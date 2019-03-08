@@ -1,4 +1,4 @@
-# mcm-ui[![Build Status](https://travis.ibm.com/IBMPrivateCloud/mcm-ui.svg?token=FQtRyxd2oucrshZSEEqZ&branch=master)](https://travis.ibm.com/IBMPrivateCloud/mcm-ui)
+# icp-grc-ui[![Build Status](https://travis.ibm.com/IBMPrivateCloud/icp-grc-ui.svg?token=FQtRyxd2oucrshZSEEqZ&branch=master)](https://travis.ibm.com/IBMPrivateCloud/icp-grc-ui)
 The UI micro-service for IBM Hybrid Cloud Manager.
 
 ## Design
