@@ -1,0 +1,17 @@
+{
+    "contextPath": "/multicloud",
+    "httpPort": 3000,
+    "hcmUiApiUrl": "",
+    "cfcRouterUrl": "",
+    "platformHeaderContextPath": "/header",
+    "feature_searchRelated": false,
+    "featureFlags": {},
+    "PLATFORM_IDENTITY_PROVIDER_URL": "",
+    "WLP_CLIENT_ID": "",
+    "WLP_CLIENT_SECRET": "",
+    "WLP_REDIRECT_URL": "https://localhost:3000/auth/liberty/callback",
+    "tests": {
+        "user": "admin",
+        "password": "AHippopotamusPlaysHopscotchWithAnElephant"
+     }
+}
