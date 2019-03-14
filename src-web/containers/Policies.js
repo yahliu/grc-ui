@@ -20,27 +20,32 @@ import config from '../../lib/shared/config'
 import ClusterComplianceTab from './ClusterCompliances'
 import withAccess from '../components/common/withAccess'
 
-const BASE_PAGE_PATH = `${config.contextPath}/policies`
+const BASE_PAGE_PATH = `${config.contextPath}`
 const SECONDARY_HEADER_PROPS = {
-  title: 'routes.compliances',
+  title: 'routes.policies',
   tabs: [
     {
-      id: 'cluster-compliance',
-      label: 'tabs.policy.cluster',
-      url: BASE_PAGE_PATH
+      id: 'policy-overview',
+      label: 'tabs.policy.overview',
+      url: `${BASE_PAGE_PATH}/overview`
     },
-    // {
-    //   id: 'local-policy',
-    //   label: 'tabs.policy.policy',
-    //   url: `${BASE_PAGE_PATH}/local`
-    // }
+    {
+      id: 'policy-security',
+      label: 'tabs.policy.security',
+      url: `${BASE_PAGE_PATH}/security`
+    },
+    {
+      id: 'policy-configuration',
+      label: 'tabs.policy.configuration',
+      url: `${BASE_PAGE_PATH}/configuration`
+    },
   ]
 }
 
 const Policies = ({ match }) =>
   <Switch>
     {/*<Route path={`${match.url}/local`} render={() => <LocalPoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />*/}
-    <Route path={match.url} render={() => <ClusterComplianceTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
+    <Route path={`${match.url}/configuration`} render={() => <ClusterComplianceTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
   </Switch>
 
 
