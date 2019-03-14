@@ -90,56 +90,56 @@ function fetchHeader(req, res, store, context) {
             {
               id: 'overview',
               label: msgs.get('routes.overview', req),
-              url: `${config.get('contextPath')}/overview`
+              url: '/multicloud/overview'
             },
             {
               id: 'search',
               label: msgs.get('routes.search', req),
-              url: `${config.get('contextPath')}/search`,
+              url: '/multicloud/search',
               disabled: config.get('featureFlags').search !== true
             },
             {
               id: 'clusters',
               label: msgs.get('routes.clusters', req),
-              url: `${config.get('contextPath')}/clusters`
+              url: '/multicloud/clusters'
             },
             {
               id: 'policies',
               label: msgs.get('routes.policies', req),
-              url: `${config.get('contextPath')}/policies`,
+              url: `${config.get('contextPath')}`,
               disabled: isLowerThanOperator(userRole)
             },
             {
               id: 'applications',
               label: msgs.get('routes.applications', req),
-              url: `${config.get('contextPath')}/applications`
+              url: '/multicloud/applications'
             },
             {
               id: 'releases',
               label: msgs.get('routes.releases', req),
-              url: `${config.get('contextPath')}/releases`
+              url: '/multicloud/releases'
             },
             {
               id: 'pods',
               label: msgs.get('routes.pods', req),
-              url: `${config.get('contextPath')}/pods`
+              url: '/multicloud/pods'
             },
             {
               id: 'nodes',
               label: msgs.get('routes.nodes', req),
-              url: `${config.get('contextPath')}/nodes`,
+              url: '/multicloud/nodes',
               disabled: isLowerThanAdmin(userRole)
             },
             {
               id: 'storage',
               label: msgs.get('routes.storage', req),
-              url: `${config.get('contextPath')}/storage`,
+              url: '/multicloud/storage',
               disabled: isLowerThanAdmin(userRole)
             },
             {
               id: 'topology',
               label: msgs.get('routes.topology', req),
-              url: `${config.get('contextPath')}/topology`,
+              url: '/multicloud/topology',
               disabled: isLowerThanEditor(userRole)
             },
             {
@@ -164,7 +164,7 @@ function fetchHeader(req, res, store, context) {
             {
               id: 'welcome',
               label: msgs.get('routes.getting-started', req),
-              url: `${config.get('contextPath')}/welcome`
+              url: '/multicloud/welcome'
             }
           ]
         }
