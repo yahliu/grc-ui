@@ -20,16 +20,15 @@ It is simple: for any part of the store that an application needs access to, def
 when given the full store, returns the desired part (or derivation) of the store.
 */
 
+import { createSelector } from 'reselect'
 import lodash from 'lodash'
+import { normalize } from 'normalizr'
+import ReactDOMServer from 'react-dom/server'
 import * as Actions from '../actions'
-
-
-export const getItems = (state, props) => getFromState(state,props.storeRoot, 'items')
-export const getItemsPerPage = (state, props) => getFromState(state,props.storeRoot, 'itemsPerPage')
-export const getPage = (state, props) => getFromState(state,props.storeRoot, 'page')
-export const getSearch = (state, props) => getFromState(state,props.storeRoot, 'search')
-export const getSortColumn = (state, props) => getFromState(state,props.storeRoot, 'sortColumn')
-export const getSortDirection = (state, props) => getFromState(state,props.storeRoot, 'sortDirection')
+import { createResourcesSchema } from '../../lib/client/resource-schema'
+import { transform } from '../../lib/client/resource-helper'
+import getResourceDefinitions, * as ResourceDefinitions from '../definitions'
+import msgs from '../../nls/platform.properties'
 
 function getFromState(state, root, attribute) {
   const storeRoot = state[root]
@@ -39,6 +38,14 @@ function getFromState(state, root, attribute) {
   }
   return storeRoot[attribute]
 }
+
+export const getItems = (state, props) => getFromState(state,props.storeRoot, 'items')
+export const getItemsPerPage = (state, props) => getFromState(state,props.storeRoot, 'itemsPerPage')
+export const getPage = (state, props) => getFromState(state,props.storeRoot, 'page')
+export const getSearch = (state, props) => getFromState(state,props.storeRoot, 'search')
+export const getSortColumn = (state, props) => getFromState(state,props.storeRoot, 'sortColumn')
+export const getSortDirection = (state, props) => getFromState(state,props.storeRoot, 'sortDirection')
+
 
 export const INITIAL_STATE = {
   items: [],
@@ -57,6 +64,150 @@ export const INITIAL_STATE = {
   clientSideFilters: undefined,
 }
 
+function searchTableCell(item, tableKey, context, searchText){
+  const renderedElement = transform(item, tableKey, context.locale, true)
+  if (typeof renderedElement === String) {
+    return renderedElement.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+  } else {
+    return ReactDOMServer.renderToString(transform(item, tableKey, context.locale, true)).toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+  }
+}
+
+function searchTableCellHelper(search, tableKeys, item, context) {
+  const searchKey = search.substring(0, search.indexOf('='))
+  const searchField = search.substring(search.indexOf('=')+1)
+
+  if (searchKey === 'textsearch') {
+    return tableKeys.find(tableKey => searchTableCell(item, tableKey, context, searchField.replace(/[{}]/g, '')))
+  }
+  const tableKey = tableKeys.find(tableKey => msgs.get(tableKey.msgKey, context.locale).toLowerCase() === searchKey.toLowerCase())
+  if (!lodash.isEmpty(searchField)) {
+    if (!searchField.includes('{')) {
+      if (tableKey) {
+        return searchTableCell(item, tableKey, context, searchField)
+      }
+    } else {
+      let found = false
+      const searchKeys = searchField.replace(/[{}]/g, '').split(',')
+      if (searchKeys && tableKey) searchKeys.forEach(searchKey => {
+        if (searchTableCell(item, tableKey, context, searchKey)) found = true
+      })
+      return found
+    }
+  }
+  // return all results when user types cluster=
+  if (searchField === '')
+    return true
+
+  // by default, search all fields
+  return tableKeys.find(tableKey => searchTableCell(item, tableKey, context, search))
+}
+
+const makeGetFilteredItemsSelector = (resourceType) => {
+  return createSelector(
+    [getItems, getSearch],
+    (items, search) => items.filter((item) => {
+      if (lodash.isEmpty(search))
+        return true
+
+      const tableKeys = ResourceDefinitions.getTableKeys(resourceType)
+      const context = JSON.parse(document.getElementById('context').textContent)
+
+      if (search.includes('},')) {
+        // special case like status={healthy}, labels={cloud=IBM}
+        let found = false
+        const searchFields = search.replace('},', '}},').toLowerCase().split('},')
+        searchFields.forEach(searchField => {
+          if (searchTableCellHelper(searchField, tableKeys, item, context)) {
+            found = true
+          }
+        })
+        return found
+      } else {
+        return searchTableCellHelper(search, tableKeys, item, context)
+      }
+    })
+  )
+}
+
+const makeGetTransformedItemsSelector = (resourceType) => {
+  return createSelector(
+    [makeGetFilteredItemsSelector(resourceType)],
+    (items) => {
+      const resourceData = getResourceDefinitions(resourceType)
+      return items.map(item => {
+        const customData = {}
+        const context = JSON.parse(document.getElementById('context').textContent)
+        resourceData.tableKeys.forEach(key => {
+          if (key.transformFunction && typeof key.transformFunction === 'function') {
+            customData[key.resourceKey.replace('custom.', '')] = key.transformFunction(item, context.locale)
+          }
+        })
+        item.custom = customData
+        return item
+      })
+    }
+  )
+}
+
+//TODO could we do better? - we have one selector thus one cache for sorting.
+//Thus if the sort direction change is toggled back we re-calculate.
+const makeGetSortedItemsSelector = (resourceType) => {
+  return createSelector(
+    [makeGetTransformedItemsSelector(resourceType), getSortColumn, getSortDirection],
+    (items, sortColumn, sortDirection) => {
+      const initialSortField = sortColumn ? sortColumn : ResourceDefinitions.getDefaultSortField(resourceType)
+      const sortField = initialSortField === 'custom.age' ? 'metadata.creationTimestamp' : initialSortField // sort by the actual date, not formatted value
+      const sortDir = sortField === 'metadata.creationTimestamp' ? (sortDirection === Actions.SORT_DIRECTION_ASCENDING ? Actions.SORT_DIRECTION_DESCENDING : Actions.SORT_DIRECTION_ASCENDING) : sortDirection // date fields should initially sort from latest to oldest
+      return lodash.orderBy(items, item => lodash.get(item, sortField), [sortDir])
+    }
+  )
+}
+
+const makeGetPagedItemsSelector = (resourceType) => {
+  return createSelector(
+    [makeGetSortedItemsSelector(resourceType), getPage, getItemsPerPage],
+    (items, page, itemsPerPage) => {
+      const offset = (page - 1) * itemsPerPage
+      let lastIndex = offset + itemsPerPage
+      lastIndex = lastIndex <= items.length ? lastIndex : items.length
+      return {
+        items: items.slice(offset, lastIndex),
+        totalResults: items.length,
+        totalPages: Math.ceil(items.length / itemsPerPage)
+      }
+    }
+  )
+}
+
+export const makeGetVisibleTableItemsSelector = (resourceType) => {
+  const pk = ResourceDefinitions.getPrimaryKey(resourceType)
+  const sk = ResourceDefinitions.getSecondaryKey(resourceType)
+  return createSelector(
+    [makeGetPagedItemsSelector(resourceType)],
+    result => {
+      const normalizedItems = normalize(result.items, [createResourcesSchema(pk, sk)]).entities.items
+      return Object.assign(result, {
+        normalizedItems: normalizedItems,
+        items: result.items.map(item => sk ? `${lodash.get(item, pk)}-${lodash.get(item, sk)}`:`${lodash.get(item, pk)}`) // to support multi cluster, use ${name}-${cluster} as unique id
+      })
+    }
+  )
+}
+
+const getItemProps= (state, props) => props
+
+export const getSingleResourceItem = createSelector(
+  [getItems, getItemProps],
+  (items, props) => items && items.length > 0 && props.predicate(items, props)
+)
+
+export const resourceItemByName = (items, props) => {
+  const key = ResourceDefinitions.getURIKey(props.resourceType)
+  return lodash.find(items, item =>
+    lodash.get(item, key) === props.name
+  )
+}
 
 export const secondaryHeader = (state = {title: '', tabs: [], breadcrumbItems: [], links: []}, action) => {
   switch (action.type) {

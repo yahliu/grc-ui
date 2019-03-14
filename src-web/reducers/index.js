@@ -29,7 +29,14 @@ export { uiconfig } from './uiconfig'
 export { role } from './role'
 export { secondaryHeader } from './common'
 
+export { modal } from './modal'
+
 export const HCMApplicationList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_APPLICATIONS))
+export const HCMComplianceList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_COMPLIANCES))
+export const HCMPolicyList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_POLICIES))
+
+// export { default as catalog } from './catalog'
+export { resourceFilters } from './filter'
 
 function predicate(resourceType, action) {
   if (lodash.isEqual(resourceType, action.resourceType)) return true

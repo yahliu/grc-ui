@@ -1,5 +1,5 @@
 {
-    "contextPath": "/multicloud",
+    "contextPath": "/policy",
     "httpPort": 3000,
     "hcmUiApiUrl": "",
     "cfcRouterUrl": "",

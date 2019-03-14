@@ -22,7 +22,8 @@ import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
 
 
-export const WelcomeTab = loadable(() => import(/* webpackChunkName: "empty" */ './WelcomePageTab'))
+export const Policies = loadable(() => import(/* webpackChunkName: "empty" */ './Policies'))
+
 resources(() => {
   require('../../scss/common.scss')
 })
@@ -49,8 +50,8 @@ class App extends React.Component {
       <div className='expand-vertically'>
         {location.pathname && !location.pathname.includes('welcome') && !location.pathname.includes('search') && <SecondaryHeader />}
         <Switch>
-          <Route path={`${match.url}/welcome`} render={() => <WelcomeTab />} />
-          <Redirect to={`${config.contextPath}/welcome`} />
+          <Route path={`${match.url}`} render={() => <Policies />} />
+          <Redirect to={`${config.contextPath}/overview`} />
         </Switch>
         <Modal locale={serverProps.context.locale} />
       </div>
