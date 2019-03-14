@@ -23,6 +23,8 @@ import Modal from '../components/common/Modal'
 
 
 export const WelcomeTab = loadable(() => import(/* webpackChunkName: "empty" */ './WelcomePageTab'))
+export const Policies = loadable(() => import(/* webpackChunkName: "empty" */ './Policies'))
+
 resources(() => {
   require('../../scss/common.scss')
 })
@@ -50,6 +52,7 @@ class App extends React.Component {
         {location.pathname && !location.pathname.includes('welcome') && !location.pathname.includes('search') && <SecondaryHeader />}
         <Switch>
           <Route path={`${match.url}/welcome`} render={() => <WelcomeTab />} />
+          <Route path={`${match.url}/policies`} render={() => <Policies />} />
           <Redirect to={`${config.contextPath}/welcome`} />
         </Switch>
         <Modal locale={serverProps.context.locale} />
