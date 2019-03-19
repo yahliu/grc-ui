@@ -1,7 +1,7 @@
 {
     "contextPath": "/policy",
     "httpPort": 3000,
-    "hcmUiApiUrl": "",
+    "grcUiApiUrl": "",
     "cfcRouterUrl": "",
     "platformHeaderContextPath": "/header",
     "feature_searchRelated": false,

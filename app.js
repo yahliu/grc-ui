@@ -78,7 +78,7 @@ app.use(`${appConfig.get('contextPath')}/graphql`, cookieParser(), csrfMiddlewar
   req.headers.Authorization = `Bearer ${accessToken}`
   next()
 }, proxy({
-  target: appConfig.get('hcmUiApiUrl') || 'https://localhost:4000/hcmuiapi',
+  target: appConfig.get('grcUiApiUrl') || 'https://localhost:4000/grcuiapi',
   changeOrigin: true,
   pathRewrite: {
     [`^${appConfig.get('contextPath')}/graphql`]: '/graphql'
