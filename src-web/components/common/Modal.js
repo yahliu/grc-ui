@@ -7,28 +7,34 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-/* eslint-disable */
 
 import React from 'react'
 import { connect } from 'react-redux'
 import loadable from 'loadable-components'
 
-let LabelEditingModal
+let RemoveResourceModal
+let ResourceModal
 
 const Modal = ({ type, open, ...rest }) => {
   switch (type) {
-  case 'label-editing':
-    return open && getLabelEditingModal({ type, open, ...rest })
+  case 'resource-remove':
+    return open && getRemoveResourceModal({ type, open, ...rest })
+  case 'resource-edit':
+    return open && getResourceModal({ type, open, ...rest })
   default:
     return null
   }
 }
 
+const getResourceModal = props => {
+  ResourceModal = ResourceModal === undefined ? loadable(() => import(/* webpackChunkName: "edit-resource-modal" */ '../modals/ResourceModal')) : ResourceModal
+  return getModal(ResourceModal, props)
+}
 
-// const getLabelEditingModal = props => {
-//   LabelEditingModal = LabelEditingModal === undefined ? loadable(() => import(/* webpackChunkName: "label-editing-modal" */ '../modals/LabelEditingModal')) : LabelEditingModal
-//   return getModal(LabelEditingModal, props)
-// }
+const getRemoveResourceModal = props => {
+  RemoveResourceModal = RemoveResourceModal === undefined ? loadable(() => import(/* webpackChunkName: "remove-resource-modal" */ '../modals/RemoveResourceModal')) : RemoveResourceModal
+  return getModal(RemoveResourceModal, props)
+}
 
 const getModal = (Component, props) => <Component {...props} />
 

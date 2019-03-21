@@ -28,6 +28,7 @@ import * as Actions from '../actions'
 import { createResourcesSchema } from '../../lib/client/resource-schema'
 import { transform } from '../../lib/client/resource-helper'
 import getResourceDefinitions, * as ResourceDefinitions from '../definitions'
+import { RESOURCE_TYPES } from '../../lib/shared/constants'
 import msgs from '../../nls/platform.properties'
 
 function getFromState(state, root, attribute) {
@@ -225,7 +226,6 @@ export const secondaryHeader = (state = {title: '', tabs: [], breadcrumbItems: [
 
 
 export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
-
   let items,index
   switch (action.type) {
   case Actions.RESOURCE_REQUEST:
@@ -280,6 +280,41 @@ export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
       putStatus: Actions.REQUEST_STATUS.ERROR,
       putErrorMsg: action.err.error ? action.err.error.message : action.err.message
     })
+  case Actions.CLEAR_REQUEST_STATUS:
+    return Object.assign({}, state, {
+      mutateStatus: undefined,
+      mutateErrorMsg: undefined,
+      postStatus: undefined,
+      postStatusCode: undefined,
+      postErrorMsg: undefined,
+      putStatus: undefined,
+      putErrorMsg: undefined
+    })
+  case Actions.TABLE_SEARCH:
+    return Object.assign({}, state, {
+      search: action.search,
+      page: 1
+    })
+  case Actions.TABLE_SORT:
+    return Object.assign({}, state, {
+      sortDirection: action.sortDirection,
+      sortColumn: action.sortColumn
+    })
+  case Actions.TABLE_PAGE_CHANGE:
+    return Object.assign({}, state, {
+      page: action.page,
+      itemsPerPage: action.pageSize
+    })
+  case Actions.RESOURCE_ADD: /* eslint-disable no-case-declarations */
+  case Actions.RESOURCE_MODIFY:
+    const resourceTypeObj = !lodash.isObject(action.resourceType) ? RESOURCE_TYPES[lodash.findKey(RESOURCE_TYPES, { name: action.resourceType })] : action.resourceType
+    const primaryKey = ResourceDefinitions.getPrimaryKey(resourceTypeObj)
+    items = state.items.slice(0)
+    index = lodash.findIndex(items, o => (lodash.get(o, primaryKey) === lodash.get(action.item, primaryKey)))
+    index > -1 ? items.splice(index, 1, action.item) : items.push(action.item)
+    return Object.assign({}, state, {
+      items: items
+    })
   case Actions.RESOURCE_MUTATE:
     return Object.assign({}, state, {
       mutateStatus: Actions.REQUEST_STATUS.IN_PROGRESS,
@@ -301,6 +336,25 @@ export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
   case Actions.RESOURCE_DELETE:
     items = [...state.items]
     index = lodash.findIndex(items, o => lodash.get(o, 'metadata.uid') === lodash.get(action, 'item.metadata.uid'))
+    if(index > -1) {
+      items.splice(index, 1)
+      return Object.assign({}, state, {
+        items: items
+      })
+    }
+    return state
+  case Actions.DEL_RECEIVE_SUCCESS:
+    items = [...state.items]
+    switch (action.resourceType) {
+    case RESOURCE_TYPES.HCM_COMPLIANCES:
+    case RESOURCE_TYPES.HCM_POLICIES:
+      const policy = lodash.get(action, 'resource')
+      index = lodash.findIndex(items, { 'name':policy.name, 'namespace':policy.namespace })
+      break
+    default:
+      index = lodash.findIndex(items, o => lodash.get(o, 'Name') === lodash.get(action, 'resourceName'))
+      break
+    }
     if(index > -1) {
       items.splice(index, 1)
       return Object.assign({}, state, {
