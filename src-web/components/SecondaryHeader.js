@@ -111,11 +111,12 @@ SecondaryHeader.contextTypes = {
 }
 
 const mapStateToProps = (state) => {
+
   return {
     title: state.secondaryHeader.title,
     tabs: state.secondaryHeader.tabs,
     breadcrumbItems: state.secondaryHeader.breadcrumbItems,
-    links: state.secondaryHeader.links,
+    refresh: state.secondaryHeader.refresh,
     role: state.role && state.role.role,
   }
 }

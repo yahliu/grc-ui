@@ -8,7 +8,7 @@
  *******************************************************************************/
 'use strict'
 
-// seems to be an issue with this rule and redux
+// seems to be an issue with this rule and redux connect method in SecondaryHeader
 /* eslint-disable import/no-named-as-default */
 
 import React from 'react'
@@ -17,20 +17,20 @@ import SecondaryHeader from '../components/SecondaryHeader'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import resources from '../../lib/shared/resources'
 import client from '../../lib/shared/client'
-import loadable from 'loadable-components'
 import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
-
-
-export const Policies = loadable(() => import(/* webpackChunkName: "empty" */ './Policies'))
+import PolicyRouter from './PolicyRouter'
 
 resources(() => {
   require('../../scss/common.scss')
 })
 
 class App extends React.Component {
-  /* FIXME: Please fix disabled eslint rules when making changes to this file. */
-  /* eslint-disable react/prop-types, react/jsx-no-bind */
+
+  static propTypes = {
+    match: PropTypes.object,
+    staticContext: PropTypes.object,
+  }
 
   constructor(props) {
     super(props)
@@ -44,13 +44,13 @@ class App extends React.Component {
 
   render() {
     const serverProps = this.getServerProps()
-    const { match, location } = this.props
+    const { match } = this.props
 
     return (
       <div className='expand-vertically'>
-        {location.pathname && !location.pathname.includes('welcome') && !location.pathname.includes('search') && <SecondaryHeader />}
+        <SecondaryHeader />
         <Switch>
-          <Route path={`${match.url}`} render={() => <Policies />} />
+          <Route path={`${match.url}`} render={() => <PolicyRouter />} />
           <Redirect to={`${config.contextPath}/overview`} />
         </Switch>
         <Modal locale={serverProps.context.locale} />

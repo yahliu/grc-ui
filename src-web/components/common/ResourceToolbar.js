@@ -1,0 +1,144 @@
+/*******************************************************************************
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corporation 2019. All Rights Reserved.
+ *
+ * Note to U.S. Government Users Restricted Rights:
+ * Use, duplication or disclosure restricted by GSA ADP Schedule
+ * Contract with IBM Corp.
+ *******************************************************************************/
+'use strict'
+
+import React from 'react'
+import PropTypes from 'prop-types'
+import resources from '../../../lib/shared/resources'
+import moment from 'moment'
+import RefreshTimeSelect from './RefreshTimeSelect'
+import ResourceFilterView from './ResourceFilterView'
+import { Icon, Tag, Loading } from 'carbon-components-react'
+import { REFRESH_TIMES } from '../../../lib/shared/constants'
+import '../../../graphics/diagramIcons.svg'
+import msgs from '../../../nls/platform.properties'
+
+resources(() => {
+  require('../../../scss/resource-toolbar.scss')
+})
+
+const RefreshTime = ({ reloading, timestamp }) => {
+  const time = moment(new Date(timestamp)).format('h:mm:ss A')
+  return (
+    <div className='refresh-time-container'>
+      {reloading ?<Loading withOverlay={false} small /> : null }
+      <div>{time}</div>
+    </div>
+  )
+}
+
+RefreshTime.propTypes = {
+  reloading: PropTypes.bool,
+  timestamp: PropTypes.string.isRequired,
+}
+
+const FilterBar = ({ boundFilters=[], locale }) => {
+  return (
+    <div className='overview-filter-bar'>
+      {boundFilters.map(({name, onClick}) => {
+        return <Tag key={name} type='custom'>
+          {name}
+          <Icon
+            className='closeIcon'
+            description={msgs.get('filter.remove.tag', locale)}
+            name="icon--close"
+            onClick={onClick}
+          />
+        </Tag>
+      })}
+    </div>
+  )
+}
+FilterBar.propTypes = {
+  boundFilters: PropTypes.array,
+  locale: PropTypes.string,
+}
+
+export default class ResourceToolbar extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      filterViewOpen: false,
+    }
+    this.handleFilterClose = this.handleFilterClose.bind(this)
+    this.updateFilters = this.updateFilters.bind(this)
+    this.toggleFilterModel = this.toggleFilterModel.bind(this)
+    this.toggleFilterModelPress = this.toggleFilterModelPress.bind(this)
+  }
+
+  render() {
+    const { locale } = this.context
+    const { filters, boundFilters, refreshControl, timestamp } = this.props
+    const { reloading } = refreshControl
+    const { filterViewOpen } = this.state
+
+    return (
+      <div className='resource-toolbar'>
+        <div className='resource-toolbar-container' >
+          <div className='resource-toolbar-buttons' >
+            {/* refresh time button */}
+            <RefreshTimeSelect
+              refreshValues = {REFRESH_TIMES}
+              refreshControl = {refreshControl}
+            />
+            {/* filter results button */}
+            <div tabIndex='0' role={'button'}
+              onClick={this.toggleFilterModel} onKeyPress={this.toggleFilterModelPress}>
+              <div>
+                <svg className='button-icon'>
+                  <use href={'#diagramIcons_filter'} ></use>
+                </svg>
+              </div>
+              <div className='button-label'>
+                {msgs.get('overview.filter.results', locale)}
+              </div>
+            </div>
+          </div>
+          <FilterBar boundFilters={boundFilters} locale={locale} />
+          <RefreshTime timestamp={timestamp} reloading={reloading} />
+        </div>
+        { filterViewOpen &&
+          <ResourceFilterView
+            updateFilters={this.updateFilters}
+            onClose={this.handleFilterClose}
+            filters={filters}
+          /> }
+      </div>)
+  }
+
+  toggleFilterModel() {
+    this.setState(({filterViewOpen})=>{
+      return { filterViewOpen: !filterViewOpen }
+    })
+  }
+
+  toggleFilterModelPress(e) {
+    if ( e.key === 'Enter') {
+      this.toggleFilterModel()
+    }
+  }
+
+  handleFilterClose = () => {
+    this.setState({ filterViewOpen: false })
+  }
+
+  updateFilters = (activeFilters) => {
+    const {updateFilters} = this.props
+    updateFilters(activeFilters)
+  }
+}
+
+ResourceToolbar.propTypes = {
+  boundFilters: PropTypes.array,
+  filters: PropTypes.object,
+  refreshControl: PropTypes.object,
+  timestamp: PropTypes.string,
+  updateFilters:  PropTypes.func,
+}
