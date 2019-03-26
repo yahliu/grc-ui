@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
-import { Select, SelectItem } from 'carbon-components-react'
+import { Select, SelectItem, Loading } from 'carbon-components-react'
 import '../../../graphics/diagramIcons.svg'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -25,18 +25,15 @@ resources(() => {
 export default class RefreshTimeSelect extends React.Component {
 
   static propTypes = {
-    pollInterval: PropTypes.number,
-    refetch: PropTypes.func.isRequired,
-    refreshCookie: PropTypes.string,
+    refreshControl: PropTypes.object,
     refreshValues: PropTypes.array,
-    startPolling: PropTypes.func,
-    stopPolling: PropTypes.func,
   }
 
   constructor (props) {
     super(props)
+    const { refreshControl: {refreshCookie} } = props
     this.state = {
-      pollInterval: props.pollInterval,
+      pollInterval: getPollInterval(refreshCookie),
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -59,19 +56,21 @@ export default class RefreshTimeSelect extends React.Component {
   }
 
   handleClick = () => {
-    this.props.refetch()
+    const {refreshControl: {refetch}} = this.props
+    refetch()
   }
 
   handleKeyPress(e) {
     if ( e.key === 'Enter') {
-      this.props.refetch()
+      const {refreshControl: {refetch}} = this.props
+      refetch()
     }
   }
 
 
   handleChange = (e) => {
     const {pollInterval} = this.autoRefreshChoices[e.currentTarget.selectedIndex]
-    const {refreshCookie, startPolling, stopPolling} = this.props
+    const {refreshControl: {refreshCookie, startPolling, stopPolling}} = this.props
     if (pollInterval===0) {
       stopPolling()
     } else {
@@ -84,15 +83,18 @@ export default class RefreshTimeSelect extends React.Component {
   render() {
     const { pollInterval } = this.state
     const refresh = msgs.get('refresh', this.context.locale)
+    const {refreshControl: {reloading}} = this.props
     return (
       <div className='refresh-time-selection'>
-        <div className='button' tabIndex='0' role={'button'}
-          title={refresh} aria-label={refresh}
-          onClick={this.handleClick} onKeyPress={this.handleKeyPress}>
-          <svg className='button-icon'>
-            <use href={'#diagramIcons_autoRefresh'} ></use>
-          </svg>
-        </div>
+        {reloading?
+          <Loading withOverlay={false} small /> :
+          <div className='button' tabIndex='0' role={'button'}
+            title={refresh} aria-label={refresh}
+            onClick={this.handleClick} onKeyPress={this.handleKeyPress}>
+            <svg className='button-icon'>
+              <use href={'#diagramIcons_autoRefresh'} ></use>
+            </svg>
+          </div>}
         <Select id='refresh-select' className='selection'
           value={pollInterval}
           hideLabel={true}

@@ -50,14 +50,13 @@ class OverviewTab extends React.Component {
             const firstLoad = this.firstLoad
             this.firstLoad = false
             const refreshControl = {
-              loading: !items && loading,
               reloading: !firstLoad && loading,
               refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch
             }
             return (
               <OverviewView
-                loading={loading}
+                loading={!items && loading}
                 error={error}
                 policies={items}
                 refreshControl={refreshControl}

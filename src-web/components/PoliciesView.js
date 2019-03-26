@@ -10,8 +10,6 @@
 
 import React from 'react'
 import resources from '../../lib/shared/resources'
-import IntegrationPoliciesModule from './modules/IntegrationPoliciesModule'
-import ProtectionPoliciesModule from './modules/ProtectionPoliciesModule'
 
 resources(() => {
   require('../../scss/policies-view.scss')
@@ -26,8 +24,6 @@ export default class PoliciesView extends React.Component {
   render() {
     return (
       <div className='policies-view'>
-        <IntegrationPoliciesModule />
-        <ProtectionPoliciesModule />
       </div>
     )
   }

@@ -41,6 +41,11 @@ export default class PolicyCardsModule extends React.Component {
 
   renderCards() {
     //const { item } = this.props
+    //
+    //  policy overview: by category
+    //    category
+    //      cluster violations/all
+    //      policy violations/all
     return (
       <div className='policy-card' >
         Policies TBD
