@@ -37,7 +37,7 @@ export class SecondaryHeader extends React.Component {
     if ((tabs && tabs.length > 0) || (breadcrumbItems && breadcrumbItems.length > 0)) {
       return (
         <div className='secondary-header-wrapper' role='region' aria-label={title}>
-          <div className='secondary-header'>
+          <div className='secondary-header simple-header'>
             {tabs && tabs.length > 0 ? (
               <DetailPageHeader hasTabs={true} title={decodeURIComponent(title)} aria-label={`${title} ${msgs.get('secondaryHeader', locale)}`}>
                 <Breadcrumb>
