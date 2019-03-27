@@ -17,9 +17,6 @@ import ResourceToolbar from './common/ResourceToolbar'
 import { filterItems } from './common/ResourceFilterView'
 import msgs from '../../nls/platform.properties'
 
-import generateMockData from './MockData'
-
-
 resources(() => {
   require('../../scss/policies-view.scss')
 })
@@ -47,7 +44,7 @@ export default class PoliciesView extends React.Component {
         subtitle={msgs.get('overview.error.default', locale)} />
 
     let { policies } = this.props
-    policies = generateMockData()
+    // policies = generateMockData()
     const timestamp = new Date().toString()
 
     policies = filterItems(policies, filters)

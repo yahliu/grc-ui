@@ -10,12 +10,13 @@
 'use strict'
 
 import React from 'react'
+import lodash from 'lodash'
 import ResourceTable from './ResourceTable'
 import { REQUEST_STATUS } from '../../actions/index'
 import NoResource from './NoResource'
 import { connect } from 'react-redux'
-import { changeTablePage, searchTable, sortTable, fetchResources, updateSecondaryHeader } from '../../actions/common'
-import { updateResourceFilters, combineFilters } from '../../actions/filters'
+import { changeTablePage, searchTable, sortTable, receiveResourceSuccess, updateSecondaryHeader } from '../../actions/common'
+import { updateResourceFilters } from '../../actions/filters'
 import TableHelper from '../../util/table-helper'
 import { Loading, Notification } from 'carbon-components-react'
 import { withRouter } from 'react-router-dom'
@@ -233,9 +234,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { updateBrowserURL, resourceType } = ownProps
   return {
-    fetchResources: (selectedFilters) => {
-      //TODO: searchTable if customized tags
-      dispatch(fetchResources(resourceType, combineFilters(selectedFilters)))
+    fetchResources: () => {
+      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(ownProps.policies)}, resourceType))
     },
     changeTablePage: page => dispatch(changeTablePage(page, resourceType)),
     searchTable: (search, updateURL) => {
