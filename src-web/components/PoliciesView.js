@@ -9,7 +9,9 @@
 'use strict'
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
+import ClusterComplianceTab from '../containers/ClusterComplianceTab'
 
 resources(() => {
   require('../../scss/policies-view.scss')
@@ -22,12 +24,15 @@ export default class PoliciesView extends React.Component {
   }
 
   render() {
+    const { secondaryHeaderProps } = this.props
     return (
       <div className='policies-view'>
+        <ClusterComplianceTab secondaryHeaderProps={secondaryHeaderProps} />
       </div>
     )
   }
 }
 
 PoliciesView.propTypes = {
+  secondaryHeaderProps: PropTypes.object,
 }

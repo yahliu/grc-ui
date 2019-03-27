@@ -110,18 +110,16 @@ const typedResourcePageWithListAndDetails = (resourceType, detailsTabs, buttons,
 
     render() {
       return (
-        <Page>
-          <ResourcePageWithListAndDetails
-            {...this.props}
-            detailsTabs={detailsTabs}
-            routes={routes}
-            resourceType={resourceType}
-            staticResourceData={staticResourceData}
-            getVisibleResources={getVisibleResources}
-            buttons={buttons}
-            modules={modules}>
-          </ResourcePageWithListAndDetails>
-        </Page>
+        <ResourcePageWithListAndDetails
+          {...this.props}
+          detailsTabs={detailsTabs}
+          routes={routes}
+          resourceType={resourceType}
+          staticResourceData={staticResourceData}
+          getVisibleResources={getVisibleResources}
+          buttons={buttons}
+          modules={modules}>
+        </ResourcePageWithListAndDetails>
       )
     }
   }

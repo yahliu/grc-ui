@@ -19,10 +19,6 @@ import {GET_COMPLIANCES_QUERY} from './PolicyQueries'
 import msgs from '../../nls/platform.properties'
 
 
-//import { OVERVIEW_REFRESH_INTERVAL_COOKIE, OVERVIEW_QUERY_COOKIE } from '../../lib/shared/constants'
-//import {getFreshOrStoredObject} from '../../lib/client/resource-helper'
-//import {getPollInterval} from '../components/common/AutoRefreshSelect'
-
 class PoliciesTab extends React.Component {
 
   static propTypes = {
@@ -42,6 +38,7 @@ class PoliciesTab extends React.Component {
   }
 
   render () {
+    const { secondaryHeaderProps } = this.props
     const pollInterval = 500000//Math.max(getPollInterval(OVERVIEW_REFRESH_INTERVAL_COOKIE), 20*1000)
     return (
       <Page>
@@ -65,7 +62,8 @@ class PoliciesTab extends React.Component {
                 startPolling={startPolling}
                 stopPolling={stopPolling}
                 pollInterval={pollInterval}
-                compliances={items} />
+                secondaryHeaderProps={secondaryHeaderProps}
+                items={items} />
             )
           }
           }
