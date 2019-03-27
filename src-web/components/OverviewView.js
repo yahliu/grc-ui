@@ -13,26 +13,33 @@ import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
 import { Loading, Notification } from 'carbon-components-react'
 import ResourceToolbar from './common/ResourceToolbar'
+import { filterItems } from './common/ResourceFilterView'
 import TopViolationsModule from './modules/TopViolationsModule'
+import PolicyCardsModule from './modules/PolicyCardsModule'
 import msgs from '../../nls/platform.properties'
 
 
-import generateDemoData from './OverviewDemoData'
+import generateMockData from './MockData'
 
 
 resources(() => {
   require('../../scss/overview-view.scss')
 })
 
-export default class OverviewTab extends React.Component {
+export default class OverviewView extends React.Component {
 
   constructor (props) {
     super(props)
+    this.state = {
+      filters: {},
+    }
+    this.updateFilters = this.updateFilters.bind(this)
   }
 
   render() {
     const { locale } = this.context
     const { loading, error, refreshControl } = this.props
+    const { filters } = this.state
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -42,20 +49,32 @@ export default class OverviewTab extends React.Component {
         subtitle={msgs.get('overview.error.default', locale)} />
 
     let { policies } = this.props
-    policies = generateDemoData()
+    policies = generateMockData()
     const timestamp = new Date().toString()
+
+    policies = filterItems(policies, filters)
 
     return (
       <div className='overview-view'>
-        <ResourceToolbar refreshControl={refreshControl} timestamp={timestamp} />
+        <ResourceToolbar
+          refreshControl={refreshControl}
+          timestamp={timestamp}
+          filters={filters}
+          updateFilters={this.updateFilters} />
         <TopViolationsModule policies={policies} />
+        <PolicyCardsModule policies={policies} />
       </div>
     )
   }
-  //<PolicyCardsModule policies={policies}  />
+
+  updateFilters = (filters) => {
+    this.setState(()=>{
+      return {filters}
+    })
+  }
 }
 
-OverviewTab.propTypes = {
+OverviewView.propTypes = {
   error: PropTypes.object,
   loading: PropTypes.bool,
   policies: PropTypes.array,

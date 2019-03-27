@@ -18,10 +18,11 @@
 
     .header-title {
       font-weight: bold;
+      padding-right: 16px;
+      border-right: 1px solid $color__gray-1;
     }
 
     .header-selection {
-      padding-left: 10px;
       .bx--select-input {
         box-shadow: none;
       }
@@ -31,7 +32,7 @@
   .card-container-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 1.925rem;
+    margin-bottom: .45rem;
 
     > div {
       flex-basis: 33%;
@@ -95,6 +96,7 @@
   .button-container {
     display: flex;
     justify-content: center;
+    margin-bottom: 1.925rem;
   }
 }
 

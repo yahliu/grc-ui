@@ -209,8 +209,8 @@ export default class ResourceFilterView extends React.Component {
   }
 
   onChange = (key, value, checked) => {
-    const {updateFilters} = this.props
-    updateFilters(key, value, checked)
+    const {filters, updateFilters} = this.props
+    updateFilters(filters, key, value, checked)
   }
 
   onExpand = (label) => {
@@ -230,4 +230,16 @@ ResourceFilterView.propTypes = {
   filters: PropTypes.object,
   onClose: PropTypes.func,
   updateFilters: PropTypes.func,
+}
+
+export const filterItems = (items, filters) => {
+  return filters ? items : []
+}
+
+export const getFilters = (cookieKey) => {
+  return localStorage.getItem(cookieKey)
+}
+
+export const saveFilters = (cookieKey, activeFilters) => {
+  localStorage.setItem(cookieKey, JSON.stringify({activeFilters}))
 }

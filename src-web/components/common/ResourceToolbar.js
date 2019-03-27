@@ -129,9 +129,9 @@ export default class ResourceToolbar extends React.Component {
     this.setState({ filterViewOpen: false })
   }
 
-  updateFilters = (activeFilters) => {
+  updateFilters = (filters) => {
     const {updateFilters} = this.props
-    updateFilters(activeFilters)
+    updateFilters(filters)
   }
 }
 

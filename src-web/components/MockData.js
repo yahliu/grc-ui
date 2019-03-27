@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  ****************************************************************************** */
 
-const generateDemoData = () => {
+const generateMockData = () => {
 
   let policies = [
     {
@@ -20,8 +20,8 @@ const generateDemoData = () => {
     },
     {
       n: 'NGINX Missing',
-      s: 'HA',
-      c: 'SystemAndCommunicationsProtections, SystemAndInformationIntegrity',
+      s: 'Configuration',
+      c: 'SystemAndServicesAquisition, SystemAndInformationIntegrity',
       e: 'MutationAdvisor, VA',
       d: 'Cluster must have active NGINX',
       r: 'enforce',
@@ -29,7 +29,7 @@ const generateDemoData = () => {
     {
       n: 'HIPAA 23-(1)',
       s: 'HIPAA',
-      c: 'SystemAndCommunicationsProtections',
+      c: 'SystemAndCommunicationsProtections, AssessmentAuthoricationAndMonitoring',
       e: 'MutationAdvisor',
       d: 'Disclosures only allowed to friends, family and others involved in a patient’s care',
       r: 'inform',
@@ -37,7 +37,7 @@ const generateDemoData = () => {
     {
       n: 'NIST 800-53 (AC-11)',
       s: 'NIST',
-      c: 'SystemAndCommunicationsProtections, SystemAndInformationIntegrity',
+      c: 'PhysicalAndEnvironmentalProtection, SystemAndInformationIntegrity',
       e: 'VA',
       d: 'Retains the session lock until the user reestablishes access using established identification and authentication procedures',
       r: 'enforce',
@@ -45,7 +45,7 @@ const generateDemoData = () => {
     {
       n: 'NIST 800-53 (AC-14)',
       s: 'NIST',
-      c: 'SystemAndCommunicationsProtections, SystemAndInformationIntegrity',
+      c: 'SystemAndCommunicationsProtections, SystemAndInformationIntegrity, SystemAndServicesAquisition',
       e: 'VA',
       d: 'Cannot perform without identification or authentication consistent with organizational missions/business functions',
       r: 'enforce',
@@ -53,7 +53,7 @@ const generateDemoData = () => {
     {
       n: 'BSA 37-2',
       s: 'BSA',
-      c: 'SystemAndCommunicationsProtections, SystemAndInformationIntegrity',
+      c: 'SystemAndCommunicationsProtections, PhysicalAndEnvironmentalProtection',
       e: 'MutationAdvisor, VA',
       d: 'Always be courteous and kind',
       r: 'enforce',
@@ -97,4 +97,4 @@ const generateDemoData = () => {
   return policies
 }
 
-export default generateDemoData
+export default generateMockData

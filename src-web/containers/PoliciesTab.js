@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
 import Page from '../components/common/Page'
 import PoliciesView from '../components/PoliciesView'
 import {updateSecondaryHeader} from '../actions/common'
@@ -44,26 +45,24 @@ class PoliciesTab extends React.Component {
       <Page>
         <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
-            const {loading, data={}, refetch, startPolling, stopPolling} = result
-            let {error} = result
+            const {data={}, loading, startPolling, stopPolling, refetch} = result
             const { items } = data
-            //overview = getFreshOrStoredObject(OVERVIEW_QUERY_COOKIE, overview)
-            if (items) {
-              error = null
-            }
+            const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
+            const refreshControl = {
+              reloading: !firstLoad && loading,
+              refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
+              startPolling, stopPolling, refetch
+            }
             return (
               <PoliciesView
                 loading={!items && loading}
-                reloading={!firstLoad && loading}
                 error={error}
-                refetch={refetch}
-                startPolling={startPolling}
-                stopPolling={stopPolling}
-                pollInterval={pollInterval}
+                policies={items}
+                refreshControl={refreshControl}
                 secondaryHeaderProps={secondaryHeaderProps}
-                items={items} />
+              />
             )
           }
           }
