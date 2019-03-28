@@ -96,6 +96,7 @@ query getCompliances {
       namespace
       selfLink
       annotations
+      resourceVersion
     }
     raw
     remediation
