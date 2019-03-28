@@ -30,41 +30,16 @@ class ResourceList extends React.Component {
   /* FIXME: Please fix disabled eslint rules when making changes to this file. */
   /* eslint-disable react/prop-types, react/jsx-no-bind */
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      xhrPoll: false,
-    }
-  }
-
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, title } = this.props
+    const { updateSecondaryHeader, tabs, title, fetchResources, policies } = this.props
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
-    if (parseInt(config['featureFlags:liveUpdates']) === 2) {
-      var intervalId = setInterval(this.reload.bind(this), config['featureFlags:liveUpdatesPollInterval'])
-      this.setState({ intervalId: intervalId })
-    }
-    const { fetchResources, selectedFilters=[] } = this.props
-    fetchResources(selectedFilters)
+    fetchResources(policies)
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedFilters !== this.props.selectedFilters) {
-      this.setState({ xhrPoll: false })
-      this.props.fetchResources(nextProps.selectedFilters)
+    if (!lodash.isEqual(this.props.policies, nextProps.policies)) {
+      this.props.fetchResources(nextProps.policies)
     }
-  }
-
-  reload() {
-    if (this.props.status === REQUEST_STATUS.DONE) {
-      this.setState({ xhrPoll: true })
-      const { fetchResources, selectedFilters=[] } = this.props
-      fetchResources(selectedFilters)
-    }
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.state.intervalId)
   }
 
   render() {
@@ -96,7 +71,7 @@ class ResourceList extends React.Component {
     } = this.props
     const { locale } = this.context
 
-    if (status === REQUEST_STATUS.ERROR && !this.state.xhrPoll) {
+    if (status === REQUEST_STATUS.ERROR) {
       if (err && err.data && err.data.Code === 1) {
         return (
           <NoResource
@@ -115,7 +90,7 @@ class ResourceList extends React.Component {
         kind='error' />
     }
 
-    if (status !== REQUEST_STATUS.DONE && !this.state.xhrPoll)
+    if (status !== REQUEST_STATUS.DONE)
       return <Loading withOverlay={false} className='content-spinner' />
 
     const actions = React.Children.map(children, action => {
@@ -124,7 +99,7 @@ class ResourceList extends React.Component {
       return React.cloneElement(action, { resourceType })
     })
     if (items || searchValue || clientSideFilters) {
-      if (searchValue !== clientSideFilters && clientSideFilters && !this.state.xhrPoll) {
+      if (searchValue !== clientSideFilters && clientSideFilters) {
         searchTable(clientSideFilters, false)
       }
       return <div>
@@ -234,8 +209,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { updateBrowserURL, resourceType } = ownProps
   return {
-    fetchResources: () => {
-      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(ownProps.policies)}, resourceType))
+    fetchResources: (policies) => {
+      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(policies)}, resourceType))
     },
     changeTablePage: page => dispatch(changeTablePage(page, resourceType)),
     searchTable: (search, updateURL) => {
