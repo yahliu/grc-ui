@@ -8,8 +8,7 @@
  ****************************************************************************** */
 
 const generateMockData = () => {
-
-  let policies = [
+  let compliances = [
     {
       n: 'GDPR 25-(2)',
       s: 'GDPR',
@@ -62,7 +61,7 @@ const generateMockData = () => {
     return {
       metadata: {
         name: n,
-        namespace: 'policyNamespace',
+        namespace: 'mcm',
         annotations: {
           'policy.mcm.ibm.com/standards': s,
           'policy.mcm.ibm.com/categories': c,
@@ -70,13 +69,16 @@ const generateMockData = () => {
           'policy.mcm.ibm.com/description': d
         },
       },
-      spec: {
-        remediationAction: r
-      },
-      status: {
+      remediation: r,
+      raw: {
+        kind: 'Policy',
         status: {
+          status: {
+          }
         }
-      }
+      },
+      policyCompliant:'0/2',
+      clusterCompliant:'0/2'
     }
   })
 
@@ -89,12 +91,13 @@ const generateMockData = () => {
     {cluster1: 'Compliant', cluster2: 'Compliant'},
   ]
 
-  policies = policies.map((p,idx)=>{
-    p.status.status = clusters[idx]
+  compliances = compliances.map((p,idx)=>{
+
+    p.raw.status.status = clusters[idx]
     return p
   })
 
-  return policies
+  return compliances
 }
 
 export default generateMockData

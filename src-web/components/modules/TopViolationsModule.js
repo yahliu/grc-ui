@@ -134,7 +134,7 @@ export default class TopViolationsModule extends React.Component {
     const { topViolationChoice } = this.state
     const dataMap = {}
     policies.map(policy=>{
-      const statuses = _.get(policy, 'status.status', {})
+      const statuses = _.get(policy, 'raw.status.status', {})
       Object.keys(statuses).forEach(key=>{
         const status = statuses[key]
         if (status!=='Compliant') {

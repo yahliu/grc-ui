@@ -231,15 +231,3 @@ ResourceFilterView.propTypes = {
   onClose: PropTypes.func,
   updateFilters: PropTypes.func,
 }
-
-export const filterItems = (items, filters) => {
-  return filters ? items : []
-}
-
-export const getFilters = (cookieKey) => {
-  return localStorage.getItem(cookieKey)
-}
-
-export const saveFilters = (cookieKey, activeFilters) => {
-  localStorage.setItem(cookieKey, JSON.stringify({activeFilters}))
-}

@@ -118,9 +118,11 @@ export default class PolicyCardsModule extends React.Component {
   }
 
   getCardData = () => {
+    const { locale } = this.context
     const { policies } = this.props
     const { policyCardChoice } = this.state
     const dataMap = {}
+    const other = msgs.get('overview.policy.overview.other', locale)
 
     // loop thru policies
     policies.map(policy=>{
@@ -134,6 +136,10 @@ export default class PolicyCardsModule extends React.Component {
       case PolicyCardsSelections.standards:
         types = annotations['policy.mcm.ibm.com/standards'] || ''
         break
+      }
+      // backward compatible and if user doesn't supply an annotation
+      if (types.length===0) {
+        types=other
       }
       types.split(',').forEach(type=>{
         type=type.trim()
@@ -162,7 +168,7 @@ export default class PolicyCardsModule extends React.Component {
 
           // collect statuses
           let anyViolation = false
-          const statuses = _.get(policy, 'status.status', {})
+          const statuses = _.get(policy, 'raw.status.status', {})
           Object.keys(statuses).forEach(cluster=>{
 
             // this is a cluster with this category/standard
@@ -188,6 +194,11 @@ export default class PolicyCardsModule extends React.Component {
     return Object.keys(dataMap).map(key=>{
       return {...dataMap[key]}
     }).sort(({name:a},{name:b})=>{
+      if (a===other && b!==other) {
+        return 1
+      } else  if (a!==other && b===other) {
+        return -1
+      }
       return a.localeCompare(b)
     })
   }

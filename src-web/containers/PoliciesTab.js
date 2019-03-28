@@ -20,6 +20,10 @@ import {GET_COMPLIANCES_QUERY} from './PolicyQueries'
 import msgs from '../../nls/platform.properties'
 
 
+//TODO remove
+import generateMockData from './MockData'
+
+
 class PoliciesTab extends React.Component {
 
   static propTypes = {
@@ -46,7 +50,7 @@ class PoliciesTab extends React.Component {
         <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
-            const { items } = data
+            let { items } = data
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
@@ -55,12 +59,19 @@ class PoliciesTab extends React.Component {
               refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch
             }
+
+            //TODO remove
+            if (items) {
+              items = [...items, ...generateMockData()]
+            }
+
             return (
               <PoliciesView
                 loading={!items && loading}
                 error={error}
                 policies={items}
                 refreshControl={refreshControl}
+                timestamp={new Date().toString()}
                 secondaryHeaderProps={secondaryHeaderProps}
               />
             )
