@@ -95,9 +95,10 @@ query getCompliances {
       name
       namespace
       selfLink
+      annotations
     }
     raw
-    apiVersion
+    remediation
     policyCompliant
     clusterCompliant
     placementPolicies {

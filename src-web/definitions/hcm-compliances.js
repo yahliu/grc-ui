@@ -9,6 +9,7 @@
 'use strict'
 
 import React from 'react'
+import _ from 'lodash'
 import msgs from '../../nls/platform.properties'
 import { getAge, getLabelsToList } from '../../lib/client/resource-helper'
 import { Icon } from 'carbon-components-react'
@@ -171,12 +172,27 @@ export default {
       resourceKey: 'metadata.namespace',
     },
     {
-      msgKey: 'table.header.policy.compliant',
-      resourceKey: 'policyCompliant',
+      msgKey: 'table.header.remediation',
+      resourceKey: 'remediation',
     },
     {
       msgKey: 'table.header.cluster.compliant',
       resourceKey: 'clusterCompliant',
+    },
+    {
+      msgKey: 'table.header.controls',
+      resourceKey: 'metadata.annotations["policy.mcm.ibm.com/controls"]',
+      transformFunction: getControls,
+    },
+    {
+      msgKey: 'table.header.standards',
+      resourceKey: 'metadata.annotations["policy.mcm.ibm.com/standards"]',
+      transformFunction: getStandards,
+    },
+    {
+      msgKey: 'table.header.categories',
+      resourceKey: 'metadata.annotations["policy.mcm.ibm.com/categories"]',
+      transformFunction: getCategories
     },
   ],
   tableActions: [
@@ -674,6 +690,40 @@ export default {
       },
     ],
   },
+  policyPolicyTemplates: {
+    title: 'table.header.policyTemplates',
+    defaultSortField: 'name',
+    normalizedKey: 'name',
+    resourceKey: 'policyTemplates',
+    tableKeys: [
+      {
+        msgKey: 'table.header.name',
+        resourceKey: 'name',
+        key: 'name',
+      },
+      {
+        msgKey: 'description.title.api.version',
+        resourceKey: 'apiVersion',
+        key: 'apiVersion',
+      },
+      {
+        msgKey: 'table.header.kind',
+        resourceKey: 'kind',
+        key: 'kind',
+      },
+      {
+        msgKey: 'description.title.last.transition',
+        resourceKey: 'lastTransition',
+        key: 'lastTransition',
+      },
+      {
+        msgKey: 'table.header.compliant',
+        resourceKey: 'compliant',
+        key: 'compliant',
+        transformFunction: getStatus
+      },
+    ],
+  },
 }
 
 export function createComplianceLink(item = {}, ...param){
@@ -774,3 +824,23 @@ export function getClusterCount(item) {
 export function getSubjects(item) {
   return item.subjects && item.subjects.map(subject => `${subject.name}(${subject.kind})`).join(', ')
 }
+
+export function getControls(item) {
+  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/controls'])
+}
+
+export function getStandards(item) {
+  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/standards'])
+}
+
+export function getCategories(item) {
+  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/categories'])
+}
+
+function convertToStartCase(items){
+  if (items) {
+    return items.split(',').map(item => _.startCase(item.trim())).join(', ')
+  }
+  return '-'
+}
+

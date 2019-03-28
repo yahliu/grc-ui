@@ -113,6 +113,7 @@ class CompliancePolicyDetail extends React.Component {
             <ResourceTableModule key='roleTemplates' definitionsKey='policyRoleTemplates' />,
             <ResourceTableModule key='roleBindingTemplates' definitionsKey='policyRoleBindingTemplates' />,
             <ResourceTableModule key='objectTemplates' definitionsKey='policyObjectTemplates' />,
+            <ResourceTableModule key='policyTemplates' definitionsKey='policyPolicyTemplates' />,
             <ResourceTableModule key='rules' definitionsKey='policyRules' />,
             <ResourceTableModule key='violations' definitionsKey='policyViolations' />], module => {
             if (module.props.right) {
