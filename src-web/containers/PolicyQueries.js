@@ -98,6 +98,8 @@ query getCompliances {
       annotations
       resourceVersion
     }
+    name
+    namespace
     raw
     remediation
     policyCompliant
