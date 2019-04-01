@@ -90,7 +90,7 @@ export default class PolicyCardsModule extends React.Component {
     policies.map(policy => {
       // get a policy's standards/categories
       let types
-      const annotations = _.get(policy, 'metadata.annotations', {})
+      const annotations = _.get(policy, 'metadata.annotations') || {}
       switch (policyCardChoice) {
       case PolicyCardsSelections.categories:
         types = annotations['policy.mcm.ibm.com/categories'] || ''

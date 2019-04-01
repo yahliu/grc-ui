@@ -831,15 +831,18 @@ export function getSubjects(item) {
 }
 
 export function getControls(item) {
-  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/controls'])
+  const annotations = _.get(item, 'metadata.annotations') || {}
+  return convertToStartCase(annotations['policy.mcm.ibm.com/controls'])
 }
 
 export function getStandards(item) {
-  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/standards'])
+  const annotations = _.get(item, 'metadata.annotations') || {}
+  return convertToStartCase(annotations['policy.mcm.ibm.com/standards'])
 }
 
 export function getCategories(item) {
-  return convertToStartCase(item.metadata.annotations['policy.mcm.ibm.com/categories'])
+  const annotations = _.get(item, 'metadata.annotations') || {}
+  return convertToStartCase(annotations['policy.mcm.ibm.com/categories'])
 }
 
 function convertToStartCase(items){
