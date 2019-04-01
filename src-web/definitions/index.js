@@ -12,15 +12,17 @@ import lodash from 'lodash'
 
 import { RESOURCE_TYPES } from '../../lib/shared/constants'
 
-import hcmnodes from './hcm-nodes'
+import hcmpoliciescluster from './hcm-policies-cluster'
+import hcmpoliciespolicy from './hcm-policies-policy'
 import hcmcompliances from './hcm-compliances'
 import hcmpolicies from './hcm-policies'
 
 
 const resourceData = {
+  [RESOURCE_TYPES.HCM_POLICIES_PRE_POLICY.name]: hcmpoliciespolicy,
+  [RESOURCE_TYPES.HCM_POLICIES_PRE_CLUSTER.name]: hcmpoliciescluster,
   [RESOURCE_TYPES.HCM_COMPLIANCES.name]: hcmcompliances,
-  [RESOURCE_TYPES.HCM_NODES.name]: hcmnodes,
-  [RESOURCE_TYPES.HCM_POLICIES.name]: hcmpolicies
+  [RESOURCE_TYPES.HCM_POLICIES.name]: hcmpolicies,
 }
 
 // diagram tabs

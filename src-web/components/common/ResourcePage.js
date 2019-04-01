@@ -16,6 +16,7 @@ import { Route, Switch } from 'react-router-dom'
 import getResourceDefinitions from '../../definitions'
 import { makeGetVisibleTableItemsSelector } from '../../reducers/common'
 import Page from './Page'
+import ResourceTableModuleFromParent from '../common/ResourceTableModuleFromParent'
 
 /* FIXME: Please fix disabled eslint rules when making changes to this file. */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
@@ -29,8 +30,10 @@ const WrappedResourceList = props =>
     </ResourceList>
   </div>
 
+
 const WrappedResourceDetails = props =>
   <ResourceDetails
+    refreshControl={props.refreshControl}
     resourceType={props.resourceType}
     staticResourceData={props.staticResourceData}
     tabs={props.detailsTabs}
@@ -38,11 +41,6 @@ const WrappedResourceDetails = props =>
     {props.modules}
   </ResourceDetails>
 
-// const WrappedResourceTopology = props =>
-//   <ResourceTopology
-//     resourceType={props.resourceType}
-//     staticResourceData={props.staticResourceData}>
-//   </ResourceTopology>
 
 const ResourcePageWithList = props =>
   <Switch>
@@ -50,6 +48,7 @@ const ResourcePageWithList = props =>
       <WrappedResourceList {...props} />
     )} />
   </Switch>
+
 
 const ResourcePageWithListAndDetails = props =>
   <Switch>
@@ -61,12 +60,6 @@ const ResourcePageWithListAndDetails = props =>
     )} />
   </Switch>
 
-// const ResourcePageWithTopology = props =>
-//   <Switch>
-//     <Route exact path={props.match.url} render={() => (
-//       <WrappedResourceTopology {...props} />
-//     )} />
-//   </Switch>
 
 const typedResourcePageWithList = (resourceType, detailsTabs, buttons) => {
 
@@ -91,6 +84,28 @@ const typedResourcePageWithList = (resourceType, detailsTabs, buttons) => {
             buttons={buttons}>
           </ResourcePageWithList>
         </Page>
+      )
+    }
+  }
+}
+
+
+const typedResourcePageFromParent = (resourceType) => {
+
+  const staticResourceData = getResourceDefinitions(resourceType)
+  return class ResourcePage extends React.PureComponent {
+
+    constructor(props) {
+      super(props)
+    }
+
+    render() {
+      return (
+        <ResourceTableModuleFromParent
+          {...this.props}
+          resourceType={resourceType}
+          staticResourceData={staticResourceData} >
+        </ResourceTableModuleFromParent>
       )
     }
   }
@@ -125,28 +140,4 @@ const typedResourcePageWithListAndDetails = (resourceType, detailsTabs, buttons,
   }
 }
 
-// const typedResourcePageWithTopology = (resourceType) => {
-
-//   const staticResourceData = getResourceDefinitions(resourceType)
-
-//   const TypedResourcePageWithTopology = class extends React.PureComponent {
-
-//     constructor(props) {
-//       super(props)
-//     }
-
-//     render() {
-//       return (
-//         <ResourcePageWithTopology
-//           {...this.props}
-//           resourceType={resourceType}
-//           staticResourceData={staticResourceData}>
-//         </ResourcePageWithTopology>
-//       )
-//     }
-//   }
-//   TypedResourcePageWithTopology.displayName = 'TypedResourcePageWithTopology'
-//   return TypedResourcePageWithTopology
-// }
-
-export { typedResourcePageWithList, typedResourcePageWithListAndDetails} //, typedResourcePageWithTopology }
+export { typedResourcePageWithList, typedResourcePageFromParent, typedResourcePageWithListAndDetails }

@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-
+/*eslint-disable*/
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
@@ -17,6 +17,7 @@ import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
+import {updateSecondaryHeader} from '../../actions/common'
 
 class ResourceTableModule extends React.Component {
   static propTypes = {
@@ -35,7 +36,7 @@ class ResourceTableModule extends React.Component {
     this.formatResourceData = this.formatResourceData.bind(this)
     this.handleSearch=TableHelper.handleInputValue.bind(this, this.handleSearch)
     this.state = {
-      resourceItems: {},
+      resourceItems: [],
       resourceIds: [],
       sortDirection: 'asc',
       searchValue: ''
@@ -44,6 +45,13 @@ class ResourceTableModule extends React.Component {
 
   componentWillMount() {
     this.formatResourceData()
+    const { tabs, title, breadcrumbItems } = this.props.secondaryHeaderProps
+    const { updateSecondaryHeader } = this.props
+    if (/^#.+#$/.test(title)) {
+      updateSecondaryHeader(title.replace(/#/g, ''), tabs, breadcrumbItems)
+    } else {
+      updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,29 +62,22 @@ class ResourceTableModule extends React.Component {
   }
 
   render() {
-    const { staticResourceData, definitionsKey, resourceType, subResourceType } = this.props
-    const keys = staticResourceData[definitionsKey]
+    const { staticResourceData, resourceType } = this.props
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state
     return (
-      (resourceItems && Object.keys(resourceItems).length > 0 || searchValue)? <Module id={`${definitionsKey}-module-id`}>
-        <ModuleHeader>{msgs.get(keys.title, this.context.locale)}</ModuleHeader>
-        <ModuleBody>
-          <ResourceTable
-            items={resourceItems || []}
-            itemIds={resourceIds || []}
-            staticResourceData={keys}
-            resourceType={resourceType}
-            subResourceType={subResourceType}
-            totalFilteredItems={resourceIds && resourceIds.length}
-            handleSort={this.handleSort}
-            handleSearch={this.handleSearch}
-            searchValue={searchValue}
-            darkSearchBox={true}
-            sortDirection={sortDirection}
-            tableActions={keys.tableActions}
-          />
-        </ModuleBody>
-      </Module> : null
+        <ResourceTable
+          items={resourceItems || []}
+          itemIds={resourceIds || []}
+          staticResourceData={staticResourceData}
+          resourceType={resourceType}
+          totalFilteredItems={resourceIds && resourceIds.length}
+          handleSort={this.handleSort}
+          handleSearch={this.handleSearch}
+          searchValue={searchValue}
+          darkSearchBox={true}
+          sortDirection={sortDirection}
+          tableActions={staticResourceData.tableActions}
+        />
     )
   }
 
@@ -92,7 +93,7 @@ class ResourceTableModule extends React.Component {
     const { normalizedKey } = this.props
     if (inputData) tableResources = inputData
     const { searchValue } = this.state
-    let normalizedItems = this.createNormalizedItems(tableResources,normalizedKey)
+    let normalizedItems = this.createNormalizedItems(tableResources, normalizedKey)
     let itemIds = Object.keys(normalizedItems)
     if (searchValue) {
       itemIds = itemIds.filter(repo => repo.includes(searchValue))
@@ -136,16 +137,12 @@ ResourceTableModule.contextTypes = {
   locale: PropTypes.string
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { staticResourceData, definitionsKey, resourceData } = ownProps
-  const resourceKey = staticResourceData[definitionsKey].resourceKey
-  const normalizedKey = staticResourceData[definitionsKey].normalizedKey
-  const tableResources = resourceData[resourceKey]
+
+
+const mapDispatchToProps = (dispatch) => {
   return {
-    normalizedKey,
-    tableResources
+    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
   }
 }
 
-
-export default withRouter(connect(mapStateToProps)(ResourceTableModule))
+export default withRouter(connect(null, mapDispatchToProps)(ResourceTableModule))

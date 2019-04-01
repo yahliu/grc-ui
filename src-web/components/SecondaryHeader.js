@@ -23,7 +23,7 @@ resources(() => {
 
 export class SecondaryHeader extends React.Component {
   /* FIXME: Please fix disabled eslint rules when making changes to this file. */
-  /* eslint-disable react/prop-types, react/jsx-no-bind */
+  /* eslint-disable react/prop-types, react/jsx-no-bind, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, react/jsx-indent */
 
   constructor(props) {
     super(props)
@@ -68,13 +68,17 @@ export class SecondaryHeader extends React.Component {
     }
   }
 
+
   renderBreadCrumb() {
+    const { locale } = this.context
     const { breadcrumbItems } = this.props
     return breadcrumbItems && breadcrumbItems.map((breadcrumb, index) => {
       const key = `${breadcrumb}-${index}`
       return (
         <div key={key} className='bx--breadcrumb-item' title={decodeURIComponent(breadcrumb.label)}>
-          <Link to={breadcrumb.url} className='bx--link'>{decodeURIComponent(breadcrumb.label)}</Link>
+          {breadcrumb.handleClick ? <div className='bx--link' onClick={breadcrumb.handleClick} >
+            {msgs.get(breadcrumb.label, locale)}</div> :
+            <Link to={breadcrumb.url || ''} className='bx--link'>{decodeURIComponent(breadcrumb.label)}</Link>}
         </div>
       )
     })

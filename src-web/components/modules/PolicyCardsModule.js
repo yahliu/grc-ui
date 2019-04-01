@@ -69,49 +69,11 @@ export default class PolicyCardsModule extends React.Component {
 
   renderCards(cardData) {
     const { locale } = this.context
+    const { handleDrillDownClick } = this.props
     return (
       <div className='card-container-container' >
-        {cardData.map(({name, counts}) => {
-          counts = Object.keys(counts).map(type=>{
-            return {
-              ...counts[type],
-              violationType: msgs.get(`overview.${type}.violations`, locale)
-            }
-          })
-          return (
-            <div key={name}>
-              <div className='card-container'>
-                <div className='card-content'>
-                  <div className='card-name'>
-                    {name}
-                  </div>
-                  <div className='card-count-content'>
-                    {counts.map(({violations, total, violationType}) => {
-                      const classes = classNames({
-                        'card-count-violations': true,
-                        'violated': violations>0,
-                      })
-                      return (
-                        <div key={violationType} className='card-count-container'>
-                          <div className='card-count'>
-                            <div className={classes}>
-                              {violations}
-                            </div>
-                            <div className='card-count-total'>
-                              {`/${total}`}
-                            </div>
-                          </div>
-                          <div className='card-violation-type'>
-                            {violationType}
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
+        {cardData.map((data) => {
+          return <PolicyCard key={data.name} data={data} locale={locale} handleClick={handleDrillDownClick} />
         })}
       </div>
     )
@@ -125,7 +87,7 @@ export default class PolicyCardsModule extends React.Component {
     const other = msgs.get('overview.policy.overview.other', locale)
 
     // loop thru policies
-    policies.map(policy=>{
+    policies.map(policy => {
       // get a policy's standards/categories
       let types
       const annotations = _.get(policy, 'metadata.annotations', {})
@@ -142,7 +104,7 @@ export default class PolicyCardsModule extends React.Component {
         types=other
       }
       types.split(',').forEach(type=>{
-        type=type.trim()
+        type = type.trim()
         if (type) {
           let name = type
           if (policyCardChoice===PolicyCardsSelections.categories) {
@@ -221,12 +183,72 @@ export default class PolicyCardsModule extends React.Component {
 
   onChange = (e) => {
     const {value} = this.policyCardChoices[e.currentTarget.selectedIndex]
+    this.props.handleDisplayChange(value)
     this.setState(()=>{
       return {policyCardChoice: value}
     })
   }
 }
 
+
+
+
+// functional card component
+const PolicyCard = ({data, locale, handleClick}) => {
+  const { counts, name } = data
+  const countData = Object.keys(counts).map(type=>{
+    return {
+      ...counts[type],
+      violationType: msgs.get(`overview.${type}.violations`, locale),
+      type: type
+    }
+  })
+  return (
+    <div key={name}>
+      <div className='card-container'>
+        <div className='card-content'>
+          <div className='card-name'>
+            {name}
+          </div>
+          <div className='card-count-content'>
+            {countData.map(({violations, total, violationType, type}) => {
+              const classes = classNames({
+                'card-count-violations': true,
+                'violated': violations>0,
+              })
+              return (
+                //eslint-disable-next-line
+                <div key={violationType} className='card-count-container' onClick={handleClick(name, type)}>
+                  <div className='card-count'>
+                    <div className={classes}>
+                      {violations}
+                    </div>
+                    <div className='card-count-total'>
+                      {`/${total}`}
+                    </div>
+                  </div>
+                  <div className='card-violation-type'>
+                    {violationType}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+PolicyCard.propTypes = {
+  data: PropTypes.object,
+  handleClick: PropTypes.func,
+  locale: PropTypes.string
+}
+
+
 PolicyCardsModule.propTypes = {
-  policies: PropTypes.array,
+  handleDisplayChange: PropTypes.func,
+  handleDrillDownClick: PropTypes.func,
+  policies: PropTypes.array
 }

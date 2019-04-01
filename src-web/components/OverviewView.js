@@ -42,7 +42,7 @@ export class OverviewView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, activeFilters={} } = this.props
+    const { loading, error, policies, activeFilters={}, handleDrillDownClick, handleDisplayChange } = this.props
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -55,7 +55,7 @@ export class OverviewView extends React.Component {
     return (
       <div className='overview-view'>
         <TopViolationsModule policies={filteredPolicies} />
-        <PolicyCardsModule policies={filteredPolicies} />
+        <PolicyCardsModule policies={filteredPolicies} handleDrillDownClick={handleDrillDownClick} handleDisplayChange={handleDisplayChange} />
       </div>
     )
   }
@@ -64,6 +64,8 @@ export class OverviewView extends React.Component {
 OverviewView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
+  handleDisplayChange: PropTypes.func,
+  handleDrillDownClick: PropTypes.func,
   loading: PropTypes.bool,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,

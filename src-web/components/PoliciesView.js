@@ -41,7 +41,7 @@ export class PoliciesView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, activeFilters={}, secondaryHeaderProps } = this.props
+    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl } = this.props
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -53,7 +53,7 @@ export class PoliciesView extends React.Component {
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
       <div className='policies-view'>
-        <ClusterComplianceTab policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} />
+        <ClusterComplianceTab refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} />
       </div>
     )
   }

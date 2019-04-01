@@ -17,7 +17,6 @@ import {getAPIGroups, getExcludeNamespace, getIncludeNamespace, getRuleVerbs} fr
 import { Link } from 'react-router-dom'
 import StatusField from '../components/common/StatusField'
 import config from '../../lib/shared/config'
-import {getDecisions} from './hcm-applications'
 
 export default {
   defaultSortField: 'metadata.name',
@@ -850,3 +849,10 @@ function convertToStartCase(items){
   return '-'
 }
 
+export function getDecisions(item = {}){
+  const decisions = _.get(item, 'placementPolicies[0].status.decisions') || _.get(item, 'status.decisions')
+  if (decisions) {
+    return decisions.map(decision => decision.clusterName).join(', ')
+  }
+  return '-'
+}

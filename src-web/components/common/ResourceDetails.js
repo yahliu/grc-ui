@@ -115,8 +115,9 @@ class ResourceDetails extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, launch_links, match } = this.props, params = match && match.params
+    const { updateSecondaryHeader, tabs, launch_links, match, refreshControl } = this.props, params = match && match.params
     updateSecondaryHeader(params.name, getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(), launch_links)
+    refreshControl.stopPolling()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -204,6 +205,7 @@ ResourceDetails.propTypes = {
   launch_links: PropTypes.object,
   location: PropTypes.object,
   match: PropTypes.object,
+  refreshControl: PropTypes.object,
   resourceType: PropTypes.object,
   routes: PropTypes.array,
   staticResourceData: PropTypes.object,
