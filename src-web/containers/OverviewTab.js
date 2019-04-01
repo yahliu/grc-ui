@@ -25,8 +25,6 @@ import {updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
-// import config from '../../lib/shared/config'
-import generateMockData from './MockData'
 import _ from 'lodash'
 
 
@@ -155,7 +153,7 @@ class OverviewTab extends React.Component {
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
-            let { items } = data
+            const { items } = data
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
@@ -168,9 +166,6 @@ class OverviewTab extends React.Component {
               refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch,
               timestamp: this.timestamp
-            }
-            if (items) {
-              items = [...items, ...generateMockData()]
             }
             let detailedData = []
             if (currentTab === 'details') {

@@ -55,7 +55,10 @@ export class OverviewView extends React.Component {
     return (
       <div className='overview-view'>
         <TopViolationsModule policies={filteredPolicies} />
-        <PolicyCardsModule policies={filteredPolicies} handleDrillDownClick={handleDrillDownClick} handleDisplayChange={handleDisplayChange} />
+        <PolicyCardsModule policies={filteredPolicies}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick}
+          handleDisplayChange={handleDisplayChange} />
       </div>
     )
   }

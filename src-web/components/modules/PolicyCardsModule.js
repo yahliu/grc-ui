@@ -81,22 +81,25 @@ export default class PolicyCardsModule extends React.Component {
 
   getCardData = () => {
     const { locale } = this.context
-    const { policies } = this.props
+    const { policies, activeFilters } = this.props
     const { policyCardChoice } = this.state
-    const dataMap = {}
     const other = msgs.get('overview.policy.overview.other', locale)
 
     // loop thru policies
+    const dataMap = {}
+    const clusterMap = {}
     policies.map(policy => {
       // get a policy's standards/categories
-      let types
+      let types, key
       const annotations = _.get(policy, 'metadata.annotations') || {}
       switch (policyCardChoice) {
       case PolicyCardsSelections.categories:
         types = annotations['policy.mcm.ibm.com/categories'] || ''
+        key = 'categories'
         break
       case PolicyCardsSelections.standards:
         types = annotations['policy.mcm.ibm.com/standards'] || ''
+        key = 'standards'
         break
       }
       // backward compatible and if user doesn't supply an annotation
@@ -110,49 +113,63 @@ export default class PolicyCardsModule extends React.Component {
           if (policyCardChoice===PolicyCardsSelections.categories) {
             name = _.capitalize(_.startCase(name))
           }
-          // if not already collecting data on this category (or standard)
-          let data = dataMap[type]
-          if (!data) {
-            dataMap[type] = data = {
-              name,
-              counts: {
-                cluster: {
-                  violations:0,
-                  total:0,
-                },
-                policy: {
-                  violations:0,
-                  total:0,
-                },
+          const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)
+          if (!filtered) {
+            let data = dataMap[type]
+            if (!data) {
+              data = dataMap[type]= {
+                name,
+                counts: {
+                  cluster: {
+                    violations:0,
+                    total:0,
+                  },
+                  policy: {
+                    violations:0,
+                    total:0,
+                  },
+                }
               }
             }
-          }
 
-          // collect statuses
-          let anyViolation = false
-          const statuses = _.get(policy, 'raw.status.status', {})
-          Object.keys(statuses).forEach(cluster=>{
-
-            // this is a cluster with this category/standard
-            data.counts.cluster.total++
-
-            // this cluster with this category has a violation
-            const status = statuses[cluster]
-            if (status!=='Compliant') {
-              data.counts.cluster.violations++
-              anyViolation = true
+            // if policy has violation
+            let anyNonCompliant = false
+            clusterMap[type] = clusterMap[type] || {}
+            const statuses = _.get(policy, 'raw.status.status', {})
+            data.counts.policy.total++
+            Object.keys(statuses).forEach(cluster=>{
+              clusterMap[type][cluster] = clusterMap[type][cluster] || statuses[cluster].compliant!=='Compliant'
+              if (clusterMap[type][cluster]) {
+                anyNonCompliant = true
+              }
+            })
+            if (anyNonCompliant) {
+              data.counts.policy.violations++
             }
-          })
-
-          // this is a policy with this category/standard
-          data.counts.policy.total++
-          // this policy with this category has a violation
-          if (anyViolation) {
-            data.counts.policy.violations++
           }
         }
       })
     })
+
+    // all clusters with this type (cat or standard)
+    // filter/count by categor or standard
+
+    Object.keys(clusterMap).forEach(type=>{
+      const data = dataMap[type]
+      // collect statuses
+      const clusters = clusterMap[type]
+      Object.keys(clusters).forEach(cluster=>{
+
+        // this is a cluster with this category/standard
+        data.counts.cluster.total++
+
+        // this cluster with this category has a violation
+        if (clusters[cluster]) {
+          data.counts.cluster.violations++
+        }
+      })
+    })
+
     return Object.keys(dataMap).map(key=>{
       return {...dataMap[key]}
     }).sort(({name:a},{name:b})=>{
@@ -248,6 +265,7 @@ PolicyCard.propTypes = {
 
 
 PolicyCardsModule.propTypes = {
+  activeFilters: PropTypes.object,
   handleDisplayChange: PropTypes.func,
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array
