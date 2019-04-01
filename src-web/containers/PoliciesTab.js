@@ -22,7 +22,7 @@ import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 import PoliciesView from '../components/PoliciesView'
 import {updateSecondaryHeader} from '../actions/common'
-import {GET_COMPLIANCES_QUERY} from './PolicyQueries'
+import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 
 
@@ -49,7 +49,7 @@ class PoliciesTab extends React.Component {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
     return (
       <Page>
-        <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
             const { items } = data

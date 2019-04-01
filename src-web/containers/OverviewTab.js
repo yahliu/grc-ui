@@ -23,7 +23,7 @@ import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPag
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
 import {updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
-import {GET_COMPLIANCES_QUERY} from './PolicyQueries'
+import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 // import config from '../../lib/shared/config'
 import generateMockData from './MockData'
@@ -152,7 +152,7 @@ class OverviewTab extends React.Component {
 
     return (
       <Page>
-        <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
             let { items } = data
