@@ -20,6 +20,9 @@ import client from '../../lib/shared/client'
 import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
 import PolicyRouter from './PolicyRouter'
+import loadable from 'loadable-components'
+
+export const ResourceToolbar = loadable(() => import(/* webpackChunkName: "ResourceToolbar" */ '../components/common/ResourceToolbar'))
 
 resources(() => {
   require('../../scss/common.scss')
@@ -49,6 +52,7 @@ class App extends React.Component {
     return (
       <div className='expand-vertically'>
         <SecondaryHeader />
+        <ResourceToolbar />
         <Switch>
           <Route path={`${match.url}`} render={() => <PolicyRouter />} />
           <Redirect to={`${config.contextPath}/overview`} />

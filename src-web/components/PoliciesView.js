@@ -11,34 +11,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import ClusterComplianceTab from '../containers/ClusterComplianceTab'
-import ResourceToolbar from './common/ResourceToolbar'
-import { getPolicyFilters, filterPolicies } from '../../lib/client/filter-helper'
+import { filterPolicies, getAvailablePolicyFilters } from '../../lib/client/filter-helper'
 import msgs from '../../nls/platform.properties'
+import _ from 'lodash'
 
 resources(() => {
   require('../../scss/policies-view.scss')
 })
 
-export default class PoliciesView extends React.Component {
+export class PoliciesView extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      filters: {},
-    }
-    this.updateFilters = this.updateFilters.bind(this)
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState({ filters: getPolicyFilters(nextProps.policies) })
+  componentWillReceiveProps(nextProps) {
+    const {refreshControl, policies, updateResourceToolbar} = nextProps
+    if (!_.isEqual(refreshControl, this.props.refreshControl) ||
+        !_.isEqual(policies, this.props.policies)) {
+      const { locale } = this.context
+      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, locale))
+    }
   }
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, refreshControl, timestamp, secondaryHeaderProps } = this.props
-    const { filters } = this.state
+    const { loading, error, policies, activeFilters={}, secondaryHeaderProps } = this.props
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -47,32 +50,36 @@ export default class PoliciesView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
-    const filteredPolicies = filterPolicies(policies, filters)
+    const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
       <div className='policies-view'>
-        <ResourceToolbar
-          refreshControl={refreshControl}
-          timestamp={timestamp}
-          filters={filters}
-          updateFilters={this.updateFilters} />
         <ClusterComplianceTab policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} />
       </div>
     )
   }
 
-  updateFilters = (filters) => {
-    this.setState(()=>{
-      return {filters}
-    })
-  }
-
 }
 
 PoliciesView.propTypes = {
+  activeFilters: PropTypes.object,
   error: PropTypes.object,
   loading: PropTypes.bool,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
   secondaryHeaderProps: PropTypes.object,
-  timestamp: PropTypes.string,
+  updateResourceToolbar: PropTypes.func,
 }
+
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {activeFilters}} = state
+  return { activeFilters }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PoliciesView))
+

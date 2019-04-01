@@ -43,11 +43,16 @@ ShowOrMoreItem.propTypes = {
 
 
 const FilterSection = ({ section: {name, filters, isExpanded, onExpand}, locale }) => {
-  filters.sort(({label:a, isAll:ia}, {label:b, isAll:ib})=>{
+  filters.sort(({label:a, isAll:ia, isOther:oa}, {label:b, isAll:ib, isOther:ob})=>{
     if (ia && !ib) {
       return -1
     } else if (!ia && ib) {
       return 1
+    }
+    if (oa && !ob) {
+      return 1
+    } else if (!oa && ob) {
+      return -1
     }
     return a.localeCompare(b)
   })
@@ -104,15 +109,25 @@ export default class ResourceFilterView extends React.Component {
     this.resize = _.debounce(()=>{
       this.layoutView()
     }, 150)
+    this.handleMouse = this.handleMouse.bind(this)
     this.handleFilterClose = this.handleFilterClose.bind(this)
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
+    window.addEventListener('mouseup', this.handleMouse, true)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize)
+    window.removeEventListener('mouseup', this.handleMouseFunc, true)
+  }
+
+  handleMouse (event) {
+    // make sure dropdown is closed when clicking outside
+    if (this.filterViewRef && !this.filterViewRef.contains(event.target)) {
+      this.handleFilterClose()
+    }
   }
 
   layoutView() {
@@ -120,16 +135,17 @@ export default class ResourceFilterView extends React.Component {
   }
 
   setContainerRef = ref => {this.containerRef = ref}
+  setFilterViewRef = ref => {this.filterViewRef = ref}
 
   render() {
     const { locale } = this.context
-    const { filters={} } = this.props
+    const { availableFilters={}, activeFilters } = this.props
 
     // add filter sections
     const sections=[]
 
-    Object.keys(filters).forEach(key=>{
-      sections.push(this.getSectionData(key, filters[key], locale))
+    Object.keys(availableFilters).forEach(key=>{
+      sections.push(this.getSectionData(key, availableFilters[key], activeFilters[key], locale))
     })
 
     // calc height of scrollbar container
@@ -138,7 +154,7 @@ export default class ResourceFilterView extends React.Component {
     const scrollHeight = height-rect.height
     const containerWidth = 260 // based on resource-filter-view width of 300px
     return (
-      <div className='resource-filter-view' style={{height:scrollHeight+3}} >
+      <div className='resource-filter-view' ref={this.setFilterViewRef} style={{height:scrollHeight+3}} >
         <h3 className='filterHeader'>
           <span className='titleText'>
             {msgs.get('filter.view.title', locale)}
@@ -179,13 +195,15 @@ export default class ResourceFilterView extends React.Component {
     return <div className={'filter-sections-scrollbar'} style={finalStyle} {...props} />
   }
 
-  getSectionData(key, filter, locale) {
-    const {name, availableSet, activeSet} = filter
+  getSectionData(key, availableFilters, activeSet=new Set(), locale) {
+    const {name, availableSet} = availableFilters
     const multipleChoices = availableSet.size>1
+    const other=msgs.get('overview.policy.overview.other', locale)
     const filters = [...availableSet].map(value=>{
       return {
-        key: key+name+value,
-        label: key,
+        key: key+value,
+        label: value,
+        isOther: value===other,
         checked: !multipleChoices || activeSet.has(value),
         onChange: !multipleChoices ? ()=>{} : this.onChange.bind(this, key, value),
       }
@@ -209,8 +227,8 @@ export default class ResourceFilterView extends React.Component {
   }
 
   onChange = (key, value, checked) => {
-    const {filters, updateFilters} = this.props
-    updateFilters(filters, key, value, checked)
+    const {updateFilters} = this.props
+    updateFilters(key, value, checked)
   }
 
   onExpand = (label) => {
@@ -227,7 +245,8 @@ export default class ResourceFilterView extends React.Component {
 }
 
 ResourceFilterView.propTypes = {
-  filters: PropTypes.object,
+  activeFilters: PropTypes.object,
+  availableFilters: PropTypes.object,
   onClose: PropTypes.func,
   updateFilters: PropTypes.func,
 }

@@ -27,6 +27,7 @@ import lodash from 'lodash'
 export { user, loggedIn } from './user'
 export { uiconfig } from './uiconfig'
 export { role } from './role'
+export { resourceToolbar } from './common'
 export { secondaryHeader } from './common'
 
 export { modal } from './modal'

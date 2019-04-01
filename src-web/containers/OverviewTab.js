@@ -6,6 +6,10 @@
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
+'use strict'
+
+// seems to be an issue with this rule and redux connect method in SecondaryHeader
+/* eslint-disable import/no-named-as-default */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -15,8 +19,8 @@ import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 import OverviewView from '../components/OverviewView'
 import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
-//import {getPollInterval} from '../components/common/ResourceToolbar'
-import {updateSecondaryHeader} from '../actions/common'
+import {getPollInterval} from '../components/common/RefreshTimeSelect'
+import { updateSecondaryHeader } from '../actions/common'
 import {GET_COMPLIANCES_QUERY} from './PolicyQueries'
 import msgs from '../../nls/platform.properties'
 
@@ -45,7 +49,7 @@ class OverviewTab extends React.Component {
   }
 
   render () {
-    const pollInterval = 500000//getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
     return (
       <Page>
         <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -55,24 +59,27 @@ class OverviewTab extends React.Component {
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
+            const reloading = !firstLoad && loading
+            if (!reloading) {
+              this.timestamp = new Date().toString()
+            }
             const refreshControl = {
-              reloading: !firstLoad && loading,
+              reloading,
               refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
-              startPolling, stopPolling, refetch
+              startPolling, stopPolling, refetch,
+              timestamp: this.timestamp
             }
 
             //TODO remove
             if (items) {
               items = [...items, ...generateMockData()]
             }
-
             return (
               <OverviewView
                 loading={!items && loading}
                 error={error}
                 policies={items}
                 refreshControl={refreshControl}
-                timestamp={new Date().toString()}
               />
             )
           }

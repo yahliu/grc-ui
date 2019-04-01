@@ -210,6 +210,22 @@ export const resourceItemByName = (items, props) => {
   )
 }
 
+export const resourceToolbar = (state = {}, action) => {
+  switch (action.type) {
+  case Actions.ACTIVE_FILTER_UPDATE:
+    return Object.assign({}, state, {
+      activeFilters: action.activeFilters,
+    })
+  case Actions.RESOURCE_TOOLBAR_UPDATE:
+    return Object.assign({}, state, {
+      refreshControl: action.refreshControl,
+      availableFilters: action.availableFilters,
+    })
+  default:
+    return state
+  }
+}
+
 export const secondaryHeader = (state = {title: '', tabs: [], breadcrumbItems: [], links: []}, action) => {
   switch (action.type) {
   case Actions.SECONDARY_HEADER_UPDATE:

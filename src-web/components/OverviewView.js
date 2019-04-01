@@ -11,37 +11,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import ResourceToolbar from './common/ResourceToolbar'
-import { getPolicyFilters, filterPolicies } from '../../lib/client/filter-helper'
+import { filterPolicies, getAvailablePolicyFilters } from '../../lib/client/filter-helper'
 import TopViolationsModule from './modules/TopViolationsModule'
 import PolicyCardsModule from './modules/PolicyCardsModule'
 import msgs from '../../nls/platform.properties'
+import _ from 'lodash'
 
 resources(() => {
   require('../../scss/overview-view.scss')
 })
 
-export default class OverviewView extends React.Component {
+export class OverviewView extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      filters: {},
-    }
-    this.updateFilters = this.updateFilters.bind(this)
   }
 
-  componentWillReceiveProps(){
-    this.setState((prevState, props) => {
-      return { filters: getPolicyFilters(props.policies, prevState.filters) }
-    })
+  componentWillReceiveProps(nextProps) {
+    const {refreshControl, policies, updateResourceToolbar} = nextProps
+    if (!_.isEqual(refreshControl, this.props.refreshControl) ||
+        !_.isEqual(policies, this.props.policies)) {
+      const { locale } = this.context
+      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, locale))
+    }
   }
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, refreshControl, timestamp } = this.props
-    const { filters } = this.state
+    const { loading, error, policies, activeFilters={} } = this.props
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -50,31 +51,35 @@ export default class OverviewView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
-    const filteredPolicies = filterPolicies(policies, filters, locale)
+    const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
       <div className='overview-view'>
-        <ResourceToolbar
-          refreshControl={refreshControl}
-          timestamp={timestamp}
-          filters={filters}
-          updateFilters={this.updateFilters} />
         <TopViolationsModule policies={filteredPolicies} />
         <PolicyCardsModule policies={filteredPolicies} />
       </div>
     )
   }
-
-  updateFilters = (filters) => {
-    this.setState(()=>{
-      return {filters}
-    })
-  }
 }
 
 OverviewView.propTypes = {
+  activeFilters: PropTypes.object,
   error: PropTypes.object,
   loading: PropTypes.bool,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
-  timestamp: PropTypes.string,
+  updateResourceToolbar: PropTypes.func,
 }
+
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {activeFilters}} = state
+  return { activeFilters }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OverviewView))
+

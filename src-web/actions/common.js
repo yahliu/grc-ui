@@ -162,6 +162,17 @@ export const removeResource = (resourceType, vars) => async dispatch => {
   }
 }
 
+export const updateActiveFilters = (activeFilters) => ({
+  type: Actions.ACTIVE_FILTER_UPDATE,
+  activeFilters,
+})
+
+export const updateResourceToolbar = (refreshControl, availableFilters) => ({
+  type: Actions.RESOURCE_TOOLBAR_UPDATE,
+  refreshControl,
+  availableFilters
+})
+
 export const updateSecondaryHeader = (title, tabs, breadcrumbItems) => ({
   type: Actions.SECONDARY_HEADER_UPDATE,
   title,

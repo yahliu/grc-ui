@@ -80,48 +80,62 @@ export default class RefreshTimeSelect extends React.Component {
     this.setState({ pollInterval })
   }
 
+  componentWillReceiveProps(){
+    this.setState((prevState, props) => {
+      const {refreshControl: {refreshCookie}} = props
+      return {pollInterval: getPollInterval(refreshCookie)}
+    })
+  }
+
   render() {
     const { pollInterval } = this.state
-    const refresh = msgs.get('refresh', this.context.locale)
-    const {refreshControl: {reloading}} = this.props
-    return (
-      <div className='refresh-time-selection'>
-        {reloading?
-          <Loading withOverlay={false} small /> :
-          <div className='button' tabIndex='0' role={'button'}
-            title={refresh} aria-label={refresh}
-            onClick={this.handleClick} onKeyPress={this.handleKeyPress}>
-            <svg className='button-icon'>
-              <use href={'#diagramIcons_autoRefresh'} ></use>
-            </svg>
-          </div>}
-        <Select id='refresh-select' className='selection'
-          value={pollInterval}
-          hideLabel={true}
-          onChange={this.handleChange}>
-          {this.autoRefreshChoices.map(({text, pollInterval:value})=> {
-            return (
-              <SelectItem key={value} text={text} value={value} />
-            )
-          })}
-        </Select>
-      </div>
-    )
+    if (pollInterval!==undefined) {
+      const refresh = msgs.get('refresh', this.context.locale)
+      const {refreshControl: {reloading}} = this.props
+      return (
+        <div className='refresh-time-selection'>
+          {reloading?
+            <Loading withOverlay={false} small /> :
+            <div className='button' tabIndex='0' role={'button'}
+              title={refresh} aria-label={refresh}
+              onClick={this.handleClick} onKeyPress={this.handleKeyPress}>
+              <svg className='button-icon'>
+                <use href={'#diagramIcons_autoRefresh'} ></use>
+              </svg>
+            </div>}
+          <Select id='refresh-select' className='selection'
+            value={pollInterval}
+            hideLabel={true}
+            onChange={this.handleChange}>
+            {this.autoRefreshChoices.map(({text, pollInterval:value})=> {
+              return (
+                <SelectItem key={value} text={text} value={value} />
+              )
+            })}
+          </Select>
+        </div>
+      )
+    }
+    return null
   }
 }
 
-export const getPollInterval = (cookieKey) => {
+export const getPollInterval = (cookieKey, dfault) => {
   let pollInterval = pollInterval = parseInt(config['featureFlags:liveUpdates']) === 2 ?
-    config['featureFlags:liveUpdatesPollInterval'] : 0
-  const savedInterval = localStorage.getItem(cookieKey)
-  if (savedInterval) {
-    try {
-      const saved = JSON.parse(savedInterval)
-      if (saved.pollInterval !== undefined) {
-        pollInterval = saved.pollInterval
+    config['featureFlags:liveUpdatesPollInterval'] : dfault
+  if (cookieKey) {
+    const savedInterval = localStorage.getItem(cookieKey)
+    if (savedInterval) {
+      try {
+        const saved = JSON.parse(savedInterval)
+        if (saved.pollInterval !== undefined) {
+          pollInterval = saved.pollInterval
+        }
+      } catch (e) {
+        //
       }
-    } catch (e) {
-      //
+    } else {
+      savePollInterval(cookieKey, dfault)
     }
   }
   return pollInterval

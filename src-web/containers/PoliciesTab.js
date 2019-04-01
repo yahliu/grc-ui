@@ -6,6 +6,11 @@
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
+'use strict'
+
+// seems to be an issue with this rule and redux connect method in SecondaryHeader
+/* eslint-disable import/no-named-as-default */
+
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -13,6 +18,7 @@ import { Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
+import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 import PoliciesView from '../components/PoliciesView'
 import {updateSecondaryHeader} from '../actions/common'
@@ -40,7 +46,7 @@ class PoliciesTab extends React.Component {
 
   render () {
     const { secondaryHeaderProps } = this.props
-    const pollInterval = 10000//Math.max(getPollInterval(OVERVIEW_REFRESH_INTERVAL_COOKIE), 20*1000)
+    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
     return (
       <Page>
         <Query query={GET_COMPLIANCES_QUERY} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -50,10 +56,15 @@ class PoliciesTab extends React.Component {
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
+            const reloading = !firstLoad && loading
+            if (!reloading) {
+              this.timestamp = new Date().toString()
+            }
             const refreshControl = {
-              reloading: !firstLoad && loading,
+              reloading,
               refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
-              startPolling, stopPolling, refetch
+              startPolling, stopPolling, refetch,
+              timestamp: this.timestamp
             }
 
             return (
@@ -62,7 +73,6 @@ class PoliciesTab extends React.Component {
                 error={error}
                 policies={items}
                 refreshControl={refreshControl}
-                timestamp={new Date().toString()}
                 secondaryHeaderProps={secondaryHeaderProps}
               />
             )

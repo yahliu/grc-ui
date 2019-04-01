@@ -10,7 +10,10 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import resources from '../../../lib/shared/resources'
+import { updateActiveFilters } from '../../actions/common'
 import moment from 'moment'
 import RefreshTimeSelect from './RefreshTimeSelect'
 import ResourceFilterView from './ResourceFilterView'
@@ -18,6 +21,7 @@ import { Icon, Tag, Loading } from 'carbon-components-react'
 import { REFRESH_TIMES } from '../../../lib/shared/constants'
 import '../../../graphics/diagramIcons.svg'
 import msgs from '../../../nls/platform.properties'
+import _ from 'lodash'
 
 resources(() => {
   require('../../../scss/resource-toolbar.scss')
@@ -35,12 +39,12 @@ const RefreshTime = ({ reloading, timestamp }) => {
 
 RefreshTime.propTypes = {
   reloading: PropTypes.bool,
-  timestamp: PropTypes.string.isRequired,
+  timestamp: PropTypes.string,
 }
 
 const FilterBar = ({ boundFilters=[], locale }) => {
   return (
-    <div className='overview-filter-bar'>
+    <div className='resource-filter-bar'>
       {boundFilters.map(({name, onClick}) => {
         return <Tag key={name} type='custom'>
           {name}
@@ -60,12 +64,12 @@ FilterBar.propTypes = {
   locale: PropTypes.string,
 }
 
-export default class ResourceToolbar extends React.Component {
+export class ResourceToolbar extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      filterViewOpen: false,
+      filterViewOpen: props.filterViewOpen,
     }
     this.handleFilterClose = this.handleFilterClose.bind(this)
     this.updateFilters = this.updateFilters.bind(this)
@@ -75,10 +79,10 @@ export default class ResourceToolbar extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { filters, boundFilters, refreshControl, timestamp } = this.props
-    const { reloading } = refreshControl
+    const { availableFilters={}, activeFilters={}, refreshControl={} } = this.props
+    const { reloading, timestamp } = refreshControl
     const { filterViewOpen } = this.state
-
+    const boundFilters = this.getBoundFilters()
     return (
       <div className='resource-toolbar'>
         <div className='resource-toolbar-container' >
@@ -102,13 +106,14 @@ export default class ResourceToolbar extends React.Component {
             </div>
           </div>
           <FilterBar boundFilters={boundFilters} locale={locale} />
-          <RefreshTime timestamp={timestamp} reloading={reloading} />
+          {timestamp&&<RefreshTime timestamp={timestamp} reloading={reloading} />}
         </div>
         { filterViewOpen &&
           <ResourceFilterView
             updateFilters={this.updateFilters}
             onClose={this.handleFilterClose}
-            filters={filters}
+            activeFilters={activeFilters}
+            availableFilters={availableFilters}
           /> }
       </div>)
   }
@@ -129,16 +134,71 @@ export default class ResourceToolbar extends React.Component {
     this.setState({ filterViewOpen: false })
   }
 
-  updateFilters = (filters) => {
-    const {updateFilters} = this.props
-    updateFilters(filters)
+  updateFilters = (key, value, checked) => {
+    this.updateActiveFilter(key, value, checked)
+  }
+
+  getBoundFilters() {
+    const boundFilters=[]
+    const {activeFilters={}} = this.props
+    Object.keys(activeFilters).forEach(key=>{
+      const activeSet = activeFilters[key]
+      activeSet.forEach(value=>{
+        let name = value
+        if (name.length>26) {
+          name=name.substr(0,12)+'..'+name.substr(-12)
+        }
+        boundFilters.push({
+          name,
+          onClick: this.removeActiveFilter.bind(this, key, value)
+        })
+      })
+    })
+    return boundFilters
+  }
+
+  removeActiveFilter(key, value) {
+    this.updateActiveFilter(key, value, false)
+  }
+
+  updateActiveFilter = (key, value, checked) => {
+    const {updateActiveFilters} = this.props
+    const activeFilters = _.cloneDeep(this.props.activeFilters||{})
+    let activeSet = activeFilters[key]
+    if (!activeSet) {
+      activeSet = activeFilters[key] = new Set()
+    }
+    if (value==='all') {
+      activeSet.clear()
+    } else {
+      if (checked) {
+        activeSet.add(value)
+      } else {
+        activeSet.delete(value)
+      }
+    }
+    updateActiveFilters(activeFilters)
   }
 }
 
 ResourceToolbar.propTypes = {
-  boundFilters: PropTypes.array,
-  filters: PropTypes.object,
+  activeFilters: PropTypes.object,
+  availableFilters: PropTypes.object,
+  filterViewOpen: PropTypes.bool,
   refreshControl: PropTypes.object,
-  timestamp: PropTypes.string,
-  updateFilters:  PropTypes.func,
+  updateActiveFilters: PropTypes.func,
 }
+
+
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {availableFilters, activeFilters, refreshControl}} = state
+  return { availableFilters, activeFilters, refreshControl }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateActiveFilters: (activeFilters) => dispatch(updateActiveFilters(activeFilters))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ResourceToolbar))
