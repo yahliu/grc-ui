@@ -152,7 +152,7 @@ export const editResource = (resourceType, namespace, name, body, selfLink, reso
 export const removeResource = (resourceType, vars) => async dispatch => {
   dispatch(delResource(resourceType))
   try {
-    const response = await apolloClient.remove(resourceType, vars)
+    const response = await apolloClient.remove(vars)
     if (response.errors) {
       return dispatch(receiveDelError(response.errors, resourceType))
     }
