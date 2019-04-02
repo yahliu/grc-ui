@@ -18,6 +18,11 @@ import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 import {updateSecondaryHeader} from '../../actions/common'
+import resources from '../../../lib/shared/resources'
+resources(() => {
+  require('../../../scss/policies-view.scss')
+})
+
 
 class ResourceTableModule extends React.Component {
   static propTypes = {
@@ -45,12 +50,12 @@ class ResourceTableModule extends React.Component {
 
   componentWillMount() {
     this.formatResourceData()
-    const { tabs, title, breadcrumbItems } = this.props.secondaryHeaderProps
     const { updateSecondaryHeader } = this.props
+    const { tabs, title, breadcrumbItems, description } = this.props.secondaryHeaderProps
     if (/^#.+#$/.test(title)) {
-      updateSecondaryHeader(title.replace(/#/g, ''), tabs, breadcrumbItems)
+      updateSecondaryHeader(title.replace(/#/g, ''), tabs, breadcrumbItems, description)
     } else {
-      updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems)
+      updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems, description)
     }
   }
 
@@ -141,7 +146,7 @@ ResourceTableModule.contextTypes = {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
+    updateSecondaryHeader: (title, tabs, breadcrumbItems, description) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems, description)),
   }
 }
 

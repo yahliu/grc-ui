@@ -92,7 +92,7 @@ export default class PolicyCardsModule extends React.Component {
     policies.map(policy => {
       // get a policy's standards/categories
       let types, key
-      const annotations = _.get(policy, 'metadata.annotations') || {}
+      const annotations = _.get(policy, 'metadata.annotations', {}) || {}
       switch (policyCardChoice) {
       case PolicyCardsSelections.categories:
         types = annotations['policy.mcm.ibm.com/categories'] || ''
@@ -243,11 +243,11 @@ const PolicyCard = ({data, locale, handleClick}) => {
             {countData.map(({violations, total, violationType, type}) => {
               const classes = classNames({
                 'card-count-violations': true,
-                'violated': violations>0,
+                'violated': violations > 0,
               })
               return (
                 //eslint-disable-next-line
-                <div key={violationType} className='card-count-container' onClick={handleClick(name, type)}>
+                <div key={violationType} className={classes !== 'card-count-violations' ? 'card-count-container' : 'card-count-container violated'} onClick={handleClick(name, type, classes)}>
                   <div className='card-count'>
                     <div className={classes}>
                       {violations}

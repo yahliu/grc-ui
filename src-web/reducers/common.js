@@ -226,14 +226,15 @@ export const resourceToolbar = (state = {}, action) => {
   }
 }
 
-export const secondaryHeader = (state = {title: '', tabs: [], breadcrumbItems: [], links: []}, action) => {
+export const secondaryHeader = (state = {title: '', tabs: [], breadcrumbItems: [], links: [], description: {}}, action) => {
   switch (action.type) {
   case Actions.SECONDARY_HEADER_UPDATE:
     return Object.assign({}, state, {
       title: action.title,
       tabs: action.tabs,
       breadcrumbItems: action.breadcrumbItems,
-      links: action.links
+      links: action.links,
+      description: action.description
     })
   default:
     return state

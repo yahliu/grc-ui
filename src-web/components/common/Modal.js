@@ -14,6 +14,7 @@ import loadable from 'loadable-components'
 
 let RemoveResourceModal
 let ResourceModal
+let DescriptionModal
 
 const Modal = ({ type, open, ...rest }) => {
   switch (type) {
@@ -21,9 +22,16 @@ const Modal = ({ type, open, ...rest }) => {
     return open && getRemoveResourceModal({ type, open, ...rest })
   case 'resource-edit':
     return open && getResourceModal({ type, open, ...rest })
+  case 'description':
+    return open && getDescriptionModal({ type, open, ...rest })
   default:
     return null
   }
+}
+
+const getDescriptionModal = props => {
+  DescriptionModal = DescriptionModal === undefined ? loadable(() => import(/* webpackChunkName: "description-modal" */ '../modals/DescriptionModal')) : DescriptionModal
+  return getModal(DescriptionModal, props)
 }
 
 const getResourceModal = props => {

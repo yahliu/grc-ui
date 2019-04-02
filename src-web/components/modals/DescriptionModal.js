@@ -1,0 +1,76 @@
+/*******************************************************************************
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corporation 2019. All Rights Reserved.
+ *
+ * Note to U.S. Government Users Restricted Rights:
+ * Use, duplication or disclosure restricted by GSA ADP Schedule
+ * Contract with IBM Corp.
+ *******************************************************************************/
+'use strict'
+
+import React from 'react'
+import PropTypes from 'prop-types'
+import msgs from '../../../nls/platform.properties'
+import { Button, Modal } from 'carbon-components-react'
+import {updateModal, } from '../../actions/common'
+import {connect} from 'react-redux'
+import resources from '../../../lib/shared/resources'
+
+resources(() => {
+  require('../../../scss/description-modal.scss')
+})
+
+
+class DescriptionModal extends React.PureComponent {
+
+  handleModalClose = () => {
+    const { updateModal } = this.props
+    updateModal()
+  }
+
+  render(){
+    const { content, title } = this.props
+    return (
+      <div className={'search-guide-modal'}>
+        <Modal
+          passiveModal
+          open={this.props.open}
+          onRequestClose={this.handleModalClose}
+          modalHeading={title}
+        >
+          <div>
+            {/*<div className={'bx--modal-content-header'}>*/}
+            {/*<div className={'bx--modal-content-header-content'}>*/}
+            {/*<div className={'bx--modal-content-header-main'}>{title}</div>*/}
+            {/*</div>*/}
+            {/*</div>*/}
+            <div className={'bx--modal-content-body'}>
+              <p>{content}</p>
+            </div>
+            <div className={'bx--modal-content-footer'}>
+              <Button type='button' onClick={this.handleModalClose}>{msgs.get('modal.button.close', this.context.locale)}</Button>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+
+DescriptionModal.propTypes = {
+  content: PropTypes.string,
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  updateModal: PropTypes.func
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateModal: () => dispatch(updateModal({ open: false }))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(DescriptionModal)
+

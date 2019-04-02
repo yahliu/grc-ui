@@ -47,9 +47,5 @@ export default {
       transformFunction: getCategories
     },
   ],
-  tableActions: [
-    'table.actions.edit',
-    'table.actions.remove',
-  ],
 }
 

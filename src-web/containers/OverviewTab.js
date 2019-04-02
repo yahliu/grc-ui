@@ -21,7 +21,7 @@ import OverviewView from '../components/OverviewView'
 import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
 import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPage'
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
-import {updateSecondaryHeader} from '../actions/common'
+import {updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
@@ -47,7 +47,8 @@ const formatClusterView = (key, value) => {
 
   value.forEach(item => {
     const status = _.get(item, `raw.status.status.${key}`, '')
-    if (status.toLowerCase() === 'compliant') validNum += 1
+    if (typeof status === 'string' && status.toLowerCase() === 'compliant') validNum += 1
+    if (typeof status === 'object' && status['compliant'].toLowerCase() === 'compliant') validNum += 1
     else nonCompliant.push(_.get(item, 'metadata.name', '-'))
   })
   const result = {
@@ -66,7 +67,7 @@ const formatTableData = (items, detailedName, detailedType, displayType) => {
     for (const item of items) {
       const statuses = _.get(item, 'raw.status.status', {})
       Object.entries(statuses).forEach(([cluster, status]) => {
-        if (status === 'NonCompliant' && shouldInclude(item, detailedName, displayType)) {
+        if ((status === 'NonCompliant' || status.compliant === 'NonCompliant') && shouldInclude(item, detailedName, displayType)) {
           if (!map.has(cluster)) map.set(cluster, [])
           map.get(cluster).push(item)
         }
@@ -80,7 +81,7 @@ const formatTableData = (items, detailedName, detailedType, displayType) => {
       const statuses = _.get(item, 'raw.status.status', {})
       //eslint-disable-next-line
       Object.entries(statuses).forEach(([cluster, status]) => {
-        if (status === 'NonCompliant' && shouldInclude(item, detailedName, displayType)) {
+        if ((status === 'NonCompliant' || status.compliant === 'NonCompliant') && shouldInclude(item, detailedName, displayType)) {
           result.push(item)
         }
       })
@@ -93,6 +94,7 @@ const formatTableData = (items, detailedName, detailedType, displayType) => {
 class OverviewTab extends React.Component {
 
   static propTypes = {
+    openDesModal: PropTypes.func,
     secondaryHeaderProps: PropTypes.object,
     updateSecondaryHeader: PropTypes.func,
   }
@@ -112,12 +114,14 @@ class OverviewTab extends React.Component {
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
   }
 
-  handleDrillDownClick = (targetTab) => (name, type) => () => {
-    this.setState({
-      currentTab: targetTab,
-      detailedName: name,
-      detailedType: type,
-    })
+  handleDrillDownClick = (targetTab) => (name, type, classes) => () => {
+    if (classes !== 'card-count-violations') {
+      this.setState({
+        currentTab: targetTab,
+        detailedName: name,
+        detailedType: type,
+      })
+    }
   }
 
   handleOverviewClick = (targetTab) => () => {
@@ -133,21 +137,14 @@ class OverviewTab extends React.Component {
     })
   }
 
+  handleDescription = (title) => () => {
+    const {openDesModal} = this.props
+    openDesModal('content', title)
+  }
+
   render () {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
     const { currentTab, detailedName = '', detailedType = '', displayType = '' } = this.state
-    const SECONDARY_HEADER_PROPS = {
-      title: `#${detailedType === 'cluster' ? msgs.get('policy.header.cluster', this.context.locale) :
-        msgs.get('policy.header.policy', this.context.locale)}: ${detailedName}#`,
-      breadcrumbItems: [
-        {
-          id: 'policy-overview',
-          label: 'tabs.policy.back',
-          handleClick: this.handleOverviewClick('overview')
-        },
-      ]
-    }
-
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -167,10 +164,30 @@ class OverviewTab extends React.Component {
               startPolling, stopPolling, refetch,
               timestamp: this.timestamp
             }
+
             let detailedData = []
             if (currentTab === 'details') {
               detailedData = formatTableData(items, detailedName, detailedType, displayType)
             }
+
+            const title = `#${detailedType === 'cluster' ? msgs.get('policy.header.cluster', this.context.locale) :
+              msgs.get('policy.header.policy', this.context.locale)}: ${detailedName} (${detailedData.length})#`
+            const SECONDARY_HEADER_PROPS = {
+              title,
+              breadcrumbItems: [
+                {
+                  id: 'policy-overview',
+                  label: 'tabs.policy.back',
+                  handleClick: this.handleOverviewClick('overview')
+                },
+              ],
+              description: {
+                display: 'Description',
+                action: this.handleDescription(title.replace(/#/g, ''))
+              }
+            }
+
+
             return (
               <div>
                 {(currentTab === 'overview') &&
@@ -209,7 +226,8 @@ class OverviewTab extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems))
+    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
+    openDesModal: (content, title) => dispatch(updateModal({ open: true, type: 'description', content: content, title: title}))
   }
 }
 

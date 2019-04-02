@@ -30,10 +30,6 @@ export default {
       transformFunction: getLabels,
     }
   ],
-  tableActions: [
-    'table.actions.edit',
-    'table.actions.remove',
-  ],
 }
 
 export function getLabels(item) {
