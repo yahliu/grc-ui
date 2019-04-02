@@ -90,81 +90,113 @@ function fetchHeader(req, res, store, context) {
             {
               id: 'overview',
               label: msgs.get('routes.overview', req),
-              url: '/multicloud/overview'
+              url: '/multicloud/overview',
+              serviceId: 'mcm-ui'
             },
             {
               id: 'search',
               label: msgs.get('routes.search', req),
               url: '/multicloud/search',
-              disabled: config.get('featureFlags').search !== true
+              serviceId: 'mcm-ui',
             },
             {
               id: 'clusters',
               label: msgs.get('routes.clusters', req),
-              url: '/multicloud/clusters'
+              url: '/multicloud/clusters',
+              serviceId: 'mcm-ui'
             },
             {
               id: 'policies',
               label: msgs.get('routes.policies', req),
               url: `${config.get('contextPath')}`,
+              serviceId: 'grc-ui',
               disabled: isLowerThanOperator(userRole)
             },
             {
               id: 'applications',
               label: msgs.get('routes.applications', req),
-              url: '/multicloud/applications'
-            },
-            {
-              id: 'releases',
-              label: msgs.get('routes.releases', req),
-              url: '/multicloud/releases'
-            },
-            {
-              id: 'pods',
-              label: msgs.get('routes.pods', req),
-              url: '/multicloud/pods'
-            },
-            {
-              id: 'nodes',
-              label: msgs.get('routes.nodes', req),
-              url: '/multicloud/nodes',
-              disabled: isLowerThanAdmin(userRole)
-            },
-            {
-              id: 'storage',
-              label: msgs.get('routes.storage', req),
-              url: '/multicloud/storage',
-              disabled: isLowerThanAdmin(userRole)
-            },
-            {
-              id: 'topology',
-              label: msgs.get('routes.topology', req),
-              url: '/multicloud/topology',
-              disabled: isLowerThanEditor(userRole)
+              url: '/multicloud/applications',
+              serviceId: 'mcm-ui'
             },
             {
               id: 'events',
               label: msgs.get('routes.events', req),
               url: '/cemui/launch',
+              serviceId: 'mcm-ui',
               disabled: isLowerThanOperator(userRole) || !serviceDiscovery.serviceEnabled('cem'),
               target: '_cem'
             },
             {
-              id: 'security',
-              label: msgs.get('routes.identity-access', req),
-              url: '/console/manage/identity-access',
-              disabled: isNotClusterAdmin(userRole)
+              id: 'topology',
+              label: msgs.get('routes.topology', req),
+              url: '/multicloud/topology',
+              serviceId: 'mcm-ui',
+              disabled: isLowerThanEditor(userRole)
             },
             {
-              id: 'icp',
-              label: msgs.get('routes.icp', req),
-              url: '/console/dashboard',
-              disabled: isNotClusterAdmin(userRole)
+              id: 'metering',
+              label: msgs.get('routes.metering', req),
+              url: '/metering/dashboard?%7B%20%22showClusterData%22%3A%20true%20%7D',
+              serviceId: 'metering-ui',
+              disabled: !serviceDiscovery.serviceEnabled('metering-ui')
             },
             {
-              id: 'welcome',
-              label: msgs.get('routes.getting-started', req),
-              url: '/multicloud/welcome'
+              id: 'local',
+              label: msgs.get('routes.local', req),
+              subItems: [
+                {
+                  id: 'releases',
+                  label: msgs.get('routes.releases', req),
+                  url: 'multicloud/releases',
+                  serviceId: 'mcm-ui'
+                },
+                {
+                  id: 'security',
+                  label: msgs.get('routes.identity-access', req),
+                  url: '/console/manage/identity-access/realms?emb=nav',
+                  serviceId: 'platform-ui',
+                  disabled: isNotClusterAdmin(userRole)
+                },
+                {
+                  id: 'images',
+                  label: msgs.get('routes.images', req),
+                  url: '/console/images?emb=nav',
+                  serviceId: 'platform-ui',
+                  disabled: !serviceDiscovery.serviceEnabled('image-manager')
+                },
+                {
+                  id: 'helm-repositories',
+                  label: msgs.get('routes.helmRepositories', req),
+                  serviceId: 'catalog',
+                  url: '/catalog/repositories?emb=nav',
+                },
+                {
+                  id: 'namespaces',
+                  label: msgs.get('routes.namespaces', req),
+                  url: '/console/manage/namespaces?emb=nav',
+                  serviceId: 'platform-ui'
+                },
+                {
+                  id: 'servicebrokers',
+                  label: msgs.get('routes.clusterservicebroker', req),
+                  url: '/console/manage/clusterservicebrokers?emb=nav',
+                  serviceId: 'platform-ui',
+                  disabled: !serviceDiscovery.serviceEnabled('service-catalog')
+                },
+                {
+                  id: 'logging',
+                  label: msgs.get('routes.logging', req),
+                  url: '/kibana',
+                  serviceId: 'kibana',
+                  target: 'logging',
+                  disabled: !serviceDiscovery.serviceEnabled('kibana')
+                }
+              ]
+            },
+            {
+              id: 'addons',
+              label: msgs.get('routes.addons', req),
+              subItems: []
             }
           ]
         }
@@ -239,10 +271,6 @@ function isLowerThanEditor(role) {
 
 function isLowerThanOperator(role) {
   return role === constants.ROLES.VIEWER || role === constants.ROLES.EDITOR
-}
-
-function isLowerThanAdmin(role) {
-  return role !== constants.ROLES.CLUSTER_ADMIN && role !== constants.ROLES.ADMIN
 }
 
 function isNotClusterAdmin(role) {
