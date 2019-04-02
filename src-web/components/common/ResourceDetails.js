@@ -22,7 +22,8 @@ import ResourceOverview from './ResourceOverview'
 // import ResourceDiagram from './ResourceDiagram'
 import CompliancePolicyDetail from './CompliancePolicyDetail'
 import CompliancePolicy from './CompliancePolicy'
-import config from '../../../lib/shared/config'
+import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
+import { getPollInterval } from './RefreshTimeSelect'
 
 const withResource = (Component) => {
   const mapDispatchToProps = (dispatch, ownProps) => {
@@ -57,8 +58,9 @@ const withResource = (Component) => {
     }
 
     componentWillMount() {
-      if (parseInt(config['featureFlags:liveUpdates']) === 2) {
-        var intervalId = setInterval(this.reload.bind(this), config['featureFlags:liveUpdatesPollInterval'])
+      const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
+      if (pollInterval) {
+        var intervalId = setInterval(this.reload.bind(this), pollInterval)
         this.setState({ intervalId: intervalId })
       }
       this.props.fetchResource()
