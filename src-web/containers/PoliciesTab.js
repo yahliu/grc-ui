@@ -17,7 +17,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
+import { POLICY_REFRESH_INTERVAL_COOKIE, DEFAULT_REFRESH_TIME } from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 import PoliciesView from '../components/PoliciesView'
@@ -46,7 +46,7 @@ class PoliciesTab extends React.Component {
 
   render () {
     const { secondaryHeaderProps } = this.props
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
+    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, DEFAULT_REFRESH_TIME*1000)
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >

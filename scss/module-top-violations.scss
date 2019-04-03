@@ -12,6 +12,32 @@
 
 .module-top-violations {
 
+   .no-violations {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .no-violations-icon {
+      }
+
+      .no-violations-title {
+        font-weight: bold;
+        margin-bottom: 9px;
+        font-size: 18px;
+        text-align: center;
+        color: $color__navy-gray-6;
+      }
+
+      .no-violations-detail {
+        font-weight: 300;
+        font-size: 14px;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.2;
+        color: $color__navy-gray-6;
+     }
+   }
+
   .header-container {
     display: flex;
     align-items: center;

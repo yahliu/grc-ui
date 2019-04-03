@@ -18,11 +18,12 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 import OverviewView from '../components/OverviewView'
-import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
+import { POLICY_REFRESH_INTERVAL_COOKIE, DEFAULT_REFRESH_TIME } from '../../lib/shared/constants'
 import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPage'
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
 import {updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
+
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
@@ -143,7 +144,7 @@ class OverviewTab extends React.Component {
   }
 
   render () {
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
+    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, DEFAULT_REFRESH_TIME*1000)
     const { currentTab, detailedName = '', detailedType = '', displayType = '' } = this.state
     return (
       <Page>

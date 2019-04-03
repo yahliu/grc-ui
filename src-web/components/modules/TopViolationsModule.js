@@ -12,6 +12,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Select, SelectItem } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
+import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 
@@ -41,15 +42,36 @@ export default class TopViolationsModule extends React.Component {
   render() {
     const { showAll } = this.state
     let cardData = this.getCardData()
-    const xcess = cardData.length>MORE_THRESHHOLD
-    if (xcess && !showAll) {
-      cardData = cardData.slice(0,MORE_THRESHHOLD)
+    if (cardData.length>0) {
+      const xcess = cardData.length>MORE_THRESHHOLD
+      if (xcess && !showAll) {
+        cardData = cardData.slice(0,MORE_THRESHHOLD)
+      }
+      return (
+        <div className='module-top-violations'>
+          {this.renderHeader()}
+          {this.renderCards(cardData)}
+          {xcess && this.renderButton()}
+        </div>
+      )
+    } else {
+      return (
+        <div className='module-top-violations'>
+          {this.renderNoViolations()}
+        </div>
+      )
     }
+  }
+
+  renderNoViolations() {
+    const { locale } = this.context
+    const title = msgs.get('overview.no.violations.title', locale)
+    const detail = msgs.get('overview.no.violations.description', locale)
     return (
-      <div className='module-top-violations'>
-        {this.renderHeader()}
-        {this.renderCards(cardData)}
-        {xcess && this.renderButton()}
+      <div className='no-violations'>
+        <img className='no-violations-icon' src={`${config.contextPath}/graphics/emptystate.svg`} alt={title} />
+        <div className='no-violations-title'>{title}</div>
+        <div className='no-violations-detail'>{detail}</div>
       </div>
     )
   }
