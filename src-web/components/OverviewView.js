@@ -15,7 +15,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, getAvailablePolicyFilters } from '../../lib/client/filter-helper'
+import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
+import { POLICY_OVERVIEW_STATE_COOKIE } from '../../lib/shared/constants'
 import TopViolationsModule from './modules/TopViolationsModule'
 import PolicyCardsModule from './modules/PolicyCardsModule'
 import msgs from '../../nls/platform.properties'
@@ -29,6 +30,16 @@ export class OverviewView extends React.Component {
 
   constructor (props) {
     super(props)
+    this.state= {
+      viewState: getSavedViewState(POLICY_OVERVIEW_STATE_COOKIE),
+    }
+    this.onUnload = this.onUnload.bind(this)
+    window.addEventListener('beforeunload', this.onUnload)
+    this.updateViewState = this.updateViewState.bind(this)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,16 +62,33 @@ export class OverviewView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
+    const { viewState } = this.state
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
       <div className='overview-view'>
-        <TopViolationsModule policies={filteredPolicies} />
-        <PolicyCardsModule policies={filteredPolicies}
+        <TopViolationsModule
+          viewState={viewState}
+          updateViewState={this.updateViewState}
+          policies={filteredPolicies} />
+        <PolicyCardsModule
+          viewState={viewState}
+          updateViewState={this.updateViewState}
+          policies={filteredPolicies}
           activeFilters={activeFilters}
           handleDrillDownClick={handleDrillDownClick}
           handleDisplayChange={handleDisplayChange} />
       </div>
     )
+  }
+
+  updateViewState(states) {
+    this.setState(prevState=>{
+      return {viewState:  Object.assign(prevState.viewState, states)}
+    })
+  }
+
+  onUnload() {
+    saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
 }
 

@@ -29,8 +29,9 @@ export default class PolicyCardsModule extends React.Component {
 
   constructor (props) {
     super(props)
+    const {viewState: {policyCardChoice=PolicyCardsSelections.categories}} = props
     this.state = {
-      policyCardChoice: PolicyCardsSelections.categories,
+      policyCardChoice
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -120,6 +121,7 @@ export default class PolicyCardsModule extends React.Component {
             if (!data) {
               data = dataMap[type]= {
                 name,
+                violations: 0,
                 counts: {
                   cluster: {
                     violations:0,
@@ -161,6 +163,7 @@ export default class PolicyCardsModule extends React.Component {
         // this policy with this category/standard has a violation
         if (policies[policy]) {
           data.counts.policy.violations++
+          data.violations++
         }
       })
     })
@@ -177,6 +180,7 @@ export default class PolicyCardsModule extends React.Component {
         // this cluster with this category/standard has a violation
         if (clusters[cluster]) {
           data.counts.cluster.violations++
+          data.violations++
         }
       })
     })
@@ -184,13 +188,17 @@ export default class PolicyCardsModule extends React.Component {
     // convert to array and sort
     return Object.keys(dataMap).map(key=>{
       return {...dataMap[key]}
-    }).sort(({name:a},{name:b})=>{
-      if (a===other && b!==other) {
-        return 1
-      } else  if (a!==other && b===other) {
-        return -1
+    }).sort(({name:an, violations:av}, {name:bn, violations:bv})=>{
+      const v = bv-av
+      if (v===0) {
+        if (an===other && bn!==other) {
+          return 1
+        } else  if (an!==other && bn===other) {
+          return -1
+        }
+        return an.localeCompare(bn)
       }
-      return a.localeCompare(b)
+      return v
     })
   }
 
@@ -213,6 +221,7 @@ export default class PolicyCardsModule extends React.Component {
   onChange = (e) => {
     const {value} = this.policyCardChoices[e.currentTarget.selectedIndex]
     this.props.handleDisplayChange(value)
+    this.props.updateViewState({policyCardChoice: value})
     this.setState(()=>{
       return {policyCardChoice: value}
     })
@@ -280,5 +289,7 @@ PolicyCardsModule.propTypes = {
   activeFilters: PropTypes.object,
   handleDisplayChange: PropTypes.func,
   handleDrillDownClick: PropTypes.func,
-  policies: PropTypes.array
+  policies: PropTypes.array,
+  updateViewState: PropTypes.func,
+  viewState: PropTypes.object,
 }

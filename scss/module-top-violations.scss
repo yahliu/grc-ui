@@ -17,14 +17,20 @@
     align-items: center;
 
     .header-title {
+      font-size: 18px;
       font-weight: bold;
-      padding-right: 16px;
+      padding-right: 10px;
       border-right: 1px solid $color__gray-1;
+      line-height: 23px
     }
 
     .header-selection {
       .bx--select-input {
         box-shadow: none;
+        font-size: 14px;
+        font-weight: bold;
+        color: #3D70B2;
+        padding-left: 10px;
       }
     }
   }
@@ -39,7 +45,7 @@
     }
 
     .card-container {
-      padding: 10px;
+      padding: 10px 20px 10px 0;
 
       .card-content {
         display: flex;
@@ -61,7 +67,7 @@
             border-right: 1px solid $color__gray-1;
 
             .card-violation-count {
-              font-size: 32px;
+              font-size: 34px;
               font-weight: bold;
               color: #E62325;
             }
@@ -70,6 +76,7 @@
               font-size: 12px;
               line-height: 16px;
               font-weight: bold;
+              color: #5A6872;
             }
           }
 
@@ -84,7 +91,7 @@
             .card-description {
               font-style: italic;
               font-size: 12px;
-              color: gray;
+              color: #5A6872;
               width: 280px;
             }
           }
@@ -96,7 +103,6 @@
   .button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 1.925rem;
   }
 }
 

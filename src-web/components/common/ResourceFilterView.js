@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import { Checkbox, Icon } from 'carbon-components-react'
 import { Scrollbars } from 'react-custom-scrollbars'
 import resources from '../../../lib/shared/resources'
+import '../../../graphics/diagramIcons.svg'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 
@@ -110,6 +111,7 @@ export default class ResourceFilterView extends React.Component {
       this.layoutView()
     }, 150)
     this.handleMouse = this.handleMouse.bind(this)
+    this.handleWheel = this.handleWheel.bind(this)
     this.handleFilterClose = this.handleFilterClose.bind(this)
   }
 
@@ -120,13 +122,17 @@ export default class ResourceFilterView extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize)
-    window.removeEventListener('mouseup', this.handleMouseFunc, true)
+    window.removeEventListener('mouseup', this.handleMouse, true)
   }
 
   handleMouse (event) {
     // make sure dropdown is closed when clicking outside
+    // unless they click a link and nothing is filtered
     if (this.filterViewRef && !this.filterViewRef.contains(event.target)) {
-      this.handleFilterClose()
+      const clickedTab = event.target.href!==undefined || event.target.firstChild.href!==undefined
+      if (!clickedTab || Object.keys(this.props.activeFilters).length==0) {
+        this.handleFilterClose()
+      }
     }
   }
 
@@ -135,7 +141,25 @@ export default class ResourceFilterView extends React.Component {
   }
 
   setContainerRef = ref => {this.containerRef = ref}
-  setFilterViewRef = ref => {this.filterViewRef = ref}
+
+  setFilterViewRef = ref => {
+    if (ref) {
+      this.filterViewRef = ref
+      this.filterViewRef.addEventListener('wheel', this.handleWheel, {passive: false} )
+    } else if (this.filterViewRef) {
+      this.filterViewRef.removeEventListener('wheel', this.handleWheel, {passive: false} )
+      this.filterViewRef = ref
+    }
+  }
+
+  // prevent mouse wheel from affecting main display
+  handleWheel(event) {
+    if (this.containerRef) {
+      this.containerRef.view.scrollTop = this.containerRef.view.scrollTop + event.deltaY
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
 
   render() {
     const { locale } = this.context
@@ -156,9 +180,12 @@ export default class ResourceFilterView extends React.Component {
     return (
       <div className='resource-filter-view' ref={this.setFilterViewRef} style={{height:scrollHeight+3}} >
         <h3 className='filterHeader'>
-          <span className='titleText'>
+          <svg className='titleIcon'>
+            <use href={'#diagramIcons_filter'} ></use>
+          </svg>
+          <div className='titleText'>
             {msgs.get('filter.view.title', locale)}
-          </span>
+          </div>
           <Icon
             className='closeIcon'
             description={msgs.get('filter.view.close', locale)}

@@ -30,9 +30,10 @@ export default class TopViolationsModule extends React.Component {
 
   constructor (props) {
     super(props)
+    const {viewState: {topViolationChoice=TopViolationSelections.clusters}} = props
     this.state = {
       showAll: false,
-      topViolationChoice: TopViolationSelections.clusters,
+      topViolationChoice
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -48,7 +49,7 @@ export default class TopViolationsModule extends React.Component {
       <div className='module-top-violations'>
         {this.renderHeader()}
         {this.renderCards(cardData)}
-        {this.renderButton(xcess)}
+        {xcess && this.renderButton()}
       </div>
     )
   }
@@ -110,12 +111,12 @@ export default class TopViolationsModule extends React.Component {
     )
   }
 
-  renderButton(xcess) {
+  renderButton() {
     const { showAll } = this.state
     const label = msgs.get(showAll ? 'button.show.less' : 'button.show.all', this.context.locale)
     return (
       <div className='button-container'>
-        <Button small kind='secondary' disabled={!xcess} id={label} onClick={this.handleToggleAll}>
+        <Button small kind='secondary' id={label} onClick={this.handleToggleAll}>
           { label }
         </Button>
       </div>
@@ -191,6 +192,7 @@ export default class TopViolationsModule extends React.Component {
 
   onChange = (e) => {
     const {value} = this.topViolationChoices[e.currentTarget.selectedIndex]
+    this.props.updateViewState({topViolationChoice: value})
     this.setState(()=>{
       return {topViolationChoice: value}
     })
@@ -199,4 +201,6 @@ export default class TopViolationsModule extends React.Component {
 
 TopViolationsModule.propTypes = {
   policies: PropTypes.array,
+  updateViewState: PropTypes.func,
+  viewState: PropTypes.object,
 }

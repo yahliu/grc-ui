@@ -101,7 +101,7 @@ export class ResourceToolbar extends React.Component {
                 </svg>
               </div>
               <div className='button-label'>
-                {msgs.get('overview.filter.results', locale)}
+                {msgs.get('overview.menu.filter', locale)}
               </div>
             </div>
           </div>
