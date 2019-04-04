@@ -86,7 +86,10 @@ export default {
         msgKey: 'table.header.created',
         transformFunction: getAge
       },
-    ]
+    ],
+    tableActions: [
+      'table.actions.edit',
+    ],
   },
   placementPolicyKeys: {
     title: 'application.placement.policies',
