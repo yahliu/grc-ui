@@ -22,6 +22,7 @@ import { Loading, Notification } from 'carbon-components-react'
 import { withRouter } from 'react-router-dom'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
+// import config2 from '../../../config'
 import TagInput from './TagInput'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 import { showCreate } from '../../../lib/client/access-helper'
@@ -29,6 +30,11 @@ import { showCreate } from '../../../lib/client/access-helper'
 class ResourceList extends React.Component {
   /* FIXME: Please fix disabled eslint rules when making changes to this file. */
   /* eslint-disable react/prop-types, react/jsx-no-bind */
+
+  constructor() {
+    super()
+    this.state = {}
+  }
 
   componentWillMount() {
     const { updateSecondaryHeader, tabs, title, fetchResources, policies } = this.props
@@ -40,6 +46,20 @@ class ResourceList extends React.Component {
     if (!lodash.isEqual(this.props.policies, nextProps.policies)) {
       this.props.fetchResources(nextProps.policies)
     }
+  }
+
+  createDocLink(resourceName, locale, actions) {
+    const vNumber = config['doc_version']
+    return (
+      <div className={'button-group'}>
+        {actions}
+        <div>
+          <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
+            <a href={`https://www.ibm.com/support/knowledgecenter/${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
+          </button>
+        </div>
+      </div>
+    )
   }
 
   render() {
@@ -146,6 +166,15 @@ class ResourceList extends React.Component {
           title={msgs.get('no-cluster.title', [resourceName], locale)}
           detail={msgs.get('no-cluster.detail', [resourceName], locale)}>
           {actions}
+        </NoResource>
+      )
+    }
+    if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name){
+      return (
+        <NoResource
+          title={msgs.get('no-resource.title', [resourceName], locale)}
+          detail={msgs.get('no-resource.detail.policy', locale)}>
+          {this.createDocLink(resourceName, locale, actions)}
         </NoResource>
       )
     }

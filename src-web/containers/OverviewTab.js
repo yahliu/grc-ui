@@ -34,9 +34,11 @@ const shouldInclude = (item, detailedName, displayType) => {
   const targetName = detailedName.replace(/\s/g, '').toLowerCase()
   if (displayType === 'categories') {
     const categories = annotations['policy.mcm.ibm.com/categories'] || ''
+    if (targetName === 'other') return true
     return categories.toLowerCase().includes(targetName)
   } else {
     const standards = annotations['policy.mcm.ibm.com/standards'] || ''
+    if (targetName === 'other') return true
     return standards.toLowerCase().includes(targetName)
   }
 }

@@ -37,6 +37,7 @@ class DescriptionModal extends React.PureComponent {
           open={this.props.open}
           onRequestClose={this.handleModalClose}
           modalHeading={title}
+          primaryButtonDisabled={true}
         >
           <div>
             {/*<div className={'bx--modal-content-header'}>*/}

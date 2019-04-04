@@ -8,13 +8,11 @@
  *******************************************************************************/
 'use strict'
 
+/*eslint-disable*/
 import React from 'react'
 import PropTypes from 'prop-types'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
-
-/* FIXME: Please fix disabled eslint rules when making changes to this file. */
-/* eslint-disable react/prop-types */
 
 const NoResource = ({
   title,
@@ -22,7 +20,7 @@ const NoResource = ({
   children
 }, context) =>
   <div className='no-resource'>
-    <img className='no-resource-icon' src={`${config.contextPath}/graphics/bee.svg`} alt={msgs.get('svg.description.resource', context.locale)} />
+    <img className='no-resource-icon' src={`${config.contextPath}/graphics/planets.png`} alt={msgs.get('svg.description.resource', context.locale)} />
     <div className='no-resource-title'>{title}</div>
     {detail && <div className='no-resource-detail'>{detail}</div>}
     {children}

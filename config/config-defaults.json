@@ -10,6 +10,7 @@
     "WLP_CLIENT_ID": "",
     "WLP_CLIENT_SECRET": "",
     "WLP_REDIRECT_URL": "https://localhost:3000/auth/liberty/callback",
+    "doc_version": "SSBS6K_3.1.2",
     "tests": {
         "user": "admin",
         "password": "AHippopotamusPlaysHopscotchWithAnElephant"

@@ -90,12 +90,11 @@
            &:hover {
              cursor: pointer;
            }
-          &.violated {
+           &.violated {
              &:hover {
                cursor: default;
              }
            }
-
           .card-count {
              display: flex;
              height: 48px;
