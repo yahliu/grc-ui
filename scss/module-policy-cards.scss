@@ -25,13 +25,21 @@
       line-height: 23px
     }
 
-    .header-selection {
-      .bx--select-input {
-        box-shadow: none;
-        font-size: 14px;
-        font-weight: bold;
-        color: #3D70B2;
-        padding-left: 10px;
+    .bx--dropdown {
+      color: $color__blue-51;
+      font-size: 14px;
+      background-color: transparent;
+      box-shadow: none;
+      width: auto;
+
+      .bx--dropdown-link {
+        color: #152935;
+        padding: 10px;
+        white-space: nowrap;
+
+        &:hover, &:focus {
+          text-decoration: none;
+        }
       }
     }
   }

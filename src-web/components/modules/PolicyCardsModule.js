@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Select, SelectItem } from 'carbon-components-react'
+import { Dropdown, DropdownItem } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
@@ -54,16 +54,15 @@ export default class PolicyCardsModule extends React.Component {
     return (
       <div className='header-container'>
         <div className='header-title'>{title}</div>
-        <Select id={'select-policy-card-type'} className='header-selection'
-          hideLabel={true}
+        <Dropdown className='selection'
           value={policyCardChoice}
-          onChange={this.onChange}>
+          onChange={this.onChange} >
           {choices.map(({text, value})=> {
             return (
-              <SelectItem key={value} text={text} value={value} />
+              <DropdownItem key={value} itemText={text} value={value} />
             )
           })}
-        </Select>
+        </Dropdown>
       </div>
     )
   }
@@ -219,7 +218,7 @@ export default class PolicyCardsModule extends React.Component {
   }
 
   onChange = (e) => {
-    const {value} = this.policyCardChoices[e.currentTarget.selectedIndex]
+    const {value} = e
     this.props.handleDisplayChange(value)
     this.props.updateViewState({policyCardChoice: value})
     this.setState(()=>{

@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
-import { Select, SelectItem, Loading } from 'carbon-components-react'
+import { Dropdown, DropdownItem, Loading } from 'carbon-components-react'
 import '../../../graphics/diagramIcons.svg'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -69,7 +69,7 @@ export default class RefreshTimeSelect extends React.Component {
 
 
   handleChange = (e) => {
-    const {pollInterval} = this.autoRefreshChoices[e.currentTarget.selectedIndex]
+    const {value:pollInterval} = e
     const {refreshControl: {refreshCookie, startPolling, stopPolling}} = this.props
     if (pollInterval===0) {
       stopPolling()
@@ -103,16 +103,15 @@ export default class RefreshTimeSelect extends React.Component {
                 <use href={'#diagramIcons_autoRefresh'} ></use>
               </svg>
             </div>}
-          <Select id='refresh-select' className='selection'
+          <Dropdown className='selection'
             value={pollInterval}
-            hideLabel={true}
-            onChange={this.handleChange}>
+            onChange={this.handleChange} >
             {this.autoRefreshChoices.map(({text, pollInterval:value})=> {
               return (
-                <SelectItem key={value} text={text} value={value} />
+                <DropdownItem key={value} itemText={text} value={value} />
               )
             })}
-          </Select>
+          </Dropdown>
         </div>
       )
     }

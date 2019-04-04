@@ -10,7 +10,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Select, SelectItem } from 'carbon-components-react'
+import { Button, Dropdown, DropdownItem } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -84,16 +84,15 @@ export default class TopViolationsModule extends React.Component {
     return (
       <div className='header-container'>
         <div className='header-title'>{title}</div>
-        <Select id={'select-top-viloation-type'} className='header-selection'
-          hideLabel={true}
+        <Dropdown className='selection'
           value={topViolationChoice}
-          onChange={this.onChange}>
+          onChange={this.onChange} >
           {choices.map(({text, value})=> {
             return (
-              <SelectItem key={value} text={text} value={value} />
+              <DropdownItem key={value} itemText={text} value={value} />
             )
           })}
-        </Select>
+        </Dropdown>
       </div>
     )
   }
@@ -213,7 +212,7 @@ export default class TopViolationsModule extends React.Component {
   }
 
   onChange = (e) => {
-    const {value} = this.topViolationChoices[e.currentTarget.selectedIndex]
+    const {value} = e
     this.props.updateViewState({topViolationChoice: value})
     this.setState(()=>{
       return {topViolationChoice: value}

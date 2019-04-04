@@ -27,15 +27,25 @@
     cursor: pointer;
   }
 
-  .bx--select-input {
+  .bx--dropdown {
     color: $color__blue-51;
     font-size: 14px;
-    height: 16px;
-    width: 150px;
-    font-weight: bold;
-    padding: 0 4px;
     background-color: $color__white;
     box-shadow: none;
+
+    .bx--dropdown-link {
+      color: #152935;
+      padding: 10px;
+      white-space: nowrap;
+
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+
+    &.bx--dropdown--open .bx--dropdown-list {
+      max-height: 30rem;
+    }
   }
 
   .bx--select__arrow {

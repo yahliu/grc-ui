@@ -95,11 +95,9 @@ export class ResourceToolbar extends React.Component {
             {/* filter results button */}
             <div tabIndex='0' role={'button'}
               onClick={this.toggleFilterModel} onKeyPress={this.toggleFilterModelPress}>
-              <div>
-                <svg className='button-icon'>
-                  <use href={'#diagramIcons_filter'} ></use>
-                </svg>
-              </div>
+              <svg className='button-icon'>
+                <use href={'#diagramIcons_filter'} ></use>
+              </svg>
               <div className='button-label'>
                 {msgs.get('overview.menu.filter', locale)}
               </div>

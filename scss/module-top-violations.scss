@@ -50,13 +50,21 @@
       line-height: 23px
     }
 
-    .header-selection {
-      .bx--select-input {
-        box-shadow: none;
-        font-size: 14px;
-        font-weight: bold;
-        color: #3D70B2;
-        padding-left: 10px;
+    .bx--dropdown {
+      color: $color__blue-51;
+      font-size: 14px;
+      background-color: transparent;
+      box-shadow: none;
+      width: auto;
+
+      .bx--dropdown-link {
+        color: #152935;
+        padding: 10px;
+        white-space: nowrap;
+
+        &:hover, &:focus {
+          text-decoration: none;
+        }
       }
     }
   }
@@ -88,6 +96,7 @@
           .card-violations {
             display: flex;
             flex-direction: column;
+            flex: 0 0 100px;
             align-items: center;
             justify-content: center;
             border-right: 1px solid $color__gray-1;
@@ -118,7 +127,6 @@
               font-style: italic;
               font-size: 12px;
               color: #5A6872;
-              width: 280px;
             }
           }
         }
