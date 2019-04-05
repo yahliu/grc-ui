@@ -10,7 +10,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Dropdown, DropdownItem } from 'carbon-components-react'
+import { Button, DropdownV2 } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -81,19 +81,19 @@ export default class TopViolationsModule extends React.Component {
     const { topViolationChoice } = this.state
     const choices = this.getTopViolationChoices(locale)
     const title = msgs.get('overview.top.violations.title', locale)
+    const idx = Math.max(0, choices.findIndex(({value})=>{
+      return topViolationChoice===value
+    }))
     return (
       <div className='header-container'>
         <div className='header-title'>{title}</div>
-        <Dropdown className='selection'
-          value={topViolationChoice}
+        <DropdownV2 className='selection'
+          label={title}
           ariaLabel={title}
-          onChange={this.onChange} >
-          {choices.map(({text, value})=> {
-            return (
-              <DropdownItem key={value} itemText={text} value={value} />
-            )
-          })}
-        </Dropdown>
+          onChange={this.onChange}
+          inline={true}
+          initialSelectedItem={choices[idx].label}
+          items={choices} />
       </div>
     )
   }
@@ -201,11 +201,11 @@ export default class TopViolationsModule extends React.Component {
       this.topViolationChoices = [
         {
           value: TopViolationSelections.clusters,
-          text: msgs.get('overview.top.violations.clusters', locale),
+          label: msgs.get('overview.top.violations.clusters', locale),
         },
         {
           value: TopViolationSelections.policies,
-          text: msgs.get('overview.top.violations.policies', locale),
+          label: msgs.get('overview.top.violations.policies', locale),
         },
       ]
     }
@@ -213,7 +213,7 @@ export default class TopViolationsModule extends React.Component {
   }
 
   onChange = (e) => {
-    const {value} = e
+    const {selectedItem: {value}} = e
     this.props.updateViewState({topViolationChoice: value})
     this.setState(()=>{
       return {topViolationChoice: value}

@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Dropdown, DropdownItem } from 'carbon-components-react'
+import { DropdownV2 } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
@@ -51,19 +51,19 @@ export default class PolicyCardsModule extends React.Component {
     const { policyCardChoice } = this.state
     const choices = this.getPolicyCardChoices(locale)
     const title = msgs.get('overview.policy.overview.title', locale)
+    const idx = Math.max(0, choices.findIndex(({value})=>{
+      return policyCardChoice===value
+    }))
     return (
       <div className='header-container'>
         <div className='header-title'>{title}</div>
-        <Dropdown className='selection'
-          value={policyCardChoice}
+        <DropdownV2 className='selection'
+          label={title}
           ariaLabel={title}
-          onChange={this.onChange} >
-          {choices.map(({text, value})=> {
-            return (
-              <DropdownItem key={value} itemText={text} value={value} />
-            )
-          })}
-        </Dropdown>
+          onChange={this.onChange}
+          inline={true}
+          initialSelectedItem={choices[idx].label}
+          items={choices} />
       </div>
     )
   }
@@ -207,11 +207,11 @@ export default class PolicyCardsModule extends React.Component {
       this.policyCardChoices = [
         {
           value: PolicyCardsSelections.categories,
-          text: msgs.get('overview.policy.cards.categories', locale),
+          label: msgs.get('overview.policy.cards.categories', locale),
         },
         {
           value: PolicyCardsSelections.standards,
-          text: msgs.get('overview.policy.cards.standards', locale),
+          label: msgs.get('overview.policy.cards.standards', locale),
         },
       ]
     }
@@ -219,7 +219,7 @@ export default class PolicyCardsModule extends React.Component {
   }
 
   onChange = (e) => {
-    const {value} = e
+    const {selectedItem: {value}} = e
     this.props.handleDisplayChange(value)
     this.props.updateViewState({policyCardChoice: value})
     this.setState(()=>{
@@ -227,8 +227,6 @@ export default class PolicyCardsModule extends React.Component {
     })
   }
 }
-
-
 
 
 // functional card component

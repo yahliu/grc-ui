@@ -26,20 +26,37 @@
     }
 
     .bx--dropdown {
-      color: $color__blue-51;
       font-size: 14px;
       background-color: transparent;
       box-shadow: none;
+      white-space: nowrap;
       width: auto;
 
-      .bx--dropdown-link {
-        color: #152935;
-        padding: 10px;
-        white-space: nowrap;
+      .bx--list-box__label {
+        color: $color__blue-51;
+        padding-right: 32px;
+      }
 
-        &:hover, &:focus {
+      .bx--list-box__field {
+        padding: 0 5px;
+        &:focus {
+         box-shadow: none;
+       }
+      }
+
+      .bx--list-box__menu-item {
+        color: #152935;
+        padding: 14px;
+        height: 26px;
+        font-weight: normal;
+
+        &:hover, .bx--list-box__menu-item--highlighted {
           text-decoration: none;
         }
+      }
+
+      .bx--list-box__menu {
+        max-height: 30rem;
       }
     }
   }
