@@ -143,7 +143,8 @@ class ResourceDetails extends React.Component {
   }
 
   renderOverview() {
-    const { match, resourceType, staticResourceData, children } = this.props
+    const { match, resourceType, staticResourceData, children, refreshControl } = this.props
+    refreshControl.stopPolling()
     return (
       <div>
         <OverviewTab
@@ -157,7 +158,8 @@ class ResourceDetails extends React.Component {
   }
 
   renderOther(route) {
-    const { match, resourceType, staticResourceData, children, tabs } = this.props
+    const { match, resourceType, staticResourceData, children, tabs, refreshControl} = this.props
+    refreshControl.stopPolling()
     const Component = components[route]
     return (
       <Component
