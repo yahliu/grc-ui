@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
 import { Dropdown, DropdownItem, Loading } from 'carbon-components-react'
 import '../../../graphics/diagramIcons.svg'
-import config from '../../../lib/shared/config'
+import { DEFAULT_REFRESH_TIME } from '../../../lib/shared/constants'
 import msgs from '../../../nls/platform.properties'
 import moment from 'moment'
 
@@ -69,7 +69,8 @@ export default class RefreshTimeSelect extends React.Component {
 
 
   handleChange = (e) => {
-    const {value:pollInterval} = e
+    const {value} = e
+    const pollInterval = parseInt(value)
     const {refreshControl: {refreshCookie, startPolling, stopPolling}} = this.props
     if (pollInterval===0) {
       stopPolling()
@@ -88,6 +89,7 @@ export default class RefreshTimeSelect extends React.Component {
   }
 
   render() {
+    const { locale } = this.context
     const { pollInterval } = this.state
     if (pollInterval!==undefined) {
       const refresh = msgs.get('refresh', this.context.locale)
@@ -104,11 +106,12 @@ export default class RefreshTimeSelect extends React.Component {
               </svg>
             </div>}
           <Dropdown className='selection'
-            value={pollInterval}
+            value={pollInterval+''}
+            ariaLabel={msgs.get('refresh.choose', locale)}
             onChange={this.handleChange} >
             {this.autoRefreshChoices.map(({text, pollInterval:value})=> {
               return (
-                <DropdownItem key={value} itemText={text} value={value} />
+                <DropdownItem key={value} itemText={text} value={value+''} />
               )
             })}
           </Dropdown>
@@ -119,9 +122,8 @@ export default class RefreshTimeSelect extends React.Component {
   }
 }
 
-export const getPollInterval = (cookieKey, dfault) => {
-  let pollInterval = pollInterval = parseInt(config['featureFlags:liveUpdates']) === 2 ?
-    config['featureFlags:liveUpdatesPollInterval'] : dfault
+export const getPollInterval = (cookieKey) => {
+  let pollInterval = DEFAULT_REFRESH_TIME*1000
   if (cookieKey) {
     const savedInterval = localStorage.getItem(cookieKey)
     if (savedInterval) {
@@ -134,7 +136,7 @@ export const getPollInterval = (cookieKey, dfault) => {
         //
       }
     } else {
-      savePollInterval(cookieKey, dfault)
+      savePollInterval(cookieKey, pollInterval)
     }
   }
   return pollInterval

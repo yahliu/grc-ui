@@ -80,6 +80,9 @@ export class ResourceToolbar extends React.Component {
   render() {
     const { locale } = this.context
     const { availableFilters={}, activeFilters={}, refreshControl={} } = this.props
+    if (Object.keys(refreshControl).length===0) {
+      return null
+    }
     const { reloading, timestamp } = refreshControl
     const { filterViewOpen } = this.state
     const boundFilters = this.getBoundFilters()

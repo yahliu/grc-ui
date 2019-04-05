@@ -58,7 +58,7 @@ const withResource = (Component) => {
     }
 
     componentWillMount() {
-      const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE, 20*1000)
+      const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
       if (pollInterval) {
         var intervalId = setInterval(this.reload.bind(this), pollInterval)
         this.setState({ intervalId: intervalId })

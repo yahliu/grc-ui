@@ -56,6 +56,7 @@ export default class PolicyCardsModule extends React.Component {
         <div className='header-title'>{title}</div>
         <Dropdown className='selection'
           value={policyCardChoice}
+          ariaLabel={title}
           onChange={this.onChange} >
           {choices.map(({text, value})=> {
             return (
