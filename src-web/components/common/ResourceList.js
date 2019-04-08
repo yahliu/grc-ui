@@ -162,21 +162,12 @@ class ResourceList extends React.Component {
         />
       </div>
     }
-    if (resourceType.name === RESOURCE_TYPES.HCM_CLUSTERS.name){
-      return (
-        <NoResource
-          title={msgs.get('no-cluster.title', [resourceName], locale)}
-          detail={msgs.get('no-cluster.detail', [resourceName], locale)}>
-          {actions}
-        </NoResource>
-      )
-    }
     if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name){
       return (
         <NoResource
-          title={msgs.get('no-resource.title', [resourceName], locale)}
+          title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {this.createDocLink(resourceName, locale, actions)}
+          {this.createDocLink(this.context.locale)}
         </NoResource>
       )
     }

@@ -18,18 +18,15 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 import OverviewView from '../components/OverviewView'
-import {POLICY_REFRESH_INTERVAL_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
+import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPage'
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
-import {createResources, updateModal, updateSecondaryHeader} from '../actions/common'
+import { updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
-import CreateResourceModal from '../components/modals/CreateResourceModal'
-import NoResource from '../components/common/NoResource'
-import config from '../../lib/shared/config'
 
 const shouldInclude = (item, detailedName, displayType) => {
   const annotations = _.get(item, 'metadata.annotations')
@@ -99,7 +96,6 @@ const formatTableData = (items, detailedName, detailedType, displayType) => {
 class OverviewTab extends React.Component {
 
   static propTypes = {
-    handleCreateResource: PropTypes.func,
     openDesModal: PropTypes.func,
     secondaryHeaderProps: PropTypes.object,
     updateSecondaryHeader: PropTypes.func,
@@ -148,31 +144,6 @@ class OverviewTab extends React.Component {
     openDesModal(content, title)
   }
 
-  createDocLink(locale) {
-    const {handleCreateResource} = this.props
-    const vNumber = config['doc_version']
-    const createComplianceModal = <CreateResourceModal
-      key='createPolicy'
-      headingTextKey='actions.create.policy'
-      submitBtnTextKey='actions.create.policy'
-      onCreateResource={ handleCreateResource }
-      resourceDescriptionKey='modal.createresource.policy'
-    />
-
-    const modal = React.cloneElement(createComplianceModal, { resourceType: RESOURCE_TYPES.HCM_POLICIES })
-
-    return (
-      <div className={'button-group'}>
-        {[modal]}
-        <div>
-          <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-            <a href={`https://www.ibm.com/support/knowledgecenter/${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
-          </button>
-        </div>
-      </div>
-    )
-  }
-
   render () {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
     const { currentTab, detailedName = '', detailedType = '', displayType = '' } = this.state
@@ -189,16 +160,6 @@ class OverviewTab extends React.Component {
             let content
             if (!reloading) {
               this.timestamp = new Date().toString()
-            }
-
-            if (error || !items || items.length === 0) {
-              return (
-                <NoResource
-                  title={msgs.get('no-cluster.title', this.context.locale)}
-                  detail={msgs.get('no-cluster.detail', this.context.locale)}>
-                  {this.createDocLink(this.context.locale)}
-                </NoResource>
-              )
             }
 
             const refreshControl = {
@@ -274,7 +235,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
     openDesModal: (content, title) => dispatch(updateModal({ open: true, type: 'description', content: content, title: title})),
-    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml))
   }
 }
 

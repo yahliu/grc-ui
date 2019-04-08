@@ -20,7 +20,7 @@ const NoResource = ({
   children
 }, context) =>
   <div className='no-resource'>
-    <img className='no-resource-icon' src={`${config.contextPath}/graphics/planets.png`} alt={msgs.get('svg.description.resource', context.locale)} />
+    <img className='no-resource-icon' src={`${config.contextPath}/graphics/planets.png`} alt={msgs.get('svg.description.noresource', context.locale)} />
     <div className='no-resource-title'>{title}</div>
     {detail && <div className='no-resource-detail'>{detail}</div>}
     {children}

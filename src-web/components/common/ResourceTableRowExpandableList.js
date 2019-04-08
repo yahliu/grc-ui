@@ -15,12 +15,12 @@ import PropTypes from 'prop-types'
 import { StructuredListWrapper, StructuredListRow, StructuredListCell, StructuredListBody } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 
-const ResourceTableRowExpandableContent = ({ items }) =>
+const ResourceTableRowExpandableContent = ({ items }, context) =>
   <StructuredListWrapper>
     <StructuredListBody>
       {items.map((item, index) => (
         <StructuredListRow className={'nested-expandable-row'} key={`${item.name}-${index}`} data-row-name={item.name} >
-          <StructuredListCell className={'nested-expandable-row-header'} noWrap>{msgs.get(item.name, this.context.locale)}</StructuredListCell>
+          <StructuredListCell className={'nested-expandable-row-header'} noWrap>{msgs.get(item.name, context.locale)}</StructuredListCell>
           <StructuredListCell className={'nested-expandable-row-content'} noWrap>{item.items.join(', ')}</StructuredListCell>
         </StructuredListRow>
       ))}
