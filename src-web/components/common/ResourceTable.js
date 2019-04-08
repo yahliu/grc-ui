@@ -24,6 +24,7 @@ import { getLink, getPrimaryKey, getSecondaryKey } from '../../definitions'
 import { Link, withRouter } from 'react-router-dom'
 import lodash from 'lodash'
 import ResourceTableRowExpandableContent from './ResourceTableRowExpandableContent'
+import ResourceTableRowExpandableList from './ResourceTableRowExpandableList'
 import constants from '../../../lib/shared/constants'
 import { fliterTableAction } from '../../../lib/client/access-helper'
 
@@ -71,7 +72,8 @@ class ResourceTable extends React.Component {
       selectableTable,
       onSelect,
       onSelectAll,
-      onSelectSubItem
+      onSelectSubItem,
+      listSubItems
     } = this.props
     return [
       <DataTable
@@ -150,7 +152,17 @@ class ResourceTable extends React.Component {
                             }
                             {row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
                           </TableExpandRow>
-                          {row.isExpanded && (
+                          {row.isExpanded && listSubItems && (
+                            <TableExpandedRow>
+                              <TableCell colSpan={1} />
+                              <TableCell colSpan={8}>
+                                <ResourceTableRowExpandableList
+                                  items={items[row.id].subItems}
+                                  type='name' />
+                              </TableCell>
+                            </TableExpandedRow>
+                          )}
+                          {row.isExpanded && !listSubItems && (
                             <TableExpandedRow>
                               <TableCell colSpan={selectableTable ? 2 : 1} />
                               <TableCell colSpan={1}>

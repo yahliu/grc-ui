@@ -55,6 +55,18 @@ body {
   height: 100%;
 }
 
+.nested-expandable-row {
+  display: flex;
+  flex-direction: column;
+  .nested-expandable-row-header {
+    font-weight: bold;
+    color: $color__blue-50;
+  }
+  .nested-expandable-row-content {
+    margin-top: -2rem;
+  }
+}
+
 .no-resource {
   display: flex;
   flex-direction: column;
@@ -93,8 +105,8 @@ body {
     //position: relative;
     //display: block;
     //margin: 0 auto 30px;
-    width: auto;
-    height: auto;
+    width: 360px;
+    height: 200px;
   }
 
   .no-resource-title {

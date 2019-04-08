@@ -18,14 +18,14 @@ import PolicyTemplates from '../components/common/PolicyTemplates'
 import ResourceTableModule from '../components/common/ResourceTableModuleFromProps'
 
 // TODO: create new type call HCM_COMPLIANCE to hand create
-const handleCreateResource = (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_COMPLIANCES, yaml))
+const handleCreateResource = (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml))
 
 const createComplianceModal = <CreateResourceModal
-  key='createCompliance'
-  headingTextKey='actions.create.compliance'
-  submitBtnTextKey='actions.create.compliance'
+  key='createPolicy'
+  headingTextKey='actions.create.policy'
+  submitBtnTextKey='actions.create.policy'
   onCreateResource={ handleCreateResource }
-  resourceDescriptionKey='modal.createresource.compliance'
+  resourceDescriptionKey='modal.createresource.policy'
 />
 
 export default withRouter(typedResourcePageWithListAndDetails(

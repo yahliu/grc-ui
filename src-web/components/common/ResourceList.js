@@ -149,6 +149,7 @@ class ResourceList extends React.Component {
           sortColumn={sortColumn}
           status={status}
           items={items}
+          expandableTable={resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name}
           totalFilteredItems={totalFilteredItems}
           resourceType={resourceType}
           changeTablePage={changeTablePage}
@@ -157,6 +158,7 @@ class ResourceList extends React.Component {
           searchValue={searchValue}
           defaultSearchValue={clientSideFilters}
           tableActions={staticResourceData.tableActions}
+          listSubItems={resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name}
         />
       </div>
     }

@@ -10,8 +10,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import msgs from '../../../nls/platform.properties'
-import { Button, Modal } from 'carbon-components-react'
+import { Modal } from 'carbon-components-react'
 import {updateModal, } from '../../actions/common'
 import {connect} from 'react-redux'
 import resources from '../../../lib/shared/resources'
@@ -47,9 +46,6 @@ class DescriptionModal extends React.PureComponent {
             {/*</div>*/}
             <div className={'bx--modal-content-body'}>
               <p>{content}</p>
-            </div>
-            <div className={'bx--modal-content-footer'}>
-              <Button type='button' onClick={this.handleModalClose}>{msgs.get('modal.button.close', this.context.locale)}</Button>
             </div>
           </div>
         </Modal>

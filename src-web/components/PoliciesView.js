@@ -39,6 +39,16 @@ export class PoliciesView extends React.Component {
     }
   }
 
+  formatExpandablePolicies(policies) {
+    const result = []
+    policies.forEach(policy => {
+      const subItems = [{name: 'policy.pb', items: policy.placementBindings.map(pb => pb.metadata.name)},
+        {name: 'policy.pp', items: policy.placementPolicies.map(pp => pp.metadata.name)}]
+      result.push({...policy, subItems})
+    })
+    return result
+  }
+
   render() {
     const { locale } = this.context
     const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl } = this.props
@@ -51,9 +61,10 @@ export class PoliciesView extends React.Component {
         subtitle={msgs.get('overview.error.default', locale)} />
 
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
+    const expandablePolicies = this.formatExpandablePolicies(filteredPolicies)
     return (
       <div className='policies-view'>
-        <ClusterComplianceTab refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} />
+        <ClusterComplianceTab refreshControl={refreshControl} policies={expandablePolicies} secondaryHeaderProps={secondaryHeaderProps} />
       </div>
     )
   }
