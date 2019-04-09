@@ -56,7 +56,7 @@ export class OverviewView extends React.Component {
 
   createDocLink(locale) {
     const {handleCreateResource} = this.props
-    const vNumber = config['doc_version']
+    const vNumber = config['ICP_VERSION']
     const createComplianceModal = <CreateResourceModal
       key='createPolicy'
       headingTextKey='actions.create.policy'
@@ -70,9 +70,9 @@ export class OverviewView extends React.Component {
     return (
       <div className={'button-group'}>
         {[modal]}
-        <div>
+        <div className={'buttons'}>
           <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-            <a href={`https://www.ibm.com/support/knowledgecenter/${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
+            <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
           </button>
         </div>
       </div>

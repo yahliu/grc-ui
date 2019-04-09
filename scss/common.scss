@@ -86,7 +86,7 @@ body {
 
   .button-group {
     display: flex;
-    div {
+    .buttons {
       margin: 0 1rem;
       button:hover {
         .doc-link {

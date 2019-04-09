@@ -27,6 +27,21 @@ import TagInput from './TagInput'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 import { showCreate } from '../../../lib/client/access-helper'
 
+
+function createDocLink(locale, actions) {
+  const vNumber = config['ICP_VERSION']
+  return (
+    <div className={'button-group'}>
+      {actions}
+      <div className={'buttons'}>
+        <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
+          <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.ibm.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
+        </button>
+      </div>
+    </div>
+  )
+}
+
 class ResourceList extends React.Component {
   /* FIXME: Please fix disabled eslint rules when making changes to this file. */
   /* eslint-disable react/prop-types, react/jsx-no-bind */
@@ -46,20 +61,6 @@ class ResourceList extends React.Component {
     if (!lodash.isEqual(this.props.policies, nextProps.policies)) {
       this.props.fetchResources(nextProps.policies)
     }
-  }
-
-  createDocLink(resourceName, locale, actions) {
-    const vNumber = config['doc_version']
-    return (
-      <div className={'button-group'}>
-        {actions}
-        <div>
-          <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-            <a href={`https://www.ibm.com/support/knowledgecenter/${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
-          </button>
-        </div>
-      </div>
-    )
   }
 
   render() {
@@ -167,7 +168,7 @@ class ResourceList extends React.Component {
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {this.createDocLink(this.context.locale)}
+          {createDocLink(locale, actions)}
         </NoResource>
       )
     }
