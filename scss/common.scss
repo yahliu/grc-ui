@@ -20,6 +20,9 @@ body {
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  .bx--data-table-v2--zebra tbody tr:nth-child(2n) {
+    background-color: $color__white;
+  }
 }
 
 .page-content-container {

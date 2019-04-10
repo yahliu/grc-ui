@@ -89,7 +89,7 @@ export const REQUEST_STATUS = {
 }
 
 export const PAGE_SIZES = {
-  DEFAULT: 20,
+  DEFAULT: 10,
   VALUES: [5, 10, 20, 50, 75, 100]
 }
 
