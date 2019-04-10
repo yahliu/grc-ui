@@ -26,17 +26,23 @@
     }
   }
 
-
+  .bx--tabs {
+    .bx--tabs__nav-item {
+      margin-top: 0.5rem
+    }
+  }
 
   header {
     .bx--detail-page-header-title {
       font-size: 1.75rem;
     }
-
+    .bx--detail-page-header-content {
+      margin-top: 1rem;
+    }
     .bx--breadcrumb {
       min-height: 15px;
-      padding: 1rem 0;
-      margin-left: -0.2rem;
+      padding-bottom: 0;
+      margin-bottom: 1rem;
     }
 
     .breadcrumb-item:last-child {
@@ -49,7 +55,7 @@
       display: none;
     }
     .bx--detail-page-header-title-container:last-child {
-      margin-bottom: 2.875rem; //TODO: decide what to do when there's no tab. Hack to display the title at same location
+      margin-bottom: 1.5rem; //TODO: decide what to do when there's no tab. Hack to display the title at same location
     }
   }
 

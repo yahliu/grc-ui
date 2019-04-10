@@ -61,9 +61,13 @@ export class SecondaryHeader extends React.Component {
           <div className={`secondary-header simple-header${description ? ' special-layout': ''}`}>
             <header>
               <div className="bx--detail-page-header-content">
-                <Breadcrumb>
-                  {breadcrumbItems && this.renderBreadCrumb()}
-                </Breadcrumb>
+                {breadcrumbItems &&
+                  (
+                    <Breadcrumb>
+                      {this.renderBreadCrumb()}
+                    </Breadcrumb>
+                  )
+                }
                 {this.renderHeader()}
                 {tabs && tabs.length > 0 &&
                   <Tabs selected={this.getSelectedTab() || 0} aria-label={`${title} ${msgs.get('tabs.label', locale)}`}>
