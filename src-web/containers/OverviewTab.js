@@ -55,7 +55,7 @@ const formatClusterView = (key, value) => {
   })
   const result = {
     cluster: key,
-    violation: `${validNum}/${value.length}`,
+    violation: `${value.length-validNum}/${value.length}`,
     nonCompliant: nonCompliant
   }
   return result

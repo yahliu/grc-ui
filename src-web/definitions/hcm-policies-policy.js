@@ -16,19 +16,15 @@ export default {
   secondaryKey: 'metadata.namespace',
   tableKeys: [
     {
-      msgKey: 'table.header.name',
+      msgKey: 'table.header.policy.name',
       resourceKey: 'metadata.name',
-    },
-    {
-      msgKey: 'table.header.namespace',
-      resourceKey: 'metadata.namespace',
     },
     {
       msgKey: 'table.header.remediation',
       resourceKey: 'remediation',
     },
     {
-      msgKey: 'table.header.cluster.compliant',
+      msgKey: 'table.header.cluster.violation',
       resourceKey: 'clusterCompliant',
     },
     {

@@ -17,7 +17,7 @@ export default {
   secondaryKey: 'metadata.namespace',
   tableKeys: [
     {
-      msgKey: 'table.header.name',
+      msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
     },
     {
@@ -25,7 +25,7 @@ export default {
       resourceKey: 'violation',
     },
     {
-      msgKey: 'table.header.standards',
+      msgKey: 'table.header.violated',
       resourceKey: 'nonCompliant',
       transformFunction: getLabels,
     }
