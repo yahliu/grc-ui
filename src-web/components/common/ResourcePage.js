@@ -25,7 +25,8 @@ const WrappedResourceList = props =>
     <ResourceList
       {...props}
       tabs={props.secondaryHeaderProps.tabs}
-      title={props.secondaryHeaderProps.title}>
+      title={props.secondaryHeaderProps.title}
+      information={props.secondaryHeaderProps.information}>
       {props.buttons}
     </ResourceList>
   </div>

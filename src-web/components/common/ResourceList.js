@@ -52,8 +52,8 @@ class ResourceList extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, title, fetchResources, policies } = this.props
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
+    const { updateSecondaryHeader, tabs, title, information, fetchResources, policies } = this.props
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
     fetchResources(policies)
   }
 
@@ -241,7 +241,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(searchTable(search, resourceType))
     },
     sortTable: (sortDirection, sortColumn) => dispatch(sortTable(sortDirection, sortColumn, resourceType)),
-    updateSecondaryHeader: (title, tabs) => dispatch(updateSecondaryHeader(title, tabs)),
+    updateSecondaryHeader: (title, tabs, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, undefined, information)),
     onSelectedFilterChange: (selectedFilters) => {
       updateBrowserURL && updateBrowserURL(selectedFilters)
       dispatch(updateResourceFilters(resourceType, selectedFilters))

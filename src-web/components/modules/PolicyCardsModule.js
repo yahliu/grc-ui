@@ -248,15 +248,26 @@ const PolicyCard = ({data, locale, handleClick}) => {
           </div>
           <div className='card-count-content'>
             {countData.map(({violations, total, violationType, type}) => {
-              const classes = classNames({
-                'card-count-violations': true,
-                'violated': violations > 0,
+              const violated = violations > 0
+              const containerClasses = classNames({
+                'card-count-container': true,
+                violated,
               })
+              const onClick = () =>{
+                if (violated) {
+                  handleClick(name, type)
+                }
+              }
+              const onKeyPress = (e) =>{
+                if ( e.key === 'Enter') {
+                  onClick()
+                }
+              }
               return (
-                //eslint-disable-next-line
-                <div key={violationType} className={classes !== 'card-count-violations' ? 'card-count-container' : 'card-count-container violated'} onClick={handleClick(name, type, classes)}>
+                <div key={violationType} className={containerClasses} role={'button'}
+                  tabIndex='0' onClick={onClick} onKeyPress={onKeyPress} >
                   <div className='card-count'>
-                    <div className={classes}>
+                    <div className='card-count-violations'>
                       {violations}
                     </div>
                     <div className='card-count-total'>

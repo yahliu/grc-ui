@@ -93,7 +93,7 @@ export class SecondaryHeader extends React.Component {
 
   renderHeader() {
     // const { locale } = this.context
-    const { title, description } = this.props
+    const { title, description, information } = this.props
     if (description) {
       return (
         <div className="bx--detail-page-header-title-container">
@@ -105,6 +105,9 @@ export class SecondaryHeader extends React.Component {
       return (
         <div className="bx--detail-page-header-title-container">
           <h1 className="bx--detail-page-header-title">{title}</h1>
+          {information &&<svg className='info-icon'>
+            <use href={'#diagramIcons_info'} ></use>
+          </svg>}
         </div>
       )
     }
@@ -164,6 +167,7 @@ const mapStateToProps = (state) => {
     refresh: state.secondaryHeader.refresh,
     role: state.role && state.role.role,
     description: state.secondaryHeader.description,
+    information: state.secondaryHeader.information,
   }
 }
 

@@ -112,25 +112,23 @@ class OverviewTab extends React.Component {
 
   componentWillMount() {
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs } = secondaryHeaderProps
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
+    const { title, tabs, information } = secondaryHeaderProps
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
-  handleDrillDownClick = (targetTab) => (name, type, classes) => () => {
-    if (classes !== 'card-count-violations') {
-      this.setState({
-        currentTab: targetTab,
-        detailedName: name,
-        detailedType: type,
-      })
-    }
+  handleDrillDownClick = (targetTab, name, type) => {
+    this.setState({
+      currentTab: targetTab,
+      detailedName: name,
+      detailedType: type,
+    })
   }
 
   handleOverviewClick = (targetTab) => () => {
     this.setState({currentTab: targetTab})
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs } = secondaryHeaderProps
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
+    const { title, tabs, information } = secondaryHeaderProps
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
   handleDisplayChange = (value) => {
@@ -195,6 +193,7 @@ class OverviewTab extends React.Component {
               }
             }
 
+            const handleDrillDownClick = this.handleDrillDownClick.bind(this, 'details')
             return (
               <div>
                 {(currentTab === 'overview') &&
@@ -203,7 +202,7 @@ class OverviewTab extends React.Component {
                     error={error}
                     policies={items}
                     refreshControl={refreshControl}
-                    handleDrillDownClick={this.handleDrillDownClick('details')}
+                    handleDrillDownClick={handleDrillDownClick}
                     handleDisplayChange={this.handleDisplayChange}
                   />
                 }
@@ -233,7 +232,7 @@ class OverviewTab extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
+    updateSecondaryHeader: (title, tabs, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, undefined, information)),
     openDesModal: (content, title) => dispatch(updateModal({ open: true, type: 'description', content: content, title: title})),
   }
 }

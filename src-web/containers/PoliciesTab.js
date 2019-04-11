@@ -40,8 +40,8 @@ class PoliciesTab extends React.Component {
 
   componentWillMount() {
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs } = secondaryHeaderProps
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs)
+    const { title, tabs, information } = secondaryHeaderProps
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
   render () {
@@ -86,7 +86,7 @@ class PoliciesTab extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, breadcrumbItems) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems)),
+    updateSecondaryHeader: (title, tabs, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, undefined, information)),
   }
 }
 

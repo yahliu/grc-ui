@@ -23,6 +23,7 @@ const BASE_PAGE_PATH = `${config.contextPath}`
 
 const SECONDARY_HEADER_PROPS = {
   title: 'routes.policies',
+  information: 'info.policies',
   tabs: [
     {
       id: 'policy-overview',

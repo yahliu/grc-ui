@@ -12,9 +12,9 @@
 .secondary-header {
 
   .detail-page-header-title-button {
-    color: #3D70B2;
+    color: $color__blue-51;
     p {
-      border-left: 2px solid #dfe3e6;
+      border-left: 2px solid $color__gray-1;
       height: 2rem;
       margin: 2rem 0 0 2rem;
       font-weight: bold;
@@ -36,9 +36,11 @@
     .bx--detail-page-header-title {
       font-size: 1.75rem;
     }
+
     .bx--detail-page-header-content {
       margin-top: 1rem;
     }
+
     .bx--breadcrumb {
       min-height: 15px;
       padding-bottom: 0;
@@ -54,8 +56,20 @@
     .bx--detail-page-header-status-container {
       display: none;
     }
-    .bx--detail-page-header-title-container:last-child {
-      margin-bottom: 1.5rem; //TODO: decide what to do when there's no tab. Hack to display the title at same location
+
+    .bx--detail-page-header-title-container {
+      &:last-child {
+        margin-bottom: 1.5rem; //TODO: decide what to do when there's no tab. Hack to display the title at same location
+      }
+
+      .info-icon {
+        margin-left: 6px;
+        width: 16px;
+        height: 16px;
+        fill: $color__blue-51;
+        stroke: none;
+        cursor: pointer;
+      }
     }
   }
 
