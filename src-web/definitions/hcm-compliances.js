@@ -165,7 +165,7 @@ export default {
   },
   tableKeys: [
     {
-      msgKey: 'table.header.name',
+      msgKey: 'table.header.policy.name',
       resourceKey: 'metadata.name',
       transformFunction: createComplianceLink,
     },
@@ -178,7 +178,7 @@ export default {
       resourceKey: 'remediation',
     },
     {
-      msgKey: 'table.header.cluster.compliant',
+      msgKey: 'table.header.cluster.violation',
       resourceKey: 'clusterCompliant',
     },
     {
