@@ -11,6 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, DropdownV2 } from 'carbon-components-react'
+import classNames from 'classnames'
 import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -49,7 +50,7 @@ export default class TopViolationsModule extends React.Component {
       }
       return (
         <div className='module-top-violations'>
-          {this.renderHeader()}
+          {this.renderHeader(true)}
           {this.renderCards(cardData)}
           {xcess && this.renderButton()}
         </div>
@@ -57,6 +58,7 @@ export default class TopViolationsModule extends React.Component {
     } else {
       return (
         <div className='module-top-violations'>
+          {this.renderHeader()}
           {this.renderNoViolations()}
         </div>
       )
@@ -76,7 +78,7 @@ export default class TopViolationsModule extends React.Component {
     )
   }
 
-  renderHeader() {
+  renderHeader(hasChoice) {
     const { locale } = this.context
     const { topViolationChoice } = this.state
     const choices = this.getTopViolationChoices(locale)
@@ -84,16 +86,20 @@ export default class TopViolationsModule extends React.Component {
     const idx = Math.max(0, choices.findIndex(({value})=>{
       return topViolationChoice===value
     }))
+    const classes = classNames({
+      'header-title': true,
+      hasChoice,
+    })
     return (
       <div className='header-container'>
-        <div className='header-title'>{title}</div>
-        <DropdownV2 className='selection'
+        <div className={classes}>{title}</div>
+        {hasChoice && <DropdownV2 className='selection'
           label={title}
           ariaLabel={title}
           onChange={this.onChange}
           inline={true}
           initialSelectedItem={choices[idx].label}
-          items={choices} />
+          items={choices} />}
       </div>
     )
   }

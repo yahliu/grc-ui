@@ -48,8 +48,10 @@
       font-size: 18px;
       font-weight: bold;
       padding-right: 10px;
-      border-right: 1px solid $color__gray-1;
-      line-height: 23px
+      line-height: 23px;
+      &.hasChoice {
+        border-right: 1px solid $color__gray-1;
+      }
     }
 
     .bx--dropdown {
@@ -65,7 +67,7 @@
       }
 
       .bx--list-box__field {
-        padding: 0 5px;
+        padding: 0 8px;
         &:focus {
          box-shadow: none;
        }
@@ -103,7 +105,6 @@
       .card-content {
         display: flex;
         height: 140px;
-        max-width: 425px;
         min-width: 23.125rem;
         background-color: white;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;

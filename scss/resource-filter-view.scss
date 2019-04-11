@@ -15,7 +15,7 @@
 .resource-filter-view {
   position: fixed;
   top: $secondary-header-top;
-  right: 5px;
+  right: 0;
   z-index: 2000;
   color: $color__white;
   background-color: $color__blue-90;
@@ -61,9 +61,12 @@
 
       .filter-section-title {
         margin-bottom: .5rem;
+        font-size: 14px;
+        font-weight: 600;
       }
 
       .filter-section-checkbox {
+        font-size: 12px;
       }
 
       .filter-section-expand {
