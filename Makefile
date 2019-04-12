@@ -51,7 +51,7 @@ run: check-env app-version
 	-e WLP_CLIENT_ID=$(WLP_CLIENT_ID) \
 	-e WLP_CLIENT_SECRET=$(WLP_CLIENT_SECRET) \
 	-e WLP_REDIRECT_URL=$(WLP_REDIRECT_URL) \
-	-e hcmUiApiUrl=https://10.10.0.5:4000/hcmuiapi \
+	-e grcUiApiUrl=https://10.10.0.5:4000/grcuiapi \
 	--name icp-grc-ui \
 	--network mcm-network \
 	-d -p $(HOST):$(APP_PORT):$(CONTAINER_PORT) $(IMAGE_REPO)/$(IMAGE_NAME_ARCH):$(IMAGE_VERSION)
@@ -69,27 +69,32 @@ test:
 	jsonfile@4.0.0 \
 	redux-mock-store@1.5.1 \
 	jest-tap-reporter@1.9.0 \
-	properties-parser@0.3.1
-ifeq ($(UNIT_TESTS), TRUE)
-	if [ ! -d "test-output" ]; then \
-		mkdir test-output; \
-	fi
-	npm test
-endif
-ifeq ($(SELENIUM_TESTS), TRUE)
+	properties-parser@0.3.1 
+
+# ifeq ($(UNIT_TESTS), TRUE)
+# 	if [ ! -d "test-output" ]; then \
+# 		mkdir test-output; \
+# 	fi
+# 	npm test
+# endif
+# ifeq ($(SELENIUM_TESTS), TRUE)
 ifeq ($(ARCH), x86_64)
-	docker pull $(IMAGE_REPO)/icp-grc-ui-api-amd64
+	docker pull $(IMAGE_REPO)/grc-ui-api-amd64
 	docker run \
-	-e NODE_ENV=test \
-	-e MOCK=true \
-	--name icp-grc-ui-api \
+	-e NODE_ENV=development \
+	-e cfcRouterUrl=$(cfcRouterUrl) \
+	-e PLATFORM_IDENTITY_PROVIDER_URL=$(PLATFORM_IDENTITY_PROVIDER_URL) \
+	-e WLP_CLIENT_ID=$(WLP_CLIENT_ID) \
+	-e WLP_CLIENT_SECRET=$(WLP_CLIENT_SECRET) \
+	-e WLP_REDIRECT_URL=$(WLP_REDIRECT_URL) \
+	--name grc-ui-api \
 	--network mcm-network \
 	--ip 10.10.0.5 \
-	-d -p 127.0.0.1:4000:4000 $(IMAGE_REPO)/icp-grc-ui-api-amd64
+	-d -p 127.0.0.1:4000:4000 $(IMAGE_REPO)/grc-ui-api-amd64
 	npm install selenium-standalone@6.12.0 xml2json@0.11.0 nightwatch@0.9.20
 	nightwatch
 endif
-endif
+# endif
 
 include Makefile.docker
 include Makefile.cicd
