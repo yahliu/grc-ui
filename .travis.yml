@@ -31,7 +31,7 @@ services:
 before_install:
   - make cicd-log-init
   - source travis-env.sh
-  - make docker-login
+
 
 install:
   - make install
@@ -39,12 +39,14 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - if [ $(uname -m) == 'x86_64' ]; then sh -e /etc/init.d/xvfb start; else echo 's390x or ppc64le - skipping'; fi
+  - make docker-login-edge
   - make image
   - make run
   - chmod +x copyright-check.sh
 
 script:
   - make copyright-check
+  - make docker-login
   - make test
 #  - make cicd-log-test
   - export PREV_COVERAGE_REPORT=$(curl -L -H 'Authorization:token ${GITHUB_TOKEN}' https://raw.github.ibm.com/IBMPrivateCloud/icp-grc-ui/gh-pages/coverage/coverage-summary.json)

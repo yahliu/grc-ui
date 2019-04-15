@@ -11,6 +11,14 @@ include Configfile
 
 SHELL := /bin/bash
 
+.PHONY: docker-login-edge
+docker-login-edge:
+ifndef $(and DOCKER_USERNAME, DOCKER_PASSWORD)
+	$(error DOCKER_USERNAME and DOCKER_PASSWORD must be defined, required for goal (docker-login))
+endif
+	@docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD) hyc-cloud-private-edge-docker-local.artifactory.swg-devops.com
+
+
 .PHONY: copyright-check
 copyright-check:
 	./copyright-check.sh

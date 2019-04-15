@@ -1,4 +1,4 @@
-FROM node:carbon-alpine
+FROM hyc-cloud-private-edge-docker-local.artifactory.swg-devops.com/build-images/node-amd64:dubnium-ubi7-minimal
 
 ARG VCS_REF
 ARG VCS_URL
