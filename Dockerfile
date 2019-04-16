@@ -20,5 +20,6 @@ COPY . /opt/ibm/icp-grc-ui
 
 EXPOSE 3000
 
+ENV BABEL_CACHE_PATH=/opt/ibm/icp-grc-ui/babel.cache.json
 ENV NODE_ENV production
 CMD ["node", "app.js"]
