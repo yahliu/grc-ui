@@ -27,6 +27,13 @@ module.exports = {
     page.verifyTable()
   },
 
+  'All policy page: Add, search and delete policy': (browser) => {
+    page.createTestPolicy(browser)
+    page.searchPolicy(true)
+    page.deletePolicy()
+    page.searchPolicy(false)
+  },
+
   after: function (browser, done) {
     setTimeout(() => {
       browser.end()
