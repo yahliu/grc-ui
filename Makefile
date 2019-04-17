@@ -37,8 +37,6 @@ prune:
 my-version:
 	$(eval IMAGE_VERSION := $(shell git rev-parse --short HEAD))
 
-app-version: my-version
-
 
 .PHONY: build
 build:
