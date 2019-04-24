@@ -11,7 +11,7 @@ rulePack: https://cc-rules.w3ibm.mybluemix.net/js/latest/
 # i.e. For May rule archive use ruleArchive: 2017MayDeploy
 # Default: latest
 # Refer to README.md FAQ section below to get the rule archive ID.
-ruleArchive : 2018AugustDeploy
+ruleArchive : latest
 
 
 # optional - Specify one or many policies to scan.
@@ -20,7 +20,7 @@ ruleArchive : 2018AugustDeploy
 # Default: null (all policies)
 #
 policies:
-  - IBM_Accessibility_2018_08
+  - IBM_Accessibility_2019_02
 
 # optional - Specify one or many violation levels on which to fail the test
 #            i.e. If specified violation then the testcase will only fail if
@@ -29,7 +29,7 @@ policies:
 # i.e. failLevels: violation,potential violation or refer to below as a list
 # Default: violation, potentialviolation
 failLevels:
-    - violation
+    - null
 
 # optional - Specify one or many violation levels which should be reported
 #            i.e. If specified violation then in the report it would only contain
@@ -62,8 +62,8 @@ label:
 
 disable:
     # FIXME - Disabled these rules for the initial CI/CD integration.
-    - 488
-    - 495
+    - 1148
+    - 1156
 
 # optional - Where the scan results should be saved.
 # Default: results

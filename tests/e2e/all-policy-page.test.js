@@ -8,6 +8,7 @@
  *******************************************************************************/
 
 const config = require('../../config')
+const a11yScan = require('../utils/accessibilityScan')
 let page
 
 module.exports = {
@@ -27,11 +28,20 @@ module.exports = {
     page.verifyTable()
   },
 
-  'All policy page: Add, search and delete policy': (browser) => {
-    page.createTestPolicy(browser)
-    page.searchPolicy(true)
+  'All policy page: Add, search, delete policy': (browser) => {
+    const time = new Date().getTime()
+
+    page.createTestPolicy(browser, time)
+    page.searchPolicy(true, time)
+    browser.pause(30*1000) // Wait for pp and pb to show up in detail page
+    page.testDetailsPage()
+    a11yScan.runAccessibilityScan(browser, 'policyDetail')
     page.deletePolicy()
-    page.searchPolicy(false)
+    page.searchPolicy(false, time)
+  },
+
+  'All policy page: Run Accessibility Scan': (browser) => {
+    a11yScan.runAccessibilityScan(browser, 'allPolicy')
   },
 
   after: function (browser, done) {

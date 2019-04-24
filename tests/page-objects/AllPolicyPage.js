@@ -25,6 +25,7 @@ module.exports = {
     verifyTable,
     createTestPolicy,
     searchPolicy,
+    testDetailsPage,
     deletePolicy,
   }]
 }
@@ -37,10 +38,33 @@ function verifyTable() {
   this.expect.element('@expandTable').to.be.not.present
 }
 
-const time = new Date().getTime()
 
-const policyYaml =
-`apiVersion: policy.mcm.ibm.com/v1alpha1
+function generatePolicyYaml (time) {
+  return `apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementPolicy
+metadata:
+  name: ${time}-placement-policy-test
+  namespace: mcm
+#  description: Example of PlacementPolicy
+spec:
+  clusterLabels:
+    matchLabels:
+      cloud: "IBM"
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: ${time}-placement-binding-test
+  namespace: mcm
+#  description: Example of PlacementBinding
+placementRef:
+  name: ${time}-placement-policy-test
+  namespace: mcm
+subjects:
+- name: ${time}-policy-pod
+  kind: Policy
+---
+apiVersion: policy.mcm.ibm.com/v1alpha1
 kind: Policy
 metadata:
   name: ${time}-policy-pod
@@ -74,14 +98,16 @@ spec:
               ports:
                 - containerPort: 80
   remediationAction: inform`
+}
 
-function createTestPolicy(browser) {
+function createTestPolicy(browser, time) {
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
   this.expect.element('@yamlInputField').to.be.present
   this.click('@yamlTextField')
 
   const keystrokes = []
+  const policyYaml = generatePolicyYaml(time)
   policyYaml.split(/\r?\n/).forEach(line => {
     const indentation = line.search(/\S|$/)
     keystrokes.push(line)
@@ -97,17 +123,24 @@ function createTestPolicy(browser) {
   this.click('@submitCreatePolicyButton')
 }
 
-function searchPolicy(expectToDisplay) {
+function searchPolicy(expectToDisplay, time) {
   this.expect.element('@searchInput').to.be.present
   this.setValue('@searchInput',`${time}-policy-pod`)
   if(expectToDisplay){
-    this.expect.element('tbody tr').to.have.attribute('data-row-name').equals(`${time}-policy-pod`)
+    this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-pod`)
   } else{
-    this.expect.element('tbody tr').to.be.not.present
+    this.expect.element('tbody>tr').to.be.not.present
+    this.setValue('@searchInput','')
   }
 }
 
+function testDetailsPage() {
+  this.click('tbody>tr>td>a')
+  this.expect.element('.bx--module__title:nth-of-type(1)').text.to.equal('Policy Details')
+}
+
 function deletePolicy(){
+  this.click('div.bx--breadcrumb-item:nth-of-type(1)>a')
   this.expect.element('@overflowButton').to.be.present
   this.click('@overflowButton')
   this.expect.element('@deleteButton').to.be.present

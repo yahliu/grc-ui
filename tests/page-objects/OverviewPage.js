@@ -46,4 +46,5 @@ function verifyViolationTable() {
   this.expect.element('@violationCardPolicy').to.be.present
   this.click('@violationCardPolicy')
   this.expect.element('@violationTable').to.be.present
+  this.click('@backLink')
 }
