@@ -16,6 +16,7 @@ import { withRouter } from 'react-router-dom'
 import {createResources, updateResourceToolbar} from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
+import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import {POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
 import TopViolationsModule from './modules/TopViolationsModule'
 import PolicyCardsModule from './modules/PolicyCardsModule'
@@ -43,6 +44,7 @@ export class OverviewView extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('beforeunload', this.onUnload)
+    this.onUnload()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -81,7 +83,8 @@ export class OverviewView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, activeFilters={}, handleDrillDownClick, handleDisplayChange } = this.props
+    const { loading, error, policies, activeFilters={}, handleDrillDownClick } = this.props
+    hideResourceToolbar()
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -100,6 +103,7 @@ export class OverviewView extends React.Component {
       )
     }
 
+    showResourceToolbar()
     const { viewState } = this.state
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
@@ -113,8 +117,7 @@ export class OverviewView extends React.Component {
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
           activeFilters={activeFilters}
-          handleDrillDownClick={handleDrillDownClick}
-          handleDisplayChange={handleDisplayChange} />
+          handleDrillDownClick={handleDrillDownClick} />
       </div>
     )
   }
@@ -134,7 +137,6 @@ OverviewView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
   handleCreateResource: PropTypes.func,
-  handleDisplayChange: PropTypes.func,
   handleDrillDownClick: PropTypes.func,
   loading: PropTypes.bool,
   policies: PropTypes.array,

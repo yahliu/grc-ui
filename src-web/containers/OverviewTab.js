@@ -28,18 +28,18 @@ import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
-const shouldInclude = (item, detailedName, displayType) => {
-  const annotations = _.get(item, 'metadata.annotations')
-  const targetName = detailedName.replace(/\s/g, '').toLowerCase()
-  if (displayType === 'categories') {
-    const categories = annotations['policy.mcm.ibm.com/categories'] || ''
-    if (targetName === 'other') return true
-    return categories.toLowerCase().includes(targetName)
+const shouldInclude = (item, detailedChoice, detailedName) => {
+  let annotations = _.get(item, 'metadata.annotations')
+  if (detailedChoice === 'categories') {
+    annotations = annotations['policy.mcm.ibm.com/categories'] || ''
   } else {
-    const standards = annotations['policy.mcm.ibm.com/standards'] || ''
-    if (targetName === 'other') return true
-    return standards.toLowerCase().includes(targetName)
+    annotations = annotations['policy.mcm.ibm.com/standards'] || ''
   }
+  // an "other" policy
+  if (detailedName.toLowerCase() === 'other' && annotations.length===0) {
+    return true
+  }
+  return annotations.includes(detailedName)
 }
 
 
@@ -49,9 +49,20 @@ const formatClusterView = (key, value) => {
 
   value.forEach(item => {
     const status = _.get(item, `raw.status.status.${key}`, '')
-    if (typeof status === 'string' && status.toLowerCase() === 'compliant') validNum += 1
-    if (typeof status === 'object' && status['compliant'].toLowerCase() === 'compliant') validNum += 1
-    else nonCompliant.push(_.get(item, 'metadata.name', '-'))
+    let compliant = false
+    switch (typeof status) {
+    case 'string':
+      compliant = (status.toLowerCase() === 'compliant')
+      break
+    case 'object':
+      compliant = (status['compliant'] && status['compliant'].toLowerCase() === 'compliant')
+      break
+    }
+    if (compliant) {
+      validNum += 1
+    } else {
+      nonCompliant.push(_.get(item, 'metadata.name', '-'))
+    }
   })
   const result = {
     cluster: key,
@@ -61,32 +72,27 @@ const formatClusterView = (key, value) => {
   return result
 }
 
-
-const formatTableData = (items, detailedName, detailedType, displayType) => {
+const formatTableData = (items, detailedChoice, detailedName, detailedType) => {
   const result = []
-  if (detailedType === 'cluster') {
-    const map = new Map()
-    for (const item of items) {
-      const statuses = _.get(item, 'raw.status.status', {})
-      Object.entries(statuses).forEach(([cluster, status]) => {
-        if ((status === 'NonCompliant' || status.compliant === 'NonCompliant') && shouldInclude(item, detailedName, displayType)) {
+  const map = new Map()
+  for (const item of items) {
+    const statuses = _.get(item, 'raw.status.status', {})
+    Object.entries(statuses).forEach(([cluster, status]) => {
+      const compliant = status.compliant
+      const noncompliant = !compliant || compliant.toLowerCase()==='noncompliant'
+      if (noncompliant && shouldInclude(item, detailedChoice, detailedName)) {
+        if (detailedType === 'cluster') {
           if (!map.has(cluster)) map.set(cluster, [])
           map.get(cluster).push(item)
-        }
-      })
-    }
-    for (const [key, value] of map.entries()) {
-      result.push(formatClusterView(key, value))
-    }
-  } else if (detailedType === 'policy') {
-    for (const item of items) {
-      const statuses = _.get(item, 'raw.status.status', {})
-      //eslint-disable-next-line
-      Object.entries(statuses).forEach(([cluster, status]) => {
-        if ((status === 'NonCompliant' || status.compliant === 'NonCompliant') && shouldInclude(item, detailedName, displayType)) {
+        } else {
           result.push(item)
         }
-      })
+      }
+    })
+  }
+  if (detailedType === 'cluster') {
+    for (const [key, value] of map.entries()) {
+      result.push(formatClusterView(key, value))
     }
   }
   return result
@@ -106,7 +112,7 @@ class OverviewTab extends React.Component {
     this.firstLoad = true
     this.state = {
       currentTab: 'overview',
-      displayType: 'categories'
+      detailedChoice: 'standards',
     }
   }
 
@@ -116,9 +122,10 @@ class OverviewTab extends React.Component {
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
-  handleDrillDownClick = (targetTab, name, type) => {
+  handleDrillDownClick = (targetTab, choice, name, type) => {
     this.setState({
       currentTab: targetTab,
+      detailedChoice: choice,
       detailedName: name,
       detailedType: type,
     })
@@ -131,12 +138,6 @@ class OverviewTab extends React.Component {
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
-  handleDisplayChange = (value) => {
-    this.setState({
-      displayType: value
-    })
-  }
-
   handleDescription = (title, content = 'placeholder') => () => {
     const {openDesModal} = this.props
     openDesModal(content, title)
@@ -144,7 +145,7 @@ class OverviewTab extends React.Component {
 
   render () {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
-    const { currentTab, detailedName = '', detailedType = '', displayType = '' } = this.state
+    const { currentTab, detailedChoice = '', detailedName = '', detailedType = '' } = this.state
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -169,7 +170,7 @@ class OverviewTab extends React.Component {
 
             let detailedData = []
             if (currentTab === 'details') {
-              detailedData = formatTableData(items, detailedName, detailedType, displayType)
+              detailedData = formatTableData(items, detailedChoice, detailedName, detailedType)
             }
 
             const title = `#${detailedType === 'cluster' ? msgs.get('policy.header.cluster', this.context.locale) :
@@ -203,7 +204,6 @@ class OverviewTab extends React.Component {
                     policies={items}
                     refreshControl={refreshControl}
                     handleDrillDownClick={handleDrillDownClick}
-                    handleDisplayChange={this.handleDisplayChange}
                   />
                 }
                 {(currentTab === 'details') && (detailedType === 'cluster') &&

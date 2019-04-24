@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
+import { hideResourceToolbar } from '../../../lib/client/resource-helper'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
@@ -67,6 +68,7 @@ class ResourceTableModule extends React.Component {
   }
 
   render() {
+    hideResourceToolbar()
     const { staticResourceData, resourceType } = this.props
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state
     return (

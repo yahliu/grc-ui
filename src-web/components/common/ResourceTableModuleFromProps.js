@@ -16,6 +16,7 @@ import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
+import { hideResourceToolbar } from '../../../lib/client/resource-helper'
 import TableHelper from '../../util/table-helper'
 
 class ResourceTableModule extends React.Component {
@@ -54,6 +55,7 @@ class ResourceTableModule extends React.Component {
   }
 
   render() {
+    hideResourceToolbar()
     const { staticResourceData, definitionsKey, resourceType, subResourceType } = this.props
     const keys = staticResourceData[definitionsKey]
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state

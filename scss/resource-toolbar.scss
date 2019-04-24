@@ -20,6 +20,10 @@
   align-items: flex-end;
   height: $secondary-header-min-height;
 
+  &.hide {
+    display: none;
+  }
+
   .resource-toolbar-container {
     position: absolute;
     top: 5px;

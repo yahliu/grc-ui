@@ -88,7 +88,7 @@ export class ResourceToolbar extends React.Component {
     const { filterViewOpen } = this.state
     const boundFilters = this.getBoundFilters()
     return (
-      <div className='resource-toolbar'>
+      <div id='resource-toolbar' className='resource-toolbar'>
         <div className='resource-toolbar-container' >
           <div className='resource-toolbar-buttons' >
             {/* refresh time button */}

@@ -17,6 +17,7 @@ import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import ClusterComplianceTab from '../containers/ClusterComplianceTab'
 import { filterPolicies, getAvailablePolicyFilters } from '../../lib/client/filter-helper'
+import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
@@ -52,6 +53,7 @@ export class PoliciesView extends React.Component {
   render() {
     const { locale } = this.context
     const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl } = this.props
+    hideResourceToolbar()
 
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -60,6 +62,7 @@ export class PoliciesView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
+    showResourceToolbar()
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     const expandablePolicies = this.formatExpandablePolicies(filteredPolicies)
     return (

@@ -121,6 +121,8 @@ export default class PolicyCardsModule extends React.Component {
             if (!data) {
               data = dataMap[type]= {
                 name,
+                rawName: type,
+                choice: policyCardChoice,
                 violations: 0,
                 counts: {
                   cluster: {
@@ -141,7 +143,8 @@ export default class PolicyCardsModule extends React.Component {
             const statuses = _.get(policy, 'raw.status.status', {})
             const policyName = _.get(policy, 'metadata.name')
             Object.keys(statuses).forEach(clusterName=>{
-              const noncompliant = statuses[clusterName].compliant!=='Compliant'
+              const compliant = statuses[clusterName].compliant
+              const noncompliant = !compliant || compliant.toLowerCase()==='noncompliant'
               policyMap[type][policyName] = policyMap[type][policyName] || noncompliant
               clusterMap[type][clusterName] = clusterMap[type][clusterName] || noncompliant
             })
@@ -220,7 +223,6 @@ export default class PolicyCardsModule extends React.Component {
 
   onChange = (e) => {
     const {selectedItem: {value}} = e
-    this.props.handleDisplayChange(value)
     this.props.updateViewState({policyCardChoice: value})
     this.setState(()=>{
       return {policyCardChoice: value}
@@ -231,12 +233,13 @@ export default class PolicyCardsModule extends React.Component {
 
 // functional card component
 const PolicyCard = ({data, locale, handleClick}) => {
-  const { counts, name } = data
+  const { counts, choice, name, rawName } = data
   const countData = Object.keys(counts).map(type=>{
     return {
       ...counts[type],
       violationType: msgs.get(`overview.${type}.violations`, locale),
-      type: type
+      choice,
+      type,
     }
   })
   return (
@@ -247,7 +250,7 @@ const PolicyCard = ({data, locale, handleClick}) => {
             {name}
           </div>
           <div className='card-count-content'>
-            {countData.map(({violations, total, violationType, type}) => {
+            {countData.map(({violations, total, violationType, choice, type }) => {
               const violated = violations > 0
               const containerClasses = classNames({
                 'card-count-container': true,
@@ -255,7 +258,7 @@ const PolicyCard = ({data, locale, handleClick}) => {
               })
               const onClick = () =>{
                 if (violated) {
-                  handleClick(name, type)
+                  handleClick(choice, rawName, type)
                 }
               }
               const onKeyPress = (e) =>{
@@ -296,7 +299,6 @@ PolicyCard.propTypes = {
 
 PolicyCardsModule.propTypes = {
   activeFilters: PropTypes.object,
-  handleDisplayChange: PropTypes.func,
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
   updateViewState: PropTypes.func,
