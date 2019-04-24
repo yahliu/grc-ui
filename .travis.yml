@@ -82,14 +82,14 @@ after_failure:
       fi
   - make cicd-log-fail
 
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   github-token: $GITHUB_TOKEN
-#   local-dir: test-output
-#   github-url: github.ibm.com
-#   on:
-#     branch: master
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: test-output
+  github-url: github.ibm.com
+  on:
+    branch: master
 
 # notifications:
 #   slack:

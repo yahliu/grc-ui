@@ -1,5 +1,5 @@
 ###############################################################################
-# Licensed Materials - Property of IBM Copyright IBM Corporation 2017, 2018. All Rights Reserved.
+# Licensed Materials - Property of IBM Copyright IBM Corporation 2017, 2019. All Rights Reserved.
 # U.S. Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 # Schedule Contract with IBM Corp.
 #
@@ -77,13 +77,13 @@ test:
 	jest-tap-reporter@1.9.0 \
 	properties-parser@0.3.1 
 
-# ifeq ($(UNIT_TESTS), TRUE)
-# 	if [ ! -d "test-output" ]; then \
-# 		mkdir test-output; \
-# 	fi
-# 	npm test
-# endif
-# ifeq ($(SELENIUM_TESTS), TRUE)
+ifeq ($(UNIT_TESTS), TRUE)
+	if [ ! -d "test-output" ]; then \
+		mkdir test-output; \
+	fi
+	npm test
+endif
+ifeq ($(SELENIUM_TESTS), TRUE)
 ifeq ($(ARCH), x86_64)
 	docker pull $(IMAGE_REPO)/grc-ui-api-amd64
 	docker run \
@@ -100,7 +100,7 @@ ifeq ($(ARCH), x86_64)
 	npm install selenium-standalone@6.12.0 xml2json@0.11.0 nightwatch@0.9.20
 	nightwatch
 endif
-# endif
+endif
 
 include Makefile.docker
 include Makefile.cicd
