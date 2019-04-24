@@ -29,7 +29,7 @@ export default class PolicyCardsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {policyCardChoice=PolicyCardsSelections.categories}} = props
+    const {viewState: {policyCardChoice=PolicyCardsSelections.standards}} = props
     this.state = {
       policyCardChoice
     }

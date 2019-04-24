@@ -155,3 +155,12 @@
   height: $secondary-header-min-height;
 }
 
+
+@media screen and (max-width: 768px) {
+  nav.bx--tabs {
+     position: absolute;
+     top: 70px;
+     width: 300px;
+  }
+}
+

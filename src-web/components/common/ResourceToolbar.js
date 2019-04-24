@@ -17,6 +17,7 @@ import { updateActiveFilters } from '../../actions/common'
 import moment from 'moment'
 import RefreshTimeSelect from './RefreshTimeSelect'
 import ResourceFilterView from './ResourceFilterView'
+import { CSSTransition } from 'react-transition-group'
 import { Icon, Tag, Loading } from 'carbon-components-react'
 import { REFRESH_TIMES } from '../../../lib/shared/constants'
 import '../../../graphics/diagramIcons.svg'
@@ -109,13 +110,20 @@ export class ResourceToolbar extends React.Component {
           <FilterBar boundFilters={boundFilters} locale={locale} />
           {timestamp&&<RefreshTime timestamp={timestamp} reloading={reloading} />}
         </div>
-        { filterViewOpen &&
+        <CSSTransition
+          in={filterViewOpen}
+          timeout={300}
+          classNames="transition"
+          mountOnEnter={true}
+          unmountOnExit={true}
+        >
           <ResourceFilterView
             updateFilters={this.updateFilters}
             onClose={this.handleFilterClose}
             activeFilters={activeFilters}
             availableFilters={availableFilters}
-          /> }
+          />
+        </CSSTransition>
       </div>)
   }
 
