@@ -11,19 +11,22 @@
 
 
 .policies-view {
-  .overview-content{
-    .bx--module__inner{
+  .overview-content {
+    .bx--module__inner {
       overflow: hidden
     }
   }
 
-  .yaml-editor-button{
+  .yaml-editor-button {
     top: -0.3rem
   }
-}
 
-.bx--search-input {
-  background-color: $color__white;
+  .bx--search--sm {
+    .bx--search-input {
+      background-color: $color__white;
+      height: 2.25rem;
+    }
+  }
 }
 
 .breadcrumb-link {
