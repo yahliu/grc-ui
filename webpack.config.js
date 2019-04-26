@@ -80,7 +80,7 @@ module.exports = {
             {
               loader: 'sass-loader?sourceMap',
               options: {
-                data: '$font-path: "'+ config.get('contextPath') + '/fonts";'
+                data: '$font-path: "'+ config.get('contextPath') + '/common/fonts";'
               }
             }
           ]
@@ -118,7 +118,7 @@ module.exports = {
     filename: PRODUCTION ? 'js/[name].[hash].min.js' : 'js/[name].min.js', //needs to be hash for production (vs chunckhash) in order to cache bust references to chunks
     chunkFilename: PRODUCTION ? 'js/[name].[chunkhash].min.js' : 'js/[name].min.js',
     path: __dirname + '/public',
-    publicPath: config.get('contextPath').replace(/\/?$/, '/')
+    publicPath: `${config.get('contextPath')}/common`.replace(/\/?$/, '/')
   },
 
   plugins: [

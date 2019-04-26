@@ -54,8 +54,9 @@ class App extends React.Component {
         <SecondaryHeader />
         <ResourceToolbar />
         <Switch>
-          <Route path={`${match.url}`} render={() => <PolicyRouter />} />
-          <Redirect to={`${config.contextPath}/overview`} />
+          <Route path={`${match.url}/policies`} render={() => <PolicyRouter />} />
+          <Route path={`${match.url}/topology`} render={() => <div />} />
+          <Redirect to={`${config.contextPath}/policies`} />
         </Switch>
         <Modal locale={serverProps.context.locale} />
       </div>

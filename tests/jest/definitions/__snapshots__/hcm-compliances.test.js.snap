@@ -5,7 +5,7 @@ exports[`hcm-compliances - createCompliancePolicyLink should return valid compli
 exports[`hcm-compliances - createPolicyLink should return valid policy link 1`] = `
 <Link
   replace={false}
-  to="undefined/policies/undefined/undefined/compliancePolicy/undefined"
+  to="undefined/policies/all/undefined/undefined/compliancePolicy/undefined"
 />
 `;
 

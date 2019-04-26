@@ -76,7 +76,7 @@ function fetchHeader(req, res, store, context) {
 
     if(process.env.NODE_ENV === 'development') {
       lodash.forOwn(filesH, value => {
-        value.path = `${config.get('contextPath')}/api/proxy${value.path}` //preprend with proxy route
+        value.path = `${config.get('contextPath')}/common/api/proxy${value.path}` //preprend with proxy route
       })
     }
     try {
