@@ -82,11 +82,11 @@ class CompliancePolicy extends React.Component {
     if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name) {
       breadcrumbItems.push({
         label: msgs.get(`tabs.${resourceType.name.toLowerCase()}`, locale),
-        url: urlSegments.slice(0, 3).join('/')
+        url: urlSegments.slice(0, 4).join('/')
       })
 
       breadcrumbItems.push({
-        label: urlSegments[4],
+        label: urlSegments[5],
         url: location.pathname.replace(/compliancePolicy\/[A-Za-z0-9-]+/, '')
       })
 
