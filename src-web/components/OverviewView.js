@@ -74,7 +74,7 @@ export class OverviewView extends React.Component {
         {[modal]}
         <div className={'buttons'}>
           <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-            <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
+            <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.ibm.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
           </button>
         </div>
       </div>
