@@ -108,8 +108,8 @@ class CreateResourceModal extends React.PureComponent {
   }
 }
 
-CreateResourceModal.contextType = {
-  locale: PropTypes.locale
+CreateResourceModal.contextTypes = {
+  locale: PropTypes.string
 }
 
 

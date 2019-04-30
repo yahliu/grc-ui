@@ -9,6 +9,7 @@
 
 module.exports = {
   elements: {
+    spinner: '.content-spinner',
     table: '.bx--data-table-v2',
     tableExpandBtn: '.bx--table-expand-v2__button:nth-of-type(1)',
     expandTable: '.bx--expandable-row-v2:nth-of-type(2)',
@@ -16,7 +17,7 @@ module.exports = {
     submitCreatePolicyButton: '.bx--btn--primary:nth-of-type(2)',
     yamlInputField: '.ace_text-input',
     yamlTextField: '.ace_editor',
-    searchInput: '.bx--search-input',
+    searchInput: 'input.bx--search-input',
     overflowButton: '.bx--overflow-menu:nth-of-type(1)',
     deleteButton: '.bx--overflow-menu-options__option--danger',
     confirmDeleteButton: '.bx--btn--danger--primary'
@@ -101,6 +102,7 @@ spec:
 }
 
 function createTestPolicy(browser, time) {
+  this.setValue('@searchInput',`${time}-policy-pod`)
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
   this.expect.element('@yamlInputField').to.be.present
@@ -121,16 +123,16 @@ function createTestPolicy(browser, time) {
 
   this.expect.element('@submitCreatePolicyButton').to.be.present
   this.click('@submitCreatePolicyButton')
+  this.waitForElementNotPresent('@spinner')
 }
 
 function searchPolicy(expectToDisplay, time) {
   this.expect.element('@searchInput').to.be.present
-  this.setValue('@searchInput',`${time}-policy-pod`)
   if(expectToDisplay){
     this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-pod`)
   } else{
     this.expect.element('tbody>tr').to.be.not.present
-    this.setValue('@searchInput','')
+    this.clearValue('@searchInput')
   }
 }
 
