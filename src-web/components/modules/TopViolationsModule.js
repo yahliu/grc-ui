@@ -71,7 +71,7 @@ export default class TopViolationsModule extends React.Component {
     const detail = msgs.get('overview.no.violations.description', locale)
     return (
       <div className='no-violations'>
-        <img className='no-violations-icon' src={`${config.contextPath}/graphics/planets.png`} alt={title} />
+        <img className='no-violations-icon' src={`${config.contextPath}/common/graphics/no-violation.svg`} alt={title} />
         <div className='no-violations-title'>{title}</div>
         <div className='no-violations-detail'>{detail}</div>
       </div>

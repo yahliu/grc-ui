@@ -173,7 +173,7 @@ var port = process.env.PORT || appConfig.get('httpPort')
 // start server
 logger.info('Starting express server.')
 server.listen(port, () => {
-  logger.info(`MCM UI is now running on ${process.env.NODE_ENV === 'development' ? 'https' : 'http'}://localhost:${port}${CONTEXT_PATH}`)
+  logger.info(`GRC UI is now running on ${process.env.NODE_ENV === 'development' ? 'https' : 'http'}://localhost:${port}${CONTEXT_PATH}`)
 })
 
 process.on('SIGTERM', () => {
