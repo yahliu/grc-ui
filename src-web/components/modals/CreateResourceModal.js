@@ -17,6 +17,7 @@ import { Button, InlineNotification, Loading, Modal } from 'carbon-components-re
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import YamlEditor from '../common/YamlEditor'
+import _ from 'lodash'
 
 resources(() => {
   require('../../../scss/modal.scss')
@@ -27,6 +28,7 @@ const initialState = {
   processing: false,
   yaml: '',
   yamlParsingError: null,
+  requestError: null
 }
 
 class CreateResourceModal extends React.PureComponent {
@@ -57,12 +59,19 @@ class CreateResourceModal extends React.PureComponent {
     }
     this.setState({ yamlParsingError: null, processing: true })
     this.props.onCreateResource(resources)
-      .then(()=> this.setState(initialState))
+      .then((data) => {
+        const error = _.get(data, 'data.createResources.errors[0].message')
+        if (error) {
+          this.setState({requestError: error, processing: false})
+        } else {
+          this.setState(initialState)
+        }
+      })
   }
 
   handleEditorChange = (yaml) => this.setState({ yaml })
 
-  handleNotificationClosed = () => this.setState({ yamlParsingError: null })
+  handleNotificationClosed = () => this.setState({ yamlParsingError: null, requestError: null })
 
   isSubmitDisabled = () => this.state.processing === true
 
@@ -97,6 +106,15 @@ class CreateResourceModal extends React.PureComponent {
               title={msgs.get('error.parse', this.context.locale)}
               iconDescription=''
               subtitle={this.state.yamlParsingError.reason}
+              onCloseButtonClick={this.handleNotificationClosed}
+            />
+          }
+          {this.state.requestError &&
+            <InlineNotification
+              kind='error'
+              title={msgs.get('error.request', this.context.locale)}
+              iconDescription=''
+              subtitle={this.state.requestError}
               onCloseButtonClick={this.handleNotificationClosed}
             />
           }

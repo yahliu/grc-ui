@@ -126,16 +126,15 @@ class ResourceTableModule extends React.Component {
     const target = key.currentTarget
     const selectedKey = target && target.getAttribute('data-key')
     if (selectedKey) {
-      const { staticResourceData, definitionsKey } = this.props
-      const resourceKeys = staticResourceData[definitionsKey]
+      const { staticResourceData } = this.props
       const { resourceItems, sortDirection } = this.state
-      const sortKey = resourceKeys.tableKeys.find(tableKey => tableKey.resourceKey === selectedKey).resourceKey
-      const sortedRes = lodash.orderBy(resourceItems, [sortKey], [sortDirection])
+      const newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
+      const sortKey = staticResourceData.tableKeys.find(tableKey => tableKey.resourceKey === selectedKey).resourceKey
+      const sortedRes = lodash.orderBy(resourceItems, [sortKey], [newDirection])
 
-      const { normalizedKey } = resourceKeys
-      const normalizedItems = this.createNormalizedItems(sortedRes, normalizedKey)
+      const normalizedItems = this.createNormalizedItems(sortedRes, staticResourceData.primaryKey)
       const itemIds = Object.keys(normalizedItems)
-      this.setState({ resourceIds: itemIds, resourceItems: normalizedItems, sortDirection: sortDirection === 'asc' ? 'desc' : 'asc' })
+      this.setState({ resourceIds: itemIds, resourceItems: normalizedItems, sortDirection: newDirection })
     }
   }
 }
