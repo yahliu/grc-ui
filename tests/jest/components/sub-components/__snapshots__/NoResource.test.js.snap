@@ -5,7 +5,7 @@ exports[`NoResource component renders as expected 1`] = `
   className="no-resource"
 >
   <img
-    alt="No Resource"
+    alt="No resource"
     className="no-resource-icon"
     src="undefined/common/graphics/no-policy.svg"
   />

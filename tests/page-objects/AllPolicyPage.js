@@ -138,7 +138,7 @@ function searchPolicy(expectToDisplay, time) {
 
 function testDetailsPage() {
   this.click('tbody>tr>td>a')
-  this.expect.element('.bx--module__title:nth-of-type(1)').text.to.equal('Policy Details')
+  this.expect.element('.bx--module__title:nth-of-type(1)').text.to.equal('Policy details')
 }
 
 function deletePolicy(){
