@@ -12,7 +12,7 @@
 For a given input, a selector should always produce the same output.
  */
 
-import { user, loggedIn } from '../../../src-web/reducers/user'
+import { user, loggedIn, isAuthenticated } from '../../../src-web/reducers/user'
 import * as Actions from '../../../src-web/actions'
 
 describe('User reducer', () => {
@@ -74,6 +74,21 @@ describe('User reducer', () => {
         loggedIn: Actions.USER_LOGIN_STATUS.LOGGED_OUT
       }
       expect(loggedIn(initialState, action)).toEqual(action.loggedIn)
+    })
+  })
+
+  describe('#isAuthenticated', () => {
+    it('should return is Authenticated', () => {
+      const state = {
+        loggedIn: Actions.USER_LOGIN_STATUS.LOGGED_IN
+      }
+      expect(isAuthenticated(state)).toEqual(true)
+    })
+    it('should return is not Authenticated', () => {
+      const state = {
+        loggedIn: Actions.USER_LOGIN_RECEIVE_SUCCESS
+      }
+      expect(isAuthenticated(state)).toEqual(false)
     })
   })
 })

@@ -137,6 +137,23 @@ describe('modal reducer', () => {
     expect(modal(state, action)).toEqual(expectedValue)
   })
 
+  it('should return a state with DEL_RECEIVE_SUCCESS status', () => {
+    const state = {
+      test: 'test',
+      reqCount: 9
+    }
+    const action = {
+      type: Actions.DEL_RECEIVE_SUCCESS
+    }
+    const expectedValue = {
+      open: false,
+      reqCount: 8,
+      reqStatus: 'DONE',
+      test: 'test'
+    }
+    expect(modal(state, action)).toEqual(expectedValue)
+  })
+
   it('should return a state with POST_RECEIVE_FAILURE status', () => {
     const state = {
       test: 'test'
@@ -178,6 +195,31 @@ describe('modal reducer', () => {
       err: [{message: 'test'}]
     }
     const expectedValue = {'reqCount': 0, 'reqErrCount': 1, 'reqErrorMsg': 'test', 'reqStatus': 'ERROR', 'test': 'test'}
+    expect(modal(state, action)).toEqual(expectedValue)
+  })
+
+  it('should return a state with DEL_RECEIVE_FAILURE status', () => {
+    const state = {
+      test: 'test',
+      reqCount: 7,
+      reqErrCount: 5
+    }
+    const action = {
+      type: Actions.DEL_RECEIVE_FAILURE,
+      err: [{message: 'test'}]
+    }
+    const expectedValue = {'reqCount': 6, 'reqErrCount': 6, 'reqErrorMsg': 'test', 'reqStatus': 'ERROR', 'test': 'test'}
+    expect(modal(state, action)).toEqual(expectedValue)
+  })
+
+  it('should return a default state', () => {
+    const state = {
+      test: 'test',
+    }
+    const action = {
+      type: Actions.RESOURCE_REQUEST,
+    }
+    const expectedValue = {'test': 'test'}
     expect(modal(state, action)).toEqual(expectedValue)
   })
 })

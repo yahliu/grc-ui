@@ -1,9 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`hcm-policies #getStatus Should return critical compliant status 1`] = `
+<StatusField
+  status="critical"
+  text={undefined}
+/>
+`;
+
 exports[`hcm-policies #getStatus Should return critical status 1`] = `
 <StatusField
   status="critical"
   text="not compliant"
+/>
+`;
+
+exports[`hcm-policies #getStatus Should return healthy compliant status 1`] = `
+<StatusField
+  status="ok"
+  text="compliant"
 />
 `;
 
@@ -13,6 +27,8 @@ exports[`hcm-policies #getStatus Should return healthy status 1`] = `
   text="compliant"
 />
 `;
+
+exports[`hcm-policies - createPolicyLink Should return item name 1`] = `"TestPolicyName"`;
 
 exports[`hcm-policies - createPolicyLink Should return vaild Link obj 1`] = `
 <Link

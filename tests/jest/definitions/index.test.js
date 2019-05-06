@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-import {getDefaultSearchField, getDefaultSortField, getLink, getPrimaryKey} from '../../../src-web/definitions/index'
+import {getDefaultSearchField, getDefaultSortField, getLink, getPrimaryKey, getSecondaryKey } from '../../../src-web/definitions/index'
 
 // regular properties/selector/reducer testing
 // compare the received and expect values
@@ -64,6 +64,16 @@ describe('definitions/index', () => {
         name: 'HCMPolicy'
       }
       expect(getPrimaryKey(item)).toBe('metadata.name')
+    })
+  })
+
+  describe('#getSecondaryKey', () => {
+    it('should return the secondary key of node', () => {
+      const item = {
+        list: 'HCMPolicyList',
+        name: 'HCMPolicy'
+      }
+      expect(getSecondaryKey(item)).toBe('metadata.namespace')
     })
   })
 

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getLabels Should return labels of truncated text item 1`] = `
+<TruncateText
+  maxCharacters={35}
+  text="nonCompliant1, nonCompliant2"
+/>
+`;
+
+exports[`getTruncatedText Should return truncated text item 1`] = `
+<TruncateText
+  maxCharacters={35}
+  text="TruncateText"
+/>
+`;

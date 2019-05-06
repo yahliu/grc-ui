@@ -12,7 +12,45 @@
 For a given input, a selector should always produce the same output.
  */
 
-import {secondaryHeader, resourceReducerFunction, INITIAL_STATE} from '../../../src-web/reducers/common'
+import {resourceToolbar, secondaryHeader, resourceReducerFunction, INITIAL_STATE} from '../../../src-web/reducers/common'
+import { RESOURCE_TYPES } from '../../../lib/shared/constants'
+
+describe('resourceToolbar creation', () => {
+  it('should return a default state', () => {
+    const action = {}
+    const expectedValue = {}
+    expect(resourceToolbar(undefined, action)).toEqual(expectedValue)
+  })
+  it('should return a state with activeFilters', () => {
+    const state = {
+      activeFilters: 'activeFilters1'
+    }
+    const action = {
+      activeFilters: 'activeFilters2',
+      type: 'ACTIVE_FILTER_UPDATE'
+    }
+    const expectedValue = {
+      activeFilters: 'activeFilters2'
+    }
+    expect(resourceToolbar(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state with activeFilters', () => {
+    const state = {
+      refreshControl: 'refreshControl1',
+      availableFilters: 'availableFilters1'
+    }
+    const action = {
+      refreshControl: 'refreshControl2',
+      availableFilters: 'availableFilters2',
+      type: 'RESOURCE_TOOLBAR_UPDATE'
+    }
+    const expectedValue = {
+      refreshControl: 'refreshControl2',
+      availableFilters: 'availableFilters2'
+    }
+    expect(resourceToolbar(state, action)).toEqual(expectedValue)
+  })
+})
 
 describe('secondaryHeader creation', () => {
   it('should return a default state', () => {
@@ -39,6 +77,30 @@ describe('secondaryHeader creation', () => {
   })
 })
 
+describe('ResourceReducer creation', () => {
+  it('should return a default state', () => {
+    const action = {}
+    const expectedValue = {title: '', tabs: [], breadcrumbItems: [], links: [], description: {}, information:{}}
+    expect(secondaryHeader(undefined, action)).toEqual(expectedValue)
+  })
+  it('should return a state with title', () => {
+    const state = {}
+    const action = {
+      title: 'Clusters',
+      tabs: '',
+      breadcrumbItems: '',
+      links: '',
+      type: 'SECONDARY_HEADER_UPDATE'
+    }
+    const expectedValue = {
+      title: 'Clusters',
+      tabs: '',
+      breadcrumbItems: '',
+      links: ''
+    }
+    expect(secondaryHeader(state, action)).toEqual(expectedValue)
+  })
+})
 
 describe('resourceReducerFunction', () => {
   it('should return the initial state', () => {
@@ -281,6 +343,54 @@ describe('resourceReducerFunction', () => {
     }
     const action = {
       type: 'RESOURCE_DELETE'
+    }
+    const expectedValue = {
+      test: 'test',
+      items: []
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return default state for resource delete action', () => {
+    const state = {
+      test: 'test',
+      items: []
+    }
+    const action = {
+      type: 'RESOURCE_DELETE'
+    }
+    const expectedValue = {
+      test: 'test',
+      items: []
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state for delete receive success action', () => {
+    const state = {
+      test: 'test',
+      items: [{namespace: 'namespace', name: 'name'}]
+    }
+    const action = {
+      type: 'DEL_RECEIVE_SUCCESS',
+      resourceType: RESOURCE_TYPES.HCM_COMPLIANCES,
+      resource: {
+        namespace: 'namespace',
+        name: 'name'
+      }
+    }
+    const expectedValue = {
+      test: 'test',
+      items: []
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state for delete receive success action', () => {
+    const state = {
+      test: 'test',
+      items: []
+    }
+    const action = {
+      type: 'DEL_RECEIVE_SUCCESS',
+      resourceType: RESOURCE_TYPES.HCM_CLUSTERS
     }
     const expectedValue = {
       test: 'test',

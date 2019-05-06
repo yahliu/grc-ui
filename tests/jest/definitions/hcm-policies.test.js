@@ -18,6 +18,16 @@ import {
 } from '../../../src-web/definitions/hcm-policies'
 
 describe('hcm-policies - createPolicyLink', () => {
+  it('Should return item name', () => {
+    const item = {
+      metadata: {
+        name: 'TestPolicyName',
+        namespace: 'TestPolicyNamespace'
+      }
+    }
+    const params = ['test1', 'test2', 'test3']
+    expect(createPolicyLink(item, ...params)).toMatchSnapshot()
+  })
   it('Should return vaild Link obj', () => {
     const item = {
       metadata: {
@@ -40,6 +50,20 @@ describe('hcm-policies', () => {
     it('Should return critical status', () => {
       const item = {
         status: 'noncompliant'
+      }
+      expect(getStatus(item)).toMatchSnapshot()
+    })
+    it('Should return healthy compliant status', () => {
+      const item = {
+        status: 'test',
+        compliant: 'compliant'
+      }
+      expect(getStatus(item)).toMatchSnapshot()
+    })
+    it('Should return critical compliant status', () => {
+      const item = {
+        status: 'test',
+        compliant: 'noncompliant'
       }
       expect(getStatus(item)).toMatchSnapshot()
     })

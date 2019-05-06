@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`hcm-compliances - createComplianceLink should return valid compliance link 1`] = `"testCreateComplianceLink1"`;
+
+exports[`hcm-compliances - createComplianceLink should return valid compliance link 2`] = `
+<Link
+  replace={false}
+  to="undefined/policies/all/testNamespace2/testCreateComplianceLink2"
+>
+  testCreateComplianceLink2
+   (Deprecated)
+</Link>
+`;
+
+exports[`hcm-compliances - createComplianceLink should return valid compliance link 3`] = `
+<Link
+  replace={false}
+  to="undefined/policies/all/testNamespace3/testCreateComplianceLink3"
+>
+  testCreateComplianceLink3
+</Link>
+`;
+
 exports[`hcm-compliances - createCompliancePolicyLink should return valid compliance policy link 1`] = `"-"`;
 
 exports[`hcm-compliances - createPolicyLink should return valid policy link 1`] = `
@@ -9,12 +30,61 @@ exports[`hcm-compliances - createPolicyLink should return valid policy link 1`] 
 />
 `;
 
+exports[`hcm-compliances - getCategories should return categories status 1`] = `"11, 12, 13, 14, 15"`;
+
+exports[`hcm-compliances - getClusterCount should return cluster count 1`] = `"7/15"`;
+
+exports[`hcm-compliances - getCompliancePolicyStatus should return compliance policy status 1`] = `
+<StatusField
+  status="critical"
+  text="not compliant"
+/>
+`;
+
+exports[`hcm-compliances - getCompliancePolicyStatus should return compliance policy status 2`] = `
+<StatusField
+  status="ok"
+  text="compliant"
+/>
+`;
+
+exports[`hcm-compliances - getComplianceStatusIcon should return compliance status incon 1`] = `
+<StatusField
+  status="ok"
+  text="compliant"
+/>
+`;
+
+exports[`hcm-compliances - getComplianceStatusIcon should return compliance status incon 2`] = `
+<StatusField
+  status="critical"
+  text="not compliant"
+/>
+`;
+
+exports[`hcm-compliances - getControls should return control status 1`] = `"1, 2, 3, 4, 5"`;
+
+exports[`hcm-compliances - getDecisions should return decisions status 1`] = `"clusterName1, clusterName2, clusterName3"`;
+
+exports[`hcm-compliances - getDecisions should return default status 1`] = `"-"`;
+
+exports[`hcm-compliances - getStandards should return standards status 1`] = `"6, 7, 8, 9, 10"`;
+
 exports[`hcm-compliances - getStatus should return compliant status 1`] = `
 <StatusField
   status="ok"
   text="compliant"
 />
 `;
+
+exports[`hcm-compliances - getStatus should return compliant status 2`] = `
+<StatusField
+  status="critical"
+  text="not compliant"
+/>
+`;
+
+exports[`hcm-compliances - getStatusCount should return status count 1`] = `"5/10"`;
 
 exports[`hcm-compliances - getStatusIcon should return compliant status 1`] = `
 <StatusField

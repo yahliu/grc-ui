@@ -45,6 +45,20 @@ describe('filter reducer', () => {
     expect(resourceFilters(state, action)).toEqual(expectedValue)
   })
 
+  it('should return a state with RESOURCE_FILTERS_UPDATE status', () => {
+    const state = {
+      test: 'test',
+      selectedFilters: null
+    }
+    const action = {
+      type: Actions.RESOURCE_FILTERS_UPDATE,
+      resourceName: 'test',
+      selectedFilters:null
+    }
+    const expectedValue = {'selectedFilters': {'test': null}, 'test': 'test'}
+    expect(resourceFilters(state, action)).toEqual(expectedValue)
+  })
+
   it('should return a default state', () => {
     const state = {
       test: 'test',
