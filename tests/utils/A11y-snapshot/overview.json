@@ -163,7 +163,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]",
-                    "snippet": "<div style=\"\" class=\"header-title\">",
+                    "snippet": "<div style=\"\" class=\"header-title hasChoice\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -273,7 +273,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]",
-                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Policy Overview\" role=\"listbox\">",
+                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Policy overview\" role=\"listbox\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -296,7 +296,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
-                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Top Violations\" role=\"listbox\">",
+                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Top violations\" role=\"listbox\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -380,7 +380,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
-                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Top Violations\" role=\"listbox\">",
+                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Top violations\" role=\"listbox\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -399,7 +399,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/div[2]",
-                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Policy Overview\" role=\"listbox\">",
+                    "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Policy overview\" role=\"listbox\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -456,9 +456,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1556119037213
+        "startScan": 1557501395101
     },
-    "scanID": "19a77793-fe0c-4872-9ad7-462955aaa113",
+    "scanID": "8b8a2702-bd5e-44aa-8d5a-3abda65cef16",
     "toolID": "@ibma/aat-v1.5.1",
     "label": "overview"
 }

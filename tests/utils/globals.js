@@ -14,6 +14,7 @@ const del = require('del')
 // const parser = require('xml2json')
 const BASE_DIR = `${__dirname}/../..`
 const reportFolder = `${BASE_DIR}/test-output/e2e`
+const time = new Date().getTime()
 
 /* eslint-disable no-console*/
 module.exports = {
@@ -25,6 +26,8 @@ module.exports = {
       done()
     })
   },
+
+  time: time,
 
   // External after hook is ran at the very end of the tests run, after closing the Selenium session
   after: function(done) {

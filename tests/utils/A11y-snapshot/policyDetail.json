@@ -72,8 +72,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
-                    "snippet": "<div style=\"\" aria-labelledby=\"complianceStatus-search-label\" role=\"search\" class=\"bx--search bx--search--sm\">",
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
+                    "snippet": "<div style=\"\" aria-labelledby=\"placementPolicies-search-label\" role=\"search\" class=\"bx--search bx--search--sm bx--search--light\">",
                     "level": "violation"
                 },
                 {
@@ -91,7 +91,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
-                    "snippet": "<div style=\"\" aria-labelledby=\"compliancePolicies-search-label\" role=\"search\" class=\"bx--search bx--search--sm\">",
+                    "snippet": "<div style=\"\" aria-labelledby=\"compliancePolicies-search-label\" role=\"search\" class=\"bx--search bx--search--sm bx--search--light\">",
                     "level": "violation"
                 },
                 {
@@ -109,7 +109,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
-                    "snippet": "<div style=\"\" aria-labelledby=\"placementBindings-search-label\" role=\"search\" class=\"bx--search bx--search--sm\">",
+                    "snippet": "<div style=\"\" aria-labelledby=\"placementBindings-search-label\" role=\"search\" class=\"bx--search bx--search--sm bx--search--light\">",
                     "level": "violation"
                 },
                 {
@@ -126,24 +126,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
-                    "snippet": "<div style=\"\" aria-labelledby=\"placementPolicies-search-label\" role=\"search\" class=\"bx--search bx--search--sm\">",
-                    "level": "violation"
-                },
-                {
-                    "severityCode": "eISHigh",
-                    "messageCode": "wcag20.tech.aria.OrphanedContent",
-                    "ruleId": "1157",
-                    "help": "idhi_accessibility_check_g1157.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]",
-                    "snippet": "<div style=\"\" role=\"button\" tabindex=\"0\">",
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]",
+                    "snippet": "<div style=\"\" aria-labelledby=\"complianceStatus-search-label\" role=\"search\" class=\"bx--search bx--search--sm bx--search--light\">",
                     "level": "violation"
                 },
                 {
@@ -160,6 +144,22 @@
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]",
                     "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Choose refresh\" role=\"listbox\">",
+                    "level": "violation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.OrphanedContent",
+                    "ruleId": "1157",
+                    "help": "idhi_accessibility_check_g1157.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]",
+                    "snippet": "<div style=\"\" role=\"button\" tabindex=\"0\">",
                     "level": "violation"
                 },
                 {
@@ -192,8 +192,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[5]",
-                    "snippet": "<style id=\"ace-monokai\">",
+                    "xpath": "/html[1]/head[1]/style[3]",
+                    "snippet": "<style id=\"ace-tm\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -208,40 +208,24 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[3]",
-                    "snippet": "<style id=\"ace-tm\">",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISLow",
-                    "messageCode": "rpt.g466.styleColorSemantics1",
-                    "ruleId": "466",
-                    "help": "idhi_accessibility_check_g466.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "xpath": "/html[1]/head[1]/style[2]",
-                    "snippet": "<style id=\"ace_editor.css\">",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISLow",
-                    "messageCode": "rpt.g466.styleColorSemantics1",
-                    "ruleId": "466",
-                    "help": "idhi_accessibility_check_g466.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
                     "xpath": "/html[1]/head[1]/style[5]",
                     "snippet": "<style id=\"ace-monokai\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISLow",
+                    "messageCode": "rpt.g466.styleColorSemantics1",
+                    "ruleId": "466",
+                    "help": "idhi_accessibility_check_g466.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/head[1]/style[1]",
+                    "snippet": "<style type=\"text/css\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -272,8 +256,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[3]",
-                    "snippet": "<style id=\"ace-tm\">",
+                    "xpath": "/html[1]/head[1]/style[2]",
+                    "snippet": "<style id=\"ace_editor.css\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -288,31 +272,15 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[1]",
-                    "snippet": "<style type=\"text/css\">",
+                    "xpath": "/html[1]/head[1]/style[3]",
+                    "snippet": "<style id=\"ace-tm\">",
                     "level": "potentialviolation"
                 },
                 {
                     "severityCode": "eISLow",
-                    "messageCode": "rpt.g506.styleHinderFocus1",
-                    "ruleId": "506",
-                    "help": "idhi_accessibility_check_g506.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "xpath": "/html[1]/head[1]/style[1]",
-                    "snippet": "<style type=\"text/css\">",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISLow",
-                    "messageCode": "rpt.g506.styleHinderFocus1",
-                    "ruleId": "506",
-                    "help": "idhi_accessibility_check_g506.html",
+                    "messageCode": "rpt.g466.styleColorSemantics1",
+                    "ruleId": "466",
+                    "help": "idhi_accessibility_check_g466.html",
                     "msgArgs": [],
                     "bounds": {
                         "left": 0,
@@ -352,8 +320,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[4]",
-                    "snippet": "<style>",
+                    "xpath": "/html[1]/head[1]/style[1]",
+                    "snippet": "<style type=\"text/css\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -384,8 +352,63 @@
                         "height": 0,
                         "width": 0
                     },
+                    "xpath": "/html[1]/head[1]/style[5]",
+                    "snippet": "<style id=\"ace-monokai\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISLow",
+                    "messageCode": "rpt.g506.styleHinderFocus1",
+                    "ruleId": "506",
+                    "help": "idhi_accessibility_check_g506.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/head[1]/style[4]",
+                    "snippet": "<style>",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISLow",
+                    "messageCode": "rpt.g506.styleHinderFocus1",
+                    "ruleId": "506",
+                    "help": "idhi_accessibility_check_g506.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
                     "xpath": "/html[1]/head[1]/style[3]",
                     "snippet": "<style id=\"ace-tm\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.MissingKeyboardHandler",
+                    "ruleId": "1087",
+                    "help": "idhi_accessibility_check_g1087.html",
+                    "msgArgs": [
+                        [
+                            "ul"
+                        ],
+                        [
+                            "tablist"
+                        ]
+                    ],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/nav[1]/ul[1]",
+                    "snippet": "<ul style=\"\" class=\"bx--tabs__nav bx--tabs__nav--hidden\" role=\"tablist\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -409,6 +432,29 @@
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]",
                     "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Choose refresh\" role=\"listbox\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.MissingKeyboardHandler",
+                    "ruleId": "1087",
+                    "help": "idhi_accessibility_check_g1087.html",
+                    "msgArgs": [
+                        [
+                            "div"
+                        ],
+                        [
+                            "menu"
+                        ]
+                    ],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/div[1]",
+                    "snippet": "<div style=\"\" tabindex=\"0\" aria-label=\"Overflow-menu\" class=\"bx--overflow-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" role=\"menu\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -441,10 +487,10 @@
                     "help": "idhi_accessibility_check_g1087.html",
                     "msgArgs": [
                         [
-                            "ul"
+                            "div"
                         ],
                         [
-                            "tablist"
+                            "menu"
                         ]
                     ],
                     "bounds": {
@@ -453,40 +499,8 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/nav[1]/ul[1]",
-                    "snippet": "<ul style=\"\" class=\"bx--tabs__nav bx--tabs__nav--hidden\" role=\"tablist\">",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISMedium",
-                    "messageCode": "haac.g1145.InputPlaceholder",
-                    "ruleId": "1145",
-                    "help": "idhi_accessibility_check_g1145.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]/input[1]",
-                    "snippet": "<input style=\"\" value=\"\" placeholder=\"Search\" id=\"complianceStatus-search\" class=\"bx--search-input\" type=\"text\" aria-label=\"complianceStatus-search\">",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISMedium",
-                    "messageCode": "haac.g1145.InputPlaceholder",
-                    "ruleId": "1145",
-                    "help": "idhi_accessibility_check_g1145.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
-                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]/input[1]",
-                    "snippet": "<input style=\"\" value=\"\" placeholder=\"Search\" id=\"compliancePolicies-search\" class=\"bx--search-input\" type=\"text\" aria-label=\"compliancePolicies-search\">",
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[6]/div[1]",
+                    "snippet": "<div style=\"\" tabindex=\"0\" aria-label=\"Overflow-menu\" class=\"bx--overflow-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" role=\"menu\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -517,8 +531,40 @@
                         "height": 0,
                         "width": 0
                     },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]/input[1]",
+                    "snippet": "<input style=\"\" value=\"\" placeholder=\"Search\" id=\"complianceStatus-search\" class=\"bx--search-input\" type=\"text\" aria-label=\"complianceStatus-search\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISMedium",
+                    "messageCode": "haac.g1145.InputPlaceholder",
+                    "ruleId": "1145",
+                    "help": "idhi_accessibility_check_g1145.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]/input[1]",
                     "snippet": "<input style=\"\" value=\"\" placeholder=\"Search\" id=\"placementBindings-search\" class=\"bx--search-input\" type=\"text\" aria-label=\"placementBindings-search\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISMedium",
+                    "messageCode": "haac.g1145.InputPlaceholder",
+                    "ruleId": "1145",
+                    "help": "idhi_accessibility_check_g1145.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/section[1]/div[1]/div[1]/input[1]",
+                    "snippet": "<input style=\"\" value=\"\" placeholder=\"Search\" id=\"compliancePolicies-search\" class=\"bx--search-input\" type=\"text\" aria-label=\"compliancePolicies-search\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -538,6 +584,44 @@
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]",
                     "snippet": "<div style=\"\" class=\"bx--dropdown selection bx--list-box\" tabindex=\"0\" aria-label=\"Choose refresh\" role=\"listbox\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.RequiredChildren",
+                    "ruleId": "1152",
+                    "help": "idhi_accessibility_check_g1152.html",
+                    "msgArgs": [
+                        "menu",
+                        "menuitem, menuitemcheckbox, menuitemradio"
+                    ],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[3]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/div[1]",
+                    "snippet": "<div style=\"\" tabindex=\"0\" aria-label=\"Overflow-menu\" class=\"bx--overflow-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" role=\"menu\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.RequiredChildren",
+                    "ruleId": "1152",
+                    "help": "idhi_accessibility_check_g1152.html",
+                    "msgArgs": [
+                        "menu",
+                        "menuitem, menuitemcheckbox, menuitemradio"
+                    ],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[6]/div[1]",
+                    "snippet": "<div style=\"\" tabindex=\"0\" aria-label=\"Overflow-menu\" class=\"bx--overflow-menu\" aria-expanded=\"false\" aria-haspopup=\"true\" role=\"menu\">",
                     "level": "potentialviolation"
                 },
                 {
@@ -583,7 +667,7 @@
     "summary": {
         "counts": {
             "violation": 9,
-            "potentialviolation": 23
+            "potentialviolation": 27
         },
         "scanTime": 0,
         "ruleArchive": "February 2019 Deployment (2019FebDeploy)",
@@ -594,9 +678,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1556119012346
+        "startScan": 1557501367523
     },
-    "scanID": "19a77793-fe0c-4872-9ad7-462955aaa113",
+    "scanID": "8b8a2702-bd5e-44aa-8d5a-3abda65cef16",
     "toolID": "@ibma/aat-v1.5.1",
     "label": "policyDetail"
 }

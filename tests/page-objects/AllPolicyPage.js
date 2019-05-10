@@ -20,7 +20,8 @@ module.exports = {
     searchInput: 'input.bx--search-input',
     overflowButton: '.bx--overflow-menu:nth-of-type(1)',
     deleteButton: '.bx--overflow-menu-options__option--danger',
-    confirmDeleteButton: '.bx--btn--danger--primary'
+    confirmDeleteButton: '.bx--btn--danger--primary',
+    noResource: '.no-resource'
   },
   commands: [{
     verifyTable,
@@ -31,12 +32,20 @@ module.exports = {
   }]
 }
 
-function verifyTable() {
-  this.expect.element('@table').to.be.present
-  this.click('@tableExpandBtn')
-  this.expect.element('@expandTable').to.be.present
-  this.click('@tableExpandBtn')
-  this.expect.element('@expandTable').to.be.not.present
+function verifyTable(browser) {
+  browser.pause(5*1000)
+  browser.element('css selector', 'div.no-resource', function(result){
+    if(result.status != -1){
+      this.expect.element('div.no-resource').to.be.present
+    }
+    else{
+      this.expect.element('table.bx--data-table-v2').to.be.present
+      this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
+      this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.present
+      this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
+      this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.not.present
+    }
+  })
 }
 
 
@@ -102,7 +111,7 @@ spec:
 }
 
 function createTestPolicy(browser, time) {
-  this.setValue('@searchInput',`${time}-policy-pod`)
+  // this.setValue('@searchInput',`${time}-policy-pod`)
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
   this.expect.element('@yamlInputField').to.be.present
@@ -124,9 +133,13 @@ function createTestPolicy(browser, time) {
   this.expect.element('@submitCreatePolicyButton').to.be.present
   this.click('@submitCreatePolicyButton')
   this.waitForElementNotPresent('@spinner')
+  this.waitForElementPresent('@searchInput')
+  this.setValue('@searchInput',`${time}-policy-pod`)
 }
 
 function searchPolicy(expectToDisplay, time) {
+  this.expect.element('@searchInput').to.be.present
+  this.setValue('@searchInput',`${time}-policy-pod`)
   this.expect.element('@searchInput').to.be.present
   if(expectToDisplay){
     this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-pod`)
@@ -142,7 +155,6 @@ function testDetailsPage() {
 }
 
 function deletePolicy(){
-  this.click('div.bx--breadcrumb-item:nth-of-type(1)>a')
   this.expect.element('@overflowButton').to.be.present
   this.click('@overflowButton')
   this.expect.element('@deleteButton').to.be.present

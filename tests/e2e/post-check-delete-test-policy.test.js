@@ -8,7 +8,6 @@
  *******************************************************************************/
 
 const config = require('../../config')
-const a11yScan = require('../utils/accessibilityScan')
 let page
 
 module.exports = {
@@ -24,24 +23,10 @@ module.exports = {
     page.navigate(url)
   },
 
-  'All policy page: Load and run expand': (browser) => {
-    page.verifyTable(browser)
-  },
-
-  'All policy page: Add, search, delete policy': (browser) => {
-    const time = browser.globals.time
-
-    page.createTestPolicy(browser, time)
-    browser.pause(20*1000) // Wait for pp and pb to show up in detail page
-    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
-    page.searchPolicy(true, time)
-    page.testDetailsPage()
-    a11yScan.runAccessibilityScan(browser, 'policyDetail')
-  },
-
-  'All policy page: Run Accessibility Scan': (browser) => {
-    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
-    a11yScan.runAccessibilityScan(browser, 'allPolicy')
+  'All policy page: delete policy': (browser) => {
+    page.searchPolicy(true, browser.globals.time)
+    page.deletePolicy()
+    page.searchPolicy(false, browser.globals.time)
   },
 
   after: function (browser, done) {
