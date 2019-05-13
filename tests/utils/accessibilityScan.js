@@ -18,7 +18,6 @@ module.exports = {
       browser.perform((done) => {
         AAT.getCompliance(source.value, page, (report) => {
           const reportSnap = JSON.parse(fs.readFileSync(path.join(__dirname,`/A11y-snapshot/${page}.json`), 'utf8'))
-          browser.assert.equal(report.summary.counts.violation, reportSnap.summary.counts.violation, `Check for accesibility violations in page ${browser.launchUrl}/policy/${page}   See report at: ./tests-output/a11y/${page}.json`)
 
           // eslint-disable-next-line no-constant-condition
           if(report.summary.counts.violation !== reportSnap.summary.counts.violation){
@@ -41,6 +40,9 @@ module.exports = {
             console.log(report.issueMessages.messages)
             console.log('------------------------------------------------------------------')
           }
+
+          browser.assert.equal(report.summary.counts.violation, reportSnap.summary.counts.violation, `Check for accesibility violations in page ${browser.launchUrl}/policy/${page}   See report at: ./tests-output/a11y/${page}.json`)
+
           done()
         })
       })
