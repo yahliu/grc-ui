@@ -86,6 +86,7 @@ The full list of npm scripts are described below.
 | `npm start`                      | Starts the application with NODE_ENV='development'                                                                               |
 | `npm test:unit`                  | Runs jest tests                                                                                                                  |
 | `npm test:update-snapshot`       | Updates snapshots for jest tests. This command should only be used if you have made changes to a component that requires an updated snapshot artifact for a test case.|
+| `npm test:update-a11ySnap`       | Updates snapshots for automated a11y test in e2e test. To update a11y test snapshot, first run `npm run test:e2e` locally, then run this command to update files. Only update a11y snapshot when you make changes and make sure those a11y issues can't be fixed on our side.|
 | `npm test:e2e`                   | Runs nightwatch e2e tests                                                                                                        |
 | `npm run start:production`       | Starts the application with NODE_ENV='production'                                                                                |
 | `npm run clean`                  | Deletes the generated files from public folder.                                                                                  |
