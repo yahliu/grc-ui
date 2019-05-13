@@ -105,38 +105,9 @@ export default class TopViolationsModule extends React.Component {
   }
 
   renderCards(cardData) {
-    return (
-      <div className='card-container-container' >
-        {cardData.map(({name, description, count, violationType}) => {
-          return (
-            <div key={Math.random()}>
-              <div className='card-container'>
-                <div className='card-content'>
-                  <div className='card-inner-content'>
-                    <div className='card-violations'>
-                      <div className='card-violation-count'>
-                        {count}
-                      </div>
-                      <div className='card-violation-type'>
-                        {violationType}
-                      </div>
-                    </div>
-                    <div className='card-name-description'>
-                      <div className='card-name'>
-                        {name}
-                      </div>
-                      <div className='card-description'>
-                        {description.join(', ')}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
-    )
+    const { handleDrillDownClick } = this.props
+
+    return <TopViolations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} />
   }
 
   renderButton() {
@@ -159,7 +130,7 @@ export default class TopViolationsModule extends React.Component {
 
   getCardData = () => {
     const { locale } = this.context
-    const { policies } = this.props
+    const { policies, activeFilters } = this.props
     const { topViolationChoice } = this.state
     const dataMap = {}
     policies.map(policy=>{
@@ -167,31 +138,40 @@ export default class TopViolationsModule extends React.Component {
       Object.keys(statuses).forEach(key=>{
         const compliant = statuses[key].compliant
         if (!compliant || compliant.toLowerCase()==='noncompliant') {
-          let name, violationType, description
+          let name, violationType, description, choice, type
           switch (topViolationChoice) {
           case TopViolationSelections.policies:
             name = _.get(policy, 'metadata.name', 'unknown')
             description = key
             violationType = msgs.get('overview.top.violations.cluster', locale)
+            choice = msgs.get('overview.top.violations.policies').toLowerCase()
+            type = msgs.get('overview.top.violations.cluster').toLowerCase()
             break
           case TopViolationSelections.clusters:
             name = key
             description = _.get(policy, 'metadata.name', 'unknown')
             violationType = msgs.get('overview.top.violations.policy', locale)
+            choice = msgs.get('overview.top.violations.clusters').toLowerCase()
+            type = msgs.get('overview.top.violations.policy').toLowerCase()
             break
           }
-          let data = dataMap[name]
-          if (!data) {
-            violationType = msgs.get('overview.top.violations', [violationType], locale)
-            dataMap[name] = data = {
-              name,
-              description: [],
-              count: 0,
-              violationType
+          const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)
+          if (!filtered) {
+            let data = dataMap[name]
+            if (!data) {
+              violationType = msgs.get('overview.top.violations', [violationType], locale)
+              dataMap[name] = data = {
+                name,
+                description: [],
+                count: 0,
+                violationType,
+                choice,
+                type
+              }
             }
+            data.description.push(description)
+            data.count++
           }
-          data.description.push(description)
-          data.count++
         }
       })
     })
@@ -227,7 +207,63 @@ export default class TopViolationsModule extends React.Component {
   }
 }
 
+const TopViolations = ({cardData, handleClick}) => {
+  return (
+    <div key={name}>
+      <div className='card-container-container' >
+        {cardData.map(({name, description, count, violationType, choice, type}) => {
+          const violated = count > 0
+          const onClick = () =>{
+            if (violated) {
+              handleClick(choice, name, type)
+            }
+          }
+          const onKeyPress = (e) =>{
+            if ( e.key === 'Enter') {
+              onClick()
+            }
+          }
+          return (
+            <div key={Math.random()}>
+              <div className='card-container'>
+                <div className='card-content'>
+                  <div className='card-inner-content'>
+                    <div className='card-violations' role={'button'}
+                      tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+                      <div className='card-violation-count'>
+                        {count}
+                      </div>
+                      <div className='card-violation-type'>
+                        {violationType}
+                      </div>
+                    </div>
+                    <div className='card-name-description'>
+                      <div className='card-name'>
+                        {name}
+                      </div>
+                      <div className='card-description'>
+                        {description.join(', ')}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+TopViolations.propTypes = {
+  cardData: PropTypes.array,
+  handleClick: PropTypes.func
+}
+
 TopViolationsModule.propTypes = {
+  activeFilters: PropTypes.object,
+  handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,

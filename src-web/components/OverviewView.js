@@ -111,7 +111,9 @@ export class OverviewView extends React.Component {
         <TopViolationsModule
           viewState={viewState}
           updateViewState={this.updateViewState}
-          policies={filteredPolicies} />
+          policies={filteredPolicies}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
         <PolicyCardsModule
           viewState={viewState}
           updateViewState={this.updateViewState}

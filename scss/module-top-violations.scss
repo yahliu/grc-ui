@@ -135,6 +135,15 @@
               font-weight: bold;
               color: #5A6872;
             }
+
+            &:hover {
+              cursor: pointer;
+            }
+
+            &:hover>.card-violation-type{
+              color: $color__blue-51;
+              text-decoration: underline;
+            }
           }
 
           .card-name-description {

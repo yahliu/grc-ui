@@ -80,7 +80,8 @@ const formatTableData = (items, detailedChoice, detailedName, detailedType) => {
     Object.entries(statuses).forEach(([cluster, status]) => {
       const compliant = status.compliant
       const noncompliant = !compliant || compliant.toLowerCase()==='noncompliant'
-      if (noncompliant && shouldInclude(item, detailedChoice, detailedName)) {
+      const ifTopViolationsData = detailedChoice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() || detailedChoice.toLowerCase()===msgs.get('overview.top.violations.policies').toLowerCase()
+      if (noncompliant && ( ifTopViolationsData || shouldInclude(item, detailedChoice, detailedName)) ) {
         if (detailedType === 'cluster') {
           if (!map.has(cluster)) map.set(cluster, [])
           map.get(cluster).push(item)
