@@ -67,10 +67,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const csrfMiddleware = csurf({ cookie: true })
-const generateCsrfToken = (req, res, next) => {
-  res.cookie('XSRF-TOKEN', req.csrfToken())
-  next()
-}
 
 var proxy = require('http-proxy-middleware')
 app.use(`${appConfig.get('contextPath')}/common/graphql`, cookieParser(), csrfMiddleware, (req, res, next) => {
@@ -115,7 +111,7 @@ appUtil.app(app)
 const CONTEXT_PATH = appConfig.get('contextPath'),
       STATIC_PATH = path.join(__dirname, 'public')
 
-app.use(cookieParser(), csrfMiddleware, generateCsrfToken, (req, res, next) => {
+app.use(cookieParser(), csrfMiddleware, (req, res, next) => {
   if(!req.path.endsWith('.js') && !req.path.endsWith('.css')) {
     next()
     return

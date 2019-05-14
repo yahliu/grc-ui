@@ -59,6 +59,7 @@ class App extends React.Component {
           <Redirect to={`${config.contextPath}/policies`} />
         </Switch>
         <Modal locale={serverProps.context.locale} />
+        <input type='hidden' id='app-access' value={serverProps.xsrfToken.toString('base64')} locale={serverProps.context.locale} />
       </div>
     )
   }
