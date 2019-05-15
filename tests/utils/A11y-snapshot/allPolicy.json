@@ -9,13 +9,30 @@
             "rpt.g112.aTargetAndText": "Inform the user that clicking on certain links or areas of a window will open pop-up windows or change the active window.",
             "rpt.g1092.multipleBannerLandmarks": "Multiple 'banner' landmarks must have unique labels specified with aria-label or aria-labelledby.",
             "wcag20.tech.aria.RequiredChildren": "An element with WAI-ARIA role {0} does not contain or own at least one child element with each of the following WAI-ARIA roles: {1}. See rule help for remediation guidance.",
-            "wcag20.tech.aria.MissingKeyboardHandler": "The {0} element with WAI-ARIA role {1} might not be keyboard accessible. See rule help for remediation guidance."
+            "wcag20.tech.aria.MissingKeyboardHandler": "The {0} element with WAI-ARIA role {1} might not be keyboard accessible. See rule help for remediation guidance.",
+            "wcag20.tech.aria.OrphanedContent": "All content must reside within a WAI-ARIA landmark or labelled region role."
         },
         "lang": "en-us"
     },
     "reports": [
         {
             "issues": [
+                {
+                    "severityCode": "eISHigh",
+                    "messageCode": "wcag20.tech.aria.OrphanedContent",
+                    "ruleId": "1157",
+                    "help": "idhi_accessibility_check_g1157.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/input[1]",
+                    "snippet": "<input style=\"\" locale=\"en-US\" value=\"uGA8Txtz-vJBTEZdbNr25C7uaiVCm8u2y1lo\" id=\"app-access\" type=\"hidden\">",
+                    "level": "violation"
+                },
                 {
                     "severityCode": "eISHigh",
                     "messageCode": "rpt.g1092.multipleBannerLandmarks",
@@ -78,22 +95,6 @@
                         "height": 0,
                         "width": 0
                     },
-                    "xpath": "/html[1]/head[1]/style[4]",
-                    "snippet": "<style>",
-                    "level": "potentialviolation"
-                },
-                {
-                    "severityCode": "eISLow",
-                    "messageCode": "rpt.g466.styleColorSemantics1",
-                    "ruleId": "466",
-                    "help": "idhi_accessibility_check_g466.html",
-                    "msgArgs": [],
-                    "bounds": {
-                        "left": 0,
-                        "top": 0,
-                        "height": 0,
-                        "width": 0
-                    },
                     "xpath": "/html[1]/head[1]/style[2]",
                     "snippet": "<style id=\"ace_editor.css\">",
                     "level": "potentialviolation"
@@ -112,6 +113,22 @@
                     },
                     "xpath": "/html[1]/head[1]/style[3]",
                     "snippet": "<style id=\"ace-tm\">",
+                    "level": "potentialviolation"
+                },
+                {
+                    "severityCode": "eISLow",
+                    "messageCode": "rpt.g466.styleColorSemantics1",
+                    "ruleId": "466",
+                    "help": "idhi_accessibility_check_g466.html",
+                    "msgArgs": [],
+                    "bounds": {
+                        "left": 0,
+                        "top": 0,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "xpath": "/html[1]/head[1]/style[4]",
+                    "snippet": "<style>",
                     "level": "potentialviolation"
                 },
                 {
@@ -266,7 +283,7 @@
     ],
     "summary": {
         "counts": {
-            "violation": 1,
+            "violation": 2,
             "potentialviolation": 13
         },
         "scanTime": 0,
@@ -278,9 +295,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1557501384663
+        "startScan": 1557943390967
     },
-    "scanID": "8b8a2702-bd5e-44aa-8d5a-3abda65cef16",
+    "scanID": "8b768d46-db4f-4463-beaa-c908645559a1",
     "toolID": "@ibma/aat-v1.5.1",
     "label": "allPolicy"
 }

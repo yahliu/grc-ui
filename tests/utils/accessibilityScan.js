@@ -14,38 +14,45 @@ const lodash = require('lodash')
 
 module.exports = {
   runAccessibilityScan: (browser, page) => {
-    browser.source(source => {
-      browser.perform((done) => {
-        AAT.getCompliance(source.value, page, (report) => {
-          const reportSnap = JSON.parse(fs.readFileSync(path.join(__dirname,`/A11y-snapshot/${page}.json`), 'utf8'))
+    const disableA11y = browser.globals.disable_a11y
+    if(disableA11y){
+      //eslint-disable-next-line
+      console.log(`A11Y TEST DISABLED ${page}`)
+    }
+    else{
+      browser.source(source => {
+        browser.perform((done) => {
+          AAT.getCompliance(source.value, page, (report) => {
+            const reportSnap = JSON.parse(fs.readFileSync(path.join(__dirname,`/A11y-snapshot/${page}.json`), 'utf8'))
 
-          // eslint-disable-next-line no-constant-condition
-          if(report.summary.counts.violation !== reportSnap.summary.counts.violation){
-            const currentViolations = lodash.filter(report.reports[0].issues,{'level':'violation'})
-            const currentPotentialViolations = lodash.filter(report.reports[0].issues,{'level':'potentialviolation'})
-            const snapshotViolations = lodash.filter(reportSnap.reports[0].issues,{'level':'violation'})
-            const snapshotPotentialViolations = lodash.filter(reportSnap.reports[0].issues,{'level':'potentialviolation'})
-            console.log('Violations from current page',lodash.countBy(currentViolations,'ruleId'))
-            console.log('Violations from snapshot',lodash.countBy(snapshotViolations,'ruleId'))
-            // console.log('Violation difference', lodash.difference(currentViolations,snapshotViolations))
-            console.log('Potential violations from current page',lodash.countBy(currentPotentialViolations,'ruleId'))
-            console.log('Potential violations from snapshot',lodash.countBy(snapshotPotentialViolations,'ruleId'))
-            // console.log('Potential violation difference', lodash.difference(currentPotentialViolations,snapshotPotentialViolations))
-            console.log('------------TO FIND RULE SET--------------')
-            console.log('GO TO http://ibm.biz/A11yToolsLandingPage AND CLICK ON RULES TAB')
-          }
+            // eslint-disable-next-line no-constant-condition
+            if(report.summary.counts.violation !== reportSnap.summary.counts.violation){
+              const currentViolations = lodash.filter(report.reports[0].issues,{'level':'violation'})
+              const currentPotentialViolations = lodash.filter(report.reports[0].issues,{'level':'potentialviolation'})
+              const snapshotViolations = lodash.filter(reportSnap.reports[0].issues,{'level':'violation'})
+              const snapshotPotentialViolations = lodash.filter(reportSnap.reports[0].issues,{'level':'potentialviolation'})
+              console.log('Violations from current page',lodash.countBy(currentViolations,'ruleId'))
+              console.log('Violations from snapshot',lodash.countBy(snapshotViolations,'ruleId'))
+              // console.log('Violation difference', lodash.difference(currentViolations,snapshotViolations))
+              console.log('Potential violations from current page',lodash.countBy(currentPotentialViolations,'ruleId'))
+              console.log('Potential violations from snapshot',lodash.countBy(snapshotPotentialViolations,'ruleId'))
+              // console.log('Potential violation difference', lodash.difference(currentPotentialViolations,snapshotPotentialViolations))
+              console.log('------------TO FIND RULE SET--------------')
+              console.log('GO TO http://ibm.biz/A11yToolsLandingPage AND CLICK ON RULES TAB')
+            }
 
-          if(report.issueMessages.messages && report.summary.counts.violation > 0) {
-            console.log('----- ITEMIZED A11Y ERRORS: --------------------------------------')
-            console.log(report.issueMessages.messages)
-            console.log('------------------------------------------------------------------')
-          }
+            if(report.issueMessages.messages && report.summary.counts.violation > 0) {
+              console.log('----- ITEMIZED A11Y ERRORS: --------------------------------------')
+              console.log(report.issueMessages.messages)
+              console.log('------------------------------------------------------------------')
+            }
 
-          browser.assert.equal(report.summary.counts.violation, reportSnap.summary.counts.violation, `Check for accesibility violations in page ${browser.launchUrl}/policy/${page}   See report at: ./tests-output/a11y/${page}.json`)
+            browser.assert.equal(report.summary.counts.violation, reportSnap.summary.counts.violation, `Check for accesibility violations in page ${browser.launchUrl}/policy/${page}   See report at: ./tests-output/a11y/${page}.json`)
 
-          done()
+            done()
+          })
         })
       })
-    })
+    }
   }
 }

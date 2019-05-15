@@ -69,10 +69,12 @@ metadata:
 #  description: Example of PlacementBinding
 placementRef:
   name: ${time}-placement-policy-test
-  namespace: mcm
+  kind: PlacementPolicy
+  apiGroup: mcm.ibm.com
 subjects:
 - name: ${time}-policy-pod
   kind: Policy
+  apiGroup: policy.mcm.ibm.com
 ---
 apiVersion: policy.mcm.ibm.com/v1alpha1
 kind: Policy

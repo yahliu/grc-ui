@@ -46,6 +46,11 @@
     "remote": {
       "launch_url": "${CLUSTER}"
     },
+    "no-a11y": {
+      "globals": {
+        "disable_a11y": true
+      }
+    },
     "chrome": {
       "desiredCapabilities": {
         "browserName": "chrome",
