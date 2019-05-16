@@ -28,8 +28,18 @@ import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
-const shouldInclude = (item, detailedChoice, detailedName) => {
+const shouldInclude = (item, detailedChoice, detailedName, detailedDescription) => {
   let annotations = _.get(item, 'metadata.annotations')
+  const itemName = _.get(item, 'metadata.name')
+
+  if (detailedChoice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase()){
+    return detailedDescription.toLowerCase().includes(itemName.toLowerCase())
+  }
+
+  if (detailedChoice.toLowerCase()===msgs.get('overview.top.violations.policies').toLowerCase()){
+    return detailedName.toLowerCase().includes(itemName.toLowerCase())
+  }
+
   if (detailedChoice === 'categories') {
     annotations = annotations['policy.mcm.ibm.com/categories'] || ''
   } else {
@@ -72,7 +82,7 @@ const formatClusterView = (key, value) => {
   return result
 }
 
-const formatTableData = (items, detailedChoice, detailedName, detailedType) => {
+const formatTableData = (items, detailedChoice, detailedName, detailedType, detailedDescription) => {
   const result = []
   const map = new Map()
   for (const item of items) {
@@ -80,8 +90,7 @@ const formatTableData = (items, detailedChoice, detailedName, detailedType) => {
     Object.entries(statuses).forEach(([cluster, status]) => {
       const compliant = status.compliant
       const noncompliant = !compliant || compliant.toLowerCase()==='noncompliant'
-      const ifTopViolationsData = detailedChoice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() || detailedChoice.toLowerCase()===msgs.get('overview.top.violations.policies').toLowerCase()
-      if (noncompliant && ( ifTopViolationsData || shouldInclude(item, detailedChoice, detailedName)) ) {
+      if (noncompliant && shouldInclude(item, detailedChoice, detailedName, detailedDescription)) {
         if (detailedType === 'cluster') {
           if (!map.has(cluster)) map.set(cluster, [])
           map.get(cluster).push(item)
@@ -123,12 +132,13 @@ class OverviewTab extends React.Component {
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
   }
 
-  handleDrillDownClick = (targetTab, choice, name, type) => {
+  handleDrillDownClick = (targetTab, choice, name, type, description) => {
     this.setState({
       currentTab: targetTab,
       detailedChoice: choice,
       detailedName: name,
       detailedType: type,
+      detailedDescription: description,
     })
   }
 
@@ -146,7 +156,7 @@ class OverviewTab extends React.Component {
 
   render () {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
-    const { currentTab, detailedChoice = '', detailedName = '', detailedType = '' } = this.state
+    const { currentTab, detailedChoice = '', detailedName = '', detailedType = '', detailedDescription = '' } = this.state
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -171,7 +181,7 @@ class OverviewTab extends React.Component {
 
             let detailedData = []
             if (currentTab === 'details') {
-              detailedData = formatTableData(items, detailedChoice, detailedName, detailedType)
+              detailedData = formatTableData(items, detailedChoice, detailedName, detailedType, detailedDescription)
             }
 
             const title = `#${detailedType === 'cluster' ? msgs.get('policy.header.cluster', this.context.locale) :

@@ -215,7 +215,7 @@ const TopViolations = ({cardData, handleClick}) => {
           const violated = count > 0
           const onClick = () =>{
             if (violated) {
-              handleClick(choice, name, type)
+              handleClick(choice, name, type, description.toString())
             }
           }
           const onKeyPress = (e) =>{
