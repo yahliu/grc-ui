@@ -16,6 +16,7 @@ import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
+import { Link } from 'react-router-dom'
 
 resources(() => {
   require('../../../scss/module-top-violations.scss')
@@ -138,7 +139,7 @@ export default class TopViolationsModule extends React.Component {
       Object.keys(statuses).forEach(key=>{
         const compliant = statuses[key].compliant
         if (!compliant || compliant.toLowerCase()==='noncompliant') {
-          let name, violationType, description, choice, type
+          let name, violationType, description, choice, type, nameSpace, policyName
           switch (topViolationChoice) {
           case TopViolationSelections.policies:
             name = _.get(policy, 'metadata.name', 'unknown')
@@ -146,6 +147,8 @@ export default class TopViolationsModule extends React.Component {
             violationType = msgs.get('overview.top.violations.cluster', locale)
             choice = msgs.get('overview.top.violations.policies').toLowerCase()
             type = msgs.get('overview.top.violations.cluster').toLowerCase()
+            nameSpace = _.get(policy, 'metadata.namespace', 'unknown')
+            policyName= _.get(policy, 'raw.spec.runtime-rules[0].metadata.name', name)
             break
           case TopViolationSelections.clusters:
             name = key
@@ -153,6 +156,8 @@ export default class TopViolationsModule extends React.Component {
             violationType = msgs.get('overview.top.violations.policy', locale)
             choice = msgs.get('overview.top.violations.clusters').toLowerCase()
             type = msgs.get('overview.top.violations.policy').toLowerCase()
+            nameSpace = _.get(policy, 'metadata.namespace', 'unknown')
+            policyName= _.get(policy, 'raw.spec.runtime-rules[0].metadata.name', name)
             break
           }
           const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)
@@ -166,7 +171,9 @@ export default class TopViolationsModule extends React.Component {
                 count: 0,
                 violationType,
                 choice,
-                type
+                type,
+                nameSpace,
+                policyName
               }
             }
             data.description.push(description)
@@ -211,7 +218,7 @@ const TopViolations = ({cardData, handleClick}) => {
   return (
     <div key={name}>
       <div className='card-container-container' >
-        {cardData.map(({name, description, count, violationType, choice, type}) => {
+        {cardData.map(({name, description, count, violationType, choice, type, nameSpace, policyName}) => {
           const violated = count > 0
           const onClick = () =>{
             if (violated) {
@@ -223,6 +230,7 @@ const TopViolations = ({cardData, handleClick}) => {
               onClick()
             }
           }
+          const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace) }/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
           return (
             <div key={Math.random()}>
               <div className='card-container'>
@@ -239,10 +247,16 @@ const TopViolations = ({cardData, handleClick}) => {
                     </div>
                     <div className='card-name-description'>
                       <div className='card-name'>
-                        {name}
+                        {cardNameConditionalLink}
                       </div>
                       <div className='card-description'>
-                        {description.join(', ')}
+                        {description.map((description) => {
+                          const cardEachDesConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace)}/${encodeURIComponent(description)}/compliancePolicy/${ encodeURIComponent(description)}/${encodeURIComponent(policyName)}`} className='card-each-description-link' key={description}>{description}</Link> : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace)}/${encodeURIComponent(name)}/compliancePolicy/${ encodeURIComponent(policyName)}/${encodeURIComponent(description)}`} className='card-each-description-link' key={description}>{description}</Link>
+                          return (
+                            cardEachDesConditionalLink
+                          )
+                        }
+                        ).reduce((prev, curr) => [prev, ', ', curr])}
                       </div>
                     </div>
                   </div>
@@ -258,7 +272,8 @@ const TopViolations = ({cardData, handleClick}) => {
 
 TopViolations.propTypes = {
   cardData: PropTypes.array,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  nameSpace: PropTypes.string
 }
 
 TopViolationsModule.propTypes = {
