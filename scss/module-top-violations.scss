@@ -148,10 +148,13 @@
 
           .card-name-description {
             display: flex;
+            flex-wrap: wrap;
             flex-direction: column;
             padding: 26px 10px;
 
             .card-name {
+              display: flex;
+              flex-wrap: wrap;
               font-weight: bold;
               padding-bottom: 5px;
               white-space: nowrap;
@@ -172,6 +175,8 @@
             }
 
             .card-description {
+              display: flex;
+              flex-wrap: wrap;
               font-style: italic;
               font-size: 12px;
               white-space: nowrap;
