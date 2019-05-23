@@ -1,0 +1,520 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PolicyCardsModule categories view renders as expected 1`] = `
+<div
+  className="module-policy-cards"
+>
+  <div
+    className="header-container"
+  >
+    <div
+      className="header-title"
+    >
+      Policy overview
+    </div>
+    <div
+      aria-invalid={undefined}
+      aria-label="Policy overview"
+      className="bx--dropdown selection bx--list-box"
+      data-invalid={undefined}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="listbox"
+      tabIndex={0}
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup={true}
+        aria-label="open menu"
+        className="bx--list-box__field"
+        data-toggle={true}
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="bx--list-box__label"
+          htmlFor="downshift-0-input"
+        >
+          Standards
+        </span>
+        <div
+          className="bx--list-box__menu-icon"
+        >
+          <svg
+            alt="Open menu"
+            aria-label="Open menu"
+            className={undefined}
+            fill={undefined}
+            fillRule="evenodd"
+            focusable="false"
+            height="5"
+            name={undefined}
+            role="img"
+            style={undefined}
+            viewBox="0 0 10 5"
+            width="10"
+          >
+            <title>
+              Open menu
+            </title>
+            <path
+              d="M0 0l5 4.998L10 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="card-container-container"
+  >
+    <div>
+      <div
+        className="card-container"
+      >
+        <div
+          className="card-content"
+        >
+          <div
+            className="card-name"
+          >
+            NIST
+          </div>
+          <div
+            className="card-count-content"
+          >
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Cluster violations
+              </div>
+            </div>
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Policy violations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="card-container"
+      >
+        <div
+          className="card-content"
+        >
+          <div
+            className="card-name"
+          >
+            HIPAA
+          </div>
+          <div
+            className="card-count-content"
+          >
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Cluster violations
+              </div>
+            </div>
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  1
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /1
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Policy violations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="card-container"
+      >
+        <div
+          className="card-content"
+        >
+          <div
+            className="card-name"
+          >
+            Other
+          </div>
+          <div
+            className="card-count-content"
+          >
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Cluster violations
+              </div>
+            </div>
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  1
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /1
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Policy violations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PolicyCardsModule standards view renders as expected 1`] = `
+<div
+  className="module-policy-cards"
+>
+  <div
+    className="header-container"
+  >
+    <div
+      className="header-title"
+    >
+      Policy overview
+    </div>
+    <div
+      aria-invalid={undefined}
+      aria-label="Policy overview"
+      className="bx--dropdown selection bx--list-box"
+      data-invalid={undefined}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="listbox"
+      tabIndex={0}
+    >
+      <div
+        aria-expanded={false}
+        aria-haspopup={true}
+        aria-label="open menu"
+        className="bx--list-box__field"
+        data-toggle={true}
+        disabled={false}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="button"
+        tabIndex="0"
+        type="button"
+      >
+        <span
+          className="bx--list-box__label"
+          htmlFor="downshift-1-input"
+        >
+          Standards
+        </span>
+        <div
+          className="bx--list-box__menu-icon"
+        >
+          <svg
+            alt="Open menu"
+            aria-label="Open menu"
+            className={undefined}
+            fill={undefined}
+            fillRule="evenodd"
+            focusable="false"
+            height="5"
+            name={undefined}
+            role="img"
+            style={undefined}
+            viewBox="0 0 10 5"
+            width="10"
+          >
+            <title>
+              Open menu
+            </title>
+            <path
+              d="M0 0l5 4.998L10 0z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="card-container-container"
+  >
+    <div>
+      <div
+        className="card-container"
+      >
+        <div
+          className="card-content"
+        >
+          <div
+            className="card-name"
+          >
+            NIST
+          </div>
+          <div
+            className="card-count-content"
+          >
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Cluster violations
+              </div>
+            </div>
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  3
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /4
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Policy violations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        className="card-container"
+      >
+        <div
+          className="card-content"
+        >
+          <div
+            className="card-name"
+          >
+            HIPAA
+          </div>
+          <div
+            className="card-count-content"
+          >
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  2
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /2
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Cluster violations
+              </div>
+            </div>
+            <div
+              className="card-count-container violated"
+              onClick={[Function]}
+              onKeyPress={[Function]}
+              role="button"
+              tabIndex="0"
+            >
+              <div
+                className="card-count"
+              >
+                <div
+                  className="card-count-violations"
+                >
+                  1
+                </div>
+                <div
+                  className="card-count-total"
+                >
+                  /1
+                </div>
+              </div>
+              <div
+                className="card-violation-type"
+              >
+                Policy violations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
