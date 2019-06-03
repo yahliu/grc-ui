@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Breadcrumb, Tabs, Tab } from 'carbon-components-react'
+import { Breadcrumb, Tabs, Tab, TooltipIcon } from 'carbon-components-react'
 import resources from '../../lib/shared/resources'
 import { withRouter, Link } from 'react-router-dom'
 import msgs from '../../nls/platform.properties'
@@ -92,8 +92,9 @@ export class SecondaryHeader extends React.Component {
 
 
   renderHeader() {
-    // const { locale } = this.context
+    const { locale } = this.context
     const { title, description, information } = this.props
+    const tooltip = msgs.get('policy.header.tooltip', locale)
     if (description) {
       return (
         <div className="bx--detail-page-header-title-container">
@@ -105,9 +106,13 @@ export class SecondaryHeader extends React.Component {
       return (
         <div className="bx--detail-page-header-title-container">
           <h1 className="bx--detail-page-header-title">{title}</h1>
-          {information &&<svg className='info-icon'>
-            <use href={'#diagramIcons_info'} ></use>
-          </svg>}
+          {information &&
+            <TooltipIcon align='end' tooltipText={tooltip}>
+              <svg className='info-icon'>
+                <use href={'#diagramIcons_info'} ></use>
+              </svg>
+            </TooltipIcon>
+          }
         </div>
       )
     }

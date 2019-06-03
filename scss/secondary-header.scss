@@ -70,6 +70,15 @@
         stroke: none;
         cursor: pointer;
       }
+
+      .bx--tooltip--icon__top:after, .bx--tooltip--icon__bottom:after {
+        white-space: normal;
+        width: 22rem;
+        max-width: 22rem;
+        transform: translate(-10px, calc(100% + 10px));
+        z-index: 2000;
+      }
+
     }
   }
 
