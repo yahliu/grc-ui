@@ -21,7 +21,8 @@ module.exports = {
     overflowButton: '.bx--overflow-menu:nth-of-type(1)',
     deleteButton: '.bx--overflow-menu-options__option--danger',
     confirmDeleteButton: '.bx--btn--danger--primary',
-    noResource: '.no-resource'
+    noResource: '.no-resource',
+    policyStatus: '#complianceStatus-module-id'
   },
   commands: [{
     verifyTable,
@@ -153,6 +154,7 @@ function searchPolicy(expectToDisplay, time) {
 
 function testDetailsPage() {
   this.click('tbody>tr>td>a')
+  this.waitForElementPresent('@policyStatus')
   this.expect.element('.bx--module__title:nth-of-type(1)').text.to.equal('Policy details')
 }
 
