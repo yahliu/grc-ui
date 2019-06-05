@@ -16436,9 +16436,9 @@
       "integrity": "sha1-8MgtmKOxOah3aogIBQuCRDEIf8o="
     },
     "selenium-standalone": {
-      "version": "6.15.6",
-      "resolved": "https://registry.npmjs.org/selenium-standalone/-/selenium-standalone-6.15.6.tgz",
-      "integrity": "sha512-iQJbjJyGY4+n9voj+QIxkjEKmk9csPL91pxjqYyX5/1jjJDw7ce0ZuTnLeNaFmFdjY/nAwcoMRvqpDPmmmyr5A==",
+      "version": "6.16.0",
+      "resolved": "https://registry.npmjs.org/selenium-standalone/-/selenium-standalone-6.16.0.tgz",
+      "integrity": "sha512-tl7HFH2FOxJD1is7Pzzsl0pY4vuePSdSWiJdPn+6ETBkpeJDiuzou8hBjvWYWpD+eIVcOrmy3L0R3GzkdHLzDw==",
       "dev": true,
       "requires": {
         "async": "^2.6.2",
@@ -16493,9 +16493,9 @@
           }
         },
         "commander": {
-          "version": "2.19.0",
-          "resolved": "https://registry.npmjs.org/commander/-/commander-2.19.0.tgz",
-          "integrity": "sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==",
+          "version": "2.20.0",
+          "resolved": "https://registry.npmjs.org/commander/-/commander-2.20.0.tgz",
+          "integrity": "sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==",
           "dev": true
         },
         "cross-spawn": {
@@ -16533,9 +16533,9 @@
           "dev": true
         },
         "readable-stream": {
-          "version": "3.2.0",
-          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-3.2.0.tgz",
-          "integrity": "sha512-RV20kLjdmpZuTF1INEb9IA3L68Nmi+Ri7ppZqo78wj//Pn62fCoJyV9zalccNzDD/OuJpMG4f+pfMl8+L6QdGw==",
+          "version": "3.4.0",
+          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-3.4.0.tgz",
+          "integrity": "sha512-jItXPLmrSR8jmTRmRWJXCnGJsfy85mB3Wd/uINMXA65yrnFo0cPClFIUWzo2najVNSl+mx7/4W8ttlLWJe99pQ==",
           "dev": true,
           "requires": {
             "inherits": "^2.0.3",

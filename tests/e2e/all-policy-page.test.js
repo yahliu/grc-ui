@@ -32,7 +32,6 @@ module.exports = {
     const time = browser.globals.time
 
     page.createTestPolicy(browser, time)
-    browser.pause(20*1000) // Wait for pp and pb to show up in detail page
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.searchPolicy(true, time)
     page.testDetailsPage()

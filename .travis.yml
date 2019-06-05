@@ -12,11 +12,6 @@ addons:
 
 cache:
   apt: true
-  directories:
-    - "$TRAVIS_CACHE_DIR"
-
-before_cache:
-  - sudo rm -rf $TRAVIS_CACHE_DIR/selenium-standalone
 
 branches:
   only:
@@ -27,9 +22,9 @@ branches:
 
 services:
   - docker
+  - xvfb
 
 before_install:
-  # - make cicd-log-init
   - source travis-env.sh
 
 
@@ -37,8 +32,6 @@ install:
   - make install
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - if [ $(uname -m) == 'x86_64' ]; then sh -e /etc/init.d/xvfb start; else echo 's390x or ppc64le - skipping'; fi
   - make docker-login-edge
   - make image
   - make run
@@ -48,8 +41,7 @@ script:
   - make copyright-check
   - make docker-login
   - make test
-#  - make cicd-log-test
-  - export PREV_COVERAGE_REPORT=$(curl -L -H 'Authorization:token ${GITHUB_TOKEN}' https://raw.github.ibm.com/IBMPrivateCloud/icp-grc-ui/gh-pages/coverage/coverage-summary.json)
+  - export PREV_COVERAGE_REPORT=$(curl -L -H 'Authorization:token ${GITHUB_TOKEN}' https://raw.github.ibm.com/IBMPrivateCloud/grc-ui/gh-pages/coverage/coverage-summary.json)
   - node travis-scripts/enforce-coverage.js
 
 after_success:
@@ -70,7 +62,6 @@ after_success:
           fi
         fi
       fi
-  # - make cicd-log-success
 
 after_failure:
   - |
@@ -80,7 +71,6 @@ after_failure:
         expect upload-selenium.sh
         echo Selenium test failed! Result available at http://9.37.247.85:81/$TRAVIS_JOB_NUMBER/e2e/
       fi
-  # - make cicd-log-fail
 
 deploy:
   provider: pages
