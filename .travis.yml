@@ -16,6 +16,7 @@ cache:
 branches:
   only:
     - master
+    - dev
     - /^[0-9]+\..*$/
     - /^v[0-9]+\..*$/
     - /^release-[0-9]+\..*$/

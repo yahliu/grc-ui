@@ -15,6 +15,7 @@ import loadable from 'loadable-components'
 let RemoveResourceModal
 let ResourceModal
 let DescriptionModal
+let SidePanelDetailsModal
 
 const Modal = ({ type, open, ...rest }) => {
   switch (type) {
@@ -24,6 +25,8 @@ const Modal = ({ type, open, ...rest }) => {
     return open && getResourceModal({ type, open, ...rest })
   case 'description':
     return open && getDescriptionModal({ type, open, ...rest })
+  case 'side-panel':
+    return open && getSidePanelDetailsModal({ type, open, ...rest })
   default:
     return null
   }
@@ -42,6 +45,11 @@ const getResourceModal = props => {
 const getRemoveResourceModal = props => {
   RemoveResourceModal = RemoveResourceModal === undefined ? loadable(() => import(/* webpackChunkName: "remove-resource-modal" */ '../modals/RemoveResourceModal')) : RemoveResourceModal
   return getModal(RemoveResourceModal, props)
+}
+
+const getSidePanelDetailsModal = props => {
+  SidePanelDetailsModal = SidePanelDetailsModal === undefined ? loadable(() => import(/* webpackChunkName: "details-side-panel-modal" */ '../modals/SidePanelDetailsModal')) : SidePanelDetailsModal
+  return getModal(SidePanelDetailsModal, props)
 }
 
 const getModal = (Component, props) => <Component {...props} />

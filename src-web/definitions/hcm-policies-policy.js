@@ -14,6 +14,9 @@ export default {
   defaultSortField: 'metadata.name',
   primaryKey: 'metadata.name',
   secondaryKey: 'metadata.namespace',
+  tableActions: [
+    'table.actions.sidepanel',
+  ],
   tableKeys: [
     {
       msgKey: 'table.header.policy.name',
@@ -43,5 +46,25 @@ export default {
       transformFunction: getCategories
     },
   ],
+  violatedTable: {
+    // title: 'policy.violated.cluster',
+    headerRows: ['', 'table.header.cluster.name', 'table.header.rule.violation', ''],
+    subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason'],
+    rows: [
+      {
+        cells: [
+          {
+            resourceKey: 'metadata.name',
+          },
+          {
+            resourceKey: 'violated',
+          },
+          {
+            resourceKey: 'spec.consoleURL',
+          }
+        ]
+      }
+    ]
+  },
 }
 

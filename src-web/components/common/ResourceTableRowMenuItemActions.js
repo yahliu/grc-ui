@@ -19,6 +19,12 @@ export const resourceActions = (action, dispatch, resourceType, data, hasService
         label: { primaryBtn: 'modal.button.submit', label: `modal.edit-${resourceType.name.toLowerCase()}.label`, heading: `modal.edit-${resourceType.name.toLowerCase()}.heading` },
         data: { kind: resourceType.name, ...data }}))
   }
+  case 'table.actions.sidepanel': {
+    return dispatch(updateModal(
+      { open: true, type: 'side-panel', resourceType,
+        label: { label: `modal.edit-${resourceType.name.toLowerCase()}.label`, heading: `modal.edit-${resourceType.name.toLowerCase()}.heading` },
+        data: { kind: resourceType.name, ...data }}))
+  }
   case 'table.actions.applications.remove':
   case 'table.actions.compliance.remove':
   case 'table.actions.policy.remove':

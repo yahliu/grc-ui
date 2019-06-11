@@ -15,6 +15,9 @@ export default {
   defaultSortField: 'cluster',
   primaryKey: 'cluster',
   secondaryKey: 'metadata.namespace',
+  tableActions: [
+    'table.actions.sidepanel',
+  ],
   tableKeys: [
     {
       msgKey: 'table.header.cluster.name',
@@ -30,6 +33,26 @@ export default {
       transformFunction: getLabels,
     }
   ],
+  violatedTable: {
+    // title: 'cluster.violated.policy',
+    headerRows: ['', 'table.header.policy.name', 'table.header.rule.violation', 'table.header.control'],
+    subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason'],
+    rows: [
+      {
+        cells: [
+          {
+            resourceKey: 'metadata.name',
+          },
+          {
+            resourceKey: 'violatedNum',
+          },
+          {
+            resourceKey: 'metadata.annotations["policy.mcm.ibm.com/controls"]',
+          }
+        ]
+      }
+    ]
+  },
 }
 
 export function getLabels(item) {
