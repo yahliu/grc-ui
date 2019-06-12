@@ -8,9 +8,8 @@
  *******************************************************************************/
 'use strict'
 
-/* eslint-disable */
-
 import React from 'react'
+import PropTypes from 'prop-types'
 import msgs from '../../../nls/platform.properties'
 import { DataTable,  } from 'carbon-components-react'
 
@@ -33,7 +32,8 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
               </th>
             )
           } else {
-            return <th className={'bx--table-header-index-'+index} scope={'col'} key={header} />
+            // eslint-disable-next-line react/no-array-index-key
+            return <th className={'bx--table-header-index-'+index} scope={'col'} key={'bx--table-header-' + index} />
           }
         }
         )}
@@ -51,5 +51,10 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
       })()}
     </TableBody>
   </Table>
+
+ResourceTableRowExpandableTable.propTypes = {
+  headers: PropTypes.array,
+  items: PropTypes.array
+}
 
 export default ResourceTableRowExpandableTable

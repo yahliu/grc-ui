@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /*******************************************************************************
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corporation 2019. All Rights Reserved.
@@ -127,12 +126,13 @@ class SidePanelDetailsModal extends React.PureComponent {
 
 //eslint-disable-next-line
 const ClustersTable = ({items, type, inapplicable}) => {
-  items = items.map(policy => {
+  items = items.map((policy, index) => {
     let violatedNum = 0
     const spec = _.get(policy, 'raw.spec', '')
     const objectTemplates = _.get(spec, 'object-templates', [])
     const roleTemplates = _.get(spec, 'role-templates', [])
     const policyTemplates = _.get(spec, 'policy-templates', [])
+    const id = _.get(policy, 'metadata.name', 'policy'+index)
     for (const template of objectTemplates) {
       if (_.get(template, 'status.Compliant','').toLowerCase() !== 'compliant') {
         violatedNum += 1
@@ -172,11 +172,11 @@ const ClustersTable = ({items, type, inapplicable}) => {
           }}}
       )
       const subItems = [...objectStatus, ...roleStatus, ...policyStatus]
-      return {...policy, violatedNum, subItems}
+      return {...policy, id, violatedNum, subItems}
     }
     else {
-      const subItems = [{ id: inapplicable, cells: [inapplicable, inapplicable, inapplicable] }]
-      return {...policy, violatedNum, subItems}
+      const subItems = [{ id: 'inapplicable'+index, cells: [inapplicable, inapplicable+' ', inapplicable+'  '] }]
+      return {...policy, id, violatedNum, subItems}
     }
   })
 
@@ -194,11 +194,11 @@ const ClustersTable = ({items, type, inapplicable}) => {
 
 //eslint-disable-next-line
 const PoliciesTable = ({items, type, inapplicable}) => {
-  const staticResourceData = getResourceDefinitions(type)
-
-  items = items.map(cluster => {
+  items = items.map((cluster, index) => {
     const policy = _.get(cluster, 'policy', [])
     const violatedNum = _.get(cluster, 'violated', 0)
+    const id = _.get(cluster, 'metadata.name', 'cluster'+index)
+
     if(violatedNum > 0) {
       const spec = _.get(policy, 'spec', '')
       const objectTemplates = _.get(spec, 'object-templates', [])
@@ -227,13 +227,16 @@ const PoliciesTable = ({items, type, inapplicable}) => {
             }}}
         )
       ]
-      return {...cluster, subItems}
+
+      return {...cluster, id, subItems}
     }
     else {
-      const subItems = [{ id: inapplicable, cells: [inapplicable, inapplicable, inapplicable] }]
-      return {...cluster, subItems}
+      const subItems = [{ id: 'inapplicable'+index, cells: [inapplicable, inapplicable+' ', inapplicable+'  '] }]
+      return {...cluster, id, subItems}
     }
   })
+
+  const staticResourceData = getResourceDefinitions(type)
 
   //Link columns with fixed title name and target direction
   const linkFixedName = {2 : {fixedName:'table.actions.launch.cluster', urlTarget:'_blank'}}

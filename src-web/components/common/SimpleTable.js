@@ -67,7 +67,8 @@ class StructuredListModule extends React.Component {
                       </th>
                     )
                   } else {
-                    return <th className={'bx--header-index-'+index} scope={'col'} key={header} />
+                    // eslint-disable-next-line react/no-array-index-key
+                    return <th className={'bx--header-index-'+index} scope={'col'} key={'bx--header-' + index} />
                   }
                 }
                 )}

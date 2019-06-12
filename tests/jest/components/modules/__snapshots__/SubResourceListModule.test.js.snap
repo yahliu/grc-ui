@@ -102,7 +102,7 @@ exports[`ClusterSubResourceList view renders as expected 1`] = `
             </td>
             <td>
               <p>
-                0
+                1
               </p>
             </td>
             <td>
@@ -267,6 +267,10 @@ exports[`PolicieSubResourceList view renders as expected 1`] = `
                 Rule violations
               </span>
             </th>
+            <th
+              className="bx--header-index-3"
+              scope="col"
+            />
           </tr>
         </thead>
         <tbody
@@ -376,7 +380,7 @@ exports[`PolicieSubResourceList view renders as expected 1`] = `
             </td>
             <td>
               <p>
-                3
+                0
               </p>
             </td>
             <td>
