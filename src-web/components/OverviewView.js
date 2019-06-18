@@ -96,7 +96,7 @@ export class OverviewView extends React.Component {
     if ((!policies || policies.length === 0) && !loading) {
       return (
         <NoResource
-          title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
+          title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
           {this.createDocLink(this.context.locale)}
         </NoResource>

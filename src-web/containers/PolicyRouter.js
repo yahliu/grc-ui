@@ -22,7 +22,7 @@ export const PoliciesTab = loadable(() => import(/* webpackChunkName: "policies"
 const BASE_PAGE_PATH = `${config.contextPath}/policies`
 
 const SECONDARY_HEADER_PROPS = {
-  title: 'routes.policies',
+  title: 'routes.grc',
   information: 'info.policies',
   tabs: [
     {

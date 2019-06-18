@@ -166,7 +166,7 @@ class ResourceList extends React.Component {
     if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name){
       return (
         <NoResource
-          title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
+          title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
           {createDocLink(locale, actions)}
         </NoResource>
