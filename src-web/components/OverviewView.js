@@ -18,11 +18,15 @@ import { Loading, Notification } from 'carbon-components-react'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import {POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
+import RecentActivityModule from './modules/RecentActivityModule'
 import TopViolationsModule from './modules/TopViolationsModule'
-import PolicyCardsModule from './modules/PolicyCardsModule'
+import TopFindingsModule from './modules/TopFindingsModule'
+import ImpactedControlsModule from './modules/ImpactedControlsModule'
+import PolicySummaryModule from './modules/PolicySummaryModule'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import NoResource from '../components/common/NoResource'
+import ResourceFilterBar from '../components/common/ResourceFilterBar'
 import config from '../../lib/shared/config'
 import CreateResourceModal from '../components/modals/CreateResourceModal'
 
@@ -102,23 +106,30 @@ export class OverviewView extends React.Component {
         </NoResource>
       )
     }
-
     showResourceToolbar()
     const { viewState } = this.state
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     return (
       <div className='overview-view'>
+        <ResourceFilterBar />
+        <RecentActivityModule
+          policies={filteredPolicies}
+          handleDrillDownClick={handleDrillDownClick} />
         <TopViolationsModule
           viewState={viewState}
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
-          activeFilters={activeFilters}
           handleDrillDownClick={handleDrillDownClick} />
-        <PolicyCardsModule
+        <TopFindingsModule
+          policies={filteredPolicies}
+          handleDrillDownClick={handleDrillDownClick} />
+        <ImpactedControlsModule
           viewState={viewState}
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
-          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
+        <PolicySummaryModule
+          policies={filteredPolicies}
           handleDrillDownClick={handleDrillDownClick} />
       </div>
     )

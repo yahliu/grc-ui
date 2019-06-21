@@ -29,6 +29,7 @@ module.exports = {
       'moment',
       'normalizr',
       'prop-types',
+      'react-d3-radar',
       'react-dom',
       'react-dom/server',
       'react-redux',

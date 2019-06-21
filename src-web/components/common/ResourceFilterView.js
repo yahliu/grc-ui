@@ -129,7 +129,7 @@ export default class ResourceFilterView extends React.Component {
     // make sure dropdown is closed when clicking outside
     // unless they click a link and nothing is filtered
     if (this.filterViewRef && !this.filterViewRef.contains(event.target)) {
-      const clickedTab = event.target.href!==undefined || event.target.firstChild.href!==undefined
+      const clickedTab = event.target.href!==undefined || (event.target.firstChild && event.target.firstChild.href!==undefined)
       if (!clickedTab || Object.keys(this.props.activeFilters).length==0) {
         this.handleFilterClose()
       }

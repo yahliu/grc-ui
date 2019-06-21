@@ -10,11 +10,11 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
     <div
       className="header-title hasChoice"
     >
-      Top violations
+      Top 3 violations
     </div>
     <div
       aria-invalid={undefined}
-      aria-label="Top violations"
+      aria-label="Top 3 violations"
       className="bx--dropdown selection bx--list-box"
       data-invalid={undefined}
       onClick={[Function]}
@@ -217,11 +217,11 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
     <div
       className="header-title hasChoice"
     >
-      Top violations
+      Top 3 violations
     </div>
     <div
       aria-invalid={undefined}
-      aria-label="Top violations"
+      aria-label="Top 3 violations"
       className="bx--dropdown selection bx--list-box"
       data-invalid={undefined}
       onClick={[Function]}

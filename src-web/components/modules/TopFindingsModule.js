@@ -10,8 +10,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DropdownV2 } from 'carbon-components-react'
-import classNames from 'classnames'
 import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
@@ -19,91 +17,67 @@ import _ from 'lodash'
 import { Link } from 'react-router-dom'
 
 resources(() => {
-  require('../../../scss/module-top-violations.scss')
+  require('../../../scss/module-top-findings.scss')
 })
 
-const VIOLATION_THRESHHOLD = 3
+const FINDINGS_THRESHHOLD = 3
 
-const TopViolationSelections = Object.freeze({
-  clusters: 'clusters',
-  policies: 'policies',
-})
-
-export default class TopViolationsModule extends React.Component {
+export default class TopFindingsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {topViolationChoice=TopViolationSelections.clusters}} = props
     this.state = {
-      topViolationChoice
     }
-    this.onChange = this.onChange.bind(this)
   }
 
   render() {
     let cardData = this.getCardData()
     if (cardData.length>0) {
-      if (cardData.length>VIOLATION_THRESHHOLD) {
-        cardData = cardData.slice(0,VIOLATION_THRESHHOLD)
+      if (cardData.length>FINDINGS_THRESHHOLD) {
+        cardData = cardData.slice(0,FINDINGS_THRESHHOLD)
       }
       return (
-        <div className='module-top-violations'>
+        <div className='module-top-findings'>
           {this.renderHeader(true)}
           {this.renderCards(cardData)}
         </div>
       )
     } else {
       return (
-        <div className='module-top-violations'>
+        <div className='module-top-findings'>
           {this.renderHeader()}
-          {this.renderNoViolations()}
+          {this.renderNoFindings()}
         </div>
       )
     }
   }
 
-  renderNoViolations() {
+  renderNoFindings() {
     const { locale } = this.context
-    const title = msgs.get('overview.no.violations.title', locale)
-    const detail = msgs.get('overview.no.violations.description', locale)
+    const title = msgs.get('overview.no.findings.title', locale)
+    const detail = msgs.get('overview.no.findings.description', locale)
     return (
-      <div className='no-violations'>
-        <img className='no-violations-icon' src={`${config.contextPath}/common/graphics/no-violation.svg`} alt={title} />
-        <div className='no-violations-title'>{title}</div>
-        <div className='no-violations-detail'>{detail}</div>
+      <div className='no-findings'>
+        <img className='no-findings-icon' src={`${config.contextPath}/common/graphics/no-violation.svg`} alt={title} />
+        <div className='no-findings-title'>{title}</div>
+        <div className='no-findings-detail'>{detail}</div>
       </div>
     )
   }
 
-  renderHeader(hasChoice) {
+  renderHeader() {
     const { locale } = this.context
-    const { topViolationChoice } = this.state
-    const choices = this.getTopViolationChoices(locale)
-    const title = msgs.get('overview.top.violations.title', locale)
-    const idx = Math.max(0, choices.findIndex(({value})=>{
-      return topViolationChoice===value
-    }))
-    const classes = classNames({
-      'header-title': true,
-      hasChoice,
-    })
+    const title = msgs.get('overview.top.findings.title', locale)
     return (
       <div className='header-container'>
-        <div className={classes}>{title}</div>
-        {hasChoice && <DropdownV2 className='selection'
-          label={title}
-          ariaLabel={title}
-          onChange={this.onChange}
-          inline={true}
-          initialSelectedItem={choices[idx].label}
-          items={choices} />}
+        <div className='header-title'>{title}</div>
       </div>
     )
   }
 
   renderCards(cardData) {
     const { handleDrillDownClick } = this.props
-    return <TopViolations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} />
+    return <TopFindings key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} />
   }
 
   getCardData = () => {
@@ -118,21 +92,13 @@ export default class TopViolationsModule extends React.Component {
         if (!compliant || compliant.toLowerCase()==='noncompliant') {
           let name, violationType, description, choice, type, nameSpace, policyName
           switch (topViolationChoice) {
-          case TopViolationSelections.policies:
+          case 0:
+          default:
             name = _.get(policy, 'metadata.name', 'unknown')
             description = key
             violationType = msgs.get('overview.top.violations.cluster', locale)
             choice = msgs.get('overview.top.violations.policies').toLowerCase()
             type = msgs.get('overview.top.violations.cluster').toLowerCase()
-            nameSpace = _.get(policy, 'metadata.namespace', 'unknown')
-            policyName= _.get(policy, 'raw.spec.runtime-rules[0].metadata.name', name)
-            break
-          case TopViolationSelections.clusters:
-            name = key
-            description = _.get(policy, 'metadata.name', 'unknown')
-            violationType = msgs.get('overview.top.violations.policy', locale)
-            choice = msgs.get('overview.top.violations.clusters').toLowerCase()
-            type = msgs.get('overview.top.violations.policy').toLowerCase()
             nameSpace = _.get(policy, 'metadata.namespace', 'unknown')
             policyName= _.get(policy, 'raw.spec.runtime-rules[0].metadata.name', name)
             break
@@ -150,9 +116,9 @@ export default class TopViolationsModule extends React.Component {
               nameSpace,
               policyName
             }
+            data.description.push(description)
+            data.count++
           }
-          data.description.push(description)
-          data.count++
         }
       })
     })
@@ -162,33 +128,9 @@ export default class TopViolationsModule extends React.Component {
       return b-a
     })
   }
-
-  getTopViolationChoices = (locale) => {
-    if (!this.topViolationChoices) {
-      this.topViolationChoices = [
-        {
-          value: TopViolationSelections.clusters,
-          label: msgs.get('overview.top.violations.clusters', locale),
-        },
-        {
-          value: TopViolationSelections.policies,
-          label: msgs.get('overview.top.violations.policies', locale),
-        },
-      ]
-    }
-    return this.topViolationChoices
-  }
-
-  onChange = (e) => {
-    const {selectedItem: {value}} = e
-    this.props.updateViewState({topViolationChoice: value})
-    this.setState(()=>{
-      return {topViolationChoice: value}
-    })
-  }
 }
 
-const TopViolations = ({cardData, handleClick}) => {
+const TopFindings = ({cardData, handleClick}) => {
   return (
     <div key={name}>
       <div className='card-container-container' >
@@ -244,15 +186,13 @@ const TopViolations = ({cardData, handleClick}) => {
   )
 }
 
-TopViolations.propTypes = {
+TopFindings.propTypes = {
   cardData: PropTypes.array,
   handleClick: PropTypes.func,
   nameSpace: PropTypes.string
 }
 
-TopViolationsModule.propTypes = {
+TopFindingsModule.propTypes = {
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
-  updateViewState: PropTypes.func,
-  viewState: PropTypes.object,
 }

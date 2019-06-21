@@ -18,7 +18,7 @@ import moment from 'moment'
 import RefreshTimeSelect from './RefreshTimeSelect'
 import ResourceFilterView from './ResourceFilterView'
 import { CSSTransition } from 'react-transition-group'
-import { Icon, Tag, Loading } from 'carbon-components-react'
+import { Loading } from 'carbon-components-react'
 import { REFRESH_TIMES } from '../../../lib/shared/constants'
 import '../../../graphics/diagramIcons.svg'
 import msgs from '../../../nls/platform.properties'
@@ -43,28 +43,6 @@ RefreshTime.propTypes = {
   timestamp: PropTypes.string,
 }
 
-const FilterBar = ({ boundFilters=[], locale }) => {
-  return (
-    <div className='resource-filter-bar'>
-      {boundFilters.map(({name, onClick}) => {
-        return <Tag key={name} type='custom'>
-          {name}
-          <Icon
-            className='closeIcon'
-            description={msgs.get('filter.remove.tag', locale)}
-            name="icon--close"
-            onClick={onClick}
-          />
-        </Tag>
-      })}
-    </div>
-  )
-}
-FilterBar.propTypes = {
-  boundFilters: PropTypes.array,
-  locale: PropTypes.string,
-}
-
 export class ResourceToolbar extends React.Component {
 
   constructor (props) {
@@ -86,7 +64,6 @@ export class ResourceToolbar extends React.Component {
     }
     const { reloading, timestamp } = refreshControl
     const { filterViewOpen } = this.state
-    const boundFilters = this.getBoundFilters()
     return (
       <div id='resource-toolbar' className='resource-toolbar'>
         <div className='resource-toolbar-container' >
@@ -107,7 +84,6 @@ export class ResourceToolbar extends React.Component {
               </div>
             </div>
           </div>
-          <FilterBar boundFilters={boundFilters} locale={locale} />
           {timestamp&&<RefreshTime timestamp={timestamp} reloading={reloading} />}
         </div>
         <CSSTransition
@@ -145,29 +121,6 @@ export class ResourceToolbar extends React.Component {
 
   updateFilters = (key, value, checked) => {
     this.updateActiveFilter(key, value, checked)
-  }
-
-  getBoundFilters() {
-    const boundFilters=[]
-    const {activeFilters={}} = this.props
-    Object.keys(activeFilters).forEach(key=>{
-      const activeSet = activeFilters[key]
-      activeSet.forEach(value=>{
-        let name = value
-        if (name.length>26) {
-          name=name.substr(0,12)+'..'+name.substr(-12)
-        }
-        boundFilters.push({
-          name,
-          onClick: this.removeActiveFilter.bind(this, key, value)
-        })
-      })
-    })
-    return boundFilters
-  }
-
-  removeActiveFilter(key, value) {
-    this.updateActiveFilter(key, value, false)
   }
 
   updateActiveFilter = (key, value, checked) => {

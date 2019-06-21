@@ -10,21 +10,21 @@
 @import 'variables';
 
 
-.module-top-violations {
+.module-top-findings {
 
-   .no-violations {
+   .no-findings {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin: 0 auto;
       width: 20rem;
 
-      .no-violations-icon {
+      .no-findings-icon {
         width: 175px;
         height: 100px;
       }
 
-      .no-violations-title {
+      .no-findings-title {
         font-weight: bold;
         margin-bottom: 9px;
         font-size: 18px;
@@ -32,7 +32,7 @@
         color: $mcm_color_blue;
       }
 
-      .no-violations-detail {
+      .no-findings-detail {
         font-weight: 300;
         font-size: 14px;
         font-style: italic;
@@ -53,41 +53,6 @@
       line-height: 23px;
       &.hasChoice {
         border-right: 1px solid $color__gray-1;
-      }
-    }
-
-    .bx--dropdown {
-      font-size: 14px;
-      background-color: transparent;
-      box-shadow: none;
-      white-space: nowrap;
-      width: auto;
-
-      .bx--list-box__label {
-        color: $color__blue-51;
-        padding-right: 32px;
-      }
-
-      .bx--list-box__field {
-        padding: 0 8px;
-        &:focus {
-         box-shadow: none;
-       }
-      }
-
-      .bx--list-box__menu-item {
-        color: $mcm_color_gray_20;
-        padding: 14px;
-        height: 26px;
-        font-weight: normal;
-
-        &:hover, .bx--list-box__menu-item--highlighted {
-          text-decoration: none;
-        }
-      }
-
-      .bx--list-box__menu {
-        max-height: 30rem;
       }
     }
   }
