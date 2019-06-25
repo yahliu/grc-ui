@@ -4,6 +4,7 @@ language: node_js
 os:
   - linux-ppc64le
   - linux
+  - linux-s390
 
 addons:
   packages:
