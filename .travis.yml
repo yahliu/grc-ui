@@ -1,10 +1,18 @@
 sudo: required
 language: node_js
 
-os:
-  - linux-ppc64le
-  - linux
-  - linux-s390
+matrix:
+  fast_finish: true
+  include:
+    - os: linux-s390
+      env: OSARCH=linux-s390
+      dist: trusty
+    - os: linux-ppc64le
+      env: OSARCH=linux-ppc64le
+      dist: trusty
+    - os: linux
+      env: OSARCH=linux-amd64
+      dist: trusty
 
 addons:
   packages:
@@ -27,27 +35,26 @@ services:
   - xvfb
 
 before_install:
-  - source travis-env.sh
-
+  - make init
 
 install:
-  - make install
+  - npm install
+  - chmod +x copyright-check.sh
+  - make copyright-check
+  - make unit-test
 
 before_script:
-  - make docker-login-edge
+  - make local
   - make image
   - make run
-  - chmod +x copyright-check.sh
 
 script:
-  - make copyright-check
-  - make docker-login
-  - make test
+  - make e2e-test
   - export PREV_COVERAGE_REPORT=$(curl -L -H 'Authorization:token ${GITHUB_TOKEN}' https://raw.github.ibm.com/IBMPrivateCloud/grc-ui/gh-pages/coverage/coverage-summary.json)
   - node travis-scripts/enforce-coverage.js
 
 after_success:
-  - make push
+  - test "$TRAVIS_EVENT_TYPE" = "pull_request" && make push || echo "pushing to scratch"
   - test "$TRAVIS_EVENT_TYPE" != "pull_request" && make release || echo "success"
   - |
       if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" ]]; then
@@ -57,8 +64,8 @@ after_success:
         if [[ "$BUILD_LEADER" == "YES" ]]; then
           if [[ "$BUILD_AGGREGATE_STATUS" == "others_succeeded" ]]; then
             echo "All jobs succeeded! Creating multi arch image..."
-            make manifest-tool
-            make multi-arch
+            make docker:manifest-tool
+            make docker:multi-arch
           else
             echo "Some jobs failed" && exit 1
           fi
