@@ -31,9 +31,14 @@ const SECONDARY_HEADER_PROPS = {
       url: `${BASE_PAGE_PATH}`
     },
     {
-      id: 'policy-all-policies',
-      label: 'tabs.policy.all.policies',
+      id: 'policy-all',
+      label: 'tabs.policy.all',
       url: `${BASE_PAGE_PATH}/all`
+    },
+    {
+      id: 'policy-findings',
+      label: 'tabs.policy.findings',
+      url: `${BASE_PAGE_PATH}/findings`
     },
   ]
 }
@@ -42,8 +47,8 @@ const PolicyRouter = ({ match }) =>
   <Switch>
     <Route exact path={`${match.url}`} render={() => <OverviewTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all`} render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
+    <Route path={`${match.url}/findings`} /*SecurityFindingsTab to do later*/render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
   </Switch>
-
 
 PolicyRouter.propTypes = {
   match: PropTypes.object,
