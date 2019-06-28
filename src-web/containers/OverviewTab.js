@@ -28,6 +28,10 @@ import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
+import getMockData from './OverviewTabMock'
+
+
+
 const shouldInclude = (item, detailedChoice, detailedName, detailedDescription) => {
   let annotations = _.get(item, 'metadata.annotations')
   const itemName = _.get(item, 'metadata.name')
@@ -161,8 +165,26 @@ class OverviewTab extends React.Component {
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
-            const {data={}, loading, startPolling, stopPolling, refetch} = result
-            const { items } = data
+            const {loading, startPolling, stopPolling, refetch} = result
+
+
+            //            const {data={}} = result
+            //            const { items } = data
+            //            if (items) {
+            //              const mockArr = []
+            //              items.forEach(item=>{
+            //                const mockData = {}
+            //                for (var key in item) {
+            //                  mockData[key] = item[key]
+            //                }
+            //                mockArr.push(mockData)
+            //              })
+            //              console.log(JSON.stringify(mockArr))
+            //            }
+
+
+            const items = getMockData().policies
+
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false

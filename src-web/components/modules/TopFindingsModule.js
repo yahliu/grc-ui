@@ -11,6 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
+import classNames from 'classnames'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
@@ -147,6 +148,10 @@ const TopFindings = ({cardData, handleClick}) => {
             }
           }
           const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace) }/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
+          const classes = classNames({
+            'card-violation-count': true,
+            'alert': count>0,
+          })
           return (
             <div key={Math.random()}>
               <div className='card-container'>
@@ -154,11 +159,11 @@ const TopFindings = ({cardData, handleClick}) => {
                   <div className='card-inner-content'>
                     <div className='card-violations' role={'button'}
                       tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
-                      <div className='card-violation-count'>
+                      <div className={classes}>
                         {count}
                       </div>
                       <div className='card-violation-type'>
-                        {violationType}
+                        {violationType.toUpperCase()}
                       </div>
                     </div>
                     <div className='card-name-description'>

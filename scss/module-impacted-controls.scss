@@ -27,60 +27,25 @@
         .card-controls {
           display: flex;
           flex-direction: column;
-          padding: 40px;
-          width: 25%;
+          padding: 36px;
+          width: 300px;
           border-right: 1px solid $color__gray-1;
-
-          > div {
-            margin-bottom: 30px;
-          }
+          position: relative;
 
           .card-title {
             font-size: 28px;
-          }
-
-          .card-selection {
-            .bx--dropdown {
-              font-size: 14px;
-              background-color: transparent;
-              box-shadow: none;
-              white-space: nowrap;
-              width: auto;
-
-              .bx--list-box__label {
-                color: $color__blue-51;
-                padding-right: 32px;
-              }
-
-              .bx--list-box__field {
-                padding: 0;
-                &:focus {
-                 box-shadow: none;
-               }
-              }
-
-              .bx--list-box__menu-item {
-                color: $mcm_color_gray_20;
-                padding: 14px;
-                height: 26px;
-                font-weight: normal;
-
-                &:hover, .bx--list-box__menu-item--highlighted {
-                  text-decoration: none;
-                }
-              }
-
-              .bx--list-box__menu {
-                max-height: 30rem;
-              }
-            }
+            font-weight: 300;
+            color: $grc_color_overview_title;
+            margin-bottom: 30px;
           }
 
           .card-legend {
             .legend-container {
              display: flex;
-             font-size: 12px;
+             font-size: 14px;
              font-weight: normal;
+             margin-bottom: 30px;
+             color: $grc_color_radar_legend;
 
              .legend {
                 width: 10px;
@@ -88,14 +53,68 @@
                 margin-right: 5px;
                 border-radius: 50%;
                 &.policies {
-                  background-color: green;
+                  background-color: $grc_color_radar_green;
                 }
                 &.findings {
-                  background-color: yellow;
+                  background-color: $grc_color_radar_blue;
                 }
               }
             }
 
+          }
+
+          .card-control-panel {
+            position: absolute;
+            bottom: 38px;
+
+            .card-selection {
+              margin-bottom: 50px;
+
+              &-title {
+                font-size: 0.875rem;
+                color: $color__blue-90;
+                font-weight: 600;
+                margin-bottom: 6px;
+              }
+
+              .bx--dropdown {
+                font-size: 14px;
+                white-space: nowrap;
+                width: auto;
+
+                .bx--list-box__label {
+                  color: $color__blue-51;
+                  padding-right: 32px;
+                }
+
+                .bx--list-box__field {
+                  &:focus {
+                   box-shadow: none;
+                 }
+                }
+
+                .bx--list-box__menu-item {
+                  color: $mcm_color_gray_20;
+                  padding: 14px;
+                  height: 26px;
+                  font-weight: normal;
+
+                  &:hover, .bx--list-box__menu-item--highlighted {
+                    text-decoration: none;
+                  }
+                }
+
+                .bx--list-box__menu {
+                  max-height: 30rem;
+                }
+              }
+             }
+
+            .card-slider {
+              .bx--slider {
+                min-width: 110px;
+              }
+            }
           }
         }
 
@@ -107,9 +126,104 @@
 
           .card-radar {
           }
+
         }
 
       }
     }
   }
 }
+
+div.tooltip {
+  position: absolute;
+  z-index: 10000;
+  width: 175px;
+  height: 175px;
+  pointer-events: none;
+  background: white;
+  border: 1px solid #DFE3E6;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+
+  &-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 16px;
+    margin:0;
+
+    .header {
+      .title {
+        color: #5A6872;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 18px;
+        padding-bottom: 6px;
+      }
+
+      .variable {
+        font-size: 14px;
+        display: flex;
+
+       .legend {
+          width: 10px;
+          height: 10px;
+          margin-right: 5px;
+          border-radius: 50%;
+          &.policies {
+            background-color: $grc_color_radar_green;
+          }
+          &.findings {
+            background-color: $grc_color_radar_blue;
+          }
+        }
+      }
+    }
+
+    .findings {
+      .finding {
+        padding-top: 14px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        color: #152935;
+
+        .count {
+          font-weight: 300;
+        }
+
+        .severity {
+          font-weight: 600;
+        }
+
+        &.high {
+          border-bottom: 2px solid $grc_color_finding_high;
+        }
+
+        &.medium {
+          border-bottom: 2px solid $grc_color_finding_medium;
+        }
+
+        &.low {
+          border-bottom: 2px solid $grc_color_finding_low;
+        }
+      }
+    }
+  }
+}
+
+div.tooltip:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent;
+  border-top-color: white;
+}
+

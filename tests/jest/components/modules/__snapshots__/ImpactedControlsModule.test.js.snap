@@ -22,67 +22,6 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
             Most impacted controls
           </div>
           <div
-            className="card-selection"
-          >
-            <div
-              aria-invalid={undefined}
-              aria-label="Most impacted controls"
-              className="bx--dropdown selection bx--list-box"
-              data-invalid={undefined}
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="listbox"
-              tabIndex={0}
-            >
-              <div
-                aria-expanded={false}
-                aria-haspopup={true}
-                aria-label="open menu"
-                className="bx--list-box__field"
-                data-toggle={true}
-                disabled={false}
-                onBlur={[Function]}
-                onClick={[Function]}
-                onKeyDown={[Function]}
-                role="button"
-                tabIndex="0"
-                type="button"
-              >
-                <span
-                  className="bx--list-box__label"
-                  htmlFor="downshift-0-input"
-                >
-                  PCI
-                </span>
-                <div
-                  className="bx--list-box__menu-icon"
-                >
-                  <svg
-                    alt="Open menu"
-                    aria-label="Open menu"
-                    className={undefined}
-                    fill={undefined}
-                    fillRule="evenodd"
-                    focusable="false"
-                    height="5"
-                    name={undefined}
-                    role="img"
-                    style={undefined}
-                    viewBox="0 0 10 5"
-                    width="10"
-                  >
-                    <title>
-                      Open menu
-                    </title>
-                    <path
-                      d="M0 0l5 4.998L10 0z"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
             className="card-legend"
           >
             <div
@@ -103,87 +42,159 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
             </div>
           </div>
           <div
-            className="card-slider"
+            className="card-control-panel"
           >
             <div
-              className="bx--form-item"
+              className="card-selection"
             >
-              <label
-                className="bx--label"
-                htmlFor="slider"
-              />
               <div
-                className="bx--slider-container"
+                className="card-selection-title"
+              >
+                Standard
+              </div>
+              <div
+                aria-invalid={undefined}
+                aria-label="Most impacted controls"
+                className="bx--dropdown selection bx--list-box"
+                data-invalid={undefined}
+                onClick={[Function]}
+                onKeyDown={[Function]}
+                role="listbox"
+                tabIndex={0}
               >
                 <div
-                  className="bx--slider"
-                  onChange={[Function]}
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="open menu"
+                  className="bx--list-box__field"
+                  data-toggle={true}
+                  disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
-                  onKeyPress={[Function]}
-                  role="presentation"
-                  tabIndex={-1}
-                  value={6}
+                  onKeyDown={[Function]}
+                  role="button"
+                  tabIndex="0"
+                  type="button"
+                >
+                  <span
+                    className="bx--list-box__label"
+                    htmlFor="downshift-0-input"
+                  >
+                    HIPAA
+                  </span>
+                  <div
+                    className="bx--list-box__menu-icon"
+                  >
+                    <svg
+                      alt="Open menu"
+                      aria-label="Open menu"
+                      className={undefined}
+                      fill={undefined}
+                      fillRule="evenodd"
+                      focusable="false"
+                      height="5"
+                      name={undefined}
+                      role="img"
+                      style={undefined}
+                      viewBox="0 0 10 5"
+                      width="10"
+                    >
+                      <title>
+                        Open menu
+                      </title>
+                      <path
+                        d="M0 0l5 4.998L10 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="card-slider"
+            >
+              <div
+                className="bx--form-item"
+              >
+                <label
+                  className="bx--label"
+                  htmlFor="slider"
+                >
+                  Show more or less controls
+                </label>
+                <div
+                  className="bx--slider-container"
                 >
                   <div
-                    aria-valuemax={24}
-                    aria-valuemin={1}
-                    aria-valuenow={6}
-                    className="bx--slider__thumb"
-                    id="slider"
-                    onKeyDown={[Function]}
-                    onMouseDown={[Function]}
-                    onTouchStart={[Function]}
-                    role="slider"
-                    style={
-                      Object {
-                        "left": "0%",
-                      }
-                    }
-                    tabIndex={0}
-                  />
-                  <div
-                    className="bx--slider__track"
-                  />
-                  <div
-                    className="bx--slider__filled-track"
-                    style={
-                      Object {
-                        "transform": "translate(0%, -50%) scaleX(0)",
-                      }
-                    }
-                  />
-                  <input
-                    className="bx--slider__input"
-                    max={24}
-                    min={1}
-                    name="Show more or less controls"
+                    className="bx--slider"
                     onChange={[Function]}
-                    required={undefined}
-                    step={1}
-                    type="hidden"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="presentation"
+                    tabIndex={-1}
+                    value={6}
+                  >
+                    <div
+                      aria-valuemax={24}
+                      aria-valuemin={1}
+                      aria-valuenow={6}
+                      className="bx--slider__thumb"
+                      id="slider"
+                      onKeyDown={[Function]}
+                      onMouseDown={[Function]}
+                      onTouchStart={[Function]}
+                      role="slider"
+                      style={
+                        Object {
+                          "left": "0%",
+                        }
+                      }
+                      tabIndex={0}
+                    />
+                    <div
+                      className="bx--slider__track"
+                    />
+                    <div
+                      className="bx--slider__filled-track"
+                      style={
+                        Object {
+                          "transform": "translate(0%, -50%) scaleX(0)",
+                        }
+                      }
+                    />
+                    <input
+                      className="bx--slider__input"
+                      max={24}
+                      min={1}
+                      name="Show more or less controls"
+                      onChange={[Function]}
+                      required={undefined}
+                      step={1}
+                      type="hidden"
+                      value={6}
+                    />
+                  </div>
+                  <span
+                    className="bx--slider__range-label"
+                  >
+                    1
+                  </span>
+                  <span
+                    className="bx--slider__range-label"
+                  >
+                    24
+                  </span>
+                  <input
+                    aria-label="Show more or less controls"
+                    className="bx--text-input bx--slider-text-input"
+                    disabled={false}
+                    id="slider-input-for-slider"
+                    labelText=""
+                    onChange={[Function]}
+                    type="number"
                     value={6}
                   />
                 </div>
-                <span
-                  className="bx--slider__range-label"
-                >
-                  1
-                </span>
-                <span
-                  className="bx--slider__range-label"
-                >
-                  24
-                </span>
-                <input
-                  aria-label="Show more or less controls"
-                  className="bx--text-input bx--slider-text-input"
-                  disabled={false}
-                  id="slider-input-for-slider"
-                  labelText=""
-                  onChange={[Function]}
-                  type="number"
-                  value={6}
-                />
               </div>
             </div>
           </div>
@@ -220,34 +231,34 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                 >
                   <g>
                     <circle
-                      fill="#cdcdcd"
+                      fill="#979797"
                       fillOpacity={0.1}
                       r={180}
-                      stroke="#cdcdcd"
+                      stroke="#979797"
                     />
                     <circle
-                      fill="#cdcdcd"
+                      fill="#979797"
                       fillOpacity={0.1}
                       r={144}
-                      stroke="#cdcdcd"
+                      stroke="#979797"
                     />
                     <circle
-                      fill="#cdcdcd"
+                      fill="#979797"
                       fillOpacity={0.1}
                       r={108}
-                      stroke="#cdcdcd"
+                      stroke="#979797"
                     />
                     <circle
-                      fill="#cdcdcd"
+                      fill="#979797"
                       fillOpacity={0.1}
                       r={72}
-                      stroke="#cdcdcd"
+                      stroke="#979797"
                     />
                     <circle
-                      fill="#cdcdcd"
+                      fill="#979797"
                       fillOpacity={0.1}
                       r={36}
-                      stroke="#cdcdcd"
+                      stroke="#979797"
                     />
                     <text
                       dx="0.4em"
@@ -326,7 +337,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={1.3226185430791415e-14}
                       y={-216}
@@ -350,7 +366,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={187.06148721743872}
                       y={-108}
@@ -374,7 +395,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={187.06148721743875}
                       y={107.99999999999996}
@@ -398,7 +424,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={1.3226185430791415e-14}
                       y={216}
@@ -422,7 +453,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={-187.06148721743872}
                       y={108.00000000000007}
@@ -446,7 +482,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       onClick={null}
                       onMouseOver={null}
-                      style={undefined}
+                      style={
+                        Object {
+                          "color": "#171717",
+                          "fontSize": "14px",
+                        }
+                      }
                       textAnchor="middle"
                       x={-187.06148721743884}
                       y={-107.99999999999987}
@@ -457,115 +498,115 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                   <g>
                     <path
                       d="M93.53076784409367,-53.999958023078605C111.71730239869534,-31.49995988525594,124.70767071342019,47.999995823089925,109.11920732761,62.999988826936C93.53074394179981,77.99998183078208,38.97112931722363,34.49999388141555,-0.000012470767438298165,35.99999999999784C-38.9711542587585,37.50000611858013,-122.10956963346993,79.50002617240412,-124.70764340033641,72.00002553842972C-127.30571716720289,64.50002490445533,-36.37306230535573,15.00000045255647,-15.588455071966331,-9.000003803848482C5.19615216142307,-33.000008060253435,-18.186537152676667,-64.50000763012831,0,-72C18.186537152676667,-79.49999236987169,75.34423328949201,-76.49995616090126,93.53076784409367,-53.999958023078605"
-                      fill="green"
+                      fill="#13B9B9"
                       fillOpacity={0.2}
-                      stroke="green"
+                      stroke="#13B9B9"
                       strokeOpacity={0.7}
                     />
                     <circle
                       cx={4.408728476930472e-15}
                       cy={-72}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                     <circle
                       cx={93.53074360871936}
                       cy={-54}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                     <circle
                       cx={109.11920087683926}
                       cy={62.99999999999997}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                     <circle
                       cx={2.204364238465236e-15}
                       cy={36}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                     <circle
                       cx={-124.70765814495914}
                       cy={72.00000000000004}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                     <circle
                       cx={-15.588457268119903}
                       cy={-8.99999999999999}
-                      fill="green"
+                      fill="#13B9B9"
                       opacity={0.7}
                       r={3}
-                      stroke="green"
+                      stroke="#13B9B9"
                     />
                   </g>
                   <g>
                     <path
                       d="M124.70769045879157,-71.99994403077147C140.29614864845016,-32.99994562692348,114.31536837133918,29.999999751293476,93.53074913795143,53.999990423088C72.74612990456369,77.99998109488253,20.78458505647104,77.99999733974244,-0.00002494153487659633,71.99999999999568C-20.784634939540798,66.00000266024892,-31.17691500700658,30.00000638460671,-31.176910850084102,18.00000638460743C-31.176906693161623,6.000006384608152,-5.19615180834735,33.00000106410124,0,0C5.19615180834735,-33.00000106410124,-20.78461507646526,-168.00000932820475,0,-180C20.78461507646526,-191.99999067179525,109.11923226913301,-110.99994243461947,124.70769045879157,-71.99994403077147"
-                      fill="yellow"
+                      fill="#0082C1"
                       fillOpacity={0.2}
-                      stroke="yellow"
+                      stroke="#0082C1"
                       strokeOpacity={0.7}
                     />
                     <circle
                       cx={1.1021821192326179e-14}
                       cy={-180}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                     <circle
                       cx={124.70765814495915}
                       cy={-72}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                     <circle
                       cx={93.53074360871938}
                       cy={53.99999999999998}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                     <circle
                       cx={4.408728476930472e-15}
                       cy={72}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                     <circle
                       cx={-31.176914536239785}
                       cy={18.00000000000001}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                     <circle
                       cx={-0}
                       cy={-0}
-                      fill="yellow"
+                      fill="#0082C1"
                       opacity={0.7}
                       r={3}
-                      stroke="yellow"
+                      stroke="#0082C1"
                     />
                   </g>
                 </g>

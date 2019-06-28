@@ -205,6 +205,10 @@ const TopViolations = ({cardData, handleClick}) => {
             }
           }
           const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace) }/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
+          const classes = classNames({
+            'card-violation-count': true,
+            'alert': count>0,
+          })
           return (
             <div key={Math.random()}>
               <div className='card-container'>
@@ -212,11 +216,11 @@ const TopViolations = ({cardData, handleClick}) => {
                   <div className='card-inner-content'>
                     <div className='card-violations' role={'button'}
                       tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
-                      <div className='card-violation-count'>
+                      <div className={classes}>
                         {count}
                       </div>
                       <div className='card-violation-type'>
-                        {violationType}
+                        {violationType.toUpperCase()}
                       </div>
                     </div>
                     <div className='card-name-description'>

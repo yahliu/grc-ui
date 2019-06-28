@@ -33,8 +33,30 @@
           align-items: center;
 
           .card-title {
-            font-size: 28px;
             width: 100px;
+            font-size: 28px;
+            font-weight: 300;
+            color: $grc_color_overview_title;
+          }
+
+          .card-counts {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+
+          .card-count-container {
+            display: flex;
+            align-items: center;
+
+            svg.card-count-pie {
+              width: 34px;
+              height: 34px;
+              margin-right: 8px;
+              g {
+                transform: translate(15px, 15px);
+              }
+            }
           }
 
           .card-count-type {
@@ -51,7 +73,10 @@
             .card-count {
               font-size: 34px;
               font-weight: bold;
-              color: $mcm_color_red;
+              color: $mcm_color_blue_gray;
+              &.alert {
+                color: $mcm_color_red;
+              }
             }
             .card-type {
               text-align: center;

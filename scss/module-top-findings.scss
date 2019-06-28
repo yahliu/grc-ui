@@ -64,6 +64,7 @@
 
     > div {
       flex-basis: 33%;
+      max-width: 590px;
     }
 
     .card-container {
@@ -91,7 +92,10 @@
             .card-violation-count {
               font-size: 34px;
               font-weight: bold;
-              color: $mcm_color_red;
+              color: $mcm_color_blue_gray;
+              &.alert {
+                color: $mcm_color_red;
+              }
             }
             .card-violation-type {
               text-align: center;
