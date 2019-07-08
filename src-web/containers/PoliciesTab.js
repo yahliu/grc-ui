@@ -68,13 +68,15 @@ class PoliciesTab extends React.Component {
             }
 
             return (
-              <PoliciesView
-                loading={!items && loading}
-                error={error}
-                policies={items}
-                refreshControl={refreshControl}
-                secondaryHeaderProps={secondaryHeaderProps}
-              />
+              <div>
+                <PoliciesView
+                  loading={!items && loading}
+                  error={error}
+                  policies={items}
+                  refreshControl={refreshControl}
+                  secondaryHeaderProps={secondaryHeaderProps}
+                />
+              </div>
             )
           }
           }

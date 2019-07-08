@@ -1,6 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PolicyCardsModule categories view renders as expected 1`] = `
+exports[`PolicyCardsModule categories view renders collapse as expected 1`] = `
+<div
+  className="module-policy-cards"
+>
+  <div
+    className="header-container"
+  >
+    <button
+      className="collapse"
+      onClick={[Function]}
+    >
+      <span
+        className="collapse-hint"
+      >
+        Want to see your summary cards?
+      </span>
+      <span
+        className="collapse-button"
+      >
+        Expand summary
+      </span>
+      <svg
+        alt="expand"
+        aria-label="expand"
+        className="arrow-down"
+        fill={undefined}
+        fillRule="evenodd"
+        height="7"
+        name="chevron--down"
+        role="img"
+        style={undefined}
+        viewBox="0 0 12 7"
+        width="12"
+      >
+        <title>
+          expand
+        </title>
+        <path
+          d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PolicyCardsModule categories view renders expand as expected 1`] = `
 <div
   className="module-policy-cards"
 >
@@ -10,65 +56,102 @@ exports[`PolicyCardsModule categories view renders as expected 1`] = `
     <div
       className="header-title"
     >
-      Policy overview
+      Summary
     </div>
-    <div
-      aria-invalid={undefined}
-      aria-label="Policy overview"
-      className="bx--dropdown selection bx--list-box"
-      data-invalid={undefined}
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      role="listbox"
-      tabIndex={0}
-    >
+    <div>
       <div
-        aria-expanded={false}
-        aria-haspopup={true}
-        aria-label="open menu"
-        className="bx--list-box__field"
-        data-toggle={true}
-        disabled={false}
-        onBlur={[Function]}
+        aria-invalid={undefined}
+        aria-label="Summary"
+        className="bx--dropdown selection bx--list-box"
+        data-invalid={undefined}
         onClick={[Function]}
         onKeyDown={[Function]}
-        role="button"
-        tabIndex="0"
-        type="button"
+        role="listbox"
+        tabIndex={0}
       >
-        <span
-          className="bx--list-box__label"
-          htmlFor="downshift-0-input"
-        >
-          Standards
-        </span>
         <div
-          className="bx--list-box__menu-icon"
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label="open menu"
+          className="bx--list-box__field"
+          data-toggle={true}
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex="0"
+          type="button"
         >
-          <svg
-            alt="Open menu"
-            aria-label="Open menu"
-            className={undefined}
-            fill={undefined}
-            fillRule="evenodd"
-            focusable="false"
-            height="5"
-            name={undefined}
-            role="img"
-            style={undefined}
-            viewBox="0 0 10 5"
-            width="10"
+          <span
+            className="bx--list-box__label"
+            htmlFor="downshift-0-input"
           >
-            <title>
-              Open menu
-            </title>
-            <path
-              d="M0 0l5 4.998L10 0z"
-            />
-          </svg>
+            Standards
+          </span>
+          <div
+            className="bx--list-box__menu-icon"
+          >
+            <svg
+              alt="Open menu"
+              aria-label="Open menu"
+              className={undefined}
+              fill={undefined}
+              fillRule="evenodd"
+              focusable="false"
+              height="5"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 10 5"
+              width="10"
+            >
+              <title>
+                Open menu
+              </title>
+              <path
+                d="M0 0l5 4.998L10 0z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
+    <button
+      className="collapse"
+      onClick={[Function]}
+    >
+      <span
+        className="collapse-hint"
+      >
+        Want to see less information?
+      </span>
+      <span
+        className="collapse-button"
+      >
+        Collapse summary
+      </span>
+      <svg
+        alt="collapse"
+        aria-label="collapse"
+        className="arrow-up"
+        fill={undefined}
+        fillRule="evenodd"
+        height="7"
+        name="chevron--up"
+        role="img"
+        style={undefined}
+        viewBox="0 0 12 7"
+        width="12"
+      >
+        <title>
+          collapse
+        </title>
+        <path
+          d="M5.994 1.45L.726 7 0 6.315 5.994 0l6.002 6.315L11.27 7z"
+        />
+      </svg>
+    </button>
   </div>
   <div
     className="card-container-container"
@@ -296,7 +379,53 @@ exports[`PolicyCardsModule categories view renders as expected 1`] = `
 </div>
 `;
 
-exports[`PolicyCardsModule standards view renders as expected 1`] = `
+exports[`PolicyCardsModule standards view renders collapse as expected 1`] = `
+<div
+  className="module-policy-cards"
+>
+  <div
+    className="header-container"
+  >
+    <button
+      className="collapse"
+      onClick={[Function]}
+    >
+      <span
+        className="collapse-hint"
+      >
+        Want to see your summary cards?
+      </span>
+      <span
+        className="collapse-button"
+      >
+        Expand summary
+      </span>
+      <svg
+        alt="expand"
+        aria-label="expand"
+        className="arrow-down"
+        fill={undefined}
+        fillRule="evenodd"
+        height="7"
+        name="chevron--down"
+        role="img"
+        style={undefined}
+        viewBox="0 0 12 7"
+        width="12"
+      >
+        <title>
+          expand
+        </title>
+        <path
+          d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`PolicyCardsModule standards view renders expand as expected 1`] = `
 <div
   className="module-policy-cards"
 >
@@ -306,65 +435,102 @@ exports[`PolicyCardsModule standards view renders as expected 1`] = `
     <div
       className="header-title"
     >
-      Policy overview
+      Summary
     </div>
-    <div
-      aria-invalid={undefined}
-      aria-label="Policy overview"
-      className="bx--dropdown selection bx--list-box"
-      data-invalid={undefined}
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      role="listbox"
-      tabIndex={0}
-    >
+    <div>
       <div
-        aria-expanded={false}
-        aria-haspopup={true}
-        aria-label="open menu"
-        className="bx--list-box__field"
-        data-toggle={true}
-        disabled={false}
-        onBlur={[Function]}
+        aria-invalid={undefined}
+        aria-label="Summary"
+        className="bx--dropdown selection bx--list-box"
+        data-invalid={undefined}
         onClick={[Function]}
         onKeyDown={[Function]}
-        role="button"
-        tabIndex="0"
-        type="button"
+        role="listbox"
+        tabIndex={0}
       >
-        <span
-          className="bx--list-box__label"
-          htmlFor="downshift-1-input"
-        >
-          Standards
-        </span>
         <div
-          className="bx--list-box__menu-icon"
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label="open menu"
+          className="bx--list-box__field"
+          data-toggle={true}
+          disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex="0"
+          type="button"
         >
-          <svg
-            alt="Open menu"
-            aria-label="Open menu"
-            className={undefined}
-            fill={undefined}
-            fillRule="evenodd"
-            focusable="false"
-            height="5"
-            name={undefined}
-            role="img"
-            style={undefined}
-            viewBox="0 0 10 5"
-            width="10"
+          <span
+            className="bx--list-box__label"
+            htmlFor="downshift-1-input"
           >
-            <title>
-              Open menu
-            </title>
-            <path
-              d="M0 0l5 4.998L10 0z"
-            />
-          </svg>
+            Standards
+          </span>
+          <div
+            className="bx--list-box__menu-icon"
+          >
+            <svg
+              alt="Open menu"
+              aria-label="Open menu"
+              className={undefined}
+              fill={undefined}
+              fillRule="evenodd"
+              focusable="false"
+              height="5"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 10 5"
+              width="10"
+            >
+              <title>
+                Open menu
+              </title>
+              <path
+                d="M0 0l5 4.998L10 0z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
+    <button
+      className="collapse"
+      onClick={[Function]}
+    >
+      <span
+        className="collapse-hint"
+      >
+        Want to see less information?
+      </span>
+      <span
+        className="collapse-button"
+      >
+        Collapse summary
+      </span>
+      <svg
+        alt="collapse"
+        aria-label="collapse"
+        className="arrow-up"
+        fill={undefined}
+        fillRule="evenodd"
+        height="7"
+        name="chevron--up"
+        role="img"
+        style={undefined}
+        viewBox="0 0 12 7"
+        width="12"
+      >
+        <title>
+          collapse
+        </title>
+        <path
+          d="M5.994 1.45L.726 7 0 6.315 5.994 0l6.002 6.315L11.27 7z"
+        />
+      </svg>
+    </button>
   </div>
   <div
     className="card-container-container"

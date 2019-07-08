@@ -11,7 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { DropdownV2 } from 'carbon-components-react'
+import { DropdownV2, Icon } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
@@ -29,26 +29,33 @@ export default class PolicyCardsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {policyCardChoice=PolicyCardsSelections.standards}} = props
+    const {viewState: {policyCardChoice=PolicyCardsSelections.standards}, showPolicyCardFlag} = props
     this.state = {
-      policyCardChoice
+      policyCardChoice,
+      showPolicyCards: showPolicyCardFlag,
     }
     this.onChange = this.onChange.bind(this)
+    this.handleToggleClick = this.handleToggleClick.bind(this)
   }
 
   render() {
     const cardData = this.getCardData()
+    const { showPolicyCards } = this.state
     return (
       <div className='module-policy-cards'>
         {this.renderHeader()}
-        {this.renderCards(cardData)}
+        {showPolicyCards && this.renderCards(cardData)}
       </div>
     )
   }
 
   renderHeader() {
     const { locale } = this.context
-    const { policyCardChoice } = this.state
+    const collapseHintCollapse = msgs.get('overview.policy.cards.collapseHint.collapse', locale)
+    const collapseHintExpand = msgs.get('overview.policy.cards.collapseHint.expand', locale)
+    const collapseButtonCollapse = msgs.get('overview.policy.cards.collapseButton.collapse', locale)
+    const collapseButtonExpand = msgs.get('overview.policy.cards.collapseButton.expand', locale)
+    const { policyCardChoice, showPolicyCards } = this.state
     const choices = this.getPolicyCardChoices(locale)
     const title = msgs.get('overview.policy.overview.title', locale)
     const idx = Math.max(0, choices.findIndex(({value})=>{
@@ -56,14 +63,22 @@ export default class PolicyCardsModule extends React.Component {
     }))
     return (
       <div className='header-container'>
-        <div className='header-title'>{title}</div>
-        <DropdownV2 className='selection'
-          label={title}
-          ariaLabel={title}
-          onChange={this.onChange}
-          inline={true}
-          initialSelectedItem={choices[idx].label}
-          items={choices} />
+        {showPolicyCards && <div className='header-title'>{title}</div>}
+        {showPolicyCards &&
+        <div>
+          <DropdownV2 className='selection'
+            label={title}
+            ariaLabel={title}
+            onChange={this.onChange}
+            inline={true}
+            initialSelectedItem={choices[idx].label}
+            items={choices} />
+        </div>}
+        <button className='collapse' onClick={this.handleToggleClick}>
+          <span className='collapse-hint'>{showPolicyCards?collapseHintCollapse:collapseHintExpand}</span>
+          <span className='collapse-button'>{showPolicyCards?collapseButtonCollapse:collapseButtonExpand}</span>
+          {showPolicyCards ? <Icon name='chevron--up' className='arrow-up' description='collapse' /> : <Icon name='chevron--down' className='arrow-down' description='expand' />}
+        </button>
       </div>
     )
   }
@@ -228,6 +243,12 @@ export default class PolicyCardsModule extends React.Component {
       return {policyCardChoice: value}
     })
   }
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showPolicyCards: !state.showPolicyCards,
+    }))
+  }
 }
 
 
@@ -301,6 +322,7 @@ PolicyCardsModule.propTypes = {
   activeFilters: PropTypes.object,
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
+  showPolicyCardFlag: PropTypes.bool,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,
 }

@@ -20,11 +20,22 @@ describe('PolicyCardsModule categories view', () => {
   const updateViewState = jest.fn()
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
-  it('renders as expected', () => {
+  it('renders expand as expected', () => {
     const component = renderer.create(<BrowserRouter><PolicyCardsModule  viewState={viewState}
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
+      showPolicyCardFlag={true}
+      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
+    expect(component).toMatchSnapshot()
+  })
+
+  it('renders collapse as expected', () => {
+    const component = renderer.create(<BrowserRouter><PolicyCardsModule  viewState={viewState}
+      updateViewState={updateViewState}
+      policies={filteredPolicies}
+      activeFilters={activeFilters}
+      showPolicyCardFlag={false}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })
@@ -36,11 +47,22 @@ describe('PolicyCardsModule standards view', () => {
   const updateViewState = jest.fn()
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet2
-  it('renders as expected', () => {
+  it('renders expand as expected', () => {
     const component = renderer.create(<BrowserRouter><PolicyCardsModule  viewState={viewState}
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
+      showPolicyCardFlag={true}
+      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
+    expect(component).toMatchSnapshot()
+  })
+
+  it('renders collapse as expected', () => {
+    const component = renderer.create(<BrowserRouter><PolicyCardsModule  viewState={viewState}
+      updateViewState={updateViewState}
+      policies={filteredPolicies}
+      activeFilters={activeFilters}
+      showPolicyCardFlag={false}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })
