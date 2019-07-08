@@ -23,14 +23,10 @@ import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPag
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
 import { updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
-
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
-
-import getMockData from './OverviewTabMock'
-
-
+//import getMockData from './OverviewTabMock'
 
 const shouldInclude = (item, detailedChoice, detailedName, detailedDescription) => {
   let annotations = _.get(item, 'metadata.annotations')
@@ -166,24 +162,22 @@ class OverviewTab extends React.Component {
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {loading, startPolling, stopPolling, refetch} = result
-
-
-            //            const {data={}} = result
-            //            const { items } = data
-            //            if (items) {
-            //              const mockArr = []
-            //              items.forEach(item=>{
-            //                const mockData = {}
-            //                for (var key in item) {
-            //                  mockData[key] = item[key]
-            //                }
-            //                mockArr.push(mockData)
-            //              })
-            //              console.log(JSON.stringify(mockArr))
-            //            }
-
-
-            const items = getMockData().policies
+            const {data={}} = result
+            const { items } = data
+            //                        if (items) {
+            //                          const mockArr = []
+            //                          items.forEach(item=>{
+            //                            const mockData = {}
+            //                            for (var key in item) {
+            //                              mockData[key] = item[key]
+            //                            }
+            //                            mockArr.push(mockData)
+            //                          })
+            //                          console.log(JSON.stringify(mockArr))
+            //                        }
+            //
+            //
+            //            const items = getMockData().policies
 
             const error = items ? null : result.error
             const firstLoad = this.firstLoad
