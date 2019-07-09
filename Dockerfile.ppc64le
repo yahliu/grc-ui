@@ -31,13 +31,13 @@ LABEL org.label-schema.vendor="IBM" \
       io.k8s.description="$IMAGE_DESCRIPTION" \
       io.openshift.tags="$IMAGE_OPENSHIFT_TAGS"
 
-RUN mkdir -p /opt/ibm/icp-grc-ui
-WORKDIR /opt/ibm/icp-grc-ui
+RUN mkdir -p /opt/ibm/grc-ui
+WORKDIR /opt/ibm/grc-ui
 
-COPY . /opt/ibm/icp-grc-ui
+COPY . /opt/ibm/grc-ui
 
 EXPOSE 3000
 
-ENV BABEL_CACHE_PATH=/opt/ibm/icp-grc-ui/babel.cache.json
+ENV BABEL_CACHE_PATH=/opt/ibm/grc-ui/babel.cache.json
 ENV NODE_ENV production
 CMD ["node", "app.js"]

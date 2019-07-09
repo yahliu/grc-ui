@@ -54,10 +54,11 @@ image:: docker-logins
 
 .PHONY: run
 run: 
-	# Both containers icp-grc-ui and icp-grc-ui-api must be on the same network.
+	# Both containers grc-ui and grc-ui-api must be on the same network.
 	docker network create --subnet 10.10.0.0/16 $(NETWORK_NAME)
 	make docker:info DOCKER_NETWORK_OP=$(NETWORK_OP) DOCKER_NETWORK=$(NETWORK_NAME)
 	make docker:run DOCKER_NETWORK_OP=$(NETWORK_OP) DOCKER_NETWORK=$(NETWORK_NAME)
+	docker ps
 
 .PHONY: unit-test
 unit-test:
@@ -91,6 +92,7 @@ ifeq ($(A11Y_TESTS), TRUE)
 else
 	nightwatch --env no-a11y
 endif
+	docker logs grc-ui >& test-output/e2e/grc-ui-`date +%s`.log
 endif
 endif
 
