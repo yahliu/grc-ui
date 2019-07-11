@@ -27,8 +27,7 @@ import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import NoResource from '../components/common/NoResource'
 import ResourceFilterBar from '../components/common/ResourceFilterBar'
-import config from '../../lib/shared/config'
-import CreateResourceModal from '../components/modals/CreateResourceModal'
+import createDocLink from '../components/common/CreateDocLink'
 
 resources(() => {
   require('../../scss/overview-view.scss')
@@ -60,34 +59,9 @@ export class OverviewView extends React.Component {
     }
   }
 
-  createDocLink(locale) {
-    const {handleCreateResource} = this.props
-    const vNumber = config['ICP_VERSION']
-    const createComplianceModal = <CreateResourceModal
-      key='createPolicy'
-      headingTextKey='actions.create.policy'
-      submitBtnTextKey='actions.create.policy'
-      onCreateResource={ handleCreateResource }
-      resourceDescriptionKey='modal.createresource.policy'
-    />
-
-    const modal = React.cloneElement(createComplianceModal, { resourceType: RESOURCE_TYPES.HCM_POLICIES })
-
-    return (
-      <div className={'button-group'}>
-        {[modal]}
-        <div className={'buttons'}>
-          <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-            <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.ibm.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
-          </button>
-        </div>
-      </div>
-    )
-  }
-
   render() {
     const { locale } = this.context
-    const { loading, error, policies, activeFilters={}, handleDrillDownClick } = this.props
+    const { loading, error, policies, activeFilters={}, handleDrillDownClick, handleCreateResource } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -102,7 +76,7 @@ export class OverviewView extends React.Component {
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {this.createDocLink(this.context.locale)}
+          {createDocLink(this.context.locale, handleCreateResource)}
         </NoResource>
       )
     }

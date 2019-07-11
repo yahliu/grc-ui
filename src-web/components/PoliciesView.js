@@ -13,14 +13,15 @@ import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { updateResourceToolbar } from '../actions/common'
+import { createResources, updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { POLICY_OVERVIEW_STATE_COOKIE } from '../../lib/shared/constants'
+import { POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES } from '../../lib/shared/constants'
 import PolicyCardsModule from '../components/modules/PolicyCardsModule'
 import ClusterComplianceTab from '../containers/ClusterComplianceTab'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import NoResource from '../components/common/NoResource'
+import createDocLink from '../components/common/CreateDocLink'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
@@ -62,7 +63,7 @@ export class PoliciesView extends React.Component {
   render() {
     const { locale } = this.context
     const { viewState } = this.state
-    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl } = this.props
+    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, handleCreateResource } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -77,7 +78,7 @@ export class PoliciesView extends React.Component {
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {this.createDocLink(this.context.locale)}
+          {createDocLink(this.context.locale, handleCreateResource)}
         </NoResource>
       )
     }
@@ -115,6 +116,7 @@ export class PoliciesView extends React.Component {
 PoliciesView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
+  handleCreateResource: PropTypes.func,
   loading: PropTypes.bool,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
@@ -130,6 +132,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
+    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml))
   }
 }
 
