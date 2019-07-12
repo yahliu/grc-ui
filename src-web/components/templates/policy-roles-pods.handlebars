@@ -1,0 +1,5 @@
+        - complianceType: "musthave" # at this level, it means if the role exists the rule is a musthave
+          policyRule:
+            apiGroups: ["core"]
+            resources: ["pods"]
+            verbs: ["get", "list", "watch"]

@@ -128,8 +128,8 @@ class OverviewTab extends React.Component {
 
   componentWillMount() {
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs, information } = secondaryHeaderProps
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
+    const { title, tabs, links, information } = secondaryHeaderProps
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, links, msgs.get(information, this.context.locale))
   }
 
   handleDrillDownClick = (targetTab, choice, name, type, description) => {
@@ -145,8 +145,8 @@ class OverviewTab extends React.Component {
   handleOverviewClick = (targetTab) => () => {
     this.setState({currentTab: targetTab})
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs, information } = secondaryHeaderProps
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, msgs.get(information, this.context.locale))
+    const { title, tabs, links, information } = secondaryHeaderProps
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, links, msgs.get(information, this.context.locale))
   }
 
   handleDescription = (title, content = 'placeholder') => () => {
@@ -259,7 +259,7 @@ class OverviewTab extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, undefined, information)),
+    updateSecondaryHeader: (title, tabs, links, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, links, '', information)),
     openDesModal: (content, title) => dispatch(updateModal({ open: true, type: 'description', content: content, title: title})),
   }
 }

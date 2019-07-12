@@ -18,12 +18,21 @@ import withAccess from '../components/common/withAccess'
 
 export const OverviewTab = loadable(() => import(/* webpackChunkName: "overview" */ './OverviewTab'))
 export const PoliciesTab = loadable(() => import(/* webpackChunkName: "policies" */ './PoliciesTab'))
+export const CreationTab = loadable(() => import(/* webpackChunkName: "policies" */ './CreationTab'))
 export const PolicyDetail = loadable(() => import(/* webpackChunkName: "policies" */ './NewPolicyDetail'))
+
 const BASE_PAGE_PATH = `${config.contextPath}/policies`
 
 const SECONDARY_HEADER_PROPS = {
   title: 'routes.grc',
-  information: 'info.policies',
+  information: 'policy.header.tooltip',
+  links: [
+    {
+      id: 'create-policy',
+      label: 'button.create.policy',
+      url: `${BASE_PAGE_PATH}/create`
+    }
+  ],
   tabs: [
     {
       id: 'policy-overview',
@@ -43,12 +52,25 @@ const SECONDARY_HEADER_PROPS = {
   ]
 }
 
+const CREATION_HEADER_PROPS = {
+  title: 'routes.create.policy',
+  information: 'policy.create.tooltip',
+  breadcrumbItems: [
+    {
+      id: 'policy-overview',
+      label: 'routes.grc',
+      url: `${BASE_PAGE_PATH}/all`
+    }
+  ],
+}
+
 const PolicyRouter = ({ match }) =>
   <Switch>
     <Route exact path={`${match.url}`} render={() => <OverviewTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all/:namespace/:name`} render={() => <PolicyDetail secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all`} render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/findings`} /*SecurityFindingsTab to do later*/render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
+    <Route path={`${match.url}/create`} render={() => <CreationTab secondaryHeaderProps={CREATION_HEADER_PROPS} />} />
   </Switch>
 
 PolicyRouter.propTypes = {

@@ -1,0 +1,14 @@
+  - objectDefinition:
+      apiVersion: policies.ibm.com/v1alpha1
+      kind: MutationPolicy
+      metadata:
+        name: mutation-policy-example
+        label:
+          category: "System-Integrity"
+      spec:
+        namespaceSelector:
+          include: ["default","kube-*"]
+          exclude: ["kube-system"]
+        remediationAction: enforce # enforce or inform
+        conditions:
+          ownership: ["ReplicaSet", "Deployment", "DeamonSet", "ReplicationController"]

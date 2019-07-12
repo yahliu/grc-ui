@@ -107,6 +107,10 @@ module.exports = {
           'image2svg-loader',
         ],
       },
+      {
+        test: /\.handlebars$/,
+        loader: 'handlebars-loader',
+      }
     ],
     noParse: [
       // don't parse minified bundles (vendor libs) for faster builds

@@ -1,0 +1,9 @@
+    - apiVersion: roletemplate.mcm.ibm.com/v1alpha1
+      metadata:
+        namespace: "" # will be inferred
+        name: operator-role-policy
+      selector:
+        matchLabels:
+          dev: "true"
+      complianceType: "musthave" # at this level, it means the role must exist with the rules that it musthave below
+      rules:

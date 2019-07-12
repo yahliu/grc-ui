@@ -32,6 +32,17 @@
     }
   }
 
+  &-links {
+    position: fixed;
+    right: 20px;
+    top: 120px;
+
+    .bx--btn--primary {
+      min-height: 30px;
+    }
+
+  }
+
   header {
     .bx--detail-page-header-title {
       font-size: 1.75rem;

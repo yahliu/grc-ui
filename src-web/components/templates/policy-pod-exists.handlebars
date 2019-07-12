@@ -1,0 +1,12 @@
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: nginx-pod
+        spec:
+          containers:
+          - image: nginx:1.7.9
+            name: nginx
+            ports:
+            - containerPort: 80

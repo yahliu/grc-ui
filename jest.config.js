@@ -43,6 +43,10 @@ const jestConfig = {
     '<rootDir>/tests/jest/*/*.test.js?(x)',
     '<rootDir>/tests/jest/*/*/*.test.js?(x)'
   ],
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+    '.+\\.(handlebars)$': 'jest-transform-stub'
+  },
   globalSetup: '<rootDir>/tests/jest/config/properties-to-json.js',
   setupFiles: [
     '<rootDir>/tests/jest/config/setup.js'

@@ -173,11 +173,12 @@ export const updateResourceToolbar = (refreshControl, availableFilters) => ({
   availableFilters
 })
 
-export const updateSecondaryHeader = (title, tabs, breadcrumbItems, description, information) => ({
+export const updateSecondaryHeader = (title, tabs, breadcrumbItems, links, description, information) => ({
   type: Actions.SECONDARY_HEADER_UPDATE,
   title,
   tabs,
   breadcrumbItems,
+  links,
   description,
   information
 })

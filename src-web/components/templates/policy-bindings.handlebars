@@ -1,0 +1,28 @@
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: binding-{{name}}
+  namespace: default
+placementRef:
+  name: placement-{{name}}
+  kind: PlacementPolicy
+  apiGroup: mcm.ibm.com
+subjects:
+- name: policy-{{name}}
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementPolicy
+metadata:
+  name: placement-{{name}}
+  namespace: default
+spec:
+  clusterLabels:
+    matchLabels:
+      {{#each bindings}}
+      {{#each values}}
+      {{{ this }}}
+      {{/each}}
+      {{/each}}

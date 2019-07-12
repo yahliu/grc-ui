@@ -1,0 +1,111 @@
+/*******************************************************************************
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ *
+ * Note to U.S. Government Users Restricted Rights:
+ * Use, duplication or disclosure restricted by GSA ADP Schedule
+ * Contract with IBM Corp.
+ *******************************************************************************/
+@import 'node_modules/carbon-components/scss/globals/scss/_colors';
+@import 'variables';
+
+
+.creation-view {
+  display: flex;
+  margin: 0 -3% -50px 0;
+
+  &-controls-container {
+    width: 30%;
+    height: calc(100vh - 210px);
+  }
+
+  &-controls {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+
+    .info-icon {
+      margin-left: 6px;
+      width: 16px;
+      height: 16px;
+      fill: $color__blue-51;
+      stroke: none;
+      cursor: pointer;
+    }
+
+    &-textbox, &-multiselect {
+      padding: 0 5px 18px 0;
+
+      &-title {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .bx--list-box__label {
+        font-weight: normal;
+      }
+
+      .bx--list-box__field, .bx--text-input {
+        background-color: white;
+      }
+
+      .bx--multi-select {
+        .bx--list-box__menu {
+          max-height: 25rem;
+          animation: slideopen 200ms  ease-in-out;
+        }
+      }
+    }
+
+    &-checkbox {
+      padding: 0 5px 18px 0;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 14px;
+
+      .bx--form-item {
+        flex: 0;
+      }
+    }
+  }
+
+
+  &-yaml {
+    width: 70%;
+    margin-left: 15px;
+    position: relative;
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+
+      &-title {
+      }
+
+      &-toolbar {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &-notification {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1000;
+
+      .bx--inline-notification {
+        background-color: white;
+      }
+    }
+
+    .yamlEditorContainer {
+      height: calc(100vh - 240px);
+    }
+  }
+
+
+}
