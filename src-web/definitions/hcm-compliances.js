@@ -87,6 +87,69 @@ export default {
         transformFunction: getAge
       },
     ],
+    detailKeys: {
+      title: 'policy.pb.details.title',
+      headerRows: ['type', 'detail'],
+      rows: [
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pb.details.name',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.name'
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pb.details.namespace',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.namespace'
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pb.details.pp',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'placementRef.name'
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pb.details.subjects',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'subjects[0]',
+              transformFunction: getSubjects
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pb.details.timestamp',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.creationTimestamp',
+              transformFunction: getAge,
+            }
+          ]
+        },
+      ]
+    },
     tableActions: [
       'table.actions.edit',
     ],
@@ -136,8 +199,187 @@ export default {
         transformFunction: getAge
       },
     ],
+    detailKeys: {
+      title: 'policy.pp.details.title',
+      headerRows: ['type', 'detail'],
+      rows: [
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pp.details.name',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.name'
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pp.details.namespace',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.namespace'
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pp.details.clusterSelector',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'clusterLabels',
+              transformFunction: getLabelsToList
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pp.details.decisions',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'status',
+              transformFunction: getDecisions,
+            }
+          ]
+        },
+        {
+          cells: [
+            {
+              resourceKey: 'policy.pp.details.timestamp',
+              type: 'i18n'
+            },
+            {
+              resourceKey: 'metadata.creationTimestamp',
+              transformFunction: getAge,
+            }
+          ]
+        },
+      ]
+    },
     tableActions: [
       'table.actions.edit',
+    ],
+  },
+  roleTemplates:{
+    resourceKey: 'role-templates',
+    title: 'table.header.role.template',
+    defaultSortField: 'metadata.name',
+    normalizedKey: 'status.Compliant',
+    tableKeys: [
+      {
+        msgKey: 'table.header.role.template.name',
+        resourceKey: 'metadata.name',
+        key: 'name',
+      },
+      {
+        msgKey: 'table.header.role.template.complianceType',
+        resourceKey: 'complianceType',
+        key: 'complianceType',
+      },
+      {
+        msgKey: 'table.header.role.template.apiVersion',
+        resourceKey: 'apiVersion',
+        key: 'apiVersion',
+      },
+      {
+        msgKey: 'table.header.role.template.lastTransition',
+        resourceKey: 'status.conditions[0].lastTransitionTime',
+        key: 'lastTransition',
+        transformFunction: getAge,
+      },
+      {
+        msgKey: 'table.header.role.template.status',
+        resourceKey: 'status.Compliant',
+        key:'status',
+        transformFunction: getStatus,
+      },
+    ],
+  },
+  objectTemplates:{
+    resourceKey: 'object-templates',
+    title: 'table.header.object.template',
+    defaultSortField: 'objectDefinition.metadata.name',
+    normalizedKey: 'status.Compliant',
+    tableKeys: [
+      {
+        msgKey: 'table.header.object.template.name',
+        resourceKey: 'objectDefinition.metadata.name',
+        key: 'name',
+      },
+      {
+        msgKey: 'table.header.object.template.complianceType',
+        resourceKey: 'complianceType',
+        key: 'complianceType',
+      },
+      {
+        msgKey: 'table.header.object.template.apiVersion',
+        resourceKey: 'objectDefinition.apiVersion',
+        key: 'apiVersion',
+      },
+      {
+        msgKey: 'table.header.object.template.kind',
+        resourceKey: 'objectDefinition.kind',
+        key: 'kind',
+      },
+      {
+        msgKey: 'table.header.object.template.lastTransition',
+        resourceKey: 'status.conditions[0].lastTransitionTime',
+        key: 'lastTransition',
+        transformFunction: getAge,
+      },
+      {
+        msgKey: 'table.header.object.template.status',
+        resourceKey: 'status.Compliant',
+        key:'status',
+        transformFunction: getStatus,
+      },
+    ],
+  },
+  policyTemplates:{
+    resourceKey: 'policy-templates',
+    title: 'table.header.policy.template',
+    defaultSortField: 'objectDefinition.metadata.name',
+    normalizedKey: 'status.Compliant',
+    tableKeys: [
+      {
+        msgKey: 'table.header.object.template.name',
+        resourceKey: 'objectDefinition.metadata.name',
+        key: 'name',
+      },
+      {
+        msgKey: 'table.header.object.template.complianceType',
+        resourceKey: 'complianceType',
+        key: 'complianceType',
+      },
+      {
+        msgKey: 'table.header.object.template.apiVersion',
+        resourceKey: 'objectDefinition.apiVersion',
+        key: 'apiVersion',
+      },
+      {
+        msgKey: 'table.header.object.template.kind',
+        resourceKey: 'objectDefinition.kind',
+        key: 'kind',
+      },
+      {
+        msgKey: 'table.header.object.template.lastTransition',
+        resourceKey: 'status.conditions[0].lastTransitionTime',
+        key: 'lastTransition',
+        transformFunction: getAge,
+      },
+      {
+        msgKey: 'table.header.object.template.status',
+        resourceKey: 'status.Compliant',
+        key:'status',
+        transformFunction: getStatus,
+      },
     ],
   },
   complianceStatus: {
@@ -219,56 +461,89 @@ export default {
       {
         cells: [
           {
-            resourceKey: 'description.title.cluster.compliant',
+            resourceKey: 'description.title.namespace',
             type: 'i18n'
           },
           {
-            resourceKey: 'clusterCompliant'
+            resourceKey: 'metadata.namespace'
           }
         ]
       },
       {
         cells: [
           {
-            resourceKey: 'description.title.created',
+            resourceKey: 'description.title.enforcement',
             type: 'i18n'
           },
           {
-            resourceKey: 'metadata.creationTimestamp',
-            transformFunction: getAge
+            resourceKey: 'raw.spec.remediationAction'
           }
         ]
       },
       {
         cells: [
           {
-            resourceKey: 'description.title.resource.version',
+            resourceKey: 'description.title.exclude_namespace',
             type: 'i18n'
           },
           {
-            resourceKey: 'metadata.resourceVersion'
+            resourceKey: 'raw.spec.namespaces.exclude'
           }
         ]
       },
       {
         cells: [
           {
-            resourceKey: 'description.title.self.link',
+            resourceKey: 'description.title.include_namespace',
             type: 'i18n'
           },
           {
-            resourceKey: 'metadata.selfLink'
+            resourceKey: 'raw.spec.namespaces.include'
           }
         ]
       },
       {
         cells: [
           {
-            resourceKey: 'description.title.uid',
+            resourceKey: 'description.title.clusters',
             type: 'i18n'
           },
           {
-            resourceKey: 'metadata.uid'
+            resourceKey: 'clusters',
+            transformFunction: getPolicyClusters,
+          }
+        ]
+      },
+      {
+        cells: [
+          {
+            resourceKey: 'description.title.categories',
+            type: 'i18n'
+          },
+          {
+            resourceKey: 'annotations.categories',
+          }
+        ]
+      },
+      {
+        cells: [
+          {
+            resourceKey: 'description.title.controls',
+            type: 'i18n'
+          },
+          {
+            resourceKey: 'annotations.controls',
+          }
+        ]
+      },
+      {
+        cells: [
+          {
+            resourceKey: 'description.title.standards',
+            type: 'i18n'
+          },
+          {
+            resourceKey: 'annotations.standards',
           }
         ]
       },
@@ -350,6 +625,11 @@ export default {
         msgKey: 'table.header.name',
         resourceKey: 'name',
         key: 'name',
+      },
+      {
+        msgKey: 'table.header.cluster',
+        resourceKey: 'cluster',
+        key: 'cluster',
       },
       {
         msgKey: 'table.header.message',
@@ -740,12 +1020,19 @@ export function createComplianceLink(item = {}, ...param){
 }
 
 export function getStatus(item, locale) {
+  const status = _.get(item, 'status', '-')
   const expectedStatuses = [ 'compliant', 'notcompliant', 'noncompliant', 'invalid', 'unknown']
-  if (item.status&&expectedStatuses.indexOf(item.status.toLowerCase()) > -1){
-    if (item.status.toLowerCase() === 'compliant') {
+  if (status.Compliant&&expectedStatuses.indexOf(status.Compliant.toLowerCase()) > -1){
+    if (status.Compliant.toLowerCase() === 'compliant') {
       return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
     } else {
-      return <StatusField status='critical' text={msgs.get(`policy.status.${item.status.toLowerCase()}`, locale)} />
+      return <StatusField status='critical' text={msgs.get(`policy.status.${status.Compliant.toLowerCase()}`, locale)} />
+    }
+  } else if (status&&typeof(status)==='string'&&expectedStatuses.indexOf(status.toLowerCase()) > -1){
+    if (status.toLowerCase() === 'compliant') {
+      return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
+    } else {
+      return <StatusField status='critical' text={msgs.get(`policy.status.${status.toLowerCase()}`, locale)} />
     }
   }
   return '-'
@@ -830,7 +1117,12 @@ export function getClusterCount(item) {
 }
 
 export function getSubjects(item) {
-  return item.subjects && item.subjects.map(subject => `${subject.name}(${subject.kind})`).join(', ')
+  if(item && item.subjects){
+    return item.subjects.map(subject => `${subject.name}(${subject.kind})`).join(', ')
+  }
+  else{
+    return '-'
+  }
 }
 
 export function getControls(item) {
@@ -862,3 +1154,9 @@ export function getDecisions(item = {}){
   }
   return '-'
 }
+
+export function getPolicyClusters(item){
+  const clusters = _.get(item, 'clusters')
+  return JSON.stringify(clusters)
+}
+

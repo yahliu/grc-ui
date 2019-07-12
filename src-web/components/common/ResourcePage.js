@@ -9,7 +9,7 @@
 'use strict'
 
 import React from 'react'
-import ResourceDetails from './ResourceDetails'
+import NewResourceDetails from './NewResourceDetails'
 import ResourceList from './ResourceList'
 // import ResourceTopology from './ResourceTopology'
 import { Route, Switch } from 'react-router-dom'
@@ -33,14 +33,14 @@ const WrappedResourceList = props =>
 
 
 const WrappedResourceDetails = props =>
-  <ResourceDetails
+  <NewResourceDetails
     refreshControl={props.refreshControl}
     resourceType={props.resourceType}
     staticResourceData={props.staticResourceData}
     tabs={props.detailsTabs}
     routes={props.routes}>
     {props.modules}
-  </ResourceDetails>
+  </NewResourceDetails>
 
 
 const ResourcePageWithList = props =>
@@ -50,6 +50,12 @@ const ResourcePageWithList = props =>
     )} />
   </Switch>
 
+const ResourcePageWithDetails = props =>
+  // <Switch>
+  //   <Route exact path={`${props.match.url}/:namespace/:name?`} render={() => (
+  <WrappedResourceDetails {...props} />
+  //   )} />
+  // </Switch>
 
 const ResourcePageWithListAndDetails = props =>
   <Switch>
@@ -112,6 +118,33 @@ const typedResourcePageFromParent = (resourceType) => {
   }
 }
 
+const typedResourcePageWithDetails = (resourceType, detailsTabs, buttons, routes, modules) => {
+
+  const staticResourceData = getResourceDefinitions(resourceType)
+
+  // eslint-disable-next-line react/display-name
+  return class extends React.PureComponent {
+
+    constructor(props) {
+      super(props)
+    }
+
+    render() {
+      return (
+        <ResourcePageWithDetails
+          {...this.props}
+          detailsTabs={detailsTabs}
+          routes={routes}
+          resourceType={resourceType}
+          staticResourceData={staticResourceData}
+          buttons={buttons}
+          modules={modules}>
+        </ResourcePageWithDetails>
+      )
+    }
+  }
+}
+
 const typedResourcePageWithListAndDetails = (resourceType, detailsTabs, buttons, routes, modules) => {
 
   const staticResourceData = getResourceDefinitions(resourceType)
@@ -141,4 +174,4 @@ const typedResourcePageWithListAndDetails = (resourceType, detailsTabs, buttons,
   }
 }
 
-export { typedResourcePageWithList, typedResourcePageFromParent, typedResourcePageWithListAndDetails }
+export { typedResourcePageWithList, typedResourcePageWithDetails, typedResourcePageFromParent, typedResourcePageWithListAndDetails }

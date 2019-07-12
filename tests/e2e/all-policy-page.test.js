@@ -34,7 +34,7 @@ module.exports = {
     page.createTestPolicy(browser, time)
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.searchPolicy(true, time)
-    page.testDetailsPage()
+    // page.testDetailsPage()
 
     a11yScan.runAccessibilityScan(browser, 'policyDetail')
   },

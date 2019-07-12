@@ -73,23 +73,19 @@ placementRef:
   kind: PlacementPolicy
   apiGroup: mcm.ibm.com
 subjects:
-- name: ${time}-policy-pod
+- name: ${time}-policy-test
   kind: Policy
   apiGroup: policy.mcm.ibm.com
 ---
 apiVersion: policy.mcm.ibm.com/v1alpha1
 kind: Policy
 metadata:
-  name: ${time}-policy-pod
+  name: ${time}-policy-test
   namespace: mcm
   annotations:
     policy.mcm.ibm.com/categories: 'SystemAndCommunicationsProtections,SystemAndInformationIntegrity'
     policy.mcm.ibm.com/controls: 'MutationAdvisor,VA'
     policy.mcm.ibm.com/standards: NIST
-    seed-generation: '2'
-  finalizers:
-    - propagator.finalizer.mcm.ibm.com
-  generation: 1
 spec:
   complianceType: musthave
   namespaces:
@@ -103,7 +99,7 @@ spec:
         apiVersion: v1
         kind: Pod
         metadata:
-          name: nginx1
+          name: nginx-test
         spec:
           containers:
             - name: nginx
@@ -114,7 +110,7 @@ spec:
 }
 
 function createTestPolicy(browser, time) {
-  // this.setValue('@searchInput',`${time}-policy-pod`)
+  // this.setValue('@searchInput',`${time}-policy-test`)
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
   this.expect.element('@yamlInputField').to.be.present
@@ -137,15 +133,15 @@ function createTestPolicy(browser, time) {
   this.click('@submitCreatePolicyButton')
   this.waitForElementNotPresent('@spinner')
   this.waitForElementPresent('@searchInput')
-  this.setValue('@searchInput',`${time}-policy-pod`)
+  this.setValue('@searchInput',`${time}-policy-test`)
 }
 
 function searchPolicy(expectToDisplay, time) {
   this.expect.element('@searchInput').to.be.present
-  this.setValue('@searchInput',`${time}-policy-pod`)
+  this.setValue('@searchInput',`${time}-policy-test`)
   this.expect.element('@searchInput').to.be.present
   if(expectToDisplay){
-    this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-pod`)
+    this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-test`)
   } else{
     this.expect.element('tbody>tr').to.be.not.present
     this.clearValue('@searchInput')

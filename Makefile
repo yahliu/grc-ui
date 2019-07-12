@@ -92,7 +92,6 @@ ifeq ($(A11Y_TESTS), TRUE)
 else
 	nightwatch --env no-a11y
 endif
-	docker logs grc-ui >& test-output/e2e/grc-ui-`date +%s`.log
 endif
 endif
 

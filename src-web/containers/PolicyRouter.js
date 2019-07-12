@@ -18,7 +18,7 @@ import withAccess from '../components/common/withAccess'
 
 export const OverviewTab = loadable(() => import(/* webpackChunkName: "overview" */ './OverviewTab'))
 export const PoliciesTab = loadable(() => import(/* webpackChunkName: "policies" */ './PoliciesTab'))
-
+export const PolicyDetail = loadable(() => import(/* webpackChunkName: "policies" */ './NewPolicyDetail'))
 const BASE_PAGE_PATH = `${config.contextPath}/policies`
 
 const SECONDARY_HEADER_PROPS = {
@@ -46,6 +46,7 @@ const SECONDARY_HEADER_PROPS = {
 const PolicyRouter = ({ match }) =>
   <Switch>
     <Route exact path={`${match.url}`} render={() => <OverviewTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
+    <Route path={`${match.url}/all/:namespace/:name`} render={() => <PolicyDetail secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all`} render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/findings`} /*SecurityFindingsTab to do later*/render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
   </Switch>

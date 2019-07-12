@@ -11,30 +11,27 @@
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { Notification, Loading } from 'carbon-components-react'
-import { REQUEST_STATUS } from '../../actions/index'
+// import { REQUEST_STATUS } from '../../actions/index'
 import { getTabs } from '../../../lib/client/resource-helper'
-import { updateSecondaryHeader, fetchResource } from '../../actions/common'
+import { updateSecondaryHeader } from '../../actions/common'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import lodash from 'lodash'
+// import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
-import ResourceOverview from './ResourceOverview'
-// import ResourceDiagram from './ResourceDiagram'
+import NewResourceOverview from './NewResourceOverview'
 import CompliancePolicyDetail from './CompliancePolicyDetail'
-// import CompliancePolicy from './CompliancePolicy'
 import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
 import { getPollInterval } from './RefreshTimeSelect'
-// import NoResource from './NoResource' //To Be Deleted
 import NewPolicyTemplateTab from '../../containers/NewPolicyTemplateTab'
 import NewPolicyViolationTab from '../../containers/NewPolicyViolationTab'
 
 const withResource = (Component) => {
-  const mapDispatchToProps = (dispatch, ownProps) => {
-    const { resourceType, params } = ownProps
-    return {
-      fetchResource: () => dispatch(fetchResource(resourceType, params.namespace, params.name))
-    }
-  }
+  // const mapDispatchToProps = (dispatch, ownProps) => {
+  //   const { resourceType, params } = ownProps
+  //   return {
+  //     fetchResource: () => dispatch(fetchResource(resourceType, params.namespace, params.name))
+  //   }
+  // }
 
   const mapStateToProps = (state, ownProps) => {
     const { list: typeListName } = ownProps.resourceType,
@@ -45,12 +42,14 @@ const withResource = (Component) => {
     }
   }
 
-  return connect(mapStateToProps, mapDispatchToProps)(class extends React.PureComponent {
+  return connect(mapStateToProps)(class extends React.PureComponent {
     static displayName = 'ResourceDetailsWithResouce'
     static propTypes = {
-      fetchResource: PropTypes.func,
-      status: PropTypes.string,
-      statusCode: PropTypes.object,
+      // fetchResource: PropTypes.func,
+      // status: PropTypes.string,
+      // statusCode: PropTypes.object,
+      error: PropTypes.any,
+      loading: PropTypes.any,
     }
 
     constructor(props) {
@@ -66,7 +65,6 @@ const withResource = (Component) => {
         var intervalId = setInterval(this.reload.bind(this), pollInterval)
         this.setState({ intervalId: intervalId })
       }
-      this.props.fetchResource()
     }
 
     componentWillUnmount() {
@@ -74,21 +72,20 @@ const withResource = (Component) => {
     }
 
     reload() {
-      if (this.props.status === REQUEST_STATUS.DONE) {
+      if (!this.props.loading) {
         this.setState({ xhrPoll: true })
-        this.props.fetchResource()
       }
     }
 
     render() {
-      const { status, statusCode } = this.props
-      if (status === REQUEST_STATUS.ERROR) {
+      const { error, loading } = this.props
+      if (error) {
         return <Notification
           title=''
           className='persistent'
-          subtitle={msgs.get(`error.${(statusCode === 401 || statusCode === 403) ? 'unauthorized' : 'default'}.description`, this.context.locale)}
+          subtitle={msgs.get(error, this.context.locale)}
           kind='error' />
-      } else if (status !== REQUEST_STATUS.DONE && !this.state.xhrPoll) {
+      } else if (loading) {
         return <Loading className='resource-detail-content-spinner' />
       }
       return <Component  {...this.props} />
@@ -96,12 +93,9 @@ const withResource = (Component) => {
   })
 }
 
-const OverviewTab = withResource(ResourceOverview)
+const OverviewTab = withResource(NewResourceOverview)
 
 const components = {
-  // '/diagram': ResourceDiagram,
-  // '/policies': ResourceOverview,
-  // '/compliancePolicy/:policyName': CompliancePolicy,
   '/compliancePolicy/:policyName/:policyNamespace': CompliancePolicyDetail,
   '/violation': NewPolicyViolationTab,
   '/yaml': NewPolicyTemplateTab,
@@ -122,15 +116,15 @@ class ResourceDetails extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, launch_links, match, refreshControl } = this.props, params = match && match.params
-    updateSecondaryHeader(params.name, getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(), launch_links)
+    const { updateSecondaryHeader, tabs, launch_links, match, refreshControl, location } = this.props
+    updateSecondaryHeader(this.getPolicyName(location), getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(), launch_links)
     refreshControl.stopPolling()
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location !== this.props.location) {
-      const { updateSecondaryHeader, tabs, launch_links, match } = this.props, params = match && match.params
-      updateSecondaryHeader(params.name, getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(nextProps.location), launch_links)
+      const { updateSecondaryHeader, tabs, launch_links, match } = this.props
+      updateSecondaryHeader(this.getPolicyName(nextProps.location), getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(nextProps.location), launch_links)
     }
   }
 
@@ -148,13 +142,14 @@ class ResourceDetails extends React.Component {
   }
 
   renderOverview() {
-    const { match, resourceType, staticResourceData, children, refreshControl } = this.props
+    const { match, resourceType, staticResourceData, children, refreshControl, items } = this.props
     refreshControl.stopPolling()
     return (
       <div>
         <OverviewTab
           resourceType={resourceType}
           params={match.params}
+          item={items}
           staticResourceData={staticResourceData}
           modules={children}
         />
@@ -163,7 +158,7 @@ class ResourceDetails extends React.Component {
   }
 
   renderOther(route) {
-    const { match, resourceType, staticResourceData, children, tabs, refreshControl} = this.props
+    const { match, resourceType, staticResourceData, tabs, refreshControl, items, loading, error} = this.props
     refreshControl.stopPolling()
     const Component = components[route]
     return (
@@ -171,38 +166,45 @@ class ResourceDetails extends React.Component {
         resourceType={resourceType}
         params={match.params}
         tabs={tabs}
+        items={items}
         baseUrl={match.url}
         staticResourceData={staticResourceData}
-        modules={children} />
+        loading={loading}
+        error={error}
+      />
     )
   }
 
   getBreadcrumb(location) {
     const breadcrumbItems = []
     location = location || this.props.location
-    const { tabs, match, resourceType } = this.props,
+    const { tabs, resourceType } = this.props,
           { locale } = this.context,
           urlSegments = location.pathname.replace(/\/$/, '').split('/'),
           lastSegment = urlSegments[urlSegments.length - 1],
           currentTab = tabs.find(tab => tab === lastSegment)
 
     // The base path, calculated by the current location minus params
-    let paramsLength = 0
-    lodash.forOwn(match.params, (value) => {
-      if (value) {
-        paramsLength++
-      }
-    })
+    const paramsLength = 2
 
     breadcrumbItems.push({
       label: msgs.get(`tabs.${resourceType.name.toLowerCase()}`, locale),
       url: urlSegments.slice(0, (urlSegments.length - (paramsLength + (currentTab ? 1 : 0)))).join('/')
     })
     breadcrumbItems.push({
-      label: match.params.name,
+      label: this.getPolicyName(location),
       url: currentTab ? location.pathname.replace(`/${currentTab}`, '') : location.pathname
     })
     return breadcrumbItems
+  }
+
+  getPolicyName(location) {
+    const urlSegments = location.pathname.split('/')
+    const lastSegment = urlSegments[urlSegments.length - 1]
+    if( lastSegment === 'violation'|| lastSegment === 'yaml' ){
+      return urlSegments[urlSegments.length - 2]
+    }
+    return lastSegment
   }
 }
 
@@ -212,7 +214,11 @@ ResourceDetails.contextTypes = {
 
 ResourceDetails.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  error: PropTypes.any,
+  items: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.array
+  ]),
   launch_links: PropTypes.object,
+  loading: PropTypes.bool,
   location: PropTypes.object,
   match: PropTypes.object,
   refreshControl: PropTypes.object,

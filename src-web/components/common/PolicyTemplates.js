@@ -100,7 +100,7 @@ class PolicyTemplates extends React.Component {
           <ModuleHeader>{`${msgs.get(headerKey, this.context.locale)}${this.state.updated? ' -  updated' : ''}`}</ModuleHeader>
           {editable &&
           <div className='yaml-editor-button'>
-            <Button icon="add--glyph" className={this.state.readOnly && 'read-only-button'} small id={'edit-button'} key='edit-resource' onClick={this.handleEditBtnClick}>
+            <Button icon="add--glyph" className={this.state.readOnly ? 'read-only-button' : 'editing-button'} small id={'edit-button'} key='edit-resource' onClick={this.handleEditBtnClick}>
               {msgs.get('table.actions.edit', this.context.locale)}
             </Button>
             <Button icon="add--glyph" small id={'edit-button'} key='submit-resource-change' onClick={this.handleSubmitClick}>
@@ -149,7 +149,7 @@ PolicyTemplates.propTypes = {
   headerKey: PropTypes.string,
   reqErrorMsg: PropTypes.string,
   reqStatus: PropTypes.string,
-  resourceData: PropTypes.object,
+  resourceData: PropTypes.any,
   resourcePath: PropTypes.string,
   resourceType: PropTypes.object,
 }
