@@ -24,6 +24,8 @@ class ResourceTableModule extends React.Component {
     definitionsKey: PropTypes.string,
     normalizedKey: PropTypes.string,
     resourceType: PropTypes.object,
+    showPagination: PropTypes.bool,
+    showSearch: PropTypes.bool,
     staticResourceData: PropTypes.object,
     subResourceType: PropTypes.object,
     tableResources: PropTypes.array,
@@ -56,7 +58,7 @@ class ResourceTableModule extends React.Component {
 
   render() {
     hideResourceToolbar()
-    const { staticResourceData, definitionsKey, resourceType, subResourceType } = this.props
+    const { staticResourceData, definitionsKey, resourceType, subResourceType, showSearch, showPagination } = this.props
     const keys = staticResourceData[definitionsKey]
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state
     return (
@@ -76,6 +78,8 @@ class ResourceTableModule extends React.Component {
             darkSearchBox={false}
             sortDirection={sortDirection}
             tableActions={keys.tableActions}
+            showSearch={showSearch}
+            showPagination={showPagination}
           />
         </ModuleBody>
       </Module> : null

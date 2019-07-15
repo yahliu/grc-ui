@@ -11,9 +11,10 @@
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { Notification, Loading } from 'carbon-components-react'
+import _ from 'lodash'
 // import { REQUEST_STATUS } from '../../actions/index'
 import { getTabs } from '../../../lib/client/resource-helper'
-import { updateSecondaryHeader } from '../../actions/common'
+import { updateSecondaryHeader, updateResourceToolbar } from '../../actions/common'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import lodash from 'lodash'
@@ -116,15 +117,19 @@ class ResourceDetails extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, launch_links, match, refreshControl, location } = this.props
+    const { updateSecondaryHeader, tabs, launch_links, match, location } = this.props
     updateSecondaryHeader(this.getPolicyName(location), getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(), launch_links)
-    refreshControl.stopPolling()
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location !== this.props.location) {
       const { updateSecondaryHeader, tabs, launch_links, match } = this.props
       updateSecondaryHeader(this.getPolicyName(nextProps.location), getTabs(tabs, (tab, index) => index === 0 ? match.url : `${match.url}/${tab}`), this.getBreadcrumb(nextProps.location), launch_links)
+    }
+    const {refreshControl, items, updateResourceToolbar} = nextProps
+    if (!_.isEqual(refreshControl, this.props.refreshControl) ||
+        !_.isEqual(items, this.props.items)) {
+      updateResourceToolbar(refreshControl, {})
     }
   }
 
@@ -142,8 +147,7 @@ class ResourceDetails extends React.Component {
   }
 
   renderOverview() {
-    const { match, resourceType, staticResourceData, children, refreshControl, items } = this.props
-    refreshControl.stopPolling()
+    const { match, resourceType, staticResourceData, children, items } = this.props
     return (
       <div>
         <OverviewTab
@@ -158,8 +162,7 @@ class ResourceDetails extends React.Component {
   }
 
   renderOther(route) {
-    const { match, resourceType, staticResourceData, tabs, refreshControl, items, loading, error} = this.props
-    refreshControl.stopPolling()
+    const { match, resourceType, staticResourceData, tabs, items, loading, error} = this.props
     const Component = components[route]
     return (
       <Component
@@ -178,12 +181,15 @@ class ResourceDetails extends React.Component {
   getBreadcrumb(location) {
     const breadcrumbItems = []
     location = location || this.props.location
-    const { tabs, resourceType } = this.props,
+    const { tabs, resourceType, refreshControl } = this.props,
           { locale } = this.context,
           urlSegments = location.pathname.replace(/\/$/, '').split('/'),
           lastSegment = urlSegments[urlSegments.length - 1],
           currentTab = tabs.find(tab => tab === lastSegment)
 
+    if(currentTab === 'violation'){
+      refreshControl.stopPolling()
+    }
     // The base path, calculated by the current location minus params
     const paramsLength = 2
 
@@ -226,13 +232,20 @@ ResourceDetails.propTypes = {
   routes: PropTypes.array,
   staticResourceData: PropTypes.object,
   tabs: PropTypes.array,
+  updateResourceToolbar: PropTypes.func,
   updateSecondaryHeader: PropTypes.func,
+}
+
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {activeFilters}} = state
+  return { activeFilters }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    updateResourceToolbar: (refreshControl) => dispatch(updateResourceToolbar(refreshControl, {})),
     updateSecondaryHeader: (title, tabs, breadcrumbItems, links) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems, links))
   }
 }
 
-export default withRouter(connect(() => ({}), mapDispatchToProps)(ResourceDetails))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ResourceDetails))

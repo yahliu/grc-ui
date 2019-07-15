@@ -73,8 +73,28 @@ class ResourceTable extends React.Component {
       onSelect,
       onSelectAll,
       onSelectSubItem,
-      listSubItems
+      listSubItems,
     } = this.props
+
+    const showSearch = lodash.get(this.props, 'showSearch', true)
+    const showPagination = lodash.get(this.props, 'showPagination', true)
+
+    const PagenationComponent = showPagination ?
+      (<PaginationV2
+        key='pagination'
+        id={staticResourceData.resourceKey ? `${staticResourceData.resourceKey}-resource-table-pagination` : 'resource-table-pagination'}
+        onChange={changeTablePage}
+        pageSize={pageSize || PAGE_SIZES.DEFAULT}
+        pageSizes={PAGE_SIZES.VALUES}
+        totalItems={totalFilteredItems}
+        page={page}
+        disabled={pageSize >= totalFilteredItems}
+        isLastPage={pageSize >= totalFilteredItems}
+        itemsPerPageText={msgs.get('pagination.itemsPerPage', this.context.locale)}
+        pageRangeText={(current, total) => msgs.get('pagination.pageRange', [current, total], this.context.locale)}
+        itemRangeText={(min, max, total) => `${msgs.get('pagination.itemRange', [min, max], this.context.locale)} ${msgs.get('pagination.itemRangeDescription', [total], this.context.locale)}`}
+        pageInputDisabled={pageSize >= totalFilteredItems} />) : null
+
     return [
       <DataTable
         key='data-table'
@@ -83,12 +103,14 @@ class ResourceTable extends React.Component {
         translateWithId={translateWithId.bind(null, this.context.locale)}
         render={({ rows, headers, getRowProps }) => (
           <TableContainer id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-table-container`}>
-            <TableToolbar aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} role='region'>
-              <TableToolbarSearch onChange={handleSearch} defaultValue={defaultSearchValue} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} />
-              <TableToolbarContent>
-                {actions}
-              </TableToolbarContent>
-            </TableToolbar>
+            {showSearch ?
+              (<TableToolbar aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} role='region'>
+                <TableToolbarSearch onChange={handleSearch} defaultValue={defaultSearchValue} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} />
+                <TableToolbarContent>
+                  {actions}
+                </TableToolbarContent>
+              </TableToolbar>) : null
+            }
             <Table className='resource-table'>
               <TableHead>
                 <TableRow>
@@ -196,20 +218,7 @@ class ResourceTable extends React.Component {
           </TableContainer>
         )}
       />,
-      <PaginationV2
-        key='pagination'
-        id={staticResourceData.resourceKey ? `${staticResourceData.resourceKey}-resource-table-pagination` : 'resource-table-pagination'}
-        onChange={changeTablePage}
-        pageSize={pageSize || PAGE_SIZES.DEFAULT}
-        pageSizes={PAGE_SIZES.VALUES}
-        totalItems={totalFilteredItems}
-        page={page}
-        disabled={pageSize >= totalFilteredItems}
-        isLastPage={pageSize >= totalFilteredItems}
-        itemsPerPageText={msgs.get('pagination.itemsPerPage', this.context.locale)}
-        pageRangeText={(current, total) => msgs.get('pagination.pageRange', [current, total], this.context.locale)}
-        itemRangeText={(min, max, total) => `${msgs.get('pagination.itemRange', [min, max], this.context.locale)} ${msgs.get('pagination.itemRangeDescription', [total], this.context.locale)}`}
-        pageInputDisabled={pageSize >= totalFilteredItems} />
+      PagenationComponent
     ]
   }
 

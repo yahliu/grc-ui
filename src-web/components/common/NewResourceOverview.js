@@ -50,13 +50,13 @@ const NewResourceOverview = ({
       templateWithResource[templateType] = [template]
       switch( templateType ){
       case 'role-templates':
-        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'roleTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, params}))
+        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'roleTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, showSearch: false, showPagination:false, params}))
         break
       case 'policy-templates':
-        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'policyTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, params}))
+        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'policyTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, showSearch: false, showPagination:false, params}))
         break
       case 'object-templates':
-        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'objectTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, params}))
+        modulesBottom.push(React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'objectTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: templateWithResource, showSearch: false, showPagination:false, params}))
         break
       default:
         break

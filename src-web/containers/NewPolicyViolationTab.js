@@ -89,7 +89,7 @@ class NewPolicyViolationTab extends React.Component{
     return (
       <Query query={HCMPolicyViolations} pollInterval={pollInterval} variables={{policyName: policyName}}>
         {({ data, loading }) => {
-          if (loading) {
+          if (loading && data.violations === undefined) {
             return (<Loading withOverlay={false} className='content-spinner' />)
           }
           if( data.violations && data.violations.length > 0){
