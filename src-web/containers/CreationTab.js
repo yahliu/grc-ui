@@ -15,16 +15,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { RESOURCE_TYPES } from '../../lib/shared/constants'
 import { createResources, updateSecondaryHeader } from '../actions/common'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 import CreationView from '../components/CreationView'
 import msgs from '../../nls/platform.properties'
+import config from '../../lib/shared/config'
 
 class CreationTab extends React.Component {
 
   static propTypes = {
     handleCreateResources: PropTypes.func,
+    mutateStatus: PropTypes.string,
     secondaryHeaderProps: PropTypes.object,
     updateSecondaryHeader: PropTypes.func,
   }
@@ -58,6 +60,9 @@ class CreationTab extends React.Component {
   }
 
   render () {
+    if (this.props.mutateStatus && this.props.mutateStatus === 'DONE') {
+      return <Redirect to={`${config.contextPath}/policies/all`} />
+    }
     return (
       <Page>
         <CreationView
@@ -68,6 +73,13 @@ class CreationTab extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    mutateStatus: state['HCMPolicyList'].mutateStatus,
+    mutateErrorMsg: state['HCMPolicyList'].mutateErrorMsg,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateSecondaryHeader: (title, tabs, breadcrumbItems, links, information) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems, links, '', information)),
@@ -75,5 +87,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(CreationTab))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreationTab))
 

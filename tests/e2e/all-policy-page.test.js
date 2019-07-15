@@ -12,7 +12,7 @@ const a11yScan = require('../utils/accessibilityScan')
 let page
 
 module.exports = {
-  '@disabled': true,
+  '@disabled': false,
 
   before: (browser) => {
     const loginPage = browser.page.LoginPage()

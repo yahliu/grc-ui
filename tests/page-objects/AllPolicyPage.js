@@ -14,7 +14,7 @@ module.exports = {
     tableExpandBtn: '.bx--table-expand-v2__button:nth-of-type(1)',
     expandTable: '.bx--expandable-row-v2:nth-of-type(2)',
     createPolicyButton: '.bx--btn--primary:nth-of-type(1)',
-    submitCreatePolicyButton: '.bx--btn--primary:nth-of-type(2)',
+    submitCreatePolicyButton: '#policy-create',
     yamlInputField: '.ace_text-input',
     yamlTextField: '.ace_editor',
     searchInput: 'input.bx--search-input',
@@ -22,7 +22,21 @@ module.exports = {
     deleteButton: '.bx--overflow-menu-options__option--danger',
     confirmDeleteButton: '.bx--btn--danger--primary',
     noResource: '.no-resource',
-    policyStatus: '#complianceStatus-module-id'
+    policyStatus: '#complianceStatus-module-id',
+    policyNameInput: '#policy-name',
+    templateDropdown: '.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box',
+    templateDropdownBox: '.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    clusterSelectorDropdown: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box',
+    clusterSelectorDropdownBox: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    enforce: '.creation-view-controls-checkbox > div.bx--form-item.bx--checkbox-wrapper',
+    standardsDropdown: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box',
+    standardsDropdownBox: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    categoriesDropdown: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box',
+    categoriesDropdownBox: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    controlsDropdown: '.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box',
+    controlsDropdownBox: '.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+
+
   },
   commands: [{
     verifyTable,
@@ -50,88 +64,42 @@ function verifyTable(browser) {
 }
 
 
-function generatePolicyYaml (time) {
-  return `apiVersion: mcm.ibm.com/v1alpha1
-kind: PlacementPolicy
-metadata:
-  name: ${time}-placement-policy-test
-  namespace: mcm
-#  description: Example of PlacementPolicy
-spec:
-  clusterLabels:
-    matchLabels:
-      cloud: "IBM"
----
-apiVersion: mcm.ibm.com/v1alpha1
-kind: PlacementBinding
-metadata:
-  name: ${time}-placement-binding-test
-  namespace: mcm
-#  description: Example of PlacementBinding
-placementRef:
-  name: ${time}-placement-policy-test
-  kind: PlacementPolicy
-  apiGroup: mcm.ibm.com
-subjects:
-- name: ${time}-policy-test
-  kind: Policy
-  apiGroup: policy.mcm.ibm.com
----
-apiVersion: policy.mcm.ibm.com/v1alpha1
-kind: Policy
-metadata:
-  name: ${time}-policy-test
-  namespace: mcm
-  annotations:
-    policy.mcm.ibm.com/categories: 'SystemAndCommunicationsProtections,SystemAndInformationIntegrity'
-    policy.mcm.ibm.com/controls: 'MutationAdvisor,VA'
-    policy.mcm.ibm.com/standards: NIST
-spec:
-  complianceType: musthave
-  namespaces:
-    exclude:
-      - kube*
-    include:
-      - default
-  object-templates:
-    - complianceType: musthave
-      objectDefinition:
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          name: nginx-test
-        spec:
-          containers:
-            - name: nginx
-              image: 'nginx:1.7.9'
-              ports:
-                - containerPort: 80
-  remediationAction: inform`
-}
-
 function createTestPolicy(browser, time) {
   // this.setValue('@searchInput',`${time}-policy-test`)
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
   this.expect.element('@yamlInputField').to.be.present
   this.click('@yamlTextField')
+  this.clearValue('@policyNameInput')
+  this.setValue('@policyNameInput',`${time}-policy-test`)
 
-  const keystrokes = []
-  const policyYaml = generatePolicyYaml(time)
-  policyYaml.split(/\r?\n/).forEach(line => {
-    const indentation = line.search(/\S|$/)
-    keystrokes.push(line)
-    keystrokes.push(browser.Keys.RETURN)
+  this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
+  this.click('#downshift-0-item-4')
+  this.click('@templateDropdown').expect.element('@templateDropdownBox').not.to.be.present
 
-    for (let i = 0; i < indentation / 2; i++ ) {
-      keystrokes.push(browser.Keys.BACK_SPACE)
-    }
-  })
-  this.api.keys(keystrokes)
+  this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').to.be.present
+  this.click('#downshift-1-item-0')
+  this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
+  this.click('@enforce')
+
+  this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
+  this.click('#downshift-2-item-2')
+  this.click('@standardsDropdown').expect.element('@standardsDropdownBox').not.to.be.present
+
+  this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
+  this.click('#downshift-3-item-1')
+  this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
+
+  this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
+  this.click('#downshift-4-item-1')
+  this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
+
+  this.waitForElementNotPresent('@spinner')
 
   this.expect.element('@submitCreatePolicyButton').to.be.present
   this.click('@submitCreatePolicyButton')
-  this.waitForElementNotPresent('@spinner')
+
+  this.waitForElementPresent('@table')
   this.waitForElementPresent('@searchInput')
   this.setValue('@searchInput',`${time}-policy-test`)
 }

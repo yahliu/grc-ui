@@ -32,6 +32,7 @@ import policyRolesDeployments from './templates/policy-roles-deployments.handleb
 import policyBindings from './templates/policy-bindings.handlebars'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
+import config from '../../lib/shared/config'
 
 resources(() => {
   require('../../scss/creation-view.scss')
@@ -39,7 +40,7 @@ resources(() => {
 
 const intialValues = {
   name: 'my-policy',
-  namespace: 'default',
+  namespace: config.complianceNamespace,
   enforce: true,
   mutation: false,
   annotations: [
