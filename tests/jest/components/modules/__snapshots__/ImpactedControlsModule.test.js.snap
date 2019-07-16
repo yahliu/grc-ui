@@ -60,7 +60,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                 onClick={[Function]}
                 onKeyDown={[Function]}
                 role="listbox"
-                tabIndex={0}
+                tabIndex={null}
               >
                 <div
                   aria-expanded={false}
@@ -80,7 +80,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     className="bx--list-box__label"
                     htmlFor="downshift-0-input"
                   >
-                    HIPAA
+                    ALL
                   </span>
                   <div
                     className="bx--list-box__menu-icon"
@@ -132,12 +132,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     onKeyPress={[Function]}
                     role="presentation"
                     tabIndex={-1}
-                    value={6}
+                    value={4}
                   >
                     <div
-                      aria-valuemax={24}
+                      aria-valuemax={4}
                       aria-valuemin={1}
-                      aria-valuenow={6}
+                      aria-valuenow={4}
                       className="bx--slider__thumb"
                       id="slider"
                       onKeyDown={[Function]}
@@ -164,14 +164,14 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     />
                     <input
                       className="bx--slider__input"
-                      max={24}
+                      max={4}
                       min={1}
                       name="Show more or less controls"
                       onChange={[Function]}
                       required={undefined}
                       step={1}
                       type="hidden"
-                      value={6}
+                      value={4}
                     />
                   </div>
                   <span
@@ -182,18 +182,8 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                   <span
                     className="bx--slider__range-label"
                   >
-                    24
+                    4
                   </span>
-                  <input
-                    aria-label="Show more or less controls"
-                    className="bx--text-input bx--slider-text-input"
-                    disabled={false}
-                    id="slider-input-for-slider"
-                    labelText=""
-                    onChange={[Function]}
-                    type="number"
-                    value={6}
-                  />
                 </div>
               </div>
             </div>
@@ -347,7 +337,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       x={1.3226185430791415e-14}
                       y={-216}
                     >
-                      Certificate expiration
+                      Other
                     </text>
                   </g>
                   <g>
@@ -355,9 +345,9 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       stroke="#cdcdcd"
                       strokeWidth={2}
                       x1={0}
-                      x2={171.47302994931886}
+                      x2={198.00000000000003}
                       y1={0}
-                      y2={-99.00000000000001}
+                      y2={0}
                     />
                     <text
                       dy="0.35em"
@@ -373,39 +363,10 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                         }
                       }
                       textAnchor="middle"
-                      x={187.06148721743872}
-                      y={-108}
+                      x={216}
+                      y={0}
                     >
-                      Network isolation
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={171.47302994931889}
-                      y1={0}
-                      y2={98.99999999999999}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={187.06148721743875}
-                      y={107.99999999999996}
-                    >
-                      Image provenance
+                      Mutationadvisor
                     </text>
                   </g>
                   <g>
@@ -434,7 +395,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       x={1.3226185430791415e-14}
                       y={216}
                     >
-                      LDAP configured
+                      Va
                     </text>
                   </g>
                   <g>
@@ -442,9 +403,9 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       stroke="#cdcdcd"
                       strokeWidth={2}
                       x1={0}
-                      x2={-171.47302994931886}
+                      x2={-198.00000000000003}
                       y1={0}
-                      y2={99.00000000000009}
+                      y2={2.4248006623117597e-14}
                     />
                     <text
                       dy="0.35em"
@@ -460,68 +421,31 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                         }
                       }
                       textAnchor="middle"
-                      x={-187.06148721743872}
-                      y={108.00000000000007}
+                      x={-216}
+                      y={2.645237086158283e-14}
                     >
-                      SAML
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={-171.47302994931894}
-                      y1={0}
-                      y2={-98.99999999999989}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={-187.06148721743884}
-                      y={-107.99999999999987}
-                    >
-                      Image vulnerability
+                      Test
                     </text>
                   </g>
                   <g>
                     <path
-                      d="M93.53076784409367,-53.999958023078605C111.71730239869534,-31.49995988525594,124.70767071342019,47.999995823089925,109.11920732761,62.999988826936C93.53074394179981,77.99998183078208,38.97112931722363,34.49999388141555,-0.000012470767438298165,35.99999999999784C-38.9711542587585,37.50000611858013,-122.10956963346993,79.50002617240412,-124.70764340033641,72.00002553842972C-127.30571716720289,64.50002490445533,-36.37306230535573,15.00000045255647,-15.588455071966331,-9.000003803848482C5.19615216142307,-33.000008060253435,-18.186537152676667,-64.50000763012831,0,-72C18.186537152676667,-79.49999236987169,75.34423328949201,-76.49995616090126,93.53076784409367,-53.999958023078605"
+                      d="M53.999999999997115,-0.00001764692441305947C53.99999792153587,11.999982353075227,8.99998752923208,41.999997058843775,-0.000012470767438298165,35.99999999999784C-9.000012470766958,30.00000294115191,-9.000002078460758,-29.99999705884629,0,-36C9.000002078460758,-42.00000294115371,54.00000207845836,-12.000017646924052,53.999999999997115,-0.00001764692441305947"
                       fill="#13B9B9"
                       fillOpacity={0.2}
                       stroke="#13B9B9"
                       strokeOpacity={0.7}
                     />
                     <circle
-                      cx={4.408728476930472e-15}
-                      cy={-72}
+                      cx={2.204364238465236e-15}
+                      cy={-36}
                       fill="#13B9B9"
                       opacity={0.7}
                       r={3}
                       stroke="#13B9B9"
                     />
                     <circle
-                      cx={93.53074360871936}
-                      cy={-54}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                    <circle
-                      cx={109.11920087683926}
-                      cy={62.99999999999997}
+                      cx={54}
+                      cy={0}
                       fill="#13B9B9"
                       opacity={0.7}
                       r={3}
@@ -535,74 +459,18 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       r={3}
                       stroke="#13B9B9"
                     />
-                    <circle
-                      cx={-124.70765814495914}
-                      cy={72.00000000000004}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                    <circle
-                      cx={-15.588457268119903}
-                      cy={-8.99999999999999}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
                   </g>
                   <g>
                     <path
-                      d="M124.70769045879157,-71.99994403077147C140.29614864845016,-32.99994562692348,114.31536837133918,29.999999751293476,93.53074913795143,53.999990423088C72.74612990456369,77.99998109488253,20.78458505647104,77.99999733974244,-0.00002494153487659633,71.99999999999568C-20.784634939540798,66.00000266024892,-31.17691500700658,30.00000638460671,-31.176910850084102,18.00000638460743C-31.176906693161623,6.000006384608152,-5.19615180834735,33.00000106410124,0,0C5.19615180834735,-33.00000106410124,-20.78461507646526,-168.00000932820475,0,-180C20.78461507646526,-191.99999067179525,109.11923226913301,-110.99994243461947,124.70769045879157,-71.99994403077147"
+                      d="M-53.999999999999986,-0.000001059226744387835Z"
                       fill="#0082C1"
                       fillOpacity={0.2}
                       stroke="#0082C1"
                       strokeOpacity={0.7}
                     />
                     <circle
-                      cx={1.1021821192326179e-14}
-                      cy={-180}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={124.70765814495915}
-                      cy={-72}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={93.53074360871938}
-                      cy={53.99999999999998}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={4.408728476930472e-15}
-                      cy={72}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={-31.176914536239785}
-                      cy={18.00000000000001}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={-0}
-                      cy={-0}
+                      cx={-54}
+                      cy={6.6130927153957075e-15}
                       fill="#0082C1"
                       opacity={0.7}
                       r={3}

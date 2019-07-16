@@ -11,15 +11,17 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import renderer from 'react-test-renderer'
-import { policiesTestingDataSet1 } from './ModuleTestingData'
+import { policiesTestingDataSet1, findingsTestingDataSet1 } from './ModuleTestingData'
 import RecentActivityModule from '../../../../src-web/components/modules/RecentActivityModule'
 
 describe('RecentActivityModule view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
+  const filteredFindings = findingsTestingDataSet1
   it('renders as expected', () => {
     const component = renderer.create(<BrowserRouter><RecentActivityModule
       policies={filteredPolicies}
+      findings={filteredFindings}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })

@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {createResources, updateResourceToolbar} from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import {POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
@@ -51,17 +51,17 @@ export class OverviewView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {refreshControl, policies, updateResourceToolbar} = nextProps
+    const {refreshControl, policies, findings, updateResourceToolbar} = nextProps
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(policies, this.props.policies)) {
       const { locale } = this.context
-      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, locale))
+      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, findings, locale))
     }
   }
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, activeFilters={}, handleDrillDownClick, handleCreateResource } = this.props
+    const { loading, error, policies, findings, activeFilters={}, handleDrillDownClick, handleCreateResource } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -83,11 +83,13 @@ export class OverviewView extends React.Component {
     showResourceToolbar()
     const { viewState } = this.state
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
+    const filteredFindings = filterFindings(findings, activeFilters, locale)
     return (
       <div className='overview-view'>
         <ResourceFilterBar />
         <RecentActivityModule
           policies={filteredPolicies}
+          findings={filteredFindings}
           handleDrillDownClick={handleDrillDownClick} />
         <TopViolationsModule
           viewState={viewState}
@@ -101,6 +103,7 @@ export class OverviewView extends React.Component {
           viewState={viewState}
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
+          findings={filteredFindings}
           handleDrillDownClick={handleDrillDownClick} />
         <PolicySummaryModule
           policies={filteredPolicies}
@@ -123,6 +126,7 @@ export class OverviewView extends React.Component {
 OverviewView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
+  findings: PropTypes.array,
   handleCreateResource: PropTypes.func,
   handleDrillDownClick: PropTypes.func,
   loading: PropTypes.bool,

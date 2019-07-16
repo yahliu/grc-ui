@@ -23,7 +23,7 @@ import PoliciesClusterPage from '../components/resource-pages/PoliciesClusterPag
 import PoliciesPage from '../components/resource-pages/PoliciesPage'
 import { updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
-import { HCMComplianceList } from '../../lib/client/queries'
+import { GRCList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 //import getMockData from './OverviewTabMock'
@@ -159,27 +159,13 @@ class OverviewTab extends React.Component {
     const { currentTab, detailedChoice = '', detailedName = '', detailedType = '', detailedDescription = '' } = this.state
     return (
       <Page>
-        <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={GRCList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {loading, startPolling, stopPolling, refetch} = result
             const {data={}} = result
-            const { items } = data
-            //                        if (items) {
-            //                          const mockArr = []
-            //                          items.forEach(item=>{
-            //                            const mockData = {}
-            //                            for (var key in item) {
-            //                              mockData[key] = item[key]
-            //                            }
-            //                            mockArr.push(mockData)
-            //                          })
-            //                          console.log(JSON.stringify(mockArr))
-            //                        }
-            //
-            //
-            //            const items = getMockData().policies
+            const { policies, findings } = data
 
-            const error = items ? null : result.error
+            const error = policies ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
             const reloading = !firstLoad && loading
@@ -197,7 +183,7 @@ class OverviewTab extends React.Component {
 
             let detailedData = []
             if (currentTab === 'details') {
-              detailedData = formatTableData(items, detailedChoice, detailedName, detailedType, detailedDescription)
+              detailedData = formatTableData(policies, detailedChoice, detailedName, detailedType, detailedDescription)
             }
 
             const title = `#${detailedType === 'cluster' ? msgs.get('policy.header.cluster', this.context.locale) :
@@ -226,9 +212,10 @@ class OverviewTab extends React.Component {
               <div>
                 {(currentTab === 'overview') &&
                   <OverviewView
-                    loading={!items && loading}
+                    loading={!policies && loading}
                     error={error}
-                    policies={items}
+                    policies={policies}
+                    findings={findings}
                     refreshControl={refreshControl}
                     handleDrillDownClick={handleDrillDownClick}
                   />

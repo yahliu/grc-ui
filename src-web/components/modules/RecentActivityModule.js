@@ -57,7 +57,7 @@ export default class RecentActivityModule extends React.Component {
 
   getModuleData = () => {
     const { locale } = this.context
-    const { policies } = this.props
+    const { policies, findings } = this.props
     const policySet = new Set()
     const clusterSet = new Set()
     policies.map(policy=>{
@@ -70,15 +70,30 @@ export default class RecentActivityModule extends React.Component {
         }
       })
     })
+    let low = 0, medium = 0, high = 0
+    const total = findings.length
+    findings.map(item => {
+      const severity = item.finding && item.finding.severity.toLowerCase()
+      switch (severity) {
+      case 'low':
+        low++
+        break
+      case 'medium':
+        medium++
+        break
+      default:
+        high++
+      }
+    })
     return {
       violations: [
         {count: policySet.size, violationType: msgs.get('overview.top.violations.policy', locale)},
         {count: clusterSet.size, violationType: msgs.get('overview.top.violations.cluster', locale)},
       ],
       findings: [
-        {count: 3, total:14, findingType: SECURITY_TYPES.HIGH},
-        {count: 23, total:55, findingType: SECURITY_TYPES.MEDIUM},
-        {count: 28, total:105, findingType: SECURITY_TYPES.LOW},
+        {count: high, total: total, findingType: SECURITY_TYPES.HIGH},
+        {count: medium, total: total, findingType: SECURITY_TYPES.MEDIUM},
+        {count: low, total: total, findingType: SECURITY_TYPES.LOW},
       ]
     }
   }
@@ -212,6 +227,7 @@ Findings.propTypes = {
 }
 
 RecentActivityModule.propTypes = {
+  findings: PropTypes.array,
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
 }

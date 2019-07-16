@@ -46,7 +46,7 @@ export class PoliciesView extends React.Component {
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(policies, this.props.policies)) {
       const { locale } = this.context
-      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, locale))
+      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, [], locale))
     }
   }
 

@@ -20,7 +20,7 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
       onClick={[Function]}
       onKeyDown={[Function]}
       role="listbox"
-      tabIndex={0}
+      tabIndex={null}
     >
       <div
         aria-expanded={false}
@@ -227,7 +227,7 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
       onClick={[Function]}
       onKeyDown={[Function]}
       role="listbox"
-      tabIndex={0}
+      tabIndex={null}
     >
       <div
         aria-expanded={false}

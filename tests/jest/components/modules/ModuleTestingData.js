@@ -7,6 +7,142 @@
  * Contract with IBM Corp.
  ****************************************************************************** */
 
+export const findingsTestingDataSet1 = [
+  {
+    'name':'id-mycluster-account/providers/security-advisor/occurrences/secret-4093fbf9-765f-11e9-9e07-00163e01db7b',
+    'shortDescription':'Policy that is not compliant',
+    'finding':{
+      'severity':'HIGH',
+      'certainty':'HIGH',
+      'networkConnection':null,
+      'nextSteps':[
+        {
+          'title':'View the details for the compliance problem in the occurrence of the findings.',
+          'url':null
+        }
+      ],
+      'dataTransferred':null
+    },
+    'reportedBy':{
+      'id':'mcm-policy-adapter',
+      'title':'Security Advisor MCM Policy Findings Adapter',
+      'url':null
+    },
+    'context':{
+      'accountId':'id-mycluster-account',
+      'region':null,
+      'resourceType':'Secret',
+      'resourceName':'other-auth-secret',
+      'resourceId':'4093fbf9-765f-11e9-9e07-00163e01db7b',
+      'resourceCrn':null,
+      'serviceName':null,
+      'serviceCrn':null,
+      'clusterName':'mycluster_name',
+      'namespaceName':'kube-system'
+    },
+    'securityClassification':{
+      'securityStandards':[
+        'NIST',
+        'CIS'
+      ],
+      'securityCategories':[
+        'System and communications protections'
+      ],
+      'securityControl':'test'
+    },
+    '__typename':'Occurrence'
+  },
+  {
+    'name':'id-mycluster-account/providers/security-advisor/occurrences/secret-4093fbf5-765f-11e9-9e07-00163e01db7b',
+    'shortDescription':'Policy that is not compliant',
+    'finding':{
+      'severity':'HIGH',
+      'certainty':'HIGH',
+      'networkConnection':null,
+      'nextSteps':[
+        {
+          'title':'View the details for the compliance problem in the occurrence of the findings.',
+          'url':null
+        }
+      ],
+      'dataTransferred':null
+    },
+    'reportedBy':{
+      'id':'mcm-policy-adapter',
+      'title':'Security Advisor MCM Policy Findings Adapter',
+      'url':null
+    },
+    'context':{
+      'accountId':'id-mycluster-account',
+      'region':null,
+      'resourceType':'Secret',
+      'resourceName':'platform-auth-secret',
+      'resourceId':'4093fbf5-765f-11e9-9e07-00163e01db7b',
+      'resourceCrn':null,
+      'serviceName':null,
+      'serviceCrn':null,
+      'clusterName':'mycluster_name',
+      'namespaceName':'kube-system'
+    },
+    'securityClassification':{
+      'securityStandards':[
+        'NIST',
+        'CIS'
+      ],
+      'securityCategories':[
+        'System and communications protections'
+      ],
+      'securityControl':'test'
+    },
+    '__typename':'Occurrence'
+  },
+  {
+    'name':'id-mycluster-account/providers/security-advisor/occurrences/secret-94fe9769-765f-11e9-9e07-00163e01db7b',
+    'shortDescription':'Policy that is not compliant',
+    'finding':{
+      'severity':'HIGH',
+      'certainty':'HIGH',
+      'networkConnection':null,
+      'nextSteps':[
+        {
+          'title':'View the details for the compliance problem in the occurrence of the findings.',
+          'url':null
+        }
+      ],
+      'dataTransferred':null
+    },
+    'reportedBy':{
+      'id':'mcm-policy-adapter',
+      'title':'Security Advisor MCM Policy Findings Adapter',
+      'url':null
+    },
+    'context':{
+      'accountId':'id-mycluster-account',
+      'region':null,
+      'resourceType':'Secret',
+      'resourceName':'multicluster_name-hub-search-secrets',
+      'resourceId':'94fe9769-765f-11e9-9e07-00163e01db7b',
+      'resourceCrn':null,
+      'serviceName':null,
+      'serviceCrn':null,
+      'clusterName':'mycluster_name',
+      'namespaceName':'kube-system'
+    },
+    'securityClassification':{
+      'securityStandards':[
+        'NIST',
+        'CIS'
+      ],
+      'securityCategories':[
+        'System and communications protections'
+      ],
+      'securityControl':'test'
+    },
+    '__typename':'Occurrence'
+  }
+]
+
+
 export const policiesTestingDataSet1 = [
   {
     'metadata':{

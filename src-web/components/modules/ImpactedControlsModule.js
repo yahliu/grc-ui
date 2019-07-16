@@ -41,7 +41,7 @@ export default class ImpactedControlsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {standardsChoice, showControls=6}} = props
+    const {viewState: {standardsChoice='ALL', showControls=6}} = props
     this.state = {
       standardsChoice,
       showControls,
@@ -72,13 +72,14 @@ export default class ImpactedControlsModule extends React.Component {
   renderControls(cardData) {
     const { locale } = this.context
     const title = msgs.get('overview.impacted.controls.title', locale)
+    // const { showControls } = this.state
     return (
       <div className='card-controls'>
         <div className='card-title'>{title}</div>
         {this.renderLegend()}
         <div className='card-control-panel'>
           {this.renderSelection(title, cardData)}
-          {this.renderSlider(cardData)}
+          {this.renderSlider({max: cardData.radarData.variables.length})}
         </div>
       </div>
     )
@@ -131,21 +132,21 @@ export default class ImpactedControlsModule extends React.Component {
     )
   }
 
-  renderSlider() {
+  renderSlider({max}) {
     const { locale } = this.context
-    const { showControls } = this.state
     const title = msgs.get('overview.impacted.controls.slider', locale)
     return (
-      <div className='card-slider'>
+      <div className='card-slider' >
         <Slider
-          id='slider'
+          id={'slider'}
           name={title}
           ariaLabelInput={title}
-          value={showControls}
+          value={max}
           labelText={title}
           min={1}
-          max={24}
+          max={max}
           onChange={this.onSliderChange}
+          hideTextInput
         />
       </div>
     )
@@ -262,7 +263,7 @@ export default class ImpactedControlsModule extends React.Component {
 
   getTooltipContent = (setKey, variableKey) => {
     const { locale } = this.context
-    const { setMap, variableMap, findings } = this.cardData
+    const { setMap, variableMap, findings1 } = this.cardData
     return ReactDOMServer.renderToStaticMarkup(
       <div className='tooltip-text'>
         <div className='header'>
@@ -273,7 +274,7 @@ export default class ImpactedControlsModule extends React.Component {
           </div>
         </div>
         <div className='findings'>
-          {findings.map(({count, findingType}) => {
+          {findings1.map(({count, findingType}) => {
             let label, className
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
@@ -302,75 +303,95 @@ export default class ImpactedControlsModule extends React.Component {
   }
 
   getCardData = () => {
-    const { locale } = this.context
-    const { policies } = this.props
+    const { policies, findings } = this.props
+    const standardsChoice = this.state.standardsChoice
 
     // loop thru policies
-    const standardsSet = new Set()
-    const other = msgs.get('overview.policy.overview.other', locale)
-    policies.forEach(policy => {
-      const annotations = _.get(policy, 'metadata.annotations', {}) || {}
-      let types = annotations['policy.mcm.ibm.com/standards'] || ''
-      // backward compatible and if user doesn't supply an annotation
-      if (types.length===0) {
-        types=other
-      }
-      types.split(',').forEach(type=>{
-        type = type.trim()
-        if (type) {
-          standardsSet.add(type)
+    const violations = []
+    policies.map(policy=>{
+      const statuses = _.get(policy, 'raw.status.status', {})
+      Object.keys(statuses).forEach(key=>{
+        const compliant = statuses[key].compliant
+        if (!compliant || compliant.toLowerCase()==='noncompliant') {
+          violations.push({
+            metadata: _.get(policy, 'raw.metadata', {}),
+            cluster: key
+          })
         }
       })
     })
 
+    const standardsSet = new Set(['ALL'])
+    violations.forEach(violation=>{
+      const annotations = _.get(violation, 'metadata.annotations', {})
+      const standards = _.get(annotations,'policy.mcm.ibm.com/standards', 'other')
+      standards.split(',').forEach(standard=>{
+        standard = standard.trim()
+        if (standard) {
+          standardsSet.add(_.startCase(standard))
+        }
+      })
+    })
+    findings.forEach(finding=>{
+      const standards = _.get(finding, 'securityClassification.securityStandards', ['other'])
+      standards.forEach(standard=>{
+        standard = standard.trim()
+        if (standard) {
+          standardsSet.add(_.startCase(standard))
+        }
+      })
+    })
 
+    const violationsByControls = {}
+    violations.forEach(policy=>{
+      const annotations = _.get(policy, 'metadata.annotations', {})
+      const controls = _.get(annotations, 'policy.mcm.ibm.com/controls', 'other')
+      controls.split(',').forEach(ctrl => {
+        ctrl = ctrl.toLowerCase().trim()
+        if (ctrl && (standardsChoice === 'ALL' || _.get(annotations, 'policy.mcm.ibm.com/standards', 'other').toLowerCase().includes(standardsChoice.toLowerCase()))) {
+          violationsByControls[ctrl] = _.get(violationsByControls, ctrl, 0)+1
+        }
+      })
+    })
+
+    const findingsByControls = {}
+    findings.forEach(finding=>{
+      const controls = _.get(finding, 'securityClassification.securityControl', 'other')
+      controls.split(',').forEach(ctrl => {
+        ctrl = ctrl.toLowerCase().trim()
+        if (ctrl && (standardsChoice === 'ALL' || _.get(finding, 'securityClassification.securityStandards', ['other']).join(',').toLowerCase().includes(standardsChoice.toLowerCase()))) {
+          findingsByControls[ctrl] = _.get(findingsByControls, ctrl, 0)+1
+        }
+      })
+    })
+    let variables =[]
+    Object.keys(violationsByControls).forEach(key=>
+      variables.push({key: key.toLowerCase(), label: _.startCase(key)})
+    )
+    Object.keys(findingsByControls).forEach(key=>
+      variables.push({key: key.toLowerCase(), label: _.startCase(key)})
+    )
+    variables = _.uniqWith(variables, _.isEqual)
     const radarData = {
-      variables: [
-        {key: 'expiration', label: 'Certificate expiration'},
-        {key: 'isolation', label: 'Network isolation'},
-        {key: 'provenance', label: 'Image provenance'},
-        {key: 'configured', label: 'LDAP configured'},
-        {key: 'SAML', label: 'SAML'},
-        {key: 'vulnerability', label: 'Image vulnerability'},
-        {key: 'dataintransit', label: 'Inter node data-in-transit'},
-        {key: 'podsecurity', label: 'Pod security'},
-      ],
+      variables,
       sets: [
         {
           key: 'policy',
           color: $grc_color_radar_green,
           className: 'policies',
           label: 'Policy violations',
-          values: {
-            expiration: 4,
-            isolation: 6,
-            provenance: 7,
-            configured: 2,
-            SAML: 8,
-            vulnerability: 1,
-            dataintransit: 6,
-            podsecurity: 3,
-          },
+          values: violationsByControls,
         },
         {
           key: 'findings',
           color: $grc_color_radar_blue,
           className: 'findings',
           label: 'Security findings',
-          values: {
-            expiration: 10,
-            isolation: 8,
-            provenance: 6,
-            configured: 4,
-            SAML: 2,
-            vulnerability: 0,
-            dataintransit: 3,
-            podsecurity: 5,
-          },
+          values: findingsByControls,
         },
       ],
     }
-    const findings = [
+    const findings1 = [
       {count: 1, findingType: SECURITY_TYPES.HIGH},
       {count: 3, findingType: SECURITY_TYPES.MEDIUM},
       {count: 8, findingType: SECURITY_TYPES.LOW},
@@ -380,7 +401,7 @@ export default class ImpactedControlsModule extends React.Component {
     return {
       selectionData: Array.from(standardsSet),
       radarData,
-      findings,
+      findings1,
       setMap: _.keyBy(radarData.sets, 'key'),
       variableMap: _.keyBy(radarData.variables, 'key'),
     }
@@ -405,6 +426,7 @@ export default class ImpactedControlsModule extends React.Component {
 }
 
 ImpactedControlsModule.propTypes = {
+  findings: PropTypes.array,
   policies: PropTypes.array,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,
