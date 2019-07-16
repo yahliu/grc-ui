@@ -88,6 +88,15 @@ export default class CreationView extends React.Component {
     props.setGetPolicyJSON(this.getPolicyJSON.bind(this))
   }
 
+
+  componentWillReceiveProps(nextProps) {
+    const { locale } = this.context
+    const {mutateErrorMsg, mutateStatus} = nextProps
+    if (mutateStatus === 'ERROR') {
+      this.setState({updateMsgKind: 'error', updateMessage: mutateErrorMsg||msgs.get('success.create.policy.check', locale)})
+    }
+  }
+
   render() {
     hideResourceToolbar()
     return (
@@ -340,11 +349,13 @@ export default class CreationView extends React.Component {
           const {count, removed} = diff
           if (removed && count===1 && idx-1<diffs.length) {
             const nextDiff = diffs[idx+1]
-            const {count:c, added} = nextDiff
-            if (added && c===1) {
-              nextDiff.modified = true
-              delete nextDiff.added
-              return false
+            if (nextDiff) {
+              const {count:c, added} = nextDiff
+              if (added && c===1) {
+                nextDiff.modified = true
+                delete nextDiff.added
+                return false
+              }
             }
           }
           return true
@@ -579,5 +590,7 @@ export default class CreationView extends React.Component {
 }
 
 CreationView.propTypes = {
+  mutateErrorMsg: PropTypes.string,
+  mutateStatus: PropTypes.string,
   setGetPolicyJSON: PropTypes.func,
 }

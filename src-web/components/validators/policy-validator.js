@@ -20,9 +20,7 @@ const requiredValues = {
       'namespace':'',
     },
     'spec':{
-      'complianceType': '',
       'remediationAction': 'enforce|inform',
-      'namespaces': {}
     }
   },
 

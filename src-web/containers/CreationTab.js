@@ -14,7 +14,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { RESOURCE_TYPES } from '../../lib/shared/constants'
-import { createResources, updateSecondaryHeader } from '../actions/common'
+import { createResources, updateSecondaryHeader, clearRequestStatus } from '../actions/common'
 import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
@@ -25,7 +25,9 @@ import config from '../../lib/shared/config'
 class CreationTab extends React.Component {
 
   static propTypes = {
+    cleanReqStatus: PropTypes.func,
     handleCreateResources: PropTypes.func,
+    mutateErrorMsg: PropTypes.string,
     mutateStatus: PropTypes.string,
     secondaryHeaderProps: PropTypes.object,
     updateSecondaryHeader: PropTypes.func,
@@ -60,13 +62,17 @@ class CreationTab extends React.Component {
   }
 
   render () {
-    if (this.props.mutateStatus && this.props.mutateStatus === 'DONE') {
+    const { mutateStatus, mutateErrorMsg } = this.props
+    if (mutateStatus && mutateStatus === 'DONE') {
+      this.props.cleanReqStatus()
       return <Redirect to={`${config.contextPath}/policies/all`} />
     }
     return (
       <Page>
         <CreationView
           setGetPolicyJSON={this.setGetPolicyJSON}
+          mutateStatus={mutateStatus}
+          mutateErrorMsg={mutateErrorMsg}
         />
       </Page>
     )
@@ -83,7 +89,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateSecondaryHeader: (title, tabs, breadcrumbItems, links, information) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems, links, '', information)),
-    handleCreateResources: (json) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, json))
+    handleCreateResources: (json) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, json)),
+    cleanReqStatus: () => dispatch(clearRequestStatus(RESOURCE_TYPES.HCM_POLICIES))
   }
 }
 
