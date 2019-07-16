@@ -107,7 +107,7 @@ export class OverviewView extends React.Component {
           handleDrillDownClick={handleDrillDownClick} />
         <PolicySummaryModule
           policies={filteredPolicies}
-          handleDrillDownClick={handleDrillDownClick} />
+          findings={filteredFindings} />
       </div>
     )
   }

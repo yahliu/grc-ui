@@ -263,7 +263,7 @@ export default class ImpactedControlsModule extends React.Component {
 
   getTooltipContent = (setKey, variableKey) => {
     const { locale } = this.context
-    const { setMap, variableMap, findings1 } = this.cardData
+    const { setMap, variableMap, tooltips } = this.cardData
     return ReactDOMServer.renderToStaticMarkup(
       <div className='tooltip-text'>
         <div className='header'>
@@ -274,7 +274,7 @@ export default class ImpactedControlsModule extends React.Component {
           </div>
         </div>
         <div className='findings'>
-          {findings1.map(({count, findingType}) => {
+          {_.get(tooltips, `${setKey}.${variableKey}`,[]).map(({count, findingType}) => {
             let label, className
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
@@ -288,6 +288,10 @@ export default class ImpactedControlsModule extends React.Component {
             case SECURITY_TYPES.LOW:
               label = msgs.get('overview.recent.activity.finding.type.low', locale)
               className = 'low'
+              break
+            case SECURITY_TYPES.VIOLATIONS:
+              label = msgs.get('overview.recent.activity.finding.type.violations', locale)
+              className = 'high'
               break
             }
             return (
@@ -343,6 +347,7 @@ export default class ImpactedControlsModule extends React.Component {
     })
 
     const violationsByControls = {}
+    const policyTooltips = {}
     violations.forEach(policy=>{
       const annotations = _.get(policy, 'metadata.annotations', {})
       const controls = _.get(annotations, 'policy.mcm.ibm.com/controls', 'other')
@@ -350,20 +355,39 @@ export default class ImpactedControlsModule extends React.Component {
         ctrl = ctrl.toLowerCase().trim()
         if (ctrl && (standardsChoice === 'ALL' || _.get(annotations, 'policy.mcm.ibm.com/standards', 'other').toLowerCase().includes(standardsChoice.toLowerCase()))) {
           violationsByControls[ctrl] = _.get(violationsByControls, ctrl, 0)+1
+          policyTooltips[ctrl] = _.get(policyTooltips, ctrl, [{count: 0, findingType: SECURITY_TYPES.VIOLATIONS},])
+          policyTooltips[ctrl][0].count = policyTooltips[ctrl][0].count+1
         }
       })
     })
 
     const findingsByControls = {}
+    const findingsTooltips = {}
     findings.forEach(finding=>{
       const controls = _.get(finding, 'securityClassification.securityControl', 'other')
       controls.split(',').forEach(ctrl => {
         ctrl = ctrl.toLowerCase().trim()
         if (ctrl && (standardsChoice === 'ALL' || _.get(finding, 'securityClassification.securityStandards', ['other']).join(',').toLowerCase().includes(standardsChoice.toLowerCase()))) {
           findingsByControls[ctrl] = _.get(findingsByControls, ctrl, 0)+1
+          findingsTooltips[ctrl] = _.get(findingsTooltips, ctrl, [
+            {count: 0, findingType: SECURITY_TYPES.HIGH},
+            {count: 0, findingType: SECURITY_TYPES.MEDIUM},
+            {count: 0, findingType: SECURITY_TYPES.LOW},
+          ])
+          switch (_.get(finding, 'finding.severity', 'high').toLowerCase()) {
+          case SECURITY_TYPES.LOW.toLowerCase():
+            findingsTooltips[ctrl][2].count = findingsTooltips[ctrl][2].count+1
+            break
+          case SECURITY_TYPES.MEDIUM.toLowerCase():
+            findingsTooltips[ctrl][1].count = findingsTooltips[ctrl][1].count+1
+            break
+          default:
+            findingsTooltips[ctrl][0].count = findingsTooltips[ctrl][0].count+1
+          }
         }
       })
     })
+
     let variables =[]
     Object.keys(violationsByControls).forEach(key=>
       variables.push({key: key.toLowerCase(), label: _.startCase(key)})
@@ -372,6 +396,11 @@ export default class ImpactedControlsModule extends React.Component {
       variables.push({key: key.toLowerCase(), label: _.startCase(key)})
     )
     variables = _.uniqWith(variables, _.isEqual)
+
+    variables.forEach(variable=>{
+      violationsByControls[variable.key] = _.get(violationsByControls, variable.key, 0)
+      findingsByControls[variable.key] = _.get(findingsByControls, variable.key, 0)
+    })
     const radarData = {
       variables,
       sets: [
@@ -391,17 +420,16 @@ export default class ImpactedControlsModule extends React.Component {
         },
       ],
     }
-    const findings1 = [
-      {count: 1, findingType: SECURITY_TYPES.HIGH},
-      {count: 3, findingType: SECURITY_TYPES.MEDIUM},
-      {count: 8, findingType: SECURITY_TYPES.LOW},
-    ]
+    const tooltips = {
+      findings: findingsTooltips,
+      policy: policyTooltips,
+    }
 
 
     return {
       selectionData: Array.from(standardsSet),
       radarData,
-      findings1,
+      tooltips,
       setMap: _.keyBy(radarData.sets, 'key'),
       variableMap: _.keyBy(radarData.variables, 'key'),
     }

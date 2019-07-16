@@ -164,6 +164,7 @@
   "overview.recent.activity.finding.type.high": "High",
   "overview.recent.activity.finding.type.medium": "Medium",
   "overview.recent.activity.finding.type.low": "Low",
+  "overview.recent.activity.finding.type.violations": "Violations",
   "overview.no.violations.title": "No current violations",
   "overview.no.violations.description": "We will continue to monitor and display any policy violations so you can easily find them here.",
   "overview.no.findings.title": "No current security findings",

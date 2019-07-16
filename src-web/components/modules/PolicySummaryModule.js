@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
+import { getAvailablePolicyFilters } from '../../../lib/client/filter-helper'
 
 resources(() => {
   require('../../../scss/module-policy-summary.scss')
@@ -58,31 +59,14 @@ export default class PolicySummaryModule extends React.Component {
 
   getModuleData = () => {
     const { locale } = this.context
-    const { policies } = this.props
-    const standardsSet = new Set()
-    const categorySet = new Set()
+    const { policies, findings } = this.props
+    const filters = getAvailablePolicyFilters(policies, findings, locale)
     const policySet = new Set()
-    const controlSet = new Set()
+    const standardsSet = filters.standards.availableSet
+    const categorySet = filters.categories.availableSet
+    const controlSet = filters.controls.availableSet
 
-    const addTypes = (types='', set) => {
-      if (types.length===0) {
-        types=msgs.get('overview.policy.overview.other', locale)
-      }
-      types.split(',').forEach(type=>{
-        type=type.trim()
-        if (type) {
-          set.add(type)
-        }
-      })
-    }
-
-    policies.map(policy=>{
-      policySet.add(_.get(policy, 'metadata.name', 'unknown'))
-      const annotations = _.get(policy, 'metadata.annotations') || {}
-      addTypes(annotations['policy.mcm.ibm.com/standards'], standardsSet)
-      addTypes(annotations['policy.mcm.ibm.com/categories'], categorySet)
-      addTypes(annotations['policy.mcm.ibm.com/controls'], controlSet)
-    })
+    policies.map(policy=>policySet.add(_.get(policy, 'metadata.name', 'unknown')))
     return {
       summary: [
         {count: standardsSet.size, summaryType: msgs.get('overview.policy.summary.standards', locale)},
@@ -95,5 +79,6 @@ export default class PolicySummaryModule extends React.Component {
 }
 
 PolicySummaryModule.propTypes = {
+  findings: PropTypes.array,
   policies: PropTypes.array,
 }
