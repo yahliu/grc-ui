@@ -55,9 +55,12 @@ export default class ImpactedControlsModule extends React.Component {
 
   render() {
     this.cardData = this.getCardData()
+    const { locale } = this.context
+    const title = msgs.get('overview.impacted.controls.title', locale)
     return (
       <div className='module-impacted-controls'>
         <div className='card-container-container'>
+          <div className='card-title'>{title}</div>
           <div className='card-container'>
             <div className='card-content'>
               {this.renderControls(this.cardData)}
@@ -72,10 +75,8 @@ export default class ImpactedControlsModule extends React.Component {
   renderControls(cardData) {
     const { locale } = this.context
     const title = msgs.get('overview.impacted.controls.title', locale)
-    // const { showControls } = this.state
     return (
       <div className='card-controls'>
-        <div className='card-title'>{title}</div>
         {this.renderLegend()}
         <div className='card-control-panel'>
           {this.renderSelection(title, cardData)}
@@ -122,6 +123,7 @@ export default class ImpactedControlsModule extends React.Component {
     ]
     return (
       <div className='card-legend'>
+        <div key={'key'} className='key' >{msgs.get('overview.impacted.controls.legend.key', locale)}</div>
         {legend.map(({title, className}) => (
           <div key={title} className='legend-container' >
             <div className={`legend ${className}`} />

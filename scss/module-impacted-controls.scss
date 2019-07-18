@@ -13,7 +13,12 @@
 .module-impacted-controls {
 
   .card-container-container {
-    margin-bottom: .45rem;
+    padding-top: 24px;
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
 
     .card-container {
       padding: 10px 20px 10px 0;
@@ -32,14 +37,16 @@
           border-right: 1px solid $color__gray-1;
           position: relative;
 
-          .card-title {
-            font-size: 28px;
-            font-weight: 300;
-            color: $grc_color_overview_title;
-            margin-bottom: 30px;
-          }
+          
 
           .card-legend {
+            .key {
+              font-weight: bold;
+              display: flex;
+              font-size: 14px;
+              margin-bottom: 30px;
+            }
+
             .legend-container {
              display: flex;
              font-size: 14px;

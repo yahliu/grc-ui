@@ -14,9 +14,9 @@ import classNames from 'classnames'
 import { SECURITY_TYPES } from '../../../lib/shared/constants'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
+import TopViolationsModule from './TopViolationsModule'
 import * as d3 from 'd3'
 import _ from 'lodash'
-//import { Link } from 'react-router-dom'
 
 const arcGenerator = d3.arc()
 
@@ -34,21 +34,35 @@ export default class RecentActivityModule extends React.Component {
   render() {
     const { locale } = this.context
     const title = msgs.get('overview.recent.activity.title', locale)
-    const { handleDrillDownClick } = this.props
+    const { handleDrillDownClick, viewState, policies, findings, updateViewState } = this.props
     const moduleData = this.getModuleData()
     return (
       <div className='module-recent-activity'>
         <div className='card-container-container'>
+          <div className='card-title'>
+            {title}
+          </div>
           <div className='card-container'>
             <div className='card-content'>
               <div className='card-inner-content'>
-                <div className='card-title'>
-                  {title}
-                </div>
                 <Violations moduleData={moduleData} handleClick={handleDrillDownClick} locale={locale} />
                 <Findings moduleData={moduleData} handleClick={handleDrillDownClick} locale={locale} />
               </div>
             </div>
+          </div>
+          <div className='violation-container'>
+            <TopViolationsModule
+              type={'policies'}
+              viewState={viewState}
+              updateViewState={updateViewState}
+              items={policies}
+              handleDrillDownClick={handleDrillDownClick} />
+            <TopViolationsModule
+              type={'findings'}
+              viewState={viewState}
+              updateViewState={updateViewState}
+              items={findings}
+              handleDrillDownClick={handleDrillDownClick} />
           </div>
         </div>
       </div>
@@ -230,4 +244,6 @@ RecentActivityModule.propTypes = {
   findings: PropTypes.array,
   handleDrillDownClick: PropTypes.func,
   policies: PropTypes.array,
+  updateViewState: PropTypes.func,
+  viewState: PropTypes.object,
 }

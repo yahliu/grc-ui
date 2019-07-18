@@ -81,7 +81,7 @@ export const findingsTestingDataSet1 = [
       'resourceCrn':null,
       'serviceName':null,
       'serviceCrn':null,
-      'clusterName':'mycluster_name',
+      'clusterName':'cluster1',
       'namespaceName':'kube-system'
     },
     'securityClassification':{
@@ -125,7 +125,7 @@ export const findingsTestingDataSet1 = [
       'resourceCrn':null,
       'serviceName':null,
       'serviceCrn':null,
-      'clusterName':'mycluster_name',
+      'clusterName':'clusterhub',
       'namespaceName':'kube-system'
     },
     'securityClassification':{

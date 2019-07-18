@@ -8,6 +8,11 @@ exports[`RecentActivityModule view renders as expected 1`] = `
     className="card-container-container"
   >
     <div
+      className="card-title"
+    >
+      Recent activity
+    </div>
+    <div
       className="card-container"
     >
       <div
@@ -16,11 +21,6 @@ exports[`RecentActivityModule view renders as expected 1`] = `
         <div
           className="card-inner-content"
         >
-          <div
-            className="card-title"
-          >
-            Recent activity
-          </div>
           <div
             className="card-count-type"
             onClick={[Function]}
@@ -187,6 +187,437 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               </div>
               <div>
                 FINDINGS
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="violation-container"
+    >
+      <div
+        className="module-top-violations"
+      >
+        <div
+          className="header-container"
+        >
+          <div
+            className="header-title"
+          >
+            Top violations
+          </div>
+          <div
+            className="header-tab"
+          >
+            <nav
+              aria-label="Top violations undefined"
+              className="bx--tabs"
+              role="navigation"
+              selected={1}
+            >
+              <div
+                aria-label="listbox"
+                className="bx--tabs-trigger"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="listbox"
+                tabIndex={0}
+              >
+                <a
+                  className="bx--tabs-trigger-text"
+                  href="#"
+                  onClick={[Function]}
+                  tabIndex={-1}
+                >
+                  Clusters
+                </a>
+                <svg
+                  alt="show menu options"
+                  aria-label="show menu options"
+                  className={undefined}
+                  fill={undefined}
+                  fillRule="evenodd"
+                  height="5"
+                  name={undefined}
+                  role="img"
+                  style={undefined}
+                  viewBox="0 0 10 5"
+                  width="10"
+                >
+                  <title>
+                    show menu options
+                  </title>
+                  <path
+                    d="M0 0l5 4.998L10 0z"
+                  />
+                </svg>
+              </div>
+              <ul
+                className="bx--tabs__nav bx--tabs__nav--hidden"
+                role="tablist"
+              >
+                <li
+                  className="bx--tabs__nav-item"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  selected={false}
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-selected={false}
+                    className="bx--tabs__nav-link"
+                    href="#"
+                    role="tab"
+                    tabIndex={-1}
+                  >
+                    Policies
+                  </a>
+                </li>
+                <li
+                  className="bx--tabs__nav-item bx--tabs__nav-item--selected"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  selected={true}
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-selected={true}
+                    className="bx--tabs__nav-link"
+                    href="#"
+                    role="tab"
+                    tabIndex={0}
+                  >
+                    Clusters
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div
+              aria-hidden={true}
+              className={undefined}
+              hidden={true}
+              selected={false}
+            />
+            <div
+              aria-hidden={false}
+              className={undefined}
+              hidden={false}
+              selected={true}
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="violation-card-container"
+          >
+            <div>
+              <div
+                className="violation-card-container"
+              >
+                <div
+                  className="violation-card-content"
+                >
+                  <div
+                    className="card-inner-content"
+                  >
+                    <div
+                      className="card-violations"
+                      onClick={[Function]}
+                      onKeyPress={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <div
+                        className="card-violation-count alert"
+                      >
+                        3
+                      </div>
+                    </div>
+                    <div
+                      className="card-name-description"
+                    >
+                      <div
+                        className="card-name"
+                      >
+                        cluster1
+                      </div>
+                      <div
+                        className="card-description"
+                      >
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/mcm/compliance-all/complianceitem/compliance-all/policy-comp"
+                          onClick={[Function]}
+                        >
+                          compliance-all
+                        </a>
+                        , 
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/mcm/policy-ma/complianceitem/policy-ma/policy-comp"
+                          onClick={[Function]}
+                        >
+                          policy-ma
+                        </a>
+                        , 
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/mcm/policy-pod/complianceitem/policy-pod/policy-comp"
+                          onClick={[Function]}
+                        >
+                          policy-pod
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="violation-card-container"
+              >
+                <div
+                  className="violation-card-content"
+                >
+                  <div
+                    className="card-inner-content"
+                  >
+                    <div
+                      className="card-violations"
+                      onClick={[Function]}
+                      onKeyPress={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <div
+                        className="card-violation-count alert"
+                      >
+                        2
+                      </div>
+                    </div>
+                    <div
+                      className="card-name-description"
+                    >
+                      <div
+                        className="card-name"
+                      >
+                        clusterhub
+                      </div>
+                      <div
+                        className="card-description"
+                      >
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/mcm/compliance-all/complianceitem/compliance-all/policy-comp"
+                          onClick={[Function]}
+                        >
+                          compliance-all
+                        </a>
+                        , 
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/mcm/policy-pod/complianceitem/policy-pod/policy-comp"
+                          onClick={[Function]}
+                        >
+                          policy-pod
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="module-top-violations"
+      >
+        <div
+          className="header-container"
+        >
+          <div
+            className="header-title"
+          >
+            Top security findings 
+          </div>
+          <div
+            className="header-tab"
+          >
+            <nav
+              aria-label="Top security findings  undefined"
+              className="bx--tabs"
+              role="navigation"
+              selected={0}
+            >
+              <div
+                aria-label="listbox"
+                className="bx--tabs-trigger"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="listbox"
+                tabIndex={0}
+              >
+                <a
+                  className="bx--tabs-trigger-text"
+                  href="#"
+                  onClick={[Function]}
+                  tabIndex={-1}
+                >
+                  Security findings
+                </a>
+                <svg
+                  alt="show menu options"
+                  aria-label="show menu options"
+                  className={undefined}
+                  fill={undefined}
+                  fillRule="evenodd"
+                  height="5"
+                  name={undefined}
+                  role="img"
+                  style={undefined}
+                  viewBox="0 0 10 5"
+                  width="10"
+                >
+                  <title>
+                    show menu options
+                  </title>
+                  <path
+                    d="M0 0l5 4.998L10 0z"
+                  />
+                </svg>
+              </div>
+              <ul
+                className="bx--tabs__nav bx--tabs__nav--hidden"
+                role="tablist"
+              >
+                <li
+                  className="bx--tabs__nav-item bx--tabs__nav-item--selected"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  selected={true}
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-selected={true}
+                    className="bx--tabs__nav-link"
+                    href="#"
+                    role="tab"
+                    tabIndex={0}
+                  >
+                    Security findings
+                  </a>
+                </li>
+                <li
+                  className="bx--tabs__nav-item"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  selected={false}
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-selected={false}
+                    className="bx--tabs__nav-link"
+                    href="#"
+                    role="tab"
+                    tabIndex={-1}
+                  >
+                    Clusters
+                  </a>
+                </li>
+              </ul>
+            </nav>
+            <div
+              aria-hidden={false}
+              className={undefined}
+              hidden={false}
+              selected={true}
+            />
+            <div
+              aria-hidden={true}
+              className={undefined}
+              hidden={true}
+              selected={false}
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="violation-card-container"
+          >
+            <div>
+              <div
+                className="violation-card-container"
+              >
+                <div
+                  className="violation-card-content"
+                >
+                  <div
+                    className="card-inner-content"
+                  >
+                    <div
+                      className="card-violations"
+                      onClick={[Function]}
+                      onKeyPress={[Function]}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <div
+                        className="card-violation-count alert"
+                      >
+                        3
+                      </div>
+                    </div>
+                    <div
+                      className="card-name-description"
+                    >
+                      <div
+                        className="card-name"
+                      >
+                        <a
+                          className="card-name-link"
+                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant"
+                          onClick={[Function]}
+                        >
+                          Policy that is not compliant
+                        </a>
+                      </div>
+                      <div
+                        className="card-description"
+                      >
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/mycluster_name"
+                          onClick={[Function]}
+                        >
+                          mycluster_name
+                        </a>
+                        , 
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/cluster1"
+                          onClick={[Function]}
+                        >
+                          cluster1
+                        </a>
+                        , 
+                        <a
+                          className="card-each-description-link"
+                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/clusterhub"
+                          onClick={[Function]}
+                        >
+                          clusterhub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

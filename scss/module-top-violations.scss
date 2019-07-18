@@ -11,48 +11,64 @@
 
 
 .module-top-violations {
+  width: 49%;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 
-   .no-violations {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 auto;
-      width: 20rem;
+  .no-violations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 20rem;
 
-      .no-violations-icon {
-        width: 175px;
-        height: 100px;
-      }
+    .no-violations-icon {
+      width: 175px;
+      height: 100px;
+    }
 
-      .no-violations-title {
-        font-weight: bold;
-        margin-bottom: 9px;
-        font-size: 18px;
-        text-align: center;
-        color: $mcm_color_blue;
-      }
+    .no-violations-title {
+      font-weight: bold;
+      margin-bottom: 9px;
+      font-size: 18px;
+      text-align: center;
+      color: $mcm_color_blue;
+    }
 
-      .no-violations-detail {
-        font-weight: 300;
-        font-size: 14px;
-        font-style: italic;
-        text-align: center;
-        line-height: 1.2;
-        color: $color__navy-gray-6;
-     }
-   }
+    .no-violations-detail {
+      font-weight: 300;
+      font-size: 14px;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.2;
+      color: $color__navy-gray-6;
+    }
+  }
 
   .header-container {
     display: flex;
     align-items: center;
+    border-bottom: 1px solid $color__gray-1;
+    padding: 0 20px;
+    height: 40px;
 
     .header-title {
-      font-size: 18px;
+      width: 50%;
+      font-size: 14px;
       font-weight: bold;
-      padding-right: 10px;
       line-height: 23px;
       &.hasChoice {
         border-right: 1px solid $color__gray-1;
+      }
+    }
+    .header-tab {
+      margin: auto;
+      width: 50%;
+      .bx--tabs__nav-item {
+        margin-left: auto;
+        &:last-child {
+          margin-left: 1rem;
+        }
       }
     }
 
@@ -93,29 +109,26 @@
     }
   }
 
-  .card-container-container {
+  .violation-card-container {
     display: flex;
-    flex-wrap: wrap;
-    margin-bottom: .45rem;
+    flex-direction: column;
 
     > div {
       flex-basis: 33%;
-      max-width: 590px;
     }
 
-    .card-container {
-      padding: 10px 20px 10px 0;
+    .violation-card-container {
+      padding: 0;
+      border-bottom: 1px solid $color__gray-1;
 
-      .card-content {
+      .violation-card-content {
         display: flex;
         height: 140px;
-        min-width: 23.125rem;
         background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 
        .card-inner-content {
          display: flex;
-         padding: 10px;
+         width: 100%;
 
           .card-violations {
             display: flex;
@@ -123,7 +136,6 @@
             flex: 0 0 100px;
             align-items: center;
             justify-content: center;
-            border-right: 1px solid $color__gray-1;
 
             .card-violation-count {
               font-size: 34px;

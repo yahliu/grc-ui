@@ -19,8 +19,8 @@ import { filterPolicies, filterFindings, getAvailablePolicyFilters, getSavedView
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import {POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
-import TopViolationsModule from './modules/TopViolationsModule'
-import TopFindingsModule from './modules/TopFindingsModule'
+// import TopViolationsModule from './modules/TopViolationsModule'
+// import TopFindingsModule from './modules/TopFindingsModule'
 import ImpactedControlsModule from './modules/ImpactedControlsModule'
 import PolicySummaryModule from './modules/PolicySummaryModule'
 import msgs from '../../nls/platform.properties'
@@ -90,15 +90,9 @@ export class OverviewView extends React.Component {
         <RecentActivityModule
           policies={filteredPolicies}
           findings={filteredFindings}
-          handleDrillDownClick={handleDrillDownClick} />
-        <TopViolationsModule
+          handleDrillDownClick={handleDrillDownClick}
           viewState={viewState}
-          updateViewState={this.updateViewState}
-          policies={filteredPolicies}
-          handleDrillDownClick={handleDrillDownClick} />
-        <TopFindingsModule
-          policies={filteredPolicies}
-          handleDrillDownClick={handleDrillDownClick} />
+          updateViewState={this.updateViewState} />
         <ImpactedControlsModule
           viewState={viewState}
           updateViewState={this.updateViewState}

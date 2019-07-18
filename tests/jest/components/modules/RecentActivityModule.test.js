@@ -18,10 +18,14 @@ describe('RecentActivityModule view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
   const filteredFindings = findingsTestingDataSet1
+  const viewState = {}
+  const updateViewState = jest.fn()
   it('renders as expected', () => {
     const component = renderer.create(<BrowserRouter><RecentActivityModule
       policies={filteredPolicies}
       findings={filteredFindings}
+      viewState={viewState}
+      updateViewState={updateViewState}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })

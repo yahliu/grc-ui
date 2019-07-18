@@ -28,12 +28,12 @@ export default class PolicySummaryModule extends React.Component {
     return (
       <div className='module-policy-summary'>
         <div className='card-container-container'>
+          <div className='card-title'>
+            {title}
+          </div>
           <div className='card-container'>
             <div className='card-content'>
               <div className='card-inner-content'>
-                <div className='card-title'>
-                  {title}
-                </div>
                 {data.summary.map(({count, summaryType}) => {
                   return (
                     <div key={summaryType} className='card-count-type'>

@@ -13,7 +13,12 @@
 .module-policy-summary {
 
   .card-container-container {
-    margin-bottom: .45rem;
+    padding-top: 24px;
+
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
 
     .card-container {
       padding: 10px 20px 10px 0;
@@ -21,21 +26,16 @@
       .card-content {
         display: flex;
         align-items: center;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
         height: 140px;
 
         .card-inner-content {
           display: flex;
-          padding: 0 5% 0 40px;
+          padding: 0 15% 0 15%;
           width: 100%;
           justify-content: space-between;
           align-items: center;
-
-          .card-title {
-            font-size: 28px;
-            font-weight: 300;
-            color: $grc_color_overview_title;
-            width: 100px;
-          }
 
           .card-count-type {
             display: flex;

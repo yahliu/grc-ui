@@ -8,6 +8,11 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
     className="card-container-container"
   >
     <div
+      className="card-title"
+    >
+      Most impacted controls
+    </div>
+    <div
       className="card-container"
     >
       <div
@@ -17,13 +22,13 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
           className="card-controls"
         >
           <div
-            className="card-title"
-          >
-            Most impacted controls
-          </div>
-          <div
             className="card-legend"
           >
+            <div
+              className="key"
+            >
+              Key
+            </div>
             <div
               className="legend-container"
             >

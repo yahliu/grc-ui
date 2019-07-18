@@ -8,6 +8,11 @@ exports[`PolicySummaryModule view renders as expected 1`] = `
     className="card-container-container"
   >
     <div
+      className="card-title"
+    >
+      Policy summary
+    </div>
+    <div
       className="card-container"
     >
       <div
@@ -16,11 +21,6 @@ exports[`PolicySummaryModule view renders as expected 1`] = `
         <div
           className="card-inner-content"
         >
-          <div
-            className="card-title"
-          >
-            Policy summary
-          </div>
           <div
             className="card-count-type"
           >
