@@ -114,7 +114,7 @@ export default class RefreshTimeSelect extends React.Component {
             ariaLabel={label}
             onChange={this.handleChange}
             inline={true}
-            initialSelectedItem={this.autoRefreshChoices[idx].label}
+            initialSelectedItem={this.autoRefreshChoices[idx]}
             items={this.autoRefreshChoices} />
         </div>
       )

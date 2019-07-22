@@ -174,8 +174,9 @@ export default class ResourceFilterView extends React.Component {
 
     // calc height of scrollbar container
     const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-    const rect = document.getElementById('header-container').getBoundingClientRect()
-    const scrollHeight = height-rect.height
+    const headerContainer = document.getElementById('header-container')
+    const rectHeight = headerContainer ? headerContainer.getBoundingClientRect().height : 0
+    const scrollHeight = height-rectHeight
     const containerWidth = 260 // based on resource-filter-view width of 300px
     return (
       <div className='resource-filter-view' ref={this.setFilterViewRef} style={{height:scrollHeight+3}} >

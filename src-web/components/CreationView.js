@@ -79,6 +79,7 @@ export default class CreationView extends React.Component {
       hasUndo: false,
       hasRedo: false,
     }
+    this.multiSelectCmpMap = {}
     this.parseDebounced = _.debounce(()=>{
       this.handleParse()
     }, 500)
@@ -172,7 +173,6 @@ export default class CreationView extends React.Component {
         return item
       }
     }
-
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'>
@@ -184,13 +184,14 @@ export default class CreationView extends React.Component {
               </svg>
             </TooltipIcon>
           </div>
-          <MultiSelect
+          <MultiSelect.Filterable
             items={available}
             initialSelectedItems={active}
-            label={active.length===0 ?
+            placeholder={active.length===0 ?
               msgs.get(`creation.view.policy.select.${key}`, locale) :
               active.join(', ')}
             itemToString={itemToString}
+            ref={this.setMultiSelectCmp.bind(this, key)}
             onChange={this.onChange.bind(this, key)} />
         </div>
       </React.Fragment>
@@ -272,8 +273,17 @@ export default class CreationView extends React.Component {
       selectorsMap[field].values = evt.selectedItems
       break
     }
+    if (this.multiSelectCmpMap[field]) {
+      this.multiSelectCmpMap[field].handleOnOuterClick()
+    }
     this.setState({currentParsed, userSelected, currentYaml: this.getYAML(currentParsed, currentYaml)})
   }
+
+
+  setMultiSelectCmp(field, ref) {
+    this.multiSelectCmpMap[field] = ref
+  }
+
 
   getYAML(values, currentYaml) {
     // failure to load templates?

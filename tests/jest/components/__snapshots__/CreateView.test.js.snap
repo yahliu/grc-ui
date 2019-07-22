@@ -16,7 +16,7 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           className="creation-view-controls-textbox-title"
         >
-          Policy name
+          Name
         </div>
         <div
           className="bx--form-item"
@@ -39,7 +39,7 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           className="creation-view-controls-multiselect-title"
         >
-          Policy template
+          Specifications
           <div
             className="bx--tooltip-icon"
           >
@@ -60,12 +60,12 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           aria-invalid={undefined}
           aria-label="Choose an item"
-          className="bx--multi-select bx--list-box"
+          className="bx--multi-select bx--combo-box bx--list-box"
           data-invalid={undefined}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
-          tabIndex={null}
+          tabIndex="-1"
         >
           <div
             aria-expanded={false}
@@ -81,11 +81,22 @@ exports[`CreationView component renders as expected 1`] = `
             tabIndex="0"
             type="button"
           >
-            <span
-              className="bx--list-box__label"
-            >
-              Select how to validate clusters
-            </span>
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={false}
+              autoComplete="off"
+              className="bx--text-input"
+              disabled={false}
+              id="downshift-0-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Select how to validate clusters"
+              role="combobox"
+              value=""
+            />
+            
             <div
               className="bx--list-box__menu-icon"
             >
@@ -141,12 +152,12 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           aria-invalid={undefined}
           aria-label="Choose an item"
-          className="bx--multi-select bx--list-box"
+          className="bx--multi-select bx--combo-box bx--list-box"
           data-invalid={undefined}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
-          tabIndex={null}
+          tabIndex="-1"
         >
           <div
             aria-expanded={false}
@@ -162,11 +173,22 @@ exports[`CreationView component renders as expected 1`] = `
             tabIndex="0"
             type="button"
           >
-            <span
-              className="bx--list-box__label"
-            >
-              Select what clusters to validate
-            </span>
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={false}
+              autoComplete="off"
+              className="bx--text-input"
+              disabled={false}
+              id="downshift-1-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Select what clusters to validate"
+              role="combobox"
+              value=""
+            />
+            
             <div
               className="bx--list-box__menu-icon"
             >
@@ -265,12 +287,12 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           aria-invalid={undefined}
           aria-label="Choose an item"
-          className="bx--multi-select bx--list-box"
+          className="bx--multi-select bx--combo-box bx--list-box"
           data-invalid={undefined}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
-          tabIndex={null}
+          tabIndex="-1"
         >
           <div
             aria-expanded={false}
@@ -286,11 +308,22 @@ exports[`CreationView component renders as expected 1`] = `
             tabIndex="0"
             type="button"
           >
-            <span
-              className="bx--list-box__label"
-            >
-              Select standards this policy belongs to
-            </span>
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={false}
+              autoComplete="off"
+              className="bx--text-input"
+              disabled={false}
+              id="downshift-2-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Select standards this policy belongs to"
+              role="combobox"
+              value=""
+            />
+            
             <div
               className="bx--list-box__menu-icon"
             >
@@ -346,12 +379,12 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           aria-invalid={undefined}
           aria-label="Choose an item"
-          className="bx--multi-select bx--list-box"
+          className="bx--multi-select bx--combo-box bx--list-box"
           data-invalid={undefined}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
-          tabIndex={null}
+          tabIndex="-1"
         >
           <div
             aria-expanded={false}
@@ -367,11 +400,22 @@ exports[`CreationView component renders as expected 1`] = `
             tabIndex="0"
             type="button"
           >
-            <span
-              className="bx--list-box__label"
-            >
-              Select categories this policy belongs to
-            </span>
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={false}
+              autoComplete="off"
+              className="bx--text-input"
+              disabled={false}
+              id="downshift-3-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Select categories this policy belongs to"
+              role="combobox"
+              value=""
+            />
+            
             <div
               className="bx--list-box__menu-icon"
             >
@@ -427,12 +471,12 @@ exports[`CreationView component renders as expected 1`] = `
         <div
           aria-invalid={undefined}
           aria-label="Choose an item"
-          className="bx--multi-select bx--list-box"
+          className="bx--multi-select bx--combo-box bx--list-box"
           data-invalid={undefined}
           onClick={[Function]}
           onKeyDown={[Function]}
           role="listbox"
-          tabIndex={null}
+          tabIndex="-1"
         >
           <div
             aria-expanded={false}
@@ -448,11 +492,22 @@ exports[`CreationView component renders as expected 1`] = `
             tabIndex="0"
             type="button"
           >
-            <span
-              className="bx--list-box__label"
-            >
-              Select controls this policy belongs to
-            </span>
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={false}
+              autoComplete="off"
+              className="bx--text-input"
+              disabled={false}
+              id="downshift-4-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              placeholder="Select controls this policy belongs to"
+              role="combobox"
+              value=""
+            />
+            
             <div
               className="bx--list-box__menu-icon"
             >

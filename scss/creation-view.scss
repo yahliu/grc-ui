@@ -56,7 +56,19 @@
           max-height: 25rem;
           animation: slideopen 200ms  ease-in-out;
         }
+
+        &.bx--combo-box input::placeholder {
+          color: $color__navy-gray-6;
+          text-overflow:ellipsis;
+        }
+
+        &.bx--combo-box input[role='combobox'] {
+          &:focus {
+            box-shadow: none;
+          }
+        }
       }
+
     }
 
     &-checkbox {
