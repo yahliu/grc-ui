@@ -251,13 +251,13 @@ exports[`TopViolationsModule findings clusters view renders as expected 1`] = `
     <div
       className="header-title"
     >
-      Top security findings 
+      Top security findings
     </div>
     <div
       className="header-tab"
     >
       <nav
-        aria-label="Top security findings  undefined"
+        aria-label="Top security findings undefined"
         className="bx--tabs"
         role="navigation"
         selected={0}
@@ -443,13 +443,13 @@ exports[`TopViolationsModule findings view renders as expected 1`] = `
     <div
       className="header-title"
     >
-      Top security findings 
+      Top security findings
     </div>
     <div
       className="header-tab"
     >
       <nav
-        aria-label="Top security findings  undefined"
+        aria-label="Top security findings undefined"
         className="bx--tabs"
         role="navigation"
         selected={0}

@@ -7,19 +7,11 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
+import { validator } from '../../../src-web/components/validators/policy-validator'
 
-import React from 'react'
-import CreationView from '../../../src-web/components/CreationView'
-import renderer from 'react-test-renderer'
-
-describe('CreationView component', () => {
-  const setGetPolicyJSON = jest.fn()
-  it('renders as expected', () => {
-    const component = renderer.create(
-      <CreationView
-        setGetPolicyJSON={setGetPolicyJSON}
-      />
-    )
-    expect(component.toJSON()).toMatchSnapshot()
+//parsed, exceptions, locale
+describe('truncate middle', () => {
+  it('should truncate string as expected', () => {
+    expect(validator('', [], '')).toMatchSnapshot()
   })
 })

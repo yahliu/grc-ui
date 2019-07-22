@@ -82,6 +82,7 @@ export class OverviewView extends React.Component {
     }
     showResourceToolbar()
     const { viewState } = this.state
+    const availableFilters =  getAvailablePolicyFilters(policies, findings, locale)
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     const filteredFindings = filterFindings(findings, activeFilters, locale)
     return (
@@ -98,6 +99,8 @@ export class OverviewView extends React.Component {
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
           findings={filteredFindings}
+          activeFilters={activeFilters}
+          availableFilters={availableFilters}
           handleDrillDownClick={handleDrillDownClick} />
         <PolicySummaryModule
           policies={filteredPolicies}

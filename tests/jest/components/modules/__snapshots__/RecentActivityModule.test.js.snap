@@ -37,10 +37,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className="card-type"
             >
               <div>
-                POLICY
-              </div>
-              <div>
-                VIOLATIONS
+                POLICY VIOLATIONS
               </div>
             </div>
           </div>
@@ -60,10 +57,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className="card-type"
             >
               <div>
-                CLUSTER
-              </div>
-              <div>
-                VIOLATIONS
+                CLUSTER VIOLATIONS
               </div>
             </div>
           </div>
@@ -101,10 +95,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className="card-type"
             >
               <div>
-                {0} SEVERITY
-              </div>
-              <div>
-                FINDINGS
+                HIGH SEVERITY
               </div>
             </div>
           </div>
@@ -142,10 +133,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className="card-type"
             >
               <div>
-                {0} SEVERITY
-              </div>
-              <div>
-                FINDINGS
+                MEDIUM SEVERITY
               </div>
             </div>
           </div>
@@ -183,10 +171,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className="card-type"
             >
               <div>
-                {0} SEVERITY
-              </div>
-              <div>
-                FINDINGS
+                LOW SEVERITY
               </div>
             </div>
           </div>
@@ -443,13 +428,13 @@ exports[`RecentActivityModule view renders as expected 1`] = `
           <div
             className="header-title"
           >
-            Top security findings 
+            Top security findings
           </div>
           <div
             className="header-tab"
           >
             <nav
-              aria-label="Top security findings  undefined"
+              aria-label="Top security findings undefined"
               className="bx--tabs"
               role="navigation"
               selected={0}

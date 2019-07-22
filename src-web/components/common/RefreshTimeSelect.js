@@ -35,6 +35,7 @@ export default class RefreshTimeSelect extends React.Component {
     this.state = {
       pollInterval: getPollInterval(refreshCookie),
     }
+    this.setRefresh = this.setRefresh.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -93,12 +94,12 @@ export default class RefreshTimeSelect extends React.Component {
     if (pollInterval!==undefined) {
       const refresh = msgs.get('refresh', this.context.locale)
       const {refreshControl: {reloading}} = this.props
-      const label = msgs.get('refresh.choose', locale)
+      const label = msgs.get('choose.refresh', locale)
       const idx = Math.max(0, this.autoRefreshChoices.findIndex(({pollInterval:pi})=>{
         return pollInterval===pi
       }))
       return (
-        <div className='refresh-time-selection'>
+        <div className='refresh-time-selection' ref={this.setRefresh}>
           {reloading?
             <Loading withOverlay={false} small /> :
             <div className='button' tabIndex='0' role={'button'}
@@ -119,6 +120,25 @@ export default class RefreshTimeSelect extends React.Component {
       )
     }
     return null
+  }
+
+  setRefresh = ref => {
+    this.refreshRef = ref
+    this.fixTooltip()
+  }
+
+  componentDidUpdate() {
+    this.fixTooltip()
+  }
+
+  // tooltip on dropdown is hardcoded
+  fixTooltip = () => {
+    if (this.refreshRef) {
+      var title = this.refreshRef.querySelector('title')
+      if (title) {
+        title.innerHTML = msgs.get('choose.refresh', this.context.locale)
+      }
+    }
   }
 }
 

@@ -107,6 +107,7 @@ export function validator(parsed, exceptions, locale) {
       })
     }
   })
+  return exceptions
 }
 
 function validatorHelper(ky, required, raw, synced, hasAlternative, exceptions, locale) {

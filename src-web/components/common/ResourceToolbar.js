@@ -14,7 +14,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import resources from '../../../lib/shared/resources'
 import { updateActiveFilters } from '../../actions/common'
-import moment from 'moment'
 import RefreshTimeSelect from './RefreshTimeSelect'
 import ResourceFilterView from './ResourceFilterView'
 import { CSSTransition } from 'react-transition-group'
@@ -28,17 +27,19 @@ resources(() => {
   require('../../../scss/resource-toolbar.scss')
 })
 
-const RefreshTime = ({ reloading, timestamp }) => {
-  const time = moment(new Date(timestamp)).format('h:mm:ss A')
+const RefreshTime = ({ reloading, timestamp, locale }) => {
+  const time = new Date(timestamp).toLocaleTimeString(locale)
+  const lastUpdate = msgs.get('overview.menu.last.update', [time], locale)
   return (
     <div className='refresh-time-container'>
       {reloading ?<Loading withOverlay={false} small /> : null }
-      <div>{time}</div>
+      <div>{lastUpdate}</div>
     </div>
   )
 }
 
 RefreshTime.propTypes = {
+  locale: PropTypes.string,
   reloading: PropTypes.bool,
   timestamp: PropTypes.string,
 }
@@ -70,6 +71,7 @@ export class ResourceToolbar extends React.Component {
           <div className='resource-toolbar-buttons' >
             {/* refresh time button */}
             <RefreshTimeSelect
+              locale = {locale}
               refreshValues = {REFRESH_TIMES}
               refreshControl = {refreshControl}
             />

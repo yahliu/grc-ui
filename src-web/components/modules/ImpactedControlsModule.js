@@ -41,16 +41,22 @@ export default class ImpactedControlsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {standardsChoice='ALL', showControls=6}} = props
+    const {viewState: {showControls=6}} = props
     this.state = {
-      standardsChoice,
       showControls,
     }
     this.onSelectionChange = this.onSelectionChange.bind(this)
     this.onSliderChange = this.onSliderChange.bind(this)
-    this.fixRadar = this.fixRadar.bind(this)
     this.openTooltip = this.openTooltip.bind(this)
     this.closeTooltip = this.closeTooltip.bind(this)
+    this.fixRadar = this.fixRadar.bind(this)
+    this.setDropdown = this.setDropdown.bind(this)
+  }
+
+  componentDidUpdate() {
+    this.dotMap=null
+    this.fixRadar(this.radarRef)
+    this.fixDropdown()
   }
 
   render() {
@@ -86,21 +92,21 @@ export default class ImpactedControlsModule extends React.Component {
     )
   }
 
-  renderSelection(title, {selectionData}) {
+  renderSelection(title, {selectionData, standardsChoice}) {
     const { locale } = this.context
-    const { standardsChoice } = this.state
     let idx = 0
     const choices = selectionData.sort().map((standard, ix)=>{
       if (standardsChoice===standard) {
         idx = ix
       }
       return {
-        value: ix,
-        label: standard,
+        value: standard,
+        label: standard==='ALL' ? msgs.get('overview.impacted.controls.all', locale)  : standard
       }
     })
+    this.currentChoice = choices[idx]
     return (
-      <div className='card-selection'>
+      <div className='card-selection' ref={this.setDropdown}>
         <div className='card-selection-title'>
           {msgs.get('overview.impacted.controls.standard', locale)}
         </div>
@@ -159,6 +165,13 @@ export default class ImpactedControlsModule extends React.Component {
     if (radarData.variables.length>showControls) {
       radarData.variables = radarData.variables.slice(0, showControls)
     }
+    let domainMax = 0
+    radarData.sets.forEach(({values})=>{
+      Object.values(values).forEach(v=>{
+        domainMax = Math.max(domainMax, v)
+      })
+    })
+    domainMax = Math.min(10, Math.ceil(domainMax*1.2))
     return (
       <div className='card-radar-container' >
         <div className='card-radar' ref={this.fixRadar}>
@@ -166,7 +179,7 @@ export default class ImpactedControlsModule extends React.Component {
             width={500}
             height={500}
             padding={70}
-            domainMax={10}
+            domainMax={domainMax}
             highlighted={null}
             style={{
               ringColor: $grc_color_radar_ring,
@@ -191,6 +204,54 @@ export default class ImpactedControlsModule extends React.Component {
     )
   }
 
+  setDropdown = ref => {
+    this.dropdownRef = ref
+    this.fixDropdown()
+  }
+
+  fixDropdown = () => {
+    if (this.dropdownRef) {
+      // tooltip on dropdown is hardcoded
+      const title = this.dropdownRef.querySelector('title')
+      if (title) {
+        title.innerHTML = msgs.get('choose.standard', this.context.locale)
+      }
+
+      // make sure editbox is the selected choice
+      if (this.cardData) {
+        const {standardsChoice} = this.cardData
+        const choice = this.dropdownRef.querySelector('span')
+        if (choice) {
+          choice.innerHTML = standardsChoice==='ALL' ? msgs.get('overview.impacted.controls.all', this.context.locale)  : standardsChoice
+        }
+      }
+
+      if (!this.observer) {
+        const dropdown = this.dropdownRef.querySelector('.bx--dropdown')
+        this.observer = new MutationObserver(() => {
+          const { activeFilters: {standards:filteredStandards=new Set()} } = this.props
+          const items = Array.from(this.dropdownRef.querySelectorAll('.bx--list-box__menu-item'))
+          items.forEach((item, idx)=>{
+            const {innerHTML} = item
+            let disabled = filteredStandards.size>0 &&
+              !filteredStandards.has(innerHTML)
+            if (disabled && filteredStandards.size>1 && idx===0) {
+              disabled = false
+            }
+            item.classList.toggle('disabled', disabled)
+          })
+        })
+        this.observer.observe(dropdown, {
+          childList: true
+        })
+      }
+
+    } else if (this.observer) {
+      this.observer.disconnect()
+      delete this.observer
+    }
+  }
+
   // modify behaviour of react-d3-radar
   // (without modifying the code)
   fixRadar = ref => {
@@ -211,10 +272,6 @@ export default class ImpactedControlsModule extends React.Component {
         }
       })
     }
-  }
-
-  componentDidUpdate() {
-    this.dotMap=null
   }
 
   openTooltip = ({x, y, setKey, variableKey}) => {
@@ -280,15 +337,15 @@ export default class ImpactedControlsModule extends React.Component {
             let label, className
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
-              label = msgs.get('overview.recent.activity.finding.type.high', locale)
+              label = msgs.get('overview.recent.activity.finding.severity.high', locale)
               className = 'high'
               break
             case SECURITY_TYPES.MEDIUM:
-              label = msgs.get('overview.recent.activity.finding.type.medium', locale)
+              label = msgs.get('overview.recent.activity.finding.severity.medium', locale)
               className = 'medium'
               break
             case SECURITY_TYPES.LOW:
-              label = msgs.get('overview.recent.activity.finding.type.low', locale)
+              label = msgs.get('overview.recent.activity.finding.severity.low', locale)
               className = 'low'
               break
             case SECURITY_TYPES.VIOLATIONS:
@@ -310,9 +367,11 @@ export default class ImpactedControlsModule extends React.Component {
 
   getCardData = () => {
     const { policies, findings } = this.props
-    const standardsChoice = this.state.standardsChoice
+    const { activeFilters: {standards:filteredStandards=new Set()} } = this.props
+    const { availableFilters: {standards: {availableSet:availableStandards}} } = this.props
+    let {viewState: {standardsChoice='ALL'}} = this.props
 
-    // loop thru policies
+    // loop thru policies to get violations
     const violations = []
     policies.map(policy=>{
       const statuses = _.get(policy, 'raw.status.status', {})
@@ -327,26 +386,20 @@ export default class ImpactedControlsModule extends React.Component {
       })
     })
 
-    const standardsSet = new Set(['ALL'])
-    violations.forEach(violation=>{
-      const annotations = _.get(violation, 'metadata.annotations', {})
-      const standards = _.get(annotations,'policy.mcm.ibm.com/standards', 'other')
-      standards.split(',').forEach(standard=>{
-        standard = standard.trim()
-        if (standard) {
-          standardsSet.add(_.startCase(standard))
+    // adjust selections based on filter bar
+    const selectionData = ['ALL', ...Array.from(availableStandards)]
+    if (filteredStandards.size!==0) {
+      // if current choice isn't available, change to first avaiable choice
+      if (!filteredStandards.has(standardsChoice)) {
+        // if only one choice, make that the selection
+        if (filteredStandards.size===1) {
+          standardsChoice = Array.from(filteredStandards)[0]
+        } else {
+          // else use all
+          standardsChoice = 'ALL'
         }
-      })
-    })
-    findings.forEach(finding=>{
-      const standards = _.get(finding, 'securityClassification.securityStandards', ['other'])
-      standards.forEach(standard=>{
-        standard = standard.trim()
-        if (standard) {
-          standardsSet.add(_.startCase(standard))
-        }
-      })
-    })
+      }
+    }
 
     const violationsByControls = {}
     const policyTooltips = {}
@@ -427,9 +480,9 @@ export default class ImpactedControlsModule extends React.Component {
       policy: policyTooltips,
     }
 
-
     return {
-      selectionData: Array.from(standardsSet),
+      standardsChoice,
+      selectionData,
       radarData,
       tooltips,
       setMap: _.keyBy(radarData.sets, 'key'),
@@ -438,11 +491,8 @@ export default class ImpactedControlsModule extends React.Component {
   }
 
   onSelectionChange = (e) => {
-    const {selectedItem: {label}} = e
-    this.props.updateViewState({standardsChoice: label})
-    this.setState(()=>{
-      return {standardsChoice: label}
-    })
+    const {selectedItem: {value}} = e
+    this.props.updateViewState({standardsChoice: value})
   }
 
   onSliderChange = (e) => {
@@ -456,6 +506,8 @@ export default class ImpactedControlsModule extends React.Component {
 }
 
 ImpactedControlsModule.propTypes = {
+  activeFilters: PropTypes.object,
+  availableFilters: PropTypes.object,
   findings: PropTypes.array,
   policies: PropTypes.array,
   updateViewState: PropTypes.func,

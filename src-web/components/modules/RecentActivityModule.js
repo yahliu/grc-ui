@@ -113,7 +113,7 @@ export default class RecentActivityModule extends React.Component {
   }
 }
 
-const Violations = ({moduleData: {violations}, handleDrillDownClick, locale}) => {
+const Violations = ({moduleData: {violations}, handleDrillDownClick}) => {
   return (
     <React.Fragment>
       {violations.map(({count, violationType}, idx) => {
@@ -143,9 +143,6 @@ const Violations = ({moduleData: {violations}, handleDrillDownClick, locale}) =>
               <div>
                 {violationType.toUpperCase()}
               </div>
-              <div>
-                {msgs.get('overview.recent.activity.violation.type', locale).toUpperCase()}
-              </div>
             </div>
           </div>
         )
@@ -156,7 +153,6 @@ const Violations = ({moduleData: {violations}, handleDrillDownClick, locale}) =>
 
 Violations.propTypes = {
   handleDrillDownClick: PropTypes.func,
-  locale: PropTypes.string,
   moduleData: PropTypes.object,
 }
 
@@ -177,15 +173,15 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
         let label, color
         switch (findingType) {
         case SECURITY_TYPES.HIGH:
-          label = msgs.get('overview.recent.activity.finding.type.high', locale)
+          label = msgs.get('overview.recent.activity.finding.severity.high', locale)
           color = $grc_color_finding_high
           break
         case SECURITY_TYPES.MEDIUM:
-          label = msgs.get('overview.recent.activity.finding.type.medium', locale)
+          label = msgs.get('overview.recent.activity.finding.severity.medium', locale)
           color = $grc_color_finding_medium
           break
         case SECURITY_TYPES.LOW:
-          label = msgs.get('overview.recent.activity.finding.type.low', locale)
+          label = msgs.get('overview.recent.activity.finding.severity.low', locale)
           color = $grc_color_finding_low
           break
         }
@@ -221,10 +217,7 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
             </div>
             <div className='card-type'>
               <div>
-                {msgs.get('overview.recent.activity.finding.severity', [label], locale).toUpperCase()}
-              </div>
-              <div>
-                {msgs.get('overview.recent.activity.finding.type', locale).toUpperCase()}
+                {label.toUpperCase()}
               </div>
             </div>
           </div>

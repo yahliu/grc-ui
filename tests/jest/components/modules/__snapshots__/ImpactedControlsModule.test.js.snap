@@ -85,7 +85,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     className="bx--list-box__label"
                     htmlFor="downshift-0-input"
                   >
-                    ALL
+                    All
                   </span>
                   <div
                     className="bx--list-box__menu-icon"
@@ -234,25 +234,19 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     <circle
                       fill="#979797"
                       fillOpacity={0.1}
-                      r={144}
+                      r={135}
                       stroke="#979797"
                     />
                     <circle
                       fill="#979797"
                       fillOpacity={0.1}
-                      r={108}
+                      r={90}
                       stroke="#979797"
                     />
                     <circle
                       fill="#979797"
                       fillOpacity={0.1}
-                      r={72}
-                      stroke="#979797"
-                    />
-                    <circle
-                      fill="#979797"
-                      fillOpacity={0.1}
-                      r={36}
+                      r={45}
                       stroke="#979797"
                     />
                     <text
@@ -265,42 +259,6 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       x={0}
                       y={-180}
                     >
-                      10
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-144}
-                    >
-                      8
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-108}
-                    >
-                      6
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-72}
-                    >
                       4
                     </text>
                     <text
@@ -311,9 +269,33 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       fontSize={10}
                       textAnchor="left"
                       x={0}
-                      y={-36}
+                      y={-135}
+                    >
+                      3
+                    </text>
+                    <text
+                      dx="0.4em"
+                      dy="0.4em"
+                      fill="black"
+                      fontFamily="sans-serif"
+                      fontSize={10}
+                      textAnchor="left"
+                      x={0}
+                      y={-90}
                     >
                       2
+                    </text>
+                    <text
+                      dx="0.4em"
+                      dy="0.4em"
+                      fill="black"
+                      fontFamily="sans-serif"
+                      fontSize={10}
+                      textAnchor="left"
+                      x={0}
+                      y={-45}
+                    >
+                      1
                     </text>
                   </g>
                   <g>
@@ -434,22 +416,22 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                   </g>
                   <g>
                     <path
-                      d="M53.999999999997115,-0.00001764692441305947C53.99999792153587,11.999982353075227,8.99998752923208,35.99999705884377,-0.000012470767438298165,35.99999999999784C-9.000012470766958,36.00000294115191,-0.0000020784612397163605,11.99999999999964,0,0C0.0000020784612397163605,-11.99999999999964,-8.999999999999519,-35.99999705884593,0,-36C8.999999999999519,-36.00000294115407,54.00000207845836,-12.000017646924052,53.999999999997115,-0.00001764692441305947"
+                      d="M134.99999999999278,-0.00004411731103264868C134.99999480383968,29.999955882688067,22.4999688230802,89.99999264710942,-0.00003117691859574541,89.9999999999946C-22.500031176917393,90.00000735287978,-0.000005196153099290901,29.999999999999098,0,0C0.000005196153099290901,-29.999999999999098,-22.499999999998796,-89.99999264711482,0,-90C22.499999999998796,-90.00000735288518,135.00000519614588,-30.00004411731013,134.99999999999278,-0.00004411731103264868"
                       fill="#13B9B9"
                       fillOpacity={0.2}
                       stroke="#13B9B9"
                       strokeOpacity={0.7}
                     />
                     <circle
-                      cx={2.204364238465236e-15}
-                      cy={-36}
+                      cx={5.5109105961630896e-15}
+                      cy={-90}
                       fill="#13B9B9"
                       opacity={0.7}
                       r={3}
                       stroke="#13B9B9"
                     />
                     <circle
-                      cx={54}
+                      cx={135}
                       cy={0}
                       fill="#13B9B9"
                       opacity={0.7}
@@ -457,8 +439,8 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       stroke="#13B9B9"
                     />
                     <circle
-                      cx={2.204364238465236e-15}
-                      cy={36}
+                      cx={5.5109105961630896e-15}
+                      cy={90}
                       fill="#13B9B9"
                       opacity={0.7}
                       r={3}
@@ -475,7 +457,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                   </g>
                   <g>
                     <path
-                      d="M0,0C0,0,8.999999999999996,1.7653779073130582e-7,0,0C-8.999999999999996,-1.7653779073130582e-7,-53.999999999999986,-0.000001059226744387835,-53.999999999999986,-0.000001059226744387835C-53.999999999999986,-0.000001059226744387835,-8.999999999999996,-1.7653779073130582e-7,0,0C8.999999999999996,1.7653779073130582e-7,0,0,0,0"
+                      d="M0,0C0,0,22.499999999999993,4.4134447682826454e-7,0,0C-22.499999999999993,-4.4134447682826454e-7,-134.99999999999997,-0.0000026480668609695874,-134.99999999999997,-0.0000026480668609695874C-134.99999999999997,-0.0000026480668609695874,-22.499999999999993,-4.4134447682826454e-7,0,0C22.499999999999993,4.4134447682826454e-7,0,0,0,0"
                       fill="#0082C1"
                       fillOpacity={0.2}
                       stroke="#0082C1"
@@ -506,8 +488,8 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       stroke="#0082C1"
                     />
                     <circle
-                      cx={-54}
-                      cy={6.6130927153957075e-15}
+                      cx={-135}
+                      cy={1.6532731788489267e-14}
                       fill="#0082C1"
                       opacity={0.7}
                       r={3}
