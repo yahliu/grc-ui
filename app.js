@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === 'production') {
 const csrfMiddleware = csurf({ cookie: true })
 
 var proxy = require('http-proxy-middleware')
-app.use(`${appConfig.get('contextPath')}/common/graphql`, cookieParser(), csrfMiddleware, (req, res, next) => {
+app.use(`${appConfig.get('contextPath')}/policies/graphql`, cookieParser(), csrfMiddleware, (req, res, next) => {
   const accessToken = req.cookies['cfc-access-token-cookie']
   req.headers.Authorization = `Bearer ${accessToken}`
   next()
@@ -77,7 +77,7 @@ app.use(`${appConfig.get('contextPath')}/common/graphql`, cookieParser(), csrfMi
   target: appConfig.get('grcUiApiUrl') || 'https://localhost:4000/grcuiapi',
   changeOrigin: true,
   pathRewrite: {
-    [`^${appConfig.get('contextPath')}/common/graphql`]: '/graphql'
+    [`^${appConfig.get('contextPath')}/policies/graphql`]: '/graphql'
   },
   secure: false
 }))
@@ -90,11 +90,11 @@ if (process.env.NODE_ENV === 'development') {
     ws: true
   }))
 
-  app.use(`${appConfig.get('contextPath')}/common/api/proxy`, cookieParser(), proxy({
+  app.use(`${appConfig.get('contextPath')}/policies/api/proxy`, cookieParser(), proxy({
     target: appConfig.get('cfcRouterUrl'),
     changeOrigin: true,
     pathRewrite: {
-      [`^${appConfig.get('contextPath')}/common/api/proxy`]: ''
+      [`^${appConfig.get('contextPath')}/policies/api/proxy`]: ''
     },
     secure: false
   }))
@@ -125,7 +125,7 @@ app.use(cookieParser(), csrfMiddleware, (req, res, next) => {
   req.url = `${req.url}.gz`
   next()
 })
-app.use(`${CONTEXT_PATH}/common`, express.static(STATIC_PATH, {
+app.use(`${CONTEXT_PATH}/policies`, express.static(STATIC_PATH, {
   maxAge: process.env.NODE_ENV === 'development' ? 0 : 1000 * 60 * 60 * 24 * 365,
   setHeaders: (res, fp) => {
     if (fp.startsWith(`${STATIC_PATH}/nls`)) {

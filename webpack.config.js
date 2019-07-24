@@ -31,7 +31,6 @@ module.exports = {
   devtool: PRODUCTION ? 'source-map' : 'cheap-module-source-map',
   stats: { children: false },
   entry: {
-    'common': ['./scss/common.scss'],
     'main': ['babel-polyfill', './src-web/index.js']
   },
 
@@ -80,7 +79,7 @@ module.exports = {
             {
               loader: 'sass-loader?sourceMap',
               options: {
-                data: '$font-path: "'+ config.get('contextPath') + '/common/fonts";'
+                data: '$font-path: "'+ config.get('contextPath') + '/policies/fonts";'
               }
             }
           ]
@@ -122,7 +121,7 @@ module.exports = {
     filename: PRODUCTION ? 'js/[name].[hash].min.js' : 'js/[name].min.js', //needs to be hash for production (vs chunckhash) in order to cache bust references to chunks
     chunkFilename: PRODUCTION ? 'js/[name].[chunkhash].min.js' : 'js/[name].min.js',
     path: __dirname + '/public',
-    publicPath: `${config.get('contextPath')}/common`.replace(/\/?$/, '/')
+    publicPath: `${config.get('contextPath')}/policies`.replace(/\/?$/, '/')
   },
 
   plugins: [
