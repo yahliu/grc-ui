@@ -1,8 +1,20 @@
-    - apiVersion: roletemplate.mcm.ibm.com/v1alpha1
+    - apiVersion: roletemplate.mcm.ibm.com/v1alpha1 # role must follow defined permissions
       metadata:
-        name: operator-role-policy
+        namespace: "" # will be inferred
+        name: operator-role-policy 
       selector:
         matchLabels:
           dev: "true"
-      complianceType: "musthave" # at this level, it means the role must exist with the rules that it musthave below
+      complianceType: musthave # at this level, it means the role must exist with the rules that it musthave below
       rules:
+        - complianceType: musthave # at this level, it means if the role exists the rule is a musthave
+          policyRule:
+            apiGroups: ["extensions", "apps"]
+            resources: ["deployments"]
+            verbs: ["get", "list", "watch", "create", "delete","patch"]
+        - complianceType: "mustnothave" # at this level, it means if the role exists the rule is a mustnothave
+          policyRule:
+            apiGroups: ["core"]
+            resources: ["secrets"]
+            verbs: ["get", "list", "watch","delete", "create", "update", "patch"]
+

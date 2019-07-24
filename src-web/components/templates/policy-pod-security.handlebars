@@ -1,7 +1,7 @@
-    - complianceType: "musthave"
+    - complianceType: musthave
       objectDefinition:
         apiVersion: policy/v1beta1
-        kind: PodSecurityPolicy
+        kind: PodSecurityPolicy # no privileged pods
         metadata:
           name: restricted-mcm
           annotations:

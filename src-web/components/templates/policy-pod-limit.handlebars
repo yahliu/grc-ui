@@ -1,7 +1,7 @@
-    - complianceType: "musthave"
+    - complianceType: musthave
       objectDefinition:
         apiVersion: v1
-        kind: LimitRange
+        kind: LimitRange # limit memory usage
         metadata:
           name: mem-limit-range
         spec:

@@ -1,6 +1,6 @@
-    - complianceType: "musthave"
+    - complianceType: musthave
       objectDefinition:
-        kind: NetworkPolicy
+        kind: NetworkPolicy # deny network request
         apiVersion: networking.k8s.io/v1
         metadata:
           name: deny-from-other-namespaces

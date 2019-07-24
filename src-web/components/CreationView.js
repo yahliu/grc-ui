@@ -18,17 +18,8 @@ import { validator } from './validators/policy-validator'
 import { hideResourceToolbar } from '../../lib/client/resource-helper'
 import EditorBar from './common/EditorBar'
 import YamlEditor from './common/YamlEditor'
+import * as Templates from './templates'
 import policyHeader from './templates/policy-header.handlebars'
-import policyMutation from './templates/policy-mutation.handlebars'
-import policyPodExists from './templates/policy-pod-exists.handlebars'
-import policyPodRole from './templates/policy-pod-role.handlebars'
-import policyPodSecurity from './templates/policy-pod-security.handlebars'
-import policyPodNetwork from './templates/policy-pod-network.handlebars'
-import policyPodLimit from './templates/policy-pod-limit.handlebars'
-import policyRoles from './templates/policy-roles.handlebars'
-import policyRolesPods from './templates/policy-roles-pods.handlebars'
-import policyRolesSecrets from './templates/policy-roles-secrets.handlebars'
-import policyRolesDeployments from './templates/policy-roles-deployments.handlebars'
 import policyBindings from './templates/policy-bindings.handlebars'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
@@ -61,7 +52,23 @@ const initalAnnotations = {
   categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
   controls: ['MutationAdvisor','VA'],
 }
-const roles = ['mutation', 'deployments', 'pods', 'secrets', 'exists', 'role', 'security', 'network', 'limits']
+
+const roles = Object.values(Templates).map(template => {
+  const value = template.call()
+  let kindDes = value.match(/kind:(.*) #(.*)/)
+  let type = ''
+  if (value.match(/apiVersion: roletemplate.mcm.ibm.com\/v1alpha1/g)) { // role-templates
+    type = 'role-templates'
+    kindDes = value.match(/apiVersion:(.*)template.mcm.ibm.com\/v1alpha1 #(.*)/)
+  } else if (value.match(/complianceType/g)) { // object-templates
+    type = 'object-templates'
+  } else { // policy-templates
+    type = 'policy-templates'
+  }
+
+  return { key: `${_.capitalize(kindDes[1].trim())}-${kindDes[2].trim()}`, kind: _.capitalize(kindDes[1].trim()), description: kindDes[2].trim(), value, type}
+})
+
 const selectors = ['cloud: "IBM"', 'env: "Dev"']
 
 export default class CreationView extends React.Component {
@@ -125,7 +132,7 @@ export default class CreationView extends React.Component {
               value={name}
               onChange={this.onChange.bind(this, 'name')} />
           </div>
-          {this.renderMultiselect('validations', 'roles', roles)}
+          {this.renderMultiselect('validations', 'roles', roles.map(role=>role.key))}
           {this.renderMultiselect('bindings', 'selectors', selectors)}
           {this.renderCheckbox('enforce')}
           {this.renderMultiselect('annotations', 'standards', standards)}
@@ -166,13 +173,6 @@ export default class CreationView extends React.Component {
     const parsed = currentParsed[parsedKey]
     const parsedMap = _.keyBy(parsed, 'name')
     const active = parsedMap[key].values
-    const itemToString = item => {
-      if (parsedKey === 'validations') {
-        return msgs.get(`creation.view.policy.choice.${item}`, locale)
-      } else {
-        return item
-      }
-    }
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'>
@@ -190,7 +190,7 @@ export default class CreationView extends React.Component {
             placeholder={active.length===0 ?
               msgs.get(`creation.view.policy.select.${key}`, locale) :
               active.join(', ')}
-            itemToString={itemToString}
+            itemToString={item=>item}
             ref={this.setMultiSelectCmp.bind(this, key)}
             onChange={this.onChange.bind(this, key)} />
         </div>
@@ -286,62 +286,38 @@ export default class CreationView extends React.Component {
 
 
   getYAML(values, currentYaml) {
-    // failure to load templates?
+    // failure to load Templates?
     if (typeof policyHeader!=='function') {
       return ''
     }
 
-    const {  validations } = values
-    const validationsMap = _.keyBy(validations, 'name')
-    const rolesSet = new Set(validationsMap['roles'].values)
+    const { validations } = values
+    // sort array for yaml concatenation
+    const validationsArray = _.keyBy(validations, 'name')['roles'].values.sort((a,b)=>{
+      const roleA = roles.find(role=>role.key===a)
+      const roleB = roles.find(role=>role.key===b)
+      return roleA.type > roleB.type ? 1 : roleA.type < roleB.type ? -1 : 0
+    })
 
     // policy header
     let yaml = policyHeader(Object.assign({}, values))
-
-    // policy-templates
-    if (rolesSet.has('mutation')) {
-      yaml = yaml.concat(
-        '  policy-templates:\n',
-        policyMutation(Object.assign({}, values))
-      )
-    }
-
-    // pod-templates
-    if (rolesSet.has('exists') || rolesSet.has('role') ||
-      rolesSet.has('security') || rolesSet.has('network') ||
-      rolesSet.has('limits')) {
-      yaml = yaml.concat('  object-templates:\n')
-      if (rolesSet.has('exists')) {
-        yaml = yaml.concat(policyPodExists(Object.assign({}, values)))
+    validationsArray.forEach(validation => {
+      const role = roles.find(role=>role.key===validation)
+      if (role.type === 'role-templates') { // role-templates
+        if (yaml.match(/role-templates:/) == null) {
+          yaml = yaml.concat('  role-templates:\n')
+        }
+      } else if (role.type === 'object-templates') { // object-templates
+        if (yaml.match(/object-templates:/) == null) {
+          yaml = yaml.concat('  object-templates:\n')
+        }
+      } else { // policy-templates
+        if (yaml.match(/policy-templates:/) == null) {
+          yaml = yaml.concat('  policy-templates:\n')
+        }
       }
-      if (rolesSet.has('role')) {
-        yaml = yaml.concat(policyPodRole(Object.assign({}, values)))
-      }
-      if (rolesSet.has('security')) {
-        yaml = yaml.concat(policyPodSecurity(Object.assign({}, values)))
-      }
-      if (rolesSet.has('network')) {
-        yaml = yaml.concat(policyPodNetwork(Object.assign({}, values)))
-      }
-      if (rolesSet.has('limits')) {
-        yaml = yaml.concat(policyPodLimit(Object.assign({}, values)))
-      }
-    }
-
-    // role-templates
-    if (rolesSet.has('deployments') || rolesSet.has('pods') || rolesSet.has('secrets')) {
-      yaml = yaml.concat('  role-templates:\n',
-        policyRoles(Object.assign({}, values)))
-      if (rolesSet.has('deployments')) {
-        yaml = yaml.concat(policyRolesDeployments(Object.assign({}, values)))
-      }
-      if (rolesSet.has('pods')) {
-        yaml = yaml.concat(policyRolesPods(Object.assign({}, values)))
-      }
-      if (rolesSet.has('secrets')) {
-        yaml = yaml.concat(policyRolesSecrets(Object.assign({}, values)))
-      }
-    }
+      yaml = yaml.concat(role.value)
+    })
 
     // policy bindings
     yaml = yaml.concat(
@@ -405,6 +381,7 @@ export default class CreationView extends React.Component {
         this.editor.scrollToLine(firstRow, true)
       }
     }
+
     return yaml
   }
 
