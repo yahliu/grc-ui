@@ -41,12 +41,14 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
     </TableHead>
     <TableBody>
       {(() => {
-        return items.map((row) => {
-          return (
-            <TableRow key={row.id}>
-              {row.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
-            </TableRow>
-          )
+        return items.map((row) => {//check undefined row.id to avoid whole page crush
+          if(row && row.id){
+            return (
+              <TableRow key={row.id}>
+                {row.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
+              </TableRow>
+            )
+          }
         })
       })()}
     </TableBody>

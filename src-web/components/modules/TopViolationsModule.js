@@ -283,7 +283,7 @@ const TopViolations = ({cardData, handleClick}) => {
   return (
     <div key={name}>
       <div className='violation-card-container' >
-        {cardData.map(({name, description, count, choice, type, nameSpace, itemName}) => {
+        {cardData.map(({name, description, count, choice, type, itemName}) => {
           const violated = count > 0
           const onClick = () =>{
             if (violated) {
@@ -295,7 +295,7 @@ const TopViolations = ({cardData, handleClick}) => {
               onClick()
             }
           }
-          const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace) }/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
+          const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
           const classes = classNames({
             'card-violation-count': true,
             'alert': count>0,
@@ -338,8 +338,7 @@ const TopViolations = ({cardData, handleClick}) => {
 
 TopViolations.propTypes = {
   cardData: PropTypes.array,
-  handleClick: PropTypes.func,
-  nameSpace: PropTypes.string
+  handleClick: PropTypes.func
 }
 
 TopViolationsModule.propTypes = {

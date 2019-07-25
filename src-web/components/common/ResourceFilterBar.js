@@ -17,6 +17,7 @@ import { updateActiveFilters } from '../../actions/common'
 import { Icon, Tag } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../../scss/resource-filterbar.scss')
@@ -98,7 +99,7 @@ class ResourceFilterBar extends React.Component {
   }
 
   removeAllActiveFilter = (clearFilters) => {
-    const {updateActiveFilters} = this.props
+    const {updateActiveFilters, location, history } = this.props
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})
     clearFilters.forEach(key=> {
       let activeSet = activeFilters[key]
@@ -108,11 +109,27 @@ class ResourceFilterBar extends React.Component {
       activeSet.clear()
     })
     updateActiveFilters(activeFilters)
+    //update current url after removing all active filters
+    //text search input filter will not be removed, which is controled by itself
+    const paraURL = {}
+    let op = ''
+    const curentURL = queryString.parse(location.search)
+    if(curentURL.index) {
+      paraURL.index = curentURL.index
+      op = '?'
+    }
+    if(curentURL.filters) {
+      paraURL.filters = curentURL.filters
+      op = '?'
+    }
+    history.push(`${location.pathname}${op}${queryString.stringify(paraURL)}`)
   }
 }
 
 ResourceFilterBar.propTypes = {
   activeFilters: PropTypes.object,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object,
   updateActiveFilters: PropTypes.func,
 }
 

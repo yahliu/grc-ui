@@ -26,21 +26,9 @@ import config from '../../../lib/shared/config'
 import TagInput from './TagInput'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 import { showCreate } from '../../../lib/client/access-helper'
+import createDocLink from '../../components/common/CreateDocLink'
 
-
-function createDocLink(locale, actions) {
-  const vNumber = config['ICP_VERSION']
-  return (
-    <div className={'button-group'}>
-      {actions}
-      <div className={'buttons'}>
-        <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
-          <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.ibm.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
-        </button>
-      </div>
-    </div>
-  )
-}
+//This ResourceList module and all other Resource common components need to be cleaned up and refactor in future
 
 class ResourceList extends React.Component {
   /* FIXME: Please fix disabled eslint rules when making changes to this file. */
@@ -55,6 +43,12 @@ class ResourceList extends React.Component {
     const { updateSecondaryHeader, tabs, title, links, information, fetchResources, policies } = this.props
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, links, msgs.get(information, this.context.locale))
     fetchResources(policies)
+  }
+
+  componentWillUnmount() {
+    const { searchTable } = this.props
+    //clean up current page search text before leaving
+    searchTable('', false)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,6 +83,10 @@ class ResourceList extends React.Component {
       selectedFilters,
       updateBrowserURL,
       clientSideFilters,
+      placeHolderText,
+      autoAction,
+      highLightRowName,
+      showSidePanel
     } = this.props
     const { locale } = this.context
 
@@ -150,7 +148,7 @@ class ResourceList extends React.Component {
           sortColumn={sortColumn}
           status={status}
           items={items}
-          expandableTable={resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name}
+          expandableTable={resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name}
           totalFilteredItems={totalFilteredItems}
           resourceType={resourceType}
           changeTablePage={changeTablePage}
@@ -159,11 +157,15 @@ class ResourceList extends React.Component {
           searchValue={searchValue}
           defaultSearchValue={clientSideFilters}
           tableActions={staticResourceData.tableActions}
-          listSubItems={resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name}
+          listSubItems={resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name}
+          placeHolderText={placeHolderText}
+          autoAction={autoAction}
+          highLightRowName={highLightRowName}
+          showSidePanel={showSidePanel}
         />
       </div>
     }
-    if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name){
+    if (resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name){
       return (
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
@@ -229,6 +231,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
+//diff than original updateBrowserURL in mcm-ui pageWithUrlQuery
+//this modified updateBrowserURL will keep flags other than text input filters
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { updateBrowserURL, resourceType } = ownProps
   return {

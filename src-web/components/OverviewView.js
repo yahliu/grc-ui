@@ -28,6 +28,7 @@ import _ from 'lodash'
 import NoResource from '../components/common/NoResource'
 import ResourceFilterBar from '../components/common/ResourceFilterBar'
 import createDocLink from '../components/common/CreateDocLink'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../scss/overview-view.scss')
@@ -43,6 +44,7 @@ export class OverviewView extends React.Component {
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
     this.updateViewState = this.updateViewState.bind(this)
+    this.handleDrillDownClickOverview = this.handleDrillDownClickOverview.bind(this)
   }
 
   componentWillUnmount() {
@@ -61,7 +63,7 @@ export class OverviewView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, findings, activeFilters={}, handleDrillDownClick, handleCreateResource } = this.props
+    const { loading, error, policies, findings, activeFilters={}, handleCreateResource } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -91,7 +93,7 @@ export class OverviewView extends React.Component {
         <RecentActivityModule
           policies={filteredPolicies}
           findings={filteredFindings}
-          handleDrillDownClick={handleDrillDownClick}
+          handleDrillDownClick={this.handleDrillDownClickOverview}
           viewState={viewState}
           updateViewState={this.updateViewState} />
         <ImpactedControlsModule
@@ -101,7 +103,7 @@ export class OverviewView extends React.Component {
           findings={filteredFindings}
           activeFilters={activeFilters}
           availableFilters={availableFilters}
-          handleDrillDownClick={handleDrillDownClick} />
+          handleDrillDownClick={this.handleDrillDownClickOverview} />
         <PolicySummaryModule
           policies={filteredPolicies}
           findings={filteredFindings} />
@@ -118,6 +120,38 @@ export class OverviewView extends React.Component {
   onUnload() {
     saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
+
+  handleDrillDownClickOverview(parentType, parentName){
+    if(parentType){
+      const paraURL = {}
+      paraURL.card = false
+      switch(parentType.toLowerCase()){
+      case 'policy violations'://RecentActivityModule
+        paraURL.index = 0
+        break
+      case 'cluster violations'://RecentActivityModule
+        paraURL.index = 1
+        break
+      case 'policies'://TopViolationsModule
+        paraURL.index = 0
+        if(parentName){
+          paraURL.name = parentName //highlight name
+          paraURL.side = true //auto open side panel under highlight name
+        }
+        break
+      case 'clusters'://TopViolationsModule
+        paraURL.index = 1
+        if(parentName){
+          paraURL.name = parentName
+          paraURL.side = true
+        }
+        break
+      default:
+        break
+      }
+      this.props.history.push(`${this.props.location.pathname}/all?${queryString.stringify(paraURL)}`)
+    }
+  }
 }
 
 OverviewView.propTypes = {
@@ -125,8 +159,9 @@ OverviewView.propTypes = {
   error: PropTypes.object,
   findings: PropTypes.array,
   handleCreateResource: PropTypes.func,
-  handleDrillDownClick: PropTypes.func,
+  history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
+  location: PropTypes.object,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
   updateResourceToolbar: PropTypes.func,

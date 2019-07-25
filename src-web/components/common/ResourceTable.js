@@ -74,6 +74,8 @@ class ResourceTable extends React.Component {
       onSelectAll,
       onSelectSubItem,
       listSubItems,
+      placeHolderText,
+      highLightRowName,
     } = this.props
 
     const showSearch = lodash.get(this.props, 'showSearch', true)
@@ -105,7 +107,7 @@ class ResourceTable extends React.Component {
           <TableContainer id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-table-container`}>
             {showSearch ?
               (<TableToolbar aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} role='region'>
-                <TableToolbarSearch onChange={handleSearch} defaultValue={defaultSearchValue} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} />
+                <TableToolbarSearch onChange={handleSearch} defaultValue={defaultSearchValue} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} placeHolderText={placeHolderText} />
                 <TableToolbarContent>
                   {actions}
                 </TableToolbarContent>
@@ -156,12 +158,10 @@ class ResourceTable extends React.Component {
               <TableBody>
                 {(() => {
                   return rows.map(row => {
-                    if (expandableTable) {
+                    if (expandableTable && row && row.id) {//check undefined row.id to avoid whole page crush
                       return (
                         <React.Fragment key={row.id}>
-                          <TableExpandRow {...getRowProps({ row,
-                            'data-row-name': lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')),
-                            'aria-hidden': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0), className: expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0) ? 'row-not-expanded' : '' })}>
+                          <TableExpandRow {...getRowProps({ row, 'data-row-name': lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')), 'aria-hidden': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0), className: (lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')) === highLightRowName) ? 'high-light': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0) ? 'row-not-expanded' : '' })}>
                             {selectableTable &&
                               <TableCell key={`select-checkbox-${row.id}`}>
                                 <Checkbox
@@ -207,11 +207,13 @@ class ResourceTable extends React.Component {
                         </React.Fragment>
                       )
                     } else {
-                      return (
-                        <TableRow key={row.id} data-row-name={lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey'))}>
-                          {row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
-                        </TableRow>
-                      )
+                      if(row && row.id){
+                        return (
+                          <TableRow key={row.id} data-row-name={lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey'))} className={lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')) === highLightRowName ? 'high-light' : ''}>
+                            {row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
+                          </TableRow>
+                        )
+                      }
                     }
                   })
                 })()}
@@ -241,7 +243,7 @@ class ResourceTable extends React.Component {
   }
 
   getRows() {
-    const { history, items, itemIds, tableActions, resourceType, staticResourceData, match, getResourceAction, userRole } = this.props
+    const { history, items, itemIds, tableActions, resourceType, staticResourceData, match, getResourceAction, userRole, highLightRowName, autoAction, showSidePanel } = this.props
     const { locale } = this.context
     const { normalizedKey } = staticResourceData
     const resources = itemIds && itemIds.map(id => items[id] || (Array.isArray(items) && items.find(target =>  (normalizedKey && lodash.get(target, normalizedKey) === id) || (target.name === id))))
@@ -258,6 +260,13 @@ class ResourceTable extends React.Component {
         const menuActions = item.metadata && tableActions && tableActions[item.metadata.namespace] || tableActions
 
         const fliteredActions = menuActions ? fliterTableAction(menuActions,userRole,resourceType) : null
+
+        //This is for grc policy page highlight item auto open side panel
+        if(showSidePanel && highLightRowName && autoAction){
+          if((item.metadata && item.metadata.name && item.metadata.name === highLightRowName) || (item.cluster && item.cluster === highLightRowName)){
+            getResourceAction(autoAction, item, null, history, locale)
+          }
+        }
 
         if (fliteredActions && fliteredActions.length > 0 && this.showTableToobar()) {
           row.action = (

@@ -1,12 +1,16 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
+
+import React from 'react'
+import { Link } from 'react-router-dom'
+import config from '../../lib/shared/config'
 
 import {getCategories, getControls, getStandards} from './hcm-compliances'
 
@@ -16,11 +20,14 @@ export default {
   secondaryKey: 'metadata.namespace',
   tableActions: [
     'table.actions.sidepanel',
+    'table.actions.edit',
+    'table.actions.remove',
   ],
   tableKeys: [
     {
       msgKey: 'table.header.policy.name',
       resourceKey: 'metadata.name',
+      transformFunction: createComplianceLink,
     },
     {
       msgKey: 'table.header.remediation',
@@ -31,14 +38,14 @@ export default {
       resourceKey: 'clusterCompliant',
     },
     {
-      msgKey: 'table.header.controls',
-      resourceKey: 'metadata.annotations["policy.mcm.ibm.com/controls"]',
-      transformFunction: getControls,
-    },
-    {
       msgKey: 'table.header.standards',
       resourceKey: 'metadata.annotations["policy.mcm.ibm.com/standards"]',
       transformFunction: getStandards,
+    },
+    {
+      msgKey: 'table.header.controls',
+      resourceKey: 'metadata.annotations["policy.mcm.ibm.com/controls"]',
+      transformFunction: getControls,
     },
     {
       msgKey: 'table.header.categories',
@@ -66,5 +73,16 @@ export default {
       }
     ]
   },
+}
+
+export function createComplianceLink(item = {}, ...param){
+  if (param[2]) {
+    return item.metadata.name
+  } else {
+    if (item.raw.kind == 'Compliance')
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name} (Deprecated)</Link>
+    else
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
+  }
 }
 

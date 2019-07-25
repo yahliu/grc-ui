@@ -10,8 +10,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import {updateModal, } from '../../actions/common'
+import { updateModal } from '../../actions/common'
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
 import {AllPoliciesInCluster, AllClustersInPolicy} from '../../../lib/client/queries'
@@ -20,6 +21,7 @@ import { Modal, Loading, InlineNotification } from 'carbon-components-react'
 import ResourceOverviewModule from '../modules/SubResourceListModule'
 import getResourceDefinitions from '../../definitions'
 import msgs from '../../../nls/platform.properties'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../../scss/side-panel-modal.scss')
@@ -56,8 +58,23 @@ function getHeader(data) {
 class SidePanelDetailsModal extends React.PureComponent {
 
   handleModalClose = () => {
-    const { updateModal } = this.props
+    const { updateModal, location, history } = this.props
     updateModal()
+
+    //update url and refresh policy page after closing sidepanel
+    //text search input filter will not be removed, which is controled by itself
+    const paraURL = {}
+    let op = ''
+    const curentURL = queryString.parse(location.search)
+    if(curentURL.index) {
+      paraURL.index = curentURL.index
+      op = '?'
+    }
+    if(curentURL.filters) {
+      paraURL.filters = curentURL.filters
+      op = '?'
+    }
+    history.push(`${location.pathname}${op}${queryString.stringify(paraURL)}`)
   }
 
   render(){
@@ -171,7 +188,8 @@ const ClustersTable = ({items, type, inapplicable}) => {
             cells: [_.get(item, 'objectDefinition.metadata.name'), _.get(item, 'status.conditions[0].message', '-'), _.get(item, 'status.conditions[0].reason', '-')]
           }}}
       )
-      const subItems = [...objectStatus, ...roleStatus, ...policyStatus]
+      //add id and remove null/undefined
+      const subItems = _.without([id, ...objectStatus, ...roleStatus, ...policyStatus], undefined, null)
       return {...policy, id, violatedNum, subItems}
     }
     else {
@@ -204,7 +222,8 @@ const PoliciesTable = ({items, type, inapplicable}) => {
       const objectTemplates = _.get(spec, 'object-templates', [])
       const roleTemplates = _.get(spec, 'role-templates', [])
       const policyTemplates = _.get(spec, 'policy-templates', [])
-      const subItems = [
+      const subItems = _.without([
+        id,
         ...objectTemplates.map(item => {
           if (_.get(item, 'status.Compliant','').toLowerCase() !== 'compliant') {
             return {
@@ -226,7 +245,7 @@ const PoliciesTable = ({items, type, inapplicable}) => {
               cells: [_.get(item, 'objectDefinition.metadata.name'), _.get(item, 'status.conditions[0].message', '-'), _.get(item, 'status.conditions[0].reason', '-')]
             }}}
         )
-      ]
+      ], undefined, null)
 
       return {...cluster, id, subItems}
     }
@@ -266,7 +285,9 @@ const ProcessBar = ({percent}) => {
 
 SidePanelDetailsModal.propTypes = {
   data: PropTypes.object,
+  history: PropTypes.object.isRequired,
   locale: PropTypes.string,
+  location: PropTypes.object,
   open: PropTypes.bool,
   resourceType: PropTypes.object,
   title: PropTypes.string,
@@ -283,5 +304,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SidePanelDetailsModal)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SidePanelDetailsModal))
 

@@ -25,7 +25,7 @@ describe('PolicyCardsModule categories view', () => {
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
-      showPolicyCardFlag={true}
+      showPolicyCard={true}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })
@@ -35,7 +35,7 @@ describe('PolicyCardsModule categories view', () => {
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
-      showPolicyCardFlag={false}
+      showPolicyCard={false}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })
@@ -52,7 +52,7 @@ describe('PolicyCardsModule standards view', () => {
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
-      showPolicyCardFlag={true}
+      showPolicyCard={true}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })
@@ -62,7 +62,7 @@ describe('PolicyCardsModule standards view', () => {
       updateViewState={updateViewState}
       policies={filteredPolicies}
       activeFilters={activeFilters}
-      showPolicyCardFlag={false}
+      showPolicyCard={false}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
     expect(component).toMatchSnapshot()
   })

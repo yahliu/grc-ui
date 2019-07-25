@@ -33,6 +33,21 @@
     }
   }
 
+  tbody {
+    tr.high-light {
+      background-color: $mcm_background_color;
+      border-color: $mcm_color_drak_blue;
+      border-style: solid;
+      border-width: 0.15rem;
+    }
+    tr:nth-child(2n).high-light {
+      background-color:$mcm_background_color;
+      border-color: $mcm_color_drak_blue;
+      border-style: solid;
+      border-width: 0.15rem;
+    }
+  }
+
   .row-not-expanded .bx--table-expand-v2__button {
     visibility: hidden;
   }

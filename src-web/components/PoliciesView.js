@@ -13,17 +13,19 @@ import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { createResources, updateResourceToolbar } from '../actions/common'
+import { createResources, updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import { POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES } from '../../lib/shared/constants'
 import PolicyCardsModule from '../components/modules/PolicyCardsModule'
-import ClusterComplianceTab from '../containers/ClusterComplianceTab'
+import PolicyTabModule from '../components//modules/PolicyTabModule'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import NoResource from '../components/common/NoResource'
 import createDocLink from '../components/common/CreateDocLink'
+import ResourceFilterBar from '../components/common/ResourceFilterBar'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../scss/policies-view.scss')
@@ -39,6 +41,7 @@ export class PoliciesView extends React.Component {
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
     this.updateViewState = this.updateViewState.bind(this)
+    this.handleDrillDownClickPoliciesView = this.handleDrillDownClickPoliciesView.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,20 +53,10 @@ export class PoliciesView extends React.Component {
     }
   }
 
-  formatExpandablePolicies(policies) {
-    const result = []
-    policies.forEach(policy => {
-      const subItems = [{name: 'policy.pb', items: policy.placementBindings.map(pb => pb.metadata.name)},
-        {name: 'policy.pp', items: policy.placementPolicies.map(pp => pp.metadata.name)}]
-      result.push({...policy, subItems})
-    })
-    return result
-  }
-
   render() {
     const { locale } = this.context
     const { viewState } = this.state
-    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, handleCreateResource } = this.props
+    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, handleCreateResource, location } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -85,19 +78,24 @@ export class PoliciesView extends React.Component {
 
     showResourceToolbar()
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
-    const expandablePolicies = this.formatExpandablePolicies(filteredPolicies)
+    const urlParams = queryString.parse(location.search)
+    const showPolicyCard = urlParams.card==='false' ? false : true
+    const policyTabToggleIndex = urlParams.index ? Number(urlParams.index) : 0
+    const showPolicyTabToggle = urlParams.toggle==='false' ? false : true
+    const highLightRowName = urlParams.name ? urlParams.name : ''
+    const showSidePanel = urlParams.side==='true' ? true : false
     return (
       <div className='policies-view'>
+        <ResourceFilterBar />
         <PolicyCardsModule
           viewState={viewState}
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
           activeFilters={activeFilters}
-          //Now just set to true, will be updated later for url query
-          showPolicyCardFlag={true}
-          //handleDrillDownClick to do in future as well as top violation card
+          showPolicyCard={showPolicyCard}
+          handleDrillDownClick={this.handleDrillDownClickPoliciesView}
         />
-        <ClusterComplianceTab refreshControl={refreshControl} policies={expandablePolicies} secondaryHeaderProps={secondaryHeaderProps} />
+        <PolicyTabModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} />
       </div>
     )
   }
@@ -111,16 +109,43 @@ export class PoliciesView extends React.Component {
   onUnload() {
     saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
+
+  handleDrillDownClickPoliciesView(key, value, type){
+    //step 1 add activeFilters when click PolicyCardsModule
+    const {updateActiveFilters} = this.props
+    const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
+    value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match side bar filter
+    let activeSet = activeFilters[key]
+    if (!activeSet) {
+      activeSet = activeFilters[key] = new Set()}
+    activeSet.add(value)
+    updateActiveFilters(activeFilters)
+
+    //step 2 update url when click PolicyCardsModule
+    const paraURL = {}
+    paraURL.card=false
+    paraURL.toggle=false
+    type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
+    let urlString = queryString.stringify(paraURL)
+    //also append PolicyTabModule search input filter to the end of url if existing
+    const curentURL = queryString.parse(location.search)
+    if(curentURL.filters && curentURL.filters!==''){
+      urlString = `${urlString}&filters=${curentURL.filters}`}
+    this.props.history.push(`${this.props.location.pathname}?${urlString}`)
+  }
 }
 
 PoliciesView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
   handleCreateResource: PropTypes.func,
+  history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
+  location: PropTypes.object,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
   secondaryHeaderProps: PropTypes.object,
+  updateActiveFilters: PropTypes.func,
   updateResourceToolbar: PropTypes.func,
 }
 
@@ -132,7 +157,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
-    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml))
+    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml)),
+    updateActiveFilters: (activeFilters) => dispatch(updateActiveFilters(activeFilters))
   }
 }
 

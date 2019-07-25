@@ -24,6 +24,10 @@ export default {
       resourceKey: 'cluster',
     },
     {
+      msgKey: 'table.header.namespace',
+      resourceKey: 'namespace',
+    },
+    {
       msgKey: 'table.header.violation',
       resourceKey: 'violation',
     },

@@ -1,0 +1,327 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidePanelDetailsModal ClustersView view renders expand as expected 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <withRouter(Connect(SidePanelDetailsModal))
+    data={
+      Object {
+        "cluster": "cluster1",
+        "custom": Object {
+          "nonCompliant": Object {
+            "_owner": null,
+            "_store": Object {},
+            "key": null,
+            "props": Object {
+              "maxCharacters": 35,
+              "text": "policy-ma",
+            },
+            "ref": null,
+          },
+        },
+        "kind": "HCMPolicyCluster",
+        "namespace": "mcm",
+        "nonCompliant": Array [
+          "policy-ma",
+        ],
+        "violation": "1/4",
+      }
+    }
+    locale="en-US"
+    open={true}
+    resourceType={
+      Object {
+        "list": "HCMPolicyClusterList",
+        "name": "HCMPolicyCluster",
+      }
+    }
+    title=""
+    updateModal={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "render": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "render": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`SidePanelDetailsModal PoliciesView view renders expand as expected 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <withRouter(Connect(SidePanelDetailsModal))
+    data={
+      Object {
+        "__typename": "Compliance",
+        "clusterCompliant": "1/2",
+        "custom": Object {
+          "metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]": "System And Information Integrity",
+          "metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]": "Mutation Advisor",
+          "metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]": "NIST",
+          "metadata.name": Object {
+            "_owner": null,
+            "_store": Object {},
+            "key": null,
+            "props": Object {
+              "children": "policy-ma",
+              "replace": false,
+              "to": "/multicloud/policies/all/mcm/policy-ma",
+            },
+            "ref": null,
+          },
+        },
+        "kind": "HCMPolicyPolicy",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "annotations": Object {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
+",
+            "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+            "policy.mcm.ibm.com/controls": "MutationAdvisor",
+            "policy.mcm.ibm.com/standards": "NIST",
+            "seed-generation": "1",
+          },
+          "name": "policy-ma",
+          "namespace": "mcm",
+          "resourceVersion": "1347579",
+          "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
+        },
+        "name": "policy-ma",
+        "namespace": "mcm",
+        "placementBindings": Array [
+          Object {
+            "__typename": "PlacementBinding",
+            "metadata": Object {
+              "__typename": "Metadata",
+              "name": "binding-ma",
+              "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-ma",
+            },
+          },
+        ],
+        "placementPolicies": Array [
+          Object {
+            "__typename": "PlacementPolicy",
+            "metadata": Object {
+              "__typename": "Metadata",
+              "name": "placement-ma",
+              "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-ma",
+            },
+          },
+        ],
+        "policyCompliant": "1/2",
+        "raw": Object {
+          "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+          "kind": "Policy",
+          "metadata": Object {
+            "annotations": Object {
+              "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
+",
+              "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+              "policy.mcm.ibm.com/controls": "MutationAdvisor",
+              "policy.mcm.ibm.com/standards": "NIST",
+              "seed-generation": "1",
+            },
+            "creationTimestamp": "2019-07-16T13:18:48Z",
+            "finalizers": Array [
+              "propagator.finalizer.mcm.ibm.com",
+            ],
+            "generation": 45,
+            "name": "policy-ma",
+            "namespace": "mcm",
+            "resourceVersion": "1347579",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
+            "uid": "3f218d45-a7cc-11e9-8a41-005056a061f1",
+          },
+          "spec": Object {
+            "namespaces": Object {},
+            "policy-templates": Array [
+              Object {
+                "objectDefinition": Object {
+                  "apiVersion": "policies.ibm.com/v1alpha1",
+                  "kind": "MutationPolicy",
+                  "metadata": Object {
+                    "label": Object {
+                      "category": "System-Integrity",
+                    },
+                    "name": "mutation-policy-example",
+                  },
+                  "spec": Object {
+                    "conditions": Object {
+                      "ownership": Array [
+                        "ReplicaSet",
+                        "Deployment",
+                        "DeamonSet",
+                        "ReplicationController",
+                      ],
+                    },
+                    "namespaceSelector": Object {
+                      "exclude": Array [
+                        "kube-system",
+                      ],
+                      "include": Array [
+                        "default",
+                        "kube-*",
+                      ],
+                    },
+                    "remediationAction": "enforce",
+                  },
+                },
+                "status": Object {
+                  "Validity": Object {},
+                },
+              },
+            ],
+            "remediationAction": "enforce",
+          },
+          "status": Object {
+            "placementBindings": Array [
+              "binding-ma",
+            ],
+            "placementPolicies": Array [
+              "placement-ma",
+            ],
+            "status": Object {
+              "cluster1": Object {
+                "aggregatePoliciesStatus": Object {
+                  "policy-ma": Object {
+                    "compliant": "NonCompliant",
+                  },
+                },
+                "clustername": "cluster1",
+                "compliant": "NonCompliant",
+              },
+              "clusterhub": Object {
+                "aggregatePoliciesStatus": Object {
+                  "policy-ma": Object {
+                    "compliant": "Compliant",
+                  },
+                },
+                "clustername": "clusterhub",
+                "compliant": "Compliant",
+              },
+            },
+          },
+        },
+        "remediation": "enforce",
+        "subItems": Array [
+          Object {
+            "items": Array [
+              "binding-ma",
+            ],
+            "name": "policy.pb",
+          },
+          Object {
+            "items": Array [
+              "placement-ma",
+            ],
+            "name": "policy.pp",
+          },
+        ],
+      }
+    }
+    locale="en-US"
+    open={true}
+    resourceType={
+      Object {
+        "list": "HCMPolicyPolicyList",
+        "name": "HCMPolicyPolicy",
+      }
+    }
+    title=""
+    updateModal={[MockFunction]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "render": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "render": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

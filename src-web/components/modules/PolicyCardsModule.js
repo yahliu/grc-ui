@@ -15,6 +15,8 @@ import { DropdownV2, Icon } from 'carbon-components-react'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
+import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../../scss/module-policy-cards.scss')
@@ -25,26 +27,25 @@ const PolicyCardsSelections = Object.freeze({
   standards: 'standards',
 })
 
-export default class PolicyCardsModule extends React.Component {
+class PolicyCardsModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {policyCardChoice=PolicyCardsSelections.standards}, showPolicyCardFlag} = props
+    const {viewState: {policyCardChoice=PolicyCardsSelections.standards}} = props
     this.state = {
       policyCardChoice,
-      showPolicyCards: showPolicyCardFlag,
     }
     this.onChange = this.onChange.bind(this)
-    this.handleToggleClick = this.handleToggleClick.bind(this)
+    this.collapseClick = this.collapseClick.bind(this)
   }
 
   render() {
     const cardData = this.getCardData()
-    const { showPolicyCards } = this.state
+    const { showPolicyCard } = this.props
     return (
       <div className='module-policy-cards'>
         {this.renderHeader()}
-        {showPolicyCards && this.renderCards(cardData)}
+        {showPolicyCard && this.renderCards(cardData)}
       </div>
     )
   }
@@ -55,7 +56,8 @@ export default class PolicyCardsModule extends React.Component {
     const collapseHintExpand = msgs.get('overview.policy.cards.collapseHint.expand', locale)
     const collapseButtonCollapse = msgs.get('overview.policy.cards.collapseButton.collapse', locale)
     const collapseButtonExpand = msgs.get('overview.policy.cards.collapseButton.expand', locale)
-    const { policyCardChoice, showPolicyCards } = this.state
+    const { policyCardChoice } = this.state
+    const { showPolicyCard } = this.props
     const choices = this.getPolicyCardChoices(locale)
     const title = msgs.get('overview.policy.overview.title', locale)
     const idx = Math.max(0, choices.findIndex(({value})=>{
@@ -63,8 +65,8 @@ export default class PolicyCardsModule extends React.Component {
     }))
     return (
       <div className='header-container'>
-        {showPolicyCards && <div className='header-title'>{title}</div>}
-        {showPolicyCards &&
+        {showPolicyCard && <div className='header-title'>{title}</div>}
+        {showPolicyCard &&
         <div>
           <DropdownV2 className='selection'
             label={title}
@@ -74,10 +76,10 @@ export default class PolicyCardsModule extends React.Component {
             initialSelectedItem={choices[idx].label}
             items={choices} />
         </div>}
-        <button className='collapse' onClick={this.handleToggleClick}>
-          <span className='collapse-hint'>{showPolicyCards?collapseHintCollapse:collapseHintExpand}</span>
-          <span className='collapse-button'>{showPolicyCards?collapseButtonCollapse:collapseButtonExpand}</span>
-          {showPolicyCards ? <Icon name='chevron--up' className='arrow-up' description='collapse' /> : <Icon name='chevron--down' className='arrow-down' description='expand' />}
+        <button className='collapse' onClick={this.collapseClick}>
+          <span className='collapse-hint'>{showPolicyCard?collapseHintCollapse:collapseHintExpand}</span>
+          <span className='collapse-button'>{showPolicyCard?collapseButtonCollapse:collapseButtonExpand}</span>
+          {showPolicyCard ? <Icon name='chevron--up' className='arrow-up' description='collapse' /> : <Icon name='chevron--down' className='arrow-down' description='expand' />}
         </button>
       </div>
     )
@@ -128,7 +130,7 @@ export default class PolicyCardsModule extends React.Component {
         if (type) {
           let name = type
           if (policyCardChoice===PolicyCardsSelections.categories) {
-            name = _.capitalize(_.startCase(name))
+            name = _.startCase(name)
           }
           const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)
           if (!filtered) {
@@ -244,17 +246,20 @@ export default class PolicyCardsModule extends React.Component {
     })
   }
 
-  handleToggleClick() {
-    this.setState(state => ({
-      showPolicyCards: !state.showPolicyCards,
-    }))
+  collapseClick() {
+    const {history, location} = this.props
+    const paraURL = queryString.parse(location.search)
+    if(typeof paraURL.card === 'undefined'){//when no card flag means true
+      paraURL.card = false}
+    else{
+      paraURL.card = paraURL.card === 'false' ? true : false}
+    history.push(`${location.pathname}?${queryString.stringify(paraURL)}`)
   }
 }
 
-
 // functional card component
 const PolicyCard = ({data, locale, handleClick}) => {
-  const { counts, choice, name, rawName } = data
+  const { counts, choice, name } = data
   const countData = Object.keys(counts).map(type=>{
     return {
       ...counts[type],
@@ -279,7 +284,7 @@ const PolicyCard = ({data, locale, handleClick}) => {
               })
               const onClick = () =>{
                 if (violated) {
-                  handleClick(choice, rawName, type)
+                  handleClick(choice, name, type)
                 }
               }
               const onKeyPress = (e) =>{
@@ -321,8 +326,12 @@ PolicyCard.propTypes = {
 PolicyCardsModule.propTypes = {
   activeFilters: PropTypes.object,
   handleDrillDownClick: PropTypes.func,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object,
   policies: PropTypes.array,
-  showPolicyCardFlag: PropTypes.bool,
+  showPolicyCard: PropTypes.bool,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,
 }
+
+export default withRouter(PolicyCardsModule)

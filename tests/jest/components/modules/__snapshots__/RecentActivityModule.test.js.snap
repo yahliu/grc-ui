@@ -567,7 +567,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       >
                         <a
                           className="card-name-link"
-                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant"
+                          href="undefined/policies/all/Policy%20that%20is%20not%20compliant"
                           onClick={[Function]}
                         >
                           Policy that is not compliant

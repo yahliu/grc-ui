@@ -45,8 +45,8 @@ export default class RecentActivityModule extends React.Component {
           <div className='card-container'>
             <div className='card-content'>
               <div className='card-inner-content'>
-                <Violations moduleData={moduleData} handleClick={handleDrillDownClick} locale={locale} />
-                <Findings moduleData={moduleData} handleClick={handleDrillDownClick} locale={locale} />
+                <Violations moduleData={moduleData} handleDrillDownClick={handleDrillDownClick} locale={locale} />
+                <Findings moduleData={moduleData} handleDrillDownClick={handleDrillDownClick} locale={locale} />
               </div>
             </div>
           </div>

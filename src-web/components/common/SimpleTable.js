@@ -108,11 +108,13 @@ class StructuredListModule extends React.Component {
                       </React.Fragment>
                     )
                   } else {
-                    return (
-                      <TableRow key={row.id}>
-                        {row.cells && row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
-                      </TableRow>
-                    )
+                    if(row && row.id){
+                      return (
+                        <TableRow key={row.id}>
+                          {row.cells && row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
+                        </TableRow>
+                      )
+                    }
                   }
                 })
               })()}
