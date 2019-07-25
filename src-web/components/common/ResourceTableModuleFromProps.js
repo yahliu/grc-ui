@@ -16,7 +16,6 @@ import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
-import { hideResourceToolbar } from '../../../lib/client/resource-helper'
 import TableHelper from '../../util/table-helper'
 
 class ResourceTableModule extends React.Component {
@@ -57,13 +56,14 @@ class ResourceTableModule extends React.Component {
   }
 
   render() {
-    hideResourceToolbar()
     const { staticResourceData, definitionsKey, resourceType, subResourceType, showSearch, showPagination } = this.props
     const keys = staticResourceData[definitionsKey]
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state
+    const showModuleHeader = lodash.get(this.props, 'showModuleHeader', true)
+
     return (
       (resourceItems && Object.keys(resourceItems).length > 0 || searchValue)? <Module id={`${definitionsKey}-module-id`}>
-        <ModuleHeader>{msgs.get(keys.title, this.context.locale)}</ModuleHeader>
+        {showModuleHeader ? <ModuleHeader>{msgs.get(keys.title, this.context.locale)}</ModuleHeader> : null}
         <ModuleBody>
           <ResourceTable
             items={resourceItems || []}

@@ -13,29 +13,34 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Loading } from 'carbon-components-react'
 import { connect } from 'react-redux'
-import StructuredListModule from '../../components/common/StructuredListModule'
+import StructuredListModule from './StructuredListModule'
 import resources from '../../../lib/shared/resources'
-import PolicyTemplates from '../../components/common/PolicyTemplates'
-import ResourceTableModule from '../../components/common/ResourceTableModuleFromProps'
+import PolicyTemplates from './PolicyTemplates'
+import ResourceTableModule from './ResourceTableModuleFromProps'
 import { updateSecondaryHeader} from '../../actions/common'
 import lodash from 'lodash'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 import msgs from '../../../nls/platform.properties'
 import { Query } from 'react-apollo'
 import { HCMPolicy } from '../../../lib/client/queries'
+import getResourceDefinitions from '../../definitions'
+
 
 resources(() => {
   require('../../../scss/resource-overview.scss')
 })
 
 
-class CompliancePolicyDetail extends React.Component {
+class PolicyClusterDetail extends React.Component {
   static propTypes = {
     location: PropTypes.object,
     params: PropTypes.object,
     resourceType: PropTypes.object,
-    staticResourceData: PropTypes.object,
     updateSecondaryHeader: PropTypes.func,
+  }
+
+  static defaultProps = {
+    resourceType: RESOURCE_TYPES.HCM_COMPLIANCES,
   }
 
   static contextTypes = {
@@ -47,14 +52,17 @@ class CompliancePolicyDetail extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, params} = this.props
-    // details page mode
-    if (params) {
-      updateSecondaryHeader(this.getPolicyName(), null, this.getBreadcrumb())
-    }
+    const { updateSecondaryHeader} = this.props
+    updateSecondaryHeader(this.getPolicyName(), null, this.getBreadcrumb())
   }
 
   getPolicyName() {
+    const { location } = this.props,
+          urlSegments = location.pathname.split('/')
+    return urlSegments[urlSegments.length - 1]
+  }
+
+  getClusterName() {
     const { location } = this.props,
           urlSegments = location.pathname.split('/')
     return urlSegments[urlSegments.length - 2]
@@ -70,18 +78,32 @@ class CompliancePolicyDetail extends React.Component {
     if (resourceType.name === RESOURCE_TYPES.HCM_COMPLIANCES.name) {
       breadcrumbItems.push({
         label: msgs.get('tabs.hcmcompliance', locale),
-        url: urlSegments.slice(0, 3).join('/')
-      })
+        noLocale: true,
+        url: `${urlSegments.slice(0, 3).join('/')}/all`
+      },
+      {
+        label: this.getPolicyName(),
+        noLocale: true,
+        url: `${urlSegments.slice(0, 3).join('/')}/all/${this.getPolicyName()}`
+      },
+      {
+        label: this.getClusterName(),
+        noLocale: true,
+        url: `${urlSegments.join('/')}`
+      }
+      )
     }
     return breadcrumbItems
   }
 
   render() {
-    const url = lodash.get(this.props, 'match.url')
+    const url = lodash.get(this.props, 'location.pathname')
     const urlSegments = url.split('/')
-    const policyName = urlSegments[urlSegments.length - 2]
-    const policyNamespace = urlSegments[urlSegments.length - 1]
-    const {staticResourceData, params, resourceType} = this.props
+    const policyName = urlSegments[urlSegments.length - 1]
+    const policyNamespace = urlSegments[urlSegments.length - 2]
+    const {params, resourceType} = this.props
+    const staticResourceData = getResourceDefinitions(resourceType)
+
     return (
       <Query query={HCMPolicy} variables={{name: policyName, clusterName: policyNamespace}}>
         {({ data, loading }) => {
@@ -92,7 +114,6 @@ class CompliancePolicyDetail extends React.Component {
           React.Children.map([
             <PolicyTemplates key='Policy Templates' headerKey='table.header.policyTemplate' right />,
             <ResourceTableModule key='roleTemplates' definitionsKey='policyRoleTemplates' />,
-            <ResourceTableModule key='roleBindingTemplates' definitionsKey='policyRoleBindingTemplates' />,
             <ResourceTableModule key='objectTemplates' definitionsKey='policyObjectTemplates' />,
             <ResourceTableModule key='policyTemplates' definitionsKey='policyPolicyTemplates' />,
             <ResourceTableModule key='rules' definitionsKey='policyRules' />,
@@ -104,18 +125,20 @@ class CompliancePolicyDetail extends React.Component {
             }
           })
           return (
-            <div className='overview-content'>
-              <StructuredListModule
-                title={staticResourceData.policyDetailKeys.title}
-                headerRows={staticResourceData.policyDetailKeys.headerRows}
-                rows={staticResourceData.policyDetailKeys.rows}
-                data={policy} />
-              {modulesRight.length > 0 &&
-                <div className='overview-content-right'>
-                  {modulesRight}
-                </div>}
-              <div className='overview-content-bottom'>
-                {modulesBottom}
+            <div className='page-content-container' role='main'>
+              <div className='overview-content'>
+                <StructuredListModule
+                  title={staticResourceData.policyDetailKeys.title}
+                  headerRows={staticResourceData.policyDetailKeys.headerRows}
+                  rows={staticResourceData.policyDetailKeys.rows}
+                  data={policy} />
+                {modulesRight.length > 0 &&
+                  <div className='overview-content-right'>
+                    {modulesRight}
+                  </div>}
+                <div className='overview-content-bottom'>
+                  {modulesBottom}
+                </div>
               </div>
             </div>
           )
@@ -137,4 +160,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CompliancePolicyDetail))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PolicyClusterDetail))

@@ -271,7 +271,7 @@ export default {
     resourceKey: 'role-templates',
     title: 'table.header.role.template',
     defaultSortField: 'metadata.name',
-    normalizedKey: 'status.Compliant',
+    normalizedKey: 'metadata.name',
     tableKeys: [
       {
         msgKey: 'table.header.role.template.name',
@@ -306,7 +306,7 @@ export default {
     resourceKey: 'object-templates',
     title: 'table.header.object.template',
     defaultSortField: 'objectDefinition.metadata.name',
-    normalizedKey: 'status.Compliant',
+    normalizedKey: 'objectDefinition.metadata.name',
     tableKeys: [
       {
         msgKey: 'table.header.object.template.name',
@@ -346,17 +346,12 @@ export default {
     resourceKey: 'policy-templates',
     title: 'table.header.policy.template',
     defaultSortField: 'objectDefinition.metadata.name',
-    normalizedKey: 'status.Compliant',
+    normalizedKey: 'metadata.name',
     tableKeys: [
       {
         msgKey: 'table.header.object.template.name',
         resourceKey: 'objectDefinition.metadata.name',
         key: 'name',
-      },
-      {
-        msgKey: 'table.header.object.template.complianceType',
-        resourceKey: 'complianceType',
-        key: 'complianceType',
       },
       {
         msgKey: 'table.header.object.template.apiVersion',
@@ -505,12 +500,11 @@ export default {
       {
         cells: [
           {
-            resourceKey: 'description.title.clusters',
+            resourceKey: 'table.header.cluster.violation',
             type: 'i18n'
           },
           {
-            resourceKey: 'clusters',
-            transformFunction: getPolicyClusters,
+            resourceKey: 'clusterCompliant',
           }
         ]
       },
@@ -616,15 +610,15 @@ export default {
     normalizedKey: 'name',
     tableKeys: [
       {
-        msgKey: 'table.header.status',
-        resourceKey: 'status',
-        key: 'status',
-        transformFunction: getStatus,
-      },
-      {
         msgKey: 'table.header.name',
         resourceKey: 'name',
         key: 'name',
+      },
+      {
+        msgKey: 'table.header.selector',
+        resourceKey: 'selector',
+        key: 'selector',
+        transformFunction: getLabelsToList
       },
       {
         msgKey: 'table.header.cluster',
@@ -642,10 +636,10 @@ export default {
         key: 'reason',
       },
       {
-        msgKey: 'table.header.selector',
-        resourceKey: 'selector',
-        key: 'selector',
-        transformFunction: getLabelsToList
+        msgKey: 'table.header.status',
+        resourceKey: 'status',
+        key: 'status',
+        transformFunction: getStatusIconForPolicy,
       },
     ],
   },
@@ -1013,9 +1007,9 @@ export function createComplianceLink(item = {}, ...param){
     return item.metadata.name
   } else {
     if (item.raw.kind == 'Compliance')
-      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name} (Deprecated)</Link>
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name} (Deprecated)</Link>
     else
-      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
   }
 }
 
@@ -1118,7 +1112,7 @@ export function getClusterCount(item) {
 
 export function getSubjects(item) {
   if(item && item.subjects){
-    return item.subjects.map(subject => `${subject.name}(${subject.kind})`).join(', ')
+    return item.subjects.map(subject => `${subject.name}(${subject.apiGroup})`).join(', ')
   }
   else{
     return '-'

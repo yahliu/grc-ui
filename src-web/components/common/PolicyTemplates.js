@@ -78,7 +78,7 @@ class PolicyTemplates extends React.Component {
       const name = lodash.get(resourceData, 'metadata.name')
       const selfLink = lodash.get(resourceData, 'metadata.selfLink')
       editResource(resourceType, namespace, name, resource, selfLink)
-    } else if (resourceData.__typename === 'CompliancePolicyDetail') {
+    } else if (resourceData.__typename === 'PolicyClusterDetail') {
       const namespace = lodash.get(resourceData, 'complianceNamespace')
       const name = lodash.get(resourceData, 'complianceName')
       const selfLink = lodash.get(resourceData, 'complianceSelfLink')
@@ -93,9 +93,10 @@ class PolicyTemplates extends React.Component {
   handleEditorChange = (yaml) => this.setState({ yaml })
 
   render() {
-    const { headerKey, editable, reqStatus } = this.props
+    const { headerKey, editable, reqStatus, className } = this.props
     return (
-      <Module className='structured-list-module'>
+      // <Module className='structured-list-module' id={`yaml-template-${headerKey}`}>
+      <Module className={className ? className :'structured-list-module'} id='yaml-template'>
         <div>
           <ModuleHeader>{`${msgs.get(headerKey, this.context.locale)}${this.state.updated? ' -  updated' : ''}`}</ModuleHeader>
           {editable &&
@@ -144,6 +145,7 @@ PolicyTemplates.contextTypes = {
 }
 
 PolicyTemplates.propTypes = {
+  className: PropTypes.string,
   editResource: PropTypes.func,
   editable: PropTypes.bool,
   headerKey: PropTypes.string,

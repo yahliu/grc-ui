@@ -11,14 +11,17 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StructuredListWrapper, StructuredListHead, StructuredListRow, StructuredListCell, StructuredListBody, OverflowMenu, OverflowMenuItem } from 'carbon-components-react'
+import { StructuredListWrapper, StructuredListRow, StructuredListCell, StructuredListBody, OverflowMenu, OverflowMenuItem, StructuredListSkeleton, Button } from 'carbon-components-react'
 import { Module, ModuleBody } from 'carbon-addons-cloud-react'
+import _ from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import resources from '../../../lib/shared/resources'
 import { transform } from '../../../lib/client/resource-helper'
 import { Link } from 'react-router-dom'
 import { resourceActions } from './ResourceTableRowMenuItemActions'
 import { connect } from 'react-redux'
+import StatusField from '../../components/common/StatusField'
+
 
 resources(() => {
   require('../../../scss/structured-list-with-actions.scss')
@@ -26,59 +29,91 @@ resources(() => {
 
 const StructuredListModule = ({
   title,
-  headerRows,
   rows,
   data,
-  url,
   id,
   actions,
+  location,
+  textEditButton,
   getResourceAction,
-}, context) =>
-  <Module className='structured-list-module' id={id}>
-    <div className='bx--module__header' style={{justifyContent: 'space-between'}} >
-      <h1 className='bx--module__title'>{msgs.get(title, context.locale)}</h1>
-      {actions && actions.length > 0 &&
-        <OverflowMenu floatingMenu iconDescription={msgs.get('svg.description.overflowMenu', context.locale)}>
-          {actions.map((action) => (
-            <OverflowMenuItem
-              data-table-action={action}
-              isDelete={action ==='table.actions.remove' || action ==='table.actions.policy.remove'|| action ==='table.actions.applications.remove'|| action ==='table.actions.compliance.remove'}
-              onClick={() => getResourceAction(action, data, null, history, context.locale)}
-              key={action}
-              itemText={msgs.get(action, context.locale)}
-            />
-          ))}
-        </OverflowMenu>
-      }
-    </div>
-    <ModuleBody>
-      <StructuredListWrapper className='bx--structured-list--condensed' ariaLabel={msgs.get(title, context.locale)}>
-        <StructuredListHead>
-          <StructuredListRow head>
-            {headerRows.map((row, index) =>
-              <StructuredListCell head key={index}>
-                {msgs.get(row, context.locale)}
-              </StructuredListCell>
-            )}
-          </StructuredListRow>
-        </StructuredListHead>
-        <StructuredListBody>
-          {rows.map((row, index) =>
-            <StructuredListRow key={index}>
-              {row.cells.map((cell, index) =>
-                <StructuredListCell key={index}>
-                  <p>{cell.link && url ? <Link to={url} className='bx--link'>{transform(data, cell, context.locale)}</Link> : transform(data, cell, context.locale)}</p>
-                </StructuredListCell>
-              )}
-            </StructuredListRow>
-          )}
-        </StructuredListBody>
-      </StructuredListWrapper>
-    </ModuleBody>
-  </Module>
+  clusterStatus,
+}, context) =>{
+  if(!data){
+    return <Module className='structured-list-module'><StructuredListSkeleton className='content-spinner' /></Module>
+  }
+  else{
+    return <Module className='structured-list-module' id={id}>
+      <div className='bx--module__header' style={{justifyContent: 'space-between'}} >
+        <h1 className='bx--module__title'>{msgs.get(title, context.locale)}</h1>
+        {actions && actions.length > 0 &&
+        (actions.length === 1 && actions[0] === 'table.actions.edit' && textEditButton) ?
+          (<Button small className='text-edit-button' onClick={() => getResourceAction(actions[0], data, null, history, context.locale)}>{msgs.get('table.actions.edit', context.locale)}</Button>) :
+          (<OverflowMenu floatingMenu flipped iconDescription={msgs.get('svg.description.overflowMenu', context.locale)}>
+            {actions.map((action) => (
+              <OverflowMenuItem
+                data-table-action={action}
+                isDelete={action ==='table.actions.remove' || action ==='table.actions.policy.remove'|| action ==='table.actions.applications.remove'|| action ==='table.actions.compliance.remove'}
+                onClick={() => getResourceAction(action, data, null, history, context.locale)}
+                key={action}
+                itemText={msgs.get(action, context.locale)}
+              />
+            ))}
+          </OverflowMenu>)}
+      </div>
+      <ModuleBody>
+        <StructuredListWrapper className='bx--structured-list--condensed' ariaLabel={msgs.get(title, context.locale)}>
+          <StructuredListBody>
+            {rows.map((row, index) =>{
+              if(row.cells[0].resourceKey === 'policy.pp.details.decisions'){
+                return (<StructuredListRow key={index}>
+                  <StructuredListCell key={`${index}-key`}><p>{msgs.get('policy.pp.details.decisions', context.locale)}</p></StructuredListCell>
+                  <StructuredListCell key={`${index}-val`}>{StructuredListModule.formatDecisionsWithLinkAndIcon(row.cells[1].resourceKey, data, clusterStatus, location)}</StructuredListCell>
+                </StructuredListRow>)
+              }
+              else{
+                return (<StructuredListRow key={index}>
+                  {row.cells.map((cell, index2) =>
+                    <StructuredListCell key={`${index}-${index2}`}>
+                      { index2 === 0 ? <p>{transform(data, cell, context.locale)}</p> : transform(data, cell, context.locale)}
+                    </StructuredListCell>
+                  )}
+                </StructuredListRow>)
+              }
+            })}
+          </StructuredListBody>
+        </StructuredListWrapper>
+      </ModuleBody>
+    </Module>
+  }
+}
 
 StructuredListModule.contextTypes = {
   locale: PropTypes.string
+}
+
+// eslint-disable-next-line react/display-name
+StructuredListModule.formatDecisionsWithLinkAndIcon = (resourceKey, data, clusterStatus, location) => {
+  const decisions = _.get(data[resourceKey], 'decisions')
+  const urlSegments = location.pathname.replace(/\/$/, '').split('/')
+  const baseUrl = urlSegments.slice(0, urlSegments.length-2 ).join('/')
+  const policyName = urlSegments[urlSegments.length-1]
+  const links = []
+  _.forEach(decisions, (item) => {
+    const cluster = _.get(item, 'clusterName')
+    const status = clusterStatus[cluster] ? clusterStatus[cluster].toLowerCase() : 'undefined'
+    let statusIcon
+    if(status === 'compliant'){
+      statusIcon = <StatusField status='ok' />
+    }
+    else {
+      statusIcon = <StatusField status='critical' />
+    }
+    links.push(<div className='one-cluster-status' key={`${cluster}-container`}>
+      <Link to= {`${baseUrl}/policy/${cluster}/${policyName}`} >{cluster}</Link>
+      {statusIcon}
+    </div>)
+  })
+  return <div className='cluster-status-container'>{links}</div>
 }
 
 const mapStateToProps = state => ({

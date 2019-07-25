@@ -20,13 +20,12 @@ import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceOverview from './ResourceOverview'
 // import ResourceDiagram from './ResourceDiagram'
-import CompliancePolicyDetail from './CompliancePolicyDetail'
+import PolicyClusterDetail from './PolicyClusterDetail'
 // import CompliancePolicy from './CompliancePolicy'
 import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
 import { getPollInterval } from './RefreshTimeSelect'
-// import NoResource from './NoResource' //To Be Deleted
-import NewPolicyTemplateTab from '../../containers/NewPolicyTemplateTab'
-import NewPolicyViolationTab from '../../containers/NewPolicyViolationTab'
+import PolicyTemplateTab from '../../containers/PolicyTemplateTab'
+import PolicyViolationTab from '../../containers/PolicyViolationTab'
 
 const withResource = (Component) => {
   const mapDispatchToProps = (dispatch, ownProps) => {
@@ -102,9 +101,9 @@ const components = {
   // '/diagram': ResourceDiagram,
   // '/policies': ResourceOverview,
   // '/compliancePolicy/:policyName': CompliancePolicy,
-  '/compliancePolicy/:policyName/:policyNamespace': CompliancePolicyDetail,
-  '/violation': NewPolicyViolationTab,
-  '/yaml': NewPolicyTemplateTab,
+  '/compliancePolicy/:policyName/:policyNamespace': PolicyClusterDetail,
+  '/violation': PolicyViolationTab,
+  '/yaml': PolicyTemplateTab,
 }
 
 class ResourceDetails extends React.Component {

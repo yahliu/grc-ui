@@ -5,7 +5,7 @@ exports[`hcm-compliances - createComplianceLink should return valid compliance l
 exports[`hcm-compliances - createComplianceLink should return valid compliance link 2`] = `
 <Link
   replace={false}
-  to="undefined/policies/all/testNamespace2/testCreateComplianceLink2"
+  to="undefined/policies/all/testCreateComplianceLink2"
 >
   testCreateComplianceLink2
    (Deprecated)
@@ -15,7 +15,7 @@ exports[`hcm-compliances - createComplianceLink should return valid compliance l
 exports[`hcm-compliances - createComplianceLink should return valid compliance link 3`] = `
 <Link
   replace={false}
-  to="undefined/policies/all/testNamespace3/testCreateComplianceLink3"
+  to="undefined/policies/all/testCreateComplianceLink3"
 >
   testCreateComplianceLink3
 </Link>

@@ -9,7 +9,7 @@
 'use strict'
 
 import React from 'react'
-import NewResourceDetails from './NewResourceDetails'
+import NewResourceDetails from './DeprecatedResourceDetails'
 import ResourceList from './ResourceList'
 // import ResourceTopology from './ResourceTopology'
 import { Route, Switch } from 'react-router-dom'

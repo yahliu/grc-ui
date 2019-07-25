@@ -11,13 +11,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-// import { StructuredListWrapper, StructuredListHead, DataTable, StructuredListRow, StructuredListCell, StructuredListBody } from 'carbon-components-react'
-import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
+import { Module, ModuleBody, ModuleHeader } from 'carbon-addons-cloud-react'
 import msgs from '../../../nls/platform.properties'
 import resources from '../../../lib/shared/resources'
-// import { transform } from '../../../lib/client/resource-helper'
-// import { Link } from 'react-router-dom'
-// import ResourceTableRowExpandableList from './ResourceTableRowExpandableList'
 
 
 resources(() => {
@@ -28,9 +24,9 @@ const VerticalDivider = (key) => {
   return <span className="vertical-divider" key={key} />
 }
 
-class NewStructuredList extends React.PureComponent {
-  constructor() {
-    super()
+class DetailsModule extends React.PureComponent {
+  constructor(props) {
+    super(props)
   }
 
   formatData() {
@@ -42,7 +38,8 @@ class NewStructuredList extends React.PureComponent {
       _.forEach(items, (item) => {
         const entry = []
         entry[0] = item.cells[0].resourceKey
-        entry[1] = _.get(listData, item.cells[1].resourceKey, '-')
+        const entryData = _.get(listData, item.cells[1].resourceKey, '-')
+        typeof(entryData) === 'object'? entry[1] = JSON.stringify(entryData).replace(/\[|\]|"/g, ' ') : entry[1] = entryData
         oneTableData.push(entry)
       })
       tablesData.push(oneTableData)
@@ -60,7 +57,7 @@ class NewStructuredList extends React.PureComponent {
         if(tableData[row]){
           const tableCells = []
           tableCells.push(<td className='structured-list-table-item' key={`list-item-${tableData[row][0]}`} ><b>{msgs.get(tableData[row][0], this.context.locale)}</b></td>)
-          tableCells.push(<td className='structured-list-table-data' key={`list-item-${tableData[row][1]}`} >{typeof(tableData[row][1]) === 'object'? JSON.stringify(tableData[row][1]) : tableData[row][1]}</td>)
+          tableCells.push(<td className='structured-list-table-data' key={`list-item-${tableData[row][1]}`} >{tableData[row][1]}</td>)
           const tableRow = <tr className = 'new-structured-list-table-row' key={`list-line-${row}-${tableData[row][0]}`} >{tableCells}</tr>
           tableRows.push(tableRow)
         }
@@ -80,27 +77,29 @@ class NewStructuredList extends React.PureComponent {
 
   render() {
     const { title } = this.props
+    const showHeader = _.get(this.props, 'showHeader', true)
     const tablesData = this.formatData()
-    return (<Module className='new-structured-list' key='new-structured-list'>
-      {title && <ModuleHeader key='new-structured-list-header'>{msgs.get(title, this.context.locale)}</ModuleHeader>}
+
+    return(<Module className='new-structured-list-container' key='new-structured-list'>
+      { showHeader? <ModuleHeader>{msgs.get(title, this.context.locale)}</ModuleHeader> : null}
       <ModuleBody key='new-structured-list-body'>
         {this.renderStructuredListBody(tablesData)}
       </ModuleBody>
     </Module>)
 
   }
+
+  static contextTypes = {
+    locale: PropTypes.string
+  }
+
+  static propTypes = {
+    listData: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+    listItem: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+    numColumns: PropTypes.number.isRequired,
+    numRows: PropTypes.number.isRequired,
+    title: PropTypes.string,
+  }
 }
 
-NewStructuredList.contextTypes = {
-  locale: PropTypes.string
-}
-
-NewStructuredList.propTypes = {
-  listData: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  listItem: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  numColumns: PropTypes.number.isRequired,
-  numRows: PropTypes.number.isRequired,
-  title: PropTypes.string,
-}
-
-export default NewStructuredList
+export default DetailsModule

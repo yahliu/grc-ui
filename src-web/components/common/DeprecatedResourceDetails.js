@@ -10,7 +10,6 @@
 
 import React from 'react'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import { Notification, Loading } from 'carbon-components-react'
 import _ from 'lodash'
 // import { REQUEST_STATUS } from '../../actions/index'
 import { getTabs } from '../../../lib/client/resource-helper'
@@ -19,87 +18,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
-import NewResourceOverview from './NewResourceOverview'
-import CompliancePolicyDetail from './CompliancePolicyDetail'
-import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
-import { getPollInterval } from './RefreshTimeSelect'
-import NewPolicyTemplateTab from '../../containers/NewPolicyTemplateTab'
-import NewPolicyViolationTab from '../../containers/NewPolicyViolationTab'
-
-const withResource = (Component) => {
-  // const mapDispatchToProps = (dispatch, ownProps) => {
-  //   const { resourceType, params } = ownProps
-  //   return {
-  //     fetchResource: () => dispatch(fetchResource(resourceType, params.namespace, params.name))
-  //   }
-  // }
-
-  const mapStateToProps = (state, ownProps) => {
-    const { list: typeListName } = ownProps.resourceType,
-          error = state[typeListName].err
-    return {
-      status: state[typeListName].status,
-      statusCode: error && error.response && error.response.status
-    }
-  }
-
-  return connect(mapStateToProps)(class extends React.PureComponent {
-    static displayName = 'ResourceDetailsWithResouce'
-    static propTypes = {
-      // fetchResource: PropTypes.func,
-      // status: PropTypes.string,
-      // statusCode: PropTypes.object,
-      error: PropTypes.any,
-      loading: PropTypes.any,
-    }
-
-    constructor(props) {
-      super(props)
-      this.state = {
-        xhrPoll: false,
-      }
-    }
-
-    componentWillMount() {
-      const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
-      if (pollInterval) {
-        var intervalId = setInterval(this.reload.bind(this), pollInterval)
-        this.setState({ intervalId: intervalId })
-      }
-    }
-
-    componentWillUnmount() {
-      clearInterval(this.state.intervalId)
-    }
-
-    reload() {
-      if (!this.props.loading) {
-        this.setState({ xhrPoll: true })
-      }
-    }
-
-    render() {
-      const { error, loading } = this.props
-      if (error) {
-        return <Notification
-          title=''
-          className='persistent'
-          subtitle={msgs.get(error, this.context.locale)}
-          kind='error' />
-      } else if (loading) {
-        return <Loading className='resource-detail-content-spinner' />
-      }
-      return <Component  {...this.props} />
-    }
-  })
-}
-
-const OverviewTab = withResource(NewResourceOverview)
+import PolicyDetailsOverview from './PolicyDetailsOverview'
+import PolicyClusterDetail from './PolicyClusterDetail'
+// import PolicyTemplateTab from '../../containers/PolicyTemplateTab'
+// import PolicyViolationTab from '../../containers/PolicyViolationTab'
 
 const components = {
-  '/compliancePolicy/:policyName/:policyNamespace': CompliancePolicyDetail,
-  '/violation': NewPolicyViolationTab,
-  '/yaml': NewPolicyTemplateTab,
+  '/compliancePolicy/:policyName/:policyNamespace': PolicyClusterDetail,
+  // '/violation': PolicyViolationTab,
+  // '/yaml': PolicyTemplateTab,
 }
 
 class ResourceDetails extends React.Component {
@@ -147,15 +74,17 @@ class ResourceDetails extends React.Component {
   }
 
   renderOverview() {
-    const { match, resourceType, staticResourceData, children, items } = this.props
+    const { match, resourceType, staticResourceData, children, items, error, loading } = this.props
     return (
       <div>
-        <OverviewTab
+        <PolicyDetailsOverview
           resourceType={resourceType}
           params={match.params}
           item={items}
           staticResourceData={staticResourceData}
           modules={children}
+          error={error}
+          loading={loading}
         />
       </div>
     )
@@ -199,8 +128,12 @@ class ResourceDetails extends React.Component {
     })
     breadcrumbItems.push({
       label: this.getPolicyName(location),
+      noLocale: true,
       url: currentTab ? location.pathname.replace(`/${currentTab}`, '') : location.pathname
     })
+
+    // eslint-disable-next-line
+      console.log('Goes to that')
     return breadcrumbItems
   }
 

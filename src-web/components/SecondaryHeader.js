@@ -11,6 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import { Breadcrumb, Button, Tabs, Tab, TooltipIcon } from 'carbon-components-react'
 import resources from '../../lib/shared/resources'
 import { withRouter, Link } from 'react-router-dom'
@@ -107,11 +108,12 @@ export class SecondaryHeader extends React.Component {
     const { breadcrumbItems } = this.props
     return breadcrumbItems && breadcrumbItems.map((breadcrumb, index) => {
       const key = `${breadcrumb.id}-${index}`
+      const noLocale = _.get(breadcrumb, 'noLocale', false)
       return (
         <div key={key} className='bx--breadcrumb-item' title={decodeURIComponent(breadcrumb.label)}>
-          {breadcrumb.handleClick ? <div className='breadcrumb-link' onClick={breadcrumb.handleClick} >
-            {msgs.get(breadcrumb.label, locale)}</div> :
-            <Link to={breadcrumb.url || ''} className='bx--link'>{msgs.get(breadcrumb.label, locale)}</Link>}
+          {breadcrumb.handleClick ?
+            <div className='breadcrumb-link' onClick={breadcrumb.handleClick} >{msgs.get(breadcrumb.label, locale)}</div> :
+            <Link to={breadcrumb.url || ''} className='bx--link'>{noLocale ? breadcrumb.label : msgs.get(breadcrumb.label, locale)}</Link>}
         </div>
       )
     })

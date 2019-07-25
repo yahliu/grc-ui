@@ -317,7 +317,7 @@ const TopViolations = ({cardData, handleClick}) => {
                       </div>
                       <div className='card-description'>
                         {description.map((description) => {
-                          const cardEachDesConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace)}/${encodeURIComponent(description)}/complianceitem/${ encodeURIComponent(description)}/${encodeURIComponent(itemName)}`} className='card-each-description-link' key={description}>{description}</Link> : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(nameSpace)}/${encodeURIComponent(name)}/complianceitem/${ encodeURIComponent(itemName)}/${encodeURIComponent(description)}`} className='card-each-description-link' key={description}>{description}</Link>
+                          const cardEachDesConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(itemName)}/${encodeURIComponent(description)}`} className='card-each-description-link' key={description}>{description}</Link> : <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(description)}/${encodeURIComponent(itemName)}`} className='card-each-description-link' key={description}>{description}</Link>
                           return (
                             cardEachDesConditionalLink
                           )

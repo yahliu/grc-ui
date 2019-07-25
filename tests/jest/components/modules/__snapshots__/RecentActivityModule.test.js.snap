@@ -334,7 +334,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       >
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/mcm/compliance-all/complianceitem/compliance-all/policy-comp"
+                          href="undefined/policies/policy/policy-comp/compliance-all"
                           onClick={[Function]}
                         >
                           compliance-all
@@ -342,7 +342,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         , 
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/mcm/policy-ma/complianceitem/policy-ma/policy-comp"
+                          href="undefined/policies/policy/policy-comp/policy-ma"
                           onClick={[Function]}
                         >
                           policy-ma
@@ -350,7 +350,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         , 
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/mcm/policy-pod/complianceitem/policy-pod/policy-comp"
+                          href="undefined/policies/policy/policy-comp/policy-pod"
                           onClick={[Function]}
                         >
                           policy-pod
@@ -397,7 +397,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       >
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/mcm/compliance-all/complianceitem/compliance-all/policy-comp"
+                          href="undefined/policies/policy/policy-comp/compliance-all"
                           onClick={[Function]}
                         >
                           compliance-all
@@ -405,7 +405,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         , 
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/mcm/policy-pod/complianceitem/policy-pod/policy-comp"
+                          href="undefined/policies/policy/policy-comp/policy-pod"
                           onClick={[Function]}
                         >
                           policy-pod
@@ -578,7 +578,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       >
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/mycluster_name"
+                          href="undefined/policies/policy/mycluster_name/undefined"
                           onClick={[Function]}
                         >
                           mycluster_name
@@ -586,7 +586,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         , 
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/cluster1"
+                          href="undefined/policies/policy/cluster1/undefined"
                           onClick={[Function]}
                         >
                           cluster1
@@ -594,7 +594,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         , 
                         <a
                           className="card-each-description-link"
-                          href="undefined/policies/all/kube-system/Policy%20that%20is%20not%20compliant/complianceitem/undefined/clusterhub"
+                          href="undefined/policies/policy/clusterhub/undefined"
                           onClick={[Function]}
                         >
                           clusterhub
