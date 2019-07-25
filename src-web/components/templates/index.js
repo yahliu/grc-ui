@@ -9,12 +9,15 @@
 'use strict'
 
 import policyMutation from './policy-mutation.handlebars'
-import policyPodRole from './policy-pod-role.handlebars'
-import policyPodSecurity from './policy-pod-security.handlebars'
-import policyPodNetwork from './policy-pod-network.handlebars'
-import policyPodLimit from './policy-pod-limit.handlebars'
-import policyPodExists from './policy-pod-exists.handlebars'
+import policyPodRole from './policy-rolebinding.handlebars'
+import policyPodSecurity from './policy-psp.handlebars'
+import policyPodNetwork from './policy-network.handlebars'
+import policyPodLimit from './policy-mem-limit.handlebars'
+import policyPodExists from './policy-pod.handlebars'
 import policyRoles from './policy-roles.handlebars'
+import policyNamespace from './policy-namespace.handlebars'
+import policyCert from './policy-cert.handlebars'
+import policyClustrolebinding from './policy-clusterrolebinding.handlebars'
 
 export {
   policyMutation,
@@ -24,4 +27,7 @@ export {
   policyPodLimit,
   policyPodExists,
   policyRoles,
+  policyNamespace,
+  policyCert,
+  policyClustrolebinding,
 }

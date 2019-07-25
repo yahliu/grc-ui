@@ -1,0 +1,13 @@
+    - objectDefinition:
+        apiVersion: mcm-grcpolicy.ibm.com/v1alpha1
+        kind: CertPolicy # cert must not expire 
+        metadata:
+          name: certificate-policy
+          label:
+            category: "System-Integrity"
+        spec:
+          namespaceSelector:
+            include: ["kube-*"]
+            exclude: []
+          remediationAction: inform
+          minimumDuration: 50h

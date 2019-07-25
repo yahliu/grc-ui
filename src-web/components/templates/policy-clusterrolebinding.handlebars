@@ -1,0 +1,16 @@
+    - objectDefinition:
+        apiVersion: mcm-grcpolicy.ibm.com/v1alpha1
+        kind: IamPolicy # cluster rolebinding must not exceed
+        metadata:
+          name: iam-policy-example
+          label:
+            category: System-Integrity
+        spec:
+          maxClusterRoleBindingUsers: 5
+          namespaceSelector:
+            exclude:
+            - kube-system
+            include:
+            - default
+            - kube-*
+          remediationAction: enforce
