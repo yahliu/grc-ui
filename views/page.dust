@@ -32,7 +32,6 @@
     <script id='context' type='application/json'>{context|js|s}</script>
     <script id='propshcm' type='application/json'>{props|js|s}</script>
     <script src="{contextPath}/policies/{manifest.vendorhcm.js}"></script>
-    <script src="{contextPath}/policies/{manifest.common.js}"></script>
     <script id='props' type='application/json'>{propsH|js|s}</script>
     <script src="{filesH.nls.path}"></script>
     <script src="{filesH.dll.path}"></script>
