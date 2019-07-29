@@ -33,7 +33,7 @@ const jestConfig = {
   testURL: 'http://localhost/',
   coverageThreshold: {
     global: {
-      branches: 19,
+      branches: 15,
       functions: 20,
       lines: 20,
       statements: 20,

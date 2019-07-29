@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-
+//FindingsView might be merged with PoliciesView as GrcView in future for reuse after finding hifi is done
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
@@ -16,13 +16,13 @@ import { withRouter } from 'react-router-dom'
 import { createResources, updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import { POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES } from '../../lib/shared/constants'
-import PolicyCardsModule from '../components/modules/PolicyCardsModule'
-import PolicyToggleModule from './modules/PolicyToggleModule'
+import FindingCardModule from './modules/FindingCardModule'
+import FindingToggleModule from './modules/FindingToggleModule'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
-import NoResource from '../components/common/NoResource'
-import createDocLink from '../components/common/CreateDocLink'
-import ResourceFilterBar from '../components/common/ResourceFilterBar'
+import NoResource from './common/NoResource'
+import createDocLink from './common/CreateDocLink'
+import ResourceFilterBar from './common/ResourceFilterBar'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import queryString from 'query-string'
@@ -31,7 +31,7 @@ resources(() => {
   require('../../scss/policies-view.scss')
 })
 
-class PoliciesView extends React.Component {
+class FindingsView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -87,7 +87,7 @@ class PoliciesView extends React.Component {
     return (
       <div className='policies-view'>
         <ResourceFilterBar />
-        <PolicyCardsModule
+        <FindingCardModule
           viewState={viewState}
           updateViewState={this.updateViewState}
           policies={filteredPolicies}
@@ -95,7 +95,7 @@ class PoliciesView extends React.Component {
           showPolicyCard={showPolicyCard}
           handleDrillDownClick={this.handleDrillDownClickPoliciesView}
         />
-        <PolicyToggleModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} />
+        <FindingToggleModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} />
       </div>
     )
   }
@@ -135,7 +135,7 @@ class PoliciesView extends React.Component {
   }
 }
 
-PoliciesView.propTypes = {
+FindingsView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
   handleCreateResource: PropTypes.func,
@@ -162,5 +162,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PoliciesView))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FindingsView))
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PoliciesView view renders expand as expected 1`] = `
+exports[`PolicyToggle view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <withRouter(Connect(PageWithUrlQuery))

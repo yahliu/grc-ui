@@ -78,11 +78,12 @@ export default {
 export function createComplianceLink(item = {}, ...param){
   if (param[2]) {
     return item.metadata.name
-  } else {
+  } else if (item && item.metadata)
+  {
     if (item.raw.kind == 'Compliance')
-      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name} (Deprecated)</Link>
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name} (Deprecated)</Link>
     else
-      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
+      return <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
   }
 }
 

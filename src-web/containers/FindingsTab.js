@@ -16,12 +16,13 @@ import { connect } from 'react-redux'
 import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
-import PoliciesView from '../components/PoliciesView'
+import FindingsView from '../components/FindingsView'
 import {updateSecondaryHeader} from '../actions/common'
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 
-class PoliciesTab extends React.Component {
+
+class FindingsTab extends React.Component {
 
   static propTypes = {
     secondaryHeaderProps: PropTypes.object,
@@ -64,7 +65,7 @@ class PoliciesTab extends React.Component {
 
             return (
               <div>
-                <PoliciesView
+                <FindingsView
                   loading={!items && loading}
                   error={error}
                   policies={items}
@@ -87,5 +88,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(PoliciesTab))
+export default withRouter(connect(null, mapDispatchToProps)(FindingsTab))
 

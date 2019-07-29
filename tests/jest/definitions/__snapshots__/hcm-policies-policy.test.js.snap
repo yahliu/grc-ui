@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createComplianceLink Should create compliance link 1`] = `
+<Link
+  replace={false}
+  to="undefined/policies/all/policy1"
+>
+  policy1
+   (Deprecated)
+</Link>
+`;
+
+exports[`createComplianceLink Should create policy link 1`] = `
+<Link
+  replace={false}
+  to="undefined/policies/all/policy1"
+>
+  policy1
+</Link>
+`;
+
+exports[`createComplianceLink Should item.metadata.name 1`] = `"policy1"`;
+
+exports[`createComplianceLink Should undefined 1`] = `undefined`;

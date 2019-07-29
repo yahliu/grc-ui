@@ -18,6 +18,7 @@ import withAccess from '../components/common/withAccess'
 
 export const OverviewTab = loadable(() => import(/* webpackChunkName: "overview" */ './OverviewTab'))
 export const PoliciesTab = loadable(() => import(/* webpackChunkName: "policies" */ './PoliciesTab'))
+export const FindingsTab = loadable(() => import(/* webpackChunkName: "findings" */ './FindingsTab'))
 export const CreationTab = loadable(() => import(/* webpackChunkName: "creation" */ './CreationTab'))
 export const PolicyDetail = loadable(() => import(/* webpackChunkName: "policy" */ './PolicyDetail'))
 export const PolicyClusterDetail = loadable(() => import(/* webpackChunkName: "policyCluster" */ '../components/common/PolicyClusterDetail'))
@@ -76,7 +77,7 @@ const PolicyRouter = ({ match }) =>
     <Route path={`${match.url}/policy/:clusterName/:name`} render={() => <PolicyClusterDetail secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all/:name`} render={() => <PolicyDetail secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/all`} render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
-    <Route path={`${match.url}/findings`} /*SecurityFindingsTab to do later*/render={() => <PoliciesTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
+    <Route path={`${match.url}/findings`} render={() => <FindingsTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/create`} render={() => <CreationTab secondaryHeaderProps={CREATION_HEADER_PROPS} />} />
   </Switch>
 

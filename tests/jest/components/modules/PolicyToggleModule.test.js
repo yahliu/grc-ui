@@ -11,11 +11,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { policiesTabModuleFilteredPolicies, policiesTabModuleRefreshControl, policiesTabModuleSecondaryHeaderProps } from './ModuleTestingData'
-import PolicyTabModule from '../../../../src-web/components/modules/PolicyTabModule'
+import PolicyToggleModule from '../../../../src-web/components/modules/PolicyToggleModule'
 
-describe('PoliciesView view', () => {
+describe('PolicyToggle view', () => {
   it('renders expand as expected', () => {
-    const component = shallow(<PolicyTabModule
+    const component = shallow(<PolicyToggleModule
       refreshControl = {policiesTabModuleRefreshControl}
       policies={policiesTabModuleFilteredPolicies}
       secondaryHeaderProps={policiesTabModuleSecondaryHeaderProps}

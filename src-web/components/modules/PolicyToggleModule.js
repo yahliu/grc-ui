@@ -21,7 +21,7 @@ import formatPoliciesToClustersTableData from '../common/FormatTableData'
 import pageWithUrlQuery from '../common/withUrlQuery'
 import queryString from 'query-string'
 
-class PolicyTabModule extends React.Component {
+class PolicyToggleModule extends React.Component {
 
   constructor (props) {
     super(props)
@@ -109,7 +109,7 @@ class PolicyTabModule extends React.Component {
   }
 }
 
-PolicyTabModule.propTypes = {
+PolicyToggleModule.propTypes = {
   highLightRowName: PropTypes.string,
   history: PropTypes.object.isRequired,
   location: PropTypes.object,
@@ -120,4 +120,4 @@ PolicyTabModule.propTypes = {
   showSidePanel: PropTypes.bool,
 }
 
-export default withRouter(pageWithUrlQuery(PolicyTabModule))
+export default withRouter(pageWithUrlQuery(PolicyToggleModule))
