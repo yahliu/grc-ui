@@ -120,6 +120,8 @@
   "modal.formfield.clusterLabels": "Cluster labels",
   "modal.edit-hcmpolicypolicy.heading": "Edit policy",
   "modal.edit-hcmpolicypolicy.label": "Edit policy",
+  "modal.edit-hcmcompliance.heading": "Edit policy",
+  "modal.edit-hcmcompliance.label": "Edit policy",
   "modal.remove-hcmpolicypolicy.heading": "Remove policy",
   "modal.remove-hcmpolicypolicy.label": "Remove policy",
   "modal.button.submit": "Submit",
