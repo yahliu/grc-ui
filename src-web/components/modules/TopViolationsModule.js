@@ -22,6 +22,7 @@ resources(() => {
   require('../../../scss/module-top-violations.scss')
 })
 
+const EMPTY_CHOICE = 'EMPTY_CHOICE'
 const VIOLATION_THRESHHOLD = 4
 
 const TopViolationSelections = Object.freeze({
@@ -71,7 +72,8 @@ export default class TopViolationsModule extends React.Component {
     const detail = msgs.get(`overview.no.violations.description.${type}`, locale)
     return (
       <div className='no-violations'>
-        <img className='no-violations-icon' src={`${config.contextPath}/common/graphics/no-violation.svg`} alt={title} />
+        <img className='no-violations-icon'
+          src={`${config.contextPath}/policies/graphics/no-violations.svg`} alt={title} />
         <div className='no-violations-title'>{title}</div>
         <div className='no-violations-detail'>{detail}</div>
       </div>
@@ -112,8 +114,9 @@ export default class TopViolationsModule extends React.Component {
   }
 
   renderCards(cardData) {
+    const { locale } = this.state
     const { handleDrillDownClick } = this.props
-    return <TopViolations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} />
+    return <TopViolations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
   }
 
   getCardData = () => {
@@ -202,11 +205,25 @@ export default class TopViolationsModule extends React.Component {
       })
       break
     }
-    return Object.keys(dataMap).map(key=>{
+    const cards = Object.keys(dataMap).map(key=>{
       return {...dataMap[key]}
     }).sort(({count:a},{count:b})=>{
       return b-a
     })
+
+    // if less violations then threshold, add an empty card
+    if (cards.length<VIOLATION_THRESHHOLD) {
+      cards.push({
+        name: type==='policies'?
+          msgs.get('overview.top.violations.policies.empty') :
+          msgs.get('overview.top.violations.findings.empty'),
+        choice: EMPTY_CHOICE,
+        description: [type==='policies'?
+          msgs.get('overview.top.violations.policies.empty.desc') :
+          msgs.get('overview.top.violations.findings.empty.desc')],
+      })
+    }
+    return cards
   }
 
   getTopViolationChoices = (locale) => {
@@ -279,7 +296,7 @@ export default class TopViolationsModule extends React.Component {
   }
 }
 
-const TopViolations = ({cardData, handleClick}) => {
+const TopViolations = ({cardData, handleClick, locale}) => {
   return (
     <div key={name}>
       <div className='violation-card-container' >
@@ -296,21 +313,41 @@ const TopViolations = ({cardData, handleClick}) => {
             }
           }
           const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
+          const renderCount = () => {
+            if (choice !== EMPTY_CHOICE) {
+              return (
+                <React.Fragment>
+                  <div className='card-violations' role={'button'}
+                    tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+                    <div className={classes}>
+                      {count}
+                    </div>
+                  </div>
+                </React.Fragment>
+              )
+            } else {
+              return (
+                <React.Fragment>
+                  <div className='card-violations'>
+                    <img
+                      src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
+                      alt={msgs.get('svg.description.noresource', locale)} />
+                  </div>
+                </React.Fragment>
+              )
+            }
+          }
+
           const classes = classNames({
             'card-violation-count': true,
-            'alert': count>0,
+            //'alert': count>0,
           })
           return (
             <div key={Math.random()}>
               <div className='violation-card-container'>
                 <div className='violation-card-content'>
                   <div className='card-inner-content'>
-                    <div className='card-violations' role={'button'}
-                      tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
-                      <div className={classes}>
-                        {count}
-                      </div>
-                    </div>
+                    {renderCount()}
                     <div className='card-name-description'>
                       <div className='card-name'>
                         {cardNameConditionalLink}
@@ -338,7 +375,8 @@ const TopViolations = ({cardData, handleClick}) => {
 
 TopViolations.propTypes = {
   cardData: PropTypes.array,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
+  locale: PropTypes.string,
 }
 
 TopViolationsModule.propTypes = {

@@ -23,6 +23,7 @@ import RecentActivityModule from './modules/RecentActivityModule'
 // import TopFindingsModule from './modules/TopFindingsModule'
 import ImpactedControlsModule from './modules/ImpactedControlsModule'
 import PolicySummaryModule from './modules/PolicySummaryModule'
+import config from '../../lib/shared/config'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import NoResource from '../components/common/NoResource'
@@ -44,6 +45,7 @@ export class OverviewView extends React.Component {
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
     this.updateViewState = this.updateViewState.bind(this)
+    this.handleCreatePolicy = this.handleCreatePolicy.bind(this)
     this.handleDrillDownClickOverview = this.handleDrillDownClickOverview.bind(this)
   }
 
@@ -63,7 +65,7 @@ export class OverviewView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, findings, activeFilters={}, handleCreateResource } = this.props
+    const { loading, error, policies, findings, activeFilters={} } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -78,7 +80,7 @@ export class OverviewView extends React.Component {
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {createDocLink(this.context.locale, handleCreateResource)}
+          {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale))}
         </NoResource>
       )
     }
@@ -121,6 +123,10 @@ export class OverviewView extends React.Component {
     saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
 
+  handleCreatePolicy(){
+    this.props.history.push(`${config.contextPath}/policies/create`)
+  }
+
   handleDrillDownClickOverview(parentType, parentName){
     if(parentType){
       const paraURL = {}
@@ -158,7 +164,6 @@ OverviewView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
   findings: PropTypes.array,
-  handleCreateResource: PropTypes.func,
   history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   location: PropTypes.object,

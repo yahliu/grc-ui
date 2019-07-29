@@ -337,15 +337,15 @@ export default class ImpactedControlsModule extends React.Component {
             let label, className
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
-              label = msgs.get('overview.recent.activity.finding.severity.high', locale)
+              label = msgs.get('overview.recent.activity.severity.high', locale)
               className = 'high'
               break
             case SECURITY_TYPES.MEDIUM:
-              label = msgs.get('overview.recent.activity.finding.severity.medium', locale)
+              label = msgs.get('overview.recent.activity.severity.medium', locale)
               className = 'medium'
               break
             case SECURITY_TYPES.LOW:
-              label = msgs.get('overview.recent.activity.finding.severity.low', locale)
+              label = msgs.get('overview.recent.activity.severity.low', locale)
               className = 'low'
               break
             case SECURITY_TYPES.VIOLATIONS:

@@ -60,8 +60,13 @@ const CREATION_HEADER_PROPS = {
     {
       id: 'policy-overview',
       label: 'routes.grc',
+      url: `${BASE_PAGE_PATH}`
+    },
+    {
+      id: 'policy-overview-all',
+      label: 'routes.policies',
       url: `${BASE_PAGE_PATH}/all`
-    }
+    },
   ],
 }
 

@@ -9,26 +9,18 @@
 'use strict'
 
 import React from 'react'
+import { Button } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
-import CreateResourceModal from '../../components/modals/CreateResourceModal'
-import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 
-const createDocLink = (locale, handleCreateResource) => {
+const createDocLink = (locale, handleCreateResource, submitBtnTextKey) => {
   const vNumber = config['ICP_VERSION']
-  const createComplianceModal = <CreateResourceModal
-    key='createPolicy'
-    headingTextKey='actions.create.policy'
-    submitBtnTextKey='actions.create.policy'
-    onCreateResource={ handleCreateResource }
-    resourceDescriptionKey='modal.createresource.policy'
-  />
-
-  const modal = React.cloneElement(createComplianceModal, { resourceType: RESOURCE_TYPES.HCM_POLICIES })
 
   return (
     <div className={'button-group'}>
-      {[modal]}
+      <Button icon="add--glyph" small id='create-resource' onClick={handleCreateResource}>
+        { submitBtnTextKey }
+      </Button>
       <div className={'buttons'}>
         <button className={'bx--btn bx--btn--sm bx--btn--secondary'}>
           <a href={`https://www${config['env']==='development' ? '-03preprod': ''}.ibm.com/support/knowledgecenter/SSBS6K_${vNumber}/mcm/compliance/compliance_intro.html`} className={'doc-link'} target='doc' aria-describedby='launchWindow'>{msgs.get('button.view.doc', locale)}</a>
