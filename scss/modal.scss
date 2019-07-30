@@ -51,3 +51,24 @@
     }
   }
 }
+
+.resource-modal#resource-modal-HCMPolicyPolicy,.resource-modal#resource-modal-HCMCompliance{
+  .bx--modal-container{
+    padding: 1rem 0 0 0;
+    .bx--modal-header{
+      padding: 0 3rem;
+    }
+    .bx--modal-content{
+      margin-bottom: 0;
+    }
+    .bx--modal-footer{
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .ace-monokai {
+      .ace_meta.ace_tag.ace_tag, .ace_keyword.ace_keyword {
+        color: #F92672;
+      }
+    }
+  }
+}

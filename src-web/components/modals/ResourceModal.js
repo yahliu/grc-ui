@@ -110,8 +110,8 @@ class ResourceModal extends React.PureComponent {
       <div id='resource-modal-container' ref={div => this.resourceModal = div} tabIndex='-1' role='region' onKeyDown={this.escapeEditor} aria-label={msgs.get('a11y.editor.escape', locale)}> {/* eslint-disable-line jsx-a11y/no-noninteractive-element-interactions */}
         {reqCount && reqCount > 0 && <Loading />}
         <Modal
-          id={`resource-modal-${resourceType}`}
-          className='modal'
+          id={`resource-modal-${resourceType.name}`}
+          className='resource-modal'
           open={open}
           primaryButtonText={msgs.get(label.primaryBtn, locale)}
           secondaryButtonText={msgs.get('modal.button.cancel', locale)}
