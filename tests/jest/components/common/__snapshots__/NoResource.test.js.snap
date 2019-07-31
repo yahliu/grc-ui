@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoResource component renders as expected 1`] = `
+<div>
+  <div>
+    topButton
+  </div>
+  <div
+    className="no-resource"
+  >
+    <img
+      alt="No resource"
+      className="no-resource-icon"
+      src="undefined/policies/graphics/no-policy.svg"
+    />
+    <div
+      className="no-resource-title"
+    >
+      title
+    </div>
+    <div
+      className="no-resource-detail"
+    >
+      detailed description
+    </div>
+    <div
+      className="child"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;

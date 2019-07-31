@@ -40,9 +40,9 @@ class ResourceList extends React.Component {
   }
 
   componentWillMount() {
-    const { updateSecondaryHeader, tabs, title, links, information, fetchResources, policies } = this.props
+    const { updateSecondaryHeader, tabs, title, links, information, fetchResources, listData } = this.props
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, links, msgs.get(information, this.context.locale))
-    fetchResources(policies)
+    fetchResources(listData)
   }
 
   componentWillUnmount() {
@@ -52,8 +52,8 @@ class ResourceList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!lodash.isEqual(this.props.policies, nextProps.policies)) {
-      this.props.fetchResources(nextProps.policies)
+    if (!lodash.isEqual(this.props.listData, nextProps.listData)) {
+      this.props.fetchResources(nextProps.listData)
     }
   }
 
@@ -86,7 +86,9 @@ class ResourceList extends React.Component {
       placeHolderText,
       autoAction,
       highLightRowName,
-      showSidePanel
+      showSidePanel,
+      handleCreatePolicy,
+      topButton
     } = this.props
     const { locale } = this.context
 
@@ -170,9 +172,12 @@ class ResourceList extends React.Component {
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {createDocLink(locale, actions)}
+          {createDocLink(locale, handleCreatePolicy, msgs.get('routes.create.policy', locale))}
         </NoResource>
       )
+    }
+    else if(resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER.name){
+      return <NoResource title={msgs.get('table.title.no.violation', this.context.locale)} topButton={topButton} />
     }
     const resourceName = msgs.get('no-resource.' + resourceType.name.toLowerCase(), locale)
     return (
@@ -236,8 +241,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { updateBrowserURL, resourceType } = ownProps
   return {
-    fetchResources: (policies) => {
-      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(policies)}, resourceType))
+    fetchResources: (listData) => {
+      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(listData)}, resourceType))
     },
     changeTablePage: page => dispatch(changeTablePage(page, resourceType)),
     searchTable: (search, updateURL) => {

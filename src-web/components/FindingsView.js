@@ -13,9 +13,9 @@ import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { createResources, updateResourceToolbar, updateActiveFilters } from '../actions/common'
+import { updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES } from '../../lib/shared/constants'
+import { POLICY_OVERVIEW_STATE_COOKIE } from '../../lib/shared/constants'
 import FindingCardModule from './modules/FindingCardModule'
 import FindingToggleModule from './modules/FindingToggleModule'
 import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
@@ -26,6 +26,7 @@ import ResourceFilterBar from './common/ResourceFilterBar'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import queryString from 'query-string'
+import config from '../../lib/shared/config'
 
 resources(() => {
   require('../../scss/policies-view.scss')
@@ -40,6 +41,7 @@ class FindingsView extends React.Component {
     }
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
+    this.handleCreatePolicy = this.handleCreatePolicy.bind(this)
     this.updateViewState = this.updateViewState.bind(this)
     this.handleDrillDownClickPoliciesView = this.handleDrillDownClickPoliciesView.bind(this)
   }
@@ -56,7 +58,7 @@ class FindingsView extends React.Component {
   render() {
     const { locale } = this.context
     const { viewState } = this.state
-    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, handleCreateResource, location } = this.props
+    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, location } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -69,9 +71,9 @@ class FindingsView extends React.Component {
     if ((!policies || policies.length === 0) && !loading) {
       return (
         <NoResource
-          title={msgs.get('no-resource.title', [msgs.get('routes.policies', locale)], locale)}
+          title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
           detail={msgs.get('no-resource.detail.policy', locale)}>
-          {createDocLink(this.context.locale, handleCreateResource)}
+          {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale))}
         </NoResource>
       )
     }
@@ -95,7 +97,7 @@ class FindingsView extends React.Component {
           showPolicyCard={showPolicyCard}
           handleDrillDownClick={this.handleDrillDownClickPoliciesView}
         />
-        <FindingToggleModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} />
+        <FindingToggleModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} handleCreatePolicy={this.handleCreatePolicy} />
       </div>
     )
   }
@@ -133,12 +135,16 @@ class FindingsView extends React.Component {
       urlString = `${urlString}&filters=${curentURL.filters}`}
     this.props.history.push(`${this.props.location.pathname}?${urlString}`)
   }
+
+  //for finding page, may need to discuss how to deal with no resource in future, current just the same as policy page
+  handleCreatePolicy(){
+    this.props.history.push(`${config.contextPath}/policies/create`)
+  }
 }
 
 FindingsView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
-  handleCreateResource: PropTypes.func,
   history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   location: PropTypes.object,
@@ -157,7 +163,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
-    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml)),
     updateActiveFilters: (activeFilters) => dispatch(updateActiveFilters(activeFilters))
   }
 }

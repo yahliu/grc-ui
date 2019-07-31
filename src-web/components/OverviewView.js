@@ -13,14 +13,12 @@ import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import {createResources, updateResourceToolbar} from '../actions/common'
+import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, filterFindings, getAvailablePolicyFilters, getSavedViewState, saveViewState} from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
-import {POLICY_OVERVIEW_STATE_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
+import {POLICY_OVERVIEW_STATE_COOKIE} from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
-// import TopViolationsModule from './modules/TopViolationsModule'
-// import TopFindingsModule from './modules/TopFindingsModule'
 import ImpactedControlsModule from './modules/ImpactedControlsModule'
 import PolicySummaryModule from './modules/PolicySummaryModule'
 import config from '../../lib/shared/config'
@@ -179,8 +177,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
-    handleCreateResource: (dispatch, yaml) => dispatch(createResources(RESOURCE_TYPES.HCM_POLICIES, yaml))
+    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters))
   }
 }
 

@@ -31,7 +31,7 @@ class FindingToggleModule extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { policies, secondaryHeaderProps, showPolicyTabToggle, policyTabToggleIndex, highLightRowName, showSidePanel } = this.props
+    const { policies, secondaryHeaderProps, showPolicyTabToggle, policyTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy } = this.props
     const policyTabSwitcher = showPolicyTabToggle ? this.renderTabSwitcher(policyTabToggleIndex) : []
     return (
       <div className='module-policy-tab'>
@@ -39,7 +39,7 @@ class FindingToggleModule extends React.Component {
           {...this.props}
           detailsTabs={['policies']}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_POLICY}
-          policies={this.formatExpandablePolicies(policies)}
+          listData={this.formatExpandablePolicies(policies)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           tabs={secondaryHeaderProps.tabs}
@@ -49,14 +49,15 @@ class FindingToggleModule extends React.Component {
           placeHolderText={msgs.get('tabs.finding.toggle.securityFindings.placeHolderText', locale)}
           autoAction='table.actions.sidepanel'
           highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}>
+          showSidePanel={showSidePanel}
+          handleCreatePolicy={handleCreatePolicy}>
           {policyTabSwitcher}
         </ResourceList>}
         {policyTabToggleIndex===1 && <ResourceList
           {...this.props}
           detailsTabs={['clusters']}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER}
-          policies={formatPoliciesToClustersTableData(policies)}
+          listData={formatPoliciesToClustersTableData(policies)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
           tabs={secondaryHeaderProps.tabs}
@@ -66,7 +67,8 @@ class FindingToggleModule extends React.Component {
           placeHolderText={msgs.get('tabs.finding.toggle.clusterFindings.placeHolderText', locale)}
           autoAction='table.actions.sidepanel'
           highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}>
+          showSidePanel={showSidePanel}
+          topButton={policyTabSwitcher}>
           {policyTabSwitcher}
         </ResourceList>}
       </div>
@@ -110,6 +112,7 @@ class FindingToggleModule extends React.Component {
 }
 
 FindingToggleModule.propTypes = {
+  handleCreatePolicy: PropTypes.func,
   highLightRowName: PropTypes.string,
   history: PropTypes.object.isRequired,
   location: PropTypes.object,
