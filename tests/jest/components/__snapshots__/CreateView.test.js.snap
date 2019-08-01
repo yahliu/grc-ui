@@ -29,7 +29,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             placeholder={undefined}
             type="text"
-            value="my-policy"
+            value="grc-policy"
           />
         </div>
       </div>
@@ -237,7 +237,9 @@ exports[`CreationView component renders as expected 1`] = `
           >
             <span
               className="bx--visually-hidden"
-            />
+            >
+              
+            </span>
           </label>
         </div>
         <div>

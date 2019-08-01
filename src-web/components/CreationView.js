@@ -10,78 +10,50 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import {diffLines} from 'diff'
 import resources from '../../lib/shared/resources'
-import { TextInput, Checkbox, TooltipIcon, MultiSelect, InlineNotification } from 'carbon-components-react'
+import { Loading, Notification, TextInput, Checkbox, TooltipIcon, MultiSelect, InlineNotification } from 'carbon-components-react'
 import { parse } from '../../lib/client/design-helper'
-import { validator } from './validators/policy-validator'
+import { initialTemplateData, getMultiSelectData, getPolicyYAML, setCustomPolicyData, getCreateErrors, highliteDifferences  } from '../util/creation-helper'
+import { validator } from '../validators/policy-validator'
 import { hideResourceToolbar } from '../../lib/client/resource-helper'
 import EditorBar from './common/EditorBar'
 import YamlEditor from './common/YamlEditor'
-import * as Templates from './templates'
-import policyHeader from './templates/policy-header.handlebars'
-import policyBindings from './templates/policy-bindings.handlebars'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
-import config from '../../lib/shared/config'
 
 resources(() => {
   require('../../scss/creation-view.scss')
 })
 
-const intialValues = {
-  name: 'my-policy',
-  namespace: config.complianceNamespace,
-  enforce: true,
-  mutation: false,
-  annotations: [
-    {name: 'standards', values: []},
-    {name: 'categories', values: []},
-    {name: 'controls', values: []},
-  ],
-  validations: [
-    {name: 'roles', values: []},
-  ],
-  bindings: [
-    {name: 'selectors', values: []},
-  ],
-}
-
-const initalAnnotations = {
-  standards: ['NIST', 'PCI', 'FISMA', 'HIPAA', 'BSA'],
-  categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
-  controls: ['MutationAdvisor','VA'],
-}
-
-const roles = Object.values(Templates).map(template => {
-  const value = template.call()
-  let kindDes = value.match(/kind:(.*) #(.*)/)
-  let type = ''
-  if (value.match(/apiVersion: roletemplate.mcm.ibm.com\/v1alpha1/g)) { // role-templates
-    type = 'role-templates'
-    kindDes = value.match(/apiVersion:(.*)template.mcm.ibm.com\/v1alpha1 #(.*)/)
-  } else if (value.match(/complianceType/g)) { // object-templates
-    type = 'object-templates'
-  } else { // policy-templates
-    type = 'policy-templates'
-  }
-
-  return { key: `${_.capitalize(kindDes[1].trim())}-${kindDes[2].trim()}`, kind: _.capitalize(kindDes[1].trim()), description: kindDes[2].trim(), value, type}
-})
-
-const selectors = ['cloud: "IBM"', 'env: "Dev"']
-
 export default class CreationView extends React.Component {
+
+  static getDerivedStateFromProps(props, state) {
+    const {loading, mutateErrorMsg, mutateStatus} = props
+    if (mutateStatus === 'ERROR') {
+      return {updateMsgKind: 'error', updateMessage: mutateErrorMsg}
+    } else if (!loading) {
+      const { existing } = props
+      if (!state.multiSelectData) {
+        const multiSelectData = getMultiSelectData(existing)
+        return {multiSelectData}
+      }
+    }
+    return null
+  }
 
   constructor (props) {
     super(props)
-    const {standards, categories, controls} = Object.assign({}, initalAnnotations)
+    // active values in controls and used to render templates
+    const templateData = Object.assign({}, initialTemplateData)
+    // rendered template
+    const policyYAML = getPolicyYAML(templateData)
+    // parsed template
+    const parsedPolicy = parse(policyYAML).parsed
     this.state = {
-      annotations: {standards, categories, controls},
-      currentParsed: Object.assign({}, intialValues),
-      currentYaml: this.getYAML(intialValues),
+      templateData,
+      policyYAML,
+      parsedPolicy,
       exceptions: [],
-      userSelected: {},
       updateMessage: '',
       hasUndo: false,
       hasRedo: false,
@@ -96,17 +68,18 @@ export default class CreationView extends React.Component {
     props.setGetPolicyJSON(this.getPolicyJSON.bind(this))
   }
 
-
-  componentWillReceiveProps(nextProps) {
-    const { locale } = this.context
-    const {mutateErrorMsg, mutateStatus} = nextProps
-    if (mutateStatus === 'ERROR') {
-      this.setState({updateMsgKind: 'error', updateMessage: mutateErrorMsg||msgs.get('success.create.policy.check', locale)})
-    }
-  }
-
   render() {
+    const { locale } = this.context
+    const { loading, error } = this.props
     hideResourceToolbar()
+
+    if (loading)
+      return <Loading withOverlay={false} className='content-spinner' />
+
+    if (error)
+      return <Notification title='' className='overview-notification' kind='error'
+        subtitle={msgs.get('overview.error.default', locale)} />
+
     return (
       <div className='creation-view'>
         {this.renderControls()}
@@ -117,7 +90,7 @@ export default class CreationView extends React.Component {
 
   renderControls() {
     const { locale } = this.context
-    const {currentParsed: {name}, annotations: {standards, categories, controls}} = this.state
+    const { templateData: {name} } = this.state
     return (
       <div className='creation-view-controls-container' >
         <div className='creation-view-controls' >
@@ -132,31 +105,32 @@ export default class CreationView extends React.Component {
               value={name}
               onChange={this.onChange.bind(this, 'name')} />
           </div>
-          {this.renderMultiselect('validations', 'roles', roles.map(role=>role.key))}
-          {this.renderMultiselect('bindings', 'selectors', selectors)}
-          {this.renderCheckbox('enforce')}
-          {this.renderMultiselect('annotations', 'standards', standards)}
-          {this.renderMultiselect('annotations', 'categories', categories)}
-          {this.renderMultiselect('annotations', 'controls', controls)}
+          {this.renderMultiselect('validations', 'specs')}
+          {this.renderMultiselect('bindings', 'selectors')}
+          {this.renderCheckbox('enforce', 'enforce')}
+          {this.renderMultiselect('annotations', 'standards')}
+          {this.renderMultiselect('annotations', 'categories')}
+          {this.renderMultiselect('annotations', 'controls')}
         </div>
       </div>
     )
   }
 
-  renderCheckbox(key) {
+  renderCheckbox(templateKey, checkboxKey) {
     const { locale } = this.context
-    const { currentParsed } = this.state
-    const active = currentParsed[key]
+    const { templateData } = this.state
+    const active = templateData[templateKey]
     return (
       <React.Fragment>
         <div className='creation-view-controls-checkbox'>
           <Checkbox
-            id={`policy-${key}`}
+            id={`policy-${templateKey}`}
             className='checkbox'
             hideLabel
+            labelText=''
             checked={active}
-            onChange={this.onChange.bind(this, key)} />
-          <div>{msgs.get(`creation.view.policy.${key}`, locale)}</div>
+            onChange={this.onChange.bind(this, checkboxKey)} />
+          <div>{msgs.get(`creation.view.policy.${checkboxKey}`, locale)}</div>
           <TooltipIcon direction='top' tooltipText={'TBD'}>
             <svg className='info-icon'>
               <use href={'#diagramIcons_info'} ></use>
@@ -167,17 +141,49 @@ export default class CreationView extends React.Component {
     )
   }
 
-  renderMultiselect(parsedKey, key, available) {
+  renderMultiselect(templateKey, multiSelectKey) {
     const { locale } = this.context
-    const { currentParsed } = this.state
-    const parsed = currentParsed[parsedKey]
-    const parsedMap = _.keyBy(parsed, 'name')
-    const active = parsedMap[key].values
+
+    // get what's available from:
+    //  1) hard coded values in creation-helper
+    //  2) the policies that exist on cluster hub
+    //  3) any custom changes user has made to policy in editor
+    let available = []
+    const { multiSelectData={}, userMultiSelectData={} } = this.state
+    available = multiSelectData[multiSelectKey]
+    if (userMultiSelectData[multiSelectKey]) {
+      available = [...userMultiSelectData[multiSelectKey], ...available]
+    }
+
+    // get what's currently active from templateData
+    // use random key on MultiSelect to make it create a new one with these active values
+    const { templateData } = this.state
+    const data = templateData[templateKey]
+    const dataMap = _.keyBy(data, 'name')
+    let active = dataMap[multiSelectKey].values
+    let activeKeys = active
+
+    // special case for validation specs
+    if (multiSelectKey==='specs' && available) {
+      if (!userMultiSelectData.customValidations) {
+        available = available.map(spec=>spec.key)
+        activeKeys = active.map(spec=>{
+          const idx = spec.indexOf('-')
+          return (idx!==-1) ? spec.substr(0, idx) : spec
+        })
+      } else {
+        active = activeKeys = available = [msgs.get('creation.view.policy.custom', locale)]
+      }
+    }
+
+    // change key if active changes so that carbon component is re-created with new initial values
+    const key = multiSelectKey + active.join('-')
+
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'>
           <div className="creation-view-controls-multiselect-title">
-            {msgs.get(`creation.view.policy.${key}`, locale)}
+            {msgs.get(`creation.view.policy.${multiSelectKey}`, locale)}
             <TooltipIcon direction='top' tooltipText={'TBD'}>
               <svg className='info-icon'>
                 <use href={'#diagramIcons_info'} ></use>
@@ -185,14 +191,15 @@ export default class CreationView extends React.Component {
             </TooltipIcon>
           </div>
           <MultiSelect.Filterable
+            key={key}
             items={available}
             initialSelectedItems={active}
             placeholder={active.length===0 ?
-              msgs.get(`creation.view.policy.select.${key}`, locale) :
-              active.join(', ')}
+              msgs.get(`creation.view.policy.select.${multiSelectKey}`, locale) :
+              activeKeys.join(', ')}
             itemToString={item=>item}
-            ref={this.setMultiSelectCmp.bind(this, key)}
-            onChange={this.onChange.bind(this, key)} />
+            ref={this.setMultiSelectCmp.bind(this, multiSelectKey)}
+            onChange={this.onChange.bind(this, multiSelectKey)} />
         </div>
       </React.Fragment>
     )
@@ -200,8 +207,8 @@ export default class CreationView extends React.Component {
 
   renderYAML() {
     const { locale } = this.context
-    const { currentYaml, hasUndo, hasRedo, exceptions, updateMessage, updateMsgKind } = this.state
-    const editorToolbarTitle = msgs.get('eitor.toolbar', this.context.locale)
+    const { policyYAML, hasUndo, hasRedo, exceptions, updateMessage, updateMsgKind } = this.state
+    const editorToolbarTitle = msgs.get('editor.toolbar', this.context.locale)
 
     return (
       <div className='creation-view-yaml' >
@@ -223,6 +230,7 @@ export default class CreationView extends React.Component {
         {updateMessage &&
           <div className='creation-view-yaml-notification' >
             <InlineNotification
+              key={updateMessage}
               kind={updateMsgKind}
               title={updateMsgKind==='error' ?
                 msgs.get('error.create.policy', locale) :
@@ -238,35 +246,40 @@ export default class CreationView extends React.Component {
           wrapEnabled={true}
           setEditor={this.setEditor}
           onYamlChange={this.handleEditorChange}
-          yaml={currentYaml} />
+          yaml={policyYAML} />
       </div>
     )
   }
 
 
   onChange(field, evt) {
-    const { currentParsed, currentYaml, userSelected } = this.state
-    const annotationMap = _.keyBy(currentParsed.annotations, 'name')
-    const validationsMap = _.keyBy(currentParsed.validations, 'name')
-    const selectorsMap = _.keyBy(currentParsed.bindings, 'name')
+    // change template data directly
+    const { templateData, policyYAML, userMultiSelectData } = this.state
+    const annotationMap = _.keyBy(templateData.annotations, 'name')
+    const validationsMap = _.keyBy(templateData.validations, 'name')
+    const selectorsMap = _.keyBy(templateData.bindings, 'name')
     switch (field) {
     case 'name':
     case 'namespace':
-      currentParsed[field] = evt.target.value
+      templateData[field] = evt.target.value
       break
 
     case 'enforce':
-      currentParsed[field] = evt
+      templateData[field] = evt
       break
 
     case 'standards':
     case 'categories':
     case 'controls':
-      annotationMap[field].values = userSelected[field] = evt.selectedItems
+      annotationMap[field].values = evt.selectedItems
       break
 
-    case 'roles':
+    case 'specs':
       validationsMap[field].values = evt.selectedItems
+      if (userMultiSelectData) {
+        userMultiSelectData.customValidations = false
+      }
+      delete templateData.customValidations
       break
 
     case 'selectors':
@@ -276,113 +289,14 @@ export default class CreationView extends React.Component {
     if (this.multiSelectCmpMap[field]) {
       this.multiSelectCmpMap[field].handleOnOuterClick()
     }
-    this.setState({currentParsed, userSelected, currentYaml: this.getYAML(currentParsed, currentYaml)})
+    const newYAML = getPolicyYAML(templateData)
+    const parsedPolicy = parse(newYAML).parsed
+    this.setState({templateData, policyYAML: newYAML, parsedPolicy, userMultiSelectData})
+    highliteDifferences(this.editor, policyYAML, newYAML)
   }
-
 
   setMultiSelectCmp(field, ref) {
     this.multiSelectCmpMap[field] = ref
-  }
-
-
-  getYAML(values, currentYaml) {
-    // failure to load Templates?
-    if (typeof policyHeader!=='function') {
-      return ''
-    }
-
-    const { validations } = values
-    // sort array for yaml concatenation
-    const validationsArray = _.keyBy(validations, 'name')['roles'].values.sort((a,b)=>{
-      const roleA = roles.find(role=>role.key===a)
-      const roleB = roles.find(role=>role.key===b)
-      return roleA.type > roleB.type ? 1 : roleA.type < roleB.type ? -1 : 0
-    })
-
-    // policy header
-    let yaml = policyHeader(Object.assign({}, values))
-    validationsArray.forEach(validation => {
-      const role = roles.find(role=>role.key===validation)
-      if (role.type === 'role-templates') { // role-templates
-        if (yaml.match(/role-templates:/) == null) {
-          yaml = yaml.concat('  role-templates:\n')
-        }
-      } else if (role.type === 'object-templates') { // object-templates
-        if (yaml.match(/object-templates:/) == null) {
-          yaml = yaml.concat('  object-templates:\n')
-        }
-      } else { // policy-templates
-        if (yaml.match(/policy-templates:/) == null) {
-          yaml = yaml.concat('  policy-templates:\n')
-        }
-      }
-      yaml = yaml.concat(role.value)
-    })
-
-    // policy bindings
-    yaml = yaml.concat(
-      policyBindings(Object.assign({}, values)),
-    )
-
-    // mark any modified/added lines in editor
-    if (currentYaml) {
-      const ranges=[]
-      let row=0
-      let firstRow=undefined
-      const range = this.editor.getSelectionRange()
-      diffLines(currentYaml, yaml)
-        .filter((diff, idx, diffs) =>{
-          const {count, removed} = diff
-          if (removed && count===1 && idx-1<diffs.length) {
-            const nextDiff = diffs[idx+1]
-            if (nextDiff) {
-              const {count:c, added} = nextDiff
-              if (added && c===1) {
-                nextDiff.modified = true
-                delete nextDiff.added
-                return false
-              }
-            }
-          }
-          return true
-        })
-        .forEach(({count, value, added, removed, modified})=>{
-          if (added || modified) {
-            const r = Object.create(range)
-            let column = modified ? value.indexOf(':')+1 : 0
-            if (modified && value[column]===' ') column++
-            const endRow = modified ? row : row+count-1
-            r.start = {row, column}
-            r.end = {row: endRow, column: 200}
-            ranges.push(r)
-            if (!firstRow) {
-              firstRow = row
-            }
-            row+=count
-          } else if (removed) {
-            row-=count
-          } else {
-            row+=count
-          }
-        })
-      setTimeout(() => {
-        if (ranges.length) {
-          const selection = this.editor.multiSelect
-          selection.toSingleRange(ranges[0])
-          for (var i = ranges.length; i--; ) {
-            selection.addRange(ranges[i], true)
-          }
-        } else {
-          this.editor.selection.clearSelection()
-        }
-      }, 0)
-      if (firstRow) {
-        this.editor.setAnimatedScroll(true)
-        this.editor.scrollToLine(firstRow, true)
-      }
-    }
-
-    return yaml
   }
 
 
@@ -496,68 +410,43 @@ export default class CreationView extends React.Component {
     }
   }
 
-  handleEditorChange = (currentYaml) => {
-    this.setState({currentYaml})
+  handleEditorChange = (policyYAML) => {
+    this.setState({policyYAML})
     delete this.resetUndoManager
     this.parseDebounced()
   }
 
   handleParse = () => {
-    const { currentYaml, currentParsed, annotations, userSelected } = this.state
-    const { parsed: customParsed, exceptions} = parse(currentYaml, validator, this.context.locale)
+    const { policyYAML, multiSelectData, parsedPolicy } = this.state
+    let { templateData } = this.state
+    const { parsed: newParsed, exceptions} = parse(policyYAML, validator, this.context.locale)
 
     // update editor annotations
     this.editor.session.setAnnotations(exceptions)
 
-    // update current parsed with selected yaml changes
-    let newParsed = currentParsed
-    let newAnnotes = annotations
+    // if no exceptions, update templateData and userMultiSelectData based on custom editting
+    // (userMultiSelectData is multiselect's choices)
+    const userMultiSelectData = {}
     if (exceptions.length===0) {
-      newParsed = Object.assign({}, newParsed)
-      newAnnotes = Object.assign({}, newAnnotes)
-      const {$raw: {metadata: {name, annotations: annotes}, spec:{remediationAction}}} = customParsed.Policy[0]
-      newParsed.name = name
-      newParsed.enforce = remediationAction==='enforce'
-      const keys = ['standards', 'categories', 'controls']
-      const annotationMap = _.keyBy(newParsed.annotations, 'name')
-      keys.forEach(key=>{
-        let values = annotes[`policy.mcm.ibm.com/${key}`]
-        if (values) {
-          values = values.split(',').map((item) => {
-            return item.trim()
-          }).filter(v=>{return v!==''})
-          // update available
-          newAnnotes[key] = [...new Set(initalAnnotations[key].concat(values))]
-          // update selected
-          annotationMap[key].values = [...new Set((userSelected[key]||[]).concat(values))]
-        }
-      })
+      templateData = Object.assign({}, templateData)
+      setCustomPolicyData(parsedPolicy, newParsed, templateData, multiSelectData, userMultiSelectData)
     }
-
-    // update editor toolbar
-    this.setState({currentParsed:newParsed, annotations:newAnnotes, exceptions})
+    this.setState({templateData, parsedPolicy: newParsed, userMultiSelectData, exceptions})
   }
 
   handleUpdateMessageClosed = () => this.setState({ updateMessage: '' })
 
   getPolicyJSON() {
     const { locale } = this.context
-    const { currentYaml } = this.state
+    const { policyYAML } = this.state
     let errorMsg = null
-    const { parsed, exceptions } = parse(currentYaml, validator, locale)
+    const { parsed, exceptions } = parse(policyYAML, validator, locale)
     if (exceptions.length>0) {
       errorMsg = msgs.get('error.create.policy.exceptions', locale)
     }
     if (!errorMsg) {
-      const {$raw: {metadata: {name}, spec={}}} = parsed.Policy[0]
-      const matchLabels = _.get(parsed.PlacementPolicy[0], '$raw.spec.clusterLabels.matchLabels')
-      if (!name) {
-        errorMsg = msgs.get('error.create.policy.noname', locale)
-      } else if (!spec['policy-templates'] && !spec['object-templates'] && !spec['role-templates']) {
-        errorMsg = msgs.get('error.create.policy.novalidation', locale)
-      } else if (!matchLabels) {
-        errorMsg = msgs.get('error.create.policy.nobinding', locale)
-      }
+      const { existing } = this.props
+      errorMsg = getCreateErrors(parsed, existing, locale)
     }
     this.setState({updateMsgKind: errorMsg?'error':'success', updateMessage: errorMsg||msgs.get('success.create.policy.check', locale)})
     if (!errorMsg) {
@@ -571,13 +460,16 @@ export default class CreationView extends React.Component {
   }
 
   resetEditor() {
-    this.setState({ currentYaml:this.getYAML(), exceptions:[], hasUndo: false, hasRedo: false})
+    const { templateData } = this.state
+    const policyYAML = getPolicyYAML(templateData)
+    this.setState({ policyYAML, exceptions:[], hasUndo: false, hasRedo: false})
     this.resetUndoManager = true
   }
 }
 
 CreationView.propTypes = {
-  mutateErrorMsg: PropTypes.string,
-  mutateStatus: PropTypes.string,
+  error: PropTypes.object,
+  existing: PropTypes.object,
+  loading: PropTypes.bool,
   setGetPolicyJSON: PropTypes.func,
 }

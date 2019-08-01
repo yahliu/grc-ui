@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-import { validator } from '../../../src-web/components/validators/policy-validator'
+import { validator } from '../../../src-web/validators/policy-validator'
 
 //parsed, exceptions, locale
 describe('truncate middle', () => {
