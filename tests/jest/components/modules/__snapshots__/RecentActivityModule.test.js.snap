@@ -76,11 +76,11 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               >
                 <g>
                   <path
-                    d="M9.18485099360515e-16,-15A15,15,0,1,1,-9.18485099360515e-16,15A15,15,0,1,1,9.18485099360515e-16,-15M-1.6532731788489267e-15,-9A9,9,0,1,0,1.6532731788489267e-15,9A9,9,0,1,0,-1.6532731788489267e-15,-9Z"
+                    d="M9.18485099360515e-16,-15A15,15,0,1,1,-15,1.83697019872103e-15L-9,1.102182119232618e-15A9,9,0,1,0,5.51091059616309e-16,-9Z"
                     fill="#E62325"
                   />
                   <path
-                    d="M-2.3880612583373385e-15,-13L-2.0206672185931327e-15,-11Z"
+                    d="M-13,1.592040838891559e-15A13,13,0,0,1,-2.3880612583373385e-15,-13L-2.0206672185931327e-15,-11A11,11,0,0,0,-11,1.3471114790620886e-15Z"
                     fill="#DFE3E6"
                   />
                 </g>
@@ -427,7 +427,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations"
+                      className="card-violations empty"
                     >
                       <img
                         alt="No resource"
@@ -440,24 +440,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-name"
                       >
-                        <a
-                          className="card-name-link"
-                          href="undefined/policies/all/No%20other%20policy%20violations"
-                          onClick={[Function]}
-                        >
-                          No other policy violations
-                        </a>
+                        No other policy violations
                       </div>
                       <div
                         className="card-description"
                       >
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20policy%20violations%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                          onClick={[Function]}
-                        >
-                          We will continue to monitor and display any policy violations so you can easily find them here.
-                        </a>
+                        We will continue to monitor and display any policy violations so you can easily find them here.
                       </div>
                     </div>
                   </div>
@@ -664,7 +652,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations"
+                      className="card-violations empty"
                     >
                       <img
                         alt="No resource"
@@ -677,24 +665,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-name"
                       >
-                        <a
-                          className="card-name-link"
-                          href="undefined/policies/all/No%20other%20security%20findings"
-                          onClick={[Function]}
-                        >
-                          No other security findings
-                        </a>
+                        No other security findings
                       </div>
                       <div
                         className="card-description"
                       >
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20security%20findings%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                          onClick={[Function]}
-                        >
-                          We will continue to monitor and display any security findings so you can easily find them here.
-                        </a>
+                        We will continue to monitor and display any security findings so you can easily find them here.
                       </div>
                     </div>
                   </div>

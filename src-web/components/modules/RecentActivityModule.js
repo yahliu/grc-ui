@@ -187,7 +187,7 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
         }
 
         // Generate the arc strings
-        const arcs = d3.pie().sort(null)([count, total-count])
+        const arcs = d3.pie().sort(null)([count, Math.max(total-count, 1)])
         const pathData1 = arcGenerator(Object.assign(arcs[0], {
           innerRadius: 9,
           outerRadius: 15

@@ -163,6 +163,12 @@
               color: $color__blue-51;
               text-decoration: underline;
             }
+
+            &.empty {
+              &:hover {
+                cursor: default;
+              }
+            }
           }
 
           .card-name-description {

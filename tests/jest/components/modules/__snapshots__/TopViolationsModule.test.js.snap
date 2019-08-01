@@ -247,7 +247,7 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
               className="card-inner-content"
             >
               <div
-                className="card-violations"
+                className="card-violations empty"
               >
                 <img
                   alt="No resource"
@@ -260,24 +260,12 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
                 <div
                   className="card-name"
                 >
-                  <a
-                    className="card-name-link"
-                    href="undefined/policies/all/No%20other%20policy%20violations"
-                    onClick={[Function]}
-                  >
-                    No other policy violations
-                  </a>
+                  No other policy violations
                 </div>
                 <div
                   className="card-description"
                 >
-                  <a
-                    className="card-each-description-link"
-                    href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20policy%20violations%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                    onClick={[Function]}
-                  >
-                    We will continue to monitor and display any policy violations so you can easily find them here.
-                  </a>
+                  We will continue to monitor and display any policy violations so you can easily find them here.
                 </div>
               </div>
             </div>
@@ -487,7 +475,7 @@ exports[`TopViolationsModule findings clusters view renders as expected 1`] = `
               className="card-inner-content"
             >
               <div
-                className="card-violations"
+                className="card-violations empty"
               >
                 <img
                   alt="No resource"
@@ -500,24 +488,12 @@ exports[`TopViolationsModule findings clusters view renders as expected 1`] = `
                 <div
                   className="card-name"
                 >
-                  <a
-                    className="card-name-link"
-                    href="undefined/policies/all/No%20other%20security%20findings"
-                    onClick={[Function]}
-                  >
-                    No other security findings
-                  </a>
+                  No other security findings
                 </div>
                 <div
                   className="card-description"
                 >
-                  <a
-                    className="card-each-description-link"
-                    href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20security%20findings%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                    onClick={[Function]}
-                  >
-                    We will continue to monitor and display any security findings so you can easily find them here.
-                  </a>
+                  We will continue to monitor and display any security findings so you can easily find them here.
                 </div>
               </div>
             </div>
@@ -727,7 +703,7 @@ exports[`TopViolationsModule findings view renders as expected 1`] = `
               className="card-inner-content"
             >
               <div
-                className="card-violations"
+                className="card-violations empty"
               >
                 <img
                   alt="No resource"
@@ -740,24 +716,12 @@ exports[`TopViolationsModule findings view renders as expected 1`] = `
                 <div
                   className="card-name"
                 >
-                  <a
-                    className="card-name-link"
-                    href="undefined/policies/all/No%20other%20security%20findings"
-                    onClick={[Function]}
-                  >
-                    No other security findings
-                  </a>
+                  No other security findings
                 </div>
                 <div
                   className="card-description"
                 >
-                  <a
-                    className="card-each-description-link"
-                    href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20security%20findings%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                    onClick={[Function]}
-                  >
-                    We will continue to monitor and display any security findings so you can easily find them here.
-                  </a>
+                  We will continue to monitor and display any security findings so you can easily find them here.
                 </div>
               </div>
             </div>
@@ -1024,7 +988,7 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
               className="card-inner-content"
             >
               <div
-                className="card-violations"
+                className="card-violations empty"
               >
                 <img
                   alt="No resource"
@@ -1037,24 +1001,12 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
                 <div
                   className="card-name"
                 >
-                  <a
-                    className="card-name-link"
-                    href="undefined/policies/all/No%20other%20policy%20violations"
-                    onClick={[Function]}
-                  >
-                    No other policy violations
-                  </a>
+                  No other policy violations
                 </div>
                 <div
                   className="card-description"
                 >
-                  <a
-                    className="card-each-description-link"
-                    href="undefined/policies/policy/We%20will%20continue%20to%20monitor%20and%20display%20any%20policy%20violations%20so%20you%20can%20easily%20find%20them%20here./undefined"
-                    onClick={[Function]}
-                  >
-                    We will continue to monitor and display any policy violations so you can easily find them here.
-                  </a>
+                  We will continue to monitor and display any policy violations so you can easily find them here.
                 </div>
               </div>
             </div>

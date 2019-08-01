@@ -302,6 +302,7 @@ const TopViolations = ({cardData, handleClick, locale}) => {
       <div className='violation-card-container' >
         {cardData.map(({name, description, count, choice, type, itemName}) => {
           const violated = count > 0
+          const choiceIsClusters = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase()
           const onClick = () =>{
             if (violated) {
               handleClick(choice, name, type, description.toString())
@@ -312,7 +313,7 @@ const TopViolations = ({cardData, handleClick, locale}) => {
               onClick()
             }
           }
-          const cardNameConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? name : <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(name)}`} className='card-name-link' key={name}>{name}</Link>
+
           const renderCount = () => {
             if (choice !== EMPTY_CHOICE) {
               return (
@@ -328,11 +329,56 @@ const TopViolations = ({cardData, handleClick, locale}) => {
             } else {
               return (
                 <React.Fragment>
-                  <div className='card-violations'>
+                  <div className='card-violations empty'>
                     <img
                       src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
                       alt={msgs.get('svg.description.noresource', locale)} />
                   </div>
+                </React.Fragment>
+              )
+            }
+          }
+
+          const renderName = () => {
+            if (choice !== EMPTY_CHOICE && !choiceIsClusters) {
+              return (
+                <React.Fragment>
+                  <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(name)}`} className='card-name-link' key={name}>
+                    {name}
+                  </Link>
+                </React.Fragment>
+              )
+            } else {
+              return (
+                <React.Fragment>
+                  {name}
+                </React.Fragment>
+              )
+            }
+          }
+
+          const renderDescription  = () => {
+            if (choice !== EMPTY_CHOICE) {
+              return (
+                <React.Fragment>
+                  {description.map((description) => {
+                    return (choiceIsClusters?
+                      <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(itemName)}/${encodeURIComponent(description)}`}
+                        className='card-each-description-link' key={description}>
+                        {description}
+                      </Link> :
+                      <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(description)}/${encodeURIComponent(itemName)}`} className='card-each-description-link' key={description}>
+                        {description}
+                      </Link>
+                    )
+                  }
+                  ).reduce((prev, curr) => [prev, ', ', curr])}
+                </React.Fragment>
+              )
+            } else {
+              return (
+                <React.Fragment>
+                  {description[0]}
                 </React.Fragment>
               )
             }
@@ -343,23 +389,17 @@ const TopViolations = ({cardData, handleClick, locale}) => {
             //'alert': count>0,
           })
           return (
-            <div key={Math.random()}>
+            <div key={name}>
               <div className='violation-card-container'>
                 <div className='violation-card-content'>
                   <div className='card-inner-content'>
                     {renderCount()}
                     <div className='card-name-description'>
                       <div className='card-name'>
-                        {cardNameConditionalLink}
+                        {renderName()}
                       </div>
                       <div className='card-description'>
-                        {description.map((description) => {
-                          const cardEachDesConditionalLink = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase() ? <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(itemName)}/${encodeURIComponent(description)}`} className='card-each-description-link' key={description}>{description}</Link> : <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(description)}/${encodeURIComponent(itemName)}`} className='card-each-description-link' key={description}>{description}</Link>
-                          return (
-                            cardEachDesConditionalLink
-                          )
-                        }
-                        ).reduce((prev, curr) => [prev, ', ', curr])}
+                        {renderDescription()}
                       </div>
                     </div>
                   </div>
