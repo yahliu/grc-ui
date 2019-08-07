@@ -9,7 +9,6 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-
 .module-top-violations {
   width: 49%;
   min-height: 360px;
@@ -182,7 +181,6 @@
               flex-wrap: wrap;
               font-weight: bold;
               padding-bottom: 5px;
-              white-space: nowrap;
               color: $mcm_color_gray_20;
 
               .card-name-link {
@@ -204,7 +202,6 @@
               flex-wrap: wrap;
               font-style: italic;
               font-size: 12px;
-              white-space: nowrap;
               color: $mcm_color_blue_gray;
 
               .card-each-description-link {
@@ -217,14 +214,12 @@
                 }
               }
             }
-
           }
         }
       }
     }
   }
 }
-
 
 @media (min-width: 1922px)  {
   .card-container-container {

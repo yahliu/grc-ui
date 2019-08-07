@@ -33,8 +33,6 @@
  *   </div>
  */
 
-
-
 /* Styles for the button */
 .tagInput-searchIcon {
   transform: scale(1.1);
@@ -49,7 +47,6 @@
   transform: scale(0.9);
   fill: $color__navy-gray-7;
   display: inline-block;
-  float: left;
   margin: 0.6rem 0 0 -3.5rem;
   position: relative;
   z-index: 11;
@@ -66,7 +63,6 @@
     fill: $color__blue-51;
   }
   display: inline-block;
-  float: left;
   margin: 0.6rem 0 0 -2rem;
   position: relative;
   z-index: 11;
@@ -76,7 +72,6 @@
 .tagInput-copyButton {
   transform: scale(0.8);
   display: inline-block;
-  float: left;
   height: 2.8rem;
   width: 2.8rem;
   margin: -0.25rem 0 0 0.3rem;
@@ -100,7 +95,6 @@
 .tagInput-filterButton {
   transform: scale(0.8);
   display: inline-block;
-  float: left;
   height: 2.8rem;
   width: 2.8rem;
   margin: -0.25rem 0 0 -0.51rem;

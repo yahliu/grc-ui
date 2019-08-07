@@ -62,19 +62,6 @@
     margin: auto;
   }
 
-  // &-right {
-  //   flex: 1 0 50%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   .bx--module {
-  //     min-height: 25rem;
-  //   }
-
-  //   .yamlEditorContainer {
-  //     height: calc(100% - 3rem);
-  //   }
-  // }
-
   &-second {
     width: 100%;
     display: flex;
@@ -82,15 +69,12 @@
 
     &-left {
       flex: 3 3 60%;
-      // max-width: 60%;
       float: left;
     }
 
     &-right {
       flex: 2 2 40%;
-      // max-width: 40%;
       float: right;
-
     }
 
     .bx--module {

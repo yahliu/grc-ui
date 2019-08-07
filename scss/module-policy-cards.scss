@@ -9,7 +9,6 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-
 .module-policy-cards {
   padding-top: 1px;
 
@@ -18,8 +17,8 @@
     align-items: center;
 
     .header-title {
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 600;
       padding-right: 10px;
       border-right: 1px solid $color__gray-1;
       line-height: 23px
@@ -100,26 +99,52 @@
     }
   }
 
+  .card-collapsed {
+    margin-bottom: 30px;
+  }
+
   .card-container-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
 
-    > div {
-      flex-basis: 34%;
-      flex-grow: 0;
-      --is-end: 1;
+    @media screen and (min-width: 81.25rem) {
+      > div {
+        flex-basis: 33.3%;
+        --need-right-padding: 1;
+      }
+
+      > div:nth-child(3n+3) {
+        flex-basis: 33.3%;
+        --need-right-padding: 0;
+        flex-grow: 1;
+      }
     }
 
-    > div:nth-child(3n+3) {
-      flex-basis: 32%;
-      flex-grow: 1;
-      --is-end: 0;
+    @media screen and (min-width: 52.8125rem) and (max-width: 81.25rem) {
+      > div {
+        flex-basis: 50%;
+        --need-right-padding: 1;
+      }
+
+      > div:nth-child(2n+2) {
+        flex-basis: 50%;
+        --need-right-padding: 0;
+        flex-grow: 1;
+      }
+    }
+
+    @media screen and (max-width: 52.8125rem) {
+      > div {
+        --need-right-padding: 0;
+        flex-grow: 1;
+      }
     }
 
     .card-container {
-      //self-defined property --is-end to determine last item layout
-      padding: 10px calc(20px * var(--is-end)) 10px 0;
+      //--need-right-padding = 0 means last item in each line so no right padding
+      //here need to dynamically calculate item numbers on each line after resizing
+      padding: 10px calc(20px * var(--need-right-padding)) 10px 0;
 
       .card-content {
         display: flex;
@@ -186,15 +211,11 @@
              align-items: flex-end;
              padding-bottom: 16px;
              align-items: baseline;
-             .card-count-violations {
-             }
-             .card-count-total {
-             }
            }
          }
+        }
       }
     }
-  }
   }
 }
 

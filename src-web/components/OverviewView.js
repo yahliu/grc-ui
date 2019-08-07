@@ -10,7 +10,6 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import resources from '../../lib/shared/resources'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar } from '../actions/common'
@@ -28,10 +27,6 @@ import NoResource from '../components/common/NoResource'
 import ResourceFilterBar from '../components/common/ResourceFilterBar'
 import createDocLink from '../components/common/CreateDocLink'
 import queryString from 'query-string'
-
-resources(() => {
-  require('../../scss/overview-view.scss')
-})
 
 export class OverviewView extends React.Component {
 

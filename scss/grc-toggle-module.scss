@@ -1,0 +1,75 @@
+/*******************************************************************************
+ * Licensed Materials - Property of IBM
+ * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ *
+ * Note to U.S. Government Users Restricted Rights:
+ * Use, duplication or disclosure restricted by GSA ADP Schedule
+ * Contract with IBM Corp.
+ *******************************************************************************/
+@import 'node_modules/carbon-components/scss/globals/scss/_colors';
+@import 'variables';
+
+.module-toggle-tab {
+  .bx--data-table-v2-container {
+      overflow: hidden;
+  }
+
+  .bx--table-toolbar {
+    .bx--search--sm .bx--search-input {
+      height: 32px;
+    }
+
+    .bx--content-switcher {
+      height: 32px;
+    }
+  }
+}
+
+.resource-table {
+  tbody {
+    tr.high-light {
+      background-color: $grc_highlight_background;
+      border-color: $grc_highlight_borad;
+      border-style: solid;
+      @media screen and (min-width: 2000px) {
+        border-width: 0.08rem;
+      }
+      @media screen and (max-width: 2000px) {
+        border-width: 0.15rem;
+      }
+    }
+    tr:nth-child(2n).high-light {
+      background-color:$grc_highlight_background;
+      border-color: $grc_highlight_borad;
+      border-style: solid;
+      @media screen and (min-width: 2000px) {
+        border-width: 0.08rem;
+      }
+      @media screen and (max-width: 2000px) {
+        border-width: 0.15rem;
+      }
+    }
+  }
+}
+
+.bx--parent-row-v2 {
+  .bx--table-expand-v2 {
+    .bx--table-expand-v2__button {
+      .bx--table-expand-v2__svg {
+        transform: rotate(90deg);
+        transition: 0.1s
+      }
+    }
+  }
+}
+
+.bx--expandable-row-v2 {
+  .bx--table-expand-v2 {
+    .bx--table-expand-v2__button {
+      .bx--table-expand-v2__svg {
+        transform: rotate(270deg);
+        transition: 0.1s
+      }
+    }
+  }
+}

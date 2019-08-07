@@ -40,18 +40,12 @@ $mcm_heat_blue: #92eeee !default;
 
 $mcm_view_filter: #DFEBF1 !default;
 
-$mcm_background_color: #f4f7fb !default;
-$mcm_provider_card_background_color: #fafafa !default;
-
-
 $ibm-colors__gray--40: #a4a4a4 !default;
 $mcm_color_blue: #3F71EC !default;
 $mcm_color_blue_gray: #5A6872 !default;
 $mcm_color_light_gray: #cccccc !default;
 $mcm_color_gray_20: #152935 !default;
 $mcm_color_drak_blue: #30588c !default;
-
-$mcm_light_blue: #f9fbfc !default;
 
 $grc_color_radar_blue: #0082C1 !default;
 $grc_color_radar_green: #13B9B9 !default;
@@ -61,3 +55,6 @@ $grc_color_overview_title: #4A4A4A !default;
 $grc_color_finding_high: #E62325 !default;
 $grc_color_finding_medium: #FEC233 !default;
 $grc_color_finding_low: #A0A0A0 !default;
+$grc_highlight_background: rgba(85,150,230, 0.1) !default;
+$grc_highlight_background_2: rgba(85,150,230, 0.02) !default;
+$grc_highlight_borad: #3d70b2 !default;

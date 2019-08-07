@@ -9,7 +9,6 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import './dashboard-card';
 
-
 .resource-table {
   .bx--form-item.bx--checkbox-wrapper {
     margin-top: 0;
@@ -33,21 +32,6 @@
     }
   }
 
-  tbody {
-    tr.high-light {
-      background-color: $mcm_background_color;
-      border-color: $mcm_color_drak_blue;
-      border-style: solid;
-      border-width: 0.15rem;
-    }
-    tr:nth-child(2n).high-light {
-      background-color:$mcm_background_color;
-      border-color: $mcm_color_drak_blue;
-      border-style: solid;
-      border-width: 0.15rem;
-    }
-  }
-
   .row-not-expanded .bx--table-expand-v2__button {
     visibility: hidden;
   }
@@ -64,7 +48,6 @@
   .bx--overflow-menu-options__option--danger:only-child {
     border-top: 0;
   }
-
 
 .search-no-results {
   font-style: italic;

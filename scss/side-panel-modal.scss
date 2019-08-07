@@ -10,14 +10,30 @@
 @import 'variables';
 
 .side-panel-modal {
+  .bx--modal {
+    background-color: transparent;
+  }
+
+  .bx--data-table-v2 tr:hover td:first-of-type {
+    border-left: none;
+  }
+
+  .bx--data-table-v2 tr:hover td:last-of-type {
+    border-right: none;
+  }
+
+  tr.bx--expandable-row-v2:hover + tr[data-child-row] > td {
+    border-right: none;
+  }
+
   .bx--modal-header {
     font-size: 1.5rem;
     color: $color__navy-gray-6;
   }
+
   .special-header {
     border-bottom: 1px solid #dfe3e6;
   }
-
 
   .bx--loading {
     margin: auto;
@@ -63,16 +79,50 @@
     width: 50%;
     padding: 30px;
     font-size: 14px;
+
+    .bx--parent-row-v2 {
+      &:hover + .bx--expandable-row-v2 { 
+        .resource-table-expandable-cell table thead tr {
+          background-color: $grc_highlight_background_2; 
+        }
+        .resource-table-expandable-cell table tbody tr {
+          background-color: $grc_highlight_background; 
+      }
+      }
+      .bx--table-expand-v2 {
+        .bx--table-expand-v2__button {
+          .bx--table-expand-v2__svg {
+            transform: rotate(90deg);
+            transition: 0.1s
+          }
+        }
+      }
+    }
+
+    .bx--expandable-row-v2 {
+      &:hover > .resource-table-expandable-cell table thead tr {
+        background-color: $grc_highlight_background_2; 
+      }
+      .bx--table-expand-v2 {
+        .bx--table-expand-v2__button {
+          .bx--table-expand-v2__svg {
+            transform: rotate(270deg);
+            transition: 0.1s
+          }
+        }
+      }
+    }
   }
 
-  .bx--module__inner {
-    box-shadow: none;
+  .bx--module{
+    .bx--module__inner {
+      box-shadow: none;
+      overflow: hidden;
+    }
   }
 
   .resource-table-main {
     .resource-table-expandable-cell {
-      background-color: $mcm_light_blue;
-      pointer-events: none;
       table {
         border-bottom: none;
         thead {
@@ -89,10 +139,10 @@
       }
     }
     thead {
-      background-color: white;
       border: none;
       tr {
         border-bottom: 1px $color__navy-gray-6 solid;
+        background-color: white;
         th {
           border: none;
         }
@@ -116,9 +166,6 @@
     }
     tbody {
       border: none;
-      .bx--expandable-row-v2 {
-        background-color: #edf4fd;
-      }
       tr {
         border: none;
         border-bottom: 1px $color__navy-gray-8 solid;
@@ -128,9 +175,7 @@
           }
           border: none;
           .resource-table-expandable {
-            background-color: $mcm_light_blue;
             thead {
-              background-color: $mcm_light_blue;
               tr { 
                 th {
                   font-size: 0.875rem;
@@ -154,7 +199,6 @@
               }
             }
             tbody {
-              background-color: $mcm_light_blue;
               tr { 
                 td {
                   font-size: 0.875rem;
@@ -171,5 +215,4 @@
     }
     border: none;
   }
-
 }

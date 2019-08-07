@@ -19,7 +19,6 @@ $util-healthy: $color__teal-20;
 $gray: $color__gray-1;
 $gray-for-text: $mcm__color__gray;
 
-
 .bx--module.bx--module--single {
   max-width: 28rem;
   min-width: 24rem;
@@ -37,7 +36,6 @@ $gray-for-text: $mcm__color__gray;
       color: #000;
       p {
         display: inline;
-        float: left;
         padding-left: 0.5rem;
       }
     }
@@ -83,9 +81,7 @@ $gray-for-text: $mcm__color__gray;
   .bx--responsive-table {
     border: none;
   }
-
 }
-
 
 .dashboard-card-header {
   &__critical {
@@ -160,7 +156,6 @@ $innerOrbSize: $orbSize - 0.4rem;
   color: #000;
   @include circle($orbSize);
   padding: 0;
-
 
   &__inner {
     @include circle($innerOrbSize);
@@ -237,26 +232,21 @@ $innerOrbSize: $orbSize - 0.4rem;
     &__healthy {
       fill: $healthy;
       display: inline;
-      float: left;
     }
     &__critical {
       fill: $critical;
       display: inline;
-      float: left;
     }
     &__warning {
       fill: $warning;
       display: inline;
-      float: left;
     }
   }
   div {
     display: inline-block;
-    float: left;
   }
   a {
     display: inline-block;
-    float: left;
   }
 }
 
@@ -319,4 +309,3 @@ $innerOrbSize: $orbSize - 0.4rem;
     font-weight: bold;
   }
 }
-

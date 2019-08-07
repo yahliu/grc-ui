@@ -13,12 +13,6 @@ import PropTypes from 'prop-types'
 import { Modal } from 'carbon-components-react'
 import {updateModal, } from '../../actions/common'
 import {connect} from 'react-redux'
-import resources from '../../../lib/shared/resources'
-
-resources(() => {
-  require('../../../scss/description-modal.scss')
-})
-
 
 class DescriptionModal extends React.PureComponent {
 

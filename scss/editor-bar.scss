@@ -7,6 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
+@import 'variables';
 
 .editor-bar {
     display: flex;
@@ -18,13 +19,11 @@
     }
 
     .editor-bar-search {
-
       .bx--search--sm .bx--search-input {
         background-color: #fff;
         font-size: 14px;
         height: 22px;
       }
-
     }
 
     .editor-bar-button {
@@ -38,12 +37,12 @@
 
       &.failure {
         cursor: default;
-        fill: #e0182d;
+        fill: $mcm__color__critical;
       }
     }
 
     .editor-error-button {
-      fill: #e0182d;
+      fill: $mcm__color__critical;
     }
 
     .editor-bar-spacer {
@@ -59,8 +58,6 @@
         box-shadow: none;
       }
     }
-
-
 }
 
 .bx--overflow-menu-options {
@@ -82,9 +79,8 @@
     display: flex;
 
     .item-icon {
-      fill: #e0182d;
+      fill: $mcm__color__critical;
       padding-right: 8px;
     }
   }
 }
-

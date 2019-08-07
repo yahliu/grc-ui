@@ -7,6 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
  @import 'node_modules/carbon-components/scss/globals/scss/_colors';
+ @import 'variables';
 
  .overview-content{
    .vertical-expend{
@@ -25,7 +26,7 @@
         }
     
         .bx--module__header{
-          border-bottom-color: #3d70b2;
+          border-bottom-color: $grc_highlight_borad;
           border-bottom-width: 2px;
           padding: 0 0.5rem;
           margin: 0 1rem;
@@ -63,7 +64,6 @@
     }
    }
   
-
   svg.bx--overflow-menu__icon{
     transform: rotate(90deg)
   }

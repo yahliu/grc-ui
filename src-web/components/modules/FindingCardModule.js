@@ -17,6 +17,7 @@ import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
+import config from '../../../lib/shared/config'
 
 resources(() => {
   require('../../../scss/module-policy-cards.scss')
@@ -64,7 +65,7 @@ class FindingCardModule extends React.Component {
       return policyCardChoice===value
     }))
     return (
-      <div className='header-container'>
+      <div className={showPolicyCard ? 'header-container' : 'header-container card-collapsed'}>
         {showPolicyCard && <div className='header-title'>{title}</div>}
         {showPolicyCard &&
         <div>
@@ -293,7 +294,7 @@ const PolicyCard = ({data, locale, handleClick}) => {
                 }
               }
               return (
-                <div key={violationType} className={containerClasses} role={'button'}
+                violated ? <div key={violationType} className={containerClasses} role={'button'}
                   tabIndex='0' onClick={onClick} onKeyPress={onKeyPress} >
                   <div className='card-count'>
                     <div className='card-count-violations'>
@@ -307,6 +308,17 @@ const PolicyCard = ({data, locale, handleClick}) => {
                     {violationType}
                   </div>
                 </div>
+                  : <div key={violationType} className={containerClasses} role={'button'}
+                    tabIndex='0' >
+                    <div className='card-violations empty'>
+                      <img
+                        src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
+                        alt={msgs.get('svg.description.noresource', locale)} />
+                    </div>
+                    <div className='no-card-violation'>
+                      {msgs.get(`overview.${type}.violations.empty`, locale)}
+                    </div>
+                  </div>
               )
             })}
           </div>

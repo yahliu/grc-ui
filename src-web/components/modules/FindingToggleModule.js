@@ -20,6 +20,11 @@ import ResourceList from '../common/ResourceList'
 import formatPoliciesToClustersTableData from '../common/FormatTableData'
 import pageWithUrlQuery from '../common/withUrlQuery'
 import queryString from 'query-string'
+import resources from '../../../lib/shared/resources'
+
+resources(() => {
+  require('../../../scss/grc-toggle-module.scss')
+})
 
 class FindingToggleModule extends React.Component {
 
@@ -34,7 +39,7 @@ class FindingToggleModule extends React.Component {
     const { policies, secondaryHeaderProps, showPolicyTabToggle, policyTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy } = this.props
     const policyTabSwitcher = showPolicyTabToggle ? this.renderTabSwitcher(policyTabToggleIndex) : []
     return (
-      <div className='module-policy-tab'>
+      <div className='module-toggle-tab'>
         {policyTabToggleIndex===0 && <ResourceList
           {...this.props}
           detailsTabs={['policies']}
@@ -80,7 +85,7 @@ class FindingToggleModule extends React.Component {
     const allPolicies = msgs.get('tabs.finding.toggle.securityFindings', locale)
     const clusterViolations = msgs.get('tabs.finding.toggle.clusterFindings', locale)
     return (
-      <div className='module-policy-tab-switch'>
+      <div className='module-toggle-tab-switch'>
         <ContentSwitcher onChange={this.onChange} selectedIndex={policyTabToggleIndex}>
           <Switch text={allPolicies} onClick={this.toggleClick} />
           <Switch text={clusterViolations} onClick={this.toggleClick} />

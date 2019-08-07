@@ -5,7 +5,7 @@ exports[`PolicyCardsModule categories view renders collapse as expected 1`] = `
   className="module-policy-cards"
 >
   <div
-    className="header-container"
+    className="header-container card-collapsed"
   >
     <button
       className="collapse"
@@ -384,7 +384,7 @@ exports[`PolicyCardsModule standards view renders collapse as expected 1`] = `
   className="module-policy-cards"
 >
   <div
-    className="header-container"
+    className="header-container card-collapsed"
   >
     <button
       className="collapse"

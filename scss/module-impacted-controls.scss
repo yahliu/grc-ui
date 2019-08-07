@@ -9,7 +9,6 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-
 .module-impacted-controls {
 
   .card-container-container {
@@ -35,8 +34,6 @@
           width: 300px;
           border-right: 1px solid $color__gray-1;
           position: relative;
-
-
 
           .card-legend {
             .key {
@@ -66,7 +63,6 @@
                 }
               }
             }
-
           }
 
           .card-control-panel {
@@ -141,9 +137,7 @@
             width: 500px;
             height: 500px;
           }
-
         }
-
       }
     }
   }
@@ -169,7 +163,7 @@ div.tooltip {
 
     .header {
       .title {
-        color: #5A6872;
+        color: $mcm_color_blue_gray;
         font-size: 11px;
         font-weight: 600;
         line-height: 18px;
@@ -201,7 +195,7 @@ div.tooltip {
         font-size: 14px;
         display: flex;
         justify-content: space-between;
-        color: #152935;
+        color: $mcm_color_gray_20;
 
         .count {
           font-weight: 300;
@@ -241,4 +235,3 @@ div.tooltip:after {
   border-color: transparent;
   border-top-color: white;
 }
-
