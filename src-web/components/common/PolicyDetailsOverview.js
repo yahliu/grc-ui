@@ -18,6 +18,7 @@ import msgs from '../../../nls/platform.properties'
 import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
 import DetailsModule from './DetailsModule'
+import SimpleTable from './SimpleTable'
 import ResourceTableModule from './ResourceTableModuleFromProps'
 import StructuredListModule from '../../components/common/StructuredListModuleWithActions'
 
@@ -130,11 +131,35 @@ class PolicyDetailsOverview extends React.PureComponent{
       tableResource['policy-templates'] = policyTemplates
       tableResource['object-templates'] = objectTemplates
       if(!_.isEmpty(roleTemplates)){
+        _.forEach(roleTemplates,(item) => {
+          item.id = item.metadata.name
+          const subItems = []
+          _.forEach(item.rules, (rule) => {
+            subItems.push({
+              id: _.get(rule, 'complianceType','-'),
+              cells: [
+                JSON.stringify(_.get(rule, 'complianceType','-')).replace(/\[|\]|"/g, ''),
+                JSON.stringify(_.get(rule, 'policyRule.apiGroups','-')).replace(/\[|\]|"/g, ''),
+                JSON.stringify(_.get(rule, 'policyRule.resources','-')).replace(/\[|\]|"/g, ''),
+                JSON.stringify(_.get(rule, 'policyRule.verbs','-')).replace(/\[|\]|"/g, ''),
+              ]
+            })
+          })
+          item.subItems = subItems
+        })
         modulesBottom.push(
           <div className='vertical-expend overview-content-bottom' key='role-temp-container'>
             <h5 className='section-title'>Role Templates</h5>
             <div className='overview-content-bottom'>
-              {React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'roleTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: tableResource, showModuleHeader: false, showSearch: false, showPagination:false})}
+              {React.createElement(SimpleTable,
+                {
+                  headerRows: ['', ..._.map(staticResourceData.roleTemplates.tableKeys, 'msgKey')],
+                  data: roleTemplates,
+                  rows: staticResourceData.roleTemplates.rows,
+                  subHeaders: staticResourceData.roleTemplates.subHeaders,
+                  listSubItems: true,
+                  emptyColFront: 1
+                })}
             </div>
           </div>
         )
@@ -144,7 +169,17 @@ class PolicyDetailsOverview extends React.PureComponent{
           <div className='vertical-expend overview-content-bottom' key='policy-temp-container'>
             <h5 className='section-title'>Policy Templates</h5>
             <div className='overview-content-bottom'>
-              {React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'policyTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: tableResource, showModuleHeader: false, showSearch: false, showPagination:false})}
+              {React.createElement(ResourceTableModule,
+                {
+                  key: templateType,
+                  definitionsKey: 'policyTemplates',
+                  staticResourceData: staticResourceData,
+                  resourceType: resourceType,
+                  resourceData: tableResource,
+                  showModuleHeader: false,
+                  showSearch: false,
+                  showPagination:false
+                })}
             </div>
           </div>
         )
@@ -154,7 +189,17 @@ class PolicyDetailsOverview extends React.PureComponent{
           <div className='vertical-expend overview-content-bottom' key='obj-temp-container'>
             <h5 className='section-title'>Object Templates</h5>
             <div className='overview-content-bottom'>
-              {React.createElement(ResourceTableModule, {key: templateType, definitionsKey: 'objectTemplates', staticResourceData: staticResourceData, resourceType: resourceType, resourceData: tableResource, showModuleHeader: false, showSearch: false, showPagination:false})}
+              {React.createElement(ResourceTableModule,
+                {
+                  key: templateType,
+                  definitionsKey: 'objectTemplates',
+                  staticResourceData: staticResourceData,
+                  resourceType: resourceType,
+                  resourceData: tableResource,
+                  showModuleHeader: false,
+                  showSearch: false,
+                  showPagination:false
+                })}
             </div>
           </div>
         )

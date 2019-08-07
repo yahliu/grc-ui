@@ -11,7 +11,7 @@ exports[`ClusterSubResourceList view renders as expected 1`] = `
       className="bx--module__content"
     >
       <table
-        className="bx--data-table-v2 resource-table-main bx--data-table-v2--zebra"
+        className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
       >
         <thead
           className={undefined}
@@ -235,7 +235,7 @@ exports[`PolicieSubResourceList view renders as expected 1`] = `
       className="bx--module__content"
     >
       <table
-        className="bx--data-table-v2 resource-table-main bx--data-table-v2--zebra"
+        className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
       >
         <thead
           className={undefined}

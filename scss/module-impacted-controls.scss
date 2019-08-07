@@ -150,7 +150,7 @@ div.tooltip {
   height: 175px;
   pointer-events: none;
   background: white;
-  border: 1px solid #DFE3E6;
+  border: 1px solid $grc_color_border_gray;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
 
   &-text {

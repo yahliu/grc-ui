@@ -299,8 +299,33 @@ export default {
         resourceKey: 'status.Compliant',
         key:'status',
         transformFunction: getStatus,
-      },
+      }
     ],
+    rows: [{
+      cells: [
+        {
+          resourceKey: 'metadata.name',
+        },
+        {
+          resourceKey: 'complianceType',
+        },
+        {
+          resourceKey: 'apiVersion',
+        },
+        {
+          resourceKey: 'status.conditions[0].lastTransitionTime',
+        },
+        {
+          resourceKey: 'status.Compliant',
+        }
+      ]
+    }],
+    subHeaders :[
+      'table.header.role.template.complianceType',
+      'table.header.apiGroups',
+      'table.header.resources',
+      'table.header.ruleVerbs',
+    ]
   },
   objectTemplates:{
     resourceKey: 'object-templates',

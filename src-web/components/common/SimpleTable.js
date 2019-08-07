@@ -11,6 +11,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { DataTable } from 'carbon-components-react'
+import _ from 'lodash'
 import resources from '../../../lib/shared/resources'
 import { transform } from '../../../lib/client/resource-helper'
 import { Link } from 'react-router-dom'
@@ -50,13 +51,19 @@ class StructuredListModule extends React.Component {
   }
 
   render() {
-    const { headerRows, data, listSubItems, url, rows, title, subHeaders, linkFixedName } = this.props
+    const { headerRows, data, listSubItems, url, rows, title, subHeaders, linkFixedName, emptyColFront } = this.props
     const { extended } = this.state
+    const frontPlaceholder = []
+    if(emptyColFront) {
+      for(let i=0; i < emptyColFront; i++){
+        frontPlaceholder.push(<TableCell />)
+      }
+    }
     return (
       <Module className='structured-list-module'>
         {title && <ModuleHeader>{msgs.get(title, this.context.locale)}</ModuleHeader>}
         <ModuleBody>
-          <Table className='resource-table-main'>
+          <Table className='resource-table-main simple-table'>
             <TableHead>
               <TableRow>
                 {headerRows.map((header, index) => {
@@ -97,7 +104,8 @@ class StructuredListModule extends React.Component {
                         {index === extended && listSubItems && (
                           <TableExpandedRow>
                             <td className='expand-arrow-align-makeup'></td>
-                            <TableCell colSpan={8} className={'resource-table-expandable-cell'} >
+                            {_.isEmpty(frontPlaceholder) ? null : frontPlaceholder}
+                            <TableCell colSpan={3} className={'resource-table-expandable-cell'} >
                               <ResourceTableRowExpandableTable
                                 items={row.subItems}
                                 headers={subHeaders}
@@ -111,7 +119,7 @@ class StructuredListModule extends React.Component {
                     if(row && row.id){
                       return (
                         <TableRow key={row.id}>
-                          {row.cells && row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
+                          {rows[0].cells && rows[0].cells.map(cell => <TableCell key={cell.resourceKey+'Cell'}>{transform(row, cell, this.context.locale)}</TableCell>)}
                         </TableRow>
                       )
                     }
@@ -133,6 +141,7 @@ StructuredListModule.contextTypes = {
 
 StructuredListModule.propTypes = {
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  emptyColFront: PropTypes.number,
   headerRows: PropTypes.array,
   linkFixedName: PropTypes.object,
   listSubItems: PropTypes.bool,
