@@ -390,7 +390,7 @@ const TopViolations = ({cardData, handleClick, locale}) => {
           })
           return (
             <div key={name}>
-              <div className='violation-card-container'>
+              <div className={choice !== EMPTY_CHOICE ? 'violation-card-container single-strip' : 'violation-card-container single-strip empty-strip'}>
                 <div className='violation-card-content'>
                   <div className='card-inner-content'>
                     {renderCount()}

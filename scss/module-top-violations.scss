@@ -66,6 +66,7 @@
       width: 50%;
       .bx--tabs__nav-item {
         margin-left: auto;
+        overflow: hidden;
         &:last-child {
           margin-left: 1rem;
         }
@@ -117,9 +118,28 @@
       flex-basis: 33%;
     }
 
-    .violation-card-container {
+    .single-strip {
       padding: 0;
       border-bottom: 1px solid $color__gray-1;
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover>.violation-card-content .card-inner-content .card-violations .card-violation-count {
+        color: $color__blue-51;
+      }
+
+      &:hover>.violation-card-content .card-inner-content .card-name-description .card-name {
+        cursor: auto;
+      }
+
+      &:hover>.violation-card-content .card-inner-content .card-name-description .card-name .card-name-link {
+        color: $color__blue-51;
+      }
+
+      &:hover>.violation-card-content .card-inner-content .card-name-description .card-description .card-each-description-link {
+        color: $color__blue-51;
+      }
 
       .violation-card-content {
         display: flex;
@@ -145,22 +165,10 @@
               &.alert {
                 color: $mcm_color_red;
               }
-            }
-            .card-violation-type {
-              text-align: center;
-              font-size: 12px;
-              line-height: 16px;
-              font-weight: bold;
-              color: $mcm_color_blue_gray;
-            }
 
-            &:hover {
-              cursor: pointer;
-            }
-
-            &:hover>.card-violation-type{
-              color: $color__blue-51;
-              text-decoration: underline;
+              &:hover {
+                text-decoration: underline;
+              }
             }
 
             &.empty {
@@ -186,12 +194,8 @@
               .card-name-link {
                 color: $mcm_color_gray_20;
                 text-decoration: none;
-                &:hover {
-                  cursor: pointer;
-                }
 
                 &:hover {
-                  color: $color__blue-51;
                   text-decoration: underline;
                 }
               }
@@ -208,14 +212,24 @@
                 color: $mcm_color_blue_gray;
                 text-decoration: none;
                 &:hover {
-                  cursor: pointer;
-                  color: $color__blue-51;
                   text-decoration: underline;
                 }
               }
             }
           }
         }
+      }
+    }
+
+    .empty-strip {
+      padding: 0;
+      border-bottom: 1px solid $color__gray-1;
+      &:hover {
+        cursor: default;
+      }
+
+      &:hover>.violation-card-content .card-inner-content .card-name-description .card-description {
+        cursor: auto;
       }
     }
   }

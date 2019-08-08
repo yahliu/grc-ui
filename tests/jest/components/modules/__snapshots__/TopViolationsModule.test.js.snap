@@ -120,7 +120,7 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
     >
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -183,7 +183,7 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -238,7 +238,7 @@ exports[`TopViolationsModule clusters view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip empty-strip"
         >
           <div
             className="violation-card-content"
@@ -397,7 +397,7 @@ exports[`TopViolationsModule findings clusters view renders as expected 1`] = `
     >
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -466,7 +466,7 @@ exports[`TopViolationsModule findings clusters view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip empty-strip"
         >
           <div
             className="violation-card-content"
@@ -625,7 +625,7 @@ exports[`TopViolationsModule findings view renders as expected 1`] = `
     >
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -694,7 +694,7 @@ exports[`TopViolationsModule findings view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip empty-strip"
         >
           <div
             className="violation-card-content"
@@ -853,7 +853,7 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
     >
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -916,7 +916,7 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip"
         >
           <div
             className="violation-card-content"
@@ -979,7 +979,7 @@ exports[`TopViolationsModule policies view renders as expected 1`] = `
       </div>
       <div>
         <div
-          className="violation-card-container"
+          className="violation-card-container single-strip empty-strip"
         >
           <div
             className="violation-card-content"
