@@ -265,6 +265,45 @@ export default class ImpactedControlsModule extends React.Component {
         }
       })
 
+      // wrap labels
+      Array.from(this.radarRef.querySelectorAll('text')).map(text=>{
+        if (text.getAttribute('text-anchor') === 'middle') {
+          // save unwrapped text
+          const textContent = text.__textContent || text.textContent
+          text.__textContent = textContent
+          text = d3.select(text)
+          text.text(null)
+
+          // wrap text into tspans
+          let line = []
+          let lineNumber = 0
+          let isMultiLined = false
+          const lineHeight = 1.1
+          const x = text.attr('x')
+          const y = text.attr('y')
+          const dy = parseFloat(text.attr('dy'))
+          let tspan = text.append('tspan').attr('x', x).attr('y', y).attr('dy', dy + 'em')
+          const words = textContent.split(/\s+/).reverse()
+          while (words.length>0) {
+            const word = words.pop()
+            line.push(word)
+            tspan.text(line.join(' '))
+            if (tspan.node().getComputedTextLength() > 60) {
+              line.pop()
+              tspan.text(line.join(' '))
+              line = [word]
+              tspan = text.append('tspan').attr('x', x).attr('y', y).attr('dy', ++lineNumber * lineHeight + dy + 'em').text(word)
+              isMultiLined = true
+            }
+          }
+
+          // if wrap resulted in multiple lines, move entire label up
+          if (isMultiLined) {
+            text.selectAll('tspan').attr('y', y-10)
+          }
+        }
+      })
+
       // close tooltip if exiting entire radar map
       this.radarRef.addEventListener('mouseout', e=>{
         if (e.target.tagName==='svg' ) {
@@ -275,24 +314,32 @@ export default class ImpactedControlsModule extends React.Component {
   }
 
   openTooltip = ({x, y, setKey, variableKey}) => {
-    tooltip.style('display', undefined)
-    tooltip.transition()
-      .delay(200)
-      .duration(100)
-      .style('opacity', 1)
-    tooltip.html(()=>{
-      return this.getTooltipContent(setKey, variableKey)
-    })
-      .styles((d, j, ts)=>{
-        const {width, height} = ts[j].getBoundingClientRect()
-        const dot = this.getDotMap()[`${x}&${y}`].getBoundingClientRect()
-        const top = dot.y + window.scrollY - height - 6
-        const left = dot.x + window.scrollX - width/2 + 3
-        return {
-          'top': top + 'px',
-          'left': left + 'px',
-        }
+    const tooltipHTML = this.getTooltipHTML(setKey, variableKey)
+    if (tooltipHTML) {
+      tooltip.style('display', undefined)
+      tooltip.transition()
+        .delay(200)
+        .duration(100)
+        .style('opacity', 1)
+      tooltip.html(()=>{
+        return tooltipHTML
       })
+        .styles((d, j, ts)=>{
+          const tooltipDiv = ts[j]
+          const {width} = tooltipDiv.getBoundingClientRect()
+          const height = setKey==='policy' ? 100 : 175
+          tooltipDiv.style.height = height + 'px'
+          const dot = this.getDotMap()[`${x}&${y}`].getBoundingClientRect()
+          const top = dot.y + window.scrollY - height - 6
+          const left = dot.x + window.scrollX - width/2 + 3
+          return {
+            'top': top + 'px',
+            'left': left + 'px',
+          }
+        })
+    } else {
+      tooltip.style('display', 'none')
+    }
   }
 
   getDotMap() {
@@ -320,10 +367,11 @@ export default class ImpactedControlsModule extends React.Component {
       })
   }
 
-  getTooltipContent = (setKey, variableKey) => {
+  getTooltipHTML = (setKey, variableKey) => {
     const { locale } = this.context
     const { setMap, variableMap, tooltips } = this.cardData
-    return ReactDOMServer.renderToStaticMarkup(
+    const tooltipList = _.get(tooltips, `${setKey}.${variableKey}`)
+    return tooltipList ? ReactDOMServer.renderToStaticMarkup(
       <div className='tooltip-text'>
         <div className='header'>
           <div className='title'>{setMap[setKey].label.toUpperCase()}</div>
@@ -333,7 +381,7 @@ export default class ImpactedControlsModule extends React.Component {
           </div>
         </div>
         <div className='findings'>
-          {_.get(tooltips, `${setKey}.${variableKey}`,[]).map(({count, findingType}) => {
+          {tooltipList.map(({count, findingType}) => {
             let label, className
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
@@ -362,7 +410,7 @@ export default class ImpactedControlsModule extends React.Component {
           })}
         </div>
       </div>
-    )
+    ) : null
   }
 
   getCardData = () => {
@@ -401,13 +449,16 @@ export default class ImpactedControlsModule extends React.Component {
       }
     }
 
+    const controlLabels = {}
     const violationsByControls = {}
     const policyTooltips = {}
     violations.forEach(policy=>{
       const annotations = _.get(policy, 'metadata.annotations', {})
       const controls = _.get(annotations, 'policy.mcm.ibm.com/controls', 'other')
-      controls.split(',').forEach(ctrl => {
-        ctrl = ctrl.toLowerCase().trim()
+      controls.split(',').forEach(control => {
+        const label = _.startCase(control.trim())
+        const ctrl = control.toLowerCase().trim()
+        controlLabels[ctrl] = label
         if (ctrl && (standardsChoice === 'ALL' || _.get(annotations, 'policy.mcm.ibm.com/standards', 'other').toLowerCase().includes(standardsChoice.toLowerCase()))) {
           violationsByControls[ctrl] = _.get(violationsByControls, ctrl, 0)+1
           policyTooltips[ctrl] = _.get(policyTooltips, ctrl, [{count: 0, findingType: SECURITY_TYPES.VIOLATIONS},])
@@ -420,8 +471,10 @@ export default class ImpactedControlsModule extends React.Component {
     const findingsTooltips = {}
     findings.forEach(finding=>{
       const controls = _.get(finding, 'securityClassification.securityControl', 'other')
-      controls.split(',').forEach(ctrl => {
-        ctrl = ctrl.toLowerCase().trim()
+      controls.split(',').forEach(control => {
+        const label = _.startCase(control.trim())
+        const ctrl = control.toLowerCase().trim()
+        controlLabels[ctrl] = label
         if (ctrl && (standardsChoice === 'ALL' || _.get(finding, 'securityClassification.securityStandards', ['other']).join(',').toLowerCase().includes(standardsChoice.toLowerCase()))) {
           findingsByControls[ctrl] = _.get(findingsByControls, ctrl, 0)+1
           findingsTooltips[ctrl] = _.get(findingsTooltips, ctrl, [
@@ -444,12 +497,14 @@ export default class ImpactedControlsModule extends React.Component {
     })
 
     let variables =[]
-    Object.keys(violationsByControls).forEach(key=>
-      variables.push({key: key.toLowerCase(), label: _.startCase(key)})
-    )
-    Object.keys(findingsByControls).forEach(key=>
-      variables.push({key: key.toLowerCase(), label: _.startCase(key)})
-    )
+    Object.keys(violationsByControls).forEach(key=> {
+      key = key.toLowerCase()
+      variables.push({key, label: controlLabels[key]})
+    })
+    Object.keys(findingsByControls).forEach(key=> {
+      key = key.toLowerCase()
+      variables.push({key, label: controlLabels[key]})
+    })
     variables = _.uniqWith(variables, _.isEqual)
 
     variables.forEach(variable=>{

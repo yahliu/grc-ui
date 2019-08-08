@@ -353,7 +353,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       x={216}
                       y={0}
                     >
-                      Mutationadvisor
+                      Mutation Advisor
                     </text>
                   </g>
                   <g>
@@ -382,7 +382,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                       x={1.3226185430791415e-14}
                       y={216}
                     >
-                      Va
+                      VA
                     </text>
                   </g>
                   <g>
