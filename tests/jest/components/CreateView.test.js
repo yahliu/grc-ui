@@ -643,6 +643,7 @@ describe('CreationView component', () => {
     const component = renderer.create(
       <CreationView
         existing={existing}
+        setResetNewPolicy={setGetPolicyJSON}
         setGetPolicyJSON={setGetPolicyJSON}
       />
     )

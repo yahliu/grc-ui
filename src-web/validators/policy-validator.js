@@ -10,6 +10,8 @@
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
+// enforce|inform means enforce or inform
+// PlacementPolicy? means PlacementPolicy is optional
 
 const requiredValues = {
   'Policy': {
@@ -24,7 +26,7 @@ const requiredValues = {
     }
   },
 
-  'PlacementPolicy': {
+  'PlacementPolicy?': {
     'apiVersion':'',
     'kind':'PlacementPolicy',
     'metadata':{
@@ -63,7 +65,7 @@ const requiredValues = {
 export function validator(parsed, exceptions, locale) {
   const required = Object.keys(requiredValues)
   required.forEach(key=>{
-    if (!parsed[key]) {
+    if (!parsed[key] && !key.endsWith('?')) {
       exceptions.push({
         row: 0,
         column: 0,
@@ -75,7 +77,7 @@ export function validator(parsed, exceptions, locale) {
 
   Object.keys(parsed).forEach(key=>{
     const resources = parsed[key]
-    if (!requiredValues[key]) {
+    if (!requiredValues[key] && !requiredValues[key+'?']) {
       resources.forEach(parse=>{
         let row = _.get(parse, '$synced.kind.$r')
         let text = msgs.get('validation.extra.kind', [key], locale)
@@ -93,7 +95,7 @@ export function validator(parsed, exceptions, locale) {
     } else {
       resources.forEach(({$raw: raw, $synced: synced})=>{
         // there may be more then one format for this resource
-        let required = requiredValues[key]
+        let required = requiredValues[key] || requiredValues[key+'?']
         if (!Array.isArray(required)) {
           required = [required]
         }

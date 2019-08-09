@@ -38,6 +38,7 @@ class CreationTab extends React.Component {
   constructor (props) {
     super(props)
     this.setGetPolicyJSON = this.setGetPolicyJSON.bind(this)
+    this.setResetNewPolicy = this.setResetNewPolicy.bind(this)
   }
 
   componentWillMount() {
@@ -55,6 +56,10 @@ class CreationTab extends React.Component {
     this.getNewPolicyJSON = getNewPolicyJSON
   }
 
+  setResetNewPolicy = resetNewPolicy => {
+    this.resetNewPolicy = resetNewPolicy
+  }
+
   handleClick = () => {
     const newPolicyJSON = this.getNewPolicyJSON()
     if (newPolicyJSON) {
@@ -66,6 +71,7 @@ class CreationTab extends React.Component {
   render () {
     const { mutateStatus, mutateErrorMsg } = this.props
     if (mutateStatus && mutateStatus === 'DONE') {
+      this.resetNewPolicy()
       this.props.cleanReqStatus()
       return <Redirect to={`${config.contextPath}/policies/all`} />
     }
@@ -81,6 +87,7 @@ class CreationTab extends React.Component {
               <CreationView
                 loading={!existing && loading}
                 error={error}
+                setResetNewPolicy={this.setResetNewPolicy}
                 setGetPolicyJSON={this.setGetPolicyJSON}
                 existing={existing}
                 mutateStatus={mutateStatus}

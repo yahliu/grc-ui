@@ -29,7 +29,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             placeholder={undefined}
             type="text"
-            value="grc-policy"
+            value="policy-grc"
           />
         </div>
       </div>

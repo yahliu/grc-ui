@@ -44,13 +44,14 @@ export default class CreationView extends React.Component {
   constructor (props) {
     super(props)
     // active values in controls and used to render templates
-    const templateData = Object.assign({}, initialTemplateData)
+    const templateData = _.cloneDeep(initialTemplateData)
     // rendered template
     const policyYAML = getPolicyYAML(templateData)
     // parsed template
     const parsedPolicy = parse(policyYAML).parsed
     this.state = {
       templateData,
+      isCustomName: false,
       policyYAML,
       parsedPolicy,
       exceptions: [],
@@ -65,6 +66,7 @@ export default class CreationView extends React.Component {
     this.handleEditorCommand = this.handleEditorCommand.bind(this)
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.gotoEditorLine = this.gotoEditorLine.bind(this)
+    props.setResetNewPolicy(this.resetEditor.bind(this))
     props.setGetPolicyJSON(this.getPolicyJSON.bind(this))
   }
 
@@ -156,7 +158,6 @@ export default class CreationView extends React.Component {
     }
 
     // get what's currently active from templateData
-    // use random key on MultiSelect to make it create a new one with these active values
     const { templateData } = this.state
     const data = templateData[templateKey]
     const dataMap = _.keyBy(data, 'name')
@@ -193,6 +194,7 @@ export default class CreationView extends React.Component {
           <MultiSelect.Filterable
             key={key}
             items={available}
+            sortItems={this.sortMultiSelectItems.bind(this, multiSelectKey)}
             initialSelectedItems={active}
             placeholder={active.length===0 ?
               msgs.get(`creation.view.policy.select.${multiSelectKey}`, locale) :
@@ -203,6 +205,10 @@ export default class CreationView extends React.Component {
         </div>
       </React.Fragment>
     )
+  }
+
+  sortMultiSelectItems = (multiSelectKey, items) => {
+    return multiSelectKey==='selectors' ? items : items.sort()
   }
 
   renderYAML() {
@@ -254,14 +260,16 @@ export default class CreationView extends React.Component {
 
   onChange(field, evt) {
     // change template data directly
+    let updateName = false
+    let { isCustomName } = this.state
     const { templateData, policyYAML, userMultiSelectData } = this.state
     const annotationMap = _.keyBy(templateData.annotations, 'name')
     const validationsMap = _.keyBy(templateData.validations, 'name')
     const selectorsMap = _.keyBy(templateData.bindings, 'name')
     switch (field) {
     case 'name':
-    case 'namespace':
       templateData[field] = evt.target.value
+      isCustomName = true
       break
 
     case 'enforce':
@@ -280,18 +288,29 @@ export default class CreationView extends React.Component {
         userMultiSelectData.customValidations = false
       }
       delete templateData.customValidations
+      updateName = !isCustomName
       break
 
     case 'selectors':
       selectorsMap[field].values = evt.selectedItems
       break
     }
+
+    // update name if spec changed
+    if (updateName) {
+      const specs = _.get(validationsMap, 'specs.values')
+      if (specs.length>0 && specs[0].indexOf('-')!==-1) {
+        templateData['name'] = `policy-${specs[0].substr(0, specs[0].indexOf('-')).toLowerCase()}`
+      }
+    }
+
+    // close multiselect menus
     if (this.multiSelectCmpMap[field]) {
       this.multiSelectCmpMap[field].handleOnOuterClick()
     }
     const newYAML = getPolicyYAML(templateData)
     const parsedPolicy = parse(newYAML).parsed
-    this.setState({templateData, policyYAML: newYAML, parsedPolicy, userMultiSelectData})
+    this.setState({templateData, isCustomName, policyYAML: newYAML, parsedPolicy, userMultiSelectData})
     highliteDifferences(this.editor, policyYAML, newYAML)
   }
 
@@ -417,6 +436,7 @@ export default class CreationView extends React.Component {
   }
 
   handleParse = () => {
+    let { isCustomName } = this.state
     const { policyYAML, multiSelectData, parsedPolicy } = this.state
     let { templateData } = this.state
     const { parsed: newParsed, exceptions} = parse(policyYAML, validator, this.context.locale)
@@ -427,11 +447,16 @@ export default class CreationView extends React.Component {
     // if no exceptions, update templateData and userMultiSelectData based on custom editting
     // (userMultiSelectData is multiselect's choices)
     const userMultiSelectData = {}
-    if (exceptions.length===0) {
+    if (newParsed.Policy!==undefined) {
       templateData = Object.assign({}, templateData)
       setCustomPolicyData(parsedPolicy, newParsed, templateData, multiSelectData, userMultiSelectData)
+
+      // did user change name??
+      isCustomName = isCustomName ||
+      _.get(newParsed, 'Policy[0].$raw.metadata.name') !==
+        _.get(parsedPolicy, 'Policy[0].$raw.metadata.name')
     }
-    this.setState({templateData, parsedPolicy: newParsed, userMultiSelectData, exceptions})
+    this.setState({templateData, isCustomName, parsedPolicy: newParsed, userMultiSelectData, exceptions})
   }
 
   handleUpdateMessageClosed = () => this.setState({ updateMessage: '' })
@@ -442,7 +467,7 @@ export default class CreationView extends React.Component {
     let errorMsg = null
     const { parsed, exceptions } = parse(policyYAML, validator, locale)
     if (exceptions.length>0) {
-      errorMsg = msgs.get('error.create.policy.exceptions', locale)
+      errorMsg = exceptions[0].text
     }
     if (!errorMsg) {
       const { existing } = this.props
@@ -452,7 +477,9 @@ export default class CreationView extends React.Component {
     if (!errorMsg) {
       const payload = []
       payload.push(parsed.Policy[0].$raw)
-      payload.push(parsed.PlacementPolicy[0].$raw)
+      if (parsed.PlacementPolicy) {
+        payload.push(parsed.PlacementPolicy[0].$raw)
+      }
       payload.push(parsed.PlacementBinding[0].$raw)
       return payload
     }
@@ -460,9 +487,9 @@ export default class CreationView extends React.Component {
   }
 
   resetEditor() {
-    const { templateData } = this.state
+    const templateData = _.cloneDeep(initialTemplateData)
     const policyYAML = getPolicyYAML(templateData)
-    this.setState({ policyYAML, exceptions:[], hasUndo: false, hasRedo: false})
+    this.setState({ templateData, policyYAML, exceptions:[], hasUndo: false, hasRedo: false})
     this.resetUndoManager = true
   }
 }
@@ -472,4 +499,5 @@ CreationView.propTypes = {
   existing: PropTypes.object,
   loading: PropTypes.bool,
   setGetPolicyJSON: PropTypes.func,
+  setResetNewPolicy: PropTypes.func,
 }

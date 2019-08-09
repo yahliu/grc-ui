@@ -8,17 +8,18 @@
  *******************************************************************************/
 'use strict'
 
-import {diffLines} from 'diff'
+import {diffTrimmedLines} from 'diff'
 import * as Templates from '../templates'
 import policyHeader from '../templates/policy-header.handlebars'
 import policyBindings from '../templates/policy-bindings.handlebars'
+import policyExistingBinding from '../templates/policy-bindings-existing.handlebars'
 import config from '../../lib/shared/config'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
 
 export const initialTemplateData = {
-  name: 'grc-policy',
+  name: 'policy-grc',
   namespace: config.complianceNamespace,
   enforce: true,
   mutation: false,
@@ -40,8 +41,6 @@ const initalAnnotations = {
   categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
   controls: ['MutationAdvisor','VA'],
 }
-
-const initialSelectors = ['cloud: "IBM"']
 
 const specs = Object.values(Templates).map(template => {
   const value = template.call()
@@ -85,8 +84,11 @@ export const getMultiSelectData = (existing={}) => {
 }
 
 const getSelectorData = (existing) => {
-  const available = new Set(initialSelectors)
-  const {clusterLabels=[]} = existing
+  const available = new Set()
+  const {clusterLabels=[], placements=[]} = existing
+  placements.forEach(({name})=>{
+    available.add(name)
+  })
   clusterLabels.forEach(({key, value}) => {
     available.add(`${key}: "${value}"`)
   })
@@ -158,11 +160,18 @@ export const getPolicyYAML = (templateData) => {
     })
   }
 
-
   // policy bindings
-  yaml = yaml.concat(
-    policyBindings(Object.assign({}, templateData)),
-  )
+  const bindings = _.get(templateData, 'bindings[0].values')
+  if (bindings.length>0 && bindings[0].indexOf(':')===-1) {
+    yaml = yaml.concat(
+      policyExistingBinding(Object.assign({existing: bindings[0]}, templateData)),
+    )
+  } else {
+    yaml = yaml.concat(
+      policyBindings(Object.assign({}, templateData)),
+    )
+  }
+  //
 
   return yaml
 }
@@ -262,7 +271,7 @@ const setCustomAnnotationsData = (annotations, templateData, multiSelectData, us
 
 
 const setCustomSelectorData = (newParsed, templateData, multiSelectData, userMultiSelectData) => {
-  const matchLabels = _.get(newParsed.PlacementPolicy[0], '$raw.spec.clusterLabels.matchLabels')
+  const matchLabels = _.get(newParsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchLabels')
   if (matchLabels) {
     const selectors = []
     Object.entries(matchLabels).forEach(([key, value]) => {
@@ -282,14 +291,14 @@ export const getCreateErrors = (parsed, {compliances=[]}, locale) => {
   let errorMsg = null
   const {$raw: {metadata: {name}, spec={}}} = parsed.Policy[0]
   const nameMap = _.keyBy(compliances, 'name')
-  const matchLabels = _.get(parsed.PlacementPolicy[0], '$raw.spec.clusterLabels.matchLabels')
+  const matchLabels = _.get(parsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchLabels')
   if (!name) {
     errorMsg = msgs.get('error.create.policy.noname', locale)
   } else if (nameMap[name]!==undefined) {
     errorMsg = msgs.get('error.create.policy.name.exists', [name], locale)
   } else if (!spec['policy-templates'] && !spec['object-templates'] && !spec['role-templates']) {
     errorMsg = msgs.get('error.create.policy.novalidation', locale)
-  } else if (!matchLabels) {
+  } else if (!matchLabels && parsed.PlacementPolicy) {
     errorMsg = msgs.get('error.create.policy.nobinding', locale)
   }
   return errorMsg
@@ -305,7 +314,7 @@ export const highliteDifferences = (editor, oldYAML, newYAML) => {
   let row=0
   let firstRow=undefined
   const range = editor.getSelectionRange()
-  diffLines(oldYAML, newYAML)
+  diffTrimmedLines(oldYAML, newYAML)
     .filter((diff, idx, diffs) =>{
       const {count, removed} = diff
       if (removed && count===1 && idx-1<diffs.length) {
