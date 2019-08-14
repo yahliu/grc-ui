@@ -13,6 +13,13 @@
   display: flex;
   margin: 0 -3% -50px 0;
 
+  .bx--tooltip--icon__top:after, .bx--tooltip--icon__bottom:after {
+    white-space: normal;
+    width: 22rem;
+    z-index: 2000;
+    margin-left: 5.8rem;
+  }
+
   &-controls-container {
     width: 30%;
     height: calc(100vh - 210px);

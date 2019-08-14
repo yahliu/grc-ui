@@ -133,7 +133,7 @@ export default class CreationView extends React.Component {
             checked={active}
             onChange={this.onChange.bind(this, checkboxKey)} />
           <div>{msgs.get(`creation.view.policy.${checkboxKey}`, locale)}</div>
-          <TooltipIcon direction='top' tooltipText={'TBD'}>
+          <TooltipIcon direction='top' tooltipText={msgs.get('policy.create.enforce.tooltip', locale)}>
             <svg className='info-icon'>
               <use href={'#diagramIcons_info'} ></use>
             </svg>
@@ -185,7 +185,7 @@ export default class CreationView extends React.Component {
         <div className='creation-view-controls-multiselect'>
           <div className="creation-view-controls-multiselect-title">
             {msgs.get(`creation.view.policy.${multiSelectKey}`, locale)}
-            <TooltipIcon direction='top' tooltipText={'TBD'}>
+            <TooltipIcon direction='top' tooltipText={msgs.get(`policy.create.${multiSelectKey}.tooltip`, locale)}>
               <svg className='info-icon'>
                 <use href={'#diagramIcons_info'} ></use>
               </svg>

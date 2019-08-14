@@ -44,7 +44,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="TBD"
+              aria-label="The parameter section that describes the rules to validate a cluster."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -136,7 +136,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="TBD"
+              aria-label="The parameter field where you select which cluster the policy is applied to. When you enter a value, a placement policy and placement binding policy are created. Note: A PlacementPolicy and PlacementBinding resource is required to apply your policy to a cluster."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -249,7 +249,7 @@ exports[`CreationView component renders as expected 1`] = `
           className="bx--tooltip-icon"
         >
           <button
-            aria-label="TBD"
+            aria-label="The remediation action for your policy. Select Enforce to automatically remediate your cluster based on your policies. When Enforce is not selected, the the remediation action is inform."
             className="bx--tooltip__trigger bx--tooltip--icon__top"
           >
             <svg
@@ -273,7 +273,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="TBD"
+              aria-label="The name or names of security standards the policy is trying to validate."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -365,7 +365,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="TBD"
+              aria-label="The security control category that the policy applies to."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -457,7 +457,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="TBD"
+              aria-label="The name of the security control that is being checked."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
