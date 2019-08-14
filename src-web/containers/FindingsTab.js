@@ -16,11 +16,11 @@ import { connect } from 'react-redux'
 import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
-import FindingsView from '../components/FindingsView'
+import GrcView from '../components/GrcView'
 import {updateSecondaryHeader} from '../actions/common'
-import { HCMComplianceList } from '../../lib/client/queries'
+import { FindingList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
-
+import _ from 'lodash'
 
 class FindingsTab extends React.Component {
 
@@ -45,11 +45,11 @@ class FindingsTab extends React.Component {
     const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
     return (
       <Page>
-        <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={FindingList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
-            const { items } = data
-            const error = items ? null : result.error
+            const { findings } = data
+            const error = findings ? null : result.error
             const firstLoad = this.firstLoad
             this.firstLoad = false
             const reloading = !firstLoad && loading
@@ -65,10 +65,10 @@ class FindingsTab extends React.Component {
 
             return (
               <div>
-                <FindingsView
-                  loading={!items && loading}
+                <GrcView
+                  loading={!findings && loading}
                   error={error}
-                  policies={items}
+                  grcItems={this.formatEmptySecurityClassification(findings)}
                   refreshControl={refreshControl}
                   secondaryHeaderProps={secondaryHeaderProps}
                 />
@@ -79,6 +79,21 @@ class FindingsTab extends React.Component {
         </Query>
       </Page>
     )
+  }
+
+  formatEmptySecurityClassification(findings) {
+    if(findings){
+      findings.forEach((finding) => {
+        if(!_.get(finding, 'securityClassification', null)) {
+          return finding['securityClassification'] = {
+            'securityStandards': [''],
+            'securityCategories': [''],
+            'securityControl': ''
+          }
+        }
+      })
+    }
+    return findings
   }
 }
 

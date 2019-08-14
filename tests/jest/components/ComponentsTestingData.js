@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  ****************************************************************************** */
 
-export const policiesViewItem = [
+export const GrcViewItem = [
   {
     'metadata': {
       'name': 'my-policy',
@@ -550,16 +550,16 @@ export const policiesViewItem = [
 ]
 
 
-export const policiesViewRefreshControl = {
+export const GrcViewRefreshControl = {
   'reloading': false,
   'refreshCookie': 'policy-refresh-interval-cookie',
   'timestamp': 'Tue Jul 23 2019 01:13:42 GMT-0400 (Eastern Daylight Time)'
 }
 
 
-export const policiesViewSecondaryHeaderProps =  {
+export const GrcViewSecondaryHeaderProps =  {
   'title': 'routes.grc',
-  'information': 'policy.header.tooltip',
+  'information': 'grc.header.tooltip',
   'links': [
     {
       'id': 'create-policy',
@@ -569,20 +569,20 @@ export const policiesViewSecondaryHeaderProps =  {
   ],
   'tabs': [
     {
-      'id': 'policy-overview',
-      'label': 'tabs.policy.overview',
+      'id': 'grc-overview',
+      'label': 'tabs.grc.overview',
       'url': '/multicloud/policies',
       'index': 0
     },
     {
-      'id': 'policy-all',
-      'label': 'tabs.policy.all',
+      'id': 'grc-all',
+      'label': 'tabs.grc.all',
       'url': '/multicloud/policies/all',
       'index': 1
     },
     {
-      'id': 'policy-findings',
-      'label': 'tabs.policy.findings',
+      'id': 'grc-findings',
+      'label': 'tabs.grc.findings',
       'url': '/multicloud/policies/findings',
       'index': 2
     }

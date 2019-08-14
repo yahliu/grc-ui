@@ -11,17 +11,17 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { policiesTabModuleFilteredPolicies, policiesTabModuleRefreshControl, policiesTabModuleSecondaryHeaderProps } from './ModuleTestingData'
-import PolicyToggleModule from '../../../../src-web/components/modules/PolicyToggleModule'
+import GrcToggleModule from '../../../../src-web/components/modules/GrcToggleModule'
 
-describe('PolicyToggle view', () => {
+describe('GrcToggle view', () => {
   it('renders expand as expected', () => {
-    const component = shallow(<PolicyToggleModule
+    const component = shallow(<GrcToggleModule
       refreshControl = {policiesTabModuleRefreshControl}
       policies={policiesTabModuleFilteredPolicies}
       secondaryHeaderProps={policiesTabModuleSecondaryHeaderProps}
       locale={''}
-      policyTabToggleIndex={0}
-      showPolicyTabToggle={true}
+      grcTabToggleIndex={0}
+      showGrcTabToggle={true}
       highLightRowName={''}
       showSidePanel={false}
     />)

@@ -37,6 +37,8 @@ export const HCMComplianceList = createResourceReducer(resourceReducerFunction, 
 export const HCMPolicyList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_POLICIES))
 export const HCMPolicyPolicyList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_POLICIES_PER_POLICY))
 export const HCMPolicyClusterList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER))
+export const HCMSecurityFindingsList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_SECURITY_FINDINGS))
+export const HCMClusterFindingsList = createResourceReducer(resourceReducerFunction, predicate.bind(null, RESOURCE_TYPES.HCM_CLUSTER_FINDINGS))
 
 // export { default as catalog } from './catalog'
 export { resourceFilters } from './filter'

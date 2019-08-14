@@ -16,23 +16,23 @@ import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
 import { POLICY_OVERVIEW_STATE_COOKIE } from '../../lib/shared/constants'
-import PolicyCardsModule from '../components/modules/PolicyCardsModule'
-import PolicyToggleModule from './modules/PolicyToggleModule'
-import { filterPolicies, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
+import GrcCardsModule from './modules/GrcCardsModule'
+import GrcToggleModule from './modules/GrcToggleModule'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
-import NoResource from '../components/common/NoResource'
-import createDocLink from '../components/common/CreateDocLink'
-import ResourceFilterBar from '../components/common/ResourceFilterBar'
+import NoResource from './common/NoResource'
+import createDocLink from './common/CreateDocLink'
+import ResourceFilterBar from './common/ResourceFilterBar'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 import queryString from 'query-string'
 import config from '../../lib/shared/config'
 
 resources(() => {
-  require('../../scss/policies-view.scss')
+  require('../../scss/grc-view.scss')
 })
 
-class PoliciesView extends React.Component {
+class GrcView extends React.Component {
 
   constructor (props) {
     super(props)
@@ -43,24 +43,34 @@ class PoliciesView extends React.Component {
     window.addEventListener('beforeunload', this.onUnload)
     this.handleCreatePolicy = this.handleCreatePolicy.bind(this)
     this.updateViewState = this.updateViewState.bind(this)
-    this.handleDrillDownClickPoliciesView = this.handleDrillDownClickPoliciesView.bind(this)
+    this.handleDrillDownClickGrcView = this.handleDrillDownClickGrcView.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
-    const {refreshControl, policies, updateResourceToolbar} = nextProps
+    const {refreshControl, grcItems, updateResourceToolbar} = nextProps
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
-        !_.isEqual(policies, this.props.policies)) {
+        !_.isEqual(grcItems, this.props.grcItems)) {
       const { locale } = this.context
-      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, [], locale))
+      const displayType = location.pathname.split('/').pop()
+      let availableGrcFilters
+      switch(displayType) {
+      case 'all':
+      default:
+        availableGrcFilters = getAvailableGrcFilters(grcItems, [], locale)
+        break
+      case 'findings':
+        availableGrcFilters = getAvailableGrcFilters([], grcItems, locale)
+        break
+      }
+      updateResourceToolbar(refreshControl, availableGrcFilters)
     }
   }
 
   render() {
     const { locale } = this.context
     const { viewState } = this.state
-    const { loading, error, policies, activeFilters={}, secondaryHeaderProps, refreshControl, location } = this.props
+    const { loading, error, grcItems, activeFilters={}, secondaryHeaderProps, refreshControl, location } = this.props
     hideResourceToolbar()
-
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
 
@@ -68,7 +78,7 @@ class PoliciesView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
-    if ((!policies || policies.length === 0) && !loading) {
+    if ((!grcItems || grcItems.length === 0) && !loading) {
       return (
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
@@ -79,25 +89,46 @@ class PoliciesView extends React.Component {
     }
 
     showResourceToolbar()
-    const filteredPolicies = filterPolicies(policies, activeFilters, locale)
+    const displayType = location.pathname.split('/').pop()
+    let filterGrcItems
+    switch(displayType) {
+    case 'all':
+    default:
+      filterGrcItems = filterPolicies(grcItems, activeFilters, locale)
+      break
+    case 'findings':
+      filterGrcItems = filterFindings(grcItems, activeFilters, locale)
+      break
+    }
     const urlParams = queryString.parse(location.search)
-    const showPolicyCard = urlParams.card==='false' ? false : true
-    const policyTabToggleIndex = urlParams.index ? Number(urlParams.index) : 0
-    const showPolicyTabToggle = urlParams.toggle==='false' ? false : true
+    const showGrcCard = urlParams.card==='false' ? false : true
+    const grcTabToggleIndex = urlParams.index ? Number(urlParams.index) : 0
+    const showGrcTabToggle = urlParams.toggle==='false' ? false : true
     const highLightRowName = urlParams.name ? urlParams.name : ''
     const showSidePanel = urlParams.side==='true' ? true : false
     return (
-      <div className='policies-view'>
+      <div className='grc-view'>
         <ResourceFilterBar />
-        <PolicyCardsModule
+        <GrcCardsModule
+          displayType={displayType}
           viewState={viewState}
           updateViewState={this.updateViewState}
-          policies={filteredPolicies}
+          grcItems={filterGrcItems}
           activeFilters={activeFilters}
-          showPolicyCard={showPolicyCard}
-          handleDrillDownClick={this.handleDrillDownClickPoliciesView}
+          showGrcCard={showGrcCard}
+          handleDrillDownClick={this.handleDrillDownClickGrcView}
         />
-        <PolicyToggleModule refreshControl={refreshControl} policies={filteredPolicies} secondaryHeaderProps={secondaryHeaderProps} locale={locale} policyTabToggleIndex={policyTabToggleIndex} showPolicyTabToggle={showPolicyTabToggle} highLightRowName={highLightRowName} showSidePanel={showSidePanel} handleCreatePolicy={this.handleCreatePolicy} />
+        <GrcToggleModule
+          displayType={displayType}
+          refreshControl={refreshControl}
+          grcItems={filterGrcItems}
+          secondaryHeaderProps={secondaryHeaderProps}
+          locale={locale}
+          grcTabToggleIndex={grcTabToggleIndex}
+          showGrcTabToggle={showGrcTabToggle}
+          highLightRowName={highLightRowName}
+          showSidePanel={showSidePanel}
+          handleCreatePolicy={this.handleCreatePolicy} />
       </div>
     )
   }
@@ -112,8 +143,8 @@ class PoliciesView extends React.Component {
     saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
 
-  handleDrillDownClickPoliciesView(key, value, type){
-    //step 1 add activeFilters when click PolicyCardsModule
+  handleDrillDownClickGrcView(key, value, type){
+    //step 1 add activeFilters when click GrcCardsModule
     const {updateActiveFilters} = this.props
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
     value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match side bar filter
@@ -123,13 +154,13 @@ class PoliciesView extends React.Component {
     activeSet.add(value)
     updateActiveFilters(activeFilters)
 
-    //step 2 update url when click PolicyCardsModule
+    //step 2 update url when click GrcCardsModule
     const paraURL = {}
     paraURL.card=false
     paraURL.toggle=false
     type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
     let urlString = queryString.stringify(paraURL)
-    //also append PolicyToggleModule search input filter to the end of url if existing
+    //also append GrcToggleModule search input filter to the end of url if existing
     const curentURL = queryString.parse(location.search)
     if(curentURL.filters && curentURL.filters!==''){
       urlString = `${urlString}&filters=${curentURL.filters}`}
@@ -141,13 +172,13 @@ class PoliciesView extends React.Component {
   }
 }
 
-PoliciesView.propTypes = {
+GrcView.propTypes = {
   activeFilters: PropTypes.object,
   error: PropTypes.object,
+  grcItems: PropTypes.array,
   history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   location: PropTypes.object,
-  policies: PropTypes.array,
   refreshControl: PropTypes.object,
   secondaryHeaderProps: PropTypes.object,
   updateActiveFilters: PropTypes.func,
@@ -166,5 +197,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PoliciesView))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GrcView))
 

@@ -9,25 +9,25 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-.module-top-violations {
+.module-top-information {
   width: 49%;
   min-height: 360px;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
 
-  .no-violations {
+  .no-informations {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
     width: 20rem;
 
-    .no-violations-icon {
+    .no-informations-icon {
       width: 175px;
       height: 240px;
     }
 
-    .no-violations-title {
+    .no-informations-title {
       font-weight: bold;
       margin-bottom: 9px;
       font-size: 18px;
@@ -35,7 +35,7 @@
       color: $mcm_color_blue;
     }
 
-    .no-violations-detail {
+    .no-informations-detail {
       font-weight: 300;
       font-size: 14px;
       font-style: italic;
@@ -69,6 +69,10 @@
         overflow: hidden;
         &:last-child {
           margin-left: 1rem;
+        }
+
+        .bx--tabs__nav-link:focus {
+          box-shadow: none;
         }
       }
     }
@@ -110,7 +114,11 @@
     }
   }
 
-  .violation-card-container {
+  .single-strip {
+    outline:none;
+  }
+
+  .information-card-container {
     display: flex;
     flex-direction: column;
 
@@ -125,23 +133,23 @@
         cursor: pointer;
       }
 
-      &:hover>.violation-card-content .card-inner-content .card-violations .card-violation-count {
+      &:hover>.information-card-content .card-inner-content .card-informations .card-information-count {
         color: $color__blue-51;
       }
 
-      &:hover>.violation-card-content .card-inner-content .card-name-description .card-name {
+      &:hover>.information-card-content .card-inner-content .card-name-description .name-clickable {
+        color: $color__blue-51;
+      }
+
+      &:hover>.information-card-content .card-inner-content .card-name-description .description-clickable {
+        color: $color__blue-51;
+      }
+
+      &:hover>.information-card-content .card-inner-content .card-name-description .name-empty {
         cursor: auto;
       }
 
-      &:hover>.violation-card-content .card-inner-content .card-name-description .card-name .card-name-link {
-        color: $color__blue-51;
-      }
-
-      &:hover>.violation-card-content .card-inner-content .card-name-description .card-description .card-each-description-link {
-        color: $color__blue-51;
-      }
-
-      .violation-card-content {
+      .information-card-content {
         display: flex;
         height: 140px;
         background-color: white;
@@ -150,7 +158,7 @@
          display: flex;
          width: 100%;
 
-          .card-violations {
+          .card-informations {
             display: flex;
             flex-direction: column;
             flex: 0 0 100px;
@@ -158,16 +166,12 @@
             justify-content: center;
             outline:none;
 
-            .card-violation-count {
+            .card-information-count {
               font-size: 34px;
               font-weight: bold;
               color: $mcm_color_blue_gray;
               &.alert {
                 color: $mcm_color_red;
-              }
-
-              &:hover {
-                text-decoration: underline;
               }
             }
 
@@ -190,15 +194,6 @@
               font-weight: bold;
               padding-bottom: 5px;
               color: $mcm_color_gray_20;
-
-              .card-name-link {
-                color: $mcm_color_gray_20;
-                text-decoration: none;
-
-                &:hover {
-                  text-decoration: underline;
-                }
-              }
             }
 
             .card-description {
@@ -207,14 +202,6 @@
               font-style: italic;
               font-size: 12px;
               color: $mcm_color_blue_gray;
-
-              .card-each-description-link {
-                color: $mcm_color_blue_gray;
-                text-decoration: none;
-                &:hover {
-                  text-decoration: underline;
-                }
-              }
             }
           }
         }
@@ -228,7 +215,7 @@
         cursor: default;
       }
 
-      &:hover>.violation-card-content .card-inner-content .card-name-description .card-description {
+      &:hover>.information-card-content .card-inner-content .card-name-description .card-description {
         cursor: auto;
       }
     }

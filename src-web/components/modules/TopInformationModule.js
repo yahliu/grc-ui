@@ -15,27 +15,26 @@ import resources from '../../../lib/shared/resources'
 import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
-import { Link } from 'react-router-dom'
 import { Tabs, Tab } from 'carbon-components-react'
 
 resources(() => {
-  require('../../../scss/module-top-violations.scss')
+  require('../../../scss/module-top-information.scss')
 })
 
 const EMPTY_CHOICE = 'EMPTY_CHOICE'
-const VIOLATION_THRESHHOLD = 4
+const INFORMATION_THRESHHOLD = 4
 
-const TopViolationSelections = Object.freeze({
+const TopInformationSelections = Object.freeze({
   clusters: 'clusters',
   policies: 'policies',
   findings: 'findings',
 })
 
-export default class TopViolationsModule extends React.Component {
+export default class TopInformationModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {topViolationChoice=TopViolationSelections.clusters,topFindingChoice=TopViolationSelections.findings}} = props
+    const {viewState: {topViolationChoice=TopInformationSelections.clusters,topFindingChoice=TopInformationSelections.findings}} = props
     this.state = {
       topViolationChoice,
       topFindingChoice
@@ -46,36 +45,36 @@ export default class TopViolationsModule extends React.Component {
   render() {
     let cardData = this.getCardData()
     if (cardData.length>0) {
-      if (cardData.length>VIOLATION_THRESHHOLD) {
-        cardData = cardData.slice(0,VIOLATION_THRESHHOLD)
+      if (cardData.length>INFORMATION_THRESHHOLD) {
+        cardData = cardData.slice(0,INFORMATION_THRESHHOLD)
       }
       return (
-        <div className='module-top-violations'>
+        <div className='module-top-information'>
           {this.renderHeader()}
           {this.renderCards(cardData)}
         </div>
       )
     } else {
       return (
-        <div className='module-top-violations'>
+        <div className='module-top-information'>
           {this.renderHeader()}
-          {this.renderNoViolations()}
+          {this.renderNoInformations()}
         </div>
       )
     }
   }
 
-  renderNoViolations() {
+  renderNoInformations() {
     const { locale } = this.context
     const { type } = this.props
-    const title = msgs.get(`overview.no.violations.title.${type}`, locale)
-    const detail = msgs.get(`overview.no.violations.description.${type}`, locale)
+    const title = msgs.get(`overview.no.informations.title.${type}`, locale)
+    const detail = msgs.get(`overview.no.informations.description.${type}`, locale)
     return (
-      <div className='no-violations'>
-        <img className='no-violations-icon'
+      <div className='no-informations'>
+        <img className='no-informations-icon'
           src={`${config.contextPath}/policies/graphics/no-violations.svg`} alt={title} />
-        <div className='no-violations-title'>{title}</div>
-        <div className='no-violations-detail'>{detail}</div>
+        <div className='no-informations-title'>{title}</div>
+        <div className='no-informations-detail'>{detail}</div>
       </div>
     )
   }
@@ -95,7 +94,7 @@ export default class TopViolationsModule extends React.Component {
       choices = this.getTopFindingChoices(locale)
       break
     }
-    const title = msgs.get(`overview.top.violations.title.${type}`, locale)
+    const title = msgs.get(`overview.top.informations.title.${type}`, locale)
     const idx = Math.max(0, choices.findIndex(({value})=>{
       return choice===value
     }))
@@ -104,8 +103,8 @@ export default class TopViolationsModule extends React.Component {
         <div className={'header-title'}>{title}</div>
         <div className={'header-tab'}>
           <Tabs selected={idx} onSelectionChange={this.onChange} aria-label={`${title} ${msgs.get('tabs.label', locale)}`}>
-            <Tab label={msgs.get(`overview.top.violations.${type}`, locale)} />
-            <Tab label={msgs.get('overview.top.violations.clusters', locale)} />
+            <Tab label={msgs.get(`overview.top.informations.${type}`, locale)} />
+            <Tab label={msgs.get('overview.top.informations.clusters', locale)} />
           </Tabs>
         </div>
 
@@ -116,7 +115,7 @@ export default class TopViolationsModule extends React.Component {
   renderCards(cardData) {
     const { locale } = this.state
     const { handleDrillDownClick } = this.props
-    return <TopViolations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
+    return <TopInformations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
   }
 
   getCardData = () => {
@@ -130,21 +129,19 @@ export default class TopViolationsModule extends React.Component {
         Object.keys(statuses).forEach(key=>{
           const compliant = statuses[key].compliant
           if (!compliant || compliant.toLowerCase()==='noncompliant') {
-            let name, description, choice, /*type,*/ nameSpace, itemName
+            let name, description, choice, nameSpace, itemName
             switch (topViolationChoice) {
-            case TopViolationSelections.policies:
+            case TopInformationSelections.policies:
               name = _.get(item, 'metadata.name', 'unknown')
               description = key
-              choice = msgs.get('overview.top.violations.policies').toLowerCase()
-              // type = msgs.get('overview.top.violations.cluster').toLowerCase()
+              choice = msgs.get('overview.top.informations.policies').toLowerCase()
               nameSpace = _.get(item, 'metadata.namespace', 'unknown')
               itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
               break
-            case TopViolationSelections.clusters:
+            case TopInformationSelections.clusters:
               name = key
               description = _.get(item, 'metadata.name', 'unknown')
-              choice = msgs.get('overview.top.violations.clusters').toLowerCase()
-              // type = msgs.get('overview.top.violations.item').toLowerCase()
+              choice = msgs.get('overview.top.informations.clusters').toLowerCase()
               nameSpace = _.get(item, 'metadata.namespace', 'unknown')
               itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
               break
@@ -156,7 +153,6 @@ export default class TopViolationsModule extends React.Component {
                 description: [],
                 count: 0,
                 choice,
-                // type,
                 nameSpace,
                 itemName
               }
@@ -169,21 +165,18 @@ export default class TopViolationsModule extends React.Component {
       break
     case 'findings':
       items.map(item=>{
-        let name, description, choice, /*type,*/ nameSpace, itemName
+        let name, description, choice, nameSpace, itemName
         switch (topFindingChoice) {
-        case TopViolationSelections.findings:
+        case TopInformationSelections.findings:
           name = _.get(item, 'shortDescription', 'unknown')
           description = _.get(item, 'context.clusterName', 'unknown')
-          choice = msgs.get('overview.top.violations.findings').toLowerCase()
-          // type = msgs.get('overview.top.violations.cluster').toLowerCase()
+          choice = msgs.get('overview.top.informations.findings').toLowerCase()
           nameSpace = _.get(item, 'context.namespaceName', 'unknown')
-          // itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
           break
-        case TopViolationSelections.clusters:
+        case TopInformationSelections.clusters:
           name = _.get(item, 'context.clusterName', 'unknown')
           description = _.get(item, 'shortDescription', 'unknown')
-          choice = msgs.get('overview.top.violations.clusters').toLowerCase()
-          // type = msgs.get('overview.top.violations.cluster').toLowerCase()
+          choice = msgs.get('overview.top.informations.finding.clusters').toLowerCase()
           nameSpace = _.get(item, 'context.namespaceName', 'unknown')
           // itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
           break
@@ -211,16 +204,16 @@ export default class TopViolationsModule extends React.Component {
       return b-a
     })
 
-    // if less violations then threshold, add an empty card
-    if (cards.length<VIOLATION_THRESHHOLD) {
+    // if less informations than threshold, add an empty card
+    if (cards.length<INFORMATION_THRESHHOLD) {
       cards.push({
         name: type==='policies'?
-          msgs.get('overview.top.violations.policies.empty') :
-          msgs.get('overview.top.violations.findings.empty'),
+          msgs.get('overview.top.informations.policies.empty') :
+          msgs.get('overview.top.informations.findings.empty'),
         choice: EMPTY_CHOICE,
         description: [type==='policies'?
-          msgs.get('overview.top.violations.policies.empty.desc') :
-          msgs.get('overview.top.violations.findings.empty.desc')],
+          msgs.get('overview.top.informations.policies.empty.desc') :
+          msgs.get('overview.top.informations.findings.empty.desc')],
       })
     }
     return cards
@@ -230,16 +223,12 @@ export default class TopViolationsModule extends React.Component {
     if (!this.topViolationChoices) {
       this.topViolationChoices = [
         {
-          value: TopViolationSelections.policies,
-          label: msgs.get('overview.top.violations.policies', locale),
+          value: TopInformationSelections.policies,
+          label: msgs.get('overview.top.informations.policies', locale),
         },
         {
-          value: TopViolationSelections.clusters,
-          label: msgs.get('overview.top.violations.clusters', locale),
-        },
-        {
-          value: TopViolationSelections.findings,
-          label: msgs.get('overview.top.violations.findings', locale),
+          value: TopInformationSelections.clusters,
+          label: msgs.get('overview.top.informations.clusters', locale),
         },
       ]
     }
@@ -250,12 +239,12 @@ export default class TopViolationsModule extends React.Component {
     if (!this.topFindingChoices) {
       this.topFindingChoices = [
         {
-          value: TopViolationSelections.findings,
-          label: msgs.get('overview.top.violations.findings', locale),
+          value: TopInformationSelections.findings,
+          label: msgs.get('overview.top.informations.findings', locale),
         },
         {
-          value: TopViolationSelections.clusters,
-          label: msgs.get('overview.top.violations.clusters', locale),
+          value: TopInformationSelections.clusters,
+          label: msgs.get('overview.top.informations.clusters', locale),
         }
       ]
     }
@@ -296,13 +285,12 @@ export default class TopViolationsModule extends React.Component {
   }
 }
 
-const TopViolations = ({cardData, handleClick, locale}) => {
+const TopInformations = ({cardData, handleClick, locale}) => {
   return (
     <div key={name}>
-      <div className='violation-card-container' >
-        {cardData.map(({name, description, count, choice, type, itemName}) => {
+      <div className='information-card-container' >
+        {cardData.map(({name, description, count, choice, type}) => {
           const violated = count > 0
-          const choiceIsClusters = choice.toLowerCase()===msgs.get('overview.top.violations.clusters').toLowerCase()
           const onClick = () =>{
             if (violated) {
               handleClick(choice, name, type, description.toString())
@@ -318,8 +306,7 @@ const TopViolations = ({cardData, handleClick, locale}) => {
             if (choice !== EMPTY_CHOICE) {
               return (
                 <React.Fragment>
-                  <div className='card-violations' role={'button'}
-                    tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+                  <div className='card-informations'>
                     <div className={classes}>
                       {count}
                     </div>
@@ -329,7 +316,7 @@ const TopViolations = ({cardData, handleClick, locale}) => {
             } else {
               return (
                 <React.Fragment>
-                  <div className='card-violations empty'>
+                  <div className='card-informations empty'>
                     <img
                       src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
                       alt={msgs.get('svg.description.noresource', locale)} />
@@ -340,39 +327,20 @@ const TopViolations = ({cardData, handleClick, locale}) => {
           }
 
           const renderName = () => {
-            if (choice !== EMPTY_CHOICE && !choiceIsClusters) {
-              return (
-                <React.Fragment>
-                  <Link to={`${config.contextPath}/policies/all/${encodeURIComponent(name)}`} className='card-name-link' key={name}>
-                    {name}
-                  </Link>
-                </React.Fragment>
-              )
-            } else {
-              return (
-                <React.Fragment>
-                  {name}
-                </React.Fragment>
-              )
-            }
+            return (
+              <React.Fragment>
+                {name}
+              </React.Fragment>
+            )
           }
 
           const renderDescription  = () => {
             if (choice !== EMPTY_CHOICE) {
               return (
                 <React.Fragment>
-                  {description.map((description) => {
-                    return (choiceIsClusters?
-                      <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(itemName)}/${encodeURIComponent(description)}`}
-                        className='card-each-description-link' key={description}>
-                        {description}
-                      </Link> :
-                      <Link to={`${config.contextPath}/policies/policy/${ encodeURIComponent(description)}/${encodeURIComponent(itemName)}`} className='card-each-description-link' key={description}>
-                        {description}
-                      </Link>
-                    )
-                  }
-                  ).reduce((prev, curr) => [prev, ', ', curr])}
+                  {description.map((singleDescription) => {
+                    return singleDescription
+                  }).reduce((prev, curr) => [prev, ', ', curr])}
                 </React.Fragment>
               )
             } else {
@@ -384,27 +352,40 @@ const TopViolations = ({cardData, handleClick, locale}) => {
             }
           }
 
-          const classes = classNames({
-            'card-violation-count': true,
-            //'alert': count>0,
-          })
-          return (
-            <div key={name}>
-              <div className={choice !== EMPTY_CHOICE ? 'violation-card-container single-strip' : 'violation-card-container single-strip empty-strip'}>
-                <div className='violation-card-content'>
-                  <div className='card-inner-content'>
-                    {renderCount()}
-                    <div className='card-name-description'>
-                      <div className='card-name'>
-                        {renderName()}
-                      </div>
-                      <div className='card-description'>
-                        {renderDescription()}
-                      </div>
+          const renderWholeStrip = () => {
+            return (
+              <div className='information-card-content'>
+                <div className='card-inner-content'>
+                  {renderCount()}
+                  <div className='card-name-description'>
+                    <div className={choice !== EMPTY_CHOICE ? 'card-name name-clickable' : 'card-name name-empty'}>
+                      {renderName()}
+                    </div>
+                    <div className={choice !== EMPTY_CHOICE ? 'card-description description-clickable' : 'card-description description-empty'}>
+                      {renderDescription()}
                     </div>
                   </div>
                 </div>
               </div>
+            )
+          }
+
+          const classes = classNames({
+            'card-information-count': true,
+            //'alert': count>0,
+          })
+          return (
+            <div key={name}>
+              <React.Fragment>
+                {choice !== EMPTY_CHOICE ?
+                  <div className='information-card-container single-strip' role={'button'} onClick={onClick} onKeyPress={onKeyPress} tabIndex='0'>
+                    {renderWholeStrip()}
+                  </div>
+                  :
+                  <div className='information-card-container single-strip empty-strip'>
+                    {renderWholeStrip()}
+                  </div>}
+              </React.Fragment>
             </div>
           )
         })}
@@ -413,13 +394,13 @@ const TopViolations = ({cardData, handleClick, locale}) => {
   )
 }
 
-TopViolations.propTypes = {
+TopInformations.propTypes = {
   cardData: PropTypes.array,
   handleClick: PropTypes.func,
   locale: PropTypes.string,
 }
 
-TopViolationsModule.propTypes = {
+TopInformationModule.propTypes = {
   handleDrillDownClick: PropTypes.func,
   items: PropTypes.array,
   type: PropTypes.string,

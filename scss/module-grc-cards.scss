@@ -9,7 +9,7 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-.module-policy-cards {
+.module-grc-cards {
   padding-top: 1px;
 
   .header-container {
@@ -186,9 +186,9 @@
            padding: 10px 0;
            outline:none;
 
-           &.violated {
+           &.violated, &.found, &.high {
             .card-count {
-               .card-count-violations {
+               .card-count-informations {
                  font-size: 34px;
                  padding-right: 3px;
                  color: $color__red-50;
@@ -196,9 +196,9 @@
              }
            }
 
-           &.violated:hover {
+           &.violated:hover, &.found:hover, &.high:hover {
              cursor: pointer;
-             .card-violation-type {
+             .card-grc-type {
                color: $color__blue-51;
                text-decoration: underline;
             }

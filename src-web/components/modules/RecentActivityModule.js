@@ -14,7 +14,7 @@ import classNames from 'classnames'
 import { SECURITY_TYPES } from '../../../lib/shared/constants'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
-import TopViolationsModule from './TopViolationsModule'
+import TopInformationModule from './TopInformationModule'
 import * as d3 from 'd3'
 import _ from 'lodash'
 
@@ -51,13 +51,13 @@ export default class RecentActivityModule extends React.Component {
             </div>
           </div>
           <div className='violation-container'>
-            <TopViolationsModule
+            <TopInformationModule
               type={'policies'}
               viewState={viewState}
               updateViewState={updateViewState}
               items={policies}
               handleDrillDownClick={handleDrillDownClick} />
-            <TopViolationsModule
+            <TopInformationModule
               type={'findings'}
               viewState={viewState}
               updateViewState={updateViewState}
@@ -101,8 +101,8 @@ export default class RecentActivityModule extends React.Component {
     })
     return {
       violations: [
-        {count: policySet.size, violationType: msgs.get('overview.top.violations.policy', locale)},
-        {count: clusterSet.size, violationType: msgs.get('overview.top.violations.cluster', locale)},
+        {count: policySet.size, violationType: msgs.get('overview.top.informations.policy.violations', locale)},
+        {count: clusterSet.size, violationType: msgs.get('overview.top.informations.cluster.violations', locale)},
       ],
       findings: [
         {count: high, total: total, findingType: SECURITY_TYPES.HIGH},

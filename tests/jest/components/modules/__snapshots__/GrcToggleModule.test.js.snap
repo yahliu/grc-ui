@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PolicyToggle view renders expand as expected 1`] = `
+exports[`GrcToggle view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <withRouter(Connect(PageWithUrlQuery))
+    grcTabToggleIndex={0}
     highLightRowName=""
     locale=""
     policies={
@@ -553,7 +554,6 @@ ShallowWrapper {
         },
       ]
     }
-    policyTabToggleIndex={0}
     refreshControl={
       Object {
         "refreshCookie": "policy-refresh-interval-cookie",
@@ -563,7 +563,7 @@ ShallowWrapper {
     }
     secondaryHeaderProps={
       Object {
-        "information": "policy.header.tooltip",
+        "information": "grc.header.tooltip",
         "links": Array [
           Object {
             "id": "create-policy",
@@ -573,28 +573,28 @@ ShallowWrapper {
         ],
         "tabs": Array [
           Object {
-            "id": "policy-overview",
+            "id": "grc-overview",
             "index": 0,
-            "label": "tabs.policy.overview",
+            "label": "tabs.grc.overview",
             "url": "/multicloud/policies",
           },
           Object {
-            "id": "policy-all",
+            "id": "grc-all",
             "index": 1,
-            "label": "tabs.policy.all",
+            "label": "tabs.grc.all",
             "url": "/multicloud/policies/all",
           },
           Object {
-            "id": "policy-findings",
+            "id": "grc-findings",
             "index": 2,
-            "label": "tabs.policy.findings",
+            "label": "tabs.grc.findings",
             "url": "/multicloud/policies/findings",
           },
         ],
         "title": "routes.grc",
       }
     }
-    showPolicyTabToggle={true}
+    showGrcTabToggle={true}
     showSidePanel={false}
   />,
   Symbol(enzyme.__renderer__): Object {

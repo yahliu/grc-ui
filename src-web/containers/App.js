@@ -19,7 +19,7 @@ import resources from '../../lib/shared/resources'
 import client from '../../lib/shared/client'
 import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
-import PolicyRouter from './PolicyRouter'
+import GrcRouter from './GrcRouter'
 import loadable from 'loadable-components'
 
 export const ResourceToolbar = loadable(() => import(/* webpackChunkName: "ResourceToolbar" */ '../components/common/ResourceToolbar'))
@@ -54,7 +54,7 @@ class App extends React.Component {
         <SecondaryHeader />
         <ResourceToolbar />
         <Switch>
-          <Route path={`${match.url}/policies`} render={() => <PolicyRouter />} />
+          <Route path={`${match.url}/policies`} render={() => <GrcRouter />} />
           <Route path={`${match.url}/topology`} render={() => <div />} />
           <Redirect to={`${config.contextPath}/policies`} />
         </Switch>

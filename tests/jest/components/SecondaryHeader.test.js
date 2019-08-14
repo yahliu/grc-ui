@@ -14,9 +14,12 @@ import renderer from 'react-test-renderer'
 import { SecondaryHeader } from '../../../src-web/components/SecondaryHeader'
 
 describe('SecondaryHeader component 1', () => {
+  const location = {
+    pathname: '/multicloud/policies'
+  }
   it('renders as expected', () => {
     const component = renderer.create(
-      <SecondaryHeader title='hello world' />
+      <SecondaryHeader title='hello world' location={location} />
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
@@ -28,9 +31,12 @@ describe('SecondaryHeader component 2', () => {
     label: 'tabs.dashboard.application',
     url: '/multicloud/dashboard',
   }]
+  const location = {
+    pathname: '/multicloud/policies/all'
+  }
   it('renders as expected', () => {
     const component = renderer.create(
-      <SecondaryHeader title='hello world' tabs={tabs} />
+      <SecondaryHeader title='hello world' tabs={tabs} location={location} />
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
@@ -50,7 +56,7 @@ describe('SecondaryHeader component 3', () => {
     }
   ]
   const location = {
-    pathname: '/hello'
+    pathname: '/multicloud/policies/findings'
   }
   it('renders as expected', () => {
     const component = renderer.create(
@@ -62,9 +68,12 @@ describe('SecondaryHeader component 3', () => {
 })
 
 describe('SecondaryHeader component 4', () => {
+  const location = {
+    pathname: '/multicloud/policies/findings'
+  }
   it('renders as expected', () => {
     const component = renderer.create(
-      <SecondaryHeader title='hello world' />
+      <SecondaryHeader title='hello world' location={location} />
     )
     expect(component.toJSON()).toMatchSnapshot()
   })

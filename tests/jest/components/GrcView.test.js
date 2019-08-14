@@ -10,17 +10,17 @@
 
 import React from 'react'
 import { shallow } from 'enzyme'
-import { policiesViewItem, policiesViewRefreshControl, policiesViewSecondaryHeaderProps } from './ComponentsTestingData'
-import { default as PoliciesView } from '../../../src-web/components/PoliciesView'
+import { GrcViewItem, GrcViewRefreshControl, GrcViewSecondaryHeaderProps } from './ComponentsTestingData'
+import { default as GrcView } from '../../../src-web/components/GrcView'
 
-describe('PoliciesView view', () => {
+describe('GrcView view', () => {
   it('renders expand as expected', () => {
-    const component = shallow(<PoliciesView
-      loading={!policiesViewItem && false}
+    const component = shallow(<GrcView
+      loading={!GrcViewItem && false}
       error={null}
-      policies={policiesViewItem}
-      refreshControl={policiesViewRefreshControl}
-      secondaryHeaderProps={policiesViewSecondaryHeaderProps} />)
+      policies={GrcViewItem}
+      refreshControl={GrcViewRefreshControl}
+      secondaryHeaderProps={GrcViewSecondaryHeaderProps} />)
     expect(component).toMatchSnapshot()
   })
 })

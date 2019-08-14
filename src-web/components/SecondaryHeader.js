@@ -33,8 +33,19 @@ export class SecondaryHeader extends React.Component {
   }
 
   render() {
-    const { tabs, title, breadcrumbItems, links, description } = this.props
+    const { tabs, title, breadcrumbItems, links, description, location } = this.props
     const { locale } = this.context
+    const displayType = location.pathname.split('/').pop()
+    let showCreationLink
+    switch(displayType) {
+    case 'all':
+    default:
+      showCreationLink = true
+      break
+    case 'findings':
+      showCreationLink = false
+      break
+    }
     if ((tabs && tabs.length > 0) || (breadcrumbItems && breadcrumbItems.length > 0)) {
       return (
         <div className='secondary-header-wrapper' role='region' aria-label={title}>
@@ -57,7 +68,7 @@ export class SecondaryHeader extends React.Component {
               </div>
             </header>
           </div>
-          {links && links.length>0 &&
+          {showCreationLink && links && links.length>0 &&
             <div className='secondary-header-links'>
               {this.renderLinks()}
             </div>

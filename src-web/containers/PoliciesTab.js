@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
-import PoliciesView from '../components/PoliciesView'
+import GrcView from '../components/GrcView'
 import {updateSecondaryHeader} from '../actions/common'
 import { HCMComplianceList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
@@ -64,10 +64,10 @@ class PoliciesTab extends React.Component {
 
             return (
               <div>
-                <PoliciesView
+                <GrcView
                   loading={!items && loading}
                   error={error}
-                  policies={items}
+                  grcItems={items}
                   refreshControl={refreshControl}
                   secondaryHeaderProps={secondaryHeaderProps}
                 />

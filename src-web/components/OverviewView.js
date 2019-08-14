@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, filterFindings, getAvailablePolicyFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import {POLICY_OVERVIEW_STATE_COOKIE} from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
@@ -52,7 +52,7 @@ export class OverviewView extends React.Component {
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(policies, this.props.policies)) {
       const { locale } = this.context
-      updateResourceToolbar(refreshControl, getAvailablePolicyFilters(policies, findings, locale))
+      updateResourceToolbar(refreshControl, getAvailableGrcFilters(policies, findings, locale))
     }
   }
 
@@ -79,7 +79,7 @@ export class OverviewView extends React.Component {
     }
     showResourceToolbar()
     const { viewState } = this.state
-    const availableFilters =  getAvailablePolicyFilters(policies, findings, locale)
+    const availableFilters =  getAvailableGrcFilters(policies, findings, locale)
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     const filteredFindings = filterFindings(findings, activeFilters, locale)
     return (
@@ -122,33 +122,54 @@ export class OverviewView extends React.Component {
 
   handleDrillDownClickOverview(parentType, parentName){
     if(parentType){
+      let page = 'all'
       const paraURL = {}
-      paraURL.card = false
       switch(parentType.toLowerCase()){
-      case 'policy violations'://RecentActivityModule
+      case 'policy violations'://RecentActivityModule to policies page, all policy violations
         paraURL.index = 0
         break
-      case 'cluster violations'://RecentActivityModule
+      case 'cluster violations'://RecentActivityModule to policies page, all cluster violations
         paraURL.index = 1
         break
-      case 'policies'://TopViolationsModule
+      case 'high'://RecentActivityModule to security findings page, all high severity findings
+      case 'medium'://all medium severity findings
+      case 'low'://all low severity findings
+        page = 'findings'
+        paraURL.index = 0
+        paraURL.filters = `{"textsearch":["${parentType}"]}`
+        break
+      case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0
         if(parentName){
-          paraURL.name = parentName //highlight name
-          paraURL.side = true //auto open side panel under highlight name
+          paraURL.name = parentName //highlight this policy violation name
+          paraURL.side = true //auto open side panel under this highlight name
         }
         break
-      case 'clusters'://TopViolationsModule
+      case 'clusters'://TopInformationModule to policies page with specific cluster violation name
         paraURL.index = 1
         if(parentName){
-          paraURL.name = parentName
-          paraURL.side = true
+          paraURL.name = parentName //highlight this cluster violation name
+          paraURL.side = true //auto open side panel under this highlight name
+        }
+        break
+      case 'security findings'://TopInformationModule to security findings page with specific security finding name
+        page = 'findings'
+        paraURL.index = 0
+        if(parentName){
+          paraURL.filters = `{"textsearch":["${parentName}"]}` //current no highlight and side panel for security findings page, just filter name
+        }
+        break
+      case 'finding clusters'://TopInformationModule to security findings page with specific finding cluster name
+        page = 'findings'
+        paraURL.index = 1
+        if(parentName){
+          paraURL.filters = `{"textsearch":["${parentName}"]}` //current no highlight and side panel for finding clusters page, just filter name
         }
         break
       default:
         break
       }
-      this.props.history.push(`${this.props.location.pathname}/all?${queryString.stringify(paraURL)}`)
+      this.props.history.push(`${this.props.location.pathname}/${page}?${queryString.stringify(paraURL)}`)
     }
   }
 }

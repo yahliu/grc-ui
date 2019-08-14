@@ -182,7 +182,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
       className="violation-container"
     >
       <div
-        className="module-top-violations"
+        className="module-top-information"
       >
         <div
           className="header-container"
@@ -296,27 +296,27 @@ exports[`RecentActivityModule view renders as expected 1`] = `
         </div>
         <div>
           <div
-            className="violation-card-container"
+            className="information-card-container"
           >
             <div>
               <div
-                className="violation-card-container single-strip"
+                className="information-card-container single-strip"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
               >
                 <div
-                  className="violation-card-content"
+                  className="information-card-content"
                 >
                   <div
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations"
-                      onClick={[Function]}
-                      onKeyPress={[Function]}
-                      role="button"
-                      tabIndex="0"
+                      className="card-informations"
                     >
                       <div
-                        className="card-violation-count"
+                        className="card-information-count"
                       >
                         3
                       </div>
@@ -325,36 +325,18 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       className="card-name-description"
                     >
                       <div
-                        className="card-name"
+                        className="card-name name-clickable"
                       >
                         cluster1
                       </div>
                       <div
-                        className="card-description"
+                        className="card-description description-clickable"
                       >
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/policy-comp/compliance-all"
-                          onClick={[Function]}
-                        >
-                          compliance-all
-                        </a>
+                        compliance-all
                         , 
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/policy-comp/policy-ma"
-                          onClick={[Function]}
-                        >
-                          policy-ma
-                        </a>
+                        policy-ma
                         , 
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/policy-comp/policy-pod"
-                          onClick={[Function]}
-                        >
-                          policy-pod
-                        </a>
+                        policy-pod
                       </div>
                     </div>
                   </div>
@@ -363,23 +345,23 @@ exports[`RecentActivityModule view renders as expected 1`] = `
             </div>
             <div>
               <div
-                className="violation-card-container single-strip"
+                className="information-card-container single-strip"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
               >
                 <div
-                  className="violation-card-content"
+                  className="information-card-content"
                 >
                   <div
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations"
-                      onClick={[Function]}
-                      onKeyPress={[Function]}
-                      role="button"
-                      tabIndex="0"
+                      className="card-informations"
                     >
                       <div
-                        className="card-violation-count"
+                        className="card-information-count"
                       >
                         2
                       </div>
@@ -388,28 +370,16 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       className="card-name-description"
                     >
                       <div
-                        className="card-name"
+                        className="card-name name-clickable"
                       >
                         clusterhub
                       </div>
                       <div
-                        className="card-description"
+                        className="card-description description-clickable"
                       >
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/policy-comp/compliance-all"
-                          onClick={[Function]}
-                        >
-                          compliance-all
-                        </a>
+                        compliance-all
                         , 
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/policy-comp/policy-pod"
-                          onClick={[Function]}
-                        >
-                          policy-pod
-                        </a>
+                        policy-pod
                       </div>
                     </div>
                   </div>
@@ -418,16 +388,16 @@ exports[`RecentActivityModule view renders as expected 1`] = `
             </div>
             <div>
               <div
-                className="violation-card-container single-strip empty-strip"
+                className="information-card-container single-strip empty-strip"
               >
                 <div
-                  className="violation-card-content"
+                  className="information-card-content"
                 >
                   <div
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations empty"
+                      className="card-informations empty"
                     >
                       <img
                         alt="No resource"
@@ -438,12 +408,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       className="card-name-description"
                     >
                       <div
-                        className="card-name"
+                        className="card-name name-empty"
                       >
                         No other policy violations
                       </div>
                       <div
-                        className="card-description"
+                        className="card-description description-empty"
                       >
                         We will continue to monitor and display any policy violations so you can easily find them here.
                       </div>
@@ -456,7 +426,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
         </div>
       </div>
       <div
-        className="module-top-violations"
+        className="module-top-information"
       >
         <div
           className="header-container"
@@ -570,27 +540,27 @@ exports[`RecentActivityModule view renders as expected 1`] = `
         </div>
         <div>
           <div
-            className="violation-card-container"
+            className="information-card-container"
           >
             <div>
               <div
-                className="violation-card-container single-strip"
+                className="information-card-container single-strip"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
               >
                 <div
-                  className="violation-card-content"
+                  className="information-card-content"
                 >
                   <div
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations"
-                      onClick={[Function]}
-                      onKeyPress={[Function]}
-                      role="button"
-                      tabIndex="0"
+                      className="card-informations"
                     >
                       <div
-                        className="card-violation-count"
+                        className="card-information-count"
                       >
                         3
                       </div>
@@ -599,42 +569,18 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       className="card-name-description"
                     >
                       <div
-                        className="card-name"
+                        className="card-name name-clickable"
                       >
-                        <a
-                          className="card-name-link"
-                          href="undefined/policies/all/Policy%20that%20is%20not%20compliant"
-                          onClick={[Function]}
-                        >
-                          Policy that is not compliant
-                        </a>
+                        Policy that is not compliant
                       </div>
                       <div
-                        className="card-description"
+                        className="card-description description-clickable"
                       >
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/mycluster_name/undefined"
-                          onClick={[Function]}
-                        >
-                          mycluster_name
-                        </a>
+                        mycluster_name
                         , 
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/cluster1/undefined"
-                          onClick={[Function]}
-                        >
-                          cluster1
-                        </a>
+                        cluster1
                         , 
-                        <a
-                          className="card-each-description-link"
-                          href="undefined/policies/policy/clusterhub/undefined"
-                          onClick={[Function]}
-                        >
-                          clusterhub
-                        </a>
+                        clusterhub
                       </div>
                     </div>
                   </div>
@@ -643,16 +589,16 @@ exports[`RecentActivityModule view renders as expected 1`] = `
             </div>
             <div>
               <div
-                className="violation-card-container single-strip empty-strip"
+                className="information-card-container single-strip empty-strip"
               >
                 <div
-                  className="violation-card-content"
+                  className="information-card-content"
                 >
                   <div
                     className="card-inner-content"
                   >
                     <div
-                      className="card-violations empty"
+                      className="card-informations empty"
                     >
                       <img
                         alt="No resource"
@@ -663,12 +609,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       className="card-name-description"
                     >
                       <div
-                        className="card-name"
+                        className="card-name name-empty"
                       >
                         No other security findings
                       </div>
                       <div
-                        className="card-description"
+                        className="card-description description-empty"
                       >
                         We will continue to monitor and display any security findings so you can easily find them here.
                       </div>

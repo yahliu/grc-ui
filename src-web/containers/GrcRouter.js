@@ -27,7 +27,7 @@ const BASE_PAGE_PATH = `${config.contextPath}/policies`
 
 const SECONDARY_HEADER_PROPS = {
   title: 'routes.grc',
-  information: 'policy.header.tooltip',
+  information: 'grc.header.tooltip',
   links: [
     {
       id: 'create-policy',
@@ -37,18 +37,18 @@ const SECONDARY_HEADER_PROPS = {
   ],
   tabs: [
     {
-      id: 'policy-overview',
-      label: 'tabs.policy.overview',
+      id: 'grc-overview',
+      label: 'tabs.grc.overview',
       url: `${BASE_PAGE_PATH}`
     },
     {
-      id: 'policy-all',
-      label: 'tabs.policy.all',
+      id: 'grc-all',
+      label: 'tabs.grc.all',
       url: `${BASE_PAGE_PATH}/all`
     },
     {
-      id: 'policy-findings',
-      label: 'tabs.policy.findings',
+      id: 'grc-findings',
+      label: 'tabs.grc.findings',
       url: `${BASE_PAGE_PATH}/findings`
     },
   ]
@@ -71,7 +71,7 @@ const CREATION_HEADER_PROPS = {
   ],
 }
 
-const PolicyRouter = ({ match }) =>
+const GrcRouter = ({ match }) =>
   <Switch>
     <Route exact path={`${match.url}`} render={() => <OverviewTab secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
     <Route path={`${match.url}/policy/:clusterName/:name`} render={() => <PolicyClusterDetail secondaryHeaderProps={SECONDARY_HEADER_PROPS} />} />
@@ -81,8 +81,8 @@ const PolicyRouter = ({ match }) =>
     <Route path={`${match.url}/create`} render={() => <CreationTab secondaryHeaderProps={CREATION_HEADER_PROPS} />} />
   </Switch>
 
-PolicyRouter.propTypes = {
+GrcRouter.propTypes = {
   match: PropTypes.object,
 }
 
-export default withRouter(withAccess(PolicyRouter, ROLES.OPERATOR))
+export default withRouter(withAccess(GrcRouter, ROLES.OPERATOR))

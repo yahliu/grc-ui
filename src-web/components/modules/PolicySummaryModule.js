@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
-import { getAvailablePolicyFilters } from '../../../lib/client/filter-helper'
+import { getAvailableGrcFilters } from '../../../lib/client/filter-helper'
 
 resources(() => {
   require('../../../scss/module-policy-summary.scss')
@@ -60,7 +60,7 @@ export default class PolicySummaryModule extends React.Component {
   getModuleData = () => {
     const { locale } = this.context
     const { policies, findings } = this.props
-    const filters = getAvailablePolicyFilters(policies, findings, locale)
+    const filters = getAvailableGrcFilters(policies, findings, locale)
     const policySet = new Set()
     const standardsSet = filters.standards.availableSet
     const categorySet = filters.categories.availableSet

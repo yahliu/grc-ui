@@ -16,17 +16,19 @@ import hcmpoliciescluster from './hcm-policies-cluster'
 import hcmpoliciespolicy from './hcm-policies-policy'
 import hcmcompliances from './hcm-compliances'
 import hcmpolicies from './hcm-policies'
-
+import hcmsecurityfindings from './hcm-security-findings'
+import hcmclusterfindings from './hcm-cluster-findings'
 
 const resourceData = {
   [RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name]: hcmpoliciespolicy,
   [RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER.name]: hcmpoliciescluster,
   [RESOURCE_TYPES.HCM_COMPLIANCES.name]: hcmcompliances,
   [RESOURCE_TYPES.HCM_POLICIES.name]: hcmpolicies,
+  [RESOURCE_TYPES.HCM_SECURITY_FINDINGS.name]: hcmsecurityfindings,
+  [RESOURCE_TYPES.HCM_CLUSTER_FINDINGS.name]: hcmclusterfindings,
 }
 
 // diagram tabs
-
 function getResourceData(resourceType) {
   // main Topology tab
   const def = resourceData[resourceType.name]

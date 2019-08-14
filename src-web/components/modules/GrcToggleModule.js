@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-//FindingToggleModule might be merged with PolicyToggleModule as GrcToggleModule in future for reuse after finding hifi is done
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
@@ -23,10 +23,10 @@ import queryString from 'query-string'
 import resources from '../../../lib/shared/resources'
 
 resources(() => {
-  require('../../../scss/grc-toggle-module.scss')
+  require('../../../scss/module-grc-toggle.scss')
 })
 
-class FindingToggleModule extends React.Component {
+class GrcToggleModule extends React.Component {
 
   constructor (props) {
     super(props)
@@ -36,59 +36,106 @@ class FindingToggleModule extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { policies, secondaryHeaderProps, showPolicyTabToggle, policyTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy } = this.props
-    const policyTabSwitcher = showPolicyTabToggle ? this.renderTabSwitcher(policyTabToggleIndex) : []
+    const { displayType, grcItems, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy } = this.props
+    const grcTabSwitcher = showGrcTabToggle ? this.renderTabSwitcher(displayType, grcTabToggleIndex) : []
     return (
+      //below whole logic branch need to substract and rewrite later
       <div className='module-toggle-tab'>
-        {policyTabToggleIndex===0 && <ResourceList
+        {displayType==='all' && grcTabToggleIndex===0 && <ResourceList
           {...this.props}
           detailsTabs={['policies']}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_POLICY}
-          listData={this.formatExpandablePolicies(policies)}
+          listData={this.formatExpandablePolicies(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           tabs={secondaryHeaderProps.tabs}
           links={secondaryHeaderProps.links}
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.finding.toggle.securityFindings.placeHolderText', locale)}
+          placeHolderText={msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)}
           autoAction='table.actions.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
           handleCreatePolicy={handleCreatePolicy}>
-          {policyTabSwitcher}
+          {grcTabSwitcher}
         </ResourceList>}
-        {policyTabToggleIndex===1 && <ResourceList
+        {displayType==='all' && grcTabToggleIndex===1 && <ResourceList
           {...this.props}
           detailsTabs={['clusters']}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER}
-          listData={formatPoliciesToClustersTableData(policies)}
+          listData={formatPoliciesToClustersTableData(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
           tabs={secondaryHeaderProps.tabs}
           links={secondaryHeaderProps.links}
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.finding.toggle.clusterFindings.placeHolderText', locale)}
+          placeHolderText={msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)}
           autoAction='table.actions.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
-          topButton={policyTabSwitcher}>
-          {policyTabSwitcher}
+          topButton={grcTabSwitcher}>
+          {grcTabSwitcher}
+        </ResourceList>}
+        {displayType==='findings' && grcTabToggleIndex===0 && <ResourceList
+          {...this.props}
+          detailsTabs={['findings']}
+          resourceType={RESOURCE_TYPES.HCM_SECURITY_FINDINGS}
+          listData={grcItems}
+          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)}
+          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)}
+          tabs={secondaryHeaderProps.tabs}
+          links={secondaryHeaderProps.links}
+          title={secondaryHeaderProps.title}
+          information={secondaryHeaderProps.information}
+          placeHolderText={msgs.get('tabs.grc.toggle.securityFindings.placeHolderText', locale)}
+          autoAction='table.actions.sidepanel'
+          highLightRowName={highLightRowName}
+          showSidePanel={showSidePanel}
+          topButton={grcTabSwitcher}>
+          {grcTabSwitcher}
+        </ResourceList>}
+        {displayType==='findings' && grcTabToggleIndex===1 && <ResourceList
+          {...this.props}
+          detailsTabs={['cluster-findings']}
+          resourceType={RESOURCE_TYPES.HCM_CLUSTER_FINDINGS}
+          listData={grcItems}
+          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
+          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
+          tabs={secondaryHeaderProps.tabs}
+          links={secondaryHeaderProps.links}
+          title={secondaryHeaderProps.title}
+          information={secondaryHeaderProps.information}
+          placeHolderText={msgs.get('tabs.grc.toggle.clusterFindings.placeHolderText', locale)}
+          autoAction='table.actions.sidepanel'
+          highLightRowName={highLightRowName}
+          showSidePanel={showSidePanel}
+          topButton={grcTabSwitcher}>
+          {grcTabSwitcher}
         </ResourceList>}
       </div>
     )
   }
 
-  renderTabSwitcher(policyTabToggleIndex) {
+  renderTabSwitcher(displayType, grcTabToggleIndex) {
     const { locale } = this.context
-    const allPolicies = msgs.get('tabs.finding.toggle.securityFindings', locale)
-    const clusterViolations = msgs.get('tabs.finding.toggle.clusterFindings', locale)
+    let toggleText1, toggleText2
+    switch(displayType) {
+    case 'all':
+    default:
+      toggleText1 = msgs.get('tabs.grc.toggle.allPolicies', locale)
+      toggleText2 = msgs.get('tabs.grc.toggle.clusterViolations', locale)
+      break
+    case 'findings':
+      toggleText1 = msgs.get('tabs.grc.toggle.securityFindings', locale)
+      toggleText2 = msgs.get('tabs.grc.toggle.clusterFindings', locale)
+      break
+    }
     return (
       <div className='module-toggle-tab-switch'>
-        <ContentSwitcher onChange={this.onChange} selectedIndex={policyTabToggleIndex}>
-          <Switch text={allPolicies} onClick={this.toggleClick} />
-          <Switch text={clusterViolations} onClick={this.toggleClick} />
+        <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
+          <Switch text={toggleText1} onClick={this.toggleClick} />
+          <Switch text={toggleText2} onClick={this.toggleClick} />
         </ContentSwitcher>
       </div>
     )
@@ -116,16 +163,17 @@ class FindingToggleModule extends React.Component {
   }
 }
 
-FindingToggleModule.propTypes = {
+GrcToggleModule.propTypes = {
+  displayType: PropTypes.string,
+  grcItems: PropTypes.array,
+  grcTabToggleIndex: PropTypes.number,
   handleCreatePolicy: PropTypes.func,
   highLightRowName: PropTypes.string,
   history: PropTypes.object.isRequired,
   location: PropTypes.object,
-  policies: PropTypes.array,
-  policyTabToggleIndex: PropTypes.number,
   secondaryHeaderProps: PropTypes.object,
-  showPolicyTabToggle: PropTypes.bool,
+  showGrcTabToggle: PropTypes.bool,
   showSidePanel: PropTypes.bool,
 }
 
-export default withRouter(pageWithUrlQuery(FindingToggleModule))
+export default withRouter(pageWithUrlQuery(GrcToggleModule))
