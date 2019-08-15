@@ -14,8 +14,30 @@
   .card-container-container {
     padding-top: 24px;
 
-    .card-title {
-      font-size: 18px;
+    .card-title-container {
+      display: flex;
+      align-items: center;
+
+      .card-title {
+        font-size: 18px;
+      }
+
+      .info-icon {
+        margin-left: 0.7rem;
+        width: 16px;
+        height: 16px;
+        fill: $color__blue-51;
+        stroke: none;
+        cursor: pointer;
+      }
+
+      .bx--tooltip--icon__top:after, .bx--tooltip--icon__bottom:after {
+        white-space: normal;
+        width: 22rem;
+        max-width: 22rem;
+        z-index: 2000;
+      }
+
     }
 
     .card-container {

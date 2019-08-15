@@ -140,8 +140,8 @@ export class SecondaryHeader extends React.Component {
     const { links } = this.props,
           { locale } = this.context
     return links.map(link => {
-      const {id, label, url, handleClick=(()=> this.props.history.push(url)) } = link
-      return <Button key={id} id={id} onClick={handleClick} >
+      const {id, label, url, kind='primary', handleClick=(()=> this.props.history.push(url)) } = link
+      return <Button key={id} id={id} onClick={handleClick} kind={kind} >
         {msgs.get(label, locale)}
       </Button>
     })

@@ -11,7 +11,7 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import PropTypes from 'prop-types'
-import { DropdownV2, Slider } from 'carbon-components-react'
+import { DropdownV2, Slider, TooltipIcon } from 'carbon-components-react'
 import Radar from 'react-d3-radar'
 import * as d3 from 'd3'
 import 'd3-selection-multi'
@@ -63,10 +63,18 @@ export default class ImpactedControlsModule extends React.Component {
     this.cardData = this.getCardData()
     const { locale } = this.context
     const title = msgs.get('overview.impacted.controls.title', locale)
+    const tooltip = msgs.get('overview.impacted.controls.tooltip', locale)
     return (
       <div className='module-impacted-controls'>
         <div className='card-container-container'>
-          <div className='card-title'>{title}</div>
+          <div className='card-title-container'>
+            <div className='card-title'>{title}</div>
+            <TooltipIcon direction='top' align='end' tooltipText={tooltip}>
+              <svg className='info-icon'>
+                <use href={'#diagramIcons_info'} ></use>
+              </svg>
+            </TooltipIcon>
+          </div>
           <div className='card-container'>
             <div className='card-content'>
               {this.renderControls(this.cardData)}
@@ -171,7 +179,7 @@ export default class ImpactedControlsModule extends React.Component {
         domainMax = Math.max(domainMax, v)
       })
     })
-    domainMax = Math.min(10, Math.ceil(domainMax*1.2))
+    domainMax = Math.max(10, Math.ceil(domainMax*1.2))
     return (
       <div className='card-radar-container' >
         <div className='card-radar' ref={this.fixRadar}>
@@ -505,11 +513,18 @@ export default class ImpactedControlsModule extends React.Component {
       key = key.toLowerCase()
       variables.push({key, label: controlLabels[key]})
     })
-    variables = _.uniqWith(variables, _.isEqual)
 
-    variables.forEach(variable=>{
-      violationsByControls[variable.key] = _.get(violationsByControls, variable.key, 0)
-      findingsByControls[variable.key] = _.get(findingsByControls, variable.key, 0)
+    // create unique controls
+    // only show controls that have both violations and findings
+    variables = _.uniqWith(variables, _.isEqual)
+      .filter(({key})=>{
+        return violationsByControls[key] && findingsByControls[key]
+      })
+
+    // create radar data
+    variables.forEach(({key})=>{
+      violationsByControls[key] = _.get(violationsByControls, key, 0)
+      findingsByControls[key] = _.get(findingsByControls, key, 0)
     })
     const radarData = {
       variables,

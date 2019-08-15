@@ -8,9 +8,30 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
     className="card-container-container"
   >
     <div
-      className="card-title"
+      className="card-title-container"
     >
-      Most impacted controls
+      <div
+        className="card-title"
+      >
+        Most impacted controls
+      </div>
+      <div
+        align="end"
+        className="bx--tooltip-icon"
+      >
+        <button
+          aria-label="This radar chart helps you to visualize problem areas. It shows you the highest number of impacts, and gives you a view into the areas where security and policy violations are overlapping and may be higher priority areas to investigate."
+          className="bx--tooltip__trigger bx--tooltip--icon__top"
+        >
+          <svg
+            className="info-icon"
+          >
+            <use
+              href="#diagramIcons_info"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <div
       className="card-container"
@@ -137,12 +158,12 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     onKeyPress={[Function]}
                     role="presentation"
                     tabIndex={-1}
-                    value={4}
+                    value={0}
                   >
                     <div
-                      aria-valuemax={4}
+                      aria-valuemax={0}
                       aria-valuemin={1}
-                      aria-valuenow={4}
+                      aria-valuenow={0}
                       className="bx--slider__thumb"
                       id="slider"
                       onKeyDown={[Function]}
@@ -169,14 +190,14 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                     />
                     <input
                       className="bx--slider__input"
-                      max={4}
+                      max={0}
                       min={1}
                       name="Show more or less controls"
                       onChange={[Function]}
                       required={undefined}
                       step={1}
                       type="hidden"
-                      value={4}
+                      value={0}
                     />
                   </div>
                   <span
@@ -187,7 +208,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
                   <span
                     className="bx--slider__range-label"
                   >
-                    4
+                    0
                   </span>
                 </div>
               </div>
@@ -199,307 +220,7 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
         >
           <div
             className="card-radar"
-          >
-            <svg
-              height={500}
-              style={
-                Object {
-                  "height": "100%",
-                  "overflow": "visible",
-                  "width": "100%",
-                }
-              }
-              viewBox="0 0 500 500"
-              width={500}
-            >
-              <g
-                transform="translate(70, 70)"
-              >
-                <rect
-                  fill="transparent"
-                  height={360}
-                  transform="translate(0, 0)"
-                  width={360}
-                />
-                <g
-                  transform="translate(180, 180)"
-                >
-                  <g>
-                    <circle
-                      fill="#979797"
-                      fillOpacity={0.1}
-                      r={180}
-                      stroke="#979797"
-                    />
-                    <circle
-                      fill="#979797"
-                      fillOpacity={0.1}
-                      r={135}
-                      stroke="#979797"
-                    />
-                    <circle
-                      fill="#979797"
-                      fillOpacity={0.1}
-                      r={90}
-                      stroke="#979797"
-                    />
-                    <circle
-                      fill="#979797"
-                      fillOpacity={0.1}
-                      r={45}
-                      stroke="#979797"
-                    />
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-180}
-                    >
-                      4
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-135}
-                    >
-                      3
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-90}
-                    >
-                      2
-                    </text>
-                    <text
-                      dx="0.4em"
-                      dy="0.4em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      textAnchor="left"
-                      x={0}
-                      y={-45}
-                    >
-                      1
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={1.2124003311558799e-14}
-                      y1={0}
-                      y2={-198.00000000000003}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={1.3226185430791415e-14}
-                      y={-216}
-                    >
-                      Other
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={198.00000000000003}
-                      y1={0}
-                      y2={0}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={216}
-                      y={0}
-                    >
-                      Mutation Advisor
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={1.2124003311558799e-14}
-                      y1={0}
-                      y2={198.00000000000003}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={1.3226185430791415e-14}
-                      y={216}
-                    >
-                      VA
-                    </text>
-                  </g>
-                  <g>
-                    <line
-                      stroke="#cdcdcd"
-                      strokeWidth={2}
-                      x1={0}
-                      x2={-198.00000000000003}
-                      y1={0}
-                      y2={2.4248006623117597e-14}
-                    />
-                    <text
-                      dy="0.35em"
-                      fill="black"
-                      fontFamily="sans-serif"
-                      fontSize={10}
-                      onClick={null}
-                      onMouseOver={null}
-                      style={
-                        Object {
-                          "color": "#171717",
-                          "fontSize": "14px",
-                        }
-                      }
-                      textAnchor="middle"
-                      x={-216}
-                      y={2.645237086158283e-14}
-                    >
-                      Test
-                    </text>
-                  </g>
-                  <g>
-                    <path
-                      d="M134.99999999999278,-0.00004411731103264868C134.99999480383968,29.999955882688067,22.4999688230802,89.99999264710942,-0.00003117691859574541,89.9999999999946C-22.500031176917393,90.00000735287978,-0.000005196153099290901,29.999999999999098,0,0C0.000005196153099290901,-29.999999999999098,-22.499999999998796,-89.99999264711482,0,-90C22.499999999998796,-90.00000735288518,135.00000519614588,-30.00004411731013,134.99999999999278,-0.00004411731103264868"
-                      fill="#13B9B9"
-                      fillOpacity={0.2}
-                      stroke="#13B9B9"
-                      strokeOpacity={0.7}
-                    />
-                    <circle
-                      cx={5.5109105961630896e-15}
-                      cy={-90}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                    <circle
-                      cx={135}
-                      cy={0}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                    <circle
-                      cx={5.5109105961630896e-15}
-                      cy={90}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                    <circle
-                      cx={-0}
-                      cy={0}
-                      fill="#13B9B9"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#13B9B9"
-                    />
-                  </g>
-                  <g>
-                    <path
-                      d="M0,0C0,0,22.499999999999993,4.4134447682826454e-7,0,0C-22.499999999999993,-4.4134447682826454e-7,-134.99999999999997,-0.0000026480668609695874,-134.99999999999997,-0.0000026480668609695874C-134.99999999999997,-0.0000026480668609695874,-22.499999999999993,-4.4134447682826454e-7,0,0C22.499999999999993,4.4134447682826454e-7,0,0,0,0"
-                      fill="#0082C1"
-                      fillOpacity={0.2}
-                      stroke="#0082C1"
-                      strokeOpacity={0.7}
-                    />
-                    <circle
-                      cx={0}
-                      cy={-0}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={0}
-                      cy={0}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={0}
-                      cy={0}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                    <circle
-                      cx={-135}
-                      cy={1.6532731788489267e-14}
-                      fill="#0082C1"
-                      opacity={0.7}
-                      r={3}
-                      stroke="#0082C1"
-                    />
-                  </g>
-                </g>
-              </g>
-            </svg>
-          </div>
+          />
         </div>
       </div>
     </div>

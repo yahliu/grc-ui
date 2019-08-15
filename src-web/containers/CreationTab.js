@@ -44,11 +44,18 @@ class CreationTab extends React.Component {
   componentWillMount() {
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
     const { title, tabs, breadcrumbItems, information } = secondaryHeaderProps
-    const links = [{
-      id: 'policy-create',
-      label: 'button.create',
-      handleClick: this.handleClick.bind(this)
-    }]
+    const links = [
+      {
+        id: 'policy-cancel',
+        label: 'button.cancel',
+        kind: 'secondary',
+        handleClick: this.handleCancel.bind(this)
+      },
+      {
+        id: 'policy-create',
+        label: 'button.create',
+        handleClick: this.handleCreate.bind(this)
+      }]
     updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems, links, msgs.get(information, this.context.locale))
   }
 
@@ -60,12 +67,16 @@ class CreationTab extends React.Component {
     this.resetNewPolicy = resetNewPolicy
   }
 
-  handleClick = () => {
+  handleCreate = () => {
     const newPolicyJSON = this.getNewPolicyJSON()
     if (newPolicyJSON) {
       const {handleCreateResources} = this.props
       handleCreateResources(newPolicyJSON)
     }
+  }
+
+  handleCancel = () => {
+    window.history.back()
   }
 
   render () {
