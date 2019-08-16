@@ -195,6 +195,7 @@ function testDetailsPage(browser, name) {
   this.expect.element('.section-title:nth-of-type(1)').text.to.equal('Policy Details')
   this.expect.element('.new-structured-list > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(2)').text.to.equal(name)
   this.expect.element('.overview-content > div:nth-child(2) > .section-title').text.to.equal('Placement')
+  this.waitForElementPresent('.overview-content-second > div:nth-child(1) > div > div > div:nth-child(1) > .bx--module__title')
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement Policy')
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('placement-' + name)
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement Binding')
