@@ -167,7 +167,8 @@ class ResourceList extends React.Component {
         />
       </div>
     }
-    if (resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name){
+    switch(resourceType.name) {
+    case RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name:
       return (
         <NoResource
           title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
@@ -175,9 +176,21 @@ class ResourceList extends React.Component {
           {createDocLink(locale, handleCreatePolicy, msgs.get('routes.create.policy', locale))}
         </NoResource>
       )
-    }
-    else if(resourceType.name === RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER.name){
-      return <NoResource title={msgs.get('table.title.no.violation', this.context.locale)} topButton={topButton} />
+    case RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER.name:
+      return <NoResource
+        title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
+        detail={msgs.get('no-resource.detail.item', locale)}
+        topButton={topButton}>
+        {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale), false)}
+      </NoResource>
+    case RESOURCE_TYPES.HCM_SECURITY_FINDINGS.name:
+    case RESOURCE_TYPES.HCM_CLUSTER_FINDINGS.name:
+      return <NoResource
+        title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
+        detail={msgs.get('no-resource.detail.item', locale)}
+        topButton={topButton}>
+        {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale), false)}
+      </NoResource>
     }
     const resourceName = msgs.get('no-resource.' + resourceType.name.toLowerCase(), locale)
     return (

@@ -47,11 +47,12 @@ class GrcView extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {refreshControl, grcItems, updateResourceToolbar} = nextProps
+    const {refreshControl, grcItems, updateActiveFilters, updateResourceToolbar} = nextProps
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(grcItems, this.props.grcItems)) {
       const { locale } = this.context
       const displayType = location.pathname.split('/').pop()
+
       let availableGrcFilters
       switch(displayType) {
       case 'all':
@@ -63,7 +64,34 @@ class GrcView extends React.Component {
         break
       }
       updateResourceToolbar(refreshControl, availableGrcFilters)
+
+      //for finding display, check url's severity level and apply it to resource filter
+      if(displayType === 'findings') {
+        //severity level filter key
+        const key = 'severity'
+        //get severity level filter value from url
+        const urlParams = queryString.parse(location.search)
+        const severityLevel = urlParams.severity ? urlParams.severity.toUpperCase() : 'All'
+        //get existing active filters
+        const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
+        let activeSet
+        activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
+        if (severityLevel==='All') {
+          activeSet.clear()
+        } else {
+          activeSet.add(severityLevel)
+        }
+        updateActiveFilters(activeFilters)
+      }
     }
+  }
+
+  componentWillUnmount() {
+    //clean up all current page filter before leaving
+    const {updateActiveFilters} = this.props
+    const cleanUpFilters = {}
+    //updateActiveFilters to empty
+    updateActiveFilters(cleanUpFilters)
   }
 
   render() {
@@ -78,28 +106,41 @@ class GrcView extends React.Component {
       return <Notification title='' className='overview-notification' kind='error'
         subtitle={msgs.get('overview.error.default', locale)} />
 
-    if ((!grcItems || grcItems.length === 0) && !loading) {
-      return (
-        <NoResource
-          title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
-          detail={msgs.get('no-resource.detail.policy', locale)}>
-          {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale))}
-        </NoResource>
-      )
-    }
-
-    showResourceToolbar()
     const displayType = location.pathname.split('/').pop()
     let filterGrcItems
     switch(displayType) {
     case 'all':
     default:
-      filterGrcItems = filterPolicies(grcItems, activeFilters, locale)
+      if ((!grcItems || grcItems.length === 0) && !loading) {
+        return (
+          <NoResource
+            title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
+            detail={msgs.get('no-resource.detail.policy', locale)}>
+            {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale))}
+          </NoResource>
+        )
+      }
+      else {
+        filterGrcItems = filterPolicies(grcItems, activeFilters, locale)
+      }
       break
     case 'findings':
-      filterGrcItems = filterFindings(grcItems, activeFilters, locale)
+      if ((!grcItems || grcItems.length === 0) && !loading) {
+        return (
+          <NoResource
+            title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
+            detail={msgs.get('no-resource.detail.item', locale)}>
+            {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale), false)}
+          </NoResource>
+        )
+      }
+      else {
+        filterGrcItems = filterFindings(grcItems, activeFilters, locale)
+      }
       break
     }
+
+    showResourceToolbar()
     const urlParams = queryString.parse(location.search)
     const showGrcCard = urlParams.card==='false' ? false : true
     const grcTabToggleIndex = urlParams.index ? Number(urlParams.index) : 0
@@ -143,14 +184,15 @@ class GrcView extends React.Component {
     saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
   }
 
-  handleDrillDownClickGrcView(key, value, type){
+  handleDrillDownClickGrcView(key, value, type, level){
     //step 1 add activeFilters when click GrcCardsModule
+    //here for severity level, will not update filter here but just update url
+    //then acutally update it in componentWillReceiveProps()
     const {updateActiveFilters} = this.props
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
-    value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match side bar filter
-    let activeSet = activeFilters[key]
-    if (!activeSet) {
-      activeSet = activeFilters[key] = new Set()}
+    value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match
+    let activeSet
+    activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
     activeSet.add(value)
     updateActiveFilters(activeFilters)
 
@@ -159,6 +201,10 @@ class GrcView extends React.Component {
     paraURL.card=false
     paraURL.toggle=false
     type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
+    //if level exists then also add severity level to url
+    if(level) {
+      paraURL.severity = level.toUpperCase()
+    }
     let urlString = queryString.stringify(paraURL)
     //also append GrcToggleModule search input filter to the end of url if existing
     const curentURL = queryString.parse(location.search)

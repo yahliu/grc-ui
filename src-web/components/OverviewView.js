@@ -136,7 +136,7 @@ export class OverviewView extends React.Component {
       case 'low'://all low severity findings
         page = 'findings'
         paraURL.index = 0
-        paraURL.filters = `{"textsearch":["${parentType}"]}`
+        paraURL.severity = parentType.toUpperCase()
         break
       case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0
