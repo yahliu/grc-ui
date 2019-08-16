@@ -25,23 +25,31 @@ module.exports = {
   },
 
   'All policy page: Load and run expand': (browser) => {
-    page.verifyTable(browser)
+    page.verifyTable(browser, false)
+  },
+
+  'All policy page: Verify summary table': (browser) => {
+    page.verifySummary(browser, `${browser.launch_url}${config.get('contextPath')}/policies/all`)
+  },
+
+  'All policy page: Test pagination': (browser) => {
+    page.verifyPagination(browser)
   },
 
   'All policy page: Add, search, delete policy': (browser) => {
     const time = browser.globals.time
-
     page.createTestPolicy(browser, time)
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.searchPolicy(true, time)
-    // page.testDetailsPage()
-
-    a11yScan.runAccessibilityScan(browser, 'policyDetail')
+    page.testDetailsPage(browser, `${time}-policy-test`)
+    page.deletePolicy(`${time}-policy-test`, browser)
   },
 
   'All policy page: Run Accessibility Scan': (browser) => {
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     a11yScan.runAccessibilityScan(browser, 'allPolicy')
+    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
+    a11yScan.runAccessibilityScan(browser, 'policyDetail')
   },
 
   after: function (browser, done) {

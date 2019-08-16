@@ -24,7 +24,6 @@ module.exports = {
         browser.perform((done) => {
           AAT.getCompliance(source.value, page, (report) => {
             const reportSnap = JSON.parse(fs.readFileSync(path.join(__dirname,`/A11y-snapshot/${page}.json`), 'utf8'))
-
             // eslint-disable-next-line no-constant-condition
             if(report.summary.counts.violation !== reportSnap.summary.counts.violation){
               const currentViolations = lodash.filter(report.reports[0].issues,{'level':'violation'})

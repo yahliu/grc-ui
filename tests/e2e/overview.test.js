@@ -8,7 +8,6 @@
  *******************************************************************************/
 
 const config = require('../../config')
-const a11yScan = require('../utils/accessibilityScan')
 let page
 
 module.exports = {
@@ -28,12 +27,20 @@ module.exports = {
     page.verifyPageLoaded()
   },
 
+  'Overview: Recent activity': (browser) => {
+    page.verifyRecentActivity(browser)
+  },
+
   'Overview: Violation table': () => {
     page.verifyViolationTable()
   },
 
-  'Overview: Run Accessibility Scan': (browser) => {
-    a11yScan.runAccessibilityScan(browser, 'overview')
+  'Overview: Most impacted controls table': () => {
+    page.verifyMostImpactedControls()
+  },
+
+  'Overview: policy summary table': () => {
+    page.verifyPolicySummary()
   },
 
   after: function (browser, done) {

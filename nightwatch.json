@@ -10,7 +10,7 @@
     "start_process": true,
     "server_path": "node_modules/selenium-standalone/.selenium/selenium-server/",
     "log_path": "",
-    "port": 4444,
+    "port": 4446,
     "cli_args": {
       "webdriver.chrome.driver": "node_modules/selenium-standalone/.selenium/chromedriver/2.36-x64-chromedriver",
       "webdriver.gecko.driver": "node_modules/selenium-standalone/.selenium/geckodriver/0.16.01-x64-geckodriver",
@@ -20,7 +20,7 @@
   "test_settings": {
     "default": {
       "launch_url": "//SET DYNAMICALLY VIA CONFIG",
-      "selenium_port": 4444,
+      "selenium_port": 4446,
       "selenium_host": "localhost",
       "silent": true,
       "screenshots": {
@@ -40,7 +40,8 @@
         }
       },
       "globals": {
-        "waitForConditionTimeout": 30000
+        "waitForConditionTimeout": 30000,
+        "disable_a11y": true
       }
     },
     "remote": {
