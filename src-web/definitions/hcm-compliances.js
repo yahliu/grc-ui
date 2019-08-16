@@ -1060,7 +1060,7 @@ export function getStatus(item, locale) {
 export function getStatusIconForPolicy(item) {
   const expectedStatuses = [ 'compliant', 'notcompliant', 'noncompliant', 'invalid']
   if (item.status&&expectedStatuses.indexOf(item.status.toLowerCase()) > -1){
-    if (item.status === 'compliant') {
+    if (item.status.toLowerCase() === 'compliant') {
       return (
         <div className='compliance-table-status'>
           <Icon className={'table-status__compliant'} name={'icon--checkmark--glyph'} description='' />
