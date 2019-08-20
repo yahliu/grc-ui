@@ -11,9 +11,9 @@
 var log4js = require('log4js'),
     logger = log4js.getLogger('server'),
     watchr = require('watchr'),
-    moment = require('moment'),
     mime = require('mime-types'),
-    fs = require('fs')
+    fs = require('fs'),
+    helmet = require('helmet')
 
 
 var log4js_config = process.env.LOG4JS_CONFIG ? JSON.parse(process.env.LOG4JS_CONFIG) : undefined
@@ -53,6 +53,8 @@ var consolidate = require('consolidate')
 require('./lib/shared/dust-helpers')
 
 var app = express()
+
+app.use(helmet())
 
 var morgan = require('morgan')
 if (process.env.NODE_ENV === 'production') {
@@ -128,11 +130,9 @@ app.use(cookieParser(), csrfMiddleware, (req, res, next) => {
 app.use(`${CONTEXT_PATH}/policies`, express.static(STATIC_PATH, {
   maxAge: process.env.NODE_ENV === 'development' ? 0 : 1000 * 60 * 60 * 24 * 365,
   setHeaders: (res, fp) => {
-    if (fp.startsWith(`${STATIC_PATH}/nls`)) {
-      res.setHeader('Cache-Control', 'max-age=0')
-    } else {
-      res.setHeader('Expires', moment().add(12, 'months').toDate())
-    }
+    // set cahce control to 30min, expect for nls
+    res.setHeader('Cache-Control', `max-age=${fp.startsWith(`${STATIC_PATH}/nls`) ? 0 : 60 * 60 * 12}`)
+    res.setHeader('X-Content-Type-Options', 'nosniff')
   }
 }))
 
