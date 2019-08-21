@@ -43,7 +43,7 @@ class PolicyDetail extends React.Component {
   }
 
   static defaultProps = {
-    tabs: ['overview','violation','yaml'],
+    tabs: ['detail','violation','yaml'],
     resourceType: RESOURCE_TYPES.HCM_COMPLIANCES
   }
 
