@@ -18,6 +18,7 @@ import 'd3-selection-multi'
 import { SECURITY_TYPES } from '../../../lib/shared/constants'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
+import config from '../../../lib/shared/config'
 import _ from 'lodash'
 
 resources(() => {
@@ -169,17 +170,23 @@ export default class ImpactedControlsModule extends React.Component {
   }
 
   renderRadar({radarData}) {
+    const { locale } = this.context
     const { showControls } = this.state
     if (radarData.variables.length>showControls) {
       radarData.variables = radarData.variables.slice(0, showControls)
     }
     let domainMax = 0
+    const variableMap = _.keyBy(radarData.variables, 'key')
     radarData.sets.forEach(({values})=>{
-      Object.values(values).forEach(v=>{
-        domainMax = Math.max(domainMax, v)
+      Object.entries(values).forEach(([k, v]) => {
+        if (variableMap[k]) {
+          domainMax = Math.max(domainMax, v)
+        }
       })
     })
     domainMax = Math.max(10, Math.ceil(domainMax*1.2))
+    const noOverlapTitle = msgs.get('overview.impacted.no.overlap.title', locale)
+    const noOverlapInfo = msgs.get('overview.impacted.no.overlap', locale)
     return (
       <div className='card-radar-container' >
         <div className='card-radar' ref={this.fixRadar}>
@@ -206,7 +213,13 @@ export default class ImpactedControlsModule extends React.Component {
             }
             data={radarData}
           />
-            :null}
+            : <div className='no-impacts'>
+              <img className='no-impacts-img'
+                src={`${config.contextPath}/policies/graphics/no-impacted-controls-overlap.svg`}
+                alt={noOverlapTitle} />
+              <div className='title'>{noOverlapTitle}</div>
+              <div className='info'>{noOverlapInfo}</div>
+            </div>}
         </div>
       </div>
     )

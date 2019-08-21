@@ -220,7 +220,27 @@ exports[`ImpactedControlsModule view renders as expected 1`] = `
         >
           <div
             className="card-radar"
-          />
+          >
+            <div
+              className="no-impacts"
+            >
+              <img
+                alt="Your data visualizations cannot be displayed"
+                className="no-impacts-img"
+                src="undefined/policies/graphics/no-impacted-controls-overlap.svg"
+              />
+              <div
+                className="title"
+              >
+                Your data visualizations cannot be displayed
+              </div>
+              <div
+                className="info"
+              >
+                Only when a control has both violations and findings will it appear. We will continue to monitor the controls.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -142,6 +142,8 @@
   "overview.impacted.controls.legend.findings": "Security findings",
   "overview.impacted.controls.slider": "Show more or less controls",
   "overview.impacted.controls.standard": "Standard",
+  "overview.impacted.no.overlap.title": "Your data visualizations cannot be displayed",
+  "overview.impacted.no.overlap": "Only when a control has both violations and findings will it appear. We will continue to monitor the controls.",
   "overview.policy.summary.title": "Policy summary",
   "overview.policy.summary.standards": "Standards",
   "overview.policy.summary.categories": "Categories",
