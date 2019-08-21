@@ -37,12 +37,12 @@ module.exports = {
     controlsDropdownBox: '.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
     summaryCollapse: 'button.collapse > span.collapse-button',
     summaryInfoContainer: '.module-grc-cards > div.card-container-container',
-    summaryDropdown: '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1)',
+    summaryDropdown: 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1)',
     summaryDropdownBox: '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)',
   },
   commands: [{
     verifyTable,
-    searchFindings,
+    // searchFindings,
     verifyPagination,
     verifySummary
   }]
@@ -57,6 +57,7 @@ function verifySummary(browser, url) {
   this.navigate(url + '?card=true&index=0')
   this.expect.element('@summaryInfoContainer').to.be.present
   //standards summary
+  this.expect.element('@summaryDropdown').to.be.present
   this.click('@summaryDropdown')
   const dropdownBox = '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
   this.click(dropdownBox + ' > div:nth-child(2)')
@@ -72,13 +73,18 @@ function checkPolicySummaryCards(browser) {
   browser.elements('css selector','div.module-grc-cards > div:nth-child(2) > div', (cards) => {
     for (var cardNum = 1; cardNum < cards.value.length + 1; cardNum++) {
       for (let i = 1; i <= 2; i++) {
-        const card = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(${i})`
-        this.expect.element(card).to.be.present
-        this.click(card)
-        browser.element('css selector', '.resource-filter-bar > span.button', function(result){
-          if(result.status != -1) {
-            verifyTable(browser)
-            this.click('div.resource-filter-bar > span.button')
+        const cardInfo = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(2)`
+        this.expect.element(cardInfo).to.be.present
+        browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
+          if(result.status == -1) {
+            this.click(cardInfo + ` > div:nth-child(${i})`)
+            browser.element('css selector', '.resource-filter-bar > span.button', function(result2){
+              if(result2.status != -1) {
+                //first card of each category is cluster (no drop-down), second is policy
+                verifyTable(browser, (i % 2 != 0))
+                this.click('div.resource-filter-bar > span.button')
+              }
+            })
           }
         })
       }
@@ -104,19 +110,7 @@ function verifyTable(browser) {
       this.expect.element('div.no-resource').to.be.present
     }
     else{
-      this.expect.element('table.bx--data-table-v2').to.be.present
+      this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
     }
   })
-}
-
-function searchFindings(expectToDisplay, resourceName) {
-  this.expect.element('@searchInput').to.be.present
-  this.setValue('@searchInput',`${resourceName}`)
-  this.expect.element('@searchInput').to.be.present
-  if(expectToDisplay){
-    this.expect.element('tbody>tr').to.be.present
-  } else{
-    this.expect.element('tbody>tr').to.be.not.present
-    this.clearValue('@searchInput')
-  }
 }

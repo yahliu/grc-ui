@@ -30,7 +30,6 @@ module.exports = {
 
   'Security findings page: Verify summary table': (browser) => {
     page.verifySummary(browser, `${browser.launch_url}${config.get('contextPath')}/policies/findings`)
-    page.searchFindings(true, 'policy-role')
   },
 
   'Security findings page: Test pagination': (browser) => {

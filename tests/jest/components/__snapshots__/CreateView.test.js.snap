@@ -224,15 +224,15 @@ exports[`CreationView component renders as expected 1`] = `
           className="bx--form-item bx--checkbox-wrapper"
         >
           <input
-            checked={true}
+            checked={undefined}
             className="bx--checkbox"
-            id="policy-enforce"
+            id="policy-inform"
             onChange={[Function]}
             type="checkbox"
           />
           <label
             className="bx--checkbox-label checkbox"
-            htmlFor="policy-enforce"
+            htmlFor="policy-inform"
             title={null}
           >
             <span

@@ -78,12 +78,16 @@ function checkPolicySummaryCards(browser) {
       for (let i = 1; i <= 2; i++) {
         const cardInfo = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(2)`
         this.expect.element(cardInfo).to.be.present
-        this.click(cardInfo + ` > div:nth-child(${i})`)
-        browser.element('css selector', '.resource-filter-bar > span.button', function(result){
-          if(result.status != -1) {
-            //first card of each category is cluster (no drop-down), second is policy
-            verifyTable(browser, (i % 2 != 0))
-            this.click('div.resource-filter-bar > span.button')
+        browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
+          if(result.status == -1) {
+            this.click(cardInfo + ` > div:nth-child(${i})`)
+            browser.element('css selector', '.resource-filter-bar > span.button', function(result2){
+              if(result2.status != -1) {
+                //first card of each category is cluster (no drop-down), second is policy
+                verifyTable(browser, (i % 2 != 0))
+                this.click('div.resource-filter-bar > span.button')
+              }
+            })
           }
         })
       }
@@ -149,8 +153,6 @@ function createTestPolicy(browser, time) {
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@clusterSelectorDropdownBox').not.to.be.present
 
-  this.click('@enforce')
-
   this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
   this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
@@ -204,15 +206,8 @@ function testDetailsPage(browser, name) {
   //violation tab test
   this.expect.element('#violation-tab').to.be.present
   this.click('#violation-tab')
-  browser.element('css selector', 'div.no-resource', function(result){
-    if(result.status != -1){
-      this.expect.element('div.no-resource').to.be.present
-      this.expect.element('div.no-resource-title').text.to.equal('No Violations')
-    }
-    else{
-      this.expect.element('.policy-violation-tab > .section-title').text.to.equal('Violations')
-    }
-  })
+  this.waitForElementPresent('.policy-violation-tab > .section-title')
+  this.expect.element('.policy-violation-tab > .section-title').text.to.equal('Violations')
   //policy yaml page test
   this.expect.element('#yaml-tab').to.be.present
   this.click('#yaml-tab')

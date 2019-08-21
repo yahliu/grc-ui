@@ -1,14 +1,13 @@
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
-        kind: MutationPolicy # no mutation allowed
+        kind: VulnerabilityPolicy # detect image vulnerabilities
         metadata:
-          name: mutation-policy-example
+          name: va-policy-example
           label:
             category: "System-Integrity"
         spec:
           namespaceSelector:
             include: ["default","kube-*"]
             exclude: ["kube-system"]
-          remediationAction: enforce # enforce or inform
-          conditions:
-            ownership: ["ReplicaSet", "Deployment", "DeamonSet", "ReplicationController"]
+          remediationAction: inform # enforce or inform
+          severity: medium

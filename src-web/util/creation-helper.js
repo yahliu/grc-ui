@@ -21,7 +21,7 @@ import _ from 'lodash'
 export const initialTemplateData = {
   name: 'policy-grc',
   namespace: config.complianceNamespace,
-  enforce: true,
+  enforce: false,
   mutation: false,
   annotations: [
     {name: 'standards', values: []},
@@ -54,7 +54,6 @@ const specs = Object.values(Templates).map(template => {
   } else { // policy-templates
     type = 'policy-templates'
   }
-
   return { key: `${_.capitalize(kindDes[1].trim())}-${kindDes[2].trim()}`, kind: _.capitalize(kindDes[1].trim()), description: kindDes[2].trim(), value, type}
 })
 
