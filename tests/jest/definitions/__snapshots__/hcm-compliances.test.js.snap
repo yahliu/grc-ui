@@ -127,3 +127,9 @@ exports[`hcm-compliances - getStatusIconForPolicy should return noncompliant sta
   />
 </div>
 `;
+
+exports[`hcm-compliances - getSubjects should get ""  1`] = `""`;
+
+exports[`hcm-compliances - getSubjects should get "-"  1`] = `"-"`;
+
+exports[`hcm-compliances - getSubjects should get subjects 1`] = `"testName1(testApiGroup1), testName2(testApiGroup2)"`;

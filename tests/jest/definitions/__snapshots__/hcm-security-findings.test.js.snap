@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFindingCategories Should return formarted FindingCategories 1`] = `"-"`;
+
+exports[`getFindingCategories Should return formarted FindingCategories 2`] = `"-"`;
+
+exports[`getFindingCategories Should return formarted FindingCategories 3`] = `"System And Information Integrity"`;
+
+exports[`getFindingCategories Should return formarted FindingCategories 4`] = `"Test Case Four, , Test Case Four"`;
+
+exports[`getFindingControl Should return formarted FindingControl 1`] = `"-"`;
+
+exports[`getFindingControl Should return formarted FindingControl 2`] = `"-"`;
+
+exports[`getFindingControl Should return formarted FindingControl 3`] = `"VA"`;
+
+exports[`getFindingControl Should return formarted FindingControl 4`] = `"Test Case Four"`;
+
+exports[`getFindingStandards Should return formarted FindingStandards 1`] = `"-"`;
+
+exports[`getFindingStandards Should return formarted FindingStandards 2`] = `"-"`;
+
+exports[`getFindingStandards Should return formarted FindingStandards 3`] = `"NIST"`;
+
+exports[`getFindingStandards Should return formarted FindingStandards 4`] = `"NIST, , HIPAA"`;

@@ -18,7 +18,7 @@ import { Query } from 'react-apollo'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import {POLICY_REFRESH_INTERVAL_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
+import {GRC_REFRESH_INTERVAL_COOKIE, RESOURCE_TYPES} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 import {updateSecondaryHeader} from '../actions/common'
@@ -69,7 +69,7 @@ class PolicyDetail extends React.Component {
     const url = _.get(this.props, 'match.url')
     const urlSegments = url.split('/')
     const policyName = urlSegments[urlSegments.length - 1]
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+    const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
 
     return (
       <Page>
@@ -87,7 +87,7 @@ class PolicyDetail extends React.Component {
             }
             const refreshControl = {
               reloading,
-              refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
+              refreshCookie: GRC_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch,
               timestamp: this.timestamp
             }

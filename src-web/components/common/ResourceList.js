@@ -117,7 +117,8 @@ class ResourceList extends React.Component {
     const actions = React.Children.map(children, action => {
       if (action.props.disabled || !showCreate(userRole, resourceType))
         return null
-      return React.cloneElement(action, { resourceType })
+      //resolve console warning, seems resourceType isn't used here
+      return React.cloneElement(action/*, { resourceType }*/)
     })
     if (items || searchValue || clientSideFilters) {
       if (searchValue !== clientSideFilters && clientSideFilters) {

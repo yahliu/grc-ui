@@ -18,10 +18,11 @@ import RefreshTimeSelect from './RefreshTimeSelect'
 import ResourceFilterView from './ResourceFilterView'
 import { CSSTransition } from 'react-transition-group'
 import { Loading } from 'carbon-components-react'
-import { REFRESH_TIMES } from '../../../lib/shared/constants'
+import { REFRESH_TIMES, GRC_FILTER_STATE_COOKIE } from '../../../lib/shared/constants'
 import '../../../graphics/diagramIcons.svg'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
+import { replaceGrcState } from '../../../lib/client/filter-helper'
 
 resources(() => {
   require('../../../scss/resource-toolbar.scss')
@@ -141,6 +142,7 @@ export class ResourceToolbar extends React.Component {
         activeSet.delete(value)
       }
     }
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
     updateActiveFilters(activeFilters)
   }
 }

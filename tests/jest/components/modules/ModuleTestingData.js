@@ -1974,7 +1974,7 @@ export const clusterSubResourceListTestingItemData = [
 
 export const policiesTabModuleRefreshControl = {
   'reloading': false,
-  'refreshCookie': 'policy-refresh-interval-cookie',
+  'refreshCookie': 'grc-refresh-interval-cookie',
   'timestamp': 'Tue Jul 23 2019 01:13:42 GMT-0400 (Eastern Daylight Time)'
 }
 

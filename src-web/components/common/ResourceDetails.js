@@ -22,7 +22,7 @@ import ResourceOverview from './ResourceOverview'
 // import ResourceDiagram from './ResourceDiagram'
 import PolicyClusterDetail from './PolicyClusterDetail'
 // import CompliancePolicy from './CompliancePolicy'
-import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
+import { GRC_REFRESH_INTERVAL_COOKIE } from '../../../lib/shared/constants'
 import { getPollInterval } from './RefreshTimeSelect'
 import PolicyTemplateTab from '../../containers/PolicyTemplateTab'
 import PolicyViolationTab from '../../containers/PolicyViolationTab'
@@ -60,7 +60,7 @@ const withResource = (Component) => {
     }
 
     componentWillMount() {
-      const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+      const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
       if (pollInterval) {
         var intervalId = setInterval(this.reload.bind(this), pollInterval)
         this.setState({ intervalId: intervalId })

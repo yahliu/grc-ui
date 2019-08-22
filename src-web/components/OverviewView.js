@@ -12,11 +12,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { updateResourceToolbar } from '../actions/common'
+import { updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, combineResourceFilters, saveGrcStatePair, replaceGrcState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
-import {POLICY_OVERVIEW_STATE_COOKIE} from '../../lib/shared/constants'
+import { GRC_VIEW_STATE_COOKIE, GRC_FILTER_STATE_COOKIE } from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
 import ImpactedControlsModule from './modules/ImpactedControlsModule'
 import PolicySummaryModule from './modules/PolicySummaryModule'
@@ -33,7 +33,7 @@ export class OverviewView extends React.Component {
   constructor (props) {
     super(props)
     this.state= {
-      viewState: getSavedViewState(POLICY_OVERVIEW_STATE_COOKIE),
+      viewState: getSavedGrcState(GRC_VIEW_STATE_COOKIE)
     }
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
@@ -42,18 +42,26 @@ export class OverviewView extends React.Component {
     this.handleDrillDownClickOverview = this.handleDrillDownClickOverview.bind(this)
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload)
-    this.onUnload()
-  }
-
   componentWillReceiveProps(nextProps) {
-    const {refreshControl, policies, findings, updateResourceToolbar} = nextProps
+    const {refreshControl, policies, findings, updateActiveFilters, updateResourceToolbar} = nextProps
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(policies, this.props.policies)) {
       const { locale } = this.context
+      const displayType = location.pathname.split('/').pop()
       updateResourceToolbar(refreshControl, getAvailableGrcFilters(policies, findings, locale))
+      //get existing active filters and combin with stored filters in sessionStorage
+      const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
+      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), displayType)
+      //update sessionStorage
+      replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
+      //update active filters
+      updateActiveFilters(combinedFilters)
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload)
+    this.onUnload()
   }
 
   render() {
@@ -112,8 +120,8 @@ export class OverviewView extends React.Component {
     })
   }
 
-  onUnload() {
-    saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
+  onUnload() {//saved overview ui setting
+    saveGrcState(GRC_VIEW_STATE_COOKIE, this.state.viewState)
   }
 
   handleCreatePolicy(){
@@ -136,7 +144,10 @@ export class OverviewView extends React.Component {
       case 'low'://all low severity findings
         page = 'findings'
         paraURL.index = 0
-        paraURL.severity = parentType.toUpperCase()
+        // paraURL.severity = parentType.toUpperCase()
+        // use sessionStorage rather than url to control severity filter
+        // all resource filters are controlled by sessionStorage for consistency
+        saveGrcStatePair(GRC_FILTER_STATE_COOKIE, 'severity', parentType.toUpperCase())
         break
       case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0
@@ -183,6 +194,7 @@ OverviewView.propTypes = {
   location: PropTypes.object,
   policies: PropTypes.array,
   refreshControl: PropTypes.object,
+  updateActiveFilters: PropTypes.func,
   updateResourceToolbar: PropTypes.func,
 }
 
@@ -193,7 +205,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters))
+    updateResourceToolbar: (refreshControl, availableFilters) => dispatch(updateResourceToolbar(refreshControl, availableFilters)),
+    updateActiveFilters: (activeFilters) => dispatch(updateActiveFilters(activeFilters))
   }
 }
 

@@ -22,6 +22,7 @@ import {
   getStandards,
   getCategories,
   getDecisions,
+  getSubjects
 } from '../../../src-web/definitions/hcm-compliances'
 
 describe('hcm-compliances - createComplianceLink', () => {
@@ -252,5 +253,26 @@ describe('hcm-compliances - getDecisions', () => {
   it('should return default status', () => {
     const items = {}
     expect(getDecisions(items)).toMatchSnapshot()
+  })
+})
+
+describe('hcm-compliances - getSubjects', () => {
+  it('should get subjects', () => {
+    const item = {
+      'subjects': [
+        {'name': 'testName1', 'apiGroup': 'testApiGroup1'},
+        {'name': 'testName2', 'apiGroup': 'testApiGroup2'}
+      ]
+
+    }
+    expect(getSubjects(item)).toMatchSnapshot()
+  })
+  it('should get "-" ', () => {
+    const item = {}
+    expect(getSubjects(item)).toMatchSnapshot()
+  })
+  it('should get "" ', () => {
+    const item = {'subjects':[]}
+    expect(getSubjects(item)).toMatchSnapshot()
   })
 })

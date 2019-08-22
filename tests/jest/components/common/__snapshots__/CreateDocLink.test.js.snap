@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createDocLink view renders does not show create link as expected 1`] = `
+<div
+  className="button-group"
+>
+  <UNDEFINED
+    disabled={false}
+    icon="add--glyph"
+    iconDescription="Provide icon description if icon is used"
+    id="create-resource"
+    kind="primary"
+    onClick={[MockFunction]}
+    small={true}
+    tabIndex={0}
+    type="button"
+  >
+    does not show create link
+  </UNDEFINED>
+  <div
+    className="buttons"
+  >
+    <button
+      className="bx--btn bx--btn--sm bx--btn--secondary"
+    >
+      <a
+        aria-describedby="launchWindow"
+        className="doc-link"
+        href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+        target="doc"
+      >
+        View documentation
+      </a>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`createDocLink view renders show create link as expected 1`] = `
+<div
+  className="button-group"
+>
+  <UNDEFINED
+    disabled={false}
+    icon="add--glyph"
+    iconDescription="Provide icon description if icon is used"
+    id="create-resource"
+    kind="primary"
+    onClick={[MockFunction]}
+    small={true}
+    tabIndex={0}
+    type="button"
+  >
+    show create link
+  </UNDEFINED>
+  <div
+    className="buttons"
+  >
+    <button
+      className="bx--btn bx--btn--sm bx--btn--secondary"
+    >
+      <a
+        aria-describedby="launchWindow"
+        className="doc-link"
+        href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+        target="doc"
+      >
+        View documentation
+      </a>
+    </button>
+  </div>
+</div>
+`;

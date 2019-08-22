@@ -18,7 +18,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 import OverviewView from '../components/OverviewView'
-import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
+import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import { updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import { GRCList } from '../../lib/client/queries'
@@ -50,7 +50,7 @@ class OverviewTab extends React.Component {
   }
 
   render () {
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+    const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
     return (
       <Page>
         <Query query={GRCList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -69,7 +69,7 @@ class OverviewTab extends React.Component {
 
             const refreshControl = {
               reloading,
-              refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
+              refreshCookie: GRC_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch,
               timestamp: this.timestamp
             }

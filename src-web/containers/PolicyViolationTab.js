@@ -13,7 +13,7 @@ import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { updateSecondaryHeader } from '../actions/common'
-import { POLICY_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
+import { GRC_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
 import { getPollInterval } from '../components/common/RefreshTimeSelect'
 import ResourceTableModule from '../components/common/ResourceTableModuleFromProps'
 import {  Loading } from 'carbon-components-react'
@@ -39,7 +39,7 @@ class PolicyViolationTab extends React.Component{
     const urlSegments = url.split('/')
     const policyName = urlSegments[urlSegments.length - 2]
     const {staticResourceData} = this.props
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+    const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
 
     return (
       <Query query={HCMPolicyViolations} pollInterval={pollInterval} variables={{policyName: policyName}}>

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {POLICY_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
+import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 import GrcView from '../components/GrcView'
@@ -41,7 +41,7 @@ class PoliciesTab extends React.Component {
 
   render () {
     const { secondaryHeaderProps } = this.props
-    const pollInterval = getPollInterval(POLICY_REFRESH_INTERVAL_COOKIE)
+    const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
@@ -57,7 +57,7 @@ class PoliciesTab extends React.Component {
             }
             const refreshControl = {
               reloading,
-              refreshCookie: POLICY_REFRESH_INTERVAL_COOKIE,
+              refreshCookie: GRC_REFRESH_INTERVAL_COOKIE,
               startPolling, stopPolling, refetch,
               timestamp: this.timestamp
             }

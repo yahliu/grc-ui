@@ -15,10 +15,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { POLICY_OVERVIEW_STATE_COOKIE } from '../../lib/shared/constants'
+import { GRC_VIEW_STATE_COOKIE, GRC_FILTER_STATE_COOKIE } from '../../lib/shared/constants'
 import GrcCardsModule from './modules/GrcCardsModule'
 import GrcToggleModule from './modules/GrcToggleModule'
-import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedViewState, saveViewState } from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, replaceGrcState, combineResourceFilters } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import NoResource from './common/NoResource'
 import createDocLink from './common/CreateDocLink'
@@ -37,7 +37,7 @@ class GrcView extends React.Component {
   constructor (props) {
     super(props)
     this.state= {
-      viewState: getSavedViewState(POLICY_OVERVIEW_STATE_COOKIE),
+      viewState: getSavedGrcState(GRC_VIEW_STATE_COOKIE)
     }
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
@@ -65,33 +65,19 @@ class GrcView extends React.Component {
       }
       updateResourceToolbar(refreshControl, availableGrcFilters)
 
-      //for finding display, check url's severity level and apply it to resource filter
-      if(displayType === 'findings') {
-        //severity level filter key
-        const key = 'severity'
-        //get severity level filter value from url
-        const urlParams = queryString.parse(location.search)
-        const severityLevel = urlParams.severity ? urlParams.severity.toUpperCase() : 'All'
-        //get existing active filters
-        const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
-        let activeSet
-        activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
-        if (severityLevel==='All') {
-          activeSet.clear()
-        } else {
-          activeSet.add(severityLevel)
-        }
-        updateActiveFilters(activeFilters)
-      }
+      //get existing active filters and combin with stored filters in sessionStorage
+      const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
+      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), displayType)
+      //update sessionStorage
+      replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
+      //update active filters
+      updateActiveFilters(combinedFilters)
     }
   }
 
   componentWillUnmount() {
-    //clean up all current page filter before leaving
-    const {updateActiveFilters} = this.props
-    const cleanUpFilters = {}
-    //updateActiveFilters to empty
-    updateActiveFilters(cleanUpFilters)
+    window.removeEventListener('beforeunload', this.onUnload)
+    this.onUnload()
   }
 
   render() {
@@ -180,8 +166,8 @@ class GrcView extends React.Component {
     })
   }
 
-  onUnload() {
-    saveViewState(POLICY_OVERVIEW_STATE_COOKIE, this.state.viewState)
+  onUnload() {//saved grc view ui setting
+    saveGrcState(GRC_VIEW_STATE_COOKIE, this.state.viewState)
   }
 
   handleDrillDownClickGrcView(key, value, type, level){
@@ -194,6 +180,10 @@ class GrcView extends React.Component {
     let activeSet
     activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
     activeSet.add(value)
+    //add severity level filter
+    activeFilters[type] ? activeSet = activeFilters[type] : activeSet = activeFilters[type] = new Set()
+    activeSet.add(level)
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
     updateActiveFilters(activeFilters)
 
     //step 2 update url when click GrcCardsModule
@@ -201,10 +191,6 @@ class GrcView extends React.Component {
     paraURL.card=false
     paraURL.toggle=false
     type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
-    //if level exists then also add severity level to url
-    if(level) {
-      paraURL.severity = level.toUpperCase()
-    }
     let urlString = queryString.stringify(paraURL)
     //also append GrcToggleModule search input filter to the end of url if existing
     const curentURL = queryString.parse(location.search)

@@ -18,13 +18,14 @@ import { Icon, Tag } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 import queryString from 'query-string'
+import { replaceGrcState } from '../../../lib/client/filter-helper'
+import { GRC_FILTER_STATE_COOKIE } from '../../../lib/shared/constants'
 
 resources(() => {
   require('../../../scss/resource-filterbar.scss')
 })
 
 class ResourceFilterBar extends React.Component {
-
   render() {
     const { locale } = this.context
     const { activeFilters={} } = this.props
@@ -36,14 +37,16 @@ class ResourceFilterBar extends React.Component {
       if (activeSet.size>0) {
         clearFilters.push(key)
         activeSet.forEach(value=>{
-          let name = value
-          if (name.length>26) {
-            name=name.substr(0,12)+'..'+name.substr(-12)
+          if(value) {
+            let name = value
+            if (name.length>26) {
+              name=name.substr(0,12)+'..'+name.substr(-12)
+            }
+            boundFilters.push({
+              name,
+              onClick: this.removeActiveFilter.bind(this, key, value)
+            })
           }
-          boundFilters.push({
-            name,
-            onClick: this.removeActiveFilter.bind(this, key, value)
-          })
         })
       }
     })
@@ -72,7 +75,6 @@ class ResourceFilterBar extends React.Component {
           </span>
         </div>
       )
-
     }
     return null
   }
@@ -85,6 +87,7 @@ class ResourceFilterBar extends React.Component {
       activeSet = activeFilters[key] = new Set()
     }
     activeSet.delete(value)
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
     updateActiveFilters(activeFilters)
   }
 
@@ -99,6 +102,8 @@ class ResourceFilterBar extends React.Component {
   }
 
   removeAllActiveFilter = (clearFilters) => {
+    //step 1 clear up stored active filters in sessionStorage
+    //step 2 clear up active filters in resource filter
     const {updateActiveFilters, location, history } = this.props
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})
     clearFilters.forEach(key=> {
@@ -108,8 +113,9 @@ class ResourceFilterBar extends React.Component {
       }
       activeSet.clear()
     })
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
     updateActiveFilters(activeFilters)
-    //update current url after removing all active filters
+    //step 3 update current url after removing all active filters
     //text search input filter will not be removed, which is controled by itself
     const paraURL = {}
     let op = ''
@@ -132,7 +138,6 @@ ResourceFilterBar.propTypes = {
   location: PropTypes.object,
   updateActiveFilters: PropTypes.func,
 }
-
 
 const mapStateToProps = (state) => {
   const {resourceToolbar: {activeFilters}} = state

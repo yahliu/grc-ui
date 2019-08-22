@@ -1174,8 +1174,8 @@ export function getDecisions(item = {}){
   return '-'
 }
 
-export function getPolicyClusters(item){
-  const clusters = _.get(item, 'clusters')
-  return JSON.stringify(clusters)
-}
+// export function getPolicyClusters(item){
+//   const clusters = _.get(item, 'clusters')
+//   return JSON.stringify(clusters)
+// }
 
