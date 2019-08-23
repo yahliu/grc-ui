@@ -133,6 +133,22 @@ const Violations = ({moduleData: {violations}, handleDrillDownClick}) => {
           'card-count': true,
           'alert': count>0,
         })
+        if (count == 0) {
+          //show dash if no violations
+          return (
+            <div key={violationType} className={cardClasses} role={'button'}
+              tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+              <div className={'no-result-dash'}>
+                --------
+              </div>
+              <div className='card-type'>
+                <div>
+                  {violationType.toUpperCase()}
+                </div>
+              </div>
+            </div>
+          )
+        }
         return (
           <div key={violationType} className={cardClasses} role={'button'}
             tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
@@ -201,6 +217,22 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
           'card-count': true,
           'alert': count>0 && findingType===SECURITY_TYPES.HIGH,
         })
+        if (count == 0) {
+          //show dash if no findings
+          return (
+            <div key={findingType} className={'card-count-type'} role={'button'}
+              tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+              <div className={'no-result-dash'}>
+                --------
+              </div>
+              <div className='card-type'>
+                <div>
+                  {label.toUpperCase()}
+                </div>
+              </div>
+            </div>
+          )
+        }
         return (
           <div key={findingType} className='card-count-type' role={'button'}
             tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>

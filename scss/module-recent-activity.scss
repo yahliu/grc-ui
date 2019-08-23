@@ -26,7 +26,6 @@
 
     .card-container {
       padding: 10px 20px 10px 0;
-
       .card-content {
         display: flex;
         align-items: center;
@@ -36,9 +35,9 @@
 
         .card-inner-content {
           display: flex;
-          padding: 0 10% 0 10%;
+          padding: 0 140px 0 140px;
           width: 100%;
-          justify-content: space-between;
+          justify-content: space-evenly;
           align-items: center;
 
           .card-counts {
@@ -55,6 +54,8 @@
               width: 34px;
               height: 34px;
               margin-right: 8px;
+              margin-bottom: 9px;
+              overflow: visible;
               g {
                 transform: translate(15px, 15px);
               }
@@ -73,10 +74,28 @@
               padding-right: 80px;
             }
 
+            .no-result-dash {
+              width: 70%;
+              text-align: center;
+              font-size: 24px;
+              letter-spacing: 1px;
+              line-height: 16px;
+              color: $mcm_color_blue_gray;
+              margin-bottom: 32px;
+              position: relative;
+              bottom: -10px;
+              font-weight: 300;
+              overflow: hidden;
+              text-overflow: clip;
+              white-space: nowrap;
+              display:block;
+            }
+
             .card-count {
               font-size: 34px;
               font-weight: bold;
               color: $mcm_color_blue_gray;
+              padding-bottom: 15px;
               &.alert {
                 color: $mcm_color_red;
               }
@@ -86,6 +105,7 @@
               text-align: center;
               font-size: 12px;
               font-variant: small-caps;
+              letter-spacing: 1px;
               line-height: 16px;
               font-weight: bold;
               color: $mcm_color_blue_gray;

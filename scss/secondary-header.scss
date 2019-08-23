@@ -28,14 +28,15 @@
 
   .bx--tabs {
     .bx--tabs__nav-item {
-      margin-top: 0.5rem
+      margin-top: 2rem;
+      //margin-top: 0.5rem
     }
   }
 
   &-links {
     position: fixed;
-    right: 20px;
-    top: 120px;
+    right: 5%;
+    top: $secondary-header-max-height;
 
     .bx--btn--primary, .bx--btn--secondary {
       min-height: 30px;
@@ -49,7 +50,8 @@
     }
 
     .bx--detail-page-header-content {
-      margin-top: 1rem;
+      margin-top: 1.12rem;
+      margin-bottom: 1rem;
     }
 
     .bx--breadcrumb {
@@ -97,9 +99,11 @@
   &.simple-header {
     position: fixed;
     width: 100%;
+    height: inherit;
     top: $secondary-header-top;
     background-color: #fff;
     padding: 0.75rem 5% 0;
+    // padding: 0.75rem 5% 0;
     &.special-layout {
       header {
         margin-top: 1.5rem;

@@ -25,9 +25,9 @@
   }
 
   .resource-toolbar-container {
-    position: absolute;
-    top: 5px;
-    right: 0;
+    position: fixed;
+    right: 5%;
+    top: $secondary-header-max-height - 4.375rem;
     display: flex;
     min-height: $secondary-header-min-height;
     flex-direction: column;
@@ -41,7 +41,6 @@
 
     .resource-toolbar-buttons {
       height: 20px;
-      margin: 3px;
       > div {
         color: $color__blue-51;
         font-size: 14px;
@@ -78,9 +77,11 @@
     .refresh-time-container {
       display: flex;
       align-items: center;
-      font-size: 12px;
+      font-size: 10px;
       height: 20px;
-      margin-right: 10px;
+      margin-right: inherit;
+      margin-top: 15px;
+      margin-bottom: 20px;
       white-space: pre;
 
       .bx--loading--small {

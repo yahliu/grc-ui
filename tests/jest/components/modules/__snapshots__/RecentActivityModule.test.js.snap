@@ -107,27 +107,9 @@ exports[`RecentActivityModule view renders as expected 1`] = `
             tabIndex="0"
           >
             <div
-              className="card-count-container"
+              className="no-result-dash"
             >
-              <svg
-                className="card-count-pie"
-              >
-                <g>
-                  <path
-                    d="M9.18485099360515e-16,-15L5.51091059616309e-16,-9Z"
-                    fill="#FEC233"
-                  />
-                  <path
-                    d="M7.960204194457795e-16,-13A13,13,0,1,1,-7.960204194457795e-16,13A13,13,0,1,1,7.960204194457795e-16,-13M-2.0206672185931327e-15,-11A11,11,0,1,0,2.0206672185931327e-15,11A11,11,0,1,0,-2.0206672185931327e-15,-11Z"
-                    fill="#DFE3E6"
-                  />
-                </g>
-              </svg>
-              <div
-                className="card-count"
-              >
-                0
-              </div>
+              --------
             </div>
             <div
               className="card-type"
@@ -145,27 +127,9 @@ exports[`RecentActivityModule view renders as expected 1`] = `
             tabIndex="0"
           >
             <div
-              className="card-count-container"
+              className="no-result-dash"
             >
-              <svg
-                className="card-count-pie"
-              >
-                <g>
-                  <path
-                    d="M9.18485099360515e-16,-15L5.51091059616309e-16,-9Z"
-                    fill="#A0A0A0"
-                  />
-                  <path
-                    d="M7.960204194457795e-16,-13A13,13,0,1,1,-7.960204194457795e-16,13A13,13,0,1,1,7.960204194457795e-16,-13M-2.0206672185931327e-15,-11A11,11,0,1,0,2.0206672185931327e-15,11A11,11,0,1,0,-2.0206672185931327e-15,-11Z"
-                    fill="#DFE3E6"
-                  />
-                </g>
-              </svg>
-              <div
-                className="card-count"
-              >
-                0
-              </div>
+              --------
             </div>
             <div
               className="card-type"
