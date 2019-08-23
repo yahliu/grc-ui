@@ -99,6 +99,11 @@ export default class CreationView extends React.Component {
           <div className='creation-view-controls-textbox'>
             <div className="creation-view-controls-textbox-title">
               {msgs.get('creation.view.policy.name', locale)}
+              <TooltipIcon direction='bottom' tooltipText={msgs.get('policy.create.name.tooltip', locale)}>
+                <svg className='info-icon'>
+                  <use href={'#diagramIcons_info'} ></use>
+                </svg>
+              </TooltipIcon>
             </div>
             <TextInput
               id={'policy-name'}
