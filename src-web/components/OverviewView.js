@@ -152,15 +152,17 @@ export class OverviewView extends React.Component {
       case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0
         if(parentName){
-          paraURL.name = parentName //highlight this policy violation name
-          paraURL.side = true //auto open side panel under this highlight name
+          // paraURL.name = parentName //highlight this policy violation name
+          // paraURL.side = true //auto open side panel under this highlight name
+          paraURL.filters = `{"textsearch":["${parentName}"]}`  // Change click action to match security finding cards
         }
         break
       case 'clusters'://TopInformationModule to policies page with specific cluster violation name
         paraURL.index = 1
         if(parentName){
-          paraURL.name = parentName //highlight this cluster violation name
-          paraURL.side = true //auto open side panel under this highlight name
+          // paraURL.name = parentName //highlight this cluster violation name
+          // paraURL.side = true //auto open side panel under this highlight name
+          paraURL.filters = `{"textsearch":["${parentName}"]}`  // Change click action to match security finding cards
         }
         break
       case 'security findings'://TopInformationModule to security findings page with specific security finding name
