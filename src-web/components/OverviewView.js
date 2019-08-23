@@ -47,11 +47,11 @@ export class OverviewView extends React.Component {
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
         !_.isEqual(policies, this.props.policies)) {
       const { locale } = this.context
-      const displayType = location.pathname.split('/').pop()
-      updateResourceToolbar(refreshControl, getAvailableGrcFilters(policies, findings, locale))
-      //get existing active filters and combin with stored filters in sessionStorage
+      const availableGrcFilters = getAvailableGrcFilters(policies, findings, locale)
+      updateResourceToolbar(refreshControl, availableGrcFilters)
+      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
-      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), displayType)
+      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
       //update sessionStorage
       replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
       //update active filters

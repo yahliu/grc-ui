@@ -65,9 +65,9 @@ class GrcView extends React.Component {
       }
       updateResourceToolbar(refreshControl, availableGrcFilters)
 
-      //get existing active filters and combin with stored filters in sessionStorage
+      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
-      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), displayType)
+      const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
       //update sessionStorage
       replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
       //update active filters
