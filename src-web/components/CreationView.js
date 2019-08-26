@@ -11,9 +11,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import resources from '../../lib/shared/resources'
-import { Loading, Notification, TextInput, Checkbox, TooltipIcon, MultiSelect, InlineNotification } from 'carbon-components-react'
+import { Loading, Notification, TextInput, Checkbox, TooltipIcon, MultiSelect, InlineNotification, Select, SelectItem, SelectItemGroup } from 'carbon-components-react'
 import { parse } from '../../lib/client/design-helper'
-import { initialTemplateData, getMultiSelectData, getPolicyYAML, setCustomPolicyData, getCreateErrors, highliteDifferences  } from '../util/creation-helper'
+import { initialTemplateData, getMultiSelectData, getPolicyYAML, setCustomPolicyData, getCreateErrors, getUniqueName, highliteDifferences  } from '../util/creation-helper'
 import { validator } from '../validators/policy-validator'
 import { hideResourceToolbar } from '../../lib/client/resource-helper'
 import EditorBar from './common/EditorBar'
@@ -33,9 +33,24 @@ export default class CreationView extends React.Component {
       return {updateMsgKind: 'error', updateMessage: mutateErrorMsg}
     } else if (!loading) {
       const { existing } = props
-      if (!state.multiSelectData) {
+      const { templateData, multiSelectData, isCustomName } = state
+
+      // init multiselect with any existing policy data
+      if (!multiSelectData) {
         const multiSelectData = getMultiSelectData(existing)
         return {multiSelectData}
+      }
+
+      // make sure an auto generated name is unique
+      if (!isCustomName) {
+        const {compliances=[]} = existing
+        const uniqueName = getUniqueName(templateData.name, compliances)
+        if (uniqueName !== templateData.name) {
+          templateData.name = uniqueName
+          const policyYAML = getPolicyYAML(templateData)
+          const parsedPolicy = parse(policyYAML).parsed
+          return {templateData, policyYAML, parsedPolicy }
+        }
       }
     }
     return null
@@ -91,27 +106,10 @@ export default class CreationView extends React.Component {
   }
 
   renderControls() {
-    const { locale } = this.context
-    const { templateData: {name} } = this.state
     return (
       <div className='creation-view-controls-container' >
         <div className='creation-view-controls' >
-          <div className='creation-view-controls-textbox'>
-            <div className="creation-view-controls-textbox-title">
-              {msgs.get('creation.view.policy.name', locale)}
-              <TooltipIcon direction='bottom' tooltipText={msgs.get('policy.create.name.tooltip', locale)}>
-                <svg className='info-icon'>
-                  <use href={'#diagramIcons_info'} ></use>
-                </svg>
-              </TooltipIcon>
-            </div>
-            <TextInput
-              id={'policy-name'}
-              hideLabel
-              labelText=''
-              value={name}
-              onChange={this.onChange.bind(this, 'name')} />
-          </div>
+          {this.renderTextInput('name', 'name')}
           {this.renderMultiselect('validations', 'specs')}
           {this.renderMultiselect('bindings', 'selectors')}
           {this.renderCheckbox('inform', 'enforce')}
@@ -120,6 +118,40 @@ export default class CreationView extends React.Component {
           {this.renderMultiselect('annotations', 'controls')}
         </div>
       </div>
+    )
+  }
+
+  renderTextInput(templateKey, inputKey) {
+    const { locale } = this.context
+    const { templateData } = this.state
+    const value = templateData[templateKey]
+
+    // special case--validate policy name
+    let invalid = false
+    if (templateKey==='name') {
+      const { isCustomName } = this.state
+      if (isCustomName) {
+        const { existing: {compliances=[]} } = this.props
+        const nameMap = _.keyBy(compliances, 'name')
+        invalid = nameMap[value]!==undefined
+      }
+    }
+
+    return (
+      <React.Fragment>
+        <div className='creation-view-controls-textbox'>
+          <div className="creation-view-controls-textbox-title">
+            {msgs.get(`creation.view.policy.${inputKey}`, locale)}
+          </div>
+          <TextInput
+            id={`policy-${templateKey}`}
+            invalid={invalid}
+            hideLabel
+            labelText=''
+            value={value}
+            onChange={this.onChange.bind(this, inputKey)} />
+        </div>
+      </React.Fragment>
     )
   }
 
@@ -143,6 +175,71 @@ export default class CreationView extends React.Component {
               <use href={'#diagramIcons_info'} ></use>
             </svg>
           </TooltipIcon>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  renderSelect(templateKey, selectKey) {
+    const { locale } = this.context
+    const { multiSelectData={}, userMultiSelectData={} } = this.state
+    let groups = multiSelectData[selectKey]
+
+    // add any custom choice to available choices
+    if (userMultiSelectData[selectKey]) {
+      groups = _.cloneDeep(groups)
+      groups.create = [...userMultiSelectData[selectKey], ...groups.create]
+    }
+
+    // get what's currently active from templateData
+    let defaultValue = 'placeholder-item'
+    const { templateData } = this.state
+    const data = templateData[templateKey]
+    const dataMap = _.keyBy(data, 'name')
+    const active = dataMap[selectKey].values
+    if (active.length>0) {
+      defaultValue = active
+    }
+    const key = selectKey + active
+    return (
+      <React.Fragment>
+        <div className='creation-view-controls-select'>
+          <div className="creation-view-controls-select-title">
+            {msgs.get(`creation.view.policy.${selectKey}`, locale)}
+            <TooltipIcon direction='top' tooltipText={msgs.get(`policy.create.${selectKey}.tooltip`, locale)}>
+              <svg className='info-icon'>
+                <use href={'#diagramIcons_info'} ></use>
+              </svg>
+            </TooltipIcon>
+          </div>
+          <Select
+            key={key}
+            id={`policy-${templateKey}`}
+            className='select'
+            defaultValue={defaultValue}
+            hideLabel={true}
+            light
+            onChange={this.onChange.bind(this, selectKey)}>
+            <React.Fragment>
+              <SelectItem
+                disabled
+                value='placeholder-item'
+                text={msgs.get(`creation.view.policy.select.${selectKey}`, locale)}
+              />
+              {Object.entries(groups).map(([group, values]) => {
+                const groupLabel = msgs.get(`policy.create.${group}.group`, locale)
+                return (
+                  <SelectItemGroup label={groupLabel} key={group} >
+                    {values.map(value => {
+                      return (
+                        <SelectItem key={value} text={value} value={JSON.stringify({group, value})} />
+                      )
+                    })}
+                  </SelectItemGroup>
+                )
+              })}
+            </React.Fragment>
+          </Select>
         </div>
       </React.Fragment>
     )
@@ -184,7 +281,6 @@ export default class CreationView extends React.Component {
 
     // change key if active changes so that carbon component is re-created with new initial values
     const key = multiSelectKey + active.join('-')
-
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'>
@@ -306,6 +402,8 @@ export default class CreationView extends React.Component {
       const specs = _.get(validationsMap, 'specs.values')
       if (specs.length>0 && specs[0].indexOf('-')!==-1) {
         templateData['name'] = `policy-${specs[0].substr(0, specs[0].indexOf('-')).toLowerCase()}`
+      } else {
+        templateData['name'] = initialTemplateData.name
       }
     }
 

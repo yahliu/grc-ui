@@ -13,7 +13,7 @@ import PropTypes from 'prop-types'
 import AceEditor from 'react-ace'
 
 import 'brace/mode/yaml'
-import 'brace/theme/monokai'
+import 'brace/theme/vibrant_ink'
 
 class IsomorphicEditor extends React.Component {
 
@@ -36,7 +36,7 @@ class IsomorphicEditor extends React.Component {
 const YamlEditor = ({ onYamlChange, setEditor, yaml, width='49.5vw', height='40vh', readOnly=false }) => (
   <div className="yamlEditorContainer">
     <IsomorphicEditor
-      theme='monokai'
+      theme='vibrant_ink'
       mode={'yaml'}
       width={width}
       height={height}

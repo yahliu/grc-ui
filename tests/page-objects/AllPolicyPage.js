@@ -211,7 +211,7 @@ function testDetailsPage(browser, name) {
   //policy yaml page test
   this.expect.element('#yaml-tab').to.be.present
   this.click('#yaml-tab')
-  this.expect.element('.ace_editor.ace-monokai.ace_dark').to.be.present
+  this.expect.element('.ace_editor').to.be.present
   this.expect.element('.yaml-editor-button > button:nth-child(1)').to.be.present
   this.expect.element('.yaml-editor-button > button:nth-child(2)').to.be.present
   this.click('.bx--breadcrumb > div:nth-child(1)')

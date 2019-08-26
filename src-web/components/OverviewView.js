@@ -35,11 +35,24 @@ export class OverviewView extends React.Component {
     this.state= {
       viewState: getSavedGrcState(GRC_VIEW_STATE_COOKIE)
     }
+    this.scroll = _.debounce(()=>{
+      this.scrollView()
+    }, 50)
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
     this.updateViewState = this.updateViewState.bind(this)
     this.handleCreatePolicy = this.handleCreatePolicy.bind(this)
     this.handleDrillDownClickOverview = this.handleDrillDownClickOverview.bind(this)
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.scroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', this.onUnload)
+    window.removeEventListener('scroll', this.scroll)
+    this.onUnload()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,11 +70,6 @@ export class OverviewView extends React.Component {
       //update active filters
       updateActiveFilters(combinedFilters)
     }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', this.onUnload)
-    this.onUnload()
   }
 
   render() {
@@ -122,6 +130,15 @@ export class OverviewView extends React.Component {
 
   onUnload() {//saved overview ui setting
     saveGrcState(GRC_VIEW_STATE_COOKIE, this.state.viewState)
+  }
+
+  scrollView () {
+    const headerRef = document.getElementsByClassName('secondary-header')[0]
+    const contentRef = document.getElementsByClassName('overview-view')[0]
+    if (headerRef && contentRef) {
+      const contentRect = contentRef.getBoundingClientRect()
+      headerRef.classList.toggle('bottom-border', contentRect.top<180)
+    }
   }
 
   handleCreatePolicy(){

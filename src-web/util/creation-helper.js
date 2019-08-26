@@ -8,11 +8,11 @@
  *******************************************************************************/
 'use strict'
 
-import {diffTrimmedLines} from 'diff'
+import {diff} from 'deep-diff'
 import * as Templates from '../templates'
+import { parse } from '../../lib/client/design-helper'
 import policyHeader from '../templates/policy-header.handlebars'
 import policyBindings from '../templates/policy-bindings.handlebars'
-import policyExistingBinding from '../templates/policy-bindings-existing.handlebars'
 import config from '../../lib/shared/config'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
@@ -41,6 +41,8 @@ const initalAnnotations = {
   categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
   controls: ['MutationAdvisor','VA'],
 }
+
+const initialSelectors = ['cloud: "IBM"']
 
 const specs = Object.values(Templates).map(template => {
   const value = template.call()
@@ -83,15 +85,8 @@ export const getMultiSelectData = (existing={}) => {
 }
 
 const getSelectorData = (existing) => {
-  const available = new Set()
-  const {clusterLabels=[], placements=[]} = existing
-  placements.forEach(({name})=>{
-    available.add(name)
-  })
-  clusterLabels.forEach(({key, value}) => {
-    available.add(`${key}: "${value}"`)
-  })
-  return  Array.from(available)
+  const {clusterLabels=[]} = existing
+  return _.union(initialSelectors, clusterLabels.map(({key, value}) => {return `${key}: "${value}"`}))
 }
 
 const getAnnotationData = (field, existingAnnotations) => {
@@ -158,12 +153,15 @@ export const getPolicyYAML = (templateData) => {
       yaml = yaml.concat(spec.value)
     })
   }
+  if (!yaml.endsWith('\n')) {
+    yaml+='\n'
+  }
 
   // policy bindings
   const bindings = _.get(templateData, 'bindings[0].values')
-  if (bindings.length>0 && bindings[0].indexOf(':')===-1) {
+  if (bindings.length>0) {
     yaml = yaml.concat(
-      policyExistingBinding(Object.assign({existing: bindings[0]}, templateData)),
+      policyBindings(Object.assign({bindings}, templateData)),
     )
   } else {
     yaml = yaml.concat(
@@ -233,7 +231,7 @@ const setCustomValidationData = (oldParsed, newParsed, templateData, multiSelect
   if (userMultiSelectData.customValidations) {
     const lines = newParsed.Policy[0].$yml.split('\n')
     const specs =  _.get(newParsed.Policy[0], '$synced.spec.$v', {})
-    templateData.customValidations = getCustomSpec(lines, specs, 'policy-templates')
+    templateData.customValidations = getCustomSpec(lines, specs, 'role-templates')
       .concat(getCustomSpec(lines, specs, 'object-templates'))
       .concat(getCustomSpec(lines, specs, 'policy-templates')).join('\n')
   } else {
@@ -271,7 +269,7 @@ const setCustomAnnotationsData = (annotations, templateData, multiSelectData, us
 
 const setCustomSelectorData = (newParsed, templateData, multiSelectData, userMultiSelectData) => {
   const matchLabels = _.get(newParsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchLabels')
-  if (matchLabels) {
+  if (matchLabels instanceof Object) {
     const selectors = []
     Object.entries(matchLabels).forEach(([key, value]) => {
       selectors.push(`${key}: "${value}"`)
@@ -303,6 +301,17 @@ export const getCreateErrors = (parsed, {compliances=[]}, locale) => {
   return errorMsg
 }
 
+export const getUniqueName = (name, compliances) => {
+  const nameMap = _.keyBy(compliances, 'name')
+  if (nameMap[name]!==undefined) {
+    let count=1
+    const baseName = name.replace(/-*\d+$/, '')
+    do {
+      name = `${baseName}-${count++}`
+    } while (nameMap[name]!==undefined)
+  }
+  return name
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -310,59 +319,116 @@ export const getCreateErrors = (parsed, {compliances=[]}, locale) => {
 export const highliteDifferences = (editor, oldYAML, newYAML) => {
   // mark any modified/added lines in editor
   const ranges=[]
-  let row=0
-  let firstRow=undefined
   const range = editor.getSelectionRange()
-  diffTrimmedLines(oldYAML, newYAML)
-    .filter((diff, idx, diffs) =>{
-      const {count, removed} = diff
-      if (removed && count===1 && idx-1<diffs.length) {
-        const nextDiff = diffs[idx+1]
-        if (nextDiff) {
-          const {count:c, added} = nextDiff
-          if (added && c===1) {
-            nextDiff.modified = true
-            delete nextDiff.added
-            return false
+
+  const getInside = (ikey, {parsed}) =>{
+    const ret = {}
+    Object.keys(parsed).forEach(key=>{
+      ret[key] = _.get(parsed, `${key}[0].${ikey}`)
+    })
+    return ret
+  }
+
+  // determine what rows were modified or added
+  const oldParse = parse(oldYAML.replace(/\./g, '_')) // any periods will mess up the _.get later
+  const newParse = parse(newYAML.replace(/\./g, '_'))
+  const oldRaw = getInside('$raw', oldParse)
+  const newRaw = getInside('$raw', newParse)
+  const newSynced = getInside('$synced', newParse)
+  const newYAMLLines = newYAML.split('\n')
+  let firstModRow=undefined
+  let firstNewRow=undefined
+  const ignorePaths = []
+  const diffs = diff(oldRaw, newRaw)
+  if (diffs) {
+    diffs.forEach(({kind, path, index, item})=>{
+      let newPath = path.shift()
+      if (path.length>0) {
+        newPath += `.${path.join('.$v.')}`
+      }
+      let obj = _.get(newSynced, newPath)
+      if (obj) {
+
+        // convert A's and E's into 'N's
+        switch (kind) {
+        case 'E': {
+          if (obj.$l>1) {
+            // convert edit to new is multilines added
+            kind = 'N'
+            obj = {$r: obj.$r+1, $l: obj.$l-1}
+          }
+          break
+        }
+        case 'A': {
+          switch (item.kind) {
+          case 'N':
+            // convert new array item to new range
+            kind = 'N'
+            obj = obj.$v[index]
+            break
+          case 'D':
+            // if array delete, ignore any other edits within array
+            // edits are just the comparison of other array items
+            ignorePaths.push(path.join('/'))
+            break
+          }
+          break
+        }
+        }
+
+        // if array delete, ignore any other edits within array
+        // edits are just the comparison of other array items
+        if (ignorePaths.length>0) {
+          const tp = path.join('/')
+          if (ignorePaths.some(p=>{
+            return tp.startsWith(p)
+          })) {
+          // ignore any edits within an array that had an imtem deleted
+            kind='D'
           }
         }
-      }
-      return true
-    })
-    .forEach(({count, value, added, removed, modified})=>{
-      if (added || modified) {
+
         const r = Object.create(range)
-        let column = modified ? value.indexOf(':')+1 : 0
-        if (modified && value[column]===' ') column++
-        const endRow = modified ? row : row+count-1
-        r.start = {row, column}
-        r.end = {row: endRow, column: 200}
-        ranges.push(r)
-        if (!firstRow) {
-          firstRow = row
+        switch (kind) {
+        case 'E': {// edited
+          if (obj.$v) { // if no value ignore--all values removed from a key
+            const col = newYAMLLines[obj.$r].indexOf(obj.$v)
+            r.start = {row: obj.$r, column: col}
+            r.end = {row: obj.$r, column: col+obj.$v.length}
+            ranges.push(r)
+            if (!firstModRow) {
+              firstModRow = obj.$r
+            }
+          }
+          break
         }
-        row+=count
-      } else if (removed) {
-        row-=count
-      } else {
-        row+=count
+        case 'N': // new
+          r.start = {row: obj.$r, column: 0}
+          r.end = {row: obj.$r + obj.$l, column: 0}
+          ranges.push(r)
+          if (!firstNewRow) {
+            firstNewRow = obj.$r
+          }
+          break
+        }
       }
     })
-  // wait until editor has content before highlighting
-  setTimeout(() => {
-    if (ranges.length) {
-      const selection = editor.multiSelect
-      selection.toSingleRange(ranges[0])
-      for (var i = ranges.length; i--; ) {
-        selection.addRange(ranges[i], true)
+    // wait until editor has content before highlighting
+    setTimeout(() => {
+      if (ranges.length) {
+        const selection = editor.multiSelect
+        selection.toSingleRange(ranges[0])
+        for (var i = ranges.length; i--; ) {
+          selection.addRange(ranges[i], true)
+        }
+      } else {
+        editor.selection.clearSelection()
       }
-    } else {
-      editor.selection.clearSelection()
+    }, 0)
+    if (firstNewRow || firstModRow) {
+      editor.setAnimatedScroll(true)
+      editor.scrollToLine(firstNewRow || firstModRow || 0, true)
     }
-  }, 0)
-  if (firstRow) {
-    editor.setAnimatedScroll(true)
-    editor.scrollToLine(firstRow, true)
   }
 }
 

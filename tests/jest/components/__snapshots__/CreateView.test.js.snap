@@ -17,22 +17,6 @@ exports[`CreationView component renders as expected 1`] = `
           className="creation-view-controls-textbox-title"
         >
           Name
-          <div
-            className="bx--tooltip-icon"
-          >
-            <button
-              aria-label="The name of your security policy."
-              className="bx--tooltip__trigger bx--tooltip--icon__bottom"
-            >
-              <svg
-                className="info-icon"
-              >
-                <use
-                  href="#diagramIcons_info"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
         <div
           className="bx--form-item"

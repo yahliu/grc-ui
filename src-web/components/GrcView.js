@@ -39,6 +39,9 @@ class GrcView extends React.Component {
     this.state= {
       viewState: getSavedGrcState(GRC_VIEW_STATE_COOKIE)
     }
+    this.scroll = _.debounce(()=>{
+      this.scrollView()
+    }, 50)
     this.onUnload = this.onUnload.bind(this)
     window.addEventListener('beforeunload', this.onUnload)
     this.handleCreatePolicy = this.handleCreatePolicy.bind(this)
@@ -74,8 +77,12 @@ class GrcView extends React.Component {
       updateActiveFilters(combinedFilters)
     }
   }
+  componentDidMount() {
+    window.addEventListener('scroll', this.scroll)
+  }
 
   componentWillUnmount() {
+    window.removeEventListener('scroll', this.scroll)
     window.removeEventListener('beforeunload', this.onUnload)
     this.onUnload()
   }
@@ -164,6 +171,15 @@ class GrcView extends React.Component {
     this.setState(prevState=>{
       return {viewState:  Object.assign(prevState.viewState, states)}
     })
+  }
+
+  scrollView () {
+    const headerRef = document.getElementsByClassName('secondary-header')[0]
+    const contentRef = document.getElementsByClassName('grc-view')[0]
+    if (headerRef && contentRef) {
+      const contentRect = contentRef.getBoundingClientRect()
+      headerRef.classList.toggle('bottom-border', contentRect.top<180)
+    }
   }
 
   onUnload() {//saved grc view ui setting

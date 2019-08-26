@@ -40,7 +40,7 @@
       cursor: pointer;
     }
 
-    &-textbox, &-multiselect {
+    &-textbox, &-multiselect, &-select {
       padding: 0 5px 25px 0;
 
       &-title {
@@ -49,6 +49,10 @@
         font-weight: bold;
         font-size: 14px;
         padding-bottom: 8px;
+      }
+
+      .bx--select {
+        width: 100%;
       }
 
       .bx--list-box__label {
@@ -133,6 +137,22 @@
       #brace-editor {
         min-width: unset;
         min-height: unset;
+      }
+
+      .ace-vibrant-ink {
+        .ace_marker-layer {
+          .ace_selection {
+            background: #459cf540;
+          }
+          .ace_selected-word {
+            border: none;
+            background: #459cf548;
+          }
+
+          .ace_active-line {
+            background: #33333370;
+          }
+        }
       }
     }
   }

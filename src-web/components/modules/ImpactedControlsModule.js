@@ -110,12 +110,13 @@ export default class ImpactedControlsModule extends React.Component {
       }
       return {
         value: standard,
-        label: standard==='ALL' ? msgs.get('overview.impacted.controls.all', locale)  : standard
+        label: this.getSelectionLabel(standard)
       }
     })
     this.currentChoice = choices[idx]
     return (
-      <div className='card-selection' ref={this.setDropdown}>
+      <div className='card-selection' ref={this.setDropdown}
+        key={this.getSelectionLabel('ALL')}>
         <div className='card-selection-title'>
           {msgs.get('overview.impacted.controls.standard', locale)}
         </div>
@@ -230,12 +231,22 @@ export default class ImpactedControlsModule extends React.Component {
     this.fixDropdown()
   }
 
+  getSelectionLabel = (standardsChoice) => {
+    const { locale } = this.context
+    const { activeFilters: {standards:filteredStandards=new Set()} } = this.props
+    const allLabel = filteredStandards.size>1 ?
+      msgs.get('overview.impacted.controls.filtered', locale) :
+      msgs.get('overview.impacted.controls.all', locale)
+    return standardsChoice==='ALL' ? allLabel : standardsChoice
+  }
+
   fixDropdown = () => {
     if (this.dropdownRef) {
       // tooltip on dropdown is hardcoded
+      const { locale } = this.context
       const title = this.dropdownRef.querySelector('title')
       if (title) {
-        title.innerHTML = msgs.get('choose.standard', this.context.locale)
+        title.innerHTML = msgs.get('choose.standard', locale)
       }
 
       // make sure editbox is the selected choice
@@ -243,7 +254,7 @@ export default class ImpactedControlsModule extends React.Component {
         const {standardsChoice} = this.cardData
         const choice = this.dropdownRef.querySelector('span')
         if (choice) {
-          choice.innerHTML = standardsChoice==='ALL' ? msgs.get('overview.impacted.controls.all', this.context.locale)  : standardsChoice
+          choice.innerHTML = this.getSelectionLabel(standardsChoice)
         }
       }
 
