@@ -21,6 +21,7 @@ import policyMutationAdvisor from './policy-mutationadvisor.handlebars'
 import policyVAsecurity from './policy-vasecurity.handlebars'
 import policyKubeEncryption from './policy-kubeencryption.handlebars'
 import policyAudit from './policy-audit.handlebars'
+import policyCis from './policy-cis.handlebars'
 
 export {
   policyPodRole,
@@ -36,4 +37,5 @@ export {
   policyVAsecurity,
   policyKubeEncryption,
   policyAudit,
+  policyCis,
 }
