@@ -225,7 +225,7 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
               <div className={'no-result-dash'}>
                 --------
               </div>
-              <div className='card-type'>
+              <div className='card-type card-findings'>
                 <div>
                   {label.toUpperCase()}
                 </div>
@@ -247,7 +247,7 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
                 {count}
               </div>
             </div>
-            <div className='card-type'>
+            <div className='card-type card-findings'>
               <div>
                 {label.toUpperCase()}
               </div>

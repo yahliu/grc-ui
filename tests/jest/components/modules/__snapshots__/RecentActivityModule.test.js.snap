@@ -92,7 +92,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               </div>
             </div>
             <div
-              className="card-type"
+              className="card-type card-findings"
             >
               <div>
                 HIGH SEVERITY FINDINGS
@@ -112,7 +112,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               --------
             </div>
             <div
-              className="card-type"
+              className="card-type card-findings"
             >
               <div>
                 MEDIUM SEVERITY FINDINGS
@@ -132,7 +132,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               --------
             </div>
             <div
-              className="card-type"
+              className="card-type card-findings"
             >
               <div>
                 LOW SEVERITY FINDINGS

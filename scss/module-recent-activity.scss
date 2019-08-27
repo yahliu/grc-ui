@@ -37,7 +37,7 @@
           display: flex;
           padding: 0 140px 0 140px;
           width: 100%;
-          justify-content: space-evenly;
+          justify-content: space-between;
           align-items: center;
 
           .card-counts {
@@ -68,6 +68,7 @@
             align-items: center;
             justify-content: center;
             outline:none;
+            flex-basis: 0;
 
             &.hasBorder {
               border-right: 1px solid $color__gray-1;
@@ -101,7 +102,7 @@
               }
             }
             .card-type {
-              width: 70%;
+              // width: 70%;
               text-align: center;
               font-size: 12px;
               font-variant: small-caps;
@@ -109,6 +110,9 @@
               line-height: 16px;
               font-weight: bold;
               color: $mcm_color_blue_gray;
+            }
+            .card-findings {
+              min-width: 7.7rem;
             }
 
             &:hover {

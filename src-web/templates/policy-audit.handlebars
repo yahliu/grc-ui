@@ -7,6 +7,9 @@
             category: "System-Integrity"
         spec:
           severity: low
+          namespaceSelector:
+            include: ["default","kube-*"]
+            exclude: ["kube-system"]
           clusterAuditPolicy:
             auditPolicyRules:
               "kubernetes": ignore
