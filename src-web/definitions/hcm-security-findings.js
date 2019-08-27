@@ -9,6 +9,7 @@
 'use strict'
 
 import _ from 'lodash'
+import { getAge } from '../../lib/client/resource-helper'
 
 export default {
   defaultSortField: 'shortDescription',
@@ -21,11 +22,16 @@ export default {
     },
     {
       msgKey: 'table.header.resources',
-      resourceKey: 'context.resourceName',
+      resourceKey: 'context',
+      transformFunction: showTypeAndName
     },
     {
       msgKey: 'table.header.severity',
       resourceKey: 'finding.severity',
+    },
+    {
+      msgKey: 'table.header.cluster',
+      resourceKey: 'context.clusterName',
     },
     {
       msgKey: 'table.header.standards',
@@ -42,6 +48,11 @@ export default {
       resourceKey: 'securityClassification.securityCategories',
       transformFunction: getFindingCategories
     },
+    {
+      msgKey: 'table.header.update.time',
+      resourceKey: 'updateTime',
+      transformFunction: getAge
+    },
   ],
 }
 
@@ -50,6 +61,12 @@ function compressArray(items){
     return items.map(item => _.startCase(item.trim())).join(', ')
   }
   return '-'
+}
+
+function showTypeAndName(item){
+  const resourceType = _.get(item, 'context.resourceType', '-')
+  const resourceName = _.get(item, 'context.resourceName', '-')
+  return `${resourceType}: ${resourceName}`
 }
 
 export function getFindingStandards(item) {

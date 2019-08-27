@@ -324,6 +324,7 @@
   "table.header.selector": "Selector",
   "table.header.standards": "Standards",
   "table.header.status": "Status",
+  "table.header.update.time": "Update time",
   "table.header.subjects": "Subjects",
   "table.header.templateType": "Template type",
   "table.header.violation": "Violations",
