@@ -17,7 +17,7 @@ import { ContentSwitcher, Switch } from 'carbon-components-react'
 import getResourceDefinitions from '../../definitions'
 import { makeGetVisibleTableItemsSelector } from '../../reducers/common'
 import ResourceList from '../common/ResourceList'
-import formatPoliciesToClustersTableData from '../common/FormatTableData'
+import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData } from '../common/FormatTableData'
 import pageWithUrlQuery from '../common/withUrlQuery'
 import queryString from 'query-string'
 import resources from '../../../lib/shared/resources'
@@ -99,7 +99,7 @@ class GrcToggleModule extends React.Component {
           {...this.props}
           detailsTabs={['cluster-findings']}
           resourceType={RESOURCE_TYPES.HCM_CLUSTER_FINDINGS}
-          listData={grcItems}
+          listData={formatFindingsToClustersTableData(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
           tabs={secondaryHeaderProps.tabs}

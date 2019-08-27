@@ -7,35 +7,44 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
+import _ from 'lodash'
 
 export default {
-  defaultSortField: 'context.clusterName',
-  primaryKey: 'name',
-  secondaryKey: 'finding.severity',
+  defaultSortField: 'cluster',
+  primaryKey: 'cluster',
+  secondaryKey: 'metadata.namespace',
+  tableActions: [
+    'table.actions.finding.sidepanel',
+  ],
   tableKeys: [
     {
       msgKey: 'table.header.cluster.name',
-      resourceKey: 'context.clusterName',
+      resourceKey: 'cluster',
     },
     {
       msgKey: 'table.header.namespace',
-      resourceKey: 'context.namespaceName',
+      resourceKey: 'namespace',
     },
     {
       msgKey: 'table.header.severity',
-      resourceKey: 'finding.severity',
+      resourceKey: 'severity',
     },
     {
-      msgKey: 'table.header.description',
-      resourceKey: 'shortDescription',
-    },
-    {
-      msgKey: 'table.header.resources',
-      resourceKey: 'context.resourceName',
-    },
-    {
-      msgKey: 'table.header.findingSource',
-      resourceKey: 'reportedBy.title',
+      msgKey: 'table.header.highSeverity',
+      resourceKey: 'highSeverity',
+      transformFunction: getHighSeverityObjTostring,
     },
   ],
+}
+
+export function getHighSeverityObjTostring(item) {
+  const highSeverityMap = _.get(item, 'highSeverity')
+  let highSeverityString = ''
+  if (highSeverityMap) {
+    Object.keys(highSeverityMap).forEach((key) => {
+      highSeverityString = `${highSeverityString} ${key} (${highSeverityMap[key]}),`
+    })
+  }
+  highSeverityString = highSeverityString.trim()
+  return highSeverityString.substring(0, highSeverityString.length-1)
 }

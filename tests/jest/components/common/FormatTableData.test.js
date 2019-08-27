@@ -8,11 +8,17 @@
  *******************************************************************************/
 'use strict'
 
-import { policies, clusters } from './CommonTestingData'
-import formatPoliciesToClustersTableData from '../../../../src-web/components/common/FormatTableData'
+import { policies, policiesClusters, findings, findingsClusters } from './CommonTestingData'
+import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData } from '../../../../src-web/components/common/FormatTableData'
 
 describe('formatPoliciesToClustersTableData', () => {
   it('should correctly format', () => {
-    expect(formatPoliciesToClustersTableData(policies)).toEqual(clusters)
+    expect(formatPoliciesToClustersTableData(policies)).toEqual(policiesClusters)
+  })
+})
+
+describe('formatFindingsToClustersTableData', () => {
+  it('should correctly format', () => {
+    expect(formatFindingsToClustersTableData(findings)).toEqual(findingsClusters)
   })
 })

@@ -316,6 +316,7 @@
   "table.header.resource.selector": "Resource selector",
   "table.header.resources": "Resources",
   "table.header.severity": "Severity",
+  "table.header.highSeverity": "High severity findings",
   "table.header.role": "Role",
   "table.header.roleBindingTemplates": "Role-binding templates",
   "table.header.roleTemplates": "Role templates",

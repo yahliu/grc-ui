@@ -9,14 +9,13 @@
 'use strict'
 import _ from 'lodash'
 
-const formatClusterView = (key, value) => {
+const formatPolicyClusterView = (clusterName, policiesUnderCluster) => {
   let validNum = 0
   let nameSpace
   const nonCompliant = []
-
-  value.forEach(item => {
-    nameSpace = _.get(item, 'namespace', 'metadata.namespace')
-    const status = _.get(item, `raw.status.status.${key}`, '')
+  policiesUnderCluster.forEach(policy => {
+    nameSpace = _.get(policy, 'namespace', 'metadata.namespace')
+    const status = _.get(policy, `raw.status.status.${clusterName}`, '')
     let compliant = false
     switch (typeof status) {
     case 'string':
@@ -29,33 +28,72 @@ const formatClusterView = (key, value) => {
     if (compliant) {
       validNum += 1
     } else {
-      nonCompliant.push(_.get(item, 'metadata.name', '-'))
+      nonCompliant.push(_.get(policy, 'metadata.name', '-'))
     }
   })
   const result = {
-    cluster: key,
+    cluster: clusterName,
     namespace: nameSpace,
-    violation: `${value.length-validNum}/${value.length}`,
+    violation: `${policiesUnderCluster.length-validNum}/${policiesUnderCluster.length}`,
     nonCompliant: nonCompliant,
   }
   return result
 }
 
-const formatPoliciesToClustersTableData = (items) => {
+export const formatPoliciesToClustersTableData = (policies) => {
   const result = []
   const map = new Map()
-  for (const item of items) {
-    const statuses = _.get(item, 'raw.status.status', {})
-    Object.entries(statuses).forEach(([cluster]) => {
-      if (!map.has(cluster)) map.set(cluster, [])
-      map.get(cluster).push(item)
+  if(policies) {
+    policies.forEach((policy) => {
+      const statuses = _.get(policy, 'raw.status.status', {})
+      Object.entries(statuses).forEach(([cluster]) => {
+        if (!map.has(cluster)) map.set(cluster, [])
+        map.get(cluster).push(policy)
+      })
     })
+    for (const [key, value] of map.entries()) {
+      result.push(formatPolicyClusterView(key, value))
+    }
   }
-  for (const [key, value] of map.entries()) {
-    result.push(formatClusterView(key, value))
-  }
-
   return result
 }
 
-export default formatPoliciesToClustersTableData
+const formatFindingClusterView = (clusterName, findingsUnderCluster) => {
+  let validNum = 0
+  let nameSpace
+  const highSeverity = {}
+  findingsUnderCluster.forEach(finding => {
+    nameSpace = _.get(finding, 'context.namespaceName', '-')
+    const status = _.get(finding, 'finding.severity', '')
+    const isHigh = status.toUpperCase() === 'HIGH' ? true : false
+    if (isHigh) {
+      const description = _.get(finding, 'shortDescription', '-')
+      highSeverity[description] = highSeverity[description] ? highSeverity[description]+1 : 1
+    } else {
+      validNum += 1
+    }
+  })
+  const result = {
+    cluster: clusterName,
+    namespace: nameSpace,
+    severity: `${findingsUnderCluster.length-validNum}/${findingsUnderCluster.length}`,
+    highSeverity: highSeverity,
+  }
+  return result
+}
+
+export const formatFindingsToClustersTableData = (findings) => {
+  const result = []
+  const map = new Map()
+  if(findings) {
+    findings.forEach((finding) => {
+      const cluster = _.get(finding, 'context.clusterName', '-')
+      if (!map.has(cluster)) map.set(cluster, [])
+      map.get(cluster).push(finding)
+    })
+    for (const [key, value] of map.entries()) {
+      result.push(formatFindingClusterView(key, value))
+    }
+  }
+  return result
+}
