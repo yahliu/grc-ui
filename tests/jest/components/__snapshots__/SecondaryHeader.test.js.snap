@@ -25,7 +25,7 @@ exports[`SecondaryHeader component 2 renders as expected 1`] = `
   role="region"
 >
   <div
-    className="secondary-header simple-header"
+    className="secondary-header secondary-header-grc-overview simple-header"
   >
     <header>
       <div
@@ -127,7 +127,7 @@ exports[`SecondaryHeader component 3 renders as expected 1`] = `
   role="region"
 >
   <div
-    className="secondary-header simple-header"
+    className="secondary-header secondary-header-grc-overview simple-header"
   >
     <header>
       <div
