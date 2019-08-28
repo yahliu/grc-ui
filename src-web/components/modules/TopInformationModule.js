@@ -16,13 +16,16 @@ import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 import { Tabs, Tab } from 'carbon-components-react'
+import LinesEllipsis from 'react-lines-ellipsis'
+import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 
 resources(() => {
   require('../../../scss/module-top-information.scss')
 })
 
+const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis)
+
 const EMPTY_CHOICE = 'EMPTY_CHOICE'
-const INFORMATION_THRESHHOLD = 4
 
 const TopInformationSelections = Object.freeze({
   clusters: 'clusters',
@@ -45,8 +48,8 @@ export default class TopInformationModule extends React.Component {
   render() {
     let cardData = this.getCardData()
     if (cardData.length>0) {
-      if (cardData.length>INFORMATION_THRESHHOLD) {
-        cardData = cardData.slice(0,INFORMATION_THRESHHOLD)
+      if (cardData.length>this.props.threshold) {
+        cardData = cardData.slice(0,this.props.threshold)
       }
       return (
         <div className='module-top-information'>
@@ -204,8 +207,11 @@ export default class TopInformationModule extends React.Component {
       return b-a
     })
 
+    //send number of cards up to parent to calculate new card threshold
+    this.props.updateThreshold(cards.length, type)
+
     // if less informations than threshold, add an empty card
-    if (cards.length<INFORMATION_THRESHHOLD) {
+    if (cards.length<this.props.threshold) {
       cards.push({
         name: type==='policies'?
           msgs.get('overview.top.informations.policies.empty') :
@@ -336,18 +342,46 @@ const TopInformations = ({cardData, handleClick, locale}) => {
 
           const renderDescription  = () => {
             if (choice !== EMPTY_CHOICE) {
+              const descDict = {}
+              for (let i = 0; i < description.length; i++) {
+                if (descDict[description[i]]) {
+                  descDict[description[i]] += 1
+                }
+                else {
+                  descDict[description[i]] = 1
+                }
+              }
+              var sortedKeys = []
+              for(var key in descDict) {
+                sortedKeys.push([ key, descDict[key] ])
+              }
+              sortedKeys.sort((kv1, kv2) => {
+                return kv2[1] - kv1[1]
+              })
+              const newDesc = []
+              for (let i = 0; i < sortedKeys.length; i++) {
+                const skey = sortedKeys[i][0]
+                newDesc.push((descDict[skey] > 1) ? skey + ' (' + descDict[skey] + ')' : skey)
+              }
+              const descText = newDesc.map((singleDescription) => {
+                return singleDescription
+              }).reduce((prev, curr) => (prev + ', ' + curr))
               return (
-                <React.Fragment>
-                  {description.map((singleDescription) => {
-                    return singleDescription
-                  }).reduce((prev, curr) => [prev, ', ', curr])}
-                </React.Fragment>
+                <ResponsiveEllipsis
+                  text={descText}
+                  maxLine={2}
+                  trimRight={true}
+                  basedOn='letters'
+                />
               )
             } else {
               return (
-                <React.Fragment>
-                  {description[0]}
-                </React.Fragment>
+                <ResponsiveEllipsis
+                  text={description[0]}
+                  maxLine={2}
+                  trimRight={true}
+                  basedOn='letters'
+                />
               )
             }
           }
@@ -403,7 +437,9 @@ TopInformations.propTypes = {
 TopInformationModule.propTypes = {
   handleDrillDownClick: PropTypes.func,
   items: PropTypes.array,
+  threshold: PropTypes.number,
   type: PropTypes.string,
+  updateThreshold: PropTypes.func,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,
 }

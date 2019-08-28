@@ -152,11 +152,12 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  compliance-all
-                  , 
-                  policy-ma
-                  , 
-                  policy-pod
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    compliance-all, policy-ma, policy-pod
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,45 +198,12 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  compliance-all
-                  , 
-                  policy-pod
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          className="information-card-container single-strip empty-strip"
-        >
-          <div
-            className="information-card-content"
-          >
-            <div
-              className="card-inner-content"
-            >
-              <div
-                className="card-informations empty"
-              >
-                <img
-                  alt="No resource"
-                  src="undefined/policies/graphics/no-other-violations.svg"
-                />
-              </div>
-              <div
-                className="card-name-description"
-              >
-                <div
-                  className="card-name name-empty"
-                >
-                  No other policy violations
-                </div>
-                <div
-                  className="card-description description-empty"
-                >
-                  We will continue to monitor and display any policy violations so you can easily find them here.
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    compliance-all, policy-pod
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>
@@ -399,47 +367,12 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  mycluster_name
-                  , 
-                  cluster1
-                  , 
-                  clusterhub
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          className="information-card-container single-strip empty-strip"
-        >
-          <div
-            className="information-card-content"
-          >
-            <div
-              className="card-inner-content"
-            >
-              <div
-                className="card-informations empty"
-              >
-                <img
-                  alt="No resource"
-                  src="undefined/policies/graphics/no-other-violations.svg"
-                />
-              </div>
-              <div
-                className="card-name-description"
-              >
-                <div
-                  className="card-name name-empty"
-                >
-                  No other security findings
-                </div>
-                <div
-                  className="card-description description-empty"
-                >
-                  We will continue to monitor and display any security findings so you can easily find them here.
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    mycluster_name, cluster1, clusterhub
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>
@@ -603,47 +536,12 @@ exports[`TopInformationModule findings view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  mycluster_name
-                  , 
-                  cluster1
-                  , 
-                  clusterhub
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          className="information-card-container single-strip empty-strip"
-        >
-          <div
-            className="information-card-content"
-          >
-            <div
-              className="card-inner-content"
-            >
-              <div
-                className="card-informations empty"
-              >
-                <img
-                  alt="No resource"
-                  src="undefined/policies/graphics/no-other-violations.svg"
-                />
-              </div>
-              <div
-                className="card-name-description"
-              >
-                <div
-                  className="card-name name-empty"
-                >
-                  No other security findings
-                </div>
-                <div
-                  className="card-description description-empty"
-                >
-                  We will continue to monitor and display any security findings so you can easily find them here.
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    mycluster_name, cluster1, clusterhub
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>
@@ -807,11 +705,12 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  1558374675051-policy-pod
-                  , 
-                  1558382034240-policy-pod
-                  , 
-                  policy-pod
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    1558374675051-policy-pod, 1558382034240-policy-pod, policy-pod
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>
@@ -852,47 +751,12 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-description description-clickable"
                 >
-                  1558374675051-policy-pod
-                  , 
-                  1558382034240-policy-pod
-                  , 
-                  policy-pod
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          className="information-card-container single-strip empty-strip"
-        >
-          <div
-            className="information-card-content"
-          >
-            <div
-              className="card-inner-content"
-            >
-              <div
-                className="card-informations empty"
-              >
-                <img
-                  alt="No resource"
-                  src="undefined/policies/graphics/no-other-violations.svg"
-                />
-              </div>
-              <div
-                className="card-name-description"
-              >
-                <div
-                  className="card-name name-empty"
-                >
-                  No other policy violations
-                </div>
-                <div
-                  className="card-description description-empty"
-                >
-                  We will continue to monitor and display any policy violations so you can easily find them here.
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    1558374675051-policy-pod, 1558382034240-policy-pod, policy-pod
+                    <wbr />
+                  </div>
                 </div>
               </div>
             </div>

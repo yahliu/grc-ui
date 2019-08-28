@@ -15,6 +15,9 @@ import { policiesTestingDataSet1, findingsTestingDataSet1 } from './ModuleTestin
 import RecentActivityModule from '../../../../src-web/components/modules/RecentActivityModule'
 
 describe('RecentActivityModule view', () => {
+  jest
+    .spyOn(window, 'getComputedStyle')
+    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
   const filteredFindings = findingsTestingDataSet1

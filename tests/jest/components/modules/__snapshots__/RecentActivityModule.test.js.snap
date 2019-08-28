@@ -296,11 +296,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-description description-clickable"
                       >
-                        compliance-all
-                        , 
-                        policy-ma
-                        , 
-                        policy-pod
+                        <div
+                          className="LinesEllipsis  "
+                        >
+                          compliance-all, policy-ma, policy-pod
+                          <wbr />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -341,45 +342,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-description description-clickable"
                       >
-                        compliance-all
-                        , 
-                        policy-pod
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div
-                className="information-card-container single-strip empty-strip"
-              >
-                <div
-                  className="information-card-content"
-                >
-                  <div
-                    className="card-inner-content"
-                  >
-                    <div
-                      className="card-informations empty"
-                    >
-                      <img
-                        alt="No resource"
-                        src="undefined/policies/graphics/no-other-violations.svg"
-                      />
-                    </div>
-                    <div
-                      className="card-name-description"
-                    >
-                      <div
-                        className="card-name name-empty"
-                      >
-                        No other policy violations
-                      </div>
-                      <div
-                        className="card-description description-empty"
-                      >
-                        We will continue to monitor and display any policy violations so you can easily find them here.
+                        <div
+                          className="LinesEllipsis  "
+                        >
+                          compliance-all, policy-pod
+                          <wbr />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -540,11 +508,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-description description-clickable"
                       >
-                        mycluster_name
-                        , 
-                        cluster1
-                        , 
-                        clusterhub
+                        <div
+                          className="LinesEllipsis  "
+                        >
+                          mycluster_name, cluster1, clusterhub
+                          <wbr />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -580,7 +549,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-description description-empty"
                       >
-                        We will continue to monitor and display any security findings so you can easily find them here.
+                        <div
+                          className="LinesEllipsis  "
+                        >
+                          We will continue to monitor and display any security findings so you can easily find them here.
+                          <wbr />
+                        </div>
                       </div>
                     </div>
                   </div>

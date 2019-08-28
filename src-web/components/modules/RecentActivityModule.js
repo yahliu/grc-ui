@@ -29,7 +29,60 @@ const $grc_color_finding_medium = '#FEC233'
 const $grc_color_finding_low = '#A0A0A0'
 const $grc_color_finding_ring = '#DFE3E6'
 
+const MAX_INFORMATION_THRESHOLD = 4
+
 export default class RecentActivityModule extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      threshold: 4,
+      topViolationsNum: 0,
+      topFindingsNum: 0,
+    }
+  }
+
+  setThreshold = (numFindings, numViolations) => {
+    //if max(Top violations, Top security findings) < 4, set information_threshold to max
+    const newMax = Math.max(numFindings, numViolations)
+    if (newMax > MAX_INFORMATION_THRESHOLD) {
+      return MAX_INFORMATION_THRESHOLD
+    }
+    return newMax
+  }
+
+  thresholdCallback = (cardsLength, cardType) => {
+    //updates module lengths and changes threshold if needed
+    if (cardType === 'policies' && cardsLength != this.state.topViolationsNum) {
+      this.setState(
+        { topViolationsNum: cardsLength },
+        () => {
+          const findingsN = this.state.topFindingsNum
+          const violationsN = this.state.topViolationsNum
+          this.setState(
+            { threshold: this.setThreshold(findingsN, violationsN) },
+            () => {
+              return
+            }
+          )
+        }
+      )
+    }
+    else if (cardType === 'findings' && cardsLength != this.state.topFindingsNum) {
+      this.setState(
+        { topFindingsNum: cardsLength },
+        () => {
+          const findingsN = this.state.topFindingsNum
+          const violationsN = this.state.topViolationsNum
+          this.setState(
+            { threshold: this.setThreshold(findingsN, violationsN) },
+            () => {
+              return
+            }
+          )
+        }
+      )
+    }
+  }
 
   render() {
     const { locale } = this.context
@@ -56,12 +109,16 @@ export default class RecentActivityModule extends React.Component {
               viewState={viewState}
               updateViewState={updateViewState}
               items={policies}
+              threshold={this.state.threshold}
+              updateThreshold={this.thresholdCallback}
               handleDrillDownClick={handleDrillDownClick} />
             <TopInformationModule
               type={'findings'}
               viewState={viewState}
               updateViewState={updateViewState}
               items={findings}
+              threshold={this.state.threshold}
+              updateThreshold={this.thresholdCallback}
               handleDrillDownClick={handleDrillDownClick} />
           </div>
         </div>

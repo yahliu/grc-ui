@@ -94,6 +94,7 @@
     "react-d3-radar": "^1.0.0-rc6",
     "react-dom": "^16.8.0",
     "react-lazyload": "^2.3.0",
+    "react-lines-ellipsis": "^0.14.0",
     "react-masonry-component": "^6.2.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
