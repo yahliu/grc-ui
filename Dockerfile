@@ -40,6 +40,6 @@ COPY . /opt/ibm/grc-ui
 
 EXPOSE 3000
 
-ENV BABEL_DISABLE_CACHE=1
+ENV BABEL_DISABLE_CACHE 1
 ENV NODE_ENV production
 CMD ["node", "app.js"]
