@@ -11,12 +11,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { sidePanelDetailsModalDataPolicies, sidePanelDetailsModalResourceTypePolicies, sidePanelDetailsModalDataClusters, sidePanelDetailsModalResourceTypeClusters } from './ModalsTestingData'
-import SidePanelDetailsModal from '../../../../src-web/components/modals/SidePanelDetailsModal'
+import PolicySidePanelDetailsModal from '../../../../src-web/components/modals/PolicySidePanelDetailsModal'
 
-describe('SidePanelDetailsModal PoliciesView view', () => {
+describe('PolicySidePanelDetailsModal PoliciesView view', () => {
   const updateModal = jest.fn()
   it('renders expand as expected', done => {
-    const component = shallow(<SidePanelDetailsModal
+    const component = shallow(<PolicySidePanelDetailsModal
       title = {''}
       data = {sidePanelDetailsModalDataPolicies}
       resourceType = {sidePanelDetailsModalResourceTypePolicies}
@@ -29,10 +29,10 @@ describe('SidePanelDetailsModal PoliciesView view', () => {
   })
 })
 
-describe('SidePanelDetailsModal ClustersView view', () => {
+describe('PolicySidePanelDetailsModal ClustersView view', () => {
   const updateModal = jest.fn()
   it('renders expand as expected', () => {
-    const component = shallow(<SidePanelDetailsModal
+    const component = shallow(<PolicySidePanelDetailsModal
       title = {''}
       data = {sidePanelDetailsModalDataClusters}
       resourceType = {sidePanelDetailsModalResourceTypeClusters}

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SidePanelDetailsModal ClustersView view renders expand as expected 1`] = `
+exports[`PolicySidePanelDetailsModal ClustersView view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <withRouter(Connect(SidePanelDetailsModal))
+  Symbol(enzyme.__unrendered__): <withRouter(Connect(PolicySidePanelDetailsModal))
     data={
       Object {
         "cluster": "cluster1",
@@ -90,10 +90,10 @@ ShallowWrapper {
 }
 `;
 
-exports[`SidePanelDetailsModal PoliciesView view renders expand as expected 1`] = `
+exports[`PolicySidePanelDetailsModal PoliciesView view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <withRouter(Connect(SidePanelDetailsModal))
+  Symbol(enzyme.__unrendered__): <withRouter(Connect(PolicySidePanelDetailsModal))
     data={
       Object {
         "__typename": "Compliance",

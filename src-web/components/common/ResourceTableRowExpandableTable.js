@@ -41,15 +41,28 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
     </TableHead>
     <TableBody>
       {(() => {
-        return items.map((row) => {//check undefined row.id to avoid whole page crush
-          if(row && row.id){
-            return (
-              <TableRow key={row.id}>
-                {row.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
-              </TableRow>
-            )
-          }
-        })
+        if(items) {
+          return items.map((row) => {//check undefined row.id to avoid whole page crush
+            if(row && row.id && row.cells){//single sub row for policy/cluster violation side panel
+              return (
+                <TableRow key={row.id}>
+                  {row.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
+                </TableRow>
+              )
+            }
+            else if (row && row.subRowsArray) {//mulit sub rows for cluster finding side panel
+              return row.subRowsArray.map((subRow) => {
+                if(subRow && subRow.id && subRow.cells) {
+                  return (
+                    <TableRow key={subRow.id}>
+                      {subRow.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
+                    </TableRow>
+                  )
+                }
+              })
+            }
+          })
+        }
       })()}
     </TableBody>
   </Table>

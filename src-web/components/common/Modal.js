@@ -15,7 +15,8 @@ import loadable from 'loadable-components'
 let RemoveResourceModal
 let ResourceModal
 let DescriptionModal
-let SidePanelDetailsModal
+let PolicySidePanelDetailsModal
+let FindingSidePanelDetailsModal
 
 const Modal = ({ type, open, ...rest }) => {
   switch (type) {
@@ -25,8 +26,10 @@ const Modal = ({ type, open, ...rest }) => {
     return open && getResourceModal({ type, open, ...rest })
   case 'description':
     return open && getDescriptionModal({ type, open, ...rest })
-  case 'side-panel':
-    return open && getSidePanelDetailsModal({ type, open, ...rest })
+  case 'policy-side-panel':
+    return open && getPolicySidePanelDetailsModal({ type, open, ...rest })
+  case 'finding-side-panel':
+    return open && getFindingSidePanelDetailsModal({ type, open, ...rest })
   default:
     return null
   }
@@ -47,9 +50,14 @@ const getRemoveResourceModal = props => {
   return getModal(RemoveResourceModal, props)
 }
 
-const getSidePanelDetailsModal = props => {
-  SidePanelDetailsModal = SidePanelDetailsModal === undefined ? loadable(() => import(/* webpackChunkName: "details-side-panel-modal" */ '../modals/SidePanelDetailsModal')) : SidePanelDetailsModal
-  return getModal(SidePanelDetailsModal, props)
+const getPolicySidePanelDetailsModal = props => {
+  PolicySidePanelDetailsModal = PolicySidePanelDetailsModal === undefined ? loadable(() => import(/* webpackChunkName: "details-policy-side-panel-modal" */ '../modals/PolicySidePanelDetailsModal')) : PolicySidePanelDetailsModal
+  return getModal(PolicySidePanelDetailsModal, props)
+}
+
+const getFindingSidePanelDetailsModal = props => {
+  FindingSidePanelDetailsModal = FindingSidePanelDetailsModal === undefined ? loadable(() => import(/* webpackChunkName: "details-finding-side-panel-modal" */ '../modals/FindingSidePanelDetailsModal')) : FindingSidePanelDetailsModal
+  return getModal(FindingSidePanelDetailsModal, props)
 }
 
 const getModal = (Component, props) => <Component {...props} />

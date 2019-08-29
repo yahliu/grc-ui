@@ -19,9 +19,15 @@ export const resourceActions = (action, dispatch, resourceType, data, hasService
         label: { primaryBtn: 'modal.button.submit', label: `modal.edit-${resourceType.name.toLowerCase()}.label`, heading: `modal.edit-${resourceType.name.toLowerCase()}.heading` },
         data: { kind: resourceType.name, ...data }}))
   }
-  case 'table.actions.sidepanel': {
+  case 'table.actions.policy.sidepanel': {
     return dispatch(updateModal(
-      { open: true, type: 'side-panel', resourceType,
+      { open: true, type: 'policy-side-panel', resourceType,
+        label: { label: `modal.edit-${resourceType.name.toLowerCase()}.label`, heading: `modal.edit-${resourceType.name.toLowerCase()}.heading` },
+        data: { kind: resourceType.name, ...data }}))
+  }
+  case 'table.actions.finding.sidepanel': {
+    return dispatch(updateModal(
+      { open: true, type: 'finding-side-panel', resourceType,
         label: { label: `modal.edit-${resourceType.name.toLowerCase()}.label`, heading: `modal.edit-${resourceType.name.toLowerCase()}.heading` },
         data: { kind: resourceType.name, ...data }}))
   }

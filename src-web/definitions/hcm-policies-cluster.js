@@ -16,7 +16,7 @@ export default {
   primaryKey: 'cluster',
   secondaryKey: 'metadata.namespace',
   tableActions: [
-    'table.actions.sidepanel',
+    'table.actions.policy.sidepanel',
   ],
   tableKeys: [
     {
@@ -37,7 +37,7 @@ export default {
       transformFunction: getLabels,
     }
   ],
-  violatedTable: {
+  clusterViolatedSidePanel: {
     // title: 'cluster.violated.policy',
     headerRows: ['', 'table.header.policy.name', 'table.header.rule.violation', 'table.header.control'],
     subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason'],

@@ -21,12 +21,12 @@ export default {
       msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
     },
+    // {
+    //   msgKey: 'table.header.namespace',
+    //   resourceKey: 'namespace',
+    // },
     {
-      msgKey: 'table.header.namespace',
-      resourceKey: 'namespace',
-    },
-    {
-      msgKey: 'table.header.severity',
+      msgKey: 'overview.recent.activity.severity.high',
       resourceKey: 'severity',
     },
     {
@@ -35,6 +35,22 @@ export default {
       transformFunction: getHighSeverityObjTostring,
     },
   ],
+  clusterFindingSidePanel: {
+    headerRows: ['', 'table.header.findingName', 'table.header.severity'],
+    subHeaders: ['tabs.detail', ''],
+    rows: [
+      {
+        cells: [
+          {
+            resourceKey: 'shortDescription',
+          },
+          {
+            resourceKey: 'finding.severity',
+          }
+        ]
+      }
+    ]
+  },
 }
 
 export function getHighSeverityObjTostring(item) {

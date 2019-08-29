@@ -22,6 +22,8 @@ import ResourceOverviewModule from '../modules/SubResourceListModule'
 import getResourceDefinitions from '../../definitions'
 import msgs from '../../../nls/platform.properties'
 import queryString from 'query-string'
+import {GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE} from '../../../lib/shared/constants'
+import {getPollInterval} from '../../components/common/RefreshTimeSelect'
 
 resources(() => {
   require('../../../scss/side-panel-modal.scss')
@@ -55,7 +57,7 @@ function getHeader(data) {
 }
 
 
-class SidePanelDetailsModal extends React.PureComponent {
+class PolicySidePanelDetailsModal extends React.PureComponent {
 
   handleModalClose = () => {
     const { updateModal, location, history } = this.props
@@ -81,6 +83,7 @@ class SidePanelDetailsModal extends React.PureComponent {
     const { title, data, resourceType, locale } = this.props
     const { header, descr, percent, violation, cluster, policy } = getHeader(data)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
+    const pollInterval = getPollInterval(GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE, 'sidePanel')
     return (
       <div className={'side-panel-modal'}>
         <Modal
@@ -103,9 +106,7 @@ class SidePanelDetailsModal extends React.PureComponent {
             </div>
             <div className={'bx--modal-content-body'}>
               <Query query={cluster ? AllPoliciesInCluster :  AllClustersInPolicy}
-                variables={cluster ? {cluster} : {policy}} pollInterval={3600000}
-                /*side panel auto refresh every 60 minutes*/
-              >
+                variables={cluster ? {cluster} : {policy}} pollInterval={pollInterval}>
                 {( {data, loading, error} ) => {
                   if (loading) {
                     // spinner if loading
@@ -141,7 +142,6 @@ class SidePanelDetailsModal extends React.PureComponent {
   }
 }
 
-//eslint-disable-next-line
 const ClustersTable = ({items, type, inapplicable}) => {
   items = items.map((policy, index) => {
     let violatedNum = 0
@@ -202,7 +202,7 @@ const ClustersTable = ({items, type, inapplicable}) => {
   return (
     <div className='overview-content'>
       <ResourceOverviewModule
-        staticResourceData={staticResourceData.violatedTable}
+        staticResourceData={staticResourceData.clusterViolatedSidePanel}
         items={items}
         listSubItems={true}
       />
@@ -210,7 +210,6 @@ const ClustersTable = ({items, type, inapplicable}) => {
   )
 }
 
-//eslint-disable-next-line
 const PoliciesTable = ({items, type, inapplicable}) => {
   items = items.map((cluster, index) => {
     const policy = _.get(cluster, 'policy', [])
@@ -262,7 +261,7 @@ const PoliciesTable = ({items, type, inapplicable}) => {
   return (
     <div className='overview-content'>
       <ResourceOverviewModule
-        staticResourceData={staticResourceData.violatedTable}
+        staticResourceData={staticResourceData.policyViolatedSidePanel}
         items={items}
         listSubItems={true}
         linkFixedName={linkFixedName}
@@ -271,7 +270,6 @@ const PoliciesTable = ({items, type, inapplicable}) => {
   )
 }
 
-//eslint-disable-next-line
 const ProcessBar = ({percent}) => {
   const width = Math.min(window.innerWidth * 0.3, window.innerHeight * 0.4), height = 12, label = 'label', r = 6, w = width * percent
   return (
@@ -282,8 +280,23 @@ const ProcessBar = ({percent}) => {
   )
 }
 
+ClustersTable.propTypes = {
+  inapplicable: PropTypes.string,
+  items: PropTypes.array,
+  type: PropTypes.object,
+}
 
-SidePanelDetailsModal.propTypes = {
+PoliciesTable.propTypes = {
+  inapplicable: PropTypes.string,
+  items: PropTypes.array,
+  type: PropTypes.object,
+}
+
+ProcessBar.propTypes = {
+  percent: PropTypes.number,
+}
+
+PolicySidePanelDetailsModal.propTypes = {
   data: PropTypes.object,
   history: PropTypes.object.isRequired,
   locale: PropTypes.string,
@@ -304,5 +317,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SidePanelDetailsModal))
-
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PolicySidePanelDetailsModal))

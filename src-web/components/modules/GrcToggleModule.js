@@ -17,7 +17,7 @@ import { ContentSwitcher, Switch } from 'carbon-components-react'
 import getResourceDefinitions from '../../definitions'
 import { makeGetVisibleTableItemsSelector } from '../../reducers/common'
 import ResourceList from '../common/ResourceList'
-import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData } from '../common/FormatTableData'
+import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData, formatExpandablePolicies } from '../common/FormatTableData'
 import pageWithUrlQuery from '../common/withUrlQuery'
 import queryString from 'query-string'
 import resources from '../../../lib/shared/resources'
@@ -45,7 +45,7 @@ class GrcToggleModule extends React.Component {
           {...this.props}
           detailsTabs={['policies']}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_POLICY}
-          listData={this.formatExpandablePolicies(grcItems)}
+          listData={formatExpandablePolicies(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
           tabs={secondaryHeaderProps.tabs}
@@ -53,7 +53,7 @@ class GrcToggleModule extends React.Component {
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
           placeHolderText={msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)}
-          autoAction='table.actions.sidepanel'
+          autoAction='table.actions.policy.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
           handleCreatePolicy={handleCreatePolicy}>
@@ -71,7 +71,7 @@ class GrcToggleModule extends React.Component {
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
           placeHolderText={msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)}
-          autoAction='table.actions.sidepanel'
+          autoAction='table.actions.policy.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
           topButton={grcTabSwitcher}>
@@ -89,7 +89,7 @@ class GrcToggleModule extends React.Component {
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
           placeHolderText={msgs.get('tabs.grc.toggle.securityFindings.placeHolderText', locale)}
-          autoAction='table.actions.sidepanel'
+          autoAction='table.actions.finding.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
           topButton={grcTabSwitcher}>
@@ -107,7 +107,7 @@ class GrcToggleModule extends React.Component {
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
           placeHolderText={msgs.get('tabs.grc.toggle.clusterFindings.placeHolderText', locale)}
-          autoAction='table.actions.sidepanel'
+          autoAction='table.actions.finding.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
           topButton={grcTabSwitcher}>
@@ -139,18 +139,6 @@ class GrcToggleModule extends React.Component {
         </ContentSwitcher>
       </div>
     )
-  }
-
-  formatExpandablePolicies(policies) {
-    const result = []
-    policies.forEach(policy => {
-      if(policy) {
-        const subItems = [{name: 'policy.pb', items: policy.placementBindings.map(pb => pb.metadata.name)},
-          {name: 'policy.pp', items: policy.placementPolicies.map(pp => pp.metadata.name)}]
-        result.push({...policy, subItems})
-      }
-    })
-    return result
   }
 
   onChange() {

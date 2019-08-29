@@ -15,6 +15,9 @@ export default {
   defaultSortField: 'shortDescription',
   primaryKey: 'name',
   secondaryKey: 'finding.severity',
+  tableActions: [
+    'table.actions.finding.sidepanel',
+  ],
   tableKeys: [
     {
       msgKey: 'table.header.description',
@@ -54,6 +57,21 @@ export default {
       transformFunction: getAge
     },
   ],
+  securityFindingSidePanel: {
+    headerRows: ['tabs.detail', ''],
+    rows: [
+      {
+        cells: [
+          {
+            resourceKey: 'key',
+          },
+          {
+            resourceKey: 'value',
+          }
+        ]
+      }
+    ]
+  },
 }
 
 function compressArray(items){
