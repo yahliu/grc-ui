@@ -636,13 +636,13 @@ exports[`CreationView component renders as expected 1`] = `
             </div>
           </div>
           <div
-            aria-label={undefined}
+            aria-label="Previous"
             className="editor-bar-button  disabled"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex="0"
-            title={undefined}
+            title="Previous"
           >
             <svg
               height="16px"
@@ -654,13 +654,13 @@ exports[`CreationView component renders as expected 1`] = `
             </svg>
           </div>
           <div
-            aria-label={undefined}
+            aria-label="Next"
             className="editor-bar-button  disabled"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex="0"
-            title={undefined}
+            title="Next"
           >
             <svg
               height="16px"
@@ -675,13 +675,13 @@ exports[`CreationView component renders as expected 1`] = `
             className="editor-bar-spacer"
           />
           <div
-            aria-label={undefined}
+            aria-label="Undo"
             className="editor-bar-button  disabled"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex="0"
-            title={undefined}
+            title="Undo"
           >
             <svg
               height="16px"
@@ -693,13 +693,13 @@ exports[`CreationView component renders as expected 1`] = `
             </svg>
           </div>
           <div
-            aria-label={undefined}
+            aria-label="Redo"
             className="editor-bar-button  disabled"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex="0"
-            title={undefined}
+            title="Redo"
           >
             <svg
               height="16px"
@@ -711,13 +711,13 @@ exports[`CreationView component renders as expected 1`] = `
             </svg>
           </div>
           <div
-            aria-label={undefined}
+            aria-label="Restore"
             className="editor-bar-button  disabled"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex="0"
-            title={undefined}
+            title="Restore"
           >
             <svg
               height="16px"

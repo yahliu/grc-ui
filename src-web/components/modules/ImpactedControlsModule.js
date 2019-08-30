@@ -60,6 +60,10 @@ export default class ImpactedControlsModule extends React.Component {
     this.fixDropdown()
   }
 
+  componentWillUnmount() {
+    tooltip.style('display', 'none')
+  }
+
   render() {
     this.cardData = this.getCardData()
     const { locale } = this.context
