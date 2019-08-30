@@ -111,7 +111,8 @@ export default class RecentActivityModule extends React.Component {
               items={policies}
               threshold={this.state.threshold}
               updateThreshold={this.thresholdCallback}
-              handleDrillDownClick={handleDrillDownClick} />
+              handleDrillDownClick={handleDrillDownClick}
+            />
             <TopInformationModule
               type={'findings'}
               viewState={viewState}
@@ -119,7 +120,8 @@ export default class RecentActivityModule extends React.Component {
               items={findings}
               threshold={this.state.threshold}
               updateThreshold={this.thresholdCallback}
-              handleDrillDownClick={handleDrillDownClick} />
+              handleDrillDownClick={handleDrillDownClick}
+            />
           </div>
         </div>
       </div>

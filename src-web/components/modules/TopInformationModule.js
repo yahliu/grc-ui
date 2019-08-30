@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*******************************************************************************
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corporation 2019. All Rights Reserved.
@@ -40,13 +41,18 @@ export default class TopInformationModule extends React.Component {
     const {viewState: {topViolationChoice=TopInformationSelections.clusters,topFindingChoice=TopInformationSelections.findings}} = props
     this.state = {
       topViolationChoice,
-      topFindingChoice
+      topFindingChoice,
+      cardData: []
     }
     this.onChange = this.onChange.bind(this)
   }
 
+  componentDidMount() {
+    this.setCardData()
+  }
+
   render() {
-    let cardData = this.getCardData()
+    let cardData = this.state.cardData
     if (cardData.length>0) {
       if (cardData.length>this.props.threshold) {
         cardData = cardData.slice(0,this.props.threshold)
@@ -65,6 +71,10 @@ export default class TopInformationModule extends React.Component {
         </div>
       )
     }
+  }
+
+  setCardData() {
+    this.setState({ cardData: this.getCardData()})
   }
 
   renderNoInformations() {
@@ -181,7 +191,6 @@ export default class TopInformationModule extends React.Component {
           description = _.get(item, 'shortDescription', 'unknown')
           choice = msgs.get('overview.top.informations.finding.clusters').toLowerCase()
           nameSpace = _.get(item, 'context.namespaceName', 'unknown')
-          // itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
           break
         }
         let data = dataMap[name]
