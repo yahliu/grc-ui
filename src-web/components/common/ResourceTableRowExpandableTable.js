@@ -55,7 +55,7 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
                 if(subRow && subRow.id && subRow.cells) {
                   return (
                     <TableRow key={subRow.id}>
-                      {subRow.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
+                      {subRow.cells.map((cell, index)=> <TableCell key={cell} className={'bx--table-subRowsArray-subRow-index-'+index}>{cell}</TableCell>)}
                     </TableRow>
                   )
                 }

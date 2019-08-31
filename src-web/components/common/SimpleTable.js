@@ -119,7 +119,7 @@ class StructuredListModule extends React.Component {
                     if(row && row.id){
                       return (
                         <TableRow key={row.id}>
-                          {rows[0].cells && rows[0].cells.map(cell => <TableCell key={cell.resourceKey+'Cell'}>{transform(row, cell, this.context.locale)}</TableCell>)}
+                          {rows[0].cells && rows[0].cells.map((cell, index)=> <TableCell key={cell.resourceKey+'Cell'} className={row.id.includes('S_F_S_P')?'S_F_S_P_'+index:''}>{transform(row, cell, this.context.locale)}</TableCell>)}
                         </TableRow>
                       )
                     }

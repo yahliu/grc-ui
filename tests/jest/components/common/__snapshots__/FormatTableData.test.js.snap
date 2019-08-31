@@ -1,0 +1,1631 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatExpandablePolicies should correctly format 1`] = `
+Array [
+  Object {
+    "__typename": "Compliance",
+    "clusterCompliant": "0/2",
+    "metadata": Object {
+      "__typename": "Metadata",
+      "annotations": Object {
+        "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+        "policy.mcm.ibm.com/controls": "VA",
+        "policy.mcm.ibm.com/standards": "BSA",
+        "seed-generation": "1",
+      },
+      "name": "my-policy-test",
+      "namespace": "mcm",
+      "resourceVersion": "1524346",
+      "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy-test",
+    },
+    "name": "my-policy-test",
+    "namespace": "mcm",
+    "placementBindings": Array [
+      Object {
+        "__typename": "PlacementBinding",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "binding-my-policy-test",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-my-policy-test",
+        },
+      },
+    ],
+    "placementPolicies": Array [
+      Object {
+        "__typename": "PlacementPolicy",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "placement-my-policy-test",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-my-policy-test",
+        },
+      },
+    ],
+    "policyCompliant": "0/2",
+    "raw": Object {
+      "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+      "kind": "Policy",
+      "metadata": Object {
+        "annotations": Object {
+          "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+          "policy.mcm.ibm.com/controls": "VA",
+          "policy.mcm.ibm.com/standards": "BSA",
+          "seed-generation": "1",
+        },
+        "creationTimestamp": "2019-07-23T21:12:04Z",
+        "finalizers": Array [
+          "propagator.finalizer.mcm.ibm.com",
+        ],
+        "generation": 7,
+        "name": "my-policy-test",
+        "namespace": "mcm",
+        "resourceVersion": "1524346",
+        "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy-test",
+        "uid": "85840587-ad8e-11e9-8a41-005056a061f1",
+      },
+      "spec": Object {
+        "-templates": Array [
+          Object {
+            "Definition": Object {
+              "apiVersion": "v1",
+              "kind": "Pod",
+              "metadata": Object {
+                "name": "nginx-pod",
+              },
+              "spec": Object {
+                "containers": Array [
+                  Object {
+                    "image": "nginx:1.7.9",
+                    "name": "nginx",
+                    "ports": Array [
+                      Object {
+                        "containerPort": 80,
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+            "complianceType": "musthave",
+            "status": Object {
+              "Validity": Object {},
+            },
+          },
+        ],
+        "complianceType": "musthave",
+        "namespaces": Object {
+          "exclude": Array [
+            "kube-*",
+          ],
+          "include": Array [
+            "default",
+          ],
+        },
+        "policy-templates": Array [
+          Object {
+            "Definition": Object {
+              "apiVersion": "policies.ibm.com/v1alpha1",
+              "kind": "MutationPolicy",
+              "metadata": Object {
+                "label": Object {
+                  "category": "System-Integrity",
+                },
+                "name": "mutation-policy-example",
+              },
+              "spec": Object {
+                "conditions": Object {
+                  "ownership": Array [
+                    "ReplicaSet",
+                    "Deployment",
+                    "DeamonSet",
+                    "ReplicationController",
+                  ],
+                },
+                "namespaceSelector": Object {
+                  "exclude": Array [
+                    "kube-system",
+                  ],
+                  "include": Array [
+                    "default",
+                    "kube-*",
+                  ],
+                },
+                "remediationAction": "enforce",
+              },
+            },
+            "status": Object {
+              "Validity": Object {},
+            },
+          },
+        ],
+        "remediationAction": "enforce",
+      },
+      "status": Object {
+        "placementBindings": Array [
+          "binding-my-policy-test",
+        ],
+        "placementPolicies": Array [
+          "placement-my-policy-test",
+        ],
+        "status": Object {
+          "cluster1": Object {
+            "aggregatePoliciesStatus": Object {
+              "my-policy-test": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "cluster1",
+            "compliant": "Compliant",
+          },
+          "clusterhub": Object {
+            "aggregatePoliciesStatus": Object {
+              "my-policy-test": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "clusterhub",
+            "compliant": "Compliant",
+          },
+        },
+      },
+    },
+    "remediation": "enforce",
+    "subItems": Array [
+      Object {
+        "items": Array [
+          "binding-my-policy-test",
+        ],
+        "name": "policy.pb",
+      },
+      Object {
+        "items": Array [
+          "placement-my-policy-test",
+        ],
+        "name": "policy.pp",
+      },
+    ],
+  },
+  Object {
+    "__typename": "Compliance",
+    "clusterCompliant": "1/2",
+    "metadata": Object {
+      "__typename": "Metadata",
+      "annotations": Object {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"Definition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
+",
+        "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+        "policy.mcm.ibm.com/controls": "MutationAdvisor",
+        "policy.mcm.ibm.com/standards": "NIST",
+        "seed-generation": "1",
+      },
+      "name": "policy-ma",
+      "namespace": "mcm",
+      "resourceVersion": "1347579",
+      "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
+    },
+    "name": "policy-ma",
+    "namespace": "mcm",
+    "placementBindings": Array [
+      Object {
+        "__typename": "PlacementBinding",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "binding-ma",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-ma",
+        },
+      },
+    ],
+    "placementPolicies": Array [
+      Object {
+        "__typename": "PlacementPolicy",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "placement-ma",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-ma",
+        },
+      },
+    ],
+    "policyCompliant": "1/2",
+    "raw": Object {
+      "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+      "kind": "Policy",
+      "metadata": Object {
+        "annotations": Object {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"Definition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
+",
+          "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+          "policy.mcm.ibm.com/controls": "MutationAdvisor",
+          "policy.mcm.ibm.com/standards": "NIST",
+          "seed-generation": "1",
+        },
+        "creationTimestamp": "2019-07-16T13:18:48Z",
+        "finalizers": Array [
+          "propagator.finalizer.mcm.ibm.com",
+        ],
+        "generation": 45,
+        "name": "policy-ma",
+        "namespace": "mcm",
+        "resourceVersion": "1347579",
+        "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
+        "uid": "3f218d45-a7cc-11e9-8a41-005056a061f1",
+      },
+      "spec": Object {
+        "namespaces": Object {},
+        "policy-templates": Array [
+          Object {
+            "Definition": Object {
+              "apiVersion": "policies.ibm.com/v1alpha1",
+              "kind": "MutationPolicy",
+              "metadata": Object {
+                "label": Object {
+                  "category": "System-Integrity",
+                },
+                "name": "mutation-policy-example",
+              },
+              "spec": Object {
+                "conditions": Object {
+                  "ownership": Array [
+                    "ReplicaSet",
+                    "Deployment",
+                    "DeamonSet",
+                    "ReplicationController",
+                  ],
+                },
+                "namespaceSelector": Object {
+                  "exclude": Array [
+                    "kube-system",
+                  ],
+                  "include": Array [
+                    "default",
+                    "kube-*",
+                  ],
+                },
+                "remediationAction": "enforce",
+              },
+            },
+            "status": Object {
+              "Validity": Object {},
+            },
+          },
+        ],
+        "remediationAction": "enforce",
+      },
+      "status": Object {
+        "placementBindings": Array [
+          "binding-ma",
+        ],
+        "placementPolicies": Array [
+          "placement-ma",
+        ],
+        "status": Object {
+          "cluster1": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-ma": Object {
+                "compliant": "NonCompliant",
+              },
+            },
+            "clustername": "cluster1",
+            "compliant": "NonCompliant",
+          },
+          "clusterhub": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-ma": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "clusterhub",
+            "compliant": "Compliant",
+          },
+        },
+      },
+    },
+    "remediation": "enforce",
+    "subItems": Array [
+      Object {
+        "items": Array [
+          "binding-ma",
+        ],
+        "name": "policy.pb",
+      },
+      Object {
+        "items": Array [
+          "placement-ma",
+        ],
+        "name": "policy.pp",
+      },
+    ],
+  },
+  Object {
+    "__typename": "Compliance",
+    "clusterCompliant": "0/2",
+    "metadata": Object {
+      "__typename": "Metadata",
+      "annotations": Object {
+        "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+        "policy.mcm.ibm.com/controls": "MutationAdvisor,CertificateManager",
+        "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+        "seed-generation": "1",
+      },
+      "name": "policy-pod",
+      "namespace": "mcm",
+      "resourceVersion": "1524369",
+      "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-pod",
+    },
+    "name": "policy-pod",
+    "namespace": "mcm",
+    "placementBindings": Array [
+      Object {
+        "__typename": "PlacementBinding",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "binding-pod",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-pod",
+        },
+      },
+    ],
+    "placementPolicies": Array [
+      Object {
+        "__typename": "PlacementPolicy",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "placement-pod",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-pod",
+        },
+      },
+    ],
+    "policyCompliant": "0/2",
+    "raw": Object {
+      "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+      "kind": "Policy",
+      "metadata": Object {
+        "annotations": Object {
+          "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+          "policy.mcm.ibm.com/controls": "MutationAdvisor,CertificateManager",
+          "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+          "seed-generation": "1",
+        },
+        "creationTimestamp": "2019-07-16T13:16:46Z",
+        "finalizers": Array [
+          "propagator.finalizer.mcm.ibm.com",
+        ],
+        "generation": 20,
+        "name": "policy-pod",
+        "namespace": "mcm",
+        "resourceVersion": "1524369",
+        "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-pod",
+        "uid": "f61a25eb-a7cb-11e9-8a41-005056a061f1",
+      },
+      "spec": Object {
+        "-templates": Array [
+          Object {
+            "Definition": Object {
+              "apiVersion": "v1",
+              "kind": "Pod",
+              "metadata": Object {
+                "name": "nginx-pod",
+              },
+              "spec": Object {
+                "containers": Array [
+                  Object {
+                    "image": "nginx:1.7.9",
+                    "name": "nginx",
+                    "ports": Array [
+                      Object {
+                        "containerPort": 80,
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+            "complianceType": "musthave",
+            "status": Object {
+              "Validity": Object {},
+            },
+          },
+        ],
+        "complianceType": "musthave",
+        "namespaces": Object {
+          "exclude": Array [
+            "kube*",
+          ],
+          "include": Array [
+            "default",
+          ],
+        },
+        "remediationAction": "inform",
+      },
+      "status": Object {
+        "placementBindings": Array [
+          "binding-pod",
+        ],
+        "placementPolicies": Array [
+          "placement-pod",
+        ],
+        "status": Object {
+          "cluster1": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-pod": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "cluster1",
+            "compliant": "Compliant",
+          },
+          "clusterhub": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-pod": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "clusterhub",
+            "compliant": "Compliant",
+          },
+        },
+      },
+    },
+    "remediation": "inform",
+    "subItems": Array [
+      Object {
+        "items": Array [
+          "binding-pod",
+        ],
+        "name": "policy.pb",
+      },
+      Object {
+        "items": Array [
+          "placement-pod",
+        ],
+        "name": "policy.pp",
+      },
+    ],
+  },
+  Object {
+    "__typename": "Compliance",
+    "clusterCompliant": "0/2",
+    "metadata": Object {
+      "__typename": "Metadata",
+      "annotations": Object {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndCommunicationsProtections,SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor,VA\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST,HIPAA\\"},\\"name\\":\\"policy-role\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"namespaces\\":{\\"exclude\\":[\\"kube*\\"],\\"include\\":[\\"default\\"]},\\"remediationAction\\":\\"inform\\",\\"role-templates\\":[{\\"apiVersion\\":\\"roletemplate.mcm.ibm.com/v1alpha1\\",\\"complianceType\\":\\"musthave\\",\\"metadata\\":{\\"name\\":\\"operator-role-policy\\",\\"namespace\\":\\"\\"},\\"rules\\":[{\\"complianceType\\":\\"musthave\\",\\"policyRule\\":{\\"apiGroups\\":[\\"extensions\\",\\"apps\\"],\\"resources\\":[\\"deployments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\",\\"patch\\"]}}],\\"selector\\":{\\"matchLabels\\":{\\"dev\\":\\"true\\"}}}]}}
+",
+        "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+        "policy.mcm.ibm.com/controls": "MutationAdvisor,VA",
+        "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+        "seed-generation": "1",
+      },
+      "name": "policy-role",
+      "namespace": "mcm",
+      "resourceVersion": "1513562",
+      "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-role",
+    },
+    "name": "policy-role",
+    "namespace": "mcm",
+    "placementBindings": Array [
+      Object {
+        "__typename": "PlacementBinding",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "binding-role",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-role",
+        },
+      },
+    ],
+    "placementPolicies": Array [
+      Object {
+        "__typename": "PlacementPolicy",
+        "metadata": Object {
+          "__typename": "Metadata",
+          "name": "placement-role",
+          "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-role",
+        },
+      },
+    ],
+    "policyCompliant": "0/2",
+    "raw": Object {
+      "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+      "kind": "Policy",
+      "metadata": Object {
+        "annotations": Object {
+          "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndCommunicationsProtections,SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor,VA\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST,HIPAA\\"},\\"name\\":\\"policy-role\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"namespaces\\":{\\"exclude\\":[\\"kube*\\"],\\"include\\":[\\"default\\"]},\\"remediationAction\\":\\"inform\\",\\"role-templates\\":[{\\"apiVersion\\":\\"roletemplate.mcm.ibm.com/v1alpha1\\",\\"complianceType\\":\\"musthave\\",\\"metadata\\":{\\"name\\":\\"operator-role-policy\\",\\"namespace\\":\\"\\"},\\"rules\\":[{\\"complianceType\\":\\"musthave\\",\\"policyRule\\":{\\"apiGroups\\":[\\"extensions\\",\\"apps\\"],\\"resources\\":[\\"deployments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\",\\"patch\\"]}}],\\"selector\\":{\\"matchLabels\\":{\\"dev\\":\\"true\\"}}}]}}
+",
+          "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+          "policy.mcm.ibm.com/controls": "MutationAdvisor,VA",
+          "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+          "seed-generation": "1",
+        },
+        "creationTimestamp": "2019-07-16T13:19:03Z",
+        "finalizers": Array [
+          "propagator.finalizer.mcm.ibm.com",
+        ],
+        "generation": 17,
+        "name": "policy-role",
+        "namespace": "mcm",
+        "resourceVersion": "1513562",
+        "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-role",
+        "uid": "47dbc091-a7cc-11e9-8a41-005056a061f1",
+      },
+      "spec": Object {
+        "namespaces": Object {
+          "exclude": Array [
+            "kube*",
+          ],
+          "include": Array [
+            "default",
+          ],
+        },
+        "remediationAction": "inform",
+        "role-templates": Array [
+          Object {
+            "apiVersion": "roletemplate.mcm.ibm.com/v1alpha1",
+            "complianceType": "musthave",
+            "metadata": Object {
+              "creationTimestamp": null,
+              "name": "operator-role-policy",
+            },
+            "rules": Array [
+              Object {
+                "complianceType": "musthave",
+                "policyRule": Object {
+                  "apiGroups": Array [
+                    "extensions",
+                    "apps",
+                  ],
+                  "resources": Array [
+                    "deployments",
+                  ],
+                  "verbs": Array [
+                    "get",
+                    "list",
+                    "watch",
+                    "create",
+                    "delete",
+                    "patch",
+                  ],
+                },
+              },
+            ],
+            "selector": Object {
+              "matchLabels": Object {
+                "dev": "true",
+              },
+            },
+            "status": Object {
+              "Validity": Object {},
+            },
+          },
+        ],
+      },
+      "status": Object {
+        "placementBindings": Array [
+          "binding-role",
+        ],
+        "placementPolicies": Array [
+          "placement-role",
+        ],
+        "status": Object {
+          "cluster1": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-role": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "cluster1",
+            "compliant": "Compliant",
+          },
+          "clusterhub": Object {
+            "aggregatePoliciesStatus": Object {
+              "policy-role": Object {
+                "compliant": "Compliant",
+              },
+            },
+            "clustername": "clusterhub",
+            "compliant": "Compliant",
+          },
+        },
+      },
+    },
+    "remediation": "inform",
+    "subItems": Array [
+      Object {
+        "items": Array [
+          "binding-role",
+        ],
+        "name": "policy.pb",
+      },
+      Object {
+        "items": Array [
+          "placement-role",
+        ],
+        "name": "policy.pp",
+      },
+    ],
+  },
+]
+`;
+
+exports[`formatFindingsToClustersTableData should correctly format 1`] = `
+Array [
+  Object {
+    "cluster": "cluster1",
+    "findingsUnderCluster": Array [
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "7a6dcc86-c742-11e9-a4d4-005056a061f1",
+          "resourceName": "1566742364066-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "LOW",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-7a6dcc86-c742-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "77a883dc-c6bb-11e9-a4d4-005056a061f1",
+          "resourceName": "1566684377115-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-77a883dc-c6bb-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "48595041-c5ab-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567482876-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-48595041-c5ab-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "11f8f455-c5ab-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567391716-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-11f8f455-c5ab-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "d55a4608-c5aa-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567286588-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-d55a4608-c5aa-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "da004294-c5aa-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567294339-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-da004294-c5aa-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "c798e46b-c5aa-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567264757-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-c798e46b-c5aa-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "9373aa2e-c517-11e9-a4d4-005056a061f1",
+          "resourceName": "1566504039600-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-9373aa2e-c517-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "e0d42c54-c4f6-11e9-a4d4-005056a061f1",
+          "resourceName": "1566489996328-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-e0d42c54-c4f6-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "869f2131-c4f3-11e9-a4d4-005056a061f1",
+          "resourceName": "1566488554311-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-869f2131-c4f3-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "122d672e-c4e9-11e9-a4d4-005056a061f1",
+          "resourceName": "1566484061272-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "LOW",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-122d672e-c4e9-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "c4ed8659-c4e8-11e9-a4d4-005056a061f1",
+          "resourceName": "1566483933161-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-c4ed8659-c4e8-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "d5fdd274-c4dd-11e9-a4d4-005056a061f1",
+          "resourceName": "1566479239297-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-d5fdd274-c4dd-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "cluster1",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "cluster1",
+          "resourceCrn": null,
+          "resourceId": "3abdde68-c386-11e9-a4d4-005056a061f1",
+          "resourceName": "1566331664952-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-3abdde68-c386-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+    ],
+    "highSeverity": Object {
+      "Policy that is not compliant": 12,
+    },
+    "severity": "12/14",
+  },
+  Object {
+    "cluster": "clusterhub",
+    "findingsUnderCluster": Array [
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "77a883dc-c6bb-11e9-a4d4-005056a061f1",
+          "resourceName": "1566684377115-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-77a883dc-c6bb-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "48595041-c5ab-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567482876-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "LOW",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-48595041-c5ab-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "11f8f455-c5ab-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567391716-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-11f8f455-c5ab-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "d55a4608-c5aa-11e9-a4d4-005056a061f1",
+          "resourceName": "1566567286588-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-d55a4608-c5aa-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "869f2131-c4f3-11e9-a4d4-005056a061f1",
+          "resourceName": "1566488554311-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-869f2131-c4f3-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "d8d9ab31-c4f0-11e9-a4d4-005056a061f1",
+          "resourceName": "1566487408129-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "LOW",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-d8d9ab31-c4f0-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "122d672e-c4e9-11e9-a4d4-005056a061f1",
+          "resourceName": "1566484061272-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-122d672e-c4e9-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+      Object {
+        "__typename": "Occurrence",
+        "context": Object {
+          "accountId": "id-mycluster-account",
+          "clusterName": "clusterhub",
+          "namespaceName": "Excludes: [kube-*], Includes: [default]",
+          "region": "clusterhub",
+          "resourceCrn": null,
+          "resourceId": "d5fdd274-c4dd-11e9-a4d4-005056a061f1",
+          "resourceName": "1566479239297-policy-test",
+          "resourceType": "Policy",
+          "serviceCrn": null,
+          "serviceName": "security-advisor",
+        },
+        "finding": Object {
+          "certainty": "HIGH",
+          "dataTransferred": null,
+          "networkConnection": null,
+          "nextSteps": Array [
+            Object {
+              "title": "View the details for the compliance problem in the occurrence of the findings.",
+              "url": null,
+            },
+          ],
+          "severity": "HIGH",
+        },
+        "name": "id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-d5fdd274-c4dd-11e9-a4d4-005056a061f1",
+        "reportedBy": Object {
+          "id": "mcm-policy-adapter",
+          "title": "Security Advisor MCM Policy Findings Adapter",
+          "url": null,
+        },
+        "securityClassification": Object {
+          "securityCategories": Array [
+            "SystemAndInformationIntegrity",
+          ],
+          "securityControl": "VA",
+          "securityStandards": Array [
+            "NIST",
+          ],
+        },
+        "shortDescription": "Policy that is not compliant",
+      },
+    ],
+    "highSeverity": Object {
+      "Policy that is not compliant": 7,
+    },
+    "severity": "7/8",
+  },
+]
+`;
+
+exports[`formatPoliciesToClustersTableData should correctly format 1`] = `
+Array [
+  Object {
+    "cluster": "cluster1",
+    "namespace": "mcm",
+    "nonCompliant": Array [
+      "policy-ma",
+    ],
+    "violation": "1/4",
+  },
+  Object {
+    "cluster": "clusterhub",
+    "namespace": "mcm",
+    "nonCompliant": Array [],
+    "violation": "0/4",
+  },
+]
+`;

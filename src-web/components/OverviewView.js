@@ -199,7 +199,8 @@ export class OverviewView extends React.Component {
       default:
         break
       }
-      this.props.history.push(`${this.props.location.pathname}/${page}?${queryString.stringify(paraURL)}`)
+      const slash = this.props.location.pathname.trim().substr(-1) === '/' ? '' : '/'
+      this.props.history.push(`${this.props.location.pathname}${slash}${page}?${queryString.stringify(paraURL)}`)
     }
   }
 }

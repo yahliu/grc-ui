@@ -8,17 +8,23 @@
  *******************************************************************************/
 'use strict'
 
-import { policies, policiesClusters, findings, findingsClusters } from './CommonTestingData'
-import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData } from '../../../../src-web/components/common/FormatTableData'
+import { policies, findings } from './CommonTestingData'
+import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData, formatExpandablePolicies } from '../../../../src-web/components/common/FormatTableData'
 
 describe('formatPoliciesToClustersTableData', () => {
   it('should correctly format', () => {
-    expect(formatPoliciesToClustersTableData(policies)).toEqual(policiesClusters)
+    expect(formatPoliciesToClustersTableData(policies)).toMatchSnapshot()
   })
 })
 
 describe('formatFindingsToClustersTableData', () => {
   it('should correctly format', () => {
-    expect(formatFindingsToClustersTableData(findings)).toEqual(findingsClusters)
+    expect(formatFindingsToClustersTableData(findings)).toMatchSnapshot()
+  })
+})
+
+describe('formatExpandablePolicies', () => {
+  it('should correctly format', () => {
+    expect(formatExpandablePolicies(policies)).toMatchSnapshot()
   })
 })
