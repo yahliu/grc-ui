@@ -119,7 +119,6 @@ export default class TopInformationModule extends React.Component {
             <Tab label={msgs.get('overview.top.informations.clusters', locale)} />
           </Tabs>
         </div>
-
       </div>
     )
   }
@@ -270,29 +269,38 @@ export default class TopInformationModule extends React.Component {
     let value = ''
     switch(type) {
     case 'policies':
+    default:
       switch(index) {
       case 0:
+      default:
         value = 'policies'
         break
       case 1:
         value = 'clusters'
+        break
       }
       this.props.updateViewState({topViolationChoice: value})
       this.setState(()=>{
         return {topViolationChoice: value}
+      }, () => {
+        this.setCardData()
       })
       break
     case 'findings':
       switch(index) {
       case 0:
+      default:
         value = 'findings'
         break
       case 1:
         value = 'clusters'
+        break
       }
       this.props.updateViewState({topFindingChoice: value})
       this.setState(()=>{
         return {topFindingChoice: value}
+      }, () => {
+        this.setCardData()
       })
       break
     }
