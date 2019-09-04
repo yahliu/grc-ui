@@ -52,9 +52,21 @@ export default class TopInformationModule extends React.Component {
 
   render() {
     let cardData = this.state.cardData
+    const { type } = this.props
     if (cardData.length>0) {
       if (cardData.length>this.props.threshold) {
         cardData = cardData.slice(0,this.props.threshold)
+      }
+      if (cardData.length < this.props.threshold && !this.hasEmptyCard(cardData)) {
+        cardData.push({
+          name: type==='policies'?
+            msgs.get('overview.top.informations.policies.empty') :
+            msgs.get('overview.top.informations.findings.empty'),
+          choice: EMPTY_CHOICE,
+          description: [type==='policies'?
+            msgs.get('overview.top.informations.policies.empty.desc') :
+            msgs.get('overview.top.informations.findings.empty.desc')],
+        })
       }
       return (
         <div className='module-top-information'>
@@ -70,6 +82,13 @@ export default class TopInformationModule extends React.Component {
         </div>
       )
     }
+  }
+
+  hasEmptyCard(cards) {
+    if (cards[cards.length - 1]['choice'] === EMPTY_CHOICE) {
+      return true
+    }
+    return false
   }
 
   setCardData() {
