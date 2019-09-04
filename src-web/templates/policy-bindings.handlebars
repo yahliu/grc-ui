@@ -20,9 +20,7 @@ metadata:
   namespace: {{namespace}}
 spec:
   clusterLabels:
-    matchLabels:
-      {{#each bindings}}
-      {{#each values}}
-      {{{ this }}}
-      {{/each}}
+    matchExpressions:
+      {{#each bindingMap}}
+      - {key: {{@key}}, operator: In, values: [{{#each this}}{{#if @index}}, {{/if}}"{{this}}"{{/each}}]}
       {{/each}}

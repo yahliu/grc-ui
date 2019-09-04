@@ -218,51 +218,6 @@ exports[`CreationView component renders as expected 1`] = `
         </div>
       </div>
       <div
-        className="creation-view-controls-checkbox"
-      >
-        <div
-          className="bx--form-item bx--checkbox-wrapper"
-        >
-          <input
-            checked={undefined}
-            className="bx--checkbox"
-            id="policy-inform"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          <label
-            className="bx--checkbox-label checkbox"
-            htmlFor="policy-inform"
-            title={null}
-          >
-            <span
-              className="bx--visually-hidden"
-            >
-              
-            </span>
-          </label>
-        </div>
-        <div>
-          Enforce
-        </div>
-        <div
-          className="bx--tooltip-icon"
-        >
-          <button
-            aria-label="Remediation directions for your policy. Select Enforce to automatically remediate your cluster based on your policies. When you select Enforce, a report will be generated informing you of the actions that were taken automatically. Select inform when you want to receive reports on cluster compliance without taking any automatic remediation actions. When inform is selected, remediation actions must be performed manually."
-            className="bx--tooltip__trigger bx--tooltip--icon__top"
-          >
-            <svg
-              className="info-icon"
-            >
-              <use
-                href="#diagramIcons_info"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div
         className="creation-view-controls-multiselect"
       >
         <div
@@ -536,6 +491,51 @@ exports[`CreationView component renders as expected 1`] = `
               </svg>
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        className="creation-view-controls-checkbox"
+      >
+        <div
+          className="bx--form-item bx--checkbox-wrapper"
+        >
+          <input
+            checked={undefined}
+            className="bx--checkbox"
+            id="policy-inform"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <label
+            className="bx--checkbox-label checkbox"
+            htmlFor="policy-inform"
+            title={null}
+          >
+            <span
+              className="bx--visually-hidden"
+            >
+              
+            </span>
+          </label>
+        </div>
+        <div>
+          Enforce
+        </div>
+        <div
+          className="bx--tooltip-icon"
+        >
+          <button
+            aria-label="Remediation directions for your policy. Select Enforce to automatically remediate your cluster based on your policies. When you select Enforce, a report will be generated informing you of the actions that were taken automatically. Select inform when you want to receive reports on cluster compliance without taking any automatic remediation actions. When inform is selected, remediation actions must be performed manually."
+            className="bx--tooltip__trigger bx--tooltip--icon__top"
+          >
+            <svg
+              className="info-icon"
+            >
+              <use
+                href="#diagramIcons_info"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

@@ -112,10 +112,10 @@ export default class CreationView extends React.Component {
           {this.renderTextInput('name', 'name')}
           {this.renderMultiselect('validations', 'specs')}
           {this.renderMultiselect('bindings', 'selectors')}
-          {this.renderCheckbox('inform', 'enforce')}
           {this.renderMultiselect('annotations', 'standards')}
           {this.renderMultiselect('annotations', 'categories')}
           {this.renderMultiselect('annotations', 'controls')}
+          {this.renderCheckbox('inform', 'enforce')}
         </div>
       </div>
     )

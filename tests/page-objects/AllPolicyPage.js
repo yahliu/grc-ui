@@ -29,12 +29,12 @@ module.exports = {
     clusterSelectorDropdown: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__field',
     clusterSelectorDropdownBox: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
     enforce: '.creation-view-controls-checkbox > div.bx--form-item.bx--checkbox-wrapper',
-    standardsDropdown: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box',
-    standardsDropdownBox: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
-    categoriesDropdown: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box',
-    categoriesDropdownBox: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
-    controlsDropdown: '.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box',
-    controlsDropdownBox: '.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    standardsDropdown: '.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box',
+    standardsDropdownBox: '.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    categoriesDropdown: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box',
+    categoriesDropdownBox: '.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
+    controlsDropdown: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box',
+    controlsDropdownBox: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
     summaryCollapse: 'button.collapse > span.collapse-button',
     summaryInfoContainer: '.module-grc-cards > div.card-container-container',
     summaryDropdown: '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1)',
@@ -154,18 +154,18 @@ function createTestPolicy(browser, time) {
   this.expect.element('@clusterSelectorDropdownBox').not.to.be.present
 
   this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
-  this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
+  this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@standardsDropdownBox').not.to.be.present
 
   this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SystemAndInformationIntegrity')
-  this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SystemAndInformationIntegrity')
+  this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@categoriesDropdownBox').not.to.be.present
 
   this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
-  this.click('div.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
+  this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@controlsDropdownBox').not.to.be.present
 
   this.waitForElementNotPresent('@spinner')

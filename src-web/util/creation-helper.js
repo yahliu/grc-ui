@@ -160,15 +160,26 @@ export const getPolicyYAML = (templateData) => {
   // policy bindings
   const bindings = _.get(templateData, 'bindings[0].values')
   if (bindings.length>0) {
+    const bindingMap = {}
+    bindings.forEach(binding=>{
+      binding = /^(.*):.\s*"(.*)"$/.exec(binding)
+      if (binding && binding.length===3) {
+        const [, key, value] = binding
+        let arr = bindingMap[key]
+        if (!arr) {
+          arr = bindingMap[key] = []
+        }
+        arr.push(value)
+      }
+    })
     yaml = yaml.concat(
-      policyBindings(Object.assign({bindings}, templateData)),
+      policyBindings(Object.assign({bindingMap}, templateData)),
     )
   } else {
     yaml = yaml.concat(
       policyBindings(Object.assign({}, templateData)),
     )
   }
-  //
 
   return yaml
 }
@@ -288,14 +299,14 @@ export const getCreateErrors = (parsed, {compliances=[]}, locale) => {
   let errorMsg = null
   const {$raw: {metadata: {name}, spec={}}} = parsed.Policy[0]
   const nameMap = _.keyBy(compliances, 'name')
-  const matchLabels = _.get(parsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchLabels')
+  const match = _.get(parsed, 'PlacementPolicy[0].$raw.spec.clusterLabels')
   if (!name) {
     errorMsg = msgs.get('error.create.policy.noname', locale)
   } else if (nameMap[name]!==undefined) {
     errorMsg = msgs.get('error.create.policy.name.exists', [name], locale)
   } else if (!spec['policy-templates'] && !spec['object-templates'] && !spec['role-templates']) {
     errorMsg = msgs.get('error.create.policy.novalidation', locale)
-  } else if (!matchLabels && parsed.PlacementPolicy) {
+  } else if (!match.matchLabels && !match.matchExpressions && parsed.PlacementPolicy) {
     errorMsg = msgs.get('error.create.policy.nobinding', locale)
   }
   return errorMsg
@@ -342,38 +353,42 @@ export const highliteDifferences = (editor, oldYAML, newYAML) => {
   const diffs = diff(oldRaw, newRaw)
   if (diffs) {
     diffs.forEach(({kind, path, index, item})=>{
-      let newPath = path.shift()
-      if (path.length>0) {
-        newPath += `.${path.join('.$v.')}`
-      }
+      const pathBase = path.shift()
+      let newPath = path.length>0 ? pathBase + `.${path.join('.$v.')}` : pathBase
       let obj = _.get(newSynced, newPath)
       if (obj) {
-
-        // convert A's and E's into 'N's
-        switch (kind) {
-        case 'E': {
-          if (obj.$l>1) {
-            // convert edit to new is multilines added
-            kind = 'N'
-            obj = {$r: obj.$r+1, $l: obj.$l-1}
-          }
-          break
-        }
-        case 'A': {
-          switch (item.kind) {
-          case 'N':
-            // convert new array item to new range
-            kind = 'N'
-            obj = obj.$v[index]
-            break
-          case 'D':
-            // if array delete, ignore any other edits within array
-            // edits are just the comparison of other array items
-            ignorePaths.push(path.join('/'))
+        if (obj.$v) {
+          // convert A's and E's into 'N's
+          switch (kind) {
+          case 'E': {
+            if (obj.$l>1) {
+              // convert edit to new is multilines added
+              kind = 'N'
+              obj = {$r: obj.$r+1, $l: obj.$l-1}
+            }
             break
           }
-          break
-        }
+          case 'A': {
+            switch (item.kind) {
+            case 'N':
+              // convert new array item to new range
+              kind = 'N'
+              obj = obj.$v[index]
+              break
+            case 'D':
+              // if array delete, ignore any other edits within array
+              // edits are just the comparison of other array items
+              ignorePaths.push(path.join('/'))
+              break
+            }
+            break
+          }
+          }
+        } else if (path.length>0 && kind!=='D') {
+          kind = 'N'
+          path.pop()
+          newPath = pathBase + `.${path.join('.$v.')}`
+          obj = _.get(newSynced, newPath)
         }
 
         // if array delete, ignore any other edits within array
