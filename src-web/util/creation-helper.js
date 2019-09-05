@@ -279,17 +279,27 @@ const setCustomAnnotationsData = (annotations, templateData, multiSelectData, us
 
 
 const setCustomSelectorData = (newParsed, templateData, multiSelectData, userMultiSelectData) => {
+  const selectors = []
   const matchLabels = _.get(newParsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchLabels')
   if (matchLabels instanceof Object) {
-    const selectors = []
     Object.entries(matchLabels).forEach(([key, value]) => {
       selectors.push(`${key}: "${value}"`)
     })
-    userMultiSelectData.selectors = selectors.filter(selector=>{
-      return multiSelectData.selectors.indexOf(selector) === -1
-    })
-    templateData.bindings[0].values = selectors
   }
+  const matchExpressions = _.get(newParsed, 'PlacementPolicy[0].$raw.spec.clusterLabels.matchExpressions')
+  if (matchExpressions instanceof Object) {
+    matchExpressions.forEach(({key, operator, values})=>{
+      if (operator==='In') {
+        values.forEach(value => {
+          selectors.push(`${key}: "${value}"`)
+        })
+      }
+    })
+  }
+  userMultiSelectData.selectors = selectors.filter(selector=>{
+    return multiSelectData.selectors.indexOf(selector) === -1
+  })
+  templateData.bindings[0].values = selectors
 }
 
 
