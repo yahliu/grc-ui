@@ -115,14 +115,16 @@
             .card-findings {
               min-width: 7.7rem;
             }
-
-            &:hover {
-              cursor: pointer;
+            &:hover :not(.no-result-dash) {
+              :not(.no-result) {
+                cursor: pointer;
+              }
             }
-
-            &:hover>.card-type{
-              color: $color__blue-51;
-              text-decoration: underline;
+            &:hover>.card-type {
+              :not(.no-result) {
+                color: $color__blue-51;
+                text-decoration: underline;
+              }
             }
           }
         }
