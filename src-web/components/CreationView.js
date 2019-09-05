@@ -110,7 +110,7 @@ export default class CreationView extends React.Component {
       <div className='creation-view-controls-container' >
         <div className='creation-view-controls' >
           {this.renderTextInput('name', 'name')}
-          {this.renderMultiselect('validations', 'specs')}
+          {this.renderMultiselect('validations', 'specs', true)}
           {this.renderMultiselect('bindings', 'selectors')}
           {this.renderMultiselect('annotations', 'standards')}
           {this.renderMultiselect('annotations', 'categories')}
@@ -245,7 +245,7 @@ export default class CreationView extends React.Component {
     )
   }
 
-  renderMultiselect(templateKey, multiSelectKey) {
+  renderMultiselect(templateKey, multiSelectKey, oneSelection) {
     const { locale } = this.context
 
     // get what's available from:
@@ -283,7 +283,8 @@ export default class CreationView extends React.Component {
     const key = multiSelectKey + active.join('-')
     return (
       <React.Fragment>
-        <div className='creation-view-controls-multiselect'>
+        <div className='creation-view-controls-multiselect'
+          ref={oneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, multiSelectKey)} >
           <div className="creation-view-controls-multiselect-title">
             {msgs.get(`creation.view.policy.${multiSelectKey}`, locale)}
             <TooltipIcon direction='top' tooltipText={msgs.get(`policy.create.${multiSelectKey}.tooltip`, locale)}>
@@ -301,8 +302,7 @@ export default class CreationView extends React.Component {
               msgs.get(`creation.view.policy.select.${multiSelectKey}`, locale) :
               activeKeys.join(', ')}
             itemToString={item=>item}
-            ref={this.setMultiSelectCmp.bind(this, multiSelectKey)}
-            onChange={this.onChange.bind(this, multiSelectKey)} />
+            onChange={this.handleChange.bind(this, multiSelectKey)} />
         </div>
       </React.Fragment>
     )
@@ -359,6 +359,30 @@ export default class CreationView extends React.Component {
   }
 
 
+  handleChange(field, evt) {
+    const multiSelect = this.multiSelectCmpMap[field]
+    if (multiSelect) {
+      // if menu is still open don't update until its gone
+      // unfortunately MultiSelect.Filterable doesn't have an onClose
+      const menu = multiSelect.getElementsByClassName('bx--list-box__menu')
+      if (menu && menu.length>0) {
+        multiSelect.selectedItems = evt.selectedItems
+        if (!multiSelect.observer) {
+          multiSelect.observer = new MutationObserver(() => {
+            this.onChange(field, {selectedItems: multiSelect.selectedItems})
+            multiSelect.observer.disconnect()
+            delete multiSelect.observer
+          })
+          multiSelect.observer.observe(menu[0].parentNode, {
+            childList: true
+          })
+        }
+        return
+      }
+    }
+    this.onChange(field, evt)
+  }
+
   onChange(field, evt) {
     // change template data directly
     let updateName = false
@@ -407,10 +431,6 @@ export default class CreationView extends React.Component {
       }
     }
 
-    // close multiselect menus
-    if (this.multiSelectCmpMap[field]) {
-      this.multiSelectCmpMap[field].handleOnOuterClick()
-    }
     const newYAML = getPolicyYAML(templateData)
     const parsedPolicy = parse(newYAML).parsed
     this.setState({templateData, isCustomName, policyYAML: newYAML, parsedPolicy, userMultiSelectData})

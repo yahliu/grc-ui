@@ -151,22 +151,22 @@ function createTestPolicy(browser, time) {
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'cloud: "IBM')
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.expect.element('@clusterSelectorDropdownBox').not.to.be.present
+  this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
 
   this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
   this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.expect.element('@standardsDropdownBox').not.to.be.present
+  this.click('@standardsDropdown').expect.element('@standardsDropdownBox').not.to.be.present
 
   this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SystemAndInformationIntegrity')
   this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.expect.element('@categoriesDropdownBox').not.to.be.present
+  this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
 
   this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
   this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.expect.element('@controlsDropdownBox').not.to.be.present
+  this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
 
   this.waitForElementNotPresent('@spinner')
 
