@@ -3,11 +3,11 @@
         kind: SecretEncryptionPolicy # Kubernetes secrets encryption
         metadata:
           name: secret-encryption-policy-example
-          namespace: kube-system
           label:
             category: "System-Integrity"
         spec:
-          # include are the namespaces you want to watch certificates in, while exclude are the namespaces you explicitly do not want to watch
+          # namespaceSelector does not play a role in secret encryption yet. At least one namespace must be put under include,
+          # but particular namespaces under include and exclude will be ignored
           namespaceSelector:
             include: ["default", "kube-*"]
           # Can be enforce or inform
@@ -15,5 +15,6 @@
           # Indicates whether the secret encryption is enabled
           secretEncryptionEnabled: true
           # Indicates the encryption mechanism. ICP supports two: aescbc and kms
-          encryptionMechanism: kms
+          encryptionMechanism: aescbc
+          # Indicates the severity of noncompliance, used for MCM display. Can be low, medium, or high
           severity: low
