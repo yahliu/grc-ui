@@ -12,6 +12,6 @@ send yes\n;
 
 expect "password:"
 
-send $SELENIUM_PASSWORD\n;
+send AHippopotamusPlaysHopscotchWithAnElephant1\n;
 
 interact
