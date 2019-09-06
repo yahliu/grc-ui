@@ -86,7 +86,16 @@ export const getMultiSelectData = (existing={}) => {
 
 const getSelectorData = (existing) => {
   const {clusterLabels=[]} = existing
-  return _.union(initialSelectors, clusterLabels.map(({key, value}) => {return `${key}: "${value}"`}))
+  return _.union(initialSelectors, clusterLabels.map(({key, value}) => {return `${key}: "${value}"`})).sort((a,b)=>{
+    const aw = a.startsWith('name')
+    const bw = b.startsWith('name')
+    if (aw && !bw) {
+      return 1
+    } else if (!aw && bw) {
+      return -1
+    }
+    return a.localeCompare(b)
+  })
 }
 
 const getAnnotationData = (field, existingAnnotations) => {
