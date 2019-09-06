@@ -331,7 +331,7 @@ exports[`PolicieSubResourceList view renders as expected 1`] = `
                   onClick={[Function]}
                   target="_blank"
                 >
-                  Launch Cluster
+                  Launch cluster
                 </a>
               </p>
             </td>
@@ -391,7 +391,7 @@ exports[`PolicieSubResourceList view renders as expected 1`] = `
                   onClick={[Function]}
                   target="_blank"
                 >
-                  Launch Cluster
+                  Launch cluster
                 </a>
               </p>
             </td>

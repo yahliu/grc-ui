@@ -92,7 +92,7 @@ exports[`CreationView component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select how to validate clusters"
+              placeholder="Begin typing to search for label to select"
               role="combobox"
               value=""
             />
@@ -184,7 +184,7 @@ exports[`CreationView component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select what clusters to validate"
+              placeholder="Begin typing to search for label to select"
               role="combobox"
               value=""
             />
@@ -228,7 +228,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="The name or names of security standards your policy should validate."
+              aria-label="The name or names of security standards your policy should validate. You can only create a new label by adding it directly to the YAML file."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -276,7 +276,7 @@ exports[`CreationView component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select standards this policy belongs to"
+              placeholder="Begin typing to search for label to select"
               role="combobox"
               value=""
             />
@@ -320,7 +320,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="The security control category to which your policy applies."
+              aria-label="The security control category from a specific standard that the policy applies to. You can only create a new label by adding it directly to the YAML file."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -368,7 +368,7 @@ exports[`CreationView component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select categories this policy belongs to"
+              placeholder="Begin typing to search for label to select"
               role="combobox"
               value=""
             />
@@ -412,7 +412,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="The name of the security control that your policy should reference for validation."
+              aria-label="The name of the security control that is checked to meet specific regulatory requirements. You can only create a new label by adding it directly to the YAML file."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -460,7 +460,7 @@ exports[`CreationView component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select controls this policy belongs to"
+              placeholder="Begin typing to search for label to select"
               role="combobox"
               value=""
             />
@@ -519,13 +519,13 @@ exports[`CreationView component renders as expected 1`] = `
           </label>
         </div>
         <div>
-          Enforce
+          Enforce if supported
         </div>
         <div
           className="bx--tooltip-icon"
         >
           <button
-            aria-label="Remediation directions for your policy. Select Enforce to automatically remediate your cluster based on your policies. When you select Enforce, a report will be generated informing you of the actions that were taken automatically. Select inform when you want to receive reports on cluster compliance without taking any automatic remediation actions. When inform is selected, remediation actions must be performed manually."
+            aria-label="Select Enforce to automatically remediate your cluster based on your policies. When you select Enforce, a report is generated, informing you of the actions that are taken automatically. Note: Depending on the type of controller you are using, the enforce capability might not be available. In those cases, auto-remediation is not executed. Select inform to receive reports on cluster compliance; remediation actions must be performed manually."
             className="bx--tooltip__trigger bx--tooltip--icon__top"
           >
             <svg

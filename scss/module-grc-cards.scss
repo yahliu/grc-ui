@@ -212,6 +212,10 @@
              }
            }
 
+           .card-grc-type {
+            text-transform: uppercase;
+           }
+
            &.violated:hover, &.found:hover, &.high:hover {
              cursor: pointer;
              .card-grc-type {

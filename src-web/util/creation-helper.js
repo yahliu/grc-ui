@@ -39,7 +39,7 @@ export const initialTemplateData = {
 const initalAnnotations = {
   standards: ['NIST', 'PCI', 'FISMA', 'HIPAA'],
   categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
-  controls: ['MutationAdvisor','VA'],
+  controls: ['MutationAdvisor','VulnerbilityAdvisor'],
 }
 
 const initialSelectors = ['cloud: "IBM"']

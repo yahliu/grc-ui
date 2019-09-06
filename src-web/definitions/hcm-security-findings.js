@@ -10,6 +10,7 @@
 
 import _ from 'lodash'
 import { getAge } from '../../lib/client/resource-helper'
+import msgs from '../../nls/platform.properties'
 
 export default {
   defaultSortField: 'shortDescription',
@@ -31,6 +32,7 @@ export default {
     {
       msgKey: 'table.header.severity',
       resourceKey: 'finding.severity',
+      transformFunction: getSeverity
     },
     {
       msgKey: 'table.header.cluster',
@@ -72,6 +74,20 @@ export default {
       }
     ]
   },
+}
+
+function getSeverity(item, locale) {
+  const severity = _.get(item, 'finding.severity')
+  switch(severity) {
+  case 'HIGH':
+    return msgs.get('finding.filter.category.severity.high', locale)
+  case 'MEDIUM':
+    return msgs.get('finding.filter.category.severity.medium', locale)
+  case 'LOW':
+    return msgs.get('finding.filter.category.severity.low', locale)
+  default:
+    return '-'
+  }
 }
 
 function compressArray(items){

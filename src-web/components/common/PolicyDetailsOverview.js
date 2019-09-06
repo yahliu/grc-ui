@@ -83,13 +83,14 @@ class PolicyDetailsOverview extends React.PureComponent{
 
   render() {
     const {staticResourceData, resourceType, error, loading, location} = this.props
-    let {item} = this.props
+    let { item } = this.props
+    const { locale } = this.context
 
     if(error) {
       return <Notification
         title=''
         className='persistent'
-        subtitle={msgs.get(error, this.context.locale)}
+        subtitle={msgs.get(error, locale)}
         kind='error' />
     } else if (loading) {
       return <Loading withOverlay={false} className='content-spinner' />
@@ -149,7 +150,7 @@ class PolicyDetailsOverview extends React.PureComponent{
         })
         modulesBottom.push(
           <div className='vertical-expend overview-content-bottom' key='role-temp-container'>
-            <h5 className='section-title'>Role Templates</h5>
+            <h5 className='section-title'>{msgs.get('table.header.roleTemplates', locale)}</h5>
             <div className='overview-content-bottom'>
               {React.createElement(SimpleTable,
                 {
@@ -167,7 +168,7 @@ class PolicyDetailsOverview extends React.PureComponent{
       if(!_.isEmpty(policyTemplates)){
         modulesBottom.push(
           <div className='vertical-expend overview-content-bottom' key='policy-temp-container'>
-            <h5 className='section-title'>Policy Templates</h5>
+            <h5 className='section-title'>{msgs.get('table.header.policyTemplates', locale)}</h5>
             <div className='overview-content-bottom'>
               {React.createElement(ResourceTableModule,
                 {
@@ -187,7 +188,7 @@ class PolicyDetailsOverview extends React.PureComponent{
       if(!_.isEmpty(objectTemplates)){
         modulesBottom.push(
           <div className='vertical-expend overview-content-bottom' key='obj-temp-container'>
-            <h5 className='section-title'>Object Templates</h5>
+            <h5 className='section-title'>{msgs.get('table.header.objectTemplates', locale)}</h5>
             <div className='overview-content-bottom'>
               {React.createElement(ResourceTableModule,
                 {
@@ -209,7 +210,7 @@ class PolicyDetailsOverview extends React.PureComponent{
     return (
       <div className='overview-content'>
         <div className='vertical-expend'>
-          <h5 className='section-title'>Policy Details</h5>
+          <h5 className='section-title'>{msgs.get('table.header.policyDetails', locale)}</h5>
           <DetailsModule
             numRows = {3}
             numColumns = {3}
@@ -221,7 +222,7 @@ class PolicyDetailsOverview extends React.PureComponent{
         </div>
 
         <div className='vertical-expend'>
-          <h5 className='section-title'>Placement</h5>
+          <h5 className='section-title'>{msgs.get('table.header.placement', locale)}</h5>
           {modulesSecond.length > 0 &&
           <div className='overview-content-second'>
             <div className='overview-content-second-left'>
