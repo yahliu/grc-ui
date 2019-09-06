@@ -22,7 +22,8 @@ const ReactDOMServer = require('react-dom/server'),
       Provider = require('react-redux').Provider,
       router = express.Router({ mergeParams: true }),
       lodash = require('lodash'),
-      request = require('../../lib/server/request')
+      request = require('../../lib/server/request'),
+      i18n = require('node-i18n-util')
 
 var log4js = require('log4js'),
     logger = log4js.getLogger('app')
@@ -59,7 +60,8 @@ function fetchHeader(req, res, store, context) {
     url: `${config.get('cfcRouterUrl')}${config.get('platformHeaderContextPath')}/api/v1/header?serviceId=grc-ui&dev=${process.env.NODE_ENV === 'development'}`,
     json: true,
     headers: {
-      Cookie: createCookie(req)
+      Cookie: createCookie(req),
+      'Accept-Language': i18n.locale(req)
     }
   }
   request(options, null, [200], (err, headerRes) => {
