@@ -42,8 +42,6 @@ const initalAnnotations = {
   controls: ['MutationAdvisor','VulnerbilityAdvisor','SecretEncryption'],
 }
 
-const initialSelectors = ['']
-
 const specs = Object.values(Templates).map(template => {
   const value = template()
   let kindDes = value.match(/kind:(.*) #(.*)/)
@@ -86,7 +84,7 @@ export const getMultiSelectData = (existing={}) => {
 
 const getSelectorData = (existing) => {
   const {clusterLabels=[]} = existing
-  return _.union(initialSelectors, clusterLabels.map(({key, value}) => {return `${key}: "${value}"`})).sort((a,b)=>{
+  return clusterLabels.map(({key, value}) => {return `${key}: "${value}"`}).sort((a,b)=>{
     const aw = a.startsWith('name')
     const bw = b.startsWith('name')
     if (aw && !bw) {
