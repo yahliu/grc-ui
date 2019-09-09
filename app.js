@@ -73,7 +73,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use('*', morgan('dev'))
 }
 
-const csrfMiddleware = csurf({ cookie: true })
+const csrfMiddleware = csurf({
+  cookie: {
+    httpOnly: false,
+    secure: true
+  }
+})
 
 var proxy = require('http-proxy-middleware')
 app.use(`${appConfig.get('contextPath')}/policies/graphql`, cookieParser(), csrfMiddleware, (req, res, next) => {

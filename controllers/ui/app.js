@@ -60,7 +60,7 @@ function fetchHeader(req, res, store, context) {
     url: `${config.get('cfcRouterUrl')}${config.get('platformHeaderContextPath')}/api/v1/header?serviceId=grc-ui&dev=${process.env.NODE_ENV === 'development'}`,
     json: true,
     headers: {
-      Cookie: createCookie(req),
+      Cookie: req.headers.cookie,
       'Accept-Language': i18n.locale(req)
     }
   }
@@ -106,13 +106,6 @@ function fetchHeader(req, res, store, context) {
       console.error(e)
     }
   })
-}
-
-function createCookie(req) {
-  var cookieNames = cookieUtil.getCookieNames()
-  return cookieNames.map(cookieName => {
-    return `${cookieName}=${req.cookies[cookieName]}`
-  }).join('; ')
 }
 
 function getContext(req) {
