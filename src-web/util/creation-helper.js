@@ -39,10 +39,10 @@ export const initialTemplateData = {
 const initalAnnotations = {
   standards: ['NIST', 'PCI', 'FISMA', 'HIPAA'],
   categories: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
-  controls: ['MutationAdvisor','VulnerbilityAdvisor','secretEncryption'],
+  controls: ['MutationAdvisor','VulnerbilityAdvisor','SecretEncryption'],
 }
 
-const initialSelectors = ['cloud: "IBM"']
+const initialSelectors = ['']
 
 const specs = Object.values(Templates).map(template => {
   const value = template.call()

@@ -196,7 +196,7 @@ div.tooltip {
   z-index: 10000;
   width: 175px;
   height: 175px;
-  pointer-events: none;
+  // pointer-events: none;
   background: white;
   border: 1px solid $grc_color_border_gray;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
@@ -238,31 +238,40 @@ div.tooltip {
     }
 
     .findings {
-      .finding {
-        padding-top: 14px;
-        font-size: 14px;
-        display: flex;
-        justify-content: space-between;
-        color: $mcm_color_gray_20;
-
-        .count {
-          font-weight: 300;
+      
+      .tool-tip-drill-down-link {
+        text-decoration: none;
+        .link {
+          &:hover {
+            color: $mcm_color_dark_blue;
+          }
         }
-
-        .severity {
-          font-weight: 600;
-        }
-
-        &.high {
-          border-bottom: 2px solid $grc_color_finding_high;
-        }
-
-        &.medium {
-          border-bottom: 2px solid $grc_color_finding_medium;
-        }
-
-        &.low {
-          border-bottom: 2px solid $grc_color_finding_low;
+        .finding {
+          padding-top: 14px;
+          font-size: 14px;
+          display: flex;
+          justify-content: space-between;
+          color: $mcm_color_gray_20;
+  
+          .count {
+            font-weight: 300;
+          }
+  
+          .severity {
+            font-weight: 600;
+          }
+  
+          &.high {
+            border-bottom: 2px solid $grc_color_finding_high;
+          }
+  
+          &.medium {
+            border-bottom: 2px solid $grc_color_finding_medium;
+          }
+  
+          &.low {
+            border-bottom: 2px solid $grc_color_finding_low;
+          }
         }
       }
     }

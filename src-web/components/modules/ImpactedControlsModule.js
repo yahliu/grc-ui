@@ -20,6 +20,8 @@ import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
 import _ from 'lodash'
+import { Router, withRouter, Link } from 'react-router-dom'
+import queryString from 'query-string'
 
 resources(() => {
   require('../../../scss/module-impacted-controls.scss')
@@ -38,7 +40,7 @@ const tooltip = d3.select('body').append('div')
     }
   })
 
-export default class ImpactedControlsModule extends React.Component {
+class ImpactedControlsModule extends React.Component {
 
   constructor (props) {
     super(props)
@@ -408,44 +410,81 @@ export default class ImpactedControlsModule extends React.Component {
     const { setMap, variableMap, tooltips } = this.cardData
     const tooltipList = _.get(tooltips, `${setKey}.${variableKey}`)
     return tooltipList ? ReactDOMServer.renderToStaticMarkup(
-      <div className='tooltip-text'>
-        <div className='header'>
-          <div className='title'>{setMap[setKey].label.toUpperCase()}</div>
-          <div className='variable'>
-            <div className={`legend ${setMap[setKey].className}`} />
-            {variableMap[variableKey].label}
+      <Router history={this.props.history}>
+        <div className='tooltip-text'>
+          <div className='header'>
+            <div className='title'>{setMap[setKey].label.toUpperCase()}</div>
+            <div className='variable'>
+              <div className={`legend ${setMap[setKey].className}`} />
+              {variableMap[variableKey].label}
+            </div>
+          </div>
+          <div className='findings'>
+            {tooltipList.map(({count, findingType}) => {
+              let label, className
+              switch (findingType) {
+              case SECURITY_TYPES.HIGH:
+                label = msgs.get('overview.recent.activity.severity.high', locale)
+                className = 'high'
+                break
+              case SECURITY_TYPES.MEDIUM:
+                label = msgs.get('overview.recent.activity.severity.medium', locale)
+                className = 'medium'
+                break
+              case SECURITY_TYPES.LOW:
+                label = msgs.get('overview.recent.activity.severity.low', locale)
+                className = 'low'
+                break
+              case SECURITY_TYPES.VIOLATIONS:
+                label = msgs.get('overview.recent.activity.finding.type.violations', locale)
+                className = 'high'
+                break
+              }
+              const pathPrefix = this.props.location.pathname.trim()
+              const slash = pathPrefix.substr(-1) === '/' ? '' : '/'
+              let page = ''
+              const paraURL = {}
+              switch(setMap[setKey].label.toUpperCase()) {
+              case 'POLICY VIOLATIONS':
+              default:
+                page = 'all'
+                paraURL.index = 0
+                break
+              case 'SECURITY FINDINGS':
+                page = 'findings'
+                paraURL.index = 0
+                //Here we can't directly set GRC_FILTER_STATE_COOKIE, 'severity', if so then loop will store
+                //all possible severity level rather than the clicked one. URL para seems the only solution
+                paraURL.severity = _.startCase(className.toLowerCase())
+                break
+              }
+              if(variableMap[variableKey].label){
+                paraURL.filters = `{"textsearch":["${variableMap[variableKey].label}"]}`
+              }
+              const toolTipDrillDownURL = `${pathPrefix}${slash}${page}?${queryString.stringify(paraURL)}`
+              if (count > 0) {
+                return (
+                  <Link to={toolTipDrillDownURL} className='tool-tip-drill-down-link' key={findingType}>
+                    <div key={findingType} className={`finding ${className} link`} >
+                      <div className='count'>{count}</div>
+                      <div className='severity'>{label}</div>
+                    </div>
+                  </Link>
+                )
+              } else {
+                return (
+                  <div className='tool-tip-drill-down-link' key={findingType}>
+                    <div key={findingType} className={`finding ${className}`} >
+                      <div className='count'>{count}</div>
+                      <div className='severity'>{label}</div>
+                    </div>
+                  </div>
+                )
+              }
+            })}
           </div>
         </div>
-        <div className='findings'>
-          {tooltipList.map(({count, findingType}) => {
-            let label, className
-            switch (findingType) {
-            case SECURITY_TYPES.HIGH:
-              label = msgs.get('overview.recent.activity.severity.high', locale)
-              className = 'high'
-              break
-            case SECURITY_TYPES.MEDIUM:
-              label = msgs.get('overview.recent.activity.severity.medium', locale)
-              className = 'medium'
-              break
-            case SECURITY_TYPES.LOW:
-              label = msgs.get('overview.recent.activity.severity.low', locale)
-              className = 'low'
-              break
-            case SECURITY_TYPES.VIOLATIONS:
-              label = msgs.get('overview.recent.activity.finding.type.violations', locale)
-              className = 'high'
-              break
-            }
-            return (
-              <div key={findingType} className={`finding ${className}`} >
-                <div className='count'>{count}</div>
-                <div className='severity'>{label}</div>
-              </div>
-            )
-          })}
-        </div>
-      </div>
+      </Router>
     ) : null
   }
 
@@ -607,7 +646,11 @@ ImpactedControlsModule.propTypes = {
   activeFilters: PropTypes.object,
   availableFilters: PropTypes.object,
   findings: PropTypes.array,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object,
   policies: PropTypes.array,
   updateViewState: PropTypes.func,
   viewState: PropTypes.object,
 }
+
+export default withRouter(ImpactedControlsModule)

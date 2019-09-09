@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { updateResourceToolbar, updateActiveFilters } from '../actions/common'
 import { Loading, Notification } from 'carbon-components-react'
-import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, combineResourceFilters, saveGrcStatePair, replaceGrcState } from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, combineResourceFilters,replaceGrcState } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import { GRC_VIEW_STATE_COOKIE, GRC_FILTER_STATE_COOKIE } from '../../lib/shared/constants'
 import RecentActivityModule from './modules/RecentActivityModule'
@@ -161,10 +161,7 @@ export class OverviewView extends React.Component {
       case 'low'://all low severity findings
         page = 'findings'
         paraURL.index = 0
-        // paraURL.severity = parentType.toUpperCase()
-        // use sessionStorage rather than url to control severity filter
-        // all resource filters are controlled by sessionStorage for consistency
-        saveGrcStatePair(GRC_FILTER_STATE_COOKIE, 'severity', parentType.toUpperCase())
+        paraURL.severity = _.startCase(parentType.toLowerCase())
         break
       case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0

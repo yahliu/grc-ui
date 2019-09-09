@@ -18,7 +18,7 @@ import { Loading, Notification } from 'carbon-components-react'
 import { GRC_VIEW_STATE_COOKIE, GRC_FILTER_STATE_COOKIE } from '../../lib/shared/constants'
 import GrcCardsModule from './modules/GrcCardsModule'
 import GrcToggleModule from './modules/GrcToggleModule'
-import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, replaceGrcState, combineResourceFilters } from '../../lib/client/filter-helper'
+import { filterPolicies, filterFindings, getAvailableGrcFilters, getSavedGrcState, saveGrcState, replaceGrcState, combineResourceFilters, saveGrcStatePair } from '../../lib/client/filter-helper'
 import { showResourceToolbar, hideResourceToolbar } from '../../lib/client/resource-helper'
 import NoResource from './common/NoResource'
 import createDocLink from './common/CreateDocLink'
@@ -55,6 +55,11 @@ class GrcView extends React.Component {
         !_.isEqual(grcItems, this.props.grcItems)) {
       const { locale } = this.context
       const displayType = location.pathname.split('/').pop()
+      //if url has severity special para, store it into sessionStorage before updating active filters
+      const urlParams = queryString.parse(location.search)
+      if (urlParams.severity) {
+        saveGrcStatePair(GRC_FILTER_STATE_COOKIE, 'severity', urlParams.severity)
+      }
 
       let availableGrcFilters
       switch(displayType) {

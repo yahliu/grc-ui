@@ -504,7 +504,7 @@ const FindingCard = ({data, locale, handleClick}) => {
                     handleClick(choice, name, type)
                   }
                   if (high) {
-                    handleClick(choice, name, type, 'HIGH')
+                    handleClick(choice, name, type, 'High')
                   }
                 }
                 const onKeyPress = (e) =>{
