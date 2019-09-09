@@ -29,7 +29,7 @@ resources(() => {
   require('../../../scss/side-panel-modal.scss')
 })
 
-function getHeader(data) {
+function getHeader(data, locale) {
   const kind = _.get(data, 'kind', '')
   let header = '', descr = '', percent = 0, violation = '0/0', cluster = undefined, policy = undefined
   if (kind === 'HCMPolicyPolicy') {
@@ -40,7 +40,7 @@ function getHeader(data) {
     if (!isNaN(vioNum) && !isNaN(totalNum)) {
       percent = +vioNum / +totalNum
     }
-    violation += ' Clusters'
+    violation += ' ' + msgs.get('overview.top.informations.clusters', locale)
     policy = data.name
   } else if (kind === 'HCMPolicyCluster') {
     header = _.get(data, 'cluster', '')
@@ -50,7 +50,7 @@ function getHeader(data) {
     if (!isNaN(vioNum) && !isNaN(totalNum)) {
       percent = +vioNum / +totalNum
     }
-    violation += ' Policies'
+    violation += ' ' + msgs.get('overview.top.informations.policies', locale)
     cluster = data.cluster
   }
   return {header, descr, percent, violation, cluster, policy}
@@ -81,7 +81,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
 
   render(){
     const { title, data, resourceType, locale } = this.props
-    const { header, descr, percent, violation, cluster, policy } = getHeader(data)
+    const { header, descr, percent, violation, cluster, policy } = getHeader(data, locale)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
     const pollInterval = getPollInterval(GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE, 'sidePanel')
     return (
