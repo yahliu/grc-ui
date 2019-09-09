@@ -60,7 +60,7 @@ export class ResourceToolbar extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { availableFilters={}, activeFilters={}, refreshControl={} } = this.props
+    const { availableFilters={}, activeFilters={}, refreshControl={}, location } = this.props
     if (Object.keys(refreshControl).length===0) {
       return null
     }
@@ -76,8 +76,8 @@ export class ResourceToolbar extends React.Component {
               refreshValues = {REFRESH_TIMES}
               refreshControl = {refreshControl}
             />
-            {/* filter results button */}
-            <div tabIndex='0' role={'button'}
+            {/* filter results button, not dispalyed in details page */}
+            { (location.pathname.startsWith('/multicloud/policies/all/') || location.pathname.startsWith('/multicloud/policies/policy/') ) ? null : <div tabIndex='0' role={'button'}
               onClick={this.toggleFilterModel} onKeyPress={this.toggleFilterModelPress}>
               <svg className='button-icon'>
                 <use href={'#diagramIcons_filter'} ></use>
@@ -85,7 +85,7 @@ export class ResourceToolbar extends React.Component {
               <div className='button-label'>
                 {msgs.get('overview.menu.filter', locale)}
               </div>
-            </div>
+            </div>}
           </div>
           {timestamp&&<RefreshTime timestamp={timestamp} reloading={reloading} />}
         </div>
@@ -151,6 +151,7 @@ ResourceToolbar.propTypes = {
   activeFilters: PropTypes.object,
   availableFilters: PropTypes.object,
   filterViewOpen: PropTypes.bool,
+  location: PropTypes.object,
   refreshControl: PropTypes.object,
   updateActiveFilters: PropTypes.func,
 }

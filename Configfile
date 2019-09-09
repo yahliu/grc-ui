@@ -38,8 +38,10 @@ IMAGE_OPENSHIFT_TAGS =GRC Console
 ARCH = $(shell uname -m)
 ifeq ($(ARCH), x86_64)
 	IMAGE_NAME_ARCH =$(IMAGE_NAME)-amd64
+	NETWORK_NAME ?=mcm-network-$(IMAGE_VERSION)
 else
 	IMAGE_NAME_ARCH =$(IMAGE_NAME)-$(ARCH)
+	NETWORK_NAME ?=mcm-network-$(IMAGE_VERSION)-$(shell date +%s)
 endif
 
 ifneq ($(BUILD_HARNESS_ARCH),amd64)
@@ -56,7 +58,6 @@ DOCKER_TAG ?=$(RELEASE_TAG)
 DOCKER_CONTAINER_NAME ?=grc-ui
 DOCKER_IMAGE ?=$(IMAGE_NAME)
 NETWORK_OP ?=--network
-NETWORK_NAME ?=mcm-network-$(IMAGE_VERSION)-$(date +%s)
 IP_OP ?=--ip
 HOST ?=127.0.0.1
 APP_PORT ?=3000
