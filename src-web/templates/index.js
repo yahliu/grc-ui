@@ -22,6 +22,7 @@ import policyVAsecurity from './policy-vasecurity.handlebars'
 import policyKubeEncryption from './policy-kubeencryption.handlebars'
 import policyAudit from './policy-audit.handlebars'
 import policyCis from './policy-cis.handlebars'
+import policyCisOcp from './policy-cis-ocp.handlebars'
 
 export {
   policyPodRole,
@@ -38,4 +39,5 @@ export {
   policyKubeEncryption,
   policyAudit,
   policyCis,
+  policyCisOcp,
 }

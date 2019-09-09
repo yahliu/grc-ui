@@ -45,7 +45,7 @@ const initalAnnotations = {
 const initialSelectors = ['']
 
 const specs = Object.values(Templates).map(template => {
-  const value = template.call()
+  const value = template()
   let kindDes = value.match(/kind:(.*) #(.*)/)
   let type = ''
   if (value.match(/apiVersion: roletemplate.mcm.ibm.com\/v1alpha1/g)) { // role-templates
@@ -56,7 +56,7 @@ const specs = Object.values(Templates).map(template => {
   } else { // policy-templates
     type = 'policy-templates'
   }
-  return { key: `${_.capitalize(kindDes[1].trim())}-${kindDes[2].trim()}`, kind: _.capitalize(kindDes[1].trim()), description: kindDes[2].trim(), value, type}
+  return { key: `${_.capitalize(kindDes[1].trim())}-${kindDes[2].trim()}`, kind: _.capitalize(kindDes[1].trim()), description: kindDes[2].trim(), type, template}
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -159,7 +159,7 @@ export const getPolicyYAML = (templateData) => {
           yaml = yaml.concat('  policy-templates:\n')
         }
       }
-      yaml = yaml.concat(spec.value)
+      yaml = yaml.concat(spec.template(Object.assign({}, templateData)))
     })
   }
   if (!yaml.endsWith('\n')) {
