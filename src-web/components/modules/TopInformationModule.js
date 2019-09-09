@@ -46,8 +46,16 @@ export default class TopInformationModule extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  componentDidMount() {
-    this.setCardData()
+  componentWillMount() {
+    //current items, type when page first loading
+    const { items, type } = this.props
+    this.setCardData(items, type)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //next items, type when update filter on current page
+    const { items, type } = nextProps
+    this.setCardData(items, type)
   }
 
   render() {
@@ -91,8 +99,8 @@ export default class TopInformationModule extends React.Component {
     return false
   }
 
-  setCardData() {
-    this.setState({ cardData: this.getCardData()})
+  setCardData(items, type) {
+    this.setState({ cardData: this.getCardData(items, type)})
   }
 
   renderNoInformations() {
@@ -148,8 +156,7 @@ export default class TopInformationModule extends React.Component {
     return <TopInformations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
   }
 
-  getCardData = () => {
-    const { items, type } = this.props
+  getCardData = (items, type) => {
     const { topViolationChoice, topFindingChoice } = this.state
     const dataMap = {}
     switch (type) {

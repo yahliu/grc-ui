@@ -49,6 +49,28 @@ class GrcView extends React.Component {
     this.handleDrillDownClickGrcView = this.handleDrillDownClickGrcView.bind(this)
   }
 
+  componentWillMount() {
+    const { locale } = this.context
+    const displayType = location.pathname.split('/').pop()
+    const { grcItems, activeFilters={} } = this.props
+    let availableGrcFilters
+    switch(displayType) {
+    case 'all':
+    default:
+      availableGrcFilters = getAvailableGrcFilters(grcItems, [], locale)
+      break
+    case 'findings':
+      availableGrcFilters = getAvailableGrcFilters([], grcItems, locale)
+      break
+    }
+    //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
+    const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
+    //update sessionStorage
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
+    //update active filters
+    updateActiveFilters(combinedFilters)
+  }
+
   componentWillReceiveProps(nextProps) {
     const {refreshControl, grcItems, updateActiveFilters, updateResourceToolbar} = nextProps
     if (!_.isEqual(refreshControl, this.props.refreshControl) ||
@@ -72,9 +94,8 @@ class GrcView extends React.Component {
         break
       }
       updateResourceToolbar(refreshControl, availableGrcFilters)
-
-      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
+      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
       //update sessionStorage
       replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)

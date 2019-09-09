@@ -45,6 +45,18 @@ export class OverviewView extends React.Component {
     this.handleDrillDownClickOverview = this.handleDrillDownClickOverview.bind(this)
   }
 
+  componentWillMount() {
+    const { locale } = this.context
+    const { policies, findings, activeFilters={} } = this.props
+    const availableGrcFilters =  getAvailableGrcFilters(policies, findings, locale)
+    //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
+    const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
+    //update sessionStorage
+    replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
+    //update active filters
+    updateActiveFilters(combinedFilters)
+  }
+
   componentDidMount() {
     window.addEventListener('scroll', this.scroll)
   }
@@ -62,8 +74,8 @@ export class OverviewView extends React.Component {
       const { locale } = this.context
       const availableGrcFilters = getAvailableGrcFilters(policies, findings, locale)
       updateResourceToolbar(refreshControl, availableGrcFilters)
-      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const activeFilters = _.cloneDeep(nextProps.activeFilters||{})
+      //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
       const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
       //update sessionStorage
       replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
