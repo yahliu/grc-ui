@@ -320,7 +320,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="The security control category from a specific standard that the policy applies to. You can only create a new label by adding it directly to the YAML file."
+              aria-label="A security control category represents the presence of specific requirements for one or more standards. For example, a System and Information Integrity Category may indicate that this policy contains a data transfer protocol protecting personal information, as required by the HIPAA and PCI standards. You can only create a new label by adding it directly to the YAML file."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
@@ -412,7 +412,7 @@ exports[`CreationView component renders as expected 1`] = `
             className="bx--tooltip-icon"
           >
             <button
-              aria-label="The name of the security control that is checked to meet specific regulatory requirements. You can only create a new label by adding it directly to the YAML file."
+              aria-label="The control contains the instructions for ensuring that a policy meets the security requirements for one or more standards. For example, a policy can check a Data In Transit control to ensure that personal information in transit is properly encrypted, as required by HIPAA and PCI standards. You can only create a new label by adding it directly to the YAML file."
               className="bx--tooltip__trigger bx--tooltip--icon__top"
             >
               <svg
