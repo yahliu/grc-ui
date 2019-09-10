@@ -291,7 +291,7 @@ export default class TopInformationModule extends React.Component {
   }
 
   onChange = (index) => {
-    const { type } = this.props
+    const { items, type } = this.props
     let value = ''
     switch(type) {
     case 'policies':
@@ -309,7 +309,7 @@ export default class TopInformationModule extends React.Component {
       this.setState(()=>{
         return {topViolationChoice: value}
       }, () => {
-        this.setCardData()
+        this.setCardData(items, type)
       })
       break
     case 'findings':
@@ -326,7 +326,7 @@ export default class TopInformationModule extends React.Component {
       this.setState(()=>{
         return {topFindingChoice: value}
       }, () => {
-        this.setCardData()
+        this.setCardData(items, type)
       })
       break
     }

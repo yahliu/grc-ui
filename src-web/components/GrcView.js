@@ -50,21 +50,10 @@ class GrcView extends React.Component {
   }
 
   componentWillMount() {
-    const { locale } = this.context
-    const displayType = location.pathname.split('/').pop()
-    const { grcItems, activeFilters={} } = this.props
-    let availableGrcFilters
-    switch(displayType) {
-    case 'all':
-    default:
-      availableGrcFilters = getAvailableGrcFilters(grcItems, [], locale)
-      break
-    case 'findings':
-      availableGrcFilters = getAvailableGrcFilters([], grcItems, locale)
-      break
-    }
-    //get (activeFilters ∪ storedFilters) ∩ availableGrcFilters
-    const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE), availableGrcFilters)
+    const { activeFilters={} } = this.props
+    //get (activeFilters ∪ storedFilters) only since availableGrcFilters is uninitialized at this stage
+    //later when availableGrcFilters initialized, will do further filtering in componentWillReceiveProps
+    const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE))
     //update sessionStorage
     replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
     //update active filters
@@ -272,4 +261,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GrcView))
-
