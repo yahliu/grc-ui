@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -132,8 +132,8 @@ class ResourceDetails extends React.Component {
       url: currentTab ? location.pathname.replace(`/${currentTab}`, '') : location.pathname
     })
 
-    // eslint-disable-next-line
-      console.log('Goes to that')
+    // eslint-disable-next-line no-console
+    console.log('Goes to that')
     return breadcrumbItems
   }
 

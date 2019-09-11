@@ -1,14 +1,12 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-
-/* eslint-disable react/no-array-index-key, react/prop-types */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -30,6 +28,7 @@ const ResourceTableRowExpandableContent = ({ items }, context) =>
     </StructuredListHead>
     <StructuredListBody>
       {items.map((item, index) => (
+        // eslint-disable-next-line react/no-array-index-key
         <StructuredListRow key={`${item.resource}-${index}`} data-row-name={item.resource} >
           <StructuredListCell noWrap>{item.resource}</StructuredListCell>
           <StructuredListCell noWrap>{getResourceType(item, context.locale)}</StructuredListCell>
@@ -40,6 +39,10 @@ const ResourceTableRowExpandableContent = ({ items }, context) =>
 
 ResourceTableRowExpandableContent.contextTypes = {
   locale: PropTypes.string
+}
+
+ResourceTableRowExpandableContent.propTypes = {
+  items: PropTypes.array,
 }
 
 export default ResourceTableRowExpandableContent

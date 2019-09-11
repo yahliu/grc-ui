@@ -11,16 +11,44 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { GrcViewItem, GrcViewRefreshControl, GrcViewSecondaryHeaderProps } from './ComponentsTestingData'
-import { default as GrcView } from '../../../src-web/components/GrcView'
+//curly braces means pure component without redux
+//which is what we want in unit test
+import { GrcView } from '../../../src-web/components/GrcView'
+import renderer from 'react-test-renderer'
 
-describe('GrcView view', () => {
+describe('GrcView view 1', () => {
+  const location = {
+    pathname: '/multicloud/policies'
+  }
   it('renders expand as expected', () => {
     const component = shallow(<GrcView
+      title='hello world'
+      location={location}
       loading={!GrcViewItem && false}
       error={null}
       policies={GrcViewItem}
       refreshControl={GrcViewRefreshControl}
       secondaryHeaderProps={GrcViewSecondaryHeaderProps} />)
     expect(component).toMatchSnapshot()
+  })
+})
+
+describe('GrcView component 2', () => {
+  const location = {
+    pathname: '/multicloud/policies'
+  }
+  it('renders as expected', () => {
+    const component = renderer.create(
+      <GrcView
+        title='hello world'
+        location={location}
+        loading={!GrcViewItem && false}
+        error={null}
+        policies={GrcViewItem}
+        refreshControl={GrcViewRefreshControl}
+        secondaryHeaderProps={GrcViewSecondaryHeaderProps}
+      />
+    )
+    expect(component.toJSON()).toMatchSnapshot()
   })
 })

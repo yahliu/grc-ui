@@ -7,16 +7,17 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 
-/* eslint-disable no-console, import/no-unresolved */
-
 if(!process.env.PREV_COVERAGE_REPORT
   || process.env.PREV_COVERAGE_REPORT === ''
   || process.env.PREV_COVERAGE_REPORT === '404: Not Found'){
+  // eslint-disable-next-line no-console
   console.error('Skipped code coverage enforcement. Unable to find the previous coverage report.')
+  // eslint-disable-next-line no-console
   console.error('Please check the value of PREV_COVERAGE_REPORT')
   process.exit(0)  // Ignoring for now, once we get the right process in place we should fail the build.
 }
 
+// eslint-disable-next-line no-console
 console.log('Current path:', process.cwd())
 
 const currReport = require('../test-output/coverage/coverage-summary.json')
@@ -24,7 +25,9 @@ let prevReport
 try{
   prevReport = JSON.parse(process.env.PREV_COVERAGE_REPORT)
 } catch (error){
+  // eslint-disable-next-line no-console
   console.error('Skipped code coverage enforcement. Unable to parse the previous coverage report.')
+  // eslint-disable-next-line no-console
   console.error(error)
   process.exit(0)  // Ignoring for now, once we get the right process in place we should fail the build.
 }
@@ -44,7 +47,9 @@ if(currReport.total.branches.pct < prevReport.total.branches.pct){
 }
 
 if(result !== ''){
+  // eslint-disable-next-line no-console
   console.error('BUILD FAILED because code coverage declined.')
+  // eslint-disable-next-line no-console
   console.error(result)
   process.exit(1)
 }

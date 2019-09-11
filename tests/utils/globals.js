@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -16,12 +16,12 @@ const BASE_DIR = `${__dirname}/../..`
 const reportFolder = `${BASE_DIR}/test-output/e2e`
 const time = new Date().getTime()
 
-/* eslint-disable no-console*/
 module.exports = {
 
   // External before hook is ran at the beginning of the tests run, before creating the Selenium session
   before: function(done) {
     del([reportFolder, `${BASE_DIR}/selenium-debug.log`]).then(() => {
+      // eslint-disable-next-line no-console
       console.log('Deleted test reports and logs.')
       done()
     })

@@ -1,14 +1,12 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2017, 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-/* eslint-disable react/prop-types, react/jsx-no-bind */
-
 
 import React from 'react'
 import lodash from 'lodash'
@@ -20,12 +18,11 @@ import { REQUEST_STATUS } from '../../actions/index'
 import msgs from '../../../nls/platform.properties'
 import { dumpAndParse, saveLoad } from '../../../lib/client/design-helper'
 import YamlEditor from '../common/YamlEditor'
-
+import PropTypes from 'prop-types'
 
 resources(() => {
   require('../../../scss/modal.scss')
 })
-
 
 class ResourceModal extends React.PureComponent {
 
@@ -140,6 +137,26 @@ class ResourceModal extends React.PureComponent {
   }
 }
 
+ResourceModal.propTypes = {
+  clearRequestStatus: PropTypes.func,
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  handleClose: PropTypes.func,
+  label: PropTypes.shape({
+    heading: PropTypes.string,
+    label: PropTypes.string,
+  }),
+  locale: PropTypes.string,
+  name: PropTypes.string,
+  namespace: PropTypes.string,
+  open: PropTypes.bool,
+  putResource: PropTypes.func,
+  reqCount: PropTypes.number,
+  reqErrCount: PropTypes.number,
+  reqErrorMsg: PropTypes.string,
+  reqStatus: PropTypes.string,
+  resourceType: PropTypes.object,
+}
+
 const mapStateToProps = state => {
   return {
     ...state.modal,
@@ -158,6 +175,5 @@ const mapDispatchToProps = dispatch => {
     clearRequestStatus: () => dispatch(clearRequestStatus())
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResourceModal)

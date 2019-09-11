@@ -22,9 +22,6 @@ resources(() => {
 })
 
 export class SecondaryHeader extends React.Component {
-  /* FIXME: Please fix disabled eslint rules when making changes to this file. */
-  /* eslint-disable react/prop-types, react/jsx-no-bind, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, react/jsx-indent */
-
   constructor(props) {
     super(props)
     this.renderBreadCrumb = this.renderBreadCrumb.bind(this)
@@ -86,10 +83,10 @@ export class SecondaryHeader extends React.Component {
     }
   }
 
-
   renderHeader() {
     const { title, description, information } = this.props
     if (description) {
+      /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
       return (
         <div className="bx--detail-page-header-title-container">
           <h1 className="bx--detail-page-header-title">{title}</h1>
@@ -121,6 +118,7 @@ export class SecondaryHeader extends React.Component {
       return (
         <div key={key} className='bx--breadcrumb-item' title={decodeURIComponent(breadcrumb.label)}>
           {breadcrumb.handleClick ?
+            // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
             <div className='breadcrumb-link' onClick={breadcrumb.handleClick} >{msgs.get(breadcrumb.label, locale)}</div> :
             <Link to={breadcrumb.url || ''} className='bx--link'>{noLocale ? breadcrumb.label : msgs.get(breadcrumb.label, locale)}</Link>}
         </div>
@@ -167,6 +165,17 @@ export class SecondaryHeader extends React.Component {
 
 SecondaryHeader.contextTypes = {
   locale: PropTypes.string
+}
+
+SecondaryHeader.propTypes = {
+  breadcrumbItems: PropTypes.array,
+  description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  history: PropTypes.object.isRequired,
+  information: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  links: PropTypes.array,
+  location: PropTypes.object,
+  tabs: PropTypes.array,
+  title: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {

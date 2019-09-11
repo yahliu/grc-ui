@@ -8,11 +8,10 @@
  *******************************************************************************/
 'use strict'
 
-// seems to be an issue with this rule and redux connect method in SecondaryHeader
-/* eslint-disable import/no-named-as-default */
-
 import React from 'react'
 import PropTypes from 'prop-types'
+// without curly braces means component with redux
+// eslint-disable-next-line import/no-named-as-default
 import SecondaryHeader from '../components/SecondaryHeader'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import resources from '../../lib/shared/resources'
@@ -75,7 +74,8 @@ App.childContextTypes = {
   locale: PropTypes.string
 }
 
-export default props => ( // eslint-disable-line react/display-name
+// eslint-disable-next-line react/display-name
+export default props => (
   <div className='expand-vertically'>
     <Route path={config.contextPath} serverProps={props} component={App} />
   </div>

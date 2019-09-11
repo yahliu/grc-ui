@@ -32,7 +32,7 @@ resources(() => {
   require('../../scss/grc-view.scss')
 })
 
-class GrcView extends React.Component {
+export class GrcView extends React.Component {
 
   constructor (props) {
     super(props)

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -25,11 +25,9 @@ import { Query } from 'react-apollo'
 import { HCMPolicy } from '../../../lib/client/queries'
 import getResourceDefinitions from '../../definitions'
 
-
 resources(() => {
   require('../../../scss/resource-overview.scss')
 })
-
 
 class PolicyClusterDetail extends React.Component {
   static propTypes = {
@@ -152,7 +150,6 @@ class PolicyClusterDetail extends React.Component {
 const mapStateToProps = () => {
   return {}
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return {

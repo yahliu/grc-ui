@@ -8,10 +8,6 @@
  *******************************************************************************/
 'use strict'
 
-// seems to be an issue with this rule and redux connect method in SecondaryHeader
-/* eslint-disable import/no-named-as-default */
-
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
@@ -29,7 +25,6 @@ import getResourceDefinitions from '../definitions'
 import PolicyDetailsOverview from '../components/common/PolicyDetailsOverview'
 import PolicyViolationTab from './PolicyViolationTab'
 import PolicyTemplateTab from './PolicyTemplateTab'
-
 
 class PolicyDetail extends React.Component {
 
@@ -170,4 +165,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(PolicyDetail))
-

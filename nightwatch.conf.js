@@ -14,7 +14,8 @@ const argv = require('minimist')(process.argv.slice(2))
 module.exports = (settings => {
 
   if (!fs.existsSync('node_modules/selenium-standalone/.selenium')) {
-    console.log('Selenium server not installed.  Installing...') // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log('Selenium server not installed.  Installing...')
     const execSync = require('child_process').execSync
     execSync('npm run test:install-selenium', {stdio:[0,1,2]})
   }

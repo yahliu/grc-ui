@@ -16,6 +16,8 @@ import { connect } from 'react-redux'
 import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
+// without curly braces means component with redux
+// eslint-disable-next-line import/no-named-as-default
 import GrcView from '../components/GrcView'
 import {updateSecondaryHeader} from '../actions/common'
 import { FindingList } from '../../lib/client/queries'

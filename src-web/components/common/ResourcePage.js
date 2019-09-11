@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2017. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -11,15 +11,13 @@
 import React from 'react'
 import NewResourceDetails from './DeprecatedResourceDetails'
 import ResourceList from './ResourceList'
-// import ResourceTopology from './ResourceTopology'
 import { Route, Switch } from 'react-router-dom'
 import getResourceDefinitions from '../../definitions'
 import { makeGetVisibleTableItemsSelector } from '../../reducers/common'
 import Page from './Page'
 import ResourceTableModuleFromParent from '../common/ResourceTableModuleFromParent'
+import PropTypes from 'prop-types'
 
-/* FIXME: Please fix disabled eslint rules when making changes to this file. */
-/* eslint-disable react/prop-types, react/jsx-no-bind */
 const WrappedResourceList = props =>
   <div>
     <ResourceList
@@ -32,6 +30,10 @@ const WrappedResourceList = props =>
     </ResourceList>
   </div>
 
+WrappedResourceList.propTypes = {
+  buttons: PropTypes.object,
+  secondaryHeaderProps: PropTypes.object,
+}
 
 const WrappedResourceDetails = props =>
   <NewResourceDetails
@@ -43,6 +45,17 @@ const WrappedResourceDetails = props =>
     {props.modules}
   </NewResourceDetails>
 
+WrappedResourceDetails.propTypes = {
+  detailsTabs: PropTypes.object,
+  modules: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]),
+  refreshControl: PropTypes.object,
+  resourceType: PropTypes.object,
+  routes: PropTypes.array,
+  staticResourceData: PropTypes.object,
+}
 
 const ResourcePageWithList = props =>
   <Switch>
@@ -50,6 +63,10 @@ const ResourcePageWithList = props =>
       <WrappedResourceList {...props} />
     )} />
   </Switch>
+
+ResourcePageWithList.propTypes = {
+  match: PropTypes.object,
+}
 
 const ResourcePageWithDetails = props =>
   // <Switch>
@@ -68,6 +85,9 @@ const ResourcePageWithListAndDetails = props =>
     )} />
   </Switch>
 
+ResourcePageWithListAndDetails.propTypes = {
+  match: PropTypes.object,
+}
 
 const typedResourcePageWithList = (resourceType, detailsTabs, buttons) => {
 
@@ -96,7 +116,6 @@ const typedResourcePageWithList = (resourceType, detailsTabs, buttons) => {
     }
   }
 }
-
 
 const typedResourcePageFromParent = (resourceType) => {
 

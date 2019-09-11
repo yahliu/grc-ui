@@ -7,7 +7,6 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-/* eslint-disable react/no-array-index-key, react/prop-types */
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -21,7 +20,6 @@ import { Link } from 'react-router-dom'
 import { resourceActions } from './ResourceTableRowMenuItemActions'
 import { connect } from 'react-redux'
 import StatusField from '../../components/common/StatusField'
-
 
 resources(() => {
   require('../../../scss/structured-list-with-actions.scss')
@@ -42,6 +40,7 @@ const StructuredListModule = ({
     return <Module className='structured-list-module'><StructuredListSkeleton className='content-spinner' /></Module>
   }
   else{
+    /* eslint-disable react/no-array-index-key*/
     return <Module className='structured-list-module' id={id}>
       <div className='bx--module__header' style={{justifyContent: 'space-between'}} >
         <h1 className='bx--module__title'>{msgs.get(title, context.locale)}</h1>

@@ -8,15 +8,14 @@
  *******************************************************************************/
 'use strict'
 
-// seems to be an issue with this rule and redux connect method in SecondaryHeader
-/* eslint-disable import/no-named-as-default */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
+// without curly braces means component with redux
+// eslint-disable-next-line import/no-named-as-default
 import OverviewView from '../components/OverviewView'
 import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
 import { updateModal, updateSecondaryHeader} from '../actions/common'
@@ -101,4 +100,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(OverviewTab))
-

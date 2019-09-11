@@ -8,15 +8,13 @@
  *******************************************************************************/
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 /**
  * Component that will scroll the window up on every navigation
  * Follows pattern recommended by react router
  * See: https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md
  * **/
 
-/* FIXME: Please fix disabled eslint rules when making changes to this file. */
-/* eslint-disable react/prop-types */
 class ScrollToTop extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
@@ -27,6 +25,10 @@ class ScrollToTop extends React.Component {
   render() {
     return this.props.children
   }
+}
+ScrollToTop.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  location: PropTypes.object,
 }
 
 export default withRouter(ScrollToTop)

@@ -1,38 +1,31 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-/*eslint-disable*/
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import { hideResourceToolbar } from '../../../lib/client/resource-helper'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
 import ResourceTable from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 import {updateSecondaryHeader} from '../../actions/common'
-import resources from '../../../lib/shared/resources'
-resources(() => {
-  require('../../../scss/policies-view.scss')
-})
-
 
 class ResourceTableModule extends React.Component {
   static propTypes = {
-    definitionsKey: PropTypes.string,
     normalizedKey: PropTypes.string,
     resourceType: PropTypes.object,
+    secondaryHeaderProps: PropTypes.object,
     staticResourceData: PropTypes.object,
-    subResourceType: PropTypes.object,
     tableResources: PropTypes.array,
+    updateSecondaryHeader: PropTypes.func,
   }
 
   constructor(props) {
@@ -72,19 +65,19 @@ class ResourceTableModule extends React.Component {
     const { staticResourceData, resourceType } = this.props
     const { resourceItems, resourceIds, searchValue, sortDirection } = this.state
     return (
-        <ResourceTable
-          items={resourceItems || []}
-          itemIds={resourceIds || []}
-          staticResourceData={staticResourceData}
-          resourceType={resourceType}
-          totalFilteredItems={resourceIds && resourceIds.length}
-          handleSort={this.handleSort}
-          handleSearch={this.handleSearch}
-          searchValue={searchValue}
-          darkSearchBox={false}
-          sortDirection={sortDirection}
-          tableActions={staticResourceData.tableActions}
-        />
+      <ResourceTable
+        items={resourceItems || []}
+        itemIds={resourceIds || []}
+        staticResourceData={staticResourceData}
+        resourceType={resourceType}
+        totalFilteredItems={resourceIds && resourceIds.length}
+        handleSort={this.handleSort}
+        handleSearch={this.handleSearch}
+        searchValue={searchValue}
+        darkSearchBox={false}
+        sortDirection={sortDirection}
+        tableActions={staticResourceData.tableActions}
+      />
     )
   }
 
@@ -142,8 +135,6 @@ class ResourceTableModule extends React.Component {
 ResourceTableModule.contextTypes = {
   locale: PropTypes.string
 }
-
-
 
 const mapDispatchToProps = (dispatch) => {
   return {

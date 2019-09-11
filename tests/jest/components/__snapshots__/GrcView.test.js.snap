@@ -1,11 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GrcView view renders expand as expected 1`] = `
+exports[`GrcView component 2 renders as expected 1`] = `
+<div>
+  <div
+    className="no-resource"
+  >
+    <img
+      alt="No resource"
+      className="no-resource-icon"
+      src="undefined/policies/graphics/no-policy.svg"
+    />
+    <div
+      className="no-resource-title"
+    >
+      Get set-up to track your governance and risk.
+    </div>
+    <div
+      className="no-resource-detail"
+    >
+      We noticed that you didn't have any policies created yet. You can view our documentation to see some samples for creating new policies, or you can go ahead and create one now!
+    </div>
+    <div
+      className="button-group"
+    >
+      <button
+        className="bx--btn bx--btn--sm bx--btn--primary"
+        disabled={false}
+        id="create-resource"
+        onClick={[Function]}
+        tabIndex={0}
+        type="button"
+      >
+        Create policy
+        <svg
+          alt="Provide icon description if icon is used"
+          aria-hidden={true}
+          aria-label="Provide icon description if icon is used"
+          className="bx--btn__icon"
+          fill={undefined}
+          fillRule="evenodd"
+          height="16"
+          name="add--glyph"
+          role="img"
+          style={undefined}
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <title>
+            Provide icon description if icon is used
+          </title>
+          <path
+            d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm4 9H9v3H7V9H4V7h3V4h2v3h3v2z"
+          />
+        </svg>
+      </button>
+      <div
+        className="buttons"
+      >
+        <button
+          className="bx--btn bx--btn--sm bx--btn--secondary"
+        >
+          <a
+            aria-describedby="launchWindow"
+            className="doc-link"
+            href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+            target="doc"
+          >
+            View documentation
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GrcView view 1 renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <withRouter(Connect(GrcView))
+  Symbol(enzyme.__unrendered__): <GrcView
     error={null}
     loading={false}
+    location={
+      Object {
+        "pathname": "/multicloud/policies",
+      }
+    }
     policies={
       Array [
         Object {
@@ -593,6 +673,7 @@ ShallowWrapper {
         "title": "routes.grc",
       }
     }
+    title="hello world"
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -605,24 +686,378 @@ ShallowWrapper {
   Symbol(enzyme.__node__): Object {
     "instance": null,
     "key": undefined,
-    "nodeType": "class",
+    "nodeType": "function",
     "props": Object {
-      "render": [Function],
+      "children": <div
+        className="button-group"
+      >
+        <UNDEFINED
+          disabled={false}
+          icon="add--glyph"
+          iconDescription="Provide icon description if icon is used"
+          id="create-resource"
+          kind="primary"
+          onClick={[Function]}
+          small={true}
+          tabIndex={0}
+          type="button"
+        >
+          Create policy
+        </UNDEFINED>
+        <div
+          className="buttons"
+        >
+          <button
+            className="bx--btn bx--btn--sm bx--btn--secondary"
+          >
+            <a
+              aria-describedby="launchWindow"
+              className="doc-link"
+              href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+              target="doc"
+            >
+              View documentation
+            </a>
+          </button>
+        </div>
+      </div>,
+      "detail": "We noticed that you didn't have any policies created yet. You can view our documentation to see some samples for creating new policies, or you can go ahead and create one now!",
+      "title": "Get set-up to track your governance and risk.",
     },
     "ref": null,
-    "rendered": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <UNDEFINED
+            disabled={false}
+            icon="add--glyph"
+            iconDescription="Provide icon description if icon is used"
+            id="create-resource"
+            kind="primary"
+            onClick={[Function]}
+            small={true}
+            tabIndex={0}
+            type="button"
+          >
+            Create policy
+          </UNDEFINED>,
+          <div
+            className="buttons"
+          >
+            <button
+              className="bx--btn bx--btn--sm bx--btn--secondary"
+            >
+              <a
+                aria-describedby="launchWindow"
+                className="doc-link"
+                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                target="doc"
+              >
+                View documentation
+              </a>
+            </button>
+          </div>,
+        ],
+        "className": "button-group",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "Create policy",
+            "disabled": false,
+            "icon": "add--glyph",
+            "iconDescription": "Provide icon description if icon is used",
+            "id": "create-resource",
+            "kind": "primary",
+            "onClick": [Function],
+            "small": true,
+            "tabIndex": 0,
+            "type": "button",
+          },
+          "ref": null,
+          "rendered": "Create policy",
+          "type": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": Object {
+              "disabled": false,
+              "iconDescription": "Provide icon description if icon is used",
+              "kind": "primary",
+              "small": false,
+              "tabIndex": 0,
+              "type": "button",
+            },
+            "propTypes": Object {
+              "as": [Function],
+              "children": [Function],
+              "className": [Function],
+              "disabled": [Function],
+              "href": [Function],
+              "icon": [Function],
+              "iconDescription": [Function],
+              "kind": [Function],
+              "renderIcon": [Function],
+              "role": [Function],
+              "small": [Function],
+              "tabIndex": [Function],
+              "type": [Function],
+            },
+            "render": [Function],
+          },
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <button
+              className="bx--btn bx--btn--sm bx--btn--secondary"
+            >
+              <a
+                aria-describedby="launchWindow"
+                className="doc-link"
+                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                target="doc"
+              >
+                View documentation
+              </a>
+            </button>,
+            "className": "buttons",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <a
+                aria-describedby="launchWindow"
+                className="doc-link"
+                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                target="doc"
+              >
+                View documentation
+              </a>,
+              "className": "bx--btn bx--btn--sm bx--btn--secondary",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "aria-describedby": "launchWindow",
+                "children": "View documentation",
+                "className": "doc-link",
+                "href": "https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html",
+                "target": "doc",
+              },
+              "ref": null,
+              "rendered": "View documentation",
+              "type": "a",
+            },
+            "type": "button",
+          },
+          "type": "div",
+        },
+      ],
+      "type": "div",
+    },
     "type": [Function],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
       "instance": null,
       "key": undefined,
-      "nodeType": "class",
+      "nodeType": "function",
       "props": Object {
-        "render": [Function],
+        "children": <div
+          className="button-group"
+        >
+          <UNDEFINED
+            disabled={false}
+            icon="add--glyph"
+            iconDescription="Provide icon description if icon is used"
+            id="create-resource"
+            kind="primary"
+            onClick={[Function]}
+            small={true}
+            tabIndex={0}
+            type="button"
+          >
+            Create policy
+          </UNDEFINED>
+          <div
+            className="buttons"
+          >
+            <button
+              className="bx--btn bx--btn--sm bx--btn--secondary"
+            >
+              <a
+                aria-describedby="launchWindow"
+                className="doc-link"
+                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                target="doc"
+              >
+                View documentation
+              </a>
+            </button>
+          </div>
+        </div>,
+        "detail": "We noticed that you didn't have any policies created yet. You can view our documentation to see some samples for creating new policies, or you can go ahead and create one now!",
+        "title": "Get set-up to track your governance and risk.",
       },
       "ref": null,
-      "rendered": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <UNDEFINED
+              disabled={false}
+              icon="add--glyph"
+              iconDescription="Provide icon description if icon is used"
+              id="create-resource"
+              kind="primary"
+              onClick={[Function]}
+              small={true}
+              tabIndex={0}
+              type="button"
+            >
+              Create policy
+            </UNDEFINED>,
+            <div
+              className="buttons"
+            >
+              <button
+                className="bx--btn bx--btn--sm bx--btn--secondary"
+              >
+                <a
+                  aria-describedby="launchWindow"
+                  className="doc-link"
+                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                  target="doc"
+                >
+                  View documentation
+                </a>
+              </button>
+            </div>,
+          ],
+          "className": "button-group",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "children": "Create policy",
+              "disabled": false,
+              "icon": "add--glyph",
+              "iconDescription": "Provide icon description if icon is used",
+              "id": "create-resource",
+              "kind": "primary",
+              "onClick": [Function],
+              "small": true,
+              "tabIndex": 0,
+              "type": "button",
+            },
+            "ref": null,
+            "rendered": "Create policy",
+            "type": Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "defaultProps": Object {
+                "disabled": false,
+                "iconDescription": "Provide icon description if icon is used",
+                "kind": "primary",
+                "small": false,
+                "tabIndex": 0,
+                "type": "button",
+              },
+              "propTypes": Object {
+                "as": [Function],
+                "children": [Function],
+                "className": [Function],
+                "disabled": [Function],
+                "href": [Function],
+                "icon": [Function],
+                "iconDescription": [Function],
+                "kind": [Function],
+                "renderIcon": [Function],
+                "role": [Function],
+                "small": [Function],
+                "tabIndex": [Function],
+                "type": [Function],
+              },
+              "render": [Function],
+            },
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <button
+                className="bx--btn bx--btn--sm bx--btn--secondary"
+              >
+                <a
+                  aria-describedby="launchWindow"
+                  className="doc-link"
+                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                  target="doc"
+                >
+                  View documentation
+                </a>
+              </button>,
+              "className": "buttons",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": <a
+                  aria-describedby="launchWindow"
+                  className="doc-link"
+                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+                  target="doc"
+                >
+                  View documentation
+                </a>,
+                "className": "bx--btn bx--btn--sm bx--btn--secondary",
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "aria-describedby": "launchWindow",
+                  "children": "View documentation",
+                  "className": "doc-link",
+                  "href": "https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html",
+                  "target": "doc",
+                },
+                "ref": null,
+                "rendered": "View documentation",
+                "type": "a",
+              },
+              "type": "button",
+            },
+            "type": "div",
+          },
+        ],
+        "type": "div",
+      },
       "type": [Function],
     },
   ],

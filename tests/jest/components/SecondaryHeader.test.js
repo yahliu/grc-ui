@@ -10,7 +10,8 @@
 
 import React from 'react'
 import renderer from 'react-test-renderer'
-
+//curly braces means pure component without redux
+//which is what we want in unit test
 import { SecondaryHeader } from '../../../src-web/components/SecondaryHeader'
 
 describe('SecondaryHeader component 1', () => {
@@ -60,7 +61,8 @@ describe('SecondaryHeader component 3', () => {
   }
   it('renders as expected', () => {
     const component = renderer.create(
-      //eslint-disable-next-line
+
+      // eslint-disable-next-line jsx-a11y/aria-role
       <SecondaryHeader title='hello world' role='Viewer' tabs={tabs} location={location} />
     )
     expect(component.toJSON()).toMatchSnapshot()

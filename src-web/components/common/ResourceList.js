@@ -1,12 +1,11 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2017, 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
-
 'use strict'
 
 import React from 'react'
@@ -22,18 +21,13 @@ import { Loading, Notification } from 'carbon-components-react'
 import { withRouter } from 'react-router-dom'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
-// import config2 from '../../../config'
 import TagInput from './TagInput'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 import { showCreate } from '../../../lib/client/access-helper'
 import createDocLink from '../../components/common/CreateDocLink'
-
-//This ResourceList module and all other Resource common components need to be cleaned up and refactor in future
+import PropTypes from 'prop-types'
 
 class ResourceList extends React.Component {
-  /* FIXME: Please fix disabled eslint rules when making changes to this file. */
-  /* eslint-disable react/prop-types, react/jsx-no-bind */
-
   constructor() {
     super()
     this.state = {}
@@ -248,6 +242,49 @@ const mapStateToProps = (state, ownProps) => {
     resourceFilters: state['resourceFilters'].filters,
     selectedFilters: state['resourceFilters'].selectedFilters && state['resourceFilters'].selectedFilters[resourceName],
   }
+}
+
+ResourceList.propTypes = {
+  addResource: PropTypes.func,
+  autoAction: PropTypes.string,
+  changeTablePage: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  clientSideFilters: PropTypes.string,
+  deleteResource: PropTypes.func,
+  err: PropTypes.object,
+  fetchResources: PropTypes.func,
+  handleCreatePolicy: PropTypes.func,
+  highLightRowName: PropTypes.string,
+  information: PropTypes.string,
+  itemIds: PropTypes.array,
+  items: PropTypes.object,
+  links: PropTypes.array,
+  listData: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  modifyResource: PropTypes.func,
+  mutateErrorMsg: PropTypes.string,
+  mutateStatus: PropTypes.string,
+  onSelectedFilterChange: PropTypes.func,
+  page: PropTypes.number,
+  pageSize: PropTypes.number,
+  placeHolderText: PropTypes.string,
+  resourceFilters: PropTypes.object,
+  resourceType: PropTypes.object,
+  searchTable: PropTypes.func,
+  searchValue: PropTypes.string,
+  selectedFilters: PropTypes.object,
+  showSidePanel: PropTypes.bool,
+  sortColumn: PropTypes.object,
+  sortDirection: PropTypes.string,
+  sortTable: PropTypes.func,
+  staticResourceData: PropTypes.object,
+  status: PropTypes.string,
+  tabs: PropTypes.array,
+  title: PropTypes.string,
+  topButton: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  totalFilteredItems: PropTypes.number,
+  updateBrowserURL: PropTypes.func,
+  updateSecondaryHeader: PropTypes.func,
+  userRole: PropTypes.string,
 }
 
 //diff than original updateBrowserURL in mcm-ui pageWithUrlQuery

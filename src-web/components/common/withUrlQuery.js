@@ -200,9 +200,8 @@ const pageWithUrlQuery = (ChildComponent, resourceType) => {
             filters = {...filters, clientSideFilters}
           }
         }
-      } catch(e) {
-        // eslint-disable-next-line
-      }
+      // eslint-disable-next-line no-empty
+      } catch(e) {}
       return filters
     }
 
@@ -228,6 +227,5 @@ const pageWithUrlQuery = (ChildComponent, resourceType) => {
 
   return connect(() => ({}), mapDispatchToProps)(PageWithUrlQuery)
 }
-
 
 export default pageWithUrlQuery

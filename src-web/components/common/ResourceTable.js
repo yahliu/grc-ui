@@ -1,15 +1,12 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2017, 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-
-/* NOTE: These eslint exceptions are added to help keep this file consistent with platform-ui. */
-/* eslint-disable react/prop-types, react/jsx-no-bind */
 
 import React from 'react'
 import resources from '../../../lib/shared/resources'
@@ -27,7 +24,6 @@ import ResourceTableRowExpandableContent from './ResourceTableRowExpandableConte
 import ResourceTableRowExpandableList from './ResourceTableRowExpandableList'
 import constants from '../../../lib/shared/constants'
 import { fliterTableAction } from '../../../lib/client/access-helper'
-
 
 resources(() => {
   require('../../../scss/table.scss')
@@ -64,7 +60,6 @@ class ResourceTable extends React.Component {
       handleSearch,
       searchValue,
       darkSearchBox,
-      defaultSearchValue,
       actions,
       items,
       itemIds,
@@ -107,7 +102,7 @@ class ResourceTable extends React.Component {
           <TableContainer id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-table-container`}>
             {showSearch ?
               (<TableToolbar aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} role='region'>
-                <TableToolbarSearch onChange={handleSearch} defaultValue={defaultSearchValue} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} placeHolderText={placeHolderText} />
+                <TableToolbarSearch onChange={handleSearch} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} placeHolderText={placeHolderText} />
                 <TableToolbarContent>
                   {actions}
                 </TableToolbarContent>
@@ -314,6 +309,63 @@ class ResourceTable extends React.Component {
 
 ResourceTable.contextTypes = {
   locale: PropTypes.string
+}
+
+ResourceTable.propTypes = {
+  actions: PropTypes.array,
+  addResource: PropTypes.func,
+  autoAction: PropTypes.string,
+  changeTablePage: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  clientSideFilters: PropTypes.string,
+  darkSearchBox: PropTypes.object,
+  deleteResource: PropTypes.func,
+  err: PropTypes.object,
+  expandableTable: PropTypes.bool,
+  fetchResources: PropTypes.func,
+  getResourceAction: PropTypes.func,
+  handleCreatePolicy: PropTypes.func,
+  handleSearch: PropTypes.func,
+  handleSort: PropTypes.func,
+  highLightRowName: PropTypes.string,
+  history: PropTypes.object.isRequired,
+  information: PropTypes.string,
+  itemIds: PropTypes.array,
+  items: PropTypes.object,
+  links: PropTypes.array,
+  listData: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  listSubItems: PropTypes.bool,
+  match: PropTypes.object,
+  modifyResource: PropTypes.func,
+  mutateErrorMsg: PropTypes.string,
+  mutateStatus: PropTypes.string,
+  onSelect: PropTypes.func,
+  onSelectAll: PropTypes.func,
+  onSelectSubItem: PropTypes.func,
+  onSelectedFilterChange: PropTypes.func,
+  page: PropTypes.number,
+  pageSize: PropTypes.number,
+  placeHolderText: PropTypes.string,
+  resourceFilters: PropTypes.object,
+  resourceType: PropTypes.object,
+  searchTable: PropTypes.func,
+  searchValue: PropTypes.string,
+  selectableTable: PropTypes.bool,
+  selectedFilters: PropTypes.object,
+  showSidePanel: PropTypes.bool,
+  sortColumn: PropTypes.object,
+  sortDirection: PropTypes.string,
+  sortTable: PropTypes.func,
+  staticResourceData: PropTypes.object,
+  status: PropTypes.string,
+  tableActions: PropTypes.array,
+  tabs: PropTypes.array,
+  title: PropTypes.string,
+  topButton: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  totalFilteredItems: PropTypes.number,
+  updateBrowserURL: PropTypes.func,
+  updateSecondaryHeader: PropTypes.func,
+  userRole: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {
