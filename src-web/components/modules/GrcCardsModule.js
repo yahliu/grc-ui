@@ -77,7 +77,7 @@ class GrcCardsModule extends React.Component {
       <div className={showGrcCard ? 'header-container' : 'header-container card-collapsed'}>
         {showGrcCard && <div className='header-title'>{title}</div>}
         {showGrcCard &&
-        <div>
+        <div role={'button'} tabIndex='0' onClick={this.onChangeByKeyboard} onKeyPress={this.onChangeByKeyboard}>
           <DropdownV2 className='selection'
             label={title}
             ariaLabel={title}
@@ -376,6 +376,10 @@ class GrcCardsModule extends React.Component {
     this.setState(()=>{
       return {grcCardChoice: value}
     })
+  }
+
+  onChangeByKeyboard = () => {
+    //Current do noting, need to determine keyboard accessible press behavior on GrcCard selection.
   }
 
   collapseClick() {

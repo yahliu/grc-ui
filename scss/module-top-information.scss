@@ -69,10 +69,12 @@
         &:last-child {
           margin-left: 1rem;
         }
-
         .bx--tabs__nav-link:focus {
           box-shadow: none;
         }
+      }
+      .bx--tabs__nav-item:focus {
+        border : 1px solid $color__gray-1;
       }
     }
 
@@ -113,9 +115,9 @@
     }
   }
 
-  .single-strip {
-    outline:none;
-  }
+  // .single-strip {
+  //   outline:none;
+  // }
 
   .information-card-container {
     display: flex;
@@ -163,7 +165,7 @@
             flex: 0 0 100px;
             align-items: center;
             justify-content: center;
-            outline:none;
+            // outline:none;
 
             .card-information-count {
               font-size: 34px;
