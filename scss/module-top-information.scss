@@ -152,7 +152,7 @@
 
       .information-card-content {
         display: flex;
-        height: 140px;
+        max-height: 140px;
         background-color: white;
 
        .card-inner-content {
