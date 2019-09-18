@@ -26,6 +26,13 @@ resources(() => {
 })
 
 class ResourceFilterBar extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      restoreURL: false,
+    }
+  }
+
   render() {
     const { locale } = this.context
     const { activeFilters={} } = this.props
@@ -52,6 +59,9 @@ class ResourceFilterBar extends React.Component {
     })
     // clear all tag
     if (clearFilters.length>0) {
+      if (!this.state.restoreURL) {
+        this.setURLState(true)
+      }
       const clearAll = msgs.get('filter.remove.all', locale)
       return (
         <div className='resource-filter-bar'>
@@ -76,7 +86,17 @@ class ResourceFilterBar extends React.Component {
         </div>
       )
     }
+    else if (this.state.restoreURL && clearFilters.length===0) {
+      this.removeAllActiveFilter() //this is just used to restore url and page layout when clearFilters is empty
+      this.setURLState(false)
+    }
     return null
+  }
+
+  setURLState(restore) {
+    this.setState(()=>{
+      return {restoreURL: restore}
+    })
   }
 
   removeActiveFilter = (key, value) => {
@@ -105,16 +125,18 @@ class ResourceFilterBar extends React.Component {
     //step 1 clear up stored active filters in sessionStorage
     //step 2 clear up active filters in resource filter
     const {updateActiveFilters, location, history } = this.props
-    const activeFilters = _.cloneDeep(this.props.activeFilters||{})
-    clearFilters.forEach(key=> {
-      let activeSet = activeFilters[key]
-      if (!activeSet) {
-        activeSet = activeFilters[key] = new Set()
-      }
-      activeSet.clear()
-    })
-    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
-    updateActiveFilters(activeFilters)
+    if (clearFilters) {
+      const activeFilters = _.cloneDeep(this.props.activeFilters||{})
+      clearFilters.forEach(key=> {
+        let activeSet = activeFilters[key]
+        if (!activeSet) {
+          activeSet = activeFilters[key] = new Set()
+        }
+        activeSet.clear()
+      })
+      replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
+      updateActiveFilters(activeFilters)
+    }
     //step 3 update current url after removing all active filters
     //text search input filter will not be removed, which is controled by itself
     const paraURL = {}

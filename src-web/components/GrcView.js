@@ -209,13 +209,18 @@ export class GrcView extends React.Component {
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
     value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match
     let activeSet
-    activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
-    activeSet.add(value)
-    //add severity level filter
-    activeFilters[type] ? activeSet = activeFilters[type] : activeSet = activeFilters[type] = new Set()
-    activeSet.add(level)
-    replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
-    updateActiveFilters(activeFilters)
+    if (value) { //add null grc-card filter
+      activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
+      activeSet.add(value)
+    }
+    if (level) { //add null severity level filter
+      activeFilters[type] ? activeSet = activeFilters[type] : activeSet = activeFilters[type] = new Set()
+      activeSet.add(level)
+    }
+    if (activeSet && activeSet.size > 0) {
+      replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
+      updateActiveFilters(activeFilters)
+    }
 
     //step 2 update url when click GrcCardsModule
     const paraURL = {}
