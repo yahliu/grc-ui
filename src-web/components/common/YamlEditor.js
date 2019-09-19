@@ -28,9 +28,26 @@ class IsomorphicEditor extends React.Component {
         props.setEditor(elem.editor)
       }
     }
+    this.handleEscKeyPress = this.handleEscKeyPress.bind(this)
   }
 
-  render = () => <AceEditor {...this.props} ref={this.setEditorRef} />
+  handleEscKeyPress(event) {
+    if(event.key === 'Escape' && event.target.className === 'ace_text-input') {
+      event.target.blur()
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown',this.handleEscKeyPress)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscKeyPress)
+  }
+
+  render = () => {
+    return <AceEditor {...this.props} ref={this.setEditorRef} />
+  }
 }
 
 const YamlEditor = ({ onYamlChange, setEditor, yaml, width='49.5vw', height='40vh', readOnly=false }) => (
