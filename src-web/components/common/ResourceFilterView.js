@@ -72,7 +72,7 @@ const FilterSection = ({ section: {name, filters, isExpanded, onExpand}, locale 
       <div className='filter-section-title'>
         {name}
       </div>
-      {filters.map(({key, label, checked, onChange}) => {
+      {filters.map(({key, label, checked, onChange, onKeyPress}) => {
         return <Checkbox
           id={key}
           key={key}
@@ -80,6 +80,7 @@ const FilterSection = ({ section: {name, filters, isExpanded, onExpand}, locale 
           labelText={label}
           checked={checked}
           onChange={onChange}
+          onKeyPress={onKeyPress}
         />
       })}
       {showMoreOrLess &&
@@ -189,9 +190,12 @@ export default class ResourceFilterView extends React.Component {
           </div>
           <Icon
             className='closeIcon'
+            tabIndex='0'
+            role={'button'}
             description={msgs.get('filter.view.close', locale)}
             name="icon--close"
             onClick={this.handleFilterClose}
+            onKeyPress={this.handleFilterClose}
           />
         </h3>
         <Scrollbars style={{ width: containerWidth, height: scrollHeight-80 }}
@@ -234,6 +238,7 @@ export default class ResourceFilterView extends React.Component {
         isOther: value===other,
         checked: !multipleChoices || activeSet.has(value),
         onChange: !multipleChoices ? ()=>{} : this.onChange.bind(this, key, value),
+        onKeyPress: !multipleChoices ? ()=>{} : this.onKeyPress.bind(this, key, value, !multipleChoices || activeSet.has(value)),
       }
     })
     if (multipleChoices) {
@@ -243,6 +248,7 @@ export default class ResourceFilterView extends React.Component {
         isAll: true,
         checked: activeSet.size===0,
         onChange: this.onChange.bind(this, key, 'all'),
+        onKeyPress: this.onKeyPress.bind(this, key, 'all'),
       })
     }
     return {
@@ -257,6 +263,12 @@ export default class ResourceFilterView extends React.Component {
   onChange = (key, value, checked) => {
     const {updateFilters} = this.props
     updateFilters(key, value, checked)
+  }
+
+  //handler checkbox by press enter key
+  onKeyPress = (key, value, checked) => {
+    const {updateFilters} = this.props
+    updateFilters(key, value, !checked)
   }
 
   onExpand = (label) => {

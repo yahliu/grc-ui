@@ -71,6 +71,8 @@
         }
         .bx--tabs__nav-link:focus {
           box-shadow: none;
+          outline: 1px solid $grc_highlight_borad;
+          border: none;
         }
       }
       .bx--tabs__nav-item:focus {
@@ -94,7 +96,9 @@
       .bx--list-box__field {
         padding: 0 8px;
         &:focus {
-         box-shadow: none;
+          box-shadow: none;
+          outline: 1px solid $grc_highlight_borad;
+          border: none;
        }
       }
 
@@ -115,9 +119,14 @@
     }
   }
 
-  // .single-strip {
-  //   outline:none;
-  // }
+  .single-strip {
+    outline: none;
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      border: 2px solid $grc_color_border_gray;
+    }
+  }
 
   .information-card-container {
     display: flex;
@@ -165,7 +174,12 @@
             flex: 0 0 100px;
             align-items: center;
             justify-content: center;
-            // outline:none;
+            outline: none;
+            &:focus {
+              box-shadow: none;
+              outline: 1px solid $grc_highlight_borad;
+              border: none;
+            }
 
             .card-information-count {
               font-size: 34px;

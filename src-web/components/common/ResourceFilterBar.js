@@ -51,7 +51,8 @@ class ResourceFilterBar extends React.Component {
             }
             boundFilters.push({
               name,
-              onClick: this.removeActiveFilter.bind(this, key, value)
+              onClick: this.removeActiveFilter.bind(this, key, value),
+              onKeyPress: this.removeActiveFilter.bind(this, key, value)
             })
           }
         })
@@ -66,8 +67,8 @@ class ResourceFilterBar extends React.Component {
       return (
         <div className='resource-filter-bar'>
           <span className='title'>{msgs.get('filter.remove.filters', locale)}</span>
-          {boundFilters.map(({name, onClick}) => {
-            return <Tag key={name} type='custom'>
+          {boundFilters.map(({name, onClick, onKeyPress}) => {
+            return <Tag key={name} type='custom' tabIndex='0' role={'button'} onKeyPress={onKeyPress}>
               {name}
               <Icon
                 className='closeIcon'
@@ -115,10 +116,8 @@ class ResourceFilterBar extends React.Component {
     this.removeAllActiveFilter(clearFilters)
   }
 
-  handleClearKeyPress(e, clearFilters) {
-    if ( e.key === 'Enter') {
-      this.removeAllActiveFilter(clearFilters)
-    }
+  handleClearKeyPress(clearFilters) {
+    this.handleClearClick(clearFilters)
   }
 
   removeAllActiveFilter = (clearFilters) => {

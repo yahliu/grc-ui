@@ -62,6 +62,12 @@ $filter_sidebar_animation_duration: 300ms;
       right: .75rem;
       fill: $color__white;
       cursor: pointer;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+        border: 3px solid $grc_highlight_borad;
+      }
     }
   }
 

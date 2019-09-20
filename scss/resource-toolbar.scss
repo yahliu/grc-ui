@@ -64,6 +64,12 @@
         }
       }
 
+      .resource-filter-button:focus {
+        box-shadow: none;
+        outline: 1px solid $grc_highlight_borad;
+        border: none;
+      }
+
       > div:not(:last-child) {
         padding-right: 20px;
         border-right: 2px solid $color__gray-1;

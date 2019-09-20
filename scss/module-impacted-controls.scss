@@ -113,7 +113,9 @@
 
                 .bx--list-box__field {
                   &:focus {
-                   box-shadow: none;
+                    box-shadow: none;
+                    outline: 1px solid $grc_highlight_borad;
+                    border: none;
                  }
                 }
 

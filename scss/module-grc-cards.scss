@@ -41,6 +41,8 @@
         padding: 0 8px;
         &:focus {
          box-shadow: none;
+         outline: 1px solid $grc_highlight_borad;
+         border: none;
        }
       }
 
@@ -63,7 +65,7 @@
     .collapse {
       background: transparent;
       border: none;
-      // outline:none;
+      outline: none;
       font-size: 0.875rem;
       display: flex;
       margin-left: auto;
@@ -95,6 +97,12 @@
       &:hover>.collapse-button {
           color: $mcm_color_dark_blue;
           text-decoration: underline;
+      }
+
+      &:focus {
+        box-shadow: none;
+        outline: 1px solid $grc_highlight_borad;
+        border: none;
       }
     }
   }
@@ -200,7 +208,13 @@
            font-size: 12px;
            color: $color__navy-gray-6;
            padding: 10px 0;
-          //  outline:none;
+           outline: none;
+
+           &:focus {
+            box-shadow: none;
+            outline: none;
+            border: 2px solid $grc_color_border_gray;
+          }
 
            &.violated, &.found, &.high {
             .card-count {

@@ -27,6 +27,11 @@
 
 .resource-table {
   tbody {
+    tr td a:focus {
+        box-shadow: none;
+        outline: 1px solid $grc_highlight_borad;
+        border: none;
+    } 
     tr.high-light {
       background-color: $grc_highlight_background;
       border-color: $grc_highlight_borad;
@@ -57,7 +62,7 @@
     .bx--table-expand-v2__button {
       .bx--table-expand-v2__svg {
         transform: rotate(90deg);
-        transition: 0.1s
+        transition: 0.1s;
       }
     }
   }
@@ -68,7 +73,7 @@
     .bx--table-expand-v2__button {
       .bx--table-expand-v2__svg {
         transform: rotate(270deg);
-        transition: 0.1s
+        transition: 0.1s;
       }
     }
   }

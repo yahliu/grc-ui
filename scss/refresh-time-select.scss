@@ -15,7 +15,11 @@
   padding-right: 10px;
 
   > div {
-    outline: none;
+    &:focus {
+      box-shadow: none;
+      outline: 1px solid $grc_highlight_borad;
+      border:  none;
+    }
   }
 
   .button-icon {
@@ -40,7 +44,9 @@
     .bx--list-box__field {
       padding: 0 5px;
       &:focus {
-       box-shadow: none;
+        box-shadow: none;
+        outline: 1px solid $grc_highlight_borad;
+        border: none;
      }
     }
 

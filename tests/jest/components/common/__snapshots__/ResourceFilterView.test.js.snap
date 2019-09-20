@@ -33,8 +33,10 @@ exports[`ResourceFilterView component renders as expected 1`] = `
       height="10"
       name="icon--close"
       onClick={[Function]}
-      role="img"
+      onKeyPress={[Function]}
+      role="button"
       style={undefined}
+      tabIndex="0"
       viewBox="0 0 10 10"
       width="10"
     >

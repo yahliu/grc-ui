@@ -80,6 +80,8 @@
           &:focus {
             cursor: text;
             box-shadow: none;
+            outline: 1px solid $grc_highlight_borad;
+            border: none;
           }
         }
       }

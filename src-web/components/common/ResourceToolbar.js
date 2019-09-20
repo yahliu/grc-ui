@@ -77,7 +77,7 @@ export class ResourceToolbar extends React.Component {
               refreshControl = {refreshControl}
             />
             {/* filter results button, not dispalyed in details page */}
-            { (location.pathname.startsWith('/multicloud/policies/all/') || location.pathname.startsWith('/multicloud/policies/policy/') ) ? null : <div tabIndex='0' role={'button'}
+            { (location.pathname.startsWith('/multicloud/policies/all/') || location.pathname.startsWith('/multicloud/policies/policy/') ) ? null : <div className='resource-filter-button' tabIndex='0' role={'button'}
               onClick={this.toggleFilterModel} onKeyPress={this.toggleFilterModelPress}>
               <svg className='button-icon'>
                 <use href={'#diagramIcons_filter'} ></use>

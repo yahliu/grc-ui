@@ -298,6 +298,9 @@ class ImpactedControlsModule extends React.Component {
 
       // don't show fill in radar rings
       Array.from(this.radarRef.querySelectorAll('circle')).map(circle=>{
+        if (circle.getAttribute('r') == 3) {
+          circle.setAttribute('tabindex', '0')
+        }
         if (circle.getAttribute('r') > 3) {
           circle.setAttribute('fill-opacity', '0')
         }
