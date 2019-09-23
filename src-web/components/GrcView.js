@@ -209,11 +209,11 @@ export class GrcView extends React.Component {
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
     value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match
     let activeSet
-    if (value) { //add null grc-card filter
+    if (value) { //add non-null grc-card filter
       activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
       activeSet.add(value)
     }
-    if (level) { //add null severity level filter
+    if (level) { //add non-null severity level filter
       activeFilters[type] ? activeSet = activeFilters[type] : activeSet = activeFilters[type] = new Set()
       activeSet.add(level)
     }

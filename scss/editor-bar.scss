@@ -20,7 +20,7 @@
 
     .editor-bar-search {
       .bx--search--sm .bx--search-input {
-        background-color: #fff;
+        background-color: $color__white;
         font-size: 14px;
         height: 22px;
       }
@@ -37,12 +37,12 @@
 
       &.failure {
         cursor: default;
-        fill: $mcm__color__critical;
+        fill: $grc__color__critical;
       }
     }
 
     .editor-error-button {
-      fill: $mcm__color__critical;
+      fill: $grc__color__critical;
     }
 
     .editor-bar-spacer {
@@ -55,7 +55,7 @@
 
       &:focus, &.bx--overflow-menu--open {
         box-shadow: none;
-        outline: 1px solid $grc_highlight_borad;
+        outline: 1px solid $color__blue-51;
         border: none;
       }
     }
@@ -66,7 +66,7 @@
   min-width: 200px;
   &:focus {
     box-shadow: none;
-    outline: 1px solid $grc_highlight_borad;
+    outline: 1px solid $color__blue-51;
     border: none;
   }
   .bx--overflow-menu-options__btn{
@@ -85,7 +85,7 @@
     display: flex;
 
     .item-icon {
-      fill: $mcm__color__critical;
+      fill: $grc__color__critical;
       padding-right: 8px;
     }
   }

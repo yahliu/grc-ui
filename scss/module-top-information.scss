@@ -31,7 +31,7 @@
       margin-bottom: 9px;
       font-size: 18px;
       text-align: center;
-      color: $mcm_color_blue;
+      color: $grc_color_blue;
     }
 
     .no-informations-detail {
@@ -71,7 +71,7 @@
         }
         .bx--tabs__nav-link:focus {
           box-shadow: none;
-          outline: 1px solid $grc_highlight_borad;
+          outline: 1px solid $color__blue-51;
           border: none;
         }
       }
@@ -97,13 +97,13 @@
         padding: 0 8px;
         &:focus {
           box-shadow: none;
-          outline: 1px solid $grc_highlight_borad;
+          outline: 1px solid $color__blue-51;
           border: none;
        }
       }
 
       .bx--list-box__menu-item {
-        color: $mcm_color_gray_20;
+        color: $color__blue-90;
         padding: 14px;
         height: 26px;
         font-weight: normal;
@@ -124,7 +124,7 @@
     &:focus {
       box-shadow: none;
       outline: none;
-      border: 2px solid $grc_color_border_gray;
+      border: 2px solid $color__gray-1;
     }
   }
 
@@ -177,16 +177,16 @@
             outline: none;
             &:focus {
               box-shadow: none;
-              outline: 1px solid $grc_highlight_borad;
+              outline: 1px solid $color__blue-51;
               border: none;
             }
 
             .card-information-count {
               font-size: 34px;
               font-weight: bold;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
               &.alert {
-                color: $mcm_color_red;
+                color: $grc_color_finding_high;
               }
             }
 
@@ -212,14 +212,14 @@
               flex-wrap: wrap;
               font-weight: bold;
               padding-bottom: 5px;
-              color: $mcm_color_gray_20;
+              color: $color__blue-90;
             }
 
             .card-description {
               padding-right: 40px;
               font-style: italic;
               font-size: 12px;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
               line-height: 18px;
               max-height: 36px;
               overflow: hidden;

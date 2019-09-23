@@ -265,12 +265,13 @@ class ResourceTable extends React.Component {
 
         if (fliteredActions && fliteredActions.length > 0 && this.showTableToobar()) {
           row.action = (
-            <OverflowMenu floatingMenu flipped iconDescription={msgs.get('svg.description.overflowMenu', locale)} ariaLabel='Overflow-menu'>
+            <OverflowMenu floatingMenu flipped iconDescription={msgs.get('svg.description.overflowMenu', locale)} ariaLabel='Overflow-menu' tabIndex={0}>
               {fliteredActions.map((action) =>
                 <OverflowMenuItem
                   data-table-action={action}
                   isDelete={action ==='table.actions.remove' || action ==='table.actions.policy.remove'|| action ==='table.actions.applications.remove'|| action ==='table.actions.compliance.remove'}
                   onClick={() => getResourceAction(action, item, null, history, locale)}
+                  primaryFocus={true}
                   key={action}
                   itemText={msgs.get(action, locale)}
                 />

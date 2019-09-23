@@ -17,7 +17,7 @@
 
   .bx--tag.bx--tag--custom {
     margin-left: 10px;
-    background-color: $mcm_view_filter;
+    background-color: $grc_view_filter;
     color: $color__blue-90;
     font-size: .9rem;
     padding: .8rem;
@@ -27,7 +27,7 @@
     &:focus {
       box-shadow: none;
       outline: none;
-      border: 1px solid $grc_highlight_borad;
+      border: 1px solid $color__blue-51;
     }
 
     .closeIcon {
@@ -46,7 +46,7 @@
     &:focus {
       box-shadow: none;
       outline: none;
-      border: 1px solid $grc_highlight_borad;
+      border: 1px solid $color__blue-51;
     }
   }
 }

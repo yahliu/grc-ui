@@ -114,13 +114,13 @@
                 .bx--list-box__field {
                   &:focus {
                     box-shadow: none;
-                    outline: 1px solid $grc_highlight_borad;
+                    outline: 1px solid $color__blue-51;
                     border: none;
                  }
                 }
 
                 .bx--list-box__menu-item {
-                  color: $mcm_color_gray_20;
+                  color: $color__blue-90;
                   padding: 14px;
                   height: 26px;
                   font-weight: normal;
@@ -176,7 +176,7 @@
               flex-wrap: wrap;
               font-weight: bold;
               padding-top: 5px;
-              color: $mcm_color_gray_20;
+              color: $color__blue-90;
             }
 
             .info {
@@ -184,7 +184,7 @@
               padding-top: 5px;
               font-style: italic;
               font-size: 12px;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
             }
           }
         }
@@ -200,7 +200,7 @@ div.tooltip {
   height: 175px;
   // pointer-events: none;
   background: white;
-  border: 1px solid $grc_color_border_gray;
+  border: 1px solid $color__gray-1;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
 
   &-text {
@@ -213,7 +213,7 @@ div.tooltip {
 
     .header {
       .title {
-        color: $mcm_color_blue_gray;
+        color: $color__navy-gray-6;
         font-size: 11px;
         font-weight: 600;
         line-height: 18px;
@@ -245,7 +245,7 @@ div.tooltip {
         text-decoration: none;
         .link {
           &:hover {
-            color: $mcm_color_dark_blue;
+            color: $grc_color_dark_blue;
           }
         }
         .finding {
@@ -253,7 +253,7 @@ div.tooltip {
           font-size: 14px;
           display: flex;
           justify-content: space-between;
-          color: $mcm_color_gray_20;
+          color: $color__blue-90;
   
           .count {
             font-weight: 300;

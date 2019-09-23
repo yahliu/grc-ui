@@ -23,40 +23,35 @@ $overview-column-width: 10px !default; /* card width must be multiple of this */
 $overview-card-margin-right: 20px !default; /* margin around cards */
 $overview-card-margin-bottom: 25px !default; /* margin around cards */
 
-$mcm__color__gray: #6f7878 !default;
-$mcm__color__critical: #e0182d !default;
-
-$mcm__available_color: #047cc0 !default;
-$mcm__used_color: #40d5bb !default;
-
-$mcm_color_green: #8cd211 !default;
-$mcm_color_gray: #8c9ba5 !default;
-$mcm_color_yellow: #EFC199 !default;
-$mcm_color_red: #E62325 !default;
-
-$mcm_heat_red: #FF4253 !default;
-$mcm_heat_yellow: #FFCB00 !default;
-$mcm_heat_blue: #92eeee !default;
-
-$mcm_view_filter: #DFEBF1 !default;
-
-$ibm-colors__gray--40: #a4a4a4 !default;
-$mcm_color_blue: #3F71EC !default;
-$mcm_color_blue_gray: #5A6872 !default;
-$mcm_color_light_gray: #cccccc !default;
-$mcm_color_gray_20: #152935 !default;
-$mcm_color_dark_blue: #30588c !default;
-
+//These are grc own colors not in carbon
+$grc__color__gray: #6f7878 !default;
+$grc__color__critical: #e0182d !default;
+$grc_view_filter: #DFEBF1 !default;
+$grc_color_blue: #3F71EC !default;
+$grc_color_light_gray: #cccccc !default;
+$grc_color_dark_blue: #30588c !default;
 $grc_color_radar_blue: #0082C1 !default;
 $grc_color_radar_green: #13B9B9 !default;
 $grc_color_radar_legend: #50565B !default;
-$grc_color_overview_title: #4A4A4A !default;
-
 $grc_color_finding_high: #E62325 !default;
 $grc_color_finding_medium: #FEC233 !default;
 $grc_color_finding_low: #A0A0A0 !default;
-$grc_highlight_borad: #3d70b2 !default;
-$grc_color_border_gray: #DFE3E6 !default;
 $grc_highlight_background: rgba(85,150,230, 0.1) !default;
 $grc_highlight_background_2: rgba(85,150,230, 0.02) !default;
-$grc_under_line: #dfe6eb !default;
+
+//These are carbon colors in previous version but will not in latest carbon 10
+$ibm-colors__gray--40: #a4a4a4 !default;
+$color__blue-51: #3d70b2 !default;
+$color__gray-1: #DFE3E6 !default;
+$color__navy-gray-8: #dfe6eb !default; 
+$color__green-40: #5aa700 !default;
+$color__white: #ffffff !default;
+$color__red-50: #e71d32 !default;
+$color__blue-50: #4178be !default;
+$color__blue-30: #5aaafa !default;
+$color__yellow-30: #efc100 !default;
+$color__blue-40: #5596e6 !default;
+$color__teal-20: #6eedd8 !default;
+$color__blue-90: #152935 !default;
+$color__navy-gray-6: #5A6872 !default;
+$color__navy-gray-7: #8c9ba5 !default;

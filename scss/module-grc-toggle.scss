@@ -29,12 +29,12 @@
   tbody {
     tr td a:focus {
         box-shadow: none;
-        outline: 1px solid $grc_highlight_borad;
+        outline: 1px solid $color__blue-51;
         border: none;
     } 
     tr.high-light {
       background-color: $grc_highlight_background;
-      border-color: $grc_highlight_borad;
+      border-color: $color__blue-51;
       border-style: solid;
       @media screen and (min-width: 2000px) {
         border-width: 0.08rem;
@@ -45,7 +45,7 @@
     }
     tr:nth-child(2n).high-light {
       background-color:$grc_highlight_background;
-      border-color: $grc_highlight_borad;
+      border-color: $color__blue-51;
       border-style: solid;
       @media screen and (min-width: 2000px) {
         border-width: 0.08rem;

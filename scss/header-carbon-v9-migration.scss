@@ -6,6 +6,8 @@
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
+ @import 'node_modules/carbon-components/scss/globals/scss/_colors';
+ @import 'variables';
 
 .expand-vertically{
   .secondary-header{
@@ -18,7 +20,7 @@
 
     .bx--detail-page-header-title {
       font-weight: 300;
-      color: #5a6872;
+      color: $color__navy-gray-6;
     }
 
   }
@@ -39,7 +41,7 @@
 
   .bx--module .bx--module__inner {
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
-    background-color: #fff;
+    background-color: $color__white;
     border: 1px solid transparent;
   }
 
@@ -63,7 +65,7 @@
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 0;
     font-weight: 600;
-    color: #152935;
+    color: $color__blue-90;
   }
 
   .bx--btn {
@@ -100,9 +102,9 @@
   }
 
   .bx--btn--primary {
-    background-color: #3d70b2;
+    background-color: $color__blue-51;
     border: 2px solid transparent;
-    color: #fff;
+    color: $color__white;
     min-height: 30px;
   }
 

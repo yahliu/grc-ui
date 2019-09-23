@@ -74,7 +74,7 @@
             &:focus {
               box-shadow: none;
               outline: none;
-              border: 2px solid $grc_color_border_gray;
+              border: 2px solid $color__gray-1;
             }
 
             &.hasBorder {
@@ -88,7 +88,7 @@
               font-size: 24px;
               letter-spacing: 1px;
               line-height: 16px;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
               margin-bottom: 32px;
               position: relative;
               bottom: -10px;
@@ -102,10 +102,10 @@
             .card-count {
               font-size: 34px;
               font-weight: bold;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
               padding-bottom: 15px;
               &.alert {
-                color: $mcm_color_red;
+                color: $grc_color_finding_high;
               }
             }
             .card-type {
@@ -116,7 +116,7 @@
               letter-spacing: 1px;
               line-height: 16px;
               font-weight: bold;
-              color: $mcm_color_blue_gray;
+              color: $color__navy-gray-6;
             }
             .card-findings {
               min-width: 7.7rem;

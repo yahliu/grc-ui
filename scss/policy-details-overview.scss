@@ -88,7 +88,7 @@
       }
   
       .vertical-divider {
-        background-color: $grc_color_border_gray;
+        background-color: $color__gray-1;
         height: auto;
         min-width: 1px;
       }
@@ -114,15 +114,15 @@
             }
             th{
               span{
-                color: $grc_highlight_borad;
+                color: $color__blue-51;
               }
-              border: 1px solid $grc_color_border_gray;
+              border: 1px solid $color__gray-1;
               border-left: hidden;
               font-size: smaller;
               padding-left: 0;
             }
             td{
-              border: 1px solid $grc_color_border_gray;
+              border: 1px solid $color__gray-1;
               border-left: hidden;
               font-size: smaller;
               padding-left: 0;

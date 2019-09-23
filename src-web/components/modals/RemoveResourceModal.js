@@ -77,6 +77,15 @@ class RemoveResourceModal extends React.Component {
     })
   }
 
+  toggleSelectedKeyboard = (target) => {
+    this.setState((prevState) => {
+      const currState = prevState.selected
+      const index = currState.findIndex(item => item.id === target)
+      currState[index].selected = !currState[index].selected
+      return currState
+    })
+  }
+
   handleSubmitClick() {
     const { handleSubmit, data } = this.props
     data.selected = this.state.selected
@@ -101,6 +110,7 @@ class RemoveResourceModal extends React.Component {
                     id={child.id}
                     checked={this.state.selected.some((i) => {return (i.id === child.id && child.selected === true)})}
                     onChange={this.toggleSelected}
+                    onKeyPress={this.toggleSelectedKeyboard.bind(this, child.id)}
                     labelText={child.label}
                     aria-label={child.id} />
                 </div>

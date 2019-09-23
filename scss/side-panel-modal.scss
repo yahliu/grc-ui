@@ -34,7 +34,7 @@
     }
   
     .special-header {
-      border-bottom: 1px solid $grc_color_border_gray;
+      border-bottom: 1px solid $color__gray-1;
     }
   
     .bx--loading {
@@ -54,11 +54,11 @@
     }
   
     .bx--modal-side-panel-process-bar-body{
-      fill: $mcm_color_light_gray;
+      fill: $grc_color_light_gray;
     }
   
     .bx--modal-side-panel-process-bar-fill{
-      fill: $mcm_color_red;
+      fill: $grc_color_finding_high;
     }
   
     .bx-modal-content-sub-header {
@@ -135,7 +135,7 @@
           tbody {
             border-bottom: none;
             tr:not(:last-child) {
-              border-bottom: 1px $grc_under_line solid;
+              border-bottom: 1px $color__navy-gray-8 solid;
             }
             tr:last-child {
               border-bottom: none;
