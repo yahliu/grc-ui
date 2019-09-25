@@ -50,4 +50,10 @@ describe('role reducer', () => {
     const expectedValue = {'test': 'test'}
     expect(role(state, action)).toEqual(expectedValue)
   })
+  it('should return undefined state', () => {
+    expect(role(null, null)).toEqual(undefined)
+  })
+  it('should return undefined state', () => {
+    expect(role()).toEqual(undefined)
+  })
 })

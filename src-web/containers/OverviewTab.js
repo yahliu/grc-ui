@@ -22,7 +22,6 @@ import { updateModal, updateSecondaryHeader} from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
 import { GRCList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
-//import getMockData from './OverviewTabMock'
 
 class OverviewTab extends React.Component {
 

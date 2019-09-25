@@ -11,642 +11,142 @@
 import React from 'react'
 import CreationView from '../../../src-web/components/CreationView'
 import renderer from 'react-test-renderer'
-
-const existing =
-{
-  'clusterLabels':[
-    {
-      'key':'cloud',
-      'value':'IBM'
-    },
-    {
-      'key':'datacenter',
-      'value':'toronto'
-    },
-    {
-      'key':'environment',
-      'value':'Dev'
-    },
-    {
-      'key':'owner',
-      'value':'marketing'
-    },
-    {
-      'key':'region',
-      'value':'US'
-    },
-    {
-      'key':'vendor',
-      'value':'ICP'
-    }
-  ],
-  'compliances':[
-    {
-      'name':'grc-policy',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'',
-        'policy.mcm.ibm.com/controls':'',
-        'policy.mcm.ibm.com/standards':'',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'complianceType':'musthave',
-        'namespaces':{
-          'exclude':[
-            'kube-*'
-          ],
-          'include':[
-            'default'
-          ]
-        },
-        'object-templates':[
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'policy/v1beta1',
-              'kind':'PodSecurityPolicy',
-              'metadata':{
-                'annotations':{
-                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
-                },
-                'name':'restricted-mcm'
-              },
-              'spec':{
-                'allowPrivilegeEscalation':false,
-                'allowedCapabilities':[
-                  '*'
-                ],
-                'fsGroup':{
-                  'rule':'RunAsAny'
-                },
-                'hostIPC':false,
-                'hostNetwork':true,
-                'hostPID':false,
-                'hostPorts':[
-                  {
-                    'max':65535,
-                    'min':1000
-                  }
-                ],
-                'privileged':false,
-                'runAsUser':{
-                  'rule':'RunAsAny'
-                },
-                'seLinux':{
-                  'rule':'RunAsAny'
-                },
-                'supplementalGroups':{
-                  'rule':'RunAsAny'
-                },
-                'volumes':[
-                  '*'
-                ]
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ],
-        'remediationAction':'enforce'
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'grc-policy2',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'',
-        'policy.mcm.ibm.com/controls':'',
-        'policy.mcm.ibm.com/standards':'',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'complianceType':'musthave',
-        'namespaces':{
-          'exclude':[
-            'kube-*'
-          ],
-          'include':[
-            'default'
-          ]
-        },
-        'object-templates':[
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'policy/v1beta1',
-              'kind':'PodSecurityPolicy',
-              'metadata':{
-                'annotations':{
-                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
-                },
-                'name':'restricted-mcm'
-              },
-              'spec':{
-                'allowPrivilegeEscalation':false,
-                'allowedCapabilities':[
-                  '*'
-                ],
-                'fsGroup':{
-                  'rule':'RunAsAny'
-                },
-                'hostIPC':false,
-                'hostNetwork':true,
-                'hostPID':false,
-                'hostPorts':[
-                  {
-                    'max':65535,
-                    'min':1000
-                  }
-                ],
-                'privileged':false,
-                'runAsUser':{
-                  'rule':'RunAsAny'
-                },
-                'seLinux':{
-                  'rule':'RunAsAny'
-                },
-                'supplementalGroups':{
-                  'rule':'RunAsAny'
-                },
-                'volumes':[
-                  '*'
-                ]
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ],
-        'remediationAction':'enforce'
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'policy-iam',
-      'namespace':'mcm',
-      'annotations':{
-        'kubectl.kubernetes.io/last-applied-configuration':'{"apiVersion":"policy.mcm.ibm.com/v1alpha1","kind":"Policy","metadata":{"annotations":{"policy.mcm.ibm.com/categories":"SystemAndInformationIntegrity","policy.mcm.ibm.com/controls":"MutationAdvisor","policy.mcm.ibm.com/standards":"NIST"},"name":"policy-iam","namespace":"mcm"},"spec":{"policy-templates":[{"objectDefinition":{"apiVersion":"mcm-grcpolicy.ibm.com/v1alpha1","kind":"IamPolicy","metadata":{"label":{"category":"System-Integrity"},"name":"iam-policy-example"},"spec":{"maxClusterRoleBindingUsers":5,"namespaceSelector":{"exclude":["kube-system"],"include":["default","kube-*"]},"remediationAction":"enforce"}}}]}}\n',
-        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity',
-        'policy.mcm.ibm.com/controls':'MutationAdvisor',
-        'policy.mcm.ibm.com/standards':'NIST',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'namespaces':{
-
-        },
-        'policy-templates':[
-          {
-            'objectDefinition':{
-              'apiVersion':'mcm-grcpolicy.ibm.com/v1alpha1',
-              'kind':'IamPolicy',
-              'metadata':{
-                'label':{
-                  'category':'System-Integrity'
-                },
-                'name':'iam-policy-example'
-              },
-              'spec':{
-                'maxClusterRoleBindingUsers':5,
-                'namespaceSelector':{
-                  'exclude':[
-                    'kube-system'
-                  ],
-                  'include':[
-                    'default',
-                    'kube-*'
-                  ]
-                },
-                'remediationAction':'enforce'
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ]
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'policy-ma',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity',
-        'policy.mcm.ibm.com/controls':'MutationAdvisor',
-        'policy.mcm.ibm.com/standards':'NIST',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'namespaces':{
-
-        },
-        'policy-templates':[
-          {
-            'objectDefinition':{
-              'apiVersion':'policies.ibm.com/v1alpha1',
-              'kind':'MutationPolicy',
-              'metadata':{
-                'label':{
-                  'category':'System-Integrity'
-                },
-                'name':'mutation-policy-example'
-              },
-              'spec':{
-                'conditions':{
-                  'ownership':[
-                    'ReplicaSet',
-                    'Deployment',
-                    'DeamonSet',
-                    'ReplicationController'
-                  ]
-                },
-                'namespaceSelector':{
-                  'exclude':[
-                    'kube-system'
-                  ],
-                  'include':[
-                    'default',
-                    'kube-*'
-                  ]
-                },
-                'remediationAction':'enforce'
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ],
-        'remediationAction':'enforce'
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'policy-pod',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
-        'policy.mcm.ibm.com/controls':'MutationAdvisor,VA',
-        'policy.mcm.ibm.com/standards':'NIST,HIPAA',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'complianceType':'musthave',
-        'namespaces':{
-          'exclude':[
-            'kube*'
-          ],
-          'include':[
-            'default'
-          ]
-        },
-        'object-templates':[
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'v1',
-              'kind':'Pod',
-              'metadata':{
-                'name':'nginx-pod'
-              },
-              'spec':{
-                'containers':[
-                  {
-                    'image':'nginx:1.7.9',
-                    'name':'nginx',
-                    'ports':[
-                      {
-                        'containerPort':80
-                      }
-                    ]
-                  }
-                ]
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ],
-        'remediationAction':'inform'
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'policy-role',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
-        'policy.mcm.ibm.com/controls':'MutationAdvisor,VA',
-        'policy.mcm.ibm.com/standards':'NIST,HIPAA',
-        'seed-generation':'1'
-      },
-      'spec':{
-        'namespaces':{
-          'exclude':[
-            'kube*'
-          ],
-          'include':[
-            'default'
-          ]
-        },
-        'remediationAction':'inform',
-        'role-templates':[
-          {
-            'apiVersion':'roletemplate.mcm.ibm.com/v1alpha1',
-            'complianceType':'musthave',
-            'metadata':{
-              'creationTimestamp':null,
-              'name':'operator-role-policy'
-            },
-            'rules':[
-              {
-                'complianceType':'musthave',
-                'policyRule':{
-                  'apiGroups':[
-                    'extensions',
-                    'apps'
-                  ],
-                  'resources':[
-                    'deployments'
-                  ],
-                  'verbs':[
-                    'get',
-                    'list',
-                    'watch',
-                    'create',
-                    'delete',
-                    'patch'
-                  ]
-                }
-              }
-            ],
-            'selector':{
-              'matchLabels':{
-                'dev':'true'
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ]
-      },
-      '__typename':'ExistingCompliance'
-    },
-    {
-      'name':'policy1',
-      'namespace':'mcm',
-      'annotations':{
-        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity, RBAC',
-        'policy.mcm.ibm.com/controls':'MutationAdvisor',
-        'policy.mcm.ibm.com/standards':'NIST',
-        'seed-generation':'2'
-      },
-      'spec':{
-        'complianceType':'musthave',
-        'namespaces':{
-          'exclude':[
-            'kube*'
-          ],
-          'include':[
-            'default'
-          ]
-        },
-        'object-templates':[
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'rbac.authorization.k8s.io/v1',
-              'kind':'RoleBinding',
-              'metadata':{
-                'name':'operate-pods-rolebinding',
-                'namespace':'default'
-              },
-              'roleRef':{
-                'apiGroup':'rbac.authorization.k8s.io',
-                'kind':'Role',
-                'name':'operator'
-              },
-              'subjects':[
-                {
-                  'apiGroup':'rbac.authorization.k8s.io',
-                  'kind':'User',
-                  'name':'admin'
-                }
-              ]
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          },
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'policy/v1beta1',
-              'kind':'PodSecurityPolicy',
-              'metadata':{
-                'annotations':{
-                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
-                },
-                'name':'restricted-mcm'
-              },
-              'spec':{
-                'allowPrivilegeEscalation':false,
-                'allowedCapabilities':[
-                  '*'
-                ],
-                'fsGroup':{
-                  'rule':'RunAsAny'
-                },
-                'hostIPC':false,
-                'hostNetwork':true,
-                'hostPID':false,
-                'hostPorts':[
-                  {
-                    'max':65535,
-                    'min':1000
-                  }
-                ],
-                'privileged':false,
-                'runAsUser':{
-                  'rule':'RunAsAny'
-                },
-                'seLinux':{
-                  'rule':'RunAsAny'
-                },
-                'supplementalGroups':{
-                  'rule':'RunAsAny'
-                },
-                'volumes':[
-                  '*'
-                ]
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          },
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'networking.k8s.io/v1',
-              'kind':'NetworkPolicy',
-              'metadata':{
-                'name':'deny-from-other-namespaces',
-                'namespace':'default'
-              },
-              'spec':{
-                'ingress':[
-                  {
-                    'from':[
-                      {
-                        'podSelector':{
-
-                        }
-                      }
-                    ]
-                  }
-                ],
-                'podSelector':{
-                  'matchLabels':null
-                }
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          },
-          {
-            'complianceType':'musthave',
-            'objectDefinition':{
-              'apiVersion':'v1',
-              'kind':'LimitRange',
-              'metadata':{
-                'name':'mem-limit-range'
-              },
-              'spec':{
-                'limits':[
-                  {
-                    'default':{
-                      'memory':'512Mi'
-                    },
-                    'defaultRequest':{
-                      'memory':'256Mi'
-                    },
-                    'type':'Container'
-                  }
-                ]
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ],
-        'remediationAction':'inform',
-        'role-templates':[
-          {
-            'apiVersion':'roletemplate.mcm.ibm.com/v1alpha1',
-            'complianceType':'musthave',
-            'metadata':{
-              'creationTimestamp':null,
-              'name':'operator-role'
-            },
-            'rules':[
-              {
-                'complianceType':'mustnothave',
-                'policyRule':{
-                  'apiGroups':[
-                    'core'
-                  ],
-                  'resources':[
-                    'secrets'
-                  ],
-                  'verbs':[
-                    'get',
-                    'list',
-                    'watch',
-                    'delete',
-                    'create',
-                    'update',
-                    'patch'
-                  ]
-                }
-              },
-              {
-                'complianceType':'musthave',
-                'policyRule':{
-                  'apiGroups':[
-                    'core'
-                  ],
-                  'resources':[
-                    'pods'
-                  ],
-                  'verbs':[
-                    'get',
-                    'list',
-                    'watch'
-                  ]
-                }
-              }
-            ],
-            'selector':{
-              'matchLabels':{
-                'dev':'true'
-              }
-            },
-            'status':{
-              'Validity':{
-
-              }
-            }
-          }
-        ]
-      },
-      '__typename':'ExistingCompliance'
-    }
-  ],
-  '__typename':'Existing'
-}
-
-
+import { shallow } from 'enzyme'
+import { existing } from './ComponentsTestingData'
 
 describe('CreationView component', () => {
+  const setResetNewPolicy = jest.fn()
   const setGetPolicyJSON = jest.fn()
   it('renders as expected', () => {
     const component = renderer.create(
       <CreationView
+        loading={false}
+        error={null}
         existing={existing}
-        setResetNewPolicy={setGetPolicyJSON}
+        setResetNewPolicy={setResetNewPolicy}
         setGetPolicyJSON={setGetPolicyJSON}
       />
     )
     expect(component.toJSON()).toMatchSnapshot()
+  })
+})
+
+describe('CreationView component', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  it('renders as expected', () => {
+    const component = renderer.create(
+      <CreationView
+        loading={true}
+        error={null}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+})
+
+describe('CreationView component', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  it('renders as expected', () => {
+    const component = renderer.create(
+      <CreationView
+        loading={false}
+        error={{}}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+})
+
+describe('getPolicyJSON function', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <CreationView
+        loading={false}
+        error={null}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(wrapper.instance().getPolicyJSON()).toEqual(null)
+  })
+})
+
+describe('sortMultiSelectItems function', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  const multiSelectKey = 'test'
+  const items = ['c', 'b', 'a']
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <CreationView
+        loading={false}
+        error={null}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(wrapper.instance().sortMultiSelectItems(multiSelectKey, items)).toEqual(items.sort())
+    expect(wrapper.instance().sortMultiSelectItems('selectors', items)).toEqual(items)
+  })
+})
+
+describe('handleEditorCommand function', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <CreationView
+        loading={false}
+        error={null}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(wrapper.instance().handleEditorCommand('next')).toEqual('next')
+    expect(wrapper.instance().handleEditorCommand('undo')).toEqual('undo')
+    expect(wrapper.instance().handleEditorCommand('redo')).toEqual('redo')
+    expect(wrapper.instance().handleEditorCommand('restore')).toEqual('restore')
+  })
+})
+
+describe('handleEditorCommand function', () => {
+  const setResetNewPolicy = jest.fn()
+  const setGetPolicyJSON = jest.fn()
+  const evt = {
+    target: {
+      value: 'value-testing'
+    },
+    selectedItems: ['selectedItems-testing-1', 'selectedItems-testing-2'],
+  }
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <CreationView
+        loading={false}
+        error={null}
+        existing={existing}
+        setResetNewPolicy={setResetNewPolicy}
+        setGetPolicyJSON={setGetPolicyJSON}
+      />
+    )
+    expect(wrapper.instance().onChange('name', evt)).toEqual('name')
+    expect(wrapper.instance().onChange('enforce', evt)).toEqual('enforce')
+    expect(wrapper.instance().onChange('standards', evt)).toEqual('standards')
+    expect(wrapper.instance().onChange('categories', evt)).toEqual('categories')
+    expect(wrapper.instance().onChange('controls', evt)).toEqual('controls')
+    // expect(wrapper.instance().onChange('specs', evt)).toEqual('specs')
+    expect(wrapper.instance().onChange('selectors', evt)).toEqual('selectors')
   })
 })

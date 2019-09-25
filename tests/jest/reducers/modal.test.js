@@ -222,4 +222,11 @@ describe('modal reducer', () => {
     const expectedValue = {'test': 'test'}
     expect(modal(state, action)).toEqual(expectedValue)
   })
+
+  it('should return undefined state', () => {
+    expect(modal(null, null)).toEqual(undefined)
+  })
+  it('should return undefined state', () => {
+    expect(modal()).toEqual(undefined)
+  })
 })

@@ -56,7 +56,6 @@ function getHeader(data, locale) {
   return {header, descr, percent, violation, cluster, policy}
 }
 
-
 class PolicySidePanelDetailsModal extends React.PureComponent {
 
   handleModalClose = () => {
@@ -142,7 +141,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
   }
 }
 
-const ClustersTable = ({items, type, inapplicable}) => {
+export const ClustersTable = ({items, type, inapplicable}) => {
   items = items.map((policy, index) => {
     let violatedNum = 0
     const spec = _.get(policy, 'raw.spec', '')
@@ -210,7 +209,7 @@ const ClustersTable = ({items, type, inapplicable}) => {
   )
 }
 
-const PoliciesTable = ({items, type, inapplicable}) => {
+export const PoliciesTable = ({items, type, inapplicable}) => {
   items = items.map((cluster, index) => {
     const policy = _.get(cluster, 'policy', [])
     const violatedNum = _.get(cluster, 'violated', 0)

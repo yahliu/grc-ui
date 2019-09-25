@@ -8,12 +8,24 @@
  *******************************************************************************/
 'use strict'
 
-import { policies, findings } from './CommonTestingData'
+import { policies, policies2, findings } from './CommonTestingData'
 import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData, formatExpandablePolicies } from '../../../../src-web/components/common/FormatTableData'
 
 describe('formatPoliciesToClustersTableData', () => {
   it('should correctly format', () => {
     expect(formatPoliciesToClustersTableData(policies)).toMatchSnapshot()
+  })
+})
+
+describe('formatPoliciesToClustersTableData', () => {
+  it('should correctly format', () => {
+    expect(formatPoliciesToClustersTableData(policies2)).toMatchSnapshot()
+  })
+})
+
+describe('formatPoliciesToClustersTableData', () => {
+  it('should correctly format', () => {
+    expect(formatPoliciesToClustersTableData(null)).toMatchSnapshot()
   })
 })
 
@@ -23,8 +35,27 @@ describe('formatFindingsToClustersTableData', () => {
   })
 })
 
+describe('formatFindingsToClustersTableData', () => {
+  it('should correctly format', () => {
+    expect(formatFindingsToClustersTableData(null)).toMatchSnapshot()
+  })
+})
+
 describe('formatExpandablePolicies', () => {
   it('should correctly format', () => {
     expect(formatExpandablePolicies(policies)).toMatchSnapshot()
   })
 })
+
+describe('formatExpandablePolicies', () => {
+  it('should correctly format', () => {
+    expect(formatExpandablePolicies(null)).toMatchSnapshot()
+  })
+})
+
+describe('formatExpandablePolicies', () => {
+  it('should correctly format', () => {
+    expect(formatExpandablePolicies([null, null])).toMatchSnapshot()
+  })
+})
+

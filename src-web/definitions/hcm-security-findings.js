@@ -76,28 +76,33 @@ export default {
   },
 }
 
-function getSeverity(item, locale) {
+export function getSeverity(item, locale) {
   const severity = _.get(item, 'finding.severity')
-  switch(severity) {
-  case 'HIGH':
-    return msgs.get('finding.filter.category.severity.high', locale)
-  case 'MEDIUM':
-    return msgs.get('finding.filter.category.severity.medium', locale)
-  case 'LOW':
-    return msgs.get('finding.filter.category.severity.low', locale)
-  default:
+  if(severity) {
+    switch(severity.toUpperCase()) {
+    case 'HIGH':
+      return msgs.get('finding.filter.category.severity.high', locale)
+    case 'MEDIUM':
+      return msgs.get('finding.filter.category.severity.medium', locale)
+    case 'LOW':
+      return msgs.get('finding.filter.category.severity.low', locale)
+    default:
+      return '-'
+    }
+  }
+  else {
     return '-'
   }
 }
 
-function compressArray(items){
+export function compressArray(items){
   if (items) {
     return items.map(item => _.startCase(item.trim())).join(', ')
   }
   return '-'
 }
 
-function showTypeAndName(item){
+export function showTypeAndName(item){
   const resourceType = _.get(item, 'context.resourceType', '-')
   const resourceName = _.get(item, 'context.resourceName', '-')
   return `${resourceType}: ${resourceName}`

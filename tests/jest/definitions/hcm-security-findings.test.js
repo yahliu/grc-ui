@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-import { getFindingStandards, getFindingControl, getFindingCategories } from '../../../src-web/definitions/hcm-security-findings'
+import { getFindingStandards, getFindingControl, getFindingCategories, showTypeAndName, compressArray, getSeverity } from '../../../src-web/definitions/hcm-security-findings'
 
 const item1 = {
   'securityClassification': {}
@@ -33,6 +33,92 @@ const item4 = {
     'securityCategories': ['TestCaseFour', '', 'Test Case Four'],
     'securityControl': 'TestCaseFour'}
 }
+
+const item5 = {
+  'context': {
+    'resourceType': 'HCMPolicyList',
+    'resourceName': 'HCMPolicy'
+  }
+}
+
+const item6 = {
+  'finding': {
+    'severity': 'low'
+  }
+}
+
+const item7 = {
+  'finding': {
+    'severity': 'high'
+  }
+}
+
+const item8 = {
+  'finding': {
+    'severity': 'MEDIUM'
+  }
+}
+
+const item9 = {
+  'finding': {
+    'severity': 'IBM'
+  }
+}
+
+describe('getSeverity', () => {
+  it('Should get severity', () => {
+    expect(getSeverity({})).toMatchSnapshot()
+  })
+
+  it('Should get severity', () => {
+    expect(getSeverity(null)).toMatchSnapshot()
+  })
+
+  it('Should get severity', () => {
+    expect(getSeverity(item6)).toMatchSnapshot()
+  })
+
+  it('Should get severity', () => {
+    expect(getSeverity(item7)).toMatchSnapshot()
+  })
+
+  it('Should get severity', () => {
+    expect(getSeverity(item8)).toMatchSnapshot()
+  })
+
+  it('Should get severity', () => {
+    expect(getSeverity(item9)).toMatchSnapshot()
+  })
+})
+
+
+describe('compressArray', () => {
+  it('Should compress array', () => {
+    expect(compressArray([])).toMatchSnapshot()
+  })
+
+  it('Should compress array', () => {
+    expect(compressArray(null)).toMatchSnapshot()
+  })
+
+  it('Should compress array', () => {
+    expect(compressArray(['ibm', 'mcm', 'grc', 'cloud'])).toMatchSnapshot()
+  })
+})
+
+describe('showTypeAndName', () => {
+  it('Should show type and name', () => {
+    expect(showTypeAndName(item5)).toMatchSnapshot()
+  })
+
+  it('Should show type and name', () => {
+    expect(showTypeAndName(null)).toMatchSnapshot()
+  })
+
+  it('Should show type and name', () => {
+    expect(showTypeAndName({})).toMatchSnapshot()
+  })
+})
 
 describe('getFindingStandards', () => {
   it('Should return formarted FindingStandards', () => {

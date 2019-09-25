@@ -7,7 +7,8 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-import {getDefaultSearchField, getDefaultSortField, getLink, getPrimaryKey, getSecondaryKey } from '../../../src-web/definitions/index'
+import {getDefaultSearchField, getDefaultSortField, getLink, getPrimaryKey, getSecondaryKey, getTableKeys, getURIKey } from '../../../src-web/definitions/index'
+import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 
 // regular properties/selector/reducer testing
 // compare the received and expect values
@@ -29,6 +30,10 @@ describe('definitions/index', () => {
         name: 'HCMPolicy'
       }
       expect(getDefaultSortField(item)).toBe('metadata.name')
+    })
+
+    it('should return undefined and error log', () => {
+      expect(getDefaultSortField({})).toEqual(undefined)
     })
   })
 
@@ -77,7 +82,17 @@ describe('definitions/index', () => {
     })
   })
 
+  describe('#getTableKeys', () => {
+    expect(getTableKeys(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)).toMatchSnapshot()
+  })
+
   describe('#getURIKey', () => {
-    //getURIKey not been used
+    it('should return the default sort field of node', () => {
+      const item = {
+        list: 'HCMPolicyList',
+        name: 'HCMPolicy'
+      }
+      expect(getURIKey(item)).toBe('metadata.name')
+    })
   })
 })

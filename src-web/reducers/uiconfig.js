@@ -10,10 +10,12 @@
 import { UICONFIG_RECEIVE_SUCCESS } from '../actions'
 
 export const uiconfig = (state = null, action) => {
-  switch (action.type) {
-  case UICONFIG_RECEIVE_SUCCESS:
-    return action.data
-  default:
-    return state
+  if (action) {
+    switch (action.type) {
+    case UICONFIG_RECEIVE_SUCCESS:
+      return action.data
+    default:
+      return state
+    }
   }
 }

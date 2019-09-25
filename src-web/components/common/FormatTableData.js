@@ -43,7 +43,7 @@ const formatPolicyClusterView = (clusterName, policiesUnderCluster) => {
 export const formatPoliciesToClustersTableData = (policies) => {
   const result = []
   const map = new Map()
-  if(policies) {
+  if (policies) {
     policies.forEach((policy) => {
       const statuses = _.get(policy, 'raw.status.status', {})
       Object.entries(statuses).forEach(([cluster]) => {
@@ -86,7 +86,7 @@ const formatFindingClusterView = (clusterName, findingsUnderCluster) => {
 export const formatFindingsToClustersTableData = (findings) => {
   const result = []
   const map = new Map()
-  if(findings) {
+  if (findings) {
     findings.forEach((finding) => {
       const cluster = _.get(finding, 'context.clusterName', '-')
       if (!map.has(cluster)) map.set(cluster, [])
@@ -101,12 +101,14 @@ export const formatFindingsToClustersTableData = (findings) => {
 
 export const formatExpandablePolicies = (policies) => {
   const result = []
-  policies.forEach(policy => {
-    if(policy) {
-      const subItems = [{name: 'policy.pb', items: policy.placementBindings ? policy.placementBindings.map(pb => pb.metadata.name) : []},
-        {name: 'policy.pp', items: policy.placementPolicies ? policy.placementPolicies.map(pp => pp.metadata.name) : []}]
-      result.push({...policy, subItems})
-    }
-  })
+  if (policies) {
+    policies.forEach(policy => {
+      if(policy) {
+        const subItems = [{name: 'policy.pb', items: policy.placementBindings ? policy.placementBindings.map(pb => pb.metadata.name) : []},
+          {name: 'policy.pp', items: policy.placementPolicies ? policy.placementPolicies.map(pp => pp.metadata.name) : []}]
+        result.push({...policy, subItems})
+      }
+    })
+  }
   return result
 }

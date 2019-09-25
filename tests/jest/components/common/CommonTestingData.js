@@ -587,6 +587,161 @@ export const policies = [
   }
 ]
 
+export const policies2 = [
+  {
+    'metadata': {
+      'name': 'my-policy-test',
+      'namespace': 'mcm',
+      'selfLink': '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy-test',
+      'annotations': {
+        'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections',
+        'policy.mcm.ibm.com/controls': 'VA',
+        'policy.mcm.ibm.com/standards': 'BSA',
+        'seed-generation': '1'
+      },
+      'resourceVersion': '1524346',
+      '__typename': 'Metadata'
+    },
+    'name': 'my-policy-test',
+    'namespace': 'mcm',
+    'raw': {
+      'apiVersion': 'policy.mcm.ibm.com/v1alpha1',
+      'kind': 'Policy',
+      'metadata': {
+        'annotations': {
+          'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections',
+          'policy.mcm.ibm.com/controls': 'VA',
+          'policy.mcm.ibm.com/standards': 'BSA',
+          'seed-generation': '1'
+        },
+        'creationTimestamp': '2019-07-23T21:12:04Z',
+        'finalizers': [
+          'propagator.finalizer.mcm.ibm.com'
+        ],
+        'generation': 7,
+        'name': 'my-policy-test',
+        'namespace': 'mcm',
+        'resourceVersion': '1524346',
+        'selfLink': '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy-test',
+        'uid': '85840587-ad8e-11e9-8a41-005056a061f1'
+      },
+      'spec': {
+        'complianceType': 'musthave',
+        'namespaces': {
+          'exclude': [
+            'kube-*'
+          ],
+          'include': [
+            'default'
+          ]
+        },
+        '-templates': [
+          {
+            'complianceType': 'musthave',
+            'Definition': {
+              'apiVersion': 'v1',
+              'kind': 'Pod',
+              'metadata': {
+                'name': 'nginx-pod'
+              },
+              'spec': {
+                'containers': [
+                  {
+                    'image': 'nginx:1.7.9',
+                    'name': 'nginx',
+                    'ports': [
+                      {
+                        'containerPort': 80
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            'status': {
+              'Validity': {}
+            }
+          }
+        ],
+        'policy-templates': [
+          {
+            'Definition': {
+              'apiVersion': 'policies.ibm.com/v1alpha1',
+              'kind': 'MutationPolicy',
+              'metadata': {
+                'label': {
+                  'category': 'System-Integrity'
+                },
+                'name': 'mutation-policy-example'
+              },
+              'spec': {
+                'conditions': {
+                  'ownership': [
+                    'ReplicaSet',
+                    'Deployment',
+                    'DeamonSet',
+                    'ReplicationController'
+                  ]
+                },
+                'namespaceSelector': {
+                  'exclude': [
+                    'kube-system'
+                  ],
+                  'include': [
+                    'default',
+                    'kube-*'
+                  ]
+                },
+                'remediationAction': 'enforce'
+              }
+            },
+            'status': {
+              'Validity': {}
+            }
+          }
+        ],
+        'remediationAction': 'enforce'
+      },
+      'status': {
+        'placementBindings': [
+          'binding-my-policy-test'
+        ],
+        'placementPolicies': [
+          'placement-my-policy-test'
+        ],
+        'status': {
+          'cluster1': 'Compliant',
+          'clusterhub': 'Compliant'
+        }
+      }
+    },
+    'remediation': 'enforce',
+    'policyCompliant': '0/2',
+    'clusterCompliant': '0/2',
+    'placementPolicies': [
+      {
+        'metadata': {
+          'name': 'placement-my-policy-test',
+          'selfLink': '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-my-policy-test',
+          '__typename': 'Metadata'
+        },
+        '__typename': 'PlacementPolicy'
+      }
+    ],
+    'placementBindings': [
+      {
+        'metadata': {
+          'name': 'binding-my-policy-test',
+          'selfLink': '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-my-policy-test',
+          '__typename': 'Metadata'
+        },
+        '__typename': 'PlacementBinding'
+      }
+    ],
+    '__typename': 'Compliance'
+  },
+]
+
 export const findings = [
   {
     'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-7a6dcc86-c742-11e9-a4d4-005056a061f1',

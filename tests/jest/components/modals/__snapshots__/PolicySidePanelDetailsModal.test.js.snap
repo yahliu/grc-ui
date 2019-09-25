@@ -1,31 +1,1666 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PolicySidePanelDetailsModal ClustersView view renders expand as expected 1`] = `
+exports[`ClustersTable 1 renders expand as expected 1`] = `
+<div
+  className="overview-content"
+>
+  <div
+    className="bx--module bx--module--double structured-list-module"
+  >
+    <div
+      className="bx--module__inner"
+    >
+      <div
+        className="bx--module__content"
+      >
+        <table
+          className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                className="bx--header-index-0"
+                scope="col"
+              />
+              <th
+                className="bx--header-index-1"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Policy name
+                </span>
+              </th>
+              <th
+                className="bx--header-index-2"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Rule violations
+                </span>
+              </th>
+              <th
+                className="bx--header-index-3"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Control
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          >
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-auditpolicy
+                </p>
+              </td>
+              <td>
+                <p>
+                  0
+                </p>
+              </td>
+              <td>
+                <p>
+                  secretEncryption
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-certificatepolicy
+                </p>
+              </td>
+              <td>
+                <p>
+                  0
+                </p>
+              </td>
+              <td>
+                <p>
+                  CertManager
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-iampolicy
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  MutationAdvisor
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-image
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  VA
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-limitrange
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  CertManager
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-namespace
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  MutationAdvisor
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-pod
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  MutationAdvisor
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-rolebinding-1
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  MutationAdvisor
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  policy-vulnerabilitypolicy
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  VA
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ClustersTable 2 renders expand as expected 1`] = `
+<div
+  className="overview-content"
+>
+  <div
+    className="bx--module bx--module--double structured-list-module"
+  >
+    <div
+      className="bx--module__inner"
+    >
+      <div
+        className="bx--module__content"
+      >
+        <table
+          className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                className="bx--header-index-0"
+                scope="col"
+              />
+              <th
+                className="bx--header-index-1"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Policy name
+                </span>
+              </th>
+              <th
+                className="bx--header-index-2"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Rule violations
+                </span>
+              </th>
+              <th
+                className="bx--header-index-3"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Control
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          />
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ClustersView view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <withRouter(Connect(PolicySidePanelDetailsModal))
     data={
-      Object {
-        "cluster": "cluster1",
-        "custom": Object {
-          "nonCompliant": Object {
-            "_owner": null,
-            "_store": Object {},
-            "key": null,
-            "props": Object {
-              "maxCharacters": 35,
-              "text": "policy-ma",
-            },
-            "ref": null,
+      Array [
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
           },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "secretEncryption",
+              "policy.mcm.ibm.com/standards": "FISMA",
+              "seed-generation": "103",
+            },
+            "creationTimestamp": "2019-09-15T08:12:45Z",
+            "name": "policy-auditpolicy",
+            "namespace": "clusterhub",
+            "resourceVersion": "6127749",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-auditpolicy",
+            "uid": "98de47f9-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "secretEncryption",
+                "policy.mcm.ibm.com/standards": "FISMA",
+                "seed-generation": "103",
+              },
+              "creationTimestamp": "2019-09-15T08:12:45Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 103,
+              "name": "policy-auditpolicy",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-auditpolicy",
+                  "uid": "786625e5-d307-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "6127749",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-auditpolicy",
+              "uid": "98de47f9-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "policy-templates": Array [
+                Object {
+                  "objectDefinition": Object {
+                    "apiVersion": "audit.policies.ibm.com/v1alpha1",
+                    "kind": "AuditPolicy",
+                    "metadata": Object {
+                      "label": Object {
+                        "category": "System-Integrity",
+                      },
+                      "name": "policy-auditpolicy-example",
+                    },
+                    "spec": Object {
+                      "clusterAuditPolicy": Object {
+                        "auditPolicyRules": Object {
+                          "auth-idp": "validate",
+                          "helmapi": "validate",
+                          "kubernetes": "ignore",
+                          "platform-api": "validate",
+                          "platform-identity-manager": "validate",
+                          "platform-identity-provider": "validate",
+                          "vulnerability-advisor": "validate",
+                        },
+                      },
+                      "namespaceSelector": Object {
+                        "exclude": Array [
+                          "kube-system",
+                        ],
+                        "include": Array [
+                          "default",
+                          "kube-*",
+                        ],
+                      },
+                      "remediationAction": "inform",
+                      "severity": "low",
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "Compliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-16T13:58:03Z",
+                        "message": "Compliant; [0 violations, services detected with audit disabled in namespace \`default\` ]; [0 violations, services detected with audit disabled in namespace \`kube-public\` ]",
+                        "reason": "policy: clusterhub/policy-auditpolicy-example",
+                        "status": "True",
+                        "type": "completed",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "Compliant",
+            },
+          },
+          "status": "Compliant",
         },
-        "kind": "HCMPolicyCluster",
-        "namespace": "mcm",
-        "nonCompliant": Array [
-          "policy-ma",
-        ],
-        "violation": "1/4",
-      }
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+              "policy.mcm.ibm.com/controls": "CertManager",
+              "policy.mcm.ibm.com/standards": "FISMA, PCI",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-15T08:13:48Z",
+            "name": "policy-certificatepolicy",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854790",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-certificatepolicy",
+            "uid": "be7f68f7-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+                "policy.mcm.ibm.com/controls": "CertManager",
+                "policy.mcm.ibm.com/standards": "FISMA, PCI",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:13:48Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-certificatepolicy",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-certificatepolicy",
+                  "uid": "68d772b1-ce79-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854790",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-certificatepolicy",
+              "uid": "be7f68f7-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "policy-templates": Array [
+                Object {
+                  "objectDefinition": Object {
+                    "apiVersion": "policies.ibm.com/v1alpha1",
+                    "kind": "CertificatePolicy",
+                    "metadata": Object {
+                      "label": Object {
+                        "category": "System-Integrity",
+                      },
+                      "name": "certificate-policy-example",
+                    },
+                    "spec": Object {
+                      "minimumDuration": "300h",
+                      "namespaceSelector": Object {
+                        "exclude": Array [],
+                        "include": Array [
+                          "default",
+                        ],
+                      },
+                      "remediationAction": "inform",
+                      "severity": "low",
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "Compliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:14:39Z",
+                        "message": "Compliant",
+                        "reason": "policy: clusterhub/certificate-policy-example",
+                        "status": "True",
+                        "type": "completed",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "Compliant",
+            },
+          },
+          "status": "Compliant",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "MutationAdvisor",
+              "policy.mcm.ibm.com/standards": "FISMA",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-11T19:22:19Z",
+            "name": "policy-iampolicy",
+            "namespace": "clusterhub",
+            "resourceVersion": "5071621",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-iampolicy",
+            "uid": "790ce871-d4c9-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "MutationAdvisor",
+                "policy.mcm.ibm.com/standards": "FISMA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-11T19:22:19Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-iampolicy",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-iampolicy",
+                  "uid": "a18d825a-cb36-11e9-a1eb-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5071621",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-iampolicy",
+              "uid": "790ce871-d4c9-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "policy-templates": Array [
+                Object {
+                  "objectDefinition": Object {
+                    "apiVersion": "iam.policies.ibm.com/v1alpha1",
+                    "kind": "IamPolicy",
+                    "metadata": Object {
+                      "label": Object {
+                        "category": "System-Integrity",
+                      },
+                      "name": "iam-policy-example",
+                    },
+                    "spec": Object {
+                      "maxClusterRoleBindingUsers": 5,
+                      "maxRoleBindingViolationsPerNamespace": 2,
+                      "namespaceSelector": Object {
+                        "exclude": Array [
+                          "kube-system",
+                        ],
+                        "include": Array [
+                          "default",
+                          "kube-*",
+                        ],
+                      },
+                      "remediationAction": "inform",
+                      "severity": "medium",
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-11T19:22:34Z",
+                        "message": "NonCompliant; 1 clusterrole admin users violations detected in namespace \`cluster-wide\`",
+                        "reason": "policy: clusterhub/iam-policy-example",
+                        "status": "True",
+                        "type": "completed",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
+          },
+          "status": "NonCompliant",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "VA",
+              "policy.mcm.ibm.com/standards": "FISMA",
+              "seed-generation": "5",
+            },
+            "creationTimestamp": "2019-09-15T08:13:48Z",
+            "name": "policy-image",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854643",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-image",
+            "uid": "be8091d5-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "VA",
+                "policy.mcm.ibm.com/standards": "FISMA",
+                "seed-generation": "5",
+              },
+              "creationTimestamp": "2019-09-15T08:13:48Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-image",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-image",
+                  "uid": "8be1a627-cb2c-11e9-a1eb-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854643",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-image",
+              "uid": "be8091d5-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "securityenforcement.admission.cloud.ibm.com/v1beta1",
+                    "kind": "ClusterImagePolicy",
+                    "metadata": Object {
+                      "name": "mongo",
+                    },
+                    "spec": Object {
+                      "repositories": Array [
+                        Object {
+                          "name": "docker.io/mongo",
+                        },
+                      ],
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:13:52Z",
+                        "message": "clusterimagepolicies \`mongo\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
+          },
+          "status": "NonCompliant",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "CertManager",
+              "policy.mcm.ibm.com/standards": "HIPAA",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-15T08:12:48Z",
+            "name": "policy-limitrange",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854341",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-limitrange",
+            "uid": "9aa3d1ac-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "CertManager",
+                "policy.mcm.ibm.com/standards": "HIPAA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:12:48Z",
+              "finalizers": Array [
+                "propagator.finalizer.mcm.ibm.com",
+                "finalizer.policies.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-limitrange",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-limitrange",
+                  "uid": "d358638d-cf30-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854341",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-limitrange",
+              "uid": "9aa3d1ac-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "v1",
+                    "kind": "LimitRange",
+                    "metadata": Object {
+                      "name": "mem-limit-range",
+                    },
+                    "spec": Object {
+                      "limits": Array [
+                        Object {
+                          "default": Object {
+                            "memory": "512Mi",
+                          },
+                          "defaultRequest": Object {
+                            "memory": "256Mi",
+                          },
+                          "type": "Container",
+                        },
+                      ],
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:12:54Z",
+                        "message": "limitranges \`mem-limit-range\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
+          },
+          "status": "NonCompliant",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "*",
+            ],
+            "include_namespace": Array [
+              "*",
+            ],
+          },
+          "enforcement": "enforce",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+              "policy.mcm.ibm.com/controls": "MutationAdvisor",
+              "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+              "seed-generation": "1",
+            },
+            "creationTimestamp": "2019-09-12T23:53:57Z",
+            "name": "policy-namespace",
+            "namespace": "clusterhub",
+            "resourceVersion": "5335869",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-namespace",
+            "uid": "95ff86af-d5b8-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
+                "policy.mcm.ibm.com/controls": "MutationAdvisor",
+                "policy.mcm.ibm.com/standards": "NIST,HIPAA",
+                "seed-generation": "1",
+              },
+              "creationTimestamp": "2019-09-12T23:53:57Z",
+              "finalizers": Array [
+                "propagator.finalizer.mcm.ibm.com",
+                "finalizer.policies.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+              ],
+              "generation": 1,
+              "name": "policy-namespace",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-namespace",
+                  "uid": "2516c2c7-d3f4-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5335869",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-namespace",
+              "uid": "95ff86af-d5b8-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {},
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "v1",
+                    "kind": "Namespace",
+                    "metadata": Object {
+                      "name": "dev-will-test",
+                    },
+                  },
+                  "status": Object {
+                    "Validity": Object {},
+                  },
+                },
+              ],
+              "remediationAction": "enforce",
+            },
+            "status": Object {},
+          },
+          "status": "unknown",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "MutationAdvisor",
+              "policy.mcm.ibm.com/standards": "FISMA",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-15T08:12:48Z",
+            "name": "policy-pod",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854352",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-pod",
+            "uid": "9a919f45-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "MutationAdvisor",
+                "policy.mcm.ibm.com/standards": "FISMA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:12:48Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 7,
+              "name": "policy-pod",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-pod",
+                  "uid": "48316272-d009-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854352",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-pod",
+              "uid": "9a919f45-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "v1",
+                    "kind": "Pod",
+                    "metadata": Object {
+                      "name": "nginx-pod",
+                    },
+                    "spec": Object {
+                      "containers": Array [
+                        Object {
+                          "image": "nginx:1.7.9",
+                          "name": "nginx",
+                          "ports": Array [
+                            Object {
+                              "containerPort": 80,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:12:52Z",
+                        "message": "pods \`nginx-pod\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {},
+          },
+          "status": "unknown",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+              "policy.mcm.ibm.com/controls": "MutationAdvisor",
+              "policy.mcm.ibm.com/standards": "FISMA",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-15T08:12:48Z",
+            "name": "policy-rolebinding-1",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854333",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-rolebinding-1",
+            "uid": "9a9d57f0-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "MutationAdvisor",
+                "policy.mcm.ibm.com/standards": "FISMA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:12:48Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-rolebinding-1",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-rolebinding-1",
+                  "uid": "22ac9660-cf15-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854333",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-rolebinding-1",
+              "uid": "9a9d57f0-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "rbac.authorization.k8s.io/v1",
+                    "kind": "RoleBinding",
+                    "metadata": Object {
+                      "name": "operate-pods-rolebinding",
+                    },
+                    "roleRef": Object {
+                      "apiGroup": "rbac.authorization.k8s.io",
+                      "kind": "Role",
+                      "name": "operator",
+                    },
+                    "subjects": Array [
+                      Object {
+                        "apiGroup": "rbac.authorization.k8s.io",
+                        "kind": "User",
+                        "name": "admin",
+                      },
+                    ],
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:12:53Z",
+                        "message": "rolebindings \`operate-pods-rolebinding\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
+          },
+          "status": "NonCompliant",
+        },
+        Object {
+          "__typename": "Policy",
+          "cluster": null,
+          "detail": Object {
+            "__typename": "PolicyDetail",
+            "exclude_namespace": Array [
+              "kube-*",
+            ],
+            "include_namespace": Array [
+              "default",
+            ],
+          },
+          "enforcement": "inform",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+              "policy.mcm.ibm.com/controls": "VA",
+              "policy.mcm.ibm.com/standards": "PCI",
+              "seed-generation": "2",
+            },
+            "creationTimestamp": "2019-09-15T08:13:48Z",
+            "name": "policy-vulnerabilitypolicy",
+            "namespace": "clusterhub",
+            "resourceVersion": "5854650",
+            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-vulnerabilitypolicy",
+            "uid": "be757224-d790-11e9-a1ed-005056a0b88e",
+          },
+          "raw": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
+                "policy.mcm.ibm.com/controls": "VA",
+                "policy.mcm.ibm.com/standards": "PCI",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:13:48Z",
+              "finalizers": Array [
+                "finalizer.policies.ibm.com",
+                "propagator.finalizer.mcm.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-vulnerabilitypolicy",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-vulnerabilitypolicy",
+                  "uid": "2767ac02-ce7a-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854650",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-vulnerabilitypolicy",
+              "uid": "be757224-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "policy-templates": Array [
+                Object {
+                  "objectDefinition": Object {
+                    "apiVersion": "policies.ibm.com/v1alpha1",
+                    "kind": "VulnerabilityPolicy",
+                    "metadata": Object {
+                      "label": Object {
+                        "category": "System-Integrity",
+                      },
+                      "name": "va-policy-example",
+                    },
+                    "spec": Object {
+                      "namespaceSelector": Object {
+                        "exclude": Array [
+                          "kube-system",
+                        ],
+                        "include": Array [
+                          "default",
+                          "kube-*",
+                        ],
+                      },
+                      "remediationAction": "inform",
+                      "severity": "medium",
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:13:52Z",
+                        "message": "mapping error from raw object: \`no matches for kind \\"VulnerabilityPolicy\\" in version \\"policies.ibm.com/v1alpha1\\"\`",
+                        "reason": "K8s creation error",
+                        "status": "False",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
+          },
+          "status": "NonCompliant",
+        },
+      ]
     }
     locale="en-US"
     open={true}
@@ -90,178 +1725,505 @@ ShallowWrapper {
 }
 `;
 
-exports[`PolicySidePanelDetailsModal PoliciesView view renders expand as expected 1`] = `
+exports[`PoliciesTable 1 renders expand as expected 1`] = `
+<div
+  className="overview-content"
+>
+  <div
+    className="bx--module bx--module--double structured-list-module"
+  >
+    <div
+      className="bx--module__inner"
+    >
+      <div
+        className="bx--module__content"
+      >
+        <table
+          className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                className="bx--header-index-0"
+                scope="col"
+              />
+              <th
+                className="bx--header-index-1"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Cluster name
+                </span>
+              </th>
+              <th
+                className="bx--header-index-2"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Rule violations
+                </span>
+              </th>
+              <th
+                className="bx--header-index-3"
+                scope="col"
+              />
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          >
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  cluster1
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  <a
+                    className="bx--link"
+                    href="https://9.42.82.160:8443"
+                    onClick={[Function]}
+                    target="_blank"
+                  >
+                    Launch cluster
+                  </a>
+                </p>
+              </td>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td>
+                <p>
+                  clusterhub
+                </p>
+              </td>
+              <td>
+                <p>
+                  1
+                </p>
+              </td>
+              <td>
+                <p>
+                  <a
+                    className="bx--link"
+                    href="https://9.42.82.240:8443"
+                    onClick={[Function]}
+                    target="_blank"
+                  >
+                    Launch cluster
+                  </a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PoliciesTable 2 renders expand as expected 1`] = `
+<div
+  className="overview-content"
+>
+  <div
+    className="bx--module bx--module--double structured-list-module"
+  >
+    <div
+      className="bx--module__inner"
+    >
+      <div
+        className="bx--module__content"
+      >
+        <table
+          className="bx--data-table-v2 resource-table-main simple-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                className="bx--header-index-0"
+                scope="col"
+              />
+              <th
+                className="bx--header-index-1"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Cluster name
+                </span>
+              </th>
+              <th
+                className="bx--header-index-2"
+                scope="col"
+              >
+                <span
+                  className="bx--table-header-label"
+                >
+                  Rule violations
+                </span>
+              </th>
+              <th
+                className="bx--header-index-3"
+                scope="col"
+              />
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          />
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PoliciesView view renders expand as expected 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <withRouter(Connect(PolicySidePanelDetailsModal))
     data={
-      Object {
-        "__typename": "Compliance",
-        "clusterCompliant": "1/2",
-        "custom": Object {
-          "metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]": "System And Information Integrity",
-          "metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]": "Mutation Advisor",
-          "metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]": "NIST",
-          "metadata.name": Object {
-            "_owner": null,
-            "_store": Object {},
-            "key": null,
-            "props": Object {
-              "children": "policy-ma",
-              "replace": false,
-              "to": "/multicloud/policies/all/mcm/policy-ma",
-            },
-            "ref": null,
-          },
-        },
-        "kind": "HCMPolicyPolicy",
-        "metadata": Object {
-          "__typename": "Metadata",
-          "annotations": Object {
-            "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
-",
-            "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
-            "policy.mcm.ibm.com/controls": "MutationAdvisor",
-            "policy.mcm.ibm.com/standards": "NIST",
-            "seed-generation": "1",
-          },
-          "name": "policy-ma",
-          "namespace": "mcm",
-          "resourceVersion": "1347579",
-          "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
-        },
-        "name": "policy-ma",
-        "namespace": "mcm",
-        "placementBindings": Array [
-          Object {
-            "__typename": "PlacementBinding",
-            "metadata": Object {
-              "__typename": "Metadata",
-              "name": "binding-ma",
-              "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-ma",
-            },
-          },
-        ],
-        "placementPolicies": Array [
-          Object {
-            "__typename": "PlacementPolicy",
-            "metadata": Object {
-              "__typename": "Metadata",
-              "name": "placement-ma",
-              "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-ma",
-            },
-          },
-        ],
-        "policyCompliant": "1/2",
-        "raw": Object {
-          "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-          "kind": "Policy",
+      Array [
+        Object {
+          "__typename": "ClusterInfo",
+          "apiVersion": "clusterregistry.k8s.io/v1alpha1",
+          "kind": "Cluster",
           "metadata": Object {
+            "__typename": "Metadata",
             "annotations": Object {
-              "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
-",
-              "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
-              "policy.mcm.ibm.com/controls": "MutationAdvisor",
-              "policy.mcm.ibm.com/standards": "NIST",
-              "seed-generation": "1",
+              "mcm.ibm.com/deployer-prefix": "md",
+              "mcm.ibm.com/secretRef": "cluster1-federation-secret",
+              "mcm.ibm.com/user-group": "aGNtOmNsdXN0ZXJzLHN5c3RlbTphdXRoZW50aWNhdGVk",
+              "mcm.ibm.com/user-identity": "aGNtOmNsdXN0ZXJzOmNsdXN0ZXIxOmNsdXN0ZXIx",
             },
-            "creationTimestamp": "2019-07-16T13:18:48Z",
-            "finalizers": Array [
-              "propagator.finalizer.mcm.ibm.com",
-            ],
-            "generation": 45,
-            "name": "policy-ma",
-            "namespace": "mcm",
-            "resourceVersion": "1347579",
-            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
-            "uid": "3f218d45-a7cc-11e9-8a41-005056a061f1",
+            "labels": Object {
+              "cloud": "IBM",
+              "environment": "Dev",
+              "name": "cluster1",
+              "region": "US",
+            },
+            "name": "cluster1",
+            "namespace": "cluster1",
+            "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/cluster1/clusterstatuses/cluster1",
+            "uid": "24694bf8-ce79-11e9-bbf4-26cb3fc6476c",
+          },
+          "name": "cluster1",
+          "policy": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "CertManager",
+                "policy.mcm.ibm.com/standards": "HIPAA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:12:48Z",
+              "finalizers": Array [
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-limitrange",
+              "namespace": "cluster1",
+              "resourceVersion": "8412735",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/cluster1/policies/policy-limitrange",
+              "uid": "9aa50808-d790-11e9-8a74-005056a04901",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "v1",
+                    "kind": "LimitRange",
+                    "metadata": Object {
+                      "name": "mem-limit-range",
+                    },
+                    "spec": Object {
+                      "limits": Array [
+                        Object {
+                          "default": Object {
+                            "memory": "512Mi",
+                          },
+                          "defaultRequest": Object {
+                            "memory": "256Mi",
+                          },
+                          "type": "Container",
+                        },
+                      ],
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:12:49Z",
+                        "message": "limitranges \`mem-limit-range\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
+            "status": Object {
+              "compliant": "NonCompliant",
+            },
           },
           "spec": Object {
-            "namespaces": Object {},
-            "policy-templates": Array [
-              Object {
-                "objectDefinition": Object {
-                  "apiVersion": "policies.ibm.com/v1alpha1",
-                  "kind": "MutationPolicy",
-                  "metadata": Object {
-                    "label": Object {
-                      "category": "System-Integrity",
-                    },
-                    "name": "mutation-policy-example",
-                  },
-                  "spec": Object {
-                    "conditions": Object {
-                      "ownership": Array [
-                        "ReplicaSet",
-                        "Deployment",
-                        "DeamonSet",
-                        "ReplicationController",
-                      ],
-                    },
-                    "namespaceSelector": Object {
-                      "exclude": Array [
-                        "kube-system",
-                      ],
-                      "include": Array [
-                        "default",
-                        "kube-*",
-                      ],
-                    },
-                    "remediationAction": "enforce",
-                  },
-                },
-                "status": Object {
-                  "Validity": Object {},
-                },
-              },
-            ],
-            "remediationAction": "enforce",
+            "consoleURL": "https://9.42.82.160:8443",
           },
           "status": Object {
-            "placementBindings": Array [
-              "binding-ma",
+            "conditions": Array [
+              Object {
+                "lastHeartbeatTime": "2019-09-16T15:10:15Z",
+                "lastTransitionTime": "2019-09-16T14:25:40Z",
+                "status": "",
+                "type": "OK",
+              },
             ],
-            "placementPolicies": Array [
-              "placement-ma",
-            ],
+          },
+          "total": "1",
+          "violated": "1",
+        },
+        Object {
+          "__typename": "ClusterInfo",
+          "apiVersion": "clusterregistry.k8s.io/v1alpha1",
+          "kind": "Cluster",
+          "metadata": Object {
+            "__typename": "Metadata",
+            "annotations": Object {
+              "mcm.ibm.com/deployer-prefix": "md",
+              "mcm.ibm.com/secretRef": "clusterhub-federation-secret",
+              "mcm.ibm.com/user-group": "aGNtOmNsdXN0ZXJzLHN5c3RlbTphdXRoZW50aWNhdGVk",
+              "mcm.ibm.com/user-identity": "aGNtOmNsdXN0ZXJzOmNsdXN0ZXJodWI6Y2x1c3Rlcmh1Yg==",
+            },
+            "labels": Object {
+              "cloud": "IBM",
+              "datacenter": "toronto",
+              "environment": "Dev",
+              "name": "clusterhub",
+              "owner": "marketing",
+              "region": "US",
+              "vendor": "ICP",
+            },
+            "name": "clusterhub",
+            "namespace": "clusterhub",
+            "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/clusterhub/clusterstatuses/clusterhub",
+            "uid": "3fb19cc2-ca8b-11e9-bbf4-26cb3fc6476c",
+          },
+          "name": "clusterhub",
+          "policy": Object {
+            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+            "kind": "Policy",
+            "metadata": Object {
+              "annotations": Object {
+                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
+                "policy.mcm.ibm.com/controls": "CertManager",
+                "policy.mcm.ibm.com/standards": "HIPAA",
+                "seed-generation": "2",
+              },
+              "creationTimestamp": "2019-09-15T08:12:48Z",
+              "finalizers": Array [
+                "propagator.finalizer.mcm.ibm.com",
+                "finalizer.policies.ibm.com",
+                "policy.finalizer.mcm.ibm.com",
+                "sync.finalizer.mcm.ibm.com",
+              ],
+              "generation": 2,
+              "name": "policy-limitrange",
+              "namespace": "clusterhub",
+              "ownerReferences": Array [
+                Object {
+                  "apiVersion": "policy.mcm.ibm.com/v1alpha1",
+                  "blockOwnerDeletion": true,
+                  "controller": true,
+                  "kind": "Policy",
+                  "name": "policy-limitrange",
+                  "uid": "d358638d-cf30-11e9-a1ed-005056a0b88e",
+                },
+              ],
+              "resourceVersion": "5854341",
+              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/clusterhub/policies/policy-limitrange",
+              "uid": "9aa3d1ac-d790-11e9-a1ed-005056a0b88e",
+            },
+            "spec": Object {
+              "complianceType": "musthave",
+              "namespaces": Object {
+                "exclude": Array [
+                  "kube-*",
+                ],
+                "include": Array [
+                  "default",
+                ],
+              },
+              "object-templates": Array [
+                Object {
+                  "complianceType": "musthave",
+                  "objectDefinition": Object {
+                    "apiVersion": "v1",
+                    "kind": "LimitRange",
+                    "metadata": Object {
+                      "name": "mem-limit-range",
+                    },
+                    "spec": Object {
+                      "limits": Array [
+                        Object {
+                          "default": Object {
+                            "memory": "512Mi",
+                          },
+                          "defaultRequest": Object {
+                            "memory": "256Mi",
+                          },
+                          "type": "Container",
+                        },
+                      ],
+                    },
+                  },
+                  "status": Object {
+                    "Compliant": "NonCompliant",
+                    "Validity": Object {},
+                    "conditions": Array [
+                      Object {
+                        "lastTransitionTime": "2019-09-15T08:12:54Z",
+                        "message": "limitranges \`mem-limit-range\` is missing, and should be created",
+                        "reason": "K8s missing a must have object",
+                        "status": "True",
+                        "type": "violation",
+                      },
+                    ],
+                  },
+                },
+              ],
+              "remediationAction": "inform",
+            },
             "status": Object {
-              "cluster1": Object {
-                "aggregatePoliciesStatus": Object {
-                  "policy-ma": Object {
-                    "compliant": "NonCompliant",
-                  },
-                },
-                "clustername": "cluster1",
-                "compliant": "NonCompliant",
-              },
-              "clusterhub": Object {
-                "aggregatePoliciesStatus": Object {
-                  "policy-ma": Object {
-                    "compliant": "Compliant",
-                  },
-                },
-                "clustername": "clusterhub",
-                "compliant": "Compliant",
-              },
+              "compliant": "NonCompliant",
             },
           },
+          "spec": Object {
+            "consoleURL": "https://9.42.82.240:8443",
+          },
+          "status": Object {
+            "conditions": Array [
+              Object {
+                "lastHeartbeatTime": "2019-09-16T15:10:37Z",
+                "lastTransitionTime": "2019-09-16T14:25:41Z",
+                "status": "",
+                "type": "OK",
+              },
+            ],
+          },
+          "total": "1",
+          "violated": "1",
         },
-        "remediation": "enforce",
-        "subItems": Array [
-          Object {
-            "items": Array [
-              "binding-ma",
-            ],
-            "name": "policy.pb",
-          },
-          Object {
-            "items": Array [
-              "placement-ma",
-            ],
-            "name": "policy.pp",
-          },
-        ],
-      }
+      ]
     }
     locale="en-US"
     open={true}

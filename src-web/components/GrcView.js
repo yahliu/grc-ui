@@ -207,9 +207,9 @@ export class GrcView extends React.Component {
     //then acutally update it in componentWillReceiveProps()
     const {updateActiveFilters} = this.props
     const activeFilters = _.cloneDeep(this.props.activeFilters||{})//loadash recursively deep clone
-    value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match
     let activeSet
     if (value) { //add non-null grc-card filter
+      value = _.startCase(value.replace(' ', '-'))//covert filter name on policy card to start case to match
       activeFilters[key] ? activeSet = activeFilters[key] : activeSet = activeFilters[key] = new Set()
       activeSet.add(value)
     }
@@ -218,21 +218,24 @@ export class GrcView extends React.Component {
       activeSet.add(level)
     }
     if (activeSet && activeSet.size > 0) {
-      replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
-      updateActiveFilters(activeFilters)
+      if(replaceGrcState && updateActiveFilters) {
+        replaceGrcState(GRC_FILTER_STATE_COOKIE, activeFilters)
+        updateActiveFilters(activeFilters)}
     }
 
     //step 2 update url when click GrcCardsModule
     const paraURL = {}
     paraURL.card=false
     paraURL.toggle=false
-    type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
+    type && type.toLowerCase()==='cluster' ? paraURL.index=1 : paraURL.index=0
     let urlString = queryString.stringify(paraURL)
     //also append GrcToggleModule search input filter to the end of url if existing
     const curentURL = queryString.parse(location.search)
     if(curentURL.filters && curentURL.filters!==''){
       urlString = `${urlString}&filters=${curentURL.filters}`}
-    this.props.history.push(`${this.props.location.pathname}?${urlString}`)
+    if (this.props.history) {
+      this.props.history.push(`${this.props.location.pathname}?${urlString}`)}
+    return urlString
   }
 
   handleCreatePolicy(){

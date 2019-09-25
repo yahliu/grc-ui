@@ -347,7 +347,7 @@ export const getUniqueName = (name, compliances) => {
 export const highliteDifferences = (editor, oldYAML, newYAML) => {
   // mark any modified/added lines in editor
   const ranges=[]
-  const range = editor.getSelectionRange()
+  const range = editor ? editor.getSelectionRange() : {}
 
   const getInside = (ikey, {parsed}) =>{
     const ret = {}
@@ -457,7 +457,7 @@ export const highliteDifferences = (editor, oldYAML, newYAML) => {
         editor.selection.clearSelection()
       }
     }, 0)
-    if (firstNewRow || firstModRow) {
+    if (editor && (firstNewRow || firstModRow)) {
       editor.setAnimatedScroll(true)
       editor.scrollToLine(firstNewRow || firstModRow || 0, true)
     }

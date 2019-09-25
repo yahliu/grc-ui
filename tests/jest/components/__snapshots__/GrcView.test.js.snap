@@ -1,6 +1,3080 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`GrcView component 1 renders as expected 1`] = `
+<div
+  className="grc-view"
+>
+  <div
+    className="module-grc-cards"
+  >
+    <div
+      className="header-container"
+    >
+      <div
+        className="header-title"
+      >
+        Summary
+      </div>
+      <div>
+        <div
+          aria-invalid={undefined}
+          aria-label="Summary"
+          className="bx--dropdown selection bx--list-box"
+          data-invalid={undefined}
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+          tabIndex={null}
+        >
+          <div
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            className="bx--list-box__field"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="bx--list-box__label"
+              htmlFor="downshift-0-input"
+            >
+              Standards
+            </span>
+            <div
+              className="bx--list-box__menu-icon"
+            >
+              <svg
+                alt="Open menu"
+                aria-label="Open menu"
+                className={undefined}
+                fill={undefined}
+                fillRule="evenodd"
+                focusable="false"
+                height="5"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 10 5"
+                width="10"
+              >
+                <title>
+                  Open menu
+                </title>
+                <path
+                  d="M0 0l5 4.998L10 0z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        className="collapse"
+        onClick={[Function]}
+      >
+        <span
+          className="collapse-hint"
+        >
+          Want to see less information?
+        </span>
+        <span
+          className="collapse-button"
+        >
+          Collapse summary
+        </span>
+        <svg
+          alt="collapse"
+          aria-label="collapse"
+          className="arrow-up"
+          fill={undefined}
+          fillRule="evenodd"
+          height="7"
+          name="chevron--up"
+          role="img"
+          style={undefined}
+          viewBox="0 0 12 7"
+          width="12"
+        >
+          <title>
+            collapse
+          </title>
+          <path
+            d="M5.994 1.45L.726 7 0 6.315 5.994 0l6.002 6.315L11.27 7z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      className="card-container-container"
+    >
+      <div>
+        <div
+          className="card-container"
+        >
+          <div
+            className="card-content"
+          >
+            <div
+              className="card-name"
+            >
+              NIST
+            </div>
+            <div
+              className="card-count-content"
+            >
+              <div
+                className="card-count-container violated"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="card-count"
+                >
+                  <div
+                    className="card-count-informations"
+                  >
+                    2
+                  </div>
+                  <div
+                    className="card-count-total"
+                  >
+                    /2
+                  </div>
+                </div>
+                <div
+                  className="card-grc-type"
+                >
+                  Cluster violations
+                </div>
+              </div>
+              <div
+                className="card-count-container violated"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="card-count"
+                >
+                  <div
+                    className="card-count-informations"
+                  >
+                    3
+                  </div>
+                  <div
+                    className="card-count-total"
+                  >
+                    /3
+                  </div>
+                </div>
+                <div
+                  className="card-grc-type"
+                >
+                  Policy violations
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className="card-container"
+        >
+          <div
+            className="card-content"
+          >
+            <div
+              className="card-name"
+            >
+              HIPAA
+            </div>
+            <div
+              className="card-count-content"
+            >
+              <div
+                className="card-count-container violated"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="card-count"
+                >
+                  <div
+                    className="card-count-informations"
+                  >
+                    1
+                  </div>
+                  <div
+                    className="card-count-total"
+                  >
+                    /2
+                  </div>
+                </div>
+                <div
+                  className="card-grc-type"
+                >
+                  Cluster violations
+                </div>
+              </div>
+              <div
+                className="card-count-container violated"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="card-count"
+                >
+                  <div
+                    className="card-count-informations"
+                  >
+                    2
+                  </div>
+                  <div
+                    className="card-count-total"
+                  >
+                    /2
+                  </div>
+                </div>
+                <div
+                  className="card-grc-type"
+                >
+                  Policy violations
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className="card-container"
+        >
+          <div
+            className="card-content"
+          >
+            <div
+              className="card-name"
+            >
+              Other
+            </div>
+            <div
+              className="card-count-content"
+            >
+              <div
+                className="empty-violations-strip"
+              >
+                <div
+                  className="card-violations empty"
+                >
+                  <img
+                    alt="No resource"
+                    className="empty-violations-img"
+                    src="undefined/policies/graphics/no-other-violations.svg"
+                  />
+                </div>
+                <div
+                  className="no-card-violations"
+                >
+                  No violations
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="module-toggle-tab"
+  >
+    <div>
+      <div
+        className="bx--data-table-v2-container"
+        id="undefined-table-container"
+      >
+        <section
+          aria-label="undefined-search"
+          className="bx--table-toolbar"
+          role="region"
+        >
+          <div
+            className="bx--toolbar-search-container"
+          >
+            <div
+              aria-labelledby="undefined-search-label"
+              className="bx--search bx--search--sm bx--search--light"
+              role="search"
+            >
+              <svg
+                alt="Filter table"
+                aria-label="Filter table"
+                className="bx--search-magnifier"
+                fill={undefined}
+                fillRule="evenodd"
+                height="16"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <title>
+                  Filter table
+                </title>
+                <path
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+                />
+              </svg>
+              <label
+                className="bx--label"
+                htmlFor="undefined-search"
+                id="undefined-search-label"
+              >
+                Filter table
+              </label>
+              <input
+                aria-label="undefined-search"
+                className="bx--search-input"
+                id="undefined-search"
+                onChange={[Function]}
+                placeholder="Search policies"
+                type="text"
+                value=""
+              />
+              <button
+                aria-label={undefined}
+                className="bx--search-close bx--search-close--hidden"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  alt="Provide a description that will be used as the title"
+                  aria-label="Provide a description that will be used as the title"
+                  className={undefined}
+                  fill={undefined}
+                  fillRule="evenodd"
+                  height="16"
+                  name={undefined}
+                  role="img"
+                  style={undefined}
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <title>
+                    Provide a description that will be used as the title
+                  </title>
+                  <path
+                    d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            className="bx--toolbar-content"
+          >
+            <div
+              className="module-toggle-tab-switch"
+            >
+              <div
+                className="bx--content-switcher"
+                onChange={[Function]}
+              >
+                <a
+                  className="bx--content-switcher-btn bx--content-switcher--selected"
+                  href=""
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                >
+                  <span>
+                    Policies
+                  </span>
+                </a>
+                <a
+                  className="bx--content-switcher-btn"
+                  href=""
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                >
+                  <span>
+                    Cluster violations
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <table
+          className="bx--data-table-v2 resource-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                scope="col"
+              />
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="metadata.name"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Policy name
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="remediation"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Remediation
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="clusterCompliant"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Cluster violations
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Standards
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Controls
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
+                  data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Categories
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              />
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          >
+            <tr
+              aria-hidden={false}
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+              data-row-name="policy-limitrange"
+              disabled={false}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label={undefined}
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td
+                className={undefined}
+              >
+                <a
+                  href="undefined/policies/all/policy-limitrange"
+                  onClick={[Function]}
+                >
+                  policy-limitrange
+                </a>
+              </td>
+              <td
+                className={undefined}
+              >
+                inform
+              </td>
+              <td
+                className={undefined}
+              >
+                2/2
+              </td>
+              <td
+                className={undefined}
+              >
+                HIPAA
+              </td>
+              <td
+                className={undefined}
+              >
+                Cert Manager
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              aria-hidden={false}
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+              data-row-name="policy-namespace"
+              disabled={false}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label={undefined}
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
+              </td>
+              <td
+                className={undefined}
+              >
+                <a
+                  href="undefined/policies/all/policy-namespace"
+                  onClick={[Function]}
+                >
+                  policy-namespace
+                </a>
+              </td>
+              <td
+                className={undefined}
+              >
+                enforce
+              </td>
+              <td
+                className={undefined}
+              >
+                2/2
+              </td>
+              <td
+                className={undefined}
+              >
+                NIST, HIPAA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections, System And Information Integrity
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        className="bx--pagination"
+        disabled={true}
+      >
+        <div
+          className="bx--pagination__left"
+        >
+          <span
+            className="bx--pagination__text"
+          >
+            items per page
+          </span>
+          <div
+            className="bx--form-item"
+          >
+            <div
+              className="bx--select bx--select--inline"
+            >
+              <label
+                className="bx--label bx--visually-hidden"
+                htmlFor="bx-pagination-select-resource-table-pagination"
+              >
+                items per page
+              </label>
+              <select
+                aria-invalid={undefined}
+                className="bx--select-input"
+                data-invalid={undefined}
+                disabled={undefined}
+                id="bx-pagination-select-resource-table-pagination"
+                onChange={[Function]}
+                value={10}
+              >
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={5}
+                >
+                  5
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={10}
+                >
+                  10
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={20}
+                >
+                  20
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={50}
+                >
+                  50
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={75}
+                >
+                  75
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={100}
+                >
+                  100
+                </option>
+              </select>
+              <svg
+                alt="open list of options"
+                aria-label="open list of options"
+                className="bx--select__arrow"
+                fill={undefined}
+                fillRule="evenodd"
+                height="5"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 10 5"
+                width="10"
+              >
+                <title>
+                  open list of options
+                </title>
+                <path
+                  d="M0 0l5 4.998L10 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <span
+            className="bx--pagination__text"
+          >
+             |  
+            {0}-{1} of {0} items
+          </span>
+        </div>
+        <div
+          className="bx--pagination__right bx--pagination--inline"
+        >
+          <button
+            aria-label="Previous page"
+            className="bx--pagination__button bx--pagination__button--backward bx--pagination__button--no-index"
+            disabled={true}
+            onClick={[Function]}
+          >
+            <svg
+              alt="Previous page"
+              aria-label="Previous page"
+              className="bx--pagination__button-icon"
+              fill={undefined}
+              fillRule="evenodd"
+              height="12"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 7 12"
+              width="7"
+            >
+              <title>
+                Previous page
+              </title>
+              <path
+                d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"
+              />
+            </svg>
+          </button>
+          <button
+            aria-label="Next page"
+            className="bx--pagination__button bx--pagination__button--forward"
+            disabled={true}
+            onClick={[Function]}
+          >
+            <svg
+              alt="Next page"
+              aria-label="Next page"
+              className="bx--pagination__button-icon"
+              fill={undefined}
+              fillRule="evenodd"
+              height="12"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 7 12"
+              width="7"
+            >
+              <title>
+                Next page
+              </title>
+              <path
+                d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`GrcView component 2 renders as expected 1`] = `
+<div
+  aria-live="assertive"
+  className="bx--loading content-spinner"
+>
+  <svg
+    className="bx--loading__svg"
+    viewBox="-75 -75 150 150"
+  >
+    <title>
+      Loading
+    </title>
+    <circle
+      className={null}
+      cx="0"
+      cy="0"
+      r="37.5"
+    />
+  </svg>
+</div>
+`;
+
+exports[`GrcView component 3 renders as expected 1`] = `
+<div
+  className="bx--inline-notification bx--inline-notification--error overview-notification"
+  kind="error"
+  role="alert"
+>
+  <div
+    className="bx--inline-notification__details"
+  >
+    <svg
+      alt="closes notification"
+      aria-label="closes notification"
+      className="bx--inline-notification__icon"
+      fill={undefined}
+      fillRule="evenodd"
+      height="16"
+      name={undefined}
+      role="img"
+      style={undefined}
+      viewBox="0 0 16 16"
+      width="16"
+    >
+      <title>
+        closes notification
+      </title>
+      <path
+        d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM3.293 4.707l8 8 1.414-1.414-8-8-1.414 1.414z"
+      />
+    </svg>
+    <div
+      className="bx--inline-notification__text-wrapper"
+    >
+      <p
+        className="bx--inline-notification__title"
+      >
+        
+      </p>
+      <div
+        className="bx--inline-notification__subtitle"
+      >
+        An unexpected error occurred. Try again.
+      </div>
+    </div>
+  </div>
+  <button
+    className="bx--inline-notification__close-button"
+    onClick={[Function]}
+    title="close icon"
+    type="button"
+  >
+    <svg
+      alt="close icon"
+      aria-label="close icon"
+      className="bx--inline-notification__close-icon"
+      fill={undefined}
+      fillRule="evenodd"
+      height="10"
+      name={undefined}
+      role="img"
+      style={undefined}
+      viewBox="0 0 10 10"
+      width="10"
+    >
+      <title>
+        close icon
+      </title>
+      <path
+        d="M6.32 5L10 8.68 8.68 10 5 6.32 1.32 10 0 8.68 3.68 5 0 1.32 1.32 0 5 3.68 8.68 0 10 1.32 6.32 5z"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`GrcView component 4 renders as expected 1`] = `
+<div
+  className="grc-view"
+>
+  <div
+    className="module-grc-cards"
+  >
+    <div
+      className="header-container card-collapsed"
+    >
+      <button
+        className="collapse"
+        onClick={[Function]}
+      >
+        <span
+          className="collapse-hint"
+        >
+          Want to see your summary cards?
+        </span>
+        <span
+          className="collapse-button"
+        >
+          Expand summary
+        </span>
+        <svg
+          alt="expand"
+          aria-label="expand"
+          className="arrow-down"
+          fill={undefined}
+          fillRule="evenodd"
+          height="7"
+          name="chevron--down"
+          role="img"
+          style={undefined}
+          viewBox="0 0 12 7"
+          width="12"
+        >
+          <title>
+            expand
+          </title>
+          <path
+            d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    className="module-toggle-tab"
+  >
+    <div
+      aria-live="assertive"
+      className="bx--loading content-spinner"
+    >
+      <svg
+        className="bx--loading__svg"
+        viewBox="-75 -75 150 150"
+      >
+        <title>
+          Loading
+        </title>
+        <circle
+          className={null}
+          cx="0"
+          cy="0"
+          r="37.5"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GrcView component 5 renders as expected 1`] = `
+<div
+  className="grc-view"
+>
+  <div
+    className="module-grc-cards"
+  >
+    <div
+      className="header-container"
+    >
+      <div
+        className="header-title"
+      >
+        Summary
+      </div>
+      <div>
+        <div
+          aria-invalid={undefined}
+          aria-label="Summary"
+          className="bx--dropdown selection bx--list-box"
+          data-invalid={undefined}
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="listbox"
+          tabIndex={null}
+        >
+          <div
+            aria-expanded={false}
+            aria-haspopup={true}
+            aria-label="open menu"
+            className="bx--list-box__field"
+            data-toggle={true}
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex="0"
+            type="button"
+          >
+            <span
+              className="bx--list-box__label"
+              htmlFor="downshift-1-input"
+            >
+              Standards
+            </span>
+            <div
+              className="bx--list-box__menu-icon"
+            >
+              <svg
+                alt="Open menu"
+                aria-label="Open menu"
+                className={undefined}
+                fill={undefined}
+                fillRule="evenodd"
+                focusable="false"
+                height="5"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 10 5"
+                width="10"
+              >
+                <title>
+                  Open menu
+                </title>
+                <path
+                  d="M0 0l5 4.998L10 0z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        className="collapse"
+        onClick={[Function]}
+      >
+        <span
+          className="collapse-hint"
+        >
+          Want to see less information?
+        </span>
+        <span
+          className="collapse-button"
+        >
+          Collapse summary
+        </span>
+        <svg
+          alt="collapse"
+          aria-label="collapse"
+          className="arrow-up"
+          fill={undefined}
+          fillRule="evenodd"
+          height="7"
+          name="chevron--up"
+          role="img"
+          style={undefined}
+          viewBox="0 0 12 7"
+          width="12"
+        >
+          <title>
+            collapse
+          </title>
+          <path
+            d="M5.994 1.45L.726 7 0 6.315 5.994 0l6.002 6.315L11.27 7z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      className="card-container-container"
+    >
+      <div>
+        <div
+          className="card-container"
+        >
+          <div
+            className="card-content"
+          >
+            <div
+              className="card-name"
+            >
+              HIPAA
+            </div>
+            <div
+              className="card-count-content"
+            >
+              <div
+                className="card-count-container found"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="finding-cluster"
+                >
+                  <div
+                    className="card-count"
+                  >
+                    <div
+                      className="card-count-informations"
+                    >
+                      4
+                    </div>
+                    <div
+                      className="card-count-total"
+                    >
+                      /4
+                    </div>
+                  </div>
+                  <div
+                    className="card-grc-type"
+                  >
+                    Cluster findings
+                  </div>
+                </div>
+              </div>
+              <div
+                className="card-count-container high"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex="0"
+              >
+                <div
+                  className="high-severity"
+                >
+                  <div
+                    className="card-count"
+                  >
+                    <div
+                      className="card-count-informations"
+                    >
+                      4
+                    </div>
+                    <div
+                      className="card-count-total"
+                    >
+                      /4
+                    </div>
+                  </div>
+                  <div
+                    className="card-grc-type"
+                  >
+                    High severity
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="module-toggle-tab"
+  >
+    <div>
+      <div
+        className="bx--data-table-v2-container"
+        id="undefined-table-container"
+      >
+        <section
+          aria-label="undefined-search"
+          className="bx--table-toolbar"
+          role="region"
+        >
+          <div
+            className="bx--toolbar-search-container"
+          >
+            <div
+              aria-labelledby="undefined-search-label"
+              className="bx--search bx--search--sm bx--search--light"
+              role="search"
+            >
+              <svg
+                alt="Filter table"
+                aria-label="Filter table"
+                className="bx--search-magnifier"
+                fill={undefined}
+                fillRule="evenodd"
+                height="16"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <title>
+                  Filter table
+                </title>
+                <path
+                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zm4.936-1.27l4.563 4.557-.707.708-4.563-4.558a6.5 6.5 0 1 1 .707-.707z"
+                />
+              </svg>
+              <label
+                className="bx--label"
+                htmlFor="undefined-search"
+                id="undefined-search-label"
+              >
+                Filter table
+              </label>
+              <input
+                aria-label="undefined-search"
+                className="bx--search-input"
+                id="undefined-search"
+                onChange={[Function]}
+                placeholder="Search security findings"
+                type="text"
+                value=""
+              />
+              <button
+                aria-label={undefined}
+                className="bx--search-close bx--search-close--hidden"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  alt="Provide a description that will be used as the title"
+                  aria-label="Provide a description that will be used as the title"
+                  className={undefined}
+                  fill={undefined}
+                  fillRule="evenodd"
+                  height="16"
+                  name={undefined}
+                  role="img"
+                  style={undefined}
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <title>
+                    Provide a description that will be used as the title
+                  </title>
+                  <path
+                    d="M8 6.586L5.879 4.464 4.464 5.88 6.586 8l-2.122 2.121 1.415 1.415L8 9.414l2.121 2.122 1.415-1.415L9.414 8l2.122-2.121-1.415-1.415L8 6.586zM8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            className="bx--toolbar-content"
+          >
+            <div
+              className="module-toggle-tab-switch"
+            >
+              <div
+                className="bx--content-switcher"
+                onChange={[Function]}
+              >
+                <a
+                  className="bx--content-switcher-btn bx--content-switcher--selected"
+                  href=""
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                >
+                  <span>
+                    Security findings
+                  </span>
+                </a>
+                <a
+                  className="bx--content-switcher-btn"
+                  href=""
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                >
+                  <span>
+                    Cluster findings
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <table
+          className="bx--data-table-v2 resource-table bx--data-table-v2--zebra"
+        >
+          <thead
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+            >
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="shortDescription"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Description
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="context"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Resources
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="finding.severity"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Severity
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="context.clusterName"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Cluster
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="securityClassification.securityStandards"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Standards
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="securityClassification.securityControl"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Controls
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="securityClassification.securityCategories"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Categories
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="shortDescription"
+                  data-key="updateTime"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Update time
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              />
+            </tr>
+          </thead>
+          <tbody
+            className={undefined}
+          >
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-vulnerabilitypolicy
+              </td>
+              <td
+                className={undefined}
+              >
+                Medium
+              </td>
+              <td
+                className={undefined}
+              >
+                clusterhub
+              </td>
+              <td
+                className={undefined}
+              >
+                PCI
+              </td>
+              <td
+                className={undefined}
+              >
+                VA
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Information Integrity
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-rolebinding-1
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                clusterhub
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-rolebinding-1
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                cluster1
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-limitrange
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                clusterhub
+              </td>
+              <td
+                className={undefined}
+              >
+                HIPAA
+              </td>
+              <td
+                className={undefined}
+              >
+                Cert Manager
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-limitrange
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                cluster1
+              </td>
+              <td
+                className={undefined}
+              >
+                HIPAA
+              </td>
+              <td
+                className={undefined}
+              >
+                Cert Manager
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-image
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                cluster1
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                VA
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-image
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                clusterhub
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                VA
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-iampolicy
+              </td>
+              <td
+                className={undefined}
+              >
+                Medium
+              </td>
+              <td
+                className={undefined}
+              >
+                cluster1
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-iampolicy
+              </td>
+              <td
+                className={undefined}
+              >
+                Medium
+              </td>
+              <td
+                className={undefined}
+              >
+                clusterhub
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+            <tr
+              className={undefined}
+              data-row-name="Policy that is not compliant"
+            >
+              <td
+                className={undefined}
+              >
+                Policy that is not compliant
+              </td>
+              <td
+                className={undefined}
+              >
+                Policy: policy-pod
+              </td>
+              <td
+                className={undefined}
+              >
+                High
+              </td>
+              <td
+                className={undefined}
+              >
+                cluster1
+              </td>
+              <td
+                className={undefined}
+              >
+                FISMA
+              </td>
+              <td
+                className={undefined}
+              >
+                Mutation Advisor
+              </td>
+              <td
+                className={undefined}
+              >
+                System And Communications Protections
+              </td>
+              <td
+                className={undefined}
+              >
+                a few seconds ago
+              </td>
+              <td
+                className={undefined}
+              >
+                <div
+                  aria-expanded={false}
+                  aria-haspopup={true}
+                  aria-label="Overflow-menu"
+                  className="bx--overflow-menu"
+                  id={undefined}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onClose={[Function]}
+                  onKeyDown={[Function]}
+                  open={false}
+                  role="menu"
+                  tabIndex={0}
+                >
+                  <svg
+                    alt="Open and close list of options"
+                    aria-label="Open and close list of options"
+                    className="bx--overflow-menu__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    focusable="false"
+                    height="15"
+                    name={undefined}
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 3 15"
+                    width="3"
+                  >
+                    <title>
+                      Open and close list of options
+                    </title>
+                    <path
+                      d="M0 1.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 7.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M0 13.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"
+                    />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        className="bx--pagination"
+        disabled={false}
+      >
+        <div
+          className="bx--pagination__left"
+        >
+          <span
+            className="bx--pagination__text"
+          >
+            items per page
+          </span>
+          <div
+            className="bx--form-item"
+          >
+            <div
+              className="bx--select bx--select--inline"
+            >
+              <label
+                className="bx--label bx--visually-hidden"
+                htmlFor="bx-pagination-select-resource-table-pagination"
+              >
+                items per page
+              </label>
+              <select
+                aria-invalid={undefined}
+                className="bx--select-input"
+                data-invalid={undefined}
+                disabled={undefined}
+                id="bx-pagination-select-resource-table-pagination"
+                onChange={[Function]}
+                value={10}
+              >
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={5}
+                >
+                  5
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={10}
+                >
+                  10
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={20}
+                >
+                  20
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={50}
+                >
+                  50
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={75}
+                >
+                  75
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={100}
+                >
+                  100
+                </option>
+              </select>
+              <svg
+                alt="open list of options"
+                aria-label="open list of options"
+                className="bx--select__arrow"
+                fill={undefined}
+                fillRule="evenodd"
+                height="5"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 10 5"
+                width="10"
+              >
+                <title>
+                  open list of options
+                </title>
+                <path
+                  d="M0 0l5 4.998L10 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <span
+            className="bx--pagination__text"
+          >
+             |  
+            {0}-{1} of {0} items
+          </span>
+        </div>
+        <div
+          className="bx--pagination__right bx--pagination--inline"
+        >
+          <span
+            className="bx--pagination__text"
+          >
+            {0} of {1} pages
+          </span>
+          <button
+            aria-label="Previous page"
+            className="bx--pagination__button bx--pagination__button--backward bx--pagination__button--no-index"
+            disabled={true}
+            onClick={[Function]}
+          >
+            <svg
+              alt="Previous page"
+              aria-label="Previous page"
+              className="bx--pagination__button-icon"
+              fill={undefined}
+              fillRule="evenodd"
+              height="12"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 7 12"
+              width="7"
+            >
+              <title>
+                Previous page
+              </title>
+              <path
+                d="M1.45 6.002L7 11.27l-.685.726L0 6.003 6.315 0 7 .726z"
+              />
+            </svg>
+          </button>
+          <div
+            className="bx--form-item"
+          >
+            <div
+              className="bx--select bx--select--inline"
+            >
+              <label
+                className="bx--label bx--visually-hidden"
+                htmlFor="bx-pagination-select-resource-table-pagination2"
+              >
+                items per page
+              </label>
+              <select
+                aria-invalid={undefined}
+                className="bx--select-input"
+                data-invalid={undefined}
+                disabled={undefined}
+                id="bx-pagination-select-resource-table-pagination2"
+                onChange={[Function]}
+                value={1}
+              >
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={1}
+                >
+                  1
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={2}
+                >
+                  2
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={3}
+                >
+                  3
+                </option>
+                <option
+                  className="bx--select-option"
+                  disabled={false}
+                  hidden={false}
+                  value={4}
+                >
+                  4
+                </option>
+              </select>
+              <svg
+                alt="open list of options"
+                aria-label="open list of options"
+                className="bx--select__arrow"
+                fill={undefined}
+                fillRule="evenodd"
+                height="5"
+                name={undefined}
+                role="img"
+                style={undefined}
+                viewBox="0 0 10 5"
+                width="10"
+              >
+                <title>
+                  open list of options
+                </title>
+                <path
+                  d="M0 0l5 4.998L10 0z"
+                />
+              </svg>
+            </div>
+          </div>
+          <button
+            aria-label="Next page"
+            className="bx--pagination__button bx--pagination__button--forward"
+            disabled={false}
+            onClick={[Function]}
+          >
+            <svg
+              alt="Next page"
+              aria-label="Next page"
+              className="bx--pagination__button-icon"
+              fill={undefined}
+              fillRule="evenodd"
+              height="12"
+              name={undefined}
+              role="img"
+              style={undefined}
+              viewBox="0 0 7 12"
+              width="7"
+            >
+              <title>
+                Next page
+              </title>
+              <path
+                d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GrcView component 6 renders as expected 1`] = `
+<div
+  className="grc-view"
+>
+  <div
+    className="module-grc-cards"
+  >
+    <div
+      className="header-container card-collapsed"
+    >
+      <button
+        className="collapse"
+        onClick={[Function]}
+      >
+        <span
+          className="collapse-hint"
+        >
+          Want to see your summary cards?
+        </span>
+        <span
+          className="collapse-button"
+        >
+          Expand summary
+        </span>
+        <svg
+          alt="expand"
+          aria-label="expand"
+          className="arrow-down"
+          fill={undefined}
+          fillRule="evenodd"
+          height="7"
+          name="chevron--down"
+          role="img"
+          style={undefined}
+          viewBox="0 0 12 7"
+          width="12"
+        >
+          <title>
+            expand
+          </title>
+          <path
+            d="M6.002 5.55L11.27 0l.726.685L6.003 7 0 .685.726 0z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    className="module-toggle-tab"
+  >
+    <div
+      aria-live="assertive"
+      className="bx--loading content-spinner"
+    >
+      <svg
+        className="bx--loading__svg"
+        viewBox="-75 -75 150 150"
+      >
+        <title>
+          Loading
+        </title>
+        <circle
+          className={null}
+          cx="0"
+          cy="0"
+          r="37.5"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GrcView component 7 renders as expected 1`] = `
 <div>
   <div
     className="no-resource"
@@ -75,1008 +3149,46 @@ exports[`GrcView component 2 renders as expected 1`] = `
 </div>
 `;
 
-exports[`GrcView view 1 renders expand as expected 1`] = `
-ShallowWrapper {
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <GrcView
-    error={null}
-    loading={false}
-    location={
-      Object {
-        "pathname": "/multicloud/policies",
-      }
-    }
-    policies={
-      Array [
-        Object {
-          "__typename": "Compliance",
-          "clusterCompliant": "0/2",
-          "metadata": Object {
-            "__typename": "Metadata",
-            "annotations": Object {
-              "policy.mcm.ibm.com/categories": "",
-              "policy.mcm.ibm.com/controls": "",
-              "policy.mcm.ibm.com/standards": "",
-              "seed-generation": "1",
-            },
-            "name": "my-policy",
-            "namespace": "mcm",
-            "resourceVersion": "1347399",
-            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy",
-          },
-          "name": "my-policy",
-          "namespace": "mcm",
-          "placementBindings": Array [
-            Object {
-              "__typename": "PlacementBinding",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "binding-my-policy",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-my-policy",
-              },
-            },
-          ],
-          "placementPolicies": Array [
-            Object {
-              "__typename": "PlacementPolicy",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "placement-my-policy",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-my-policy",
-              },
-            },
-          ],
-          "policyCompliant": "0/2",
-          "raw": Object {
-            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-            "kind": "Policy",
-            "metadata": Object {
-              "annotations": Object {
-                "policy.mcm.ibm.com/categories": "",
-                "policy.mcm.ibm.com/controls": "",
-                "policy.mcm.ibm.com/standards": "",
-                "seed-generation": "1",
-              },
-              "creationTimestamp": "2019-07-21T15:53:58Z",
-              "finalizers": Array [
-                "propagator.finalizer.mcm.ibm.com",
-              ],
-              "generation": 55,
-              "name": "my-policy",
-              "namespace": "mcm",
-              "resourceVersion": "1347399",
-              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/my-policy",
-              "uid": "c049ec0d-abcf-11e9-8a41-005056a061f1",
-            },
-            "spec": Object {
-              "complianceType": "musthave",
-              "namespaces": Object {
-                "exclude": Array [
-                  "kube-*",
-                ],
-                "include": Array [
-                  "default",
-                ],
-              },
-              "object-templates": Array [
-                Object {
-                  "complianceType": "musthave",
-                  "objectDefinition": Object {
-                    "apiVersion": "rbac.authorization.k8s.io/v1",
-                    "kind": "RoleBinding",
-                    "metadata": Object {
-                      "name": "operate-pods-rolebinding",
-                    },
-                    "roleRef": Object {
-                      "apiGroup": "rbac.authorization.k8s.io",
-                      "kind": "Role",
-                      "name": "operator",
-                    },
-                    "subjects": Array [
-                      Object {
-                        "apiGroup": "rbac.authorization.k8s.io",
-                        "kind": "User",
-                        "name": "admin",
-                      },
-                    ],
-                  },
-                  "status": Object {
-                    "Validity": Object {},
-                  },
-                },
-              ],
-              "remediationAction": "enforce",
-            },
-            "status": Object {
-              "placementBindings": Array [
-                "binding-my-policy",
-              ],
-              "placementPolicies": Array [
-                "placement-my-policy",
-              ],
-              "status": Object {
-                "cluster1": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "my-policy": Object {
-                      "compliant": "Compliant",
-                    },
-                  },
-                  "clustername": "cluster1",
-                  "compliant": "Compliant",
-                },
-                "clusterhub": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "my-policy": Object {
-                      "compliant": "Compliant",
-                    },
-                  },
-                  "clustername": "clusterhub",
-                  "compliant": "Compliant",
-                },
-              },
-            },
-          },
-          "remediation": "enforce",
-        },
-        Object {
-          "__typename": "Compliance",
-          "clusterCompliant": "1/2",
-          "metadata": Object {
-            "__typename": "Metadata",
-            "annotations": Object {
-              "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
-",
-              "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
-              "policy.mcm.ibm.com/controls": "MutationAdvisor",
-              "policy.mcm.ibm.com/standards": "NIST",
-              "seed-generation": "1",
-            },
-            "name": "policy-ma",
-            "namespace": "mcm",
-            "resourceVersion": "1347579",
-            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
-          },
-          "name": "policy-ma",
-          "namespace": "mcm",
-          "placementBindings": Array [
-            Object {
-              "__typename": "PlacementBinding",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "binding-ma",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-ma",
-              },
-            },
-          ],
-          "placementPolicies": Array [
-            Object {
-              "__typename": "PlacementPolicy",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "placement-ma",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-ma",
-              },
-            },
-          ],
-          "policyCompliant": "1/2",
-          "raw": Object {
-            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-            "kind": "Policy",
-            "metadata": Object {
-              "annotations": Object {
-                "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST\\"},\\"name\\":\\"policy-ma\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"policy-templates\\":[{\\"objectDefinition\\":{\\"apiVersion\\":\\"policies.ibm.com/v1alpha1\\",\\"kind\\":\\"MutationPolicy\\",\\"metadata\\":{\\"label\\":{\\"category\\":\\"System-Integrity\\"},\\"name\\":\\"mutation-policy-example\\"},\\"spec\\":{\\"conditions\\":{\\"ownership\\":[\\"ReplicaSet\\",\\"Deployment\\",\\"DeamonSet\\",\\"ReplicationController\\"]},\\"namespaceSelector\\":{\\"exclude\\":[\\"kube-system\\"],\\"include\\":[\\"default\\",\\"kube-*\\"]},\\"remediationAction\\":\\"enforce\\"}}}],\\"remediationAction\\":\\"enforce\\"}}
-",
-                "policy.mcm.ibm.com/categories": "SystemAndInformationIntegrity",
-                "policy.mcm.ibm.com/controls": "MutationAdvisor",
-                "policy.mcm.ibm.com/standards": "NIST",
-                "seed-generation": "1",
-              },
-              "creationTimestamp": "2019-07-16T13:18:48Z",
-              "finalizers": Array [
-                "propagator.finalizer.mcm.ibm.com",
-              ],
-              "generation": 45,
-              "name": "policy-ma",
-              "namespace": "mcm",
-              "resourceVersion": "1347579",
-              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-ma",
-              "uid": "3f218d45-a7cc-11e9-8a41-005056a061f1",
-            },
-            "spec": Object {
-              "namespaces": Object {},
-              "policy-templates": Array [
-                Object {
-                  "objectDefinition": Object {
-                    "apiVersion": "policies.ibm.com/v1alpha1",
-                    "kind": "MutationPolicy",
-                    "metadata": Object {
-                      "label": Object {
-                        "category": "System-Integrity",
-                      },
-                      "name": "mutation-policy-example",
-                    },
-                    "spec": Object {
-                      "conditions": Object {
-                        "ownership": Array [
-                          "ReplicaSet",
-                          "Deployment",
-                          "DeamonSet",
-                          "ReplicationController",
-                        ],
-                      },
-                      "namespaceSelector": Object {
-                        "exclude": Array [
-                          "kube-system",
-                        ],
-                        "include": Array [
-                          "default",
-                          "kube-*",
-                        ],
-                      },
-                      "remediationAction": "enforce",
-                    },
-                  },
-                  "status": Object {
-                    "Validity": Object {},
-                  },
-                },
-              ],
-              "remediationAction": "enforce",
-            },
-            "status": Object {
-              "placementBindings": Array [
-                "binding-ma",
-              ],
-              "placementPolicies": Array [
-                "placement-ma",
-              ],
-              "status": Object {
-                "cluster1": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-ma": Object {
-                      "compliant": "NonCompliant",
-                    },
-                  },
-                  "clustername": "cluster1",
-                  "compliant": "NonCompliant",
-                },
-                "clusterhub": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-ma": Object {
-                      "compliant": "Compliant",
-                    },
-                  },
-                  "clustername": "clusterhub",
-                  "compliant": "Compliant",
-                },
-              },
-            },
-          },
-          "remediation": "enforce",
-        },
-        Object {
-          "__typename": "Compliance",
-          "clusterCompliant": "1/2",
-          "metadata": Object {
-            "__typename": "Metadata",
-            "annotations": Object {
-              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
-              "policy.mcm.ibm.com/controls": "MutationAdvisor,CertificateManager",
-              "policy.mcm.ibm.com/standards": "NIST,HIPAA",
-              "seed-generation": "1",
-            },
-            "name": "policy-pod",
-            "namespace": "mcm",
-            "resourceVersion": "1257026",
-            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-pod",
-          },
-          "name": "policy-pod",
-          "namespace": "mcm",
-          "placementBindings": Array [
-            Object {
-              "__typename": "PlacementBinding",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "binding-pod",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-pod",
-              },
-            },
-          ],
-          "placementPolicies": Array [
-            Object {
-              "__typename": "PlacementPolicy",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "placement-pod",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-pod",
-              },
-            },
-          ],
-          "policyCompliant": "1/2",
-          "raw": Object {
-            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-            "kind": "Policy",
-            "metadata": Object {
-              "annotations": Object {
-                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
-                "policy.mcm.ibm.com/controls": "MutationAdvisor,CertificateManager",
-                "policy.mcm.ibm.com/standards": "NIST,HIPAA",
-                "seed-generation": "1",
-              },
-              "creationTimestamp": "2019-07-16T13:16:46Z",
-              "finalizers": Array [
-                "propagator.finalizer.mcm.ibm.com",
-              ],
-              "generation": 19,
-              "name": "policy-pod",
-              "namespace": "mcm",
-              "resourceVersion": "1257026",
-              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-pod",
-              "uid": "f61a25eb-a7cb-11e9-8a41-005056a061f1",
-            },
-            "spec": Object {
-              "complianceType": "musthave",
-              "namespaces": Object {
-                "exclude": Array [
-                  "kube*",
-                ],
-                "include": Array [
-                  "default",
-                ],
-              },
-              "object-templates": Array [
-                Object {
-                  "complianceType": "musthave",
-                  "objectDefinition": Object {
-                    "apiVersion": "v1",
-                    "kind": "Pod",
-                    "metadata": Object {
-                      "name": "nginx-pod",
-                    },
-                    "spec": Object {
-                      "containers": Array [
-                        Object {
-                          "image": "nginx:1.7.9",
-                          "name": "nginx",
-                          "ports": Array [
-                            Object {
-                              "containerPort": 80,
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  },
-                  "status": Object {
-                    "Validity": Object {},
-                  },
-                },
-              ],
-              "remediationAction": "inform",
-            },
-            "status": Object {
-              "placementBindings": Array [
-                "binding-pod",
-              ],
-              "placementPolicies": Array [
-                "placement-pod",
-              ],
-              "status": Object {
-                "cluster1": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-pod": Object {
-                      "compliant": "Compliant",
-                    },
-                  },
-                  "clustername": "cluster1",
-                  "compliant": "Compliant",
-                },
-                "clusterhub": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-pod": Object {
-                      "compliant": "NonCompliant",
-                    },
-                  },
-                  "clustername": "clusterhub",
-                  "compliant": "NonCompliant",
-                },
-              },
-            },
-          },
-          "remediation": "inform",
-        },
-        Object {
-          "__typename": "Compliance",
-          "clusterCompliant": "1/2",
-          "metadata": Object {
-            "__typename": "Metadata",
-            "annotations": Object {
-              "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndCommunicationsProtections,SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor,VA\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST,HIPAA\\"},\\"name\\":\\"policy-role\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"namespaces\\":{\\"exclude\\":[\\"kube*\\"],\\"include\\":[\\"default\\"]},\\"remediationAction\\":\\"inform\\",\\"role-templates\\":[{\\"apiVersion\\":\\"roletemplate.mcm.ibm.com/v1alpha1\\",\\"complianceType\\":\\"musthave\\",\\"metadata\\":{\\"name\\":\\"operator-role-policy\\",\\"namespace\\":\\"\\"},\\"rules\\":[{\\"complianceType\\":\\"musthave\\",\\"policyRule\\":{\\"apiGroups\\":[\\"extensions\\",\\"apps\\"],\\"resources\\":[\\"deployments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\",\\"patch\\"]}}],\\"selector\\":{\\"matchLabels\\":{\\"dev\\":\\"true\\"}}}]}}
-",
-              "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
-              "policy.mcm.ibm.com/controls": "MutationAdvisor,VA",
-              "policy.mcm.ibm.com/standards": "NIST,HIPAA",
-              "seed-generation": "1",
-            },
-            "name": "policy-role",
-            "namespace": "mcm",
-            "resourceVersion": "1201118",
-            "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-role",
-          },
-          "name": "policy-role",
-          "namespace": "mcm",
-          "placementBindings": Array [
-            Object {
-              "__typename": "PlacementBinding",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "binding-role",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-role",
-              },
-            },
-          ],
-          "placementPolicies": Array [
-            Object {
-              "__typename": "PlacementPolicy",
-              "metadata": Object {
-                "__typename": "Metadata",
-                "name": "placement-role",
-                "selfLink": "/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-role",
-              },
-            },
-          ],
-          "policyCompliant": "1/2",
-          "raw": Object {
-            "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-            "kind": "Policy",
-            "metadata": Object {
-              "annotations": Object {
-                "kubectl.kubernetes.io/last-applied-configuration": "{\\"apiVersion\\":\\"policy.mcm.ibm.com/v1alpha1\\",\\"kind\\":\\"Policy\\",\\"metadata\\":{\\"annotations\\":{\\"policy.mcm.ibm.com/categories\\":\\"SystemAndCommunicationsProtections,SystemAndInformationIntegrity\\",\\"policy.mcm.ibm.com/controls\\":\\"MutationAdvisor,VA\\",\\"policy.mcm.ibm.com/standards\\":\\"NIST,HIPAA\\"},\\"name\\":\\"policy-role\\",\\"namespace\\":\\"mcm\\"},\\"spec\\":{\\"namespaces\\":{\\"exclude\\":[\\"kube*\\"],\\"include\\":[\\"default\\"]},\\"remediationAction\\":\\"inform\\",\\"role-templates\\":[{\\"apiVersion\\":\\"roletemplate.mcm.ibm.com/v1alpha1\\",\\"complianceType\\":\\"musthave\\",\\"metadata\\":{\\"name\\":\\"operator-role-policy\\",\\"namespace\\":\\"\\"},\\"rules\\":[{\\"complianceType\\":\\"musthave\\",\\"policyRule\\":{\\"apiGroups\\":[\\"extensions\\",\\"apps\\"],\\"resources\\":[\\"deployments\\"],\\"verbs\\":[\\"get\\",\\"list\\",\\"watch\\",\\"create\\",\\"delete\\",\\"patch\\"]}}],\\"selector\\":{\\"matchLabels\\":{\\"dev\\":\\"true\\"}}}]}}
-",
-                "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections,SystemAndInformationIntegrity",
-                "policy.mcm.ibm.com/controls": "MutationAdvisor,VA",
-                "policy.mcm.ibm.com/standards": "NIST,HIPAA",
-                "seed-generation": "1",
-              },
-              "creationTimestamp": "2019-07-16T13:19:03Z",
-              "finalizers": Array [
-                "propagator.finalizer.mcm.ibm.com",
-              ],
-              "generation": 16,
-              "name": "policy-role",
-              "namespace": "mcm",
-              "resourceVersion": "1201118",
-              "selfLink": "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-role",
-              "uid": "47dbc091-a7cc-11e9-8a41-005056a061f1",
-            },
-            "spec": Object {
-              "namespaces": Object {
-                "exclude": Array [
-                  "kube*",
-                ],
-                "include": Array [
-                  "default",
-                ],
-              },
-              "remediationAction": "inform",
-              "role-templates": Array [
-                Object {
-                  "apiVersion": "roletemplate.mcm.ibm.com/v1alpha1",
-                  "complianceType": "musthave",
-                  "metadata": Object {
-                    "creationTimestamp": null,
-                    "name": "operator-role-policy",
-                  },
-                  "rules": Array [
-                    Object {
-                      "complianceType": "musthave",
-                      "policyRule": Object {
-                        "apiGroups": Array [
-                          "extensions",
-                          "apps",
-                        ],
-                        "resources": Array [
-                          "deployments",
-                        ],
-                        "verbs": Array [
-                          "get",
-                          "list",
-                          "watch",
-                          "create",
-                          "delete",
-                          "patch",
-                        ],
-                      },
-                    },
-                  ],
-                  "selector": Object {
-                    "matchLabels": Object {
-                      "dev": "true",
-                    },
-                  },
-                  "status": Object {
-                    "Validity": Object {},
-                  },
-                },
-              ],
-            },
-            "status": Object {
-              "placementBindings": Array [
-                "binding-role",
-              ],
-              "placementPolicies": Array [
-                "placement-role",
-              ],
-              "status": Object {
-                "cluster1": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-role": Object {
-                      "compliant": "Compliant",
-                    },
-                  },
-                  "clustername": "cluster1",
-                  "compliant": "Compliant",
-                },
-                "clusterhub": Object {
-                  "aggregatePoliciesStatus": Object {
-                    "policy-role": Object {
-                      "compliant": "NonCompliant",
-                    },
-                  },
-                  "clustername": "clusterhub",
-                  "compliant": "NonCompliant",
-                },
-              },
-            },
-          },
-          "remediation": "inform",
-        },
-      ]
-    }
-    refreshControl={
-      Object {
-        "refreshCookie": "grc-refresh-interval-cookie",
-        "reloading": false,
-        "timestamp": "Tue Jul 23 2019 01:13:42 GMT-0400 (Eastern Daylight Time)",
-      }
-    }
-    secondaryHeaderProps={
-      Object {
-        "information": "grc.header.tooltip",
-        "links": Array [
-          Object {
-            "id": "create-policy",
-            "label": "button.create.policy",
-            "url": "/multicloud/policies/create",
-          },
-        ],
-        "tabs": Array [
-          Object {
-            "id": "grc-overview",
-            "index": 0,
-            "label": "tabs.grc.overview",
-            "url": "/multicloud/policies",
-          },
-          Object {
-            "id": "grc-all",
-            "index": 1,
-            "label": "tabs.grc.all",
-            "url": "/multicloud/policies/all",
-          },
-          Object {
-            "id": "grc-findings",
-            "index": 2,
-            "label": "tabs.grc.findings",
-            "url": "/multicloud/policies/findings",
-          },
-        ],
-        "title": "routes.grc",
-      }
-    }
-    title="hello world"
-  />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateError": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "function",
-    "props": Object {
-      "children": <div
-        className="button-group"
+exports[`GrcView component 8 renders as expected 1`] = `
+<div>
+  <div
+    className="no-resource"
+  >
+    <img
+      alt="No resource"
+      className="no-resource-icon"
+      src="undefined/policies/graphics/no-policy.svg"
+    />
+    <div
+      className="no-resource-title"
+    >
+      Get set-up to track your governance and risk.
+    </div>
+    <div
+      className="no-resource-detail"
+    >
+      You don't have any security risk integrations, yet. You can view the product documentation for instructions, or you can just start integrating.
+    </div>
+    <div
+      className="button-group"
+    >
+      <div
+        className="buttons"
       >
-        <UNDEFINED
-          disabled={false}
-          icon="add--glyph"
-          iconDescription="Provide icon description if icon is used"
-          id="create-resource"
-          kind="primary"
-          onClick={[Function]}
-          small={true}
-          tabIndex={0}
-          type="button"
+        <button
+          className="bx--btn bx--btn--sm bx--btn--secondary"
         >
-          Create policy
-        </UNDEFINED>
-        <div
-          className="buttons"
-        >
-          <button
-            className="bx--btn bx--btn--sm bx--btn--secondary"
+          <a
+            aria-describedby="launchWindow"
+            className="doc-link"
+            href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
+            target="doc"
           >
-            <a
-              aria-describedby="launchWindow"
-              className="doc-link"
-              href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-              target="doc"
-            >
-              View documentation
-            </a>
-          </button>
-        </div>
-      </div>,
-      "detail": "We noticed that you didn't have any policies created yet. You can view our documentation to see some samples for creating new policies, or you can go ahead and create one now!",
-      "title": "Get set-up to track your governance and risk.",
-    },
-    "ref": null,
-    "rendered": Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "host",
-      "props": Object {
-        "children": Array [
-          <UNDEFINED
-            disabled={false}
-            icon="add--glyph"
-            iconDescription="Provide icon description if icon is used"
-            id="create-resource"
-            kind="primary"
-            onClick={[Function]}
-            small={true}
-            tabIndex={0}
-            type="button"
-          >
-            Create policy
-          </UNDEFINED>,
-          <div
-            className="buttons"
-          >
-            <button
-              className="bx--btn bx--btn--sm bx--btn--secondary"
-            >
-              <a
-                aria-describedby="launchWindow"
-                className="doc-link"
-                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                target="doc"
-              >
-                View documentation
-              </a>
-            </button>
-          </div>,
-        ],
-        "className": "button-group",
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "function",
-          "props": Object {
-            "children": "Create policy",
-            "disabled": false,
-            "icon": "add--glyph",
-            "iconDescription": "Provide icon description if icon is used",
-            "id": "create-resource",
-            "kind": "primary",
-            "onClick": [Function],
-            "small": true,
-            "tabIndex": 0,
-            "type": "button",
-          },
-          "ref": null,
-          "rendered": "Create policy",
-          "type": Object {
-            "$$typeof": Symbol(react.forward_ref),
-            "defaultProps": Object {
-              "disabled": false,
-              "iconDescription": "Provide icon description if icon is used",
-              "kind": "primary",
-              "small": false,
-              "tabIndex": 0,
-              "type": "button",
-            },
-            "propTypes": Object {
-              "as": [Function],
-              "children": [Function],
-              "className": [Function],
-              "disabled": [Function],
-              "href": [Function],
-              "icon": [Function],
-              "iconDescription": [Function],
-              "kind": [Function],
-              "renderIcon": [Function],
-              "role": [Function],
-              "small": [Function],
-              "tabIndex": [Function],
-              "type": [Function],
-            },
-            "render": [Function],
-          },
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "host",
-          "props": Object {
-            "children": <button
-              className="bx--btn bx--btn--sm bx--btn--secondary"
-            >
-              <a
-                aria-describedby="launchWindow"
-                className="doc-link"
-                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                target="doc"
-              >
-                View documentation
-              </a>
-            </button>,
-            "className": "buttons",
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <a
-                aria-describedby="launchWindow"
-                className="doc-link"
-                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                target="doc"
-              >
-                View documentation
-              </a>,
-              "className": "bx--btn bx--btn--sm bx--btn--secondary",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "aria-describedby": "launchWindow",
-                "children": "View documentation",
-                "className": "doc-link",
-                "href": "https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html",
-                "target": "doc",
-              },
-              "ref": null,
-              "rendered": "View documentation",
-              "type": "a",
-            },
-            "type": "button",
-          },
-          "type": "div",
-        },
-      ],
-      "type": "div",
-    },
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "function",
-      "props": Object {
-        "children": <div
-          className="button-group"
-        >
-          <UNDEFINED
-            disabled={false}
-            icon="add--glyph"
-            iconDescription="Provide icon description if icon is used"
-            id="create-resource"
-            kind="primary"
-            onClick={[Function]}
-            small={true}
-            tabIndex={0}
-            type="button"
-          >
-            Create policy
-          </UNDEFINED>
-          <div
-            className="buttons"
-          >
-            <button
-              className="bx--btn bx--btn--sm bx--btn--secondary"
-            >
-              <a
-                aria-describedby="launchWindow"
-                className="doc-link"
-                href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                target="doc"
-              >
-                View documentation
-              </a>
-            </button>
-          </div>
-        </div>,
-        "detail": "We noticed that you didn't have any policies created yet. You can view our documentation to see some samples for creating new policies, or you can go ahead and create one now!",
-        "title": "Get set-up to track your governance and risk.",
-      },
-      "ref": null,
-      "rendered": Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "host",
-        "props": Object {
-          "children": Array [
-            <UNDEFINED
-              disabled={false}
-              icon="add--glyph"
-              iconDescription="Provide icon description if icon is used"
-              id="create-resource"
-              kind="primary"
-              onClick={[Function]}
-              small={true}
-              tabIndex={0}
-              type="button"
-            >
-              Create policy
-            </UNDEFINED>,
-            <div
-              className="buttons"
-            >
-              <button
-                className="bx--btn bx--btn--sm bx--btn--secondary"
-              >
-                <a
-                  aria-describedby="launchWindow"
-                  className="doc-link"
-                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                  target="doc"
-                >
-                  View documentation
-                </a>
-              </button>
-            </div>,
-          ],
-          "className": "button-group",
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "function",
-            "props": Object {
-              "children": "Create policy",
-              "disabled": false,
-              "icon": "add--glyph",
-              "iconDescription": "Provide icon description if icon is used",
-              "id": "create-resource",
-              "kind": "primary",
-              "onClick": [Function],
-              "small": true,
-              "tabIndex": 0,
-              "type": "button",
-            },
-            "ref": null,
-            "rendered": "Create policy",
-            "type": Object {
-              "$$typeof": Symbol(react.forward_ref),
-              "defaultProps": Object {
-                "disabled": false,
-                "iconDescription": "Provide icon description if icon is used",
-                "kind": "primary",
-                "small": false,
-                "tabIndex": 0,
-                "type": "button",
-              },
-              "propTypes": Object {
-                "as": [Function],
-                "children": [Function],
-                "className": [Function],
-                "disabled": [Function],
-                "href": [Function],
-                "icon": [Function],
-                "iconDescription": [Function],
-                "kind": [Function],
-                "renderIcon": [Function],
-                "role": [Function],
-                "small": [Function],
-                "tabIndex": [Function],
-                "type": [Function],
-              },
-              "render": [Function],
-            },
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "host",
-            "props": Object {
-              "children": <button
-                className="bx--btn bx--btn--sm bx--btn--secondary"
-              >
-                <a
-                  aria-describedby="launchWindow"
-                  className="doc-link"
-                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                  target="doc"
-                >
-                  View documentation
-                </a>
-              </button>,
-              "className": "buttons",
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "host",
-              "props": Object {
-                "children": <a
-                  aria-describedby="launchWindow"
-                  className="doc-link"
-                  href="https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html"
-                  target="doc"
-                >
-                  View documentation
-                </a>,
-                "className": "bx--btn bx--btn--sm bx--btn--secondary",
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "host",
-                "props": Object {
-                  "aria-describedby": "launchWindow",
-                  "children": "View documentation",
-                  "className": "doc-link",
-                  "href": "https://www.ibm.com/support/knowledgecenter/SSBS6K_undefined/mcm/compliance/compliance_intro.html",
-                  "target": "doc",
-                },
-                "ref": null,
-                "rendered": "View documentation",
-                "type": "a",
-              },
-              "type": "button",
-            },
-            "type": "div",
-          },
-        ],
-        "type": "div",
-      },
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-        "lifecycles": Object {
-          "componentDidUpdate": Object {
-            "onSetState": true,
-          },
-          "getDerivedStateFromProps": true,
-          "getSnapshotBeforeUpdate": true,
-          "setState": Object {
-            "skipsComponentDidUpdateOnNullish": true,
-          },
-        },
-      },
-    },
-  },
-}
+            View documentation
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 `;

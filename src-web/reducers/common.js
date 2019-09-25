@@ -112,20 +112,22 @@ const makeGetFilteredItemsSelector = (resourceType) => {
         return true
 
       const tableKeys = ResourceDefinitions.getTableKeys(resourceType)
-      const context = JSON.parse(document.getElementById('context').textContent)
+      if(document.getElementById('context')) {
+        const context = JSON.parse(document.getElementById('context').textContent)
 
-      if (search.includes('},')) {
+        if (search.includes('},')) {
         // special case like status={healthy}, labels={cloud=IBM}
-        let found = false
-        const searchFields = search.replace('},', '}},').toLowerCase().split('},')
-        searchFields.forEach(searchField => {
-          if (searchTableCellHelper(searchField, tableKeys, item, context)) {
-            found = true
-          }
-        })
-        return found
-      } else {
-        return searchTableCellHelper(search, tableKeys, item, context)
+          let found = false
+          const searchFields = search.replace('},', '}},').toLowerCase().split('},')
+          searchFields.forEach(searchField => {
+            if (searchTableCellHelper(searchField, tableKeys, item, context)) {
+              found = true
+            }
+          })
+          return found
+        } else {
+          return searchTableCellHelper(search, tableKeys, item, context)
+        }
       }
     })
   )
@@ -137,14 +139,18 @@ const makeGetTransformedItemsSelector = (resourceType) => {
     (items) => {
       const resourceData = getResourceDefinitions(resourceType)
       return items.map(item => {
-        const customData = {}
-        const context = JSON.parse(document.getElementById('context').textContent)
-        resourceData.tableKeys.forEach(key => {
-          if (key.transformFunction && typeof key.transformFunction === 'function') {
-            customData[key.resourceKey.replace('custom.', '')] = key.transformFunction(item, context.locale)
+        if(document) {
+          const customData = {}
+          if(document.getElementById('context')) {
+            const context = JSON.parse(document.getElementById('context').textContent)
+            resourceData.tableKeys.forEach(key => {
+              if (key.transformFunction && typeof key.transformFunction === 'function') {
+                customData[key.resourceKey.replace('custom.', '')] = key.transformFunction(item, context.locale)
+              }
+            })
           }
-        })
-        item.custom = customData
+          item.custom = customData
+        }
         return item
       })
     }

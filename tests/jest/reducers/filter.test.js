@@ -72,4 +72,11 @@ describe('filter reducer', () => {
     const expectedValue = {'selectedFilters': {}, 'test': 'test'}
     expect(resourceFilters(state, action)).toEqual(expectedValue)
   })
+
+  it('should return undefined state', () => {
+    expect(resourceFilters(null, null)).toEqual(undefined)
+  })
+  it('should return undefined state', () => {
+    expect(resourceFilters()).toEqual(undefined)
+  })
 })

@@ -33,4 +33,10 @@ describe('uiconfig reducer', () => {
     const expectedValue = {'test': 'test'}
     expect(uiconfig(state, action)).toEqual(expectedValue)
   })
+  it('should return undefined state', () => {
+    expect(uiconfig(null, null)).toEqual(undefined)
+  })
+  it('should return undefined state', () => {
+    expect(uiconfig()).toEqual(undefined)
+  })
 })

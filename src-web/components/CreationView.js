@@ -435,6 +435,7 @@ export default class CreationView extends React.Component {
     const parsedPolicy = parse(newYAML).parsed
     this.setState({templateData, isCustomName, policyYAML: newYAML, parsedPolicy, userMultiSelectData})
     highliteDifferences(this.editor, policyYAML, newYAML)
+    return field
   }
 
   setMultiSelectCmp(field, ref) {
@@ -496,7 +497,7 @@ export default class CreationView extends React.Component {
     case 'next':
     case 'previous':
       if (this.selectionIndex!==-1) {
-        if (this.selectionRanges.length>1) {
+        if (this.selectionRanges && this.selectionRanges.length>1) {
           switch (command) {
           case 'next':
             this.selectionIndex++
@@ -518,18 +519,22 @@ export default class CreationView extends React.Component {
       }
       break
     case 'undo':
-      this.editor.undo()
+      if (this.editor)
+        this.editor.undo()
       break
     case 'redo':
-      this.editor.redo()
+      if (this.editor)
+        this.editor.redo()
       break
     case 'restore':
       this.resetEditor()
       break
     case 'update':
+      //where is defined?
       this.updateResources()
       break
     }
+    return command
   }
 
   handleSearchChange(searchName) {

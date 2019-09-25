@@ -6,8 +6,13 @@
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  ****************************************************************************** */
+import moment from 'moment'
 
-export const GrcViewItem = [
+const currentTime = moment().format('YYYY-MM-DDTHH:mm:ssZ').toString()
+// eslint-disable-next-line no-console
+console.log('Current time used to unit test GrcView ; ' + JSON.stringify(currentTime))
+
+export const GrcViewPolicyCluster = [
   {
     'metadata': {
       'name': 'my-policy',
@@ -549,13 +554,11 @@ export const GrcViewItem = [
   }
 ]
 
-
 export const GrcViewRefreshControl = {
   'reloading': false,
   'refreshCookie': 'grc-refresh-interval-cookie',
   'timestamp': 'Tue Jul 23 2019 01:13:42 GMT-0400 (Eastern Daylight Time)'
 }
-
 
 export const GrcViewSecondaryHeaderProps =  {
   'title': 'routes.grc',
@@ -587,4 +590,4984 @@ export const GrcViewSecondaryHeaderProps =  {
       'index': 2
     }
   ]
+}
+
+export const reduxStorePolicyCluster = {
+  user: 'admin',
+  loggedIn: 'LOGGED_IN',
+  uiconfig: {
+    cluster_address: '9.42.82.240',
+    cluster_ca_domain: 'mycluster.icp',
+    cluster_endpoint: 'https://mycluster.icp:8443',
+    cluster_kube_apiserver_host: '9.42.82.240',
+    cluster_kube_apiserver_port: '8001',
+    cluster_name: 'mycluster',
+    cluster_router_http_port: '8080',
+    cluster_router_https_port: '8443',
+    edition: 'Enterprise Edition',
+    proxy_address: '9.42.82.240',
+    proxy_ingress_http_port: '80',
+    proxy_ingress_https_port: '443',
+    version: 'latest'
+  },
+  role: {
+    type: 'ROLE_RECEIVE_SUCCESS',
+    role: 'ClusterAdministrator',
+    status: 'DONE'
+  },
+  resourceToolbar: {
+    refreshControl: {
+      reloading: true,
+      refreshCookie: 'grc-refresh-interval-cookie',
+      timestamp: 'Thu Sep 12 2019 16:22:18 GMT-0400 (Eastern Daylight Time)'
+    },
+    availableFilters: {
+      standards: {
+        name: 'Standards',
+        availableSet: [
+          'FISMA',
+          'PCI',
+          'HIPAA',
+          'NIST'
+        ]
+      },
+      categories: {
+        name: 'Categories',
+        availableSet: [
+          'System And Communications Protections',
+          'System And Information Integrity'
+        ]
+      },
+      controls: {
+        name: 'Controls',
+        availableSet: [
+          'Secret Encryption',
+          'Cert Manager',
+          'Mutation Advisor',
+          'VA'
+        ]
+      },
+      type: {
+        name: 'Type',
+        availableSet: [
+          'Enforce',
+          'Inform only'
+        ]
+      },
+      severity: {
+        availableSet: []
+      }
+    },
+    activeFilters: {
+      standards: [
+        'NIST',
+        'HIPAA'
+      ]
+    }
+  },
+  secondaryHeader: {
+    title: '',
+    tabs: [],
+    breadcrumbItems: [],
+    links: [],
+    description: {},
+    information: {}
+  },
+  modal: {},
+  HCMApplicationList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMComplianceList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMPolicyList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMPolicyPolicyList: {
+    items: [
+      {
+        metadata: {
+          name: 'policy-limitrange',
+          namespace: 'mcm',
+          selfLink: '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-limitrange',
+          annotations: {
+            'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections',
+            'policy.mcm.ibm.com/controls': 'CertManager',
+            'policy.mcm.ibm.com/standards': 'HIPAA',
+            'seed-generation': '1'
+          },
+          resourceVersion: '3489357',
+          __typename: 'Metadata'
+        },
+        name: 'policy-limitrange',
+        namespace: 'mcm',
+        raw: {
+          apiVersion: 'policy.mcm.ibm.com/v1alpha1',
+          kind: 'Policy',
+          metadata: {
+            annotations: {
+              'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections',
+              'policy.mcm.ibm.com/controls': 'CertManager',
+              'policy.mcm.ibm.com/standards': 'HIPAA',
+              'seed-generation': '1'
+            },
+            creationTimestamp: '2019-09-04T16:27:02Z',
+            finalizers: [
+              'propagator.finalizer.mcm.ibm.com',
+              'finalizer.policies.ibm.com'
+            ],
+            generation: 7,
+            name: 'policy-limitrange',
+            namespace: 'mcm',
+            resourceVersion: '3489357',
+            selfLink: '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-limitrange',
+            uid: 'd358638d-cf30-11e9-a1ed-005056a0b88e'
+          },
+          spec: {
+            complianceType: 'musthave',
+            namespaces: {
+              exclude: [
+                'kube-*'
+              ],
+              include: [
+                'default'
+              ]
+            },
+            'object-templates': [
+              {
+                complianceType: 'musthave',
+                objectDefinition: {
+                  apiVersion: 'v1',
+                  kind: 'LimitRange',
+                  metadata: {
+                    name: 'mem-limit-range'
+                  },
+                  spec: {
+                    limits: [
+                      {
+                        'default': {
+                          memory: '512Mi'
+                        },
+                        defaultRequest: {
+                          memory: '256Mi'
+                        },
+                        type: 'Container'
+                      }
+                    ]
+                  }
+                },
+                status: {
+                  Validity: {}
+                }
+              }
+            ],
+            remediationAction: 'inform'
+          },
+          status: {
+            placementBindings: [
+              'binding-policy-limitrange'
+            ],
+            placementPolicies: [
+              'placement-policy-limitrange'
+            ],
+            status: {
+              cluster1: {
+                aggregatePoliciesStatus: {
+                  'policy-limitrange': {
+                    compliant: 'NonCompliant'
+                  }
+                },
+                clustername: 'cluster1',
+                compliant: 'NonCompliant'
+              },
+              clusterhub: {
+                aggregatePoliciesStatus: {
+                  'policy-limitrange': {
+                    compliant: 'NonCompliant'
+                  }
+                },
+                clustername: 'clusterhub',
+                compliant: 'NonCompliant'
+              }
+            }
+          }
+        },
+        remediation: 'inform',
+        policyCompliant: '2/2',
+        clusterCompliant: '2/2',
+        placementPolicies: [
+          {
+            metadata: {
+              name: 'placement-policy-limitrange',
+              selfLink: '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-policy-limitrange',
+              __typename: 'Metadata'
+            },
+            __typename: 'PlacementPolicy'
+          }
+        ],
+        placementBindings: [
+          {
+            metadata: {
+              name: 'binding-policy-limitrange',
+              selfLink: '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-policy-limitrange',
+              __typename: 'Metadata'
+            },
+            __typename: 'PlacementBinding'
+          }
+        ],
+        __typename: 'Compliance',
+        subItems: [
+          {
+            name: 'policy.pb',
+            items: [
+              'binding-policy-limitrange'
+            ]
+          },
+          {
+            name: 'policy.pp',
+            items: [
+              'placement-policy-limitrange'
+            ]
+          }
+        ],
+        custom: {
+          'metadata.name': {
+            key: null,
+            ref: null,
+            props: {
+              to: '/multicloud/policies/all/policy-limitrange',
+              children: 'policy-limitrange',
+              replace: false
+            },
+            _owner: null,
+            _store: {}
+          },
+          'metadata.annotations["policy.mcm.ibm.com/standards"]': 'HIPAA',
+          'metadata.annotations["policy.mcm.ibm.com/controls"]': 'Cert Manager',
+          'metadata.annotations["policy.mcm.ibm.com/categories"]': 'System And Communications Protections'
+        }
+      },
+      {
+        metadata: {
+          name: 'policy-namespace',
+          namespace: 'mcm',
+          selfLink: '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-namespace',
+          annotations: {
+            'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
+            'policy.mcm.ibm.com/controls': 'MutationAdvisor',
+            'policy.mcm.ibm.com/standards': 'NIST,HIPAA',
+            'seed-generation': '1'
+          },
+          resourceVersion: '4855462',
+          __typename: 'Metadata'
+        },
+        name: 'policy-namespace',
+        namespace: 'mcm',
+        raw: {
+          apiVersion: 'policy.mcm.ibm.com/v1alpha1',
+          kind: 'Policy',
+          metadata: {
+            annotations: {
+              'policy.mcm.ibm.com/categories': 'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
+              'policy.mcm.ibm.com/controls': 'MutationAdvisor',
+              'policy.mcm.ibm.com/standards': 'NIST,HIPAA',
+              'seed-generation': '1'
+            },
+            creationTimestamp: '2019-09-10T17:55:15Z',
+            finalizers: [
+              'propagator.finalizer.mcm.ibm.com',
+              'finalizer.policies.ibm.com'
+            ],
+            generation: 9,
+            name: 'policy-namespace',
+            namespace: 'mcm',
+            resourceVersion: '4855462',
+            selfLink: '/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-namespace',
+            uid: '2516c2c7-d3f4-11e9-a1ed-005056a0b88e'
+          },
+          spec: {
+            complianceType: 'musthave',
+            namespaces: {},
+            'object-templates': [
+              {
+                complianceType: 'musthave',
+                objectDefinition: {
+                  apiVersion: 'v1',
+                  kind: 'Namespace',
+                  metadata: {
+                    name: 'dev-will-test'
+                  }
+                },
+                status: {
+                  Validity: {}
+                }
+              }
+            ],
+            remediationAction: 'enforce'
+          },
+          status: {
+            placementBindings: [
+              'binding-namespace'
+            ],
+            placementPolicies: [
+              'placement-namespace'
+            ],
+            status: {
+              cluster1: {
+                aggregatePoliciesStatus: {
+                  'policy-namespace': {}
+                },
+                clustername: 'cluster1'
+              },
+              clusterhub: {
+                aggregatePoliciesStatus: {
+                  'policy-namespace': {}
+                },
+                clustername: 'clusterhub'
+              }
+            }
+          }
+        },
+        remediation: 'enforce',
+        policyCompliant: '2/2',
+        clusterCompliant: '2/2',
+        placementPolicies: [
+          {
+            metadata: {
+              name: 'placement-namespace',
+              selfLink: '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementpolicies/placement-namespace',
+              __typename: 'Metadata'
+            },
+            __typename: 'PlacementPolicy'
+          }
+        ],
+        placementBindings: [
+          {
+            metadata: {
+              name: 'binding-namespace',
+              selfLink: '/apis/mcm.ibm.com/v1alpha1/namespaces/mcm/placementbindings/binding-namespace',
+              __typename: 'Metadata'
+            },
+            __typename: 'PlacementBinding'
+          }
+        ],
+        __typename: 'Compliance',
+        subItems: [
+          {
+            name: 'policy.pb',
+            items: [
+              'binding-namespace'
+            ]
+          },
+          {
+            name: 'policy.pp',
+            items: [
+              'placement-namespace'
+            ]
+          }
+        ],
+        custom: {
+          'metadata.name': {
+            key: null,
+            ref: null,
+            props: {
+              to: '/multicloud/policies/all/policy-namespace',
+              children: 'policy-namespace',
+              replace: false
+            },
+            _owner: null,
+            _store: {}
+          },
+          'metadata.annotations["policy.mcm.ibm.com/standards"]': 'NIST, HIPAA',
+          'metadata.annotations["policy.mcm.ibm.com/controls"]': 'Mutation Advisor',
+          'metadata.annotations["policy.mcm.ibm.com/categories"]': 'System And Communications Protections, System And Information Integrity'
+        }
+      }
+    ],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'DONE',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMPolicyClusterList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMSecurityFindingsList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMClusterFindingsList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  resourceFilters: {}
+}
+
+export const GrcViewFindingCluster = [
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-2767ac02-ce7a-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'mapping error from raw object: `no matches for kind "VulnerabilityPolicy" in version "policies.ibm.com/v1alpha1"`',
+    'updateTime': currentTime,
+    'finding': {
+      'severity': 'MEDIUM',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-vulnerabilitypolicy',
+      'resourceId': '2767ac02-ce7a-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'PCI'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-22ac9660-cf15-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'rolebindings `operate-pods-rolebinding` is missing, and should be created',
+    'updateTime': currentTime,
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-rolebinding-1',
+      'resourceId': '22ac9660-cf15-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-22ac9660-cf15-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': currentTime,
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-rolebinding-1',
+      'resourceId': '22ac9660-cf15-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-d358638d-cf30-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'limitranges `mem-limit-range` is missing, and should be created',
+    'updateTime': '2019-09-15T14:49:38.406220Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-limitrange',
+      'resourceId': 'd358638d-cf30-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'HIPAA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'CertManager'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-d358638d-cf30-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-15T14:49:37.206988Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-limitrange',
+      'resourceId': 'd358638d-cf30-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'HIPAA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'CertManager'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-15T14:49:35.892074Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-image',
+      'resourceId': '8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'clusterimagepolicies `mongo` is missing, and should be created',
+    'updateTime': '2019-09-15T14:49:34.546915Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-image',
+      'resourceId': '8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-a18d825a-cb36-11e9-a1eb-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-15T14:49:33.034863Z',
+    'finding': {
+      'severity': 'MEDIUM',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-iampolicy',
+      'resourceId': 'a18d825a-cb36-11e9-a1eb-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-a18d825a-cb36-11e9-a1eb-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'NonCompliant; 1 clusterrole admin users violations detected in namespace `cluster-wide`',
+    'updateTime': '2019-09-15T14:49:31.415041Z',
+    'finding': {
+      'severity': 'MEDIUM',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-iampolicy',
+      'resourceId': 'a18d825a-cb36-11e9-a1eb-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-48316272-d009-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-15T14:49:29.926577Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-pod',
+      'resourceId': '48316272-d009-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-48316272-d009-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'pods `nginx-pod` is missing, and should be created',
+    'updateTime': '2019-09-15T08:12:50.637446Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-pod',
+      'resourceId': '48316272-d009-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'FISMA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections'
+      ],
+      'securityControl': 'MutationAdvisor'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-5b4caebf-d341-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-12T17:49:20.727667Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568061286260-policy-test',
+      'resourceId': '5b4caebf-d341-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-5b4caebf-d341-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-12T17:49:18.716240Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568061286260-policy-test',
+      'resourceId': '5b4caebf-d341-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-12T17:49:17.093456Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568056925581-policy-test',
+      'resourceId': '34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-12T17:49:15.642708Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568056925581-policy-test',
+      'resourceId': '34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4fe26689-d302-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-12T17:49:14.254742Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568034219566-policy-test',
+      'resourceId': '4fe26689-d302-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-4fe26689-d302-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-12T17:49:12.892542Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568034219566-policy-test',
+      'resourceId': '4fe26689-d302-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-12T17:49:01.556249Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568036913520-policy-test',
+      'resourceId': '9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-12T17:49:00.433037Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568036913520-policy-test',
+      'resourceId': '9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-11T13:20:41.695295Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568207972605-policy-test',
+      'resourceId': 'e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-11T13:20:39.291212Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568207972605-policy-test',
+      'resourceId': 'e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-524e95b5-d42d-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-11T00:44:51.957836Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568162636873-policy-test',
+      'resourceId': '524e95b5-d42d-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8514ac0a-d418-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T22:16:21.690479Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568153704100-policy-test',
+      'resourceId': '8514ac0a-d418-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4f8c0bf2-d418-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T22:14:50.526978Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568153613164-policy-test',
+      'resourceId': '4f8c0bf2-d418-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-348ab228-d40a-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T20:33:43.620675Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568147552669-policy-test',
+      'resourceId': '348ab228-d40a-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-348ab228-d40a-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T20:33:41.120084Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568147552669-policy-test',
+      'resourceId': '348ab228-d40a-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T20:15:47.094914Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568146478323-policy-test',
+      'resourceId': 'b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T20:15:44.691882Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568146478323-policy-test',
+      'resourceId': 'b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T19:32:43.614886Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568143899657-policy-test',
+      'resourceId': 'b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T19:32:40.365082Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568143899657-policy-test',
+      'resourceId': 'b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T19:03:05.998427Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': '1568142120415-policy-test',
+      'resourceId': '8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T19:03:03.590474Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568142120415-policy-test',
+      'resourceId': '8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-a0f60bfb-d3d3-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'namespaces `prod` is missing, and should be created',
+    'updateTime': '2019-09-10T14:03:25.228534Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568124103676-policy-test',
+      'resourceId': 'a0f60bfb-d3d3-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T13:59:48.300164Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-namespace',
+      'resourceId': '4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST',
+        'HIPAA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections',
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'MutationAdvisor,VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T13:59:43.189220Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-namespace',
+      'resourceId': '4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST',
+        'HIPAA'
+      ],
+      'securityCategories': [
+        'SystemAndCommunicationsProtections',
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'MutationAdvisor,VA'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-04bcaee9-d3d2-11e9-a1ed-005056a0b88e',
+    'shortDescription': 'Policy that is not compliant',
+    'longDescription': 'MCM Policy that is not compliant',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': '',
+    'updateTime': '2019-09-10T13:51:15.095202Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the compliance problem in the occurrence of the findings.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor MCM Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': '1568123422580-policy-test',
+      'resourceId': '04bcaee9-d3d2-11e9-a1ed-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST'
+      ],
+      'securityCategories': [
+        'SystemAndInformationIntegrity'
+      ],
+      'securityControl': 'VA'
+    },
+    '__typename': 'Occurrence'
+  }
+]
+
+export const reduxStoreFindingCluster = {
+  user: 'admin',
+  loggedIn: 'LOGGED_IN',
+  uiconfig: {
+    cluster_address: '9.42.82.240',
+    cluster_ca_domain: 'mycluster.icp',
+    cluster_endpoint: 'https://mycluster.icp:8443',
+    cluster_kube_apiserver_host: '9.42.82.240',
+    cluster_kube_apiserver_port: '8001',
+    cluster_name: 'mycluster',
+    cluster_router_http_port: '8080',
+    cluster_router_https_port: '8443',
+    edition: 'Enterprise Edition',
+    proxy_address: '9.42.82.240',
+    proxy_ingress_http_port: '80',
+    proxy_ingress_https_port: '443',
+    version: 'latest'
+  },
+  role: {
+    type: 'ROLE_RECEIVE_SUCCESS',
+    role: 'ClusterAdministrator',
+    status: 'DONE'
+  },
+  resourceToolbar: {
+    refreshControl: {
+      reloading: false,
+      refreshCookie: 'grc-refresh-interval-cookie',
+      timestamp: 'Sun Sep 15 2019 11:04:57 GMT-0400 (Eastern Daylight Time)'
+    },
+    availableFilters: {
+      standards: {
+        name: 'Standards',
+        availableSet: [
+          'PCI',
+          'FISMA',
+          'HIPAA',
+          'NIST'
+        ]
+      },
+      categories: {
+        name: 'Categories',
+        availableSet: [
+          'System And Information Integrity',
+          'System And Communications Protections'
+        ]
+      },
+      controls: {
+        name: 'Controls',
+        availableSet: [
+          'VA',
+          'Mutation Advisor',
+          'Cert Manager',
+          'Mutation Advisor VA'
+        ]
+      },
+      type: {
+        availableSet: []
+      },
+      severity: {
+        name: 'Severity',
+        availableSet: [
+          'High',
+          'Medium',
+          'Low'
+        ]
+      }
+    },
+    activeFilters: {
+      severity: []
+    }
+  },
+  secondaryHeader: {
+    title: 'Governance and risk',
+    tabs: [
+      {
+        id: 'grc-overview',
+        label: 'tabs.grc.overview',
+        url: '/multicloud/policies',
+        index: 0
+      },
+      {
+        id: 'grc-all',
+        label: 'tabs.grc.all',
+        url: '/multicloud/policies/all',
+        index: 1
+      },
+      {
+        id: 'grc-findings',
+        label: 'tabs.grc.findings',
+        url: '/multicloud/policies/findings',
+        index: 2
+      }
+    ],
+    links: [
+      {
+        id: 'create-policy',
+        label: 'button.create.policy',
+        url: '/multicloud/policies/create'
+      }
+    ],
+    description: '',
+    information: 'A core service that enables operators to define multicluster policies needed to meet enterprise requirements and standards.'
+  },
+  modal: {},
+  HCMApplicationList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMSecurityFindingsList: {
+    items: [
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-2767ac02-ce7a-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'mapping error from raw object: `no matches for kind "VulnerabilityPolicy" in version "policies.ibm.com/v1alpha1"`',
+        updateTime: currentTime,
+        finding: {
+          severity: 'MEDIUM',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-vulnerabilitypolicy',
+          resourceId: '2767ac02-ce7a-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'PCI'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-vulnerabilitypolicy',
+          'finding.severity': 'Medium',
+          'securityClassification.securityStandards': 'PCI',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-22ac9660-cf15-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'rolebindings `operate-pods-rolebinding` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-rolebinding-1',
+          resourceId: '22ac9660-cf15-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-rolebinding-1',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-22ac9660-cf15-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-rolebinding-1',
+          resourceId: '22ac9660-cf15-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-rolebinding-1',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-d358638d-cf30-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'limitranges `mem-limit-range` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-limitrange',
+          resourceId: 'd358638d-cf30-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'HIPAA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'CertManager'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-limitrange',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'HIPAA',
+          'securityClassification.securityControl': 'Cert Manager',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-d358638d-cf30-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-limitrange',
+          resourceId: 'd358638d-cf30-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'HIPAA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'CertManager'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-limitrange',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'HIPAA',
+          'securityClassification.securityControl': 'Cert Manager',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-image',
+          resourceId: '8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-image',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'clusterimagepolicies `mongo` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-image',
+          resourceId: '8be1a627-cb2c-11e9-a1eb-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-image',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-a18d825a-cb36-11e9-a1eb-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'MEDIUM',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-iampolicy',
+          resourceId: 'a18d825a-cb36-11e9-a1eb-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-iampolicy',
+          'finding.severity': 'Medium',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-a18d825a-cb36-11e9-a1eb-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'NonCompliant; 1 clusterrole admin users violations detected in namespace `cluster-wide`',
+        updateTime: currentTime,
+        finding: {
+          severity: 'MEDIUM',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-iampolicy',
+          resourceId: 'a18d825a-cb36-11e9-a1eb-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-iampolicy',
+          'finding.severity': 'Medium',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-48316272-d009-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-pod',
+          resourceId: '48316272-d009-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-pod',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-48316272-d009-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'pods `nginx-pod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-pod',
+          resourceId: '48316272-d009-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'FISMA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections'
+          ],
+          securityControl: 'MutationAdvisor'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-pod',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'FISMA',
+          'securityClassification.securityControl': 'Mutation Advisor',
+          'securityClassification.securityCategories': 'System And Communications Protections',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-5b4caebf-d341-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568061286260-policy-test',
+          resourceId: '5b4caebf-d341-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568061286260-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-5b4caebf-d341-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568061286260-policy-test',
+          resourceId: '5b4caebf-d341-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568061286260-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568056925581-policy-test',
+          resourceId: '34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568056925581-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568056925581-policy-test',
+          resourceId: '34c2d5bc-d337-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568056925581-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4fe26689-d302-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568034219566-policy-test',
+          resourceId: '4fe26689-d302-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568034219566-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-4fe26689-d302-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568034219566-policy-test',
+          resourceId: '4fe26689-d302-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568034219566-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568036913520-policy-test',
+          resourceId: '9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568036913520-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568036913520-policy-test',
+          resourceId: '9cc06eb5-d308-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568036913520-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568207972605-policy-test',
+          resourceId: 'e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568207972605-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568207972605-policy-test',
+          resourceId: 'e1efa5a4-d496-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568207972605-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-524e95b5-d42d-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568162636873-policy-test',
+          resourceId: '524e95b5-d42d-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568162636873-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8514ac0a-d418-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568153704100-policy-test',
+          resourceId: '8514ac0a-d418-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568153704100-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4f8c0bf2-d418-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568153613164-policy-test',
+          resourceId: '4f8c0bf2-d418-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568153613164-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-348ab228-d40a-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568147552669-policy-test',
+          resourceId: '348ab228-d40a-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568147552669-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-348ab228-d40a-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568147552669-policy-test',
+          resourceId: '348ab228-d40a-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568147552669-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568146478323-policy-test',
+          resourceId: 'b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568146478323-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568146478323-policy-test',
+          resourceId: 'b1fe01c2-d407-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568146478323-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568143899657-policy-test',
+          resourceId: 'b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568143899657-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568143899657-policy-test',
+          resourceId: 'b2f3fc2e-d401-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568143899657-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: '1568142120415-policy-test',
+          resourceId: '8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568142120415-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568142120415-policy-test',
+          resourceId: '8e28ce53-d3fd-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568142120415-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-a0f60bfb-d3d3-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: 'namespaces `prod` is missing, and should be created',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568124103676-policy-test',
+          resourceId: 'a0f60bfb-d3d3-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568124103676-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: 'policy-namespace',
+          resourceId: '4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST',
+            'HIPAA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections',
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'MutationAdvisor,VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-namespace',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST, HIPAA',
+          'securityClassification.securityControl': 'Mutation Advisor VA',
+          'securityClassification.securityCategories': 'System And Communications Protections, System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'clusterhub',
+          resourceType: 'Policy',
+          resourceName: 'policy-namespace',
+          resourceId: '4e21e5e7-ce78-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'clusterhub',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST',
+            'HIPAA'
+          ],
+          securityCategories: [
+            'SystemAndCommunicationsProtections',
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'MutationAdvisor,VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: policy-namespace',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST, HIPAA',
+          'securityClassification.securityControl': 'Mutation Advisor VA',
+          'securityClassification.securityCategories': 'System And Communications Protections, System And Information Integrity',
+          updateTime: '-'
+        }
+      },
+      {
+        name: 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-04bcaee9-d3d2-11e9-a1ed-005056a0b88e',
+        shortDescription: 'Policy that is not compliant',
+        longDescription: 'MCM Policy that is not compliant',
+        providerId: 'security-advisor',
+        providerName: 'id-mycluster-account/providers/security-advisor',
+        remediation: '',
+        updateTime: currentTime,
+        finding: {
+          severity: 'HIGH',
+          certainty: 'HIGH',
+          networkConnection: null,
+          nextSteps: [
+            {
+              title: 'View the details for the compliance problem in the occurrence of the findings.',
+              url: null
+            }
+          ],
+          dataTransferred: null
+        },
+        reportedBy: {
+          id: 'mcm-policy-adapter',
+          title: 'Security Advisor MCM Policy Findings Adapter',
+          url: null
+        },
+        context: {
+          accountId: 'id-mycluster-account',
+          region: 'cluster1',
+          resourceType: 'Policy',
+          resourceName: '1568123422580-policy-test',
+          resourceId: '04bcaee9-d3d2-11e9-a1ed-005056a0b88e',
+          resourceCrn: null,
+          serviceName: 'icp4mcm-findings',
+          serviceCrn: null,
+          clusterName: 'cluster1',
+          namespaceName: 'Excludes: [kube-*], Includes: [default]'
+        },
+        securityClassification: {
+          securityStandards: [
+            'NIST'
+          ],
+          securityCategories: [
+            'SystemAndInformationIntegrity'
+          ],
+          securityControl: 'VA'
+        },
+        __typename: 'Occurrence',
+        custom: {
+          context: 'Policy: 1568123422580-policy-test',
+          'finding.severity': 'High',
+          'securityClassification.securityStandards': 'NIST',
+          'securityClassification.securityControl': 'VA',
+          'securityClassification.securityCategories': 'System And Information Integrity',
+          updateTime: '-'
+        }
+      }
+    ],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'DONE',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  HCMClusterFindingsList: {
+    items: [],
+    itemsPerPage: 10,
+    page: 1,
+    search: '',
+    sortDirection: 'asc',
+    status: 'INCEPTION',
+    putErrorMsg: '',
+    postErrorMsg: '',
+    pendingActions: []
+  },
+  resourceFilters: {}
+}
+
+export const existing =
+{
+  'clusterLabels':[
+    {
+      'key':'cloud',
+      'value':'IBM'
+    },
+    {
+      'key':'datacenter',
+      'value':'toronto'
+    },
+    {
+      'key':'environment',
+      'value':'Dev'
+    },
+    {
+      'key':'owner',
+      'value':'marketing'
+    },
+    {
+      'key':'region',
+      'value':'US'
+    },
+    {
+      'key':'vendor',
+      'value':'ICP'
+    }
+  ],
+  'compliances':[
+    {
+      'name':'grc-policy',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'',
+        'policy.mcm.ibm.com/controls':'',
+        'policy.mcm.ibm.com/standards':'',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'complianceType':'musthave',
+        'namespaces':{
+          'exclude':[
+            'kube-*'
+          ],
+          'include':[
+            'default'
+          ]
+        },
+        'object-templates':[
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'policy/v1beta1',
+              'kind':'PodSecurityPolicy',
+              'metadata':{
+                'annotations':{
+                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
+                },
+                'name':'restricted-mcm'
+              },
+              'spec':{
+                'allowPrivilegeEscalation':false,
+                'allowedCapabilities':[
+                  '*'
+                ],
+                'fsGroup':{
+                  'rule':'RunAsAny'
+                },
+                'hostIPC':false,
+                'hostNetwork':true,
+                'hostPID':false,
+                'hostPorts':[
+                  {
+                    'max':65535,
+                    'min':1000
+                  }
+                ],
+                'privileged':false,
+                'runAsUser':{
+                  'rule':'RunAsAny'
+                },
+                'seLinux':{
+                  'rule':'RunAsAny'
+                },
+                'supplementalGroups':{
+                  'rule':'RunAsAny'
+                },
+                'volumes':[
+                  '*'
+                ]
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ],
+        'remediationAction':'enforce'
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'grc-policy2',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'',
+        'policy.mcm.ibm.com/controls':'',
+        'policy.mcm.ibm.com/standards':'',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'complianceType':'musthave',
+        'namespaces':{
+          'exclude':[
+            'kube-*'
+          ],
+          'include':[
+            'default'
+          ]
+        },
+        'object-templates':[
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'policy/v1beta1',
+              'kind':'PodSecurityPolicy',
+              'metadata':{
+                'annotations':{
+                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
+                },
+                'name':'restricted-mcm'
+              },
+              'spec':{
+                'allowPrivilegeEscalation':false,
+                'allowedCapabilities':[
+                  '*'
+                ],
+                'fsGroup':{
+                  'rule':'RunAsAny'
+                },
+                'hostIPC':false,
+                'hostNetwork':true,
+                'hostPID':false,
+                'hostPorts':[
+                  {
+                    'max':65535,
+                    'min':1000
+                  }
+                ],
+                'privileged':false,
+                'runAsUser':{
+                  'rule':'RunAsAny'
+                },
+                'seLinux':{
+                  'rule':'RunAsAny'
+                },
+                'supplementalGroups':{
+                  'rule':'RunAsAny'
+                },
+                'volumes':[
+                  '*'
+                ]
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ],
+        'remediationAction':'enforce'
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'policy-iam',
+      'namespace':'mcm',
+      'annotations':{
+        'kubectl.kubernetes.io/last-applied-configuration':'{"apiVersion":"policy.mcm.ibm.com/v1alpha1","kind":"Policy","metadata":{"annotations":{"policy.mcm.ibm.com/categories":"SystemAndInformationIntegrity","policy.mcm.ibm.com/controls":"MutationAdvisor","policy.mcm.ibm.com/standards":"NIST"},"name":"policy-iam","namespace":"mcm"},"spec":{"policy-templates":[{"objectDefinition":{"apiVersion":"mcm-grcpolicy.ibm.com/v1alpha1","kind":"IamPolicy","metadata":{"label":{"category":"System-Integrity"},"name":"iam-policy-example"},"spec":{"maxClusterRoleBindingUsers":5,"namespaceSelector":{"exclude":["kube-system"],"include":["default","kube-*"]},"remediationAction":"enforce"}}}]}}\n',
+        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity',
+        'policy.mcm.ibm.com/controls':'MutationAdvisor',
+        'policy.mcm.ibm.com/standards':'NIST',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'namespaces':{
+
+        },
+        'policy-templates':[
+          {
+            'objectDefinition':{
+              'apiVersion':'mcm-grcpolicy.ibm.com/v1alpha1',
+              'kind':'IamPolicy',
+              'metadata':{
+                'label':{
+                  'category':'System-Integrity'
+                },
+                'name':'iam-policy-example'
+              },
+              'spec':{
+                'maxClusterRoleBindingUsers':5,
+                'namespaceSelector':{
+                  'exclude':[
+                    'kube-system'
+                  ],
+                  'include':[
+                    'default',
+                    'kube-*'
+                  ]
+                },
+                'remediationAction':'enforce'
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ]
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'policy-ma',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity',
+        'policy.mcm.ibm.com/controls':'MutationAdvisor',
+        'policy.mcm.ibm.com/standards':'NIST',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'namespaces':{
+
+        },
+        'policy-templates':[
+          {
+            'objectDefinition':{
+              'apiVersion':'policies.ibm.com/v1alpha1',
+              'kind':'MutationPolicy',
+              'metadata':{
+                'label':{
+                  'category':'System-Integrity'
+                },
+                'name':'mutation-policy-example'
+              },
+              'spec':{
+                'conditions':{
+                  'ownership':[
+                    'ReplicaSet',
+                    'Deployment',
+                    'DeamonSet',
+                    'ReplicationController'
+                  ]
+                },
+                'namespaceSelector':{
+                  'exclude':[
+                    'kube-system'
+                  ],
+                  'include':[
+                    'default',
+                    'kube-*'
+                  ]
+                },
+                'remediationAction':'enforce'
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ],
+        'remediationAction':'enforce'
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'policy-pod',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
+        'policy.mcm.ibm.com/controls':'MutationAdvisor,VA',
+        'policy.mcm.ibm.com/standards':'NIST,HIPAA',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'complianceType':'musthave',
+        'namespaces':{
+          'exclude':[
+            'kube*'
+          ],
+          'include':[
+            'default'
+          ]
+        },
+        'object-templates':[
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'v1',
+              'kind':'Pod',
+              'metadata':{
+                'name':'nginx-pod'
+              },
+              'spec':{
+                'containers':[
+                  {
+                    'image':'nginx:1.7.9',
+                    'name':'nginx',
+                    'ports':[
+                      {
+                        'containerPort':80
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ],
+        'remediationAction':'inform'
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'policy-role',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'SystemAndCommunicationsProtections,SystemAndInformationIntegrity',
+        'policy.mcm.ibm.com/controls':'MutationAdvisor,VA',
+        'policy.mcm.ibm.com/standards':'NIST,HIPAA',
+        'seed-generation':'1'
+      },
+      'spec':{
+        'namespaces':{
+          'exclude':[
+            'kube*'
+          ],
+          'include':[
+            'default'
+          ]
+        },
+        'remediationAction':'inform',
+        'role-templates':[
+          {
+            'apiVersion':'roletemplate.mcm.ibm.com/v1alpha1',
+            'complianceType':'musthave',
+            'metadata':{
+              'creationTimestamp':null,
+              'name':'operator-role-policy'
+            },
+            'rules':[
+              {
+                'complianceType':'musthave',
+                'policyRule':{
+                  'apiGroups':[
+                    'extensions',
+                    'apps'
+                  ],
+                  'resources':[
+                    'deployments'
+                  ],
+                  'verbs':[
+                    'get',
+                    'list',
+                    'watch',
+                    'create',
+                    'delete',
+                    'patch'
+                  ]
+                }
+              }
+            ],
+            'selector':{
+              'matchLabels':{
+                'dev':'true'
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ]
+      },
+      '__typename':'ExistingCompliance'
+    },
+    {
+      'name':'policy1',
+      'namespace':'mcm',
+      'annotations':{
+        'policy.mcm.ibm.com/categories':'SystemAndInformationIntegrity, RBAC',
+        'policy.mcm.ibm.com/controls':'MutationAdvisor',
+        'policy.mcm.ibm.com/standards':'NIST',
+        'seed-generation':'2'
+      },
+      'spec':{
+        'complianceType':'musthave',
+        'namespaces':{
+          'exclude':[
+            'kube*'
+          ],
+          'include':[
+            'default'
+          ]
+        },
+        'object-templates':[
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'rbac.authorization.k8s.io/v1',
+              'kind':'RoleBinding',
+              'metadata':{
+                'name':'operate-pods-rolebinding',
+                'namespace':'default'
+              },
+              'roleRef':{
+                'apiGroup':'rbac.authorization.k8s.io',
+                'kind':'Role',
+                'name':'operator'
+              },
+              'subjects':[
+                {
+                  'apiGroup':'rbac.authorization.k8s.io',
+                  'kind':'User',
+                  'name':'admin'
+                }
+              ]
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          },
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'policy/v1beta1',
+              'kind':'PodSecurityPolicy',
+              'metadata':{
+                'annotations':{
+                  'seccomp.security.alpha.kubernetes.io/allowedProfileNames':'*'
+                },
+                'name':'restricted-mcm'
+              },
+              'spec':{
+                'allowPrivilegeEscalation':false,
+                'allowedCapabilities':[
+                  '*'
+                ],
+                'fsGroup':{
+                  'rule':'RunAsAny'
+                },
+                'hostIPC':false,
+                'hostNetwork':true,
+                'hostPID':false,
+                'hostPorts':[
+                  {
+                    'max':65535,
+                    'min':1000
+                  }
+                ],
+                'privileged':false,
+                'runAsUser':{
+                  'rule':'RunAsAny'
+                },
+                'seLinux':{
+                  'rule':'RunAsAny'
+                },
+                'supplementalGroups':{
+                  'rule':'RunAsAny'
+                },
+                'volumes':[
+                  '*'
+                ]
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          },
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'networking.k8s.io/v1',
+              'kind':'NetworkPolicy',
+              'metadata':{
+                'name':'deny-from-other-namespaces',
+                'namespace':'default'
+              },
+              'spec':{
+                'ingress':[
+                  {
+                    'from':[
+                      {
+                        'podSelector':{
+
+                        }
+                      }
+                    ]
+                  }
+                ],
+                'podSelector':{
+                  'matchLabels':null
+                }
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          },
+          {
+            'complianceType':'musthave',
+            'objectDefinition':{
+              'apiVersion':'v1',
+              'kind':'LimitRange',
+              'metadata':{
+                'name':'mem-limit-range'
+              },
+              'spec':{
+                'limits':[
+                  {
+                    'default':{
+                      'memory':'512Mi'
+                    },
+                    'defaultRequest':{
+                      'memory':'256Mi'
+                    },
+                    'type':'Container'
+                  }
+                ]
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ],
+        'remediationAction':'inform',
+        'role-templates':[
+          {
+            'apiVersion':'roletemplate.mcm.ibm.com/v1alpha1',
+            'complianceType':'musthave',
+            'metadata':{
+              'creationTimestamp':null,
+              'name':'operator-role'
+            },
+            'rules':[
+              {
+                'complianceType':'mustnothave',
+                'policyRule':{
+                  'apiGroups':[
+                    'core'
+                  ],
+                  'resources':[
+                    'secrets'
+                  ],
+                  'verbs':[
+                    'get',
+                    'list',
+                    'watch',
+                    'delete',
+                    'create',
+                    'update',
+                    'patch'
+                  ]
+                }
+              },
+              {
+                'complianceType':'musthave',
+                'policyRule':{
+                  'apiGroups':[
+                    'core'
+                  ],
+                  'resources':[
+                    'pods'
+                  ],
+                  'verbs':[
+                    'get',
+                    'list',
+                    'watch'
+                  ]
+                }
+              }
+            ],
+            'selector':{
+              'matchLabels':{
+                'dev':'true'
+              }
+            },
+            'status':{
+              'Validity':{
+
+              }
+            }
+          }
+        ]
+      },
+      '__typename':'ExistingCompliance'
+    }
+  ],
+  '__typename':'Existing'
 }
