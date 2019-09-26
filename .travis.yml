@@ -82,6 +82,14 @@ after_failure:
         echo Selenium test failed! Result available at http://9.37.247.85:81/$TRAVIS_JOB_NUMBER/e2e/
       fi
 
+notifications:
+  slack: 
+    rooms:
+      - ibm-cloudplatform:9YJcmhOhUJM1pMJfRkYXgb5G#icp-policy-grc-build
+    on_pull_requests: false
+    on_success: change
+    on_failure: always
+
 deploy:
   provider: pages
   skip-cleanup: true
