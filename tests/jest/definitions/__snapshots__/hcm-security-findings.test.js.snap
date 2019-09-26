@@ -22,6 +22,18 @@ exports[`getFindingControl Should return formarted FindingControl 3`] = `"VA"`;
 
 exports[`getFindingControl Should return formarted FindingControl 4`] = `"Test Case Four"`;
 
+exports[`getFindingControl Should return formarted FindingControl 5`] = `"Test, VA"`;
+
+exports[`getFindingControl Should return formarted FindingControl 6`] = `"-"`;
+
+exports[`getFindingControl Should return formarted FindingControl 7`] = `"-"`;
+
+exports[`getFindingControl Should return formarted FindingControl 8`] = `"Test, VA"`;
+
+exports[`getFindingControl Should return formarted FindingControl 9`] = `"-"`;
+
+exports[`getFindingControl Should return formarted FindingControl 10`] = `"Test VA"`;
+
 exports[`getFindingStandards Should return formarted FindingStandards 1`] = `"-"`;
 
 exports[`getFindingStandards Should return formarted FindingStandards 2`] = `"-"`;

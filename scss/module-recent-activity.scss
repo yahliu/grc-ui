@@ -73,8 +73,8 @@
 
             &:focus {
               box-shadow: none;
-              outline: none;
-              border: 2px solid $color__gray-1;
+              outline: 1px solid $color__blue-51;
+              border: none;
             }
 
             &.hasBorder {

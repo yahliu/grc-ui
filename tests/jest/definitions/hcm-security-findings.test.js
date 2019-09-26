@@ -65,6 +65,48 @@ const item9 = {
   }
 }
 
+const item10 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': 'Test, VA'}
+}
+
+const item11 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': true}
+}
+
+const item12 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': []}
+}
+
+const item13 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': ['Test', 'VA']}
+}
+
+const item14 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': {}}
+}
+
+const item15 = {
+  'securityClassification': {
+    'securityStandards': ['NIST'],
+    'securityCategories': ['SystemAndInformationIntegrity'],
+    'securityControl': {'Test':'VA'}}
+}
+
 describe('getSeverity', () => {
   it('Should get severity', () => {
     expect(getSeverity({})).toMatchSnapshot()
@@ -150,6 +192,24 @@ describe('getFindingControl', () => {
   })
   it('Should return formarted FindingControl', () => {
     expect(getFindingControl(item4)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item10)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item11)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item12)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item13)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item14)).toMatchSnapshot()
+  })
+  it('Should return formarted FindingControl', () => {
+    expect(getFindingControl(item15)).toMatchSnapshot()
   })
 })
 

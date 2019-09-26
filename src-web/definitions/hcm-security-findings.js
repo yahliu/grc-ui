@@ -10,6 +10,7 @@
 
 import _ from 'lodash'
 import { getAge } from '../../lib/client/resource-helper'
+import { fieldTypeToArray } from '../../lib/client/filter-helper'
 import msgs from '../../nls/platform.properties'
 
 export default {
@@ -96,29 +97,24 @@ export function getSeverity(item, locale) {
 }
 
 export function compressArray(items){
-  if (items) {
-    return items.map(item => _.startCase(item.trim())).join(', ')
-  }
-  return '-'
+  return (items && Array.isArray(items)) ? items.map(item => _.startCase(item.trim())).join(', ') : '-'
 }
 
 export function showTypeAndName(item){
-  const resourceType = _.get(item, 'context.resourceType', '-')
-  const resourceName = _.get(item, 'context.resourceName', '-')
-  return `${resourceType}: ${resourceName}`
+  return `${_.get(item, 'context.resourceType', '-')}: ${_.get(item, 'context.resourceName', '-')}`
 }
 
 export function getFindingStandards(item) {
-  const securityStandards = compressArray(_.get(item, 'securityClassification.securityStandards') || [])
+  const securityStandards = compressArray(fieldTypeToArray(_.get(item, 'securityClassification.securityStandards', [])))
   return securityStandards ? securityStandards : '-'
 }
 
 export function getFindingControl(item) {
-  const securityControl = _.startCase((_.get(item, 'securityClassification.securityControl') || '').trim())
+  const securityControl = compressArray(fieldTypeToArray(_.get(item, 'securityClassification.securityControl', '')))
   return securityControl ? securityControl : '-'
 }
 
 export function getFindingCategories(item) {
-  const securityCategories = compressArray(_.get(item, 'securityClassification.securityCategories') || [])
+  const securityCategories = compressArray(fieldTypeToArray(_.get(item, 'securityClassification.securityCategories', [])))
   return securityCategories ? securityCategories : '-'
 }
