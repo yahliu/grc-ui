@@ -26,6 +26,7 @@ resources(() => {
 const GrcCardsSelections = Object.freeze({
   categories: 'categories',
   standards: 'standards',
+  controls: 'controls',
 })
 
 class GrcCardsModule extends React.Component {
@@ -150,7 +151,7 @@ class GrcCardsModule extends React.Component {
         type = type.trim()
         if (type) {
           let name = type
-          if (grcCardChoice===GrcCardsSelections.categories) {
+          if (grcCardChoice===GrcCardsSelections.categories || grcCardChoice===GrcCardsSelections.standards || grcCardChoice===GrcCardsSelections.controls ) {
             name = _.startCase(name)
           }
           const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)
@@ -286,7 +287,7 @@ class GrcCardsModule extends React.Component {
         type = type.trim()
         if (type) {
           let name = type
-          if (grcCardChoice===GrcCardsSelections.categories) {
+          if (grcCardChoice===GrcCardsSelections.categories || grcCardChoice===GrcCardsSelections.standards || grcCardChoice===GrcCardsSelections.controls ) {
             name = _.startCase(name)
           }
           const filtered = activeFilters[key] &&  activeFilters[key].size>0 && !activeFilters[key].has(name)

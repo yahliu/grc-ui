@@ -149,7 +149,7 @@ function createTestPolicy(browser, time) {
   this.expect.element('@templateDropdownBox').not.to.be.present
 
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'cloud: "IBM')
+  // this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'cloud: "IBM')
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
 
@@ -164,7 +164,7 @@ function createTestPolicy(browser, time) {
   this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
 
   this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
+  // this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
   this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
 
@@ -206,8 +206,14 @@ function testDetailsPage(browser, name) {
   //violation tab test
   this.expect.element('#violation-tab').to.be.present
   this.click('#violation-tab')
-  this.waitForElementPresent('.policy-violation-tab > .section-title')
-  this.expect.element('.policy-violation-tab > .section-title').text.to.equal('Violations')
+  browser.element('css selector', '.policy-violation-tab > .section-title', (result) => {
+    if(result.status == -1){
+      browser.expect.element('.no-resource').to.be.present
+    }
+    else{
+      browser.expect.element('.policy-violation-tab > .section-title').text.to.equal('Violations')
+    }
+  })
   //policy yaml page test
   this.expect.element('#yaml-tab').to.be.present
   this.click('#yaml-tab')
