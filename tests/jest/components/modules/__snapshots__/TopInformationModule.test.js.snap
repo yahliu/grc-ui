@@ -215,6 +215,108 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
 </div>
 `;
 
+exports[`TopInformationModule clusters view renders as expected 2`] = `
+Array [
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-comp",
+    "name": "compliance-all",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-pod",
+    "name": "policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 1,
+    "description": Array [
+      "cluster1",
+    ],
+    "itemName": "policy-ma",
+    "name": "policy-ma",
+    "nameSpace": "mcm",
+  },
+]
+`;
+
+exports[`TopInformationModule clusters view renders as expected 3`] = `
+Array [
+  Object {
+    "choice": "clusters",
+    "count": 3,
+    "description": Array [
+      "compliance-all",
+      "policy-ma",
+      "policy-pod",
+    ],
+    "itemName": "policy-comp",
+    "name": "cluster1",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "clusters",
+    "count": 2,
+    "description": Array [
+      "compliance-all",
+      "policy-pod",
+    ],
+    "itemName": "policy-comp",
+    "name": "clusterhub",
+    "nameSpace": "mcm",
+  },
+]
+`;
+
+exports[`TopInformationModule clusters view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-comp",
+    "name": "compliance-all",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-pod",
+    "name": "policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 1,
+    "description": Array [
+      "cluster1",
+    ],
+    "itemName": "policy-ma",
+    "name": "policy-ma",
+    "nameSpace": "mcm",
+  },
+]
+`;
+
 exports[`TopInformationModule findings clusters view renders as expected 1`] = `
 <div
   className="module-top-information"
@@ -384,6 +486,75 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
 </div>
 `;
 
+exports[`TopInformationModule findings clusters view renders as expected 2`] = `
+Array [
+  Object {
+    "choice": "security findings",
+    "count": 3,
+    "description": Array [
+      "mycluster_name",
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": undefined,
+    "name": "Policy that is not compliant",
+    "nameSpace": "kube-system",
+  },
+]
+`;
+
+exports[`TopInformationModule findings clusters view renders as expected 3`] = `
+Array [
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "mycluster_name",
+    "nameSpace": "kube-system",
+  },
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "cluster1",
+    "nameSpace": "kube-system",
+  },
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "clusterhub",
+    "nameSpace": "kube-system",
+  },
+]
+`;
+
+exports[`TopInformationModule findings clusters view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "security findings",
+    "count": 3,
+    "description": Array [
+      "mycluster_name",
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": undefined,
+    "name": "Policy that is not compliant",
+    "nameSpace": "kube-system",
+  },
+]
+`;
+
 exports[`TopInformationModule findings view renders as expected 1`] = `
 <div
   className="module-top-information"
@@ -551,6 +722,75 @@ exports[`TopInformationModule findings view renders as expected 1`] = `
     </div>
   </div>
 </div>
+`;
+
+exports[`TopInformationModule findings view renders as expected 2`] = `
+Array [
+  Object {
+    "choice": "security findings",
+    "count": 3,
+    "description": Array [
+      "mycluster_name",
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": undefined,
+    "name": "Policy that is not compliant",
+    "nameSpace": "kube-system",
+  },
+]
+`;
+
+exports[`TopInformationModule findings view renders as expected 3`] = `
+Array [
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "mycluster_name",
+    "nameSpace": "kube-system",
+  },
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "cluster1",
+    "nameSpace": "kube-system",
+  },
+  Object {
+    "choice": "finding clusters",
+    "count": 1,
+    "description": Array [
+      "Policy that is not compliant",
+    ],
+    "itemName": undefined,
+    "name": "clusterhub",
+    "nameSpace": "kube-system",
+  },
+]
+`;
+
+exports[`TopInformationModule findings view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "security findings",
+    "count": 3,
+    "description": Array [
+      "mycluster_name",
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": undefined,
+    "name": "Policy that is not compliant",
+    "nameSpace": "kube-system",
+  },
+]
 `;
 
 exports[`TopInformationModule policies view renders as expected 1`] = `
@@ -766,4 +1006,109 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
     </div>
   </div>
 </div>
+`;
+
+exports[`TopInformationModule policies view renders as expected 2`] = `
+Array [
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "1558374675051-policy-pod",
+    "name": "1558374675051-policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "1558382034240-policy-pod",
+    "name": "1558382034240-policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-pod",
+    "name": "policy-pod",
+    "nameSpace": "mcm",
+  },
+]
+`;
+
+exports[`TopInformationModule policies view renders as expected 3`] = `
+Array [
+  Object {
+    "choice": "clusters",
+    "count": 3,
+    "description": Array [
+      "1558374675051-policy-pod",
+      "1558382034240-policy-pod",
+      "policy-pod",
+    ],
+    "itemName": "cluster1",
+    "name": "cluster1",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "clusters",
+    "count": 3,
+    "description": Array [
+      "1558374675051-policy-pod",
+      "1558382034240-policy-pod",
+      "policy-pod",
+    ],
+    "itemName": "clusterhub",
+    "name": "clusterhub",
+    "nameSpace": "mcm",
+  },
+]
+`;
+
+exports[`TopInformationModule policies view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "1558374675051-policy-pod",
+    "name": "1558374675051-policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "1558382034240-policy-pod",
+    "name": "1558382034240-policy-pod",
+    "nameSpace": "mcm",
+  },
+  Object {
+    "choice": "policies",
+    "count": 2,
+    "description": Array [
+      "cluster1",
+      "clusterhub",
+    ],
+    "itemName": "policy-pod",
+    "name": "policy-pod",
+    "nameSpace": "mcm",
+  },
+]
 `;

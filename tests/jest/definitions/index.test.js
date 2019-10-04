@@ -10,6 +10,9 @@
 import {getDefaultSearchField, getDefaultSortField, getLink, getPrimaryKey, getSecondaryKey, getTableKeys, getURIKey } from '../../../src-web/definitions/index'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 
+// eslint-disable-next-line no-console
+console.log('Below console logs are just unit test results, not actual errors:')
+
 // regular properties/selector/reducer testing
 // compare the received and expect values
 describe('definitions/index', () => {

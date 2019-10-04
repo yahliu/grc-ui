@@ -20,6 +20,6 @@ describe('PolicySummaryModule view', () => {
     const component = renderer.create(<BrowserRouter><PolicySummaryModule
       policies={filteredPolicies} />
     </BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
   })
 })

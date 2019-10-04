@@ -273,7 +273,7 @@ ResourceList.propTypes = {
   searchValue: PropTypes.string,
   selectedFilters: PropTypes.object,
   showSidePanel: PropTypes.bool,
-  sortColumn: PropTypes.object,
+  sortColumn: PropTypes.string,
   sortDirection: PropTypes.string,
   sortTable: PropTypes.func,
   staticResourceData: PropTypes.object,

@@ -330,6 +330,7 @@ export default class TopInformationModule extends React.Component {
       })
       break
     }
+    return this.state.cardData
   }
 }
 

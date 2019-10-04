@@ -142,7 +142,6 @@ export const findingsTestingDataSet1 = [
   }
 ]
 
-
 export const policiesTestingDataSet1 = [
   {
     'metadata':{

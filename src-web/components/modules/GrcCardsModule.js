@@ -29,7 +29,7 @@ const GrcCardsSelections = Object.freeze({
   controls: 'controls',
 })
 
-class GrcCardsModule extends React.Component {
+export class GrcCardsModule extends React.Component {
 
   constructor (props) {
     super(props)
@@ -387,6 +387,7 @@ class GrcCardsModule extends React.Component {
     else{
       paraURL.card = paraURL.card === 'false' ? true : false}
     history.push(`${location.pathname}?${queryString.stringify(paraURL)}`)
+    return queryString.stringify(paraURL)
   }
 }
 
@@ -581,7 +582,7 @@ GrcCardsModule.propTypes = {
   displayType: PropTypes.string,
   grcItems: PropTypes.array,
   handleDrillDownClick: PropTypes.func,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   location: PropTypes.object,
   showGrcCard: PropTypes.bool,
   updateViewState: PropTypes.func,

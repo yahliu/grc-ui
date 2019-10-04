@@ -12,7 +12,7 @@
 For a given input, a selector should always produce the same output.
  */
 
-import {resourceToolbar, secondaryHeader, resourceReducerFunction, INITIAL_STATE} from '../../../src-web/reducers/common'
+import {resourceToolbar, secondaryHeader, resourceReducerFunction, resourceItemByName, INITIAL_STATE} from '../../../src-web/reducers/common'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
 
 describe('resourceToolbar creation', () => {
@@ -74,6 +74,17 @@ describe('secondaryHeader creation', () => {
       links: ''
     }
     expect(secondaryHeader(state, action)).toEqual(expectedValue)
+  })
+})
+
+describe('resourceItemByName', () => {
+  it('should resourceItemByName', () => {
+    const items = {'HCM_COMPLIANCES':'test'}
+    const props = {
+      resourceType:{name:'HCM_COMPLIANCES'},
+    }
+    const expectedValue = 'test'
+    expect(resourceItemByName(items, props)).toEqual(expectedValue)
   })
 })
 
@@ -184,6 +195,18 @@ describe('resourceReducerFunction', () => {
       items: ['test', 'test1'],
       postStatus: 'DONE'
     }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state with post:DONE status', () => {
+    const state = {
+      test: 'test',
+      items: ['test']
+    }
+    const action = {
+      type: 'POST_RECEIVE_SUCCESS',
+      item: []
+    }
+    const expectedValue = {'items': ['test', []], 'postStatus': 'DONE', 'test': 'test'}
     expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
   })
   it('should return a state with post:ERROR status', () => {
@@ -334,6 +357,71 @@ describe('resourceReducerFunction', () => {
       test: 'test',
       items: [undefined]
     }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state for resource mutate action', () => {
+    const state = {
+      test: 'test',
+      items: ['test'],
+      pendingActions:[{name:'TEST_RESOURCE_MUTATE'}, {name:'TEST_RESOURCE_MUTATE_FAILURE'}],
+    }
+    const action = {
+      resourceName: 'TEST_RESOURCE_MUTATE',
+      type: 'RESOURCE_MUTATE',
+      resourceType:{
+        list: 'HCMPolicyList',
+        name: 'HCMPolicy'
+      }
+    }
+    const expectedValue = {'items': ['test'], 'mutateErrorMsg': null, 'mutateStatus': 'IN_PROGRESS', 'pendingActions': [{'name': 'TEST_RESOURCE_MUTATE'}, {'name': 'TEST_RESOURCE_MUTATE_FAILURE'}, {'action': 'RESOURCE_MUTATE', 'name': 'TEST_RESOURCE_MUTATE'}], 'test': 'test'}
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state for resource mutate failure action', () => {
+    const state = {
+      test: 'test',
+      items: ['test'],
+      pendingActions:[{name:'TEST_RESOURCE_MUTATE'}, {name:'TEST_RESOURCE_MUTATE_FAILURE'}],
+    }
+    const action = {
+      resourceName: 'TEST_RESOURCE_MUTATE_FAILURE',
+      type: 'RESOURCE_MUTATE_FAILURE',
+      resourceType:{
+        list: 'HCMPolicyList',
+        name: 'HCMPolicy'
+      },
+      err:{
+        message:'errorMessage',
+        error:'errorError',
+        data:{
+          message:'errorDataMessage',
+        }
+      }
+    }
+    const expectedValue = {'items': ['test'], 'mutateErrorMsg': 'errorMessage', 'mutateStatus': 'ERROR', 'pendingActions': [{'name': 'TEST_RESOURCE_MUTATE'}], 'test': 'test'}
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+  it('should return a state for resource mutate success action', () => {
+    const state = {
+      test: 'test',
+      items: ['test'],
+      pendingActions:[{name:'TEST_RESOURCE_MUTATE'}, {name:'TEST_RESOURCE_MUTATE_FAILURE'}],
+    }
+    const action = {
+      resourceName: 'TEST_RESOURCE_MUTATE_FAILURE',
+      type: 'RESOURCE_MUTATE_SUCCESS',
+      resourceType:{
+        list: 'HCMPolicyList',
+        name: 'HCMPolicy'
+      },
+      err:{
+        message:'errorMessage',
+        error:'errorError',
+        data:{
+          message:'errorDataMessage',
+        }
+      }
+    }
+    const expectedValue =  {'items': ['test'], 'mutateStatus': 'DONE', 'pendingActions': [{'name': 'TEST_RESOURCE_MUTATE'}], 'test': 'test'}
     expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
   })
   it('should return a state for resource delete action', () => {

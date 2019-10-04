@@ -160,6 +160,7 @@ export class SecondaryHeader extends React.Component {
 
   clickTab(url) {
     this.props.history.push(url)
+    return url
   }
 }
 
@@ -179,7 +180,6 @@ SecondaryHeader.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-
   return {
     title: state.secondaryHeader.title,
     tabs: state.secondaryHeader.tabs,

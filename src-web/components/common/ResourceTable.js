@@ -65,6 +65,7 @@ class ResourceTable extends React.Component {
       itemIds,
       expandableTable,
       selectableTable,
+      tableExpandRowAriaLabel,
       onSelect,
       onSelectAll,
       onSelectSubItem,
@@ -156,7 +157,7 @@ class ResourceTable extends React.Component {
                     if (expandableTable && row && row.id) {//check undefined row.id to avoid whole page crush
                       return (
                         <React.Fragment key={row.id}>
-                          <TableExpandRow {...getRowProps({ row, 'data-row-name': lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')), 'aria-hidden': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0), className: (lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')) === highLightRowName) ? 'high-light': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0) ? 'row-not-expanded' : '' })}>
+                          <TableExpandRow {...getRowProps({ row, 'data-row-name': lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')), 'aria-hidden': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0), className: (lodash.get(items[row.id], lodash.get(staticResourceData, 'tableKeys[0].resourceKey')) === highLightRowName) ? 'high-light': expandableTable && (items[row.id] && !items[row.id].subItems || items[row.id] && items[row.id].subItems.length === 0) ? 'row-not-expanded' : '' })} ariaLabel={tableExpandRowAriaLabel ? tableExpandRowAriaLabel : 'TableExpandRow'}>
                             {selectableTable &&
                               <TableCell key={`select-checkbox-${row.id}`}>
                                 <Checkbox
@@ -354,12 +355,13 @@ ResourceTable.propTypes = {
   selectableTable: PropTypes.bool,
   selectedFilters: PropTypes.object,
   showSidePanel: PropTypes.bool,
-  sortColumn: PropTypes.object,
+  sortColumn: PropTypes.string,
   sortDirection: PropTypes.string,
   sortTable: PropTypes.func,
   staticResourceData: PropTypes.object,
   status: PropTypes.string,
   tableActions: PropTypes.array,
+  tableExpandRowAriaLabel: PropTypes.string,
   tabs: PropTypes.array,
   title: PropTypes.string,
   topButton: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),

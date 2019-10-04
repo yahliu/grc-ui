@@ -24,7 +24,7 @@ resources(() => {
   require('../../../scss/modal.scss')
 })
 
-class ResourceModal extends React.PureComponent {
+export class ResourceModal extends React.PureComponent {
 
   state = {
     reqErrorMsg: []
@@ -75,7 +75,7 @@ class ResourceModal extends React.PureComponent {
   escapeEditor = e => {
     e.persist()
     const button = document.querySelector('.bx--btn--secondary')
-    e.shiftKey && e.ctrlKey && e.which === 81 && button.focus()
+    e.shiftKey && e.ctrlKey && e.which === 81 && (button && button.focus())
   }
 
   onChange = value => {
@@ -98,7 +98,7 @@ class ResourceModal extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.resourceModal.focus()
+    this.resourceModal && this.resourceModal.focus()
   }
 
   render() {

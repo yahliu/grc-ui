@@ -63,10 +63,12 @@ export function getSecondaryKey(resourceType) {
 
 export function getURIKey(resourceType) {
   const def = getResourceData(resourceType)
-  let uriKey = def.uriKey
+  let uriKey = ''
 
-  if (!uriKey)
-    uriKey = 'metadata.name'
+  if (def && def.uriKey) {
+    uriKey = def.uriKey}
+  else {
+    uriKey = 'metadata.name'}
 
   return uriKey
 }

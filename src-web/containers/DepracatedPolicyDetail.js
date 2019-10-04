@@ -12,6 +12,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { RESOURCE_TYPES } from '../../lib/shared/constants'
 import { typedResourcePageWithDetails } from '../components/common/ResourcePage'
+// eslint-disable-next-line import/no-named-as-default
 import CreateResourceModal from '../components/modals/CreateResourceModal'
 import { createResources } from '../actions/common'
 import StructuredListModule from '../components/common/StructuredListModuleWithActions'

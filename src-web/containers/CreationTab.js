@@ -21,7 +21,7 @@ import CreationView from '../components/CreationView'
 import msgs from '../../nls/platform.properties'
 import config from '../../lib/shared/config'
 
-class CreationTab extends React.Component {
+export class CreationTab extends React.Component {
 
   static propTypes = {
     cleanReqStatus: PropTypes.func,
@@ -79,8 +79,8 @@ class CreationTab extends React.Component {
   render () {
     const { mutateStatus, mutateErrorMsg } = this.props
     if (mutateStatus && mutateStatus === 'DONE') {
-      this.resetNewPolicy()
-      this.props.cleanReqStatus()
+      this.resetNewPolicy && this.resetNewPolicy()
+      this.props.cleanReqStatus && this.props.cleanReqStatus()
       return <Redirect to={`${config.contextPath}/policies/all`} />
     }
     return (

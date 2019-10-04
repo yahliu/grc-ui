@@ -14,9 +14,11 @@ import { GrcViewPolicyCluster, GrcViewFindingCluster, GrcViewRefreshControl, Grc
 //which is what we want in unit test
 import { OverviewView } from '../../../src-web/components/OverviewView'
 import renderer from 'react-test-renderer'
-import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { shallow } from 'enzyme'
+import { createMemoryHistory } from 'history'
+
+const history = createMemoryHistory({'length':4,'action':'POP','location':{'pathname':'/multicloud/policies/','search':'','hash':''}})
 
 describe('OverviewView component 1', () => {
   const location = {
@@ -24,21 +26,20 @@ describe('OverviewView component 1', () => {
   }
   it('renders as expected', () => {
     const component = renderer.create(
-      <Provider>
-        <BrowserRouter>
-          <OverviewView
-            title='Test1'
-            location={location}
-            loading={true}
-            error={null}
-            activeFilters={{}}
-            policies={GrcViewPolicyCluster}
-            findings={GrcViewFindingCluster}
-            refreshControl={GrcViewRefreshControl}
-            secondaryHeaderProps={GrcViewSecondaryHeaderProps}
-          />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <OverviewView
+          title='Test1'
+          history={history}
+          location={location}
+          loading={true}
+          error={null}
+          activeFilters={{}}
+          policies={GrcViewPolicyCluster}
+          findings={GrcViewFindingCluster}
+          refreshControl={GrcViewRefreshControl}
+          secondaryHeaderProps={GrcViewSecondaryHeaderProps}
+        />
+      </BrowserRouter>
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
@@ -50,21 +51,20 @@ describe('OverviewView component 2', () => {
   }
   it('renders as expected', () => {
     const component = renderer.create(
-      <Provider>
-        <BrowserRouter>
-          <OverviewView
-            title='Test2'
-            location={location}
-            loading={false}
-            error={{}}
-            activeFilters={{}}
-            policies={GrcViewPolicyCluster}
-            findings={GrcViewFindingCluster}
-            refreshControl={GrcViewRefreshControl}
-            secondaryHeaderProps={GrcViewSecondaryHeaderProps}
-          />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <OverviewView
+          title='Test2'
+          history={history}
+          location={location}
+          loading={false}
+          error={{}}
+          activeFilters={{}}
+          policies={GrcViewPolicyCluster}
+          findings={GrcViewFindingCluster}
+          refreshControl={GrcViewRefreshControl}
+          secondaryHeaderProps={GrcViewSecondaryHeaderProps}
+        />
+      </BrowserRouter>
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
@@ -76,21 +76,20 @@ describe('OverviewView component 3', () => {
   }
   it('renders as expected', () => {
     const component = renderer.create(
-      <Provider>
-        <BrowserRouter>
-          <OverviewView
-            title='Test3'
-            location={location}
-            loading={false}
-            error={null}
-            activeFilters={{}}
-            policies={[]}
-            findings={GrcViewFindingCluster}
-            refreshControl={GrcViewRefreshControl}
-            secondaryHeaderProps={GrcViewSecondaryHeaderProps}
-          />
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <OverviewView
+          title='Test3'
+          history={history}
+          location={location}
+          loading={false}
+          error={null}
+          activeFilters={{}}
+          policies={[]}
+          findings={GrcViewFindingCluster}
+          refreshControl={GrcViewRefreshControl}
+          secondaryHeaderProps={GrcViewSecondaryHeaderProps}
+        />
+      </BrowserRouter>
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
@@ -107,6 +106,7 @@ describe('OverviewView handleDrillDownClickOverview 1', () => {
     const wrapper = shallow(
       <OverviewView
         title='Test4'
+        history={history}
         location={location1}
         loading={false}
         error={{}}
@@ -137,6 +137,7 @@ describe('OverviewView handleDrillDownClickOverview 1', () => {
     const wrapper = shallow(
       <OverviewView
         title='Test4'
+        history={history}
         location={location2}
         loading={false}
         error={{}}

@@ -29,7 +29,7 @@ describe('PolicieSubResourceList view', () => {
       listSubItems={true}
       linkFixedName={linkFixedName}
     /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
   })
 })
 
@@ -40,6 +40,6 @@ describe('ClusterSubResourceList view', () => {
     const component = renderer.create(<BrowserRouter><ResourceOverviewModule  staticResourceData={staticResourceData}
       items={items}
       listSubItems={true} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
   })
 })

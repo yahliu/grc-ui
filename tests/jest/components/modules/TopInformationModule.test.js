@@ -11,6 +11,7 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import renderer from 'react-test-renderer'
+import { shallow } from 'enzyme'
 import { policiesTestingDataSet1, policiesTestingDataSet2, findingsTestingDataSet1 } from './ModuleTestingData'
 import TopInformationModule from '../../../../src-web/components/modules/TopInformationModule'
 
@@ -25,14 +26,31 @@ describe('TopInformationModule clusters view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
   it('renders as expected', () => {
-    const component = renderer.create(<BrowserRouter><TopInformationModule  viewState={viewState}
-      type='policies'
-      updateViewState={updateViewState}
-      updateThreshold={updateThreshold}
-      items={filteredPolicies}
-      activeFilters={activeFilters}
-      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    const component = renderer.create(
+      <BrowserRouter>
+        <TopInformationModule
+          viewState={viewState}
+          type='policies'
+          updateViewState={updateViewState}
+          updateThreshold={updateThreshold}
+          items={filteredPolicies}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
+      </BrowserRouter>)
+    expect(component.toJSON()).toMatchSnapshot()
+
+    const wrapper = shallow(
+      <TopInformationModule
+        viewState={viewState}
+        type='policies'
+        updateViewState={updateViewState}
+        updateThreshold={updateThreshold}
+        items={filteredPolicies}
+        activeFilters={activeFilters}
+        handleDrillDownClick={handleDrillDownClick} />)
+    expect(wrapper.instance().onChange(0)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(1)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(2)).toMatchSnapshot()
   })
 })
 
@@ -47,14 +65,31 @@ describe('TopInformationModule policies view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet2
   it('renders as expected', () => {
-    const component = renderer.create(<BrowserRouter><TopInformationModule  viewState={viewState}
-      type='policies'
-      updateThreshold={updateThreshold}
-      updateViewState={updateViewState}
-      items={filteredPolicies}
-      activeFilters={activeFilters}
-      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    const component = renderer.create(
+      <BrowserRouter>
+        <TopInformationModule
+          viewState={viewState}
+          type='policies'
+          updateThreshold={updateThreshold}
+          updateViewState={updateViewState}
+          items={filteredPolicies}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
+      </BrowserRouter>)
+    expect(component.toJSON()).toMatchSnapshot()
+
+    const wrapper = shallow(
+      <TopInformationModule
+        viewState={viewState}
+        type='policies'
+        updateThreshold={updateThreshold}
+        updateViewState={updateViewState}
+        items={filteredPolicies}
+        activeFilters={activeFilters}
+        handleDrillDownClick={handleDrillDownClick} />)
+    expect(wrapper.instance().onChange(0)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(1)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(2)).toMatchSnapshot()
   })
 })
 
@@ -69,14 +104,31 @@ describe('TopInformationModule findings view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredFindings = findingsTestingDataSet1
   it('renders as expected', () => {
-    const component = renderer.create(<BrowserRouter><TopInformationModule  viewState={viewState}
-      type='findings'
-      updateThreshold={updateThreshold}
-      updateViewState={updateViewState}
-      items={filteredFindings}
-      activeFilters={activeFilters}
-      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    const component = renderer.create(
+      <BrowserRouter>
+        <TopInformationModule
+          viewState={viewState}
+          type='findings'
+          updateThreshold={updateThreshold}
+          updateViewState={updateViewState}
+          items={filteredFindings}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
+      </BrowserRouter>)
+    expect(component.toJSON()).toMatchSnapshot()
+
+    const wrapper = shallow(
+      <TopInformationModule
+        viewState={viewState}
+        type='findings'
+        updateThreshold={updateThreshold}
+        updateViewState={updateViewState}
+        items={filteredFindings}
+        activeFilters={activeFilters}
+        handleDrillDownClick={handleDrillDownClick} />)
+    expect(wrapper.instance().onChange(0)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(1)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(2)).toMatchSnapshot()
   })
 })
 
@@ -91,13 +143,30 @@ describe('TopInformationModule findings clusters view', () => {
   const handleDrillDownClick = jest.fn()
   const filteredFindings = findingsTestingDataSet1
   it('renders as expected', () => {
-    const component = renderer.create(<BrowserRouter><TopInformationModule  viewState={viewState}
-      type='findings'
-      updateViewState={updateViewState}
-      updateThreshold={updateThreshold}
-      items={filteredFindings}
-      activeFilters={activeFilters}
-      handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    const component = renderer.create(
+      <BrowserRouter>
+        <TopInformationModule
+          viewState={viewState}
+          type='findings'
+          updateViewState={updateViewState}
+          updateThreshold={updateThreshold}
+          items={filteredFindings}
+          activeFilters={activeFilters}
+          handleDrillDownClick={handleDrillDownClick} />
+      </BrowserRouter>)
+    expect(component.toJSON()).toMatchSnapshot()
+
+    const wrapper = shallow(
+      <TopInformationModule
+        viewState={viewState}
+        type='findings'
+        updateViewState={updateViewState}
+        updateThreshold={updateThreshold}
+        items={filteredFindings}
+        activeFilters={activeFilters}
+        handleDrillDownClick={handleDrillDownClick} />)
+    expect(wrapper.instance().onChange(0)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(1)).toMatchSnapshot()
+    expect(wrapper.instance().onChange(2)).toMatchSnapshot()
   })
 })

@@ -377,23 +377,25 @@ export default {
 
 export function createPolicyLink(item = {}, ...param){
   if (param[2]) return item.metadata.name
-  return <Link to={`${config.contextPath}/policies/local/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link>
+  return (item && item.metadata) ? <Link to={`${config.contextPath}/policies/local/${encodeURIComponent(item.metadata.namespace)}/${encodeURIComponent(item.metadata.name)}`}>{item.metadata.name}</Link> : <Link to={`${config.contextPath}/policies/local/`}>{JSON.stringify(item)}</Link>
 }
 
 export function getStatus(item= {}, locale) {
   const expectedStatuses = [ 'compliant', 'notcompliant', 'noncompliant', 'invalid']
-  if (item.status && expectedStatuses.indexOf(item.status.toLowerCase()) > -1){
-    if (item.status.toLowerCase() === 'compliant') {
-      return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
-    } else {
-      return <StatusField status='critical' text={msgs.get(`policy.status.${item.status.toLowerCase()}`, locale)} />
+  if (item) {
+    if (item.status && expectedStatuses.indexOf(item.status.toLowerCase()) > -1){
+      if (item.status.toLowerCase() === 'compliant') {
+        return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
+      } else {
+        return <StatusField status='critical' text={msgs.get(`policy.status.${item.status.toLowerCase()}`, locale)} />
+      }
     }
-  }
-  if (item.compliant && expectedStatuses.indexOf(item.compliant.toLowerCase()) > -1){
-    if (item.compliant.toLowerCase() === 'compliant') {
-      return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
-    } else {
-      return <StatusField status='critical' text={msgs.get(`policy.status.${item.status.toLowerCase()}`, locale)} />
+    if (item.compliant && expectedStatuses.indexOf(item.compliant.toLowerCase()) > -1){
+      if (item.compliant.toLowerCase() === 'compliant') {
+        return <StatusField status='ok' text={msgs.get('policy.status.compliant', locale)} />
+      } else {
+        return <StatusField status='critical' text={msgs.get(`policy.status.${item.status.toLowerCase()}`, locale)} />
+      }
     }
   }
   return '-'

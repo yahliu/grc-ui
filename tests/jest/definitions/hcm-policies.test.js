@@ -37,6 +37,9 @@ describe('hcm-policies - createPolicyLink', () => {
     }
     expect(createPolicyLink(item)).toMatchSnapshot()
   })
+  it('Should return empty Link obj', () => {
+    expect(createPolicyLink()).toMatchSnapshot()
+  })
 })
 
 describe('hcm-policies', () => {
@@ -71,6 +74,12 @@ describe('hcm-policies', () => {
       const item = {
       }
       expect(getStatus(item)).toBe('-')
+    })
+    it('should return "-"', () => {
+      expect(getStatus(null, null)).toBe('-')
+    })
+    it('should return "-"', () => {
+      expect(getStatus()).toBe('-')
     })
   })
 })

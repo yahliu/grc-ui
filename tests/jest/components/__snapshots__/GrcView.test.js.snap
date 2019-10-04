@@ -673,7 +673,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                 headers="expand"
               >
                 <button
-                  aria-label={undefined}
+                  aria-label="TableExpandRow"
                   className="bx--table-expand-v2__button"
                   onClick={[Function]}
                   title={undefined}
@@ -791,7 +791,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                 headers="expand"
               >
                 <button
-                  aria-label={undefined}
+                  aria-label="TableExpandRow"
                   className="bx--table-expand-v2__button"
                   onClick={[Function]}
                   title={undefined}

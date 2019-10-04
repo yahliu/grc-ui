@@ -264,3 +264,136 @@ exports[`SecondaryHeader component 4 renders as expected 1`] = `
   </div>
 </div>
 `;
+
+exports[`SecondaryHeader component 5 renderBreadCrumb1 as expected 1`] = `undefined`;
+
+exports[`SecondaryHeader component 5 renderBreadCrumb2 as expected 1`] = `Array []`;
+
+exports[`SecondaryHeader component 5 renderBreadCrumb3 as expected 1`] = `
+Array [
+  <div
+    className="bx--breadcrumb-item"
+    title="label1"
+  >
+    <div
+      className="breadcrumb-link"
+      onClick={[MockFunction]}
+    />
+  </div>,
+  <div
+    className="bx--breadcrumb-item"
+    title="label2"
+  >
+    <Link
+      className="bx--link"
+      replace={false}
+      to="www.test2.com"
+    >
+      label2
+    </Link>
+  </div>,
+  <div
+    className="bx--breadcrumb-item"
+    title="label3"
+  >
+    <div
+      className="breadcrumb-link"
+      onClick={[MockFunction]}
+    />
+  </div>,
+  <div
+    className="bx--breadcrumb-item"
+    title="label4"
+  >
+    <Link
+      className="bx--link"
+      replace={false}
+      to="www.test4.com"
+    />
+  </div>,
+]
+`;
+
+exports[`SecondaryHeader component 5 renderHeader with description 1`] = `
+<div
+  className="bx--detail-page-header-title-container"
+>
+  <h1
+    className="bx--detail-page-header-title"
+  >
+    hello world
+  </h1>
+  <div
+    className="detail-page-header-title-button"
+    onClick={[MockFunction]}
+  >
+    <p>
+      [MockFunction]
+    </p>
+  </div>
+</div>
+`;
+
+exports[`SecondaryHeader component 5 renderHeader without description 1`] = `
+<div
+  className="bx--detail-page-header-title-container"
+>
+  <h1
+    className="bx--detail-page-header-title"
+  >
+    hello world
+  </h1>
+</div>
+`;
+
+exports[`SecondaryHeader component 5 renderLinks as expected 1`] = `
+Array [
+  <UNDEFINED
+    disabled={false}
+    iconDescription="Provide icon description if icon is used"
+    id="create-policy"
+    kind="primary"
+    onClick={[Function]}
+    small={false}
+    tabIndex={0}
+    type="button"
+  >
+    Create policy
+  </UNDEFINED>,
+]
+`;
+
+exports[`SecondaryHeader component 5 renderTabs as expected 1`] = `
+Array [
+  <Tab
+    href="/multicloud/policies"
+    id="grc-overview"
+    label="Overview"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+    selected={false}
+    tabIndex={0}
+  />,
+  <Tab
+    href="/multicloud/policies/all"
+    id="grc-all"
+    label="Policies"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+    selected={false}
+    tabIndex={0}
+  />,
+  <Tab
+    href="/multicloud/policies/findings"
+    id="grc-findings"
+    label="Security findings"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+    selected={false}
+    tabIndex={0}
+  />,
+]
+`;

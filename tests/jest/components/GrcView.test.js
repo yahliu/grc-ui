@@ -18,10 +18,12 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import configureMockStore from 'redux-mock-store'
 import { shallow } from 'enzyme'
+import { createMemoryHistory } from 'history'
 
 const mockStore = configureMockStore()
 const storePolicyCluster = mockStore(reduxStorePolicyCluster)
 const storeFindingCluster = mockStore(reduxStoreFindingCluster)
+const history = createMemoryHistory({'length':5,'action':'PUSH','location':{'pathname':'/multicloud/policies/all','search':'','hash':''}})
 
 describe('GrcView component 1', () => {
   const location = {
@@ -33,6 +35,7 @@ describe('GrcView component 1', () => {
         <BrowserRouter>
           <GrcView
             title='Test1'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -58,6 +61,7 @@ describe('GrcView component 2', () => {
         <BrowserRouter>
           <GrcView
             title='Test2'
+            history={history}
             location={location}
             loading={true}
             error={null}
@@ -83,6 +87,7 @@ describe('GrcView component 3', () => {
         <BrowserRouter>
           <GrcView
             title='Test3'
+            history={history}
             location={location}
             loading={false}
             error={{}}
@@ -109,6 +114,7 @@ describe('GrcView component 4', () => {
         <BrowserRouter>
           <GrcView
             title='Test4'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -134,6 +140,7 @@ describe('GrcView component 5', () => {
         <BrowserRouter>
           <GrcView
             title='Test5'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -160,6 +167,7 @@ describe('GrcView component 6', () => {
         <BrowserRouter>
           <GrcView
             title='Test6'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -186,6 +194,7 @@ describe('GrcView component 7', () => {
         <BrowserRouter>
           <GrcView
             title='Test7'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -212,6 +221,7 @@ describe('GrcView component 8', () => {
         <BrowserRouter>
           <GrcView
             title='Test8'
+            history={history}
             location={location}
             loading={false}
             error={null}
@@ -239,6 +249,7 @@ describe('GrcView handleDrillDownClickGrcView', () => {
     const wrapper = shallow(
       <GrcView
         title='Test9'
+        history={history}
         location={location1}
         loading={false}
         error={null}
@@ -255,6 +266,7 @@ describe('GrcView handleDrillDownClickGrcView', () => {
     const wrapper = shallow(
       <GrcView
         title='Test9'
+        history={history}
         location={location1}
         loading={false}
         error={null}
@@ -271,6 +283,7 @@ describe('GrcView handleDrillDownClickGrcView', () => {
     const wrapper = shallow(
       <GrcView
         title='Test9'
+        history={history}
         location={location2}
         loading={false}
         error={null}
@@ -286,6 +299,7 @@ describe('GrcView handleDrillDownClickGrcView', () => {
     const wrapper = shallow(
       <GrcView
         title='Test9'
+        history={history}
         location={location2}
         loading={false}
         error={null}

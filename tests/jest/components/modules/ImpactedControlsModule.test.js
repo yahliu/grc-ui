@@ -31,6 +31,6 @@ describe('ImpactedControlsModule view', () => {
       activeFilters={activeFilters}
       availableFilters={availableFilters}
       handleDrillDownClick={handleDrillDownClick} /></BrowserRouter>)
-    expect(component).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
   })
 })

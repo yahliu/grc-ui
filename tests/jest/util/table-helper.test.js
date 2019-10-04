@@ -73,6 +73,18 @@ describe('table-helper handleSort newSortColumn!=defaultSortColumn', () => {
     expect(fn.mock.calls[0][0]).toBe('asc')
     expect(fn.mock.calls[0][1]).toBe('asc')
   })
+  it('handleSort should execute call back function', () => {
+    tableHelper.handleSort('asc', false, fn, item_asc)
+    expect(fn).toHaveBeenCalled()
+    expect(fn.mock.calls[0][0]).toBe('asc')
+    expect(fn.mock.calls[0][1]).toBe('asc')
+  })
+  it('handleSort should execute call back function', () => {
+    tableHelper.handleSort('asc', 'asc', fn, item_asc)
+    expect(fn).toHaveBeenCalled()
+    expect(fn.mock.calls[0][0]).toBe('asc')
+    expect(fn.mock.calls[0][1]).toBe('asc')
+  })
 
   const item_null = {
     currentTarget: null
@@ -80,6 +92,10 @@ describe('table-helper handleSort newSortColumn!=defaultSortColumn', () => {
   const fnNull = jest.fn()
   it('handleSort should not execute call back function', () => {
     tableHelper.handleSort(true, 'asc', fnNull, item_null)
+    expect(fnNull).not.toHaveBeenCalled()
+  })
+  it('handleSort should not execute call back function', () => {
+    tableHelper.handleSort('asc', 'asc', fnNull, item_null)
     expect(fnNull).not.toHaveBeenCalled()
   })
 })

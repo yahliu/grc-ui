@@ -26,7 +26,7 @@ resources(() => {
   require('../../../scss/module-grc-toggle.scss')
 })
 
-class GrcToggleModule extends React.Component {
+export class GrcToggleModule extends React.Component {
 
   constructor (props) {
     super(props)
@@ -149,7 +149,10 @@ class GrcToggleModule extends React.Component {
     const {history, location} = this.props
     const paraURL = queryString.parse(location.search)
     paraURL.index = props.index
-    history.push(`${location.pathname}?${queryString.stringify(paraURL)}`)
+    const paraURLString = queryString.stringify(paraURL)
+    const op = paraURLString && paraURLString.length > 0 ? '?' : ''
+    history.push(`${location.pathname}${op}${paraURLString}`)
+    return `${location.pathname}${op}${paraURLString}`
   }
 }
 
@@ -159,7 +162,7 @@ GrcToggleModule.propTypes = {
   grcTabToggleIndex: PropTypes.number,
   handleCreatePolicy: PropTypes.func,
   highLightRowName: PropTypes.string,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
   location: PropTypes.object,
   secondaryHeaderProps: PropTypes.object,
   showGrcTabToggle: PropTypes.bool,

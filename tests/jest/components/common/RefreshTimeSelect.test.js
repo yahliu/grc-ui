@@ -16,7 +16,7 @@ describe('RefreshTimeSelect component', () => {
   it('renders as expected', () => {
     const component = renderer.create(
       <RefreshTimeSelect
-        locale = {''}
+        locale = {'en-US'}
         refreshValues = {[]}
         refreshControl = {{}}
       />

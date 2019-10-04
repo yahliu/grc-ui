@@ -31,7 +31,7 @@ const initialState = {
   requestError: null
 }
 
-class CreateResourceModal extends React.PureComponent {
+export class CreateResourceModal extends React.PureComponent {
   static propTypes = {
     headingTextKey: PropTypes.string,
     onCreateResource: PropTypes.func,
@@ -58,7 +58,7 @@ class CreateResourceModal extends React.PureComponent {
       return
     }
     this.setState({ yamlParsingError: null, processing: true })
-    this.props.onCreateResource(resources)
+    this.props.onCreateResource && this.props.onCreateResource(resources)
       .then((data) => {
         const error = _.get(data, 'data.createResources.errors[0].message')
         if (error) {
