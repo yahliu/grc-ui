@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -36,9 +36,9 @@ module.exports = {
     controlsDropdown: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box',
     controlsDropdownBox: '.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
     summaryCollapse: 'button.collapse > span.collapse-button',
-    summaryInfoContainer: '.module-grc-cards > div.card-container-container',
-    summaryDropdown: '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1)',
-    summaryDropdownBox: '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)',
+    summaryInfoContainer: 'div.module-grc-cards > div.card-container-container',
+    summaryDropdown: 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1)',
+    summaryDropdownBox: 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)',
     filterClear: '.resource-filter-bar > span.button',
   },
   commands: [{
@@ -61,14 +61,20 @@ function verifySummary(browser, url) {
   this.navigate(url + '?card=true&index=0')
   this.expect.element('@summaryInfoContainer').to.be.present
   //standards summary
+  this.expect.element('@summaryDropdown').to.be.present
   this.click('@summaryDropdown')
-  const dropdownBox = '.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
-  this.click(dropdownBox + ' > div:nth-child(2)')
-  checkPolicySummaryCards.call(this, browser)
-
-  //categories summary
-  this.click('@summaryDropdown')
+  browser.pause(1000)//wait 1s for every click
+  const dropdownBox = 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
+  //Categories summary
   this.click(dropdownBox + ' > div:nth-child(1)')
+  browser.pause(1000)
+  checkPolicySummaryCards.call(this, browser)
+  browser.pause(3000)//wait 3s for checkPolicySummaryCards func
+  //Standards summary
+  this.click('@summaryDropdown')
+  browser.pause(1000)
+  this.click(dropdownBox + ' > div:nth-child(2)')
+  browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
 }
 
@@ -81,11 +87,13 @@ function checkPolicySummaryCards(browser) {
         browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
           if(result.status == -1) {
             this.click(cardInfo + ` > div:nth-child(${i})`)
+            browser.pause(1000)
             browser.element('css selector', '.resource-filter-bar > span.button', function(result2){
               if(result2.status != -1) {
                 //first card of each category is cluster (no drop-down), second is policy
                 verifyTable(browser, (i % 2 != 0))
                 this.click('div.resource-filter-bar > span.button')
+                browser.pause(3000)//wait 3s for cleaning resource filters
               }
             })
           }
@@ -104,20 +112,27 @@ function verifyTable(browser, cluster) {
       this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
       if (!cluster) {
         this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
+        browser.pause(1000)
         this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.present
         this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
+        browser.pause(1000)
         this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.not.present
         this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(8) > div > svg')
+        browser.pause(1000)
         this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
         this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(1)')
+        browser.pause(1000)
       }
       else {
         this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(5) > div > svg')
+        browser.pause(1000)
         this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
         this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(1)')
+        browser.pause(1000)
       }
       this.expect.element('div.bx--modal.is-visible').to.be.present
       this.click('button.bx--modal-close')
+      browser.pause(1000)
       this.expect.element('div.bx--modal.is-visible').to.be.not.present
     }
   })
