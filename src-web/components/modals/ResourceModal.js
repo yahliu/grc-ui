@@ -104,7 +104,7 @@ export class ResourceModal extends React.PureComponent {
   render() {
     const { reqCount, open, label, locale, resourceType } = this.props
     return (
-      <div id='resource-modal-container' ref={div => this.resourceModal = div} tabIndex='-1' role='region' onKeyDown={this.escapeEditor} aria-label={msgs.get('a11y.editor.escape', locale)}> {/* eslint-disable-line jsx-a11y/no-noninteractive-element-interactions */}
+      <div id='resource-modal-container' ref={div => this.resourceModal = div} tabIndex={-1} role='region' onKeyDown={this.escapeEditor} aria-label={msgs.get('a11y.editor.escape', locale)}> {/* eslint-disable-line jsx-a11y/no-noninteractive-element-interactions */}
         {reqCount && reqCount > 0 && <Loading />}
         <Modal
           id={`resource-modal-${resourceType.name}`}

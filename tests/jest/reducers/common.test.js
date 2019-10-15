@@ -81,9 +81,22 @@ describe('resourceItemByName', () => {
   it('should resourceItemByName', () => {
     const items = {'HCM_COMPLIANCES':'test'}
     const props = {
-      resourceType:{name:'HCM_COMPLIANCES'},
+      resourceType:{name:'HCMCompliance'},
     }
     const expectedValue = 'test'
+    expect(resourceItemByName(items, props)).toEqual(expectedValue)
+  })
+})
+
+describe('resourceItemByName', () => {
+  it('should resourceItemByName', () => {
+    const items = {'HCM_COMPLIANCES':'test'}
+    const props = {
+      resourceType:{name:'JustTesting'},
+    }
+    const expectedValue = 'test'
+    // eslint-disable-next-line no-console
+    console.log('Below console logs are just unit test results, not actual errors: ')
     expect(resourceItemByName(items, props)).toEqual(expectedValue)
   })
 })

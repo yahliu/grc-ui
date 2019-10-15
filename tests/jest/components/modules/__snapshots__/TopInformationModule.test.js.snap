@@ -124,7 +124,7 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"
@@ -170,7 +170,7 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"
@@ -441,7 +441,7 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"
@@ -679,7 +679,7 @@ exports[`TopInformationModule findings view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"
@@ -917,7 +917,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"
@@ -963,7 +963,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div
             className="information-card-content"

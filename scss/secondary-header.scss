@@ -49,12 +49,24 @@
     .bx--detail-page-header-content {
       margin-top: 1.12rem;
       margin-bottom: 1rem;
+
+      .bx--tabs__nav-link:focus, .bx--tabs__nav-link:active {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      }
     }
 
     .bx--breadcrumb {
       min-height: 15px;
       padding-bottom: 0;
       margin-bottom: 1rem;
+
+      .bx--link:focus {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      }
     }
 
     .breadcrumb-item:last-child {
@@ -172,6 +184,28 @@
       margin-top: 2rem;
     }
   }
+
+  .bx--tabs__nav-link:focus {
+    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
+    border: none;
+  }
+
+  .bx--tooltip--icon__bottom:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    .info-icon {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    }
+  }
+}
+.secondary-header-links .bx--btn--primary:focus {
+  box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+  outline: 1px solid transparent;
+  border: none;
 }
 
 .secondary-header-wrapper {

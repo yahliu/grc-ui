@@ -34,7 +34,7 @@ function getResourceData(resourceType) {
   const def = resourceData[resourceType.name]
   if (!def) {
     //eslint-disable-next-line no-console
-    console.error(`No resource data found for '${resourceType}'`)
+    console.error(`No resource data found for '${JSON.stringify(resourceType)}'`)
   }
   return def
 }

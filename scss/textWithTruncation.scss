@@ -13,8 +13,8 @@
   font-size: .875rem;
   font-weight: 400;
   &:focus {
-    box-shadow: none;
-    outline: 1px solid $color__blue-51;
+    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
     border: none;
   }
 }

@@ -21,6 +21,12 @@
     padding: 1.25rem 3rem 1.25rem 3rem;
     border-bottom: 1px solid $color__gray-1;
     margin-bottom: 0;
+
+    .bx--modal-close:focus {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    }  
   }
 
   .bx--modal-content {
@@ -59,6 +65,12 @@
     padding: 1rem 0 0 0;
     .bx--modal-header{
       padding: 0 3rem;
+
+      .bx--modal-close:focus {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      }  
     }
     .bx--modal-content{
       margin-bottom: 0;

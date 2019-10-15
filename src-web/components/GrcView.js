@@ -98,6 +98,16 @@ export class GrcView extends React.Component {
     window.addEventListener('scroll', this.scroll)
   }
 
+  componentDidUpdate() {
+    const urlParams = queryString.parse(location.search)
+    if (urlParams.autoFocus) {
+      const ref = document.getElementsByClassName(urlParams.autoFocus)[0].offsetTop
+      window.scrollTo({
+        top: ref,
+      })
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scroll)
     window.removeEventListener('beforeunload', this.onUnload)

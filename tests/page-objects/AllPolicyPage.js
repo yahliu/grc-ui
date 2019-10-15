@@ -69,7 +69,7 @@ function verifySummary(browser, url) {
   this.click(dropdownBox + ' > div:nth-child(1)')
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
-  browser.pause(3000)//wait 3s for checkPolicySummaryCards func
+  browser.pause(1000)//wait 1s for checkPolicySummaryCards func
   //Standards summary
   this.click('@summaryDropdown')
   browser.pause(1000)
@@ -93,7 +93,7 @@ function checkPolicySummaryCards(browser) {
                 //first card of each category is cluster (no drop-down), second is policy
                 verifyTable(browser, (i % 2 != 0))
                 this.click('div.resource-filter-bar > span.button')
-                browser.pause(3000)//wait 3s for cleaning resource filters
+                browser.pause(1000)//wait 1s for cleaning resource filters
               }
             })
           }

@@ -68,7 +68,7 @@ class ResourceFilterBar extends React.Component {
         <div className='resource-filter-bar'>
           <span className='title'>{msgs.get('filter.remove.filters', locale)}</span>
           {boundFilters.map(({name, onClick, onKeyPress}) => {
-            return <Tag key={name} type='custom' tabIndex='0' role={'button'} onKeyPress={onKeyPress}>
+            return <Tag key={name} type='custom' tabIndex={0} role={'button'} onKeyPress={onKeyPress}>
               {name}
               <Icon
                 className='closeIcon'
@@ -78,7 +78,7 @@ class ResourceFilterBar extends React.Component {
               />
             </Tag>
           })}
-          <span className='button' tabIndex='0' role={'button'}
+          <span className='button' tabIndex={0} role={'button'}
             title={clearAll} aria-label={clearAll}
             onClick={this.handleClearClick.bind(this, clearFilters)}
             onKeyPress={this.handleClearKeyPress.bind(this, clearFilters)} >

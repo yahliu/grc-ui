@@ -10,7 +10,7 @@ exports[`RefreshTimeSelect component renders as expected 1`] = `
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
     title="Refresh"
   >
     <svg

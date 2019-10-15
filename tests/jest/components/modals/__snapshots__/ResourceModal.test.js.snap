@@ -473,7 +473,7 @@ spec:
       "id": "resource-modal-container",
       "onKeyDown": [Function],
       "role": "region",
-      "tabIndex": "-1",
+      "tabIndex": -1,
     },
     "ref": [Function],
     "rendered": Array [
@@ -793,7 +793,7 @@ spec:
         "id": "resource-modal-container",
         "onKeyDown": [Function],
         "role": "region",
-        "tabIndex": "-1",
+        "tabIndex": -1,
       },
       "ref": [Function],
       "rendered": Array [
@@ -1341,7 +1341,7 @@ spec:
       "id": "resource-modal-container",
       "onKeyDown": [Function],
       "role": "region",
-      "tabIndex": "-1",
+      "tabIndex": -1,
     },
     "ref": [Function],
     "rendered": Array [
@@ -1677,7 +1677,7 @@ spec:
         "id": "resource-modal-container",
         "onKeyDown": [Function],
         "role": "region",
-        "tabIndex": "-1",
+        "tabIndex": -1,
       },
       "ref": [Function],
       "rendered": Array [

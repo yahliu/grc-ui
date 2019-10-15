@@ -70,8 +70,8 @@
           margin-left: 1rem;
         }
         .bx--tabs__nav-link:focus {
-          box-shadow: none;
-          outline: 1px solid $color__blue-51;
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
           border: none;
         }
       }
@@ -96,8 +96,8 @@
       .bx--list-box__field {
         padding: 0 8px;
         &:focus {
-          box-shadow: none;
-          outline: 1px solid $color__blue-51;
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
           border: none;
        }
       }
@@ -119,15 +119,6 @@
     }
   }
 
-  .single-strip {
-    outline: none;
-    &:focus {
-      box-shadow: none;
-      outline: 1px solid $color__blue-51;
-      border: none;
-    }
-  }
-
   .information-card-container {
     display: flex;
     flex-direction: column;
@@ -140,8 +131,11 @@
       padding: 0;
       border-bottom: 1px solid $color__gray-1;
       &:focus {
-        border-bottom: 1px solid $color__blue-51;
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border-bottom: 3px solid $grc_focus_shaldow_color;
       }
+
       &:hover {
         cursor: pointer;
       }
@@ -179,8 +173,8 @@
             justify-content: center;
             outline: none;
             &:focus {
-              box-shadow: none;
-              outline: 1px solid $color__blue-51;
+              box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+              outline: 1px solid transparent;
               border: none;
             }
 

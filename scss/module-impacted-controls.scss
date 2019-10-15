@@ -31,6 +31,17 @@
         cursor: pointer;
       }
 
+      .bx--tooltip--icon__top:focus {
+        box-shadow: none;
+        outline: none;
+        border: none;
+        .info-icon {
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
+          border: none;
+        }
+      }
+
       .bx--tooltip--icon__top:after, .bx--tooltip--icon__bottom:after {
         white-space: normal;
         width: 22rem;
@@ -113,8 +124,8 @@
 
                 .bx--list-box__field {
                   &:focus {
-                    box-shadow: none;
-                    outline: 1px solid $color__blue-51;
+                    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+                    outline: 1px solid transparent;
                     border: none;
                  }
                 }
@@ -146,6 +157,12 @@
             .card-slider {
               .bx--slider {
                 min-width: 110px;
+
+                .bx--slider__thumb:focus {
+                  box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+                  outline: 1px solid transparent;
+                  border: none;
+               }
               }
             }
           }
@@ -203,6 +220,12 @@ div.tooltip {
   border: 1px solid $color__gray-1;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
 
+  &:focus {
+    box-shadow: 0 0 0 3px $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
+    border: none;
+ }
+
   &-text {
     display: flex;
     flex-direction: column;
@@ -240,9 +263,13 @@ div.tooltip {
     }
 
     .findings {
-      
-      .tool-tip-drill-down-link {
+      .tool-tip-strip {
         text-decoration: none;
+        &:focus {
+          box-shadow: 0 0 0 3px $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
+          border: none;
+       }
         .link {
           &:hover {
             color: $grc_color_dark_blue;

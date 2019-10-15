@@ -20,7 +20,7 @@ import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
 import _ from 'lodash'
-import { Router, withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
 
 resources(() => {
@@ -33,6 +33,7 @@ const $grc_color_radar_ring = '#979797'
 
 const tooltip = d3.select('body').append('div')
   .attr('class', 'tooltip')
+  .attr('tabindex', '-1') //tooltip only accessible when keyboard focused and press enter key
   .styles(()=>{
     return {
       'display': 'none',
@@ -47,6 +48,7 @@ class ImpactedControlsModule extends React.Component {
     const {viewState: {showControls=6}} = props
     this.state = {
       showControls,
+      tooltipKeyFocus: false, //true means tooltip is open and keyboard focused
     }
     this.onSelectionChange = this.onSelectionChange.bind(this)
     this.onSliderChange = this.onSliderChange.bind(this)
@@ -54,6 +56,8 @@ class ImpactedControlsModule extends React.Component {
     this.closeTooltip = this.closeTooltip.bind(this)
     this.fixRadar = this.fixRadar.bind(this)
     this.setDropdown = this.setDropdown.bind(this)
+    this.openTooltipLink = this.openTooltipLink.bind(this)
+    this.fixTooltipDrilldown = this.fixTooltipDrilldown.bind(this)
   }
 
   componentDidUpdate() {
@@ -290,19 +294,112 @@ class ImpactedControlsModule extends React.Component {
     }
   }
 
+  openTooltipLink = link => {
+    if (this.props.history && this.props.location) {
+      const pathPrefix = this.props.location.pathname.trim()
+      const slash = pathPrefix.substr(-1) === '/' ? '' : '/'
+      this.props.history.push(`${this.props.location.pathname}${slash}${link}`)
+    }
+  }
+
+  //this funcation modified tooltip after rendering to make link clcikable/pressable
+  fixTooltipDrilldown = () => {
+    const openedTooltipLinksArray = document.getElementsByClassName('tool-tip-drill-down-link')
+    if (openedTooltipLinksArray && openedTooltipLinksArray.length >= 1) {
+      Array.from(openedTooltipLinksArray).map(openedTooltipLink => {
+        openedTooltipLink.tabIndex=0 // make drill down links keyboard accessible
+        const link = openedTooltipLink.getAttribute('link')
+        if (link && link.length > 0) {
+          //open drill down link by press enter key
+          window.removeEventListener('keydown', openedTooltipLink)
+          openedTooltipLink.addEventListener('keydown', (e)=>{
+            const evt = e || window.event
+            if (evt.key === 'Enter' || evt.keyCode === 13) {
+              if (this.props.history && this.props.location) {
+                this.openTooltipLink(openedTooltipLink.getAttribute('link'))
+              }
+            }
+          })
+          //open drill down link by mouse click
+          window.removeEventListener('click', openedTooltipLink)
+          openedTooltipLink.addEventListener('click', ()=>{
+            if (this.props.history && this.props.location) {
+              this.openTooltipLink(openedTooltipLink.getAttribute('link'))
+            }
+          })
+        }
+      })
+      const lastTooltipLink = openedTooltipLinksArray[openedTooltipLinksArray.length-1]
+      // when last link on tooltip, prevent default Tab key otherwise will navi to webbrowser address bar
+      window.removeEventListener('keydown', lastTooltipLink)
+      lastTooltipLink.addEventListener('keydown', (e)=>{
+        const evt = e || window.event
+        if (evt.key === 'Tab' || evt.keyCode === 9) {
+          evt.preventDefault()
+          openedTooltipLinksArray[0].focus()
+        }
+      })
+    }
+  }
+
   // modify behaviour of react-d3-radar
   // (without modifying the code)
+  // here renderToStaticMarkup in getTooltipHTML creates static html first,
+  // then fixRadar function addes events onto static html later
   fixRadar = ref => {
     this.radarRef = ref
     if (this.radarRef) {
-
       // don't show fill in radar rings
       Array.from(this.radarRef.querySelectorAll('circle')).map(circle=>{
-        if (circle.getAttribute('r') == 3) {
-          circle.setAttribute('tabindex', '0')
-        }
         if (circle.getAttribute('r') > 3) {
           circle.setAttribute('fill-opacity', '0')
+        } else if (circle.tabIndex!==0 && this.radarRef.querySelector('svg')) {
+          const hoverMap = this.radarRef.querySelector('svg').children[0]
+          circle.tabIndex = 0 // make point on radar keyboard accessible
+          //when point on radar is keyboard focused, simulate clicking event to open tooltip
+          window.removeEventListener('focus', circle)
+          circle.addEventListener('focus', ()=>{
+            clearTimeout(this.timeout)
+            const rect = circle.getBoundingClientRect()
+            const evt = new MouseEvent('mousemove', {
+              bubbles: true,
+              cancelable: true,
+              view: window,
+              clientX: rect.left+2,
+              clientY: rect.top+2,
+            })
+            hoverMap.dispatchEvent(evt)
+          })
+          //then if also pressing enter key, move current focus on opened tooltip
+          window.removeEventListener('keydown', circle)
+          circle.addEventListener('keydown', (e)=>{
+            const evt = e || window.event
+            if (evt.key === 'Enter' || evt.keyCode === 13) {
+              this.setState({ tooltipKeyFocus: true })
+              const openedTooltip = document.getElementsByClassName('tooltip')[1]
+              if (openedTooltip) {
+                openedTooltip.focus()
+                //add pressing Esc key event to close tooltip and refocus back to point on radar
+                window.removeEventListener('keydown', openedTooltip)
+                openedTooltip.addEventListener('keydown', (e)=>{
+                  const evt = e || window.event
+                  if (evt.key === 'Escape' || evt.key === 'Esc' || evt.keyCode === 27) {
+                    circle.focus()
+                    this.setState({ tooltipKeyFocus: false })
+                    this.closeTooltip()
+                  }
+                })
+                //add drill down on tooltip link
+                this.fixTooltipDrilldown()
+              }
+            }
+          })
+          window.removeEventListener('blur', circle)
+          circle.addEventListener('blur', ()=>{
+            this.timeout = setTimeout(() => {
+              !this.state.tooltipKeyFocus && this.closeTooltip()
+            }, 200)
+          })
         }
       })
 
@@ -346,6 +443,7 @@ class ImpactedControlsModule extends React.Component {
       })
 
       // close tooltip if exiting entire radar map
+      window.removeEventListener('mouseout', this.radarRef)
       this.radarRef.addEventListener('mouseout', e=>{
         if (e.target.tagName==='svg' ) {
           this.closeTooltip()
@@ -378,6 +476,9 @@ class ImpactedControlsModule extends React.Component {
             'left': left + 'px',
           }
         })
+
+      //add drill down on tooltip link
+      this.fixTooltipDrilldown()
     } else {
       tooltip.style('display', 'none')
     }
@@ -413,81 +514,78 @@ class ImpactedControlsModule extends React.Component {
     const { setMap, variableMap, tooltips } = this.cardData
     const tooltipList = _.get(tooltips, `${setKey}.${variableKey}`)
     return tooltipList ? ReactDOMServer.renderToStaticMarkup(
-      <Router history={this.props.history}>
-        <div className='tooltip-text'>
-          <div className='header'>
-            <div className='title'>{setMap[setKey].label.toUpperCase()}</div>
-            <div className='variable'>
-              <div className={`legend ${setMap[setKey].className}`} />
-              {variableMap[variableKey].label}
-            </div>
-          </div>
-          <div className='findings'>
-            {tooltipList.map(({count, findingType}) => {
-              let label, className
-              switch (findingType) {
-              case SECURITY_TYPES.HIGH:
-                label = msgs.get('overview.recent.activity.severity.high', locale)
-                className = 'high'
-                break
-              case SECURITY_TYPES.MEDIUM:
-                label = msgs.get('overview.recent.activity.severity.medium', locale)
-                className = 'medium'
-                break
-              case SECURITY_TYPES.LOW:
-                label = msgs.get('overview.recent.activity.severity.low', locale)
-                className = 'low'
-                break
-              case SECURITY_TYPES.VIOLATIONS:
-                label = msgs.get('overview.recent.activity.finding.type.violations', locale)
-                className = 'high'
-                break
-              }
-              const pathPrefix = this.props.location.pathname.trim()
-              const slash = pathPrefix.substr(-1) === '/' ? '' : '/'
-              let page = ''
-              const paraURL = {}
-              switch(setMap[setKey].label.toUpperCase()) {
-              case 'POLICY VIOLATIONS':
-              default:
-                page = 'all'
-                paraURL.index = 0
-                break
-              case 'SECURITY FINDINGS':
-                page = 'findings'
-                paraURL.index = 0
-                //Here we can't directly set GRC_FILTER_STATE_COOKIE, 'severity', if so then loop will store
-                //all possible severity level rather than the clicked one. URL para seems the only solution
-                paraURL.severity = _.startCase(className.toLowerCase())
-                break
-              }
-              if(variableMap[variableKey].label){
-                paraURL.filters = `{"textsearch":["${variableMap[variableKey].label}"]}`
-              }
-              const toolTipDrillDownURL = `${pathPrefix}${slash}${page}?${queryString.stringify(paraURL)}`
-              if (count > 0) {
-                return (
-                  <Link to={toolTipDrillDownURL} className='tool-tip-drill-down-link' key={findingType}>
-                    <div key={findingType} className={`finding ${className} link`} >
-                      <div className='count'>{count}</div>
-                      <div className='severity'>{label}</div>
-                    </div>
-                  </Link>
-                )
-              } else {
-                return (
-                  <div className='tool-tip-drill-down-link' key={findingType}>
-                    <div key={findingType} className={`finding ${className}`} >
-                      <div className='count'>{count}</div>
-                      <div className='severity'>{label}</div>
-                    </div>
-                  </div>
-                )
-              }
-            })}
+      <div className='tooltip-text'>
+        <div className='header'>
+          <div className='title'>{setMap[setKey].label.toUpperCase()}</div>
+          <div className='variable'>
+            <div className={`legend ${setMap[setKey].className}`} />
+            {variableMap[variableKey].label}
           </div>
         </div>
-      </Router>
+        <div className='findings'>
+          {tooltipList.map(({count, findingType}) => {
+            let label, className
+            switch (findingType) {
+            case SECURITY_TYPES.HIGH:
+              label = msgs.get('overview.recent.activity.severity.high', locale)
+              className = 'high'
+              break
+            case SECURITY_TYPES.MEDIUM:
+              label = msgs.get('overview.recent.activity.severity.medium', locale)
+              className = 'medium'
+              break
+            case SECURITY_TYPES.LOW:
+              label = msgs.get('overview.recent.activity.severity.low', locale)
+              className = 'low'
+              break
+            case SECURITY_TYPES.VIOLATIONS:
+              label = msgs.get('overview.recent.activity.finding.type.violations', locale)
+              className = 'high'
+              break
+            }
+            let page = ''
+            const paraURL = {}
+            switch(setMap[setKey].label.toUpperCase()) {
+            case 'POLICY VIOLATIONS':
+            default:
+              page = 'all'
+              paraURL.index = 0
+              break
+            case 'SECURITY FINDINGS':
+              page = 'findings'
+              paraURL.index = 0
+              //Here we can't directly set GRC_FILTER_STATE_COOKIE, 'severity', if so then loop will store
+              //all possible severity level rather than the clicked one. URL para seems the only solution
+              paraURL.severity = _.startCase(className.toLowerCase())
+              break
+            }
+            if(variableMap[variableKey].label){
+              paraURL.filters = `{"textsearch":["${variableMap[variableKey].label}"]}`
+            }
+            const toolTipDrillDownURL = `${page}?${queryString.stringify(paraURL)}`
+            if (count > 0) {
+              //tool-tip-drill-down-link only accessible when tooltip keyboard focused and press enter key
+              return (
+                <div className='tool-tip-strip tool-tip-drill-down-link' link={toolTipDrillDownURL} key={findingType} tabIndex={-1} >
+                  <div key={findingType} className={`finding ${className} link`} >
+                    <div className='count'>{count}</div>
+                    <div className='severity'>{label}</div>
+                  </div>
+                </div>
+              )
+            } else {
+              return (
+                <div className='tool-tip-strip' key={findingType}>
+                  <div key={findingType} className={`finding ${className}`} >
+                    <div className='count'>{count}</div>
+                    <div className='severity'>{label}</div>
+                  </div>
+                </div>
+              )
+            }
+          })}
+        </div>
+      </div>
     ) : null
   }
 

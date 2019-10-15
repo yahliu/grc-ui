@@ -102,7 +102,7 @@ export default class RefreshTimeSelect extends React.Component {
         <div className='refresh-time-selection' ref={this.setRefresh}>
           {reloading?
             <Loading withOverlay={false} small /> :
-            <div className='button' tabIndex='0' role={'button'}
+            <div className='button' tabIndex={0} role={'button'}
               title={refresh} aria-label={refresh}
               onClick={this.handleClick} onKeyPress={this.handleKeyPress}>
               <svg className='button-icon'>

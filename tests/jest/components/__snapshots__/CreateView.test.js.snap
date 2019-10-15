@@ -641,7 +641,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
             title="Previous"
           >
             <svg
@@ -659,7 +659,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
             title="Next"
           >
             <svg
@@ -680,7 +680,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
             title="Undo"
           >
             <svg
@@ -698,7 +698,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
             title="Redo"
           >
             <svg
@@ -716,7 +716,7 @@ exports[`CreationView component renders as expected 1`] = `
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
-            tabIndex="0"
+            tabIndex={0}
             title="Restore"
           >
             <svg

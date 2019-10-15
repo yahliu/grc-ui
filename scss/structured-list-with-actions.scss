@@ -21,6 +21,11 @@
             flex-direction: row;
             a{
               margin-right: 0.7rem;
+              &:focus {
+                box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+                outline: 1px solid transparent;
+                border: none;
+              }
             }
           }
         }
@@ -35,6 +40,11 @@
             font-size: smaller;
             background-color: white;
             min-height: 2.5rem;
+            &:focus {
+              box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+              outline: 1px solid transparent;
+              border: none;
+            }
           }
         }
     

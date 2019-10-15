@@ -455,7 +455,7 @@ const TopInformations = ({cardData, handleClick, locale}) => {
             <div key={name}>
               <React.Fragment>
                 {choice !== EMPTY_CHOICE ?
-                  <div className='information-card-container single-strip' role={'button'} onClick={onClick} onKeyPress={onKeyPress} tabIndex='0'>
+                  <div className='information-card-container single-strip' role={'button'} onClick={onClick} onKeyPress={onKeyPress} tabIndex={0}>
                     {renderWholeStrip()}
                   </div>
                   :

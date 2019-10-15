@@ -23,12 +23,23 @@
         background-color: $color__white;
         font-size: 14px;
         height: 22px;
+        &:focus {
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
+          border: none;
+       }
       }
     }
 
     .editor-bar-button {
       padding: 2px;
       cursor: pointer;
+
+      &:focus {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+     }
 
       &.disabled {
         opacity: 0.4;
@@ -54,8 +65,8 @@
       height: 22px;
 
       &:focus, &.bx--overflow-menu--open {
-        box-shadow: none;
-        outline: 1px solid $color__blue-51;
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
         border: none;
       }
     }
@@ -65,8 +76,8 @@
   width: auto;
   min-width: 200px;
   &:focus {
-    box-shadow: none;
-    outline: 1px solid $color__blue-51;
+    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
     border: none;
   }
   .bx--overflow-menu-options__btn{

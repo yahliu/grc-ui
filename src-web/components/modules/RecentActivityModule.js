@@ -209,7 +209,7 @@ const Violations = ({moduleData: {violations}, handleDrillDownClick}) => {
         }
         return (
           <div key={violationType} className={cardClasses} role={'button'}
-            tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+            tabIndex={0} onClick={onClick} onKeyPress={onKeyPress}>
             <div className={countClasses}>
               {count}
             </div>
@@ -292,7 +292,7 @@ const Findings = ({moduleData: {findings}, handleDrillDownClick, locale}) => {
         }
         return (
           <div key={findingType} className='card-count-type' role={'button'}
-            tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+            tabIndex={0} onClick={onClick} onKeyPress={onKeyPress}>
             <div className='card-count-container'>
               <svg className='card-count-pie'>
                 <g>

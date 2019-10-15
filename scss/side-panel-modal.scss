@@ -31,6 +31,12 @@
     .bx--modal-header {
       font-size: 1.5rem;
       color: $color__navy-gray-6;
+
+      .bx--modal-close:focus {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+     }
     }
   
     .special-header {
@@ -83,6 +89,12 @@
       font-size: 14px;
   
       .bx--parent-row-v2 {
+        .bx--link:focus {
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
+          border: none;
+        }
+
         &:hover + .bx--expandable-row-v2 { 
           .resource-table-expandable-cell table thead tr {
             background-color: $grc_highlight_background_2; 
@@ -93,6 +105,12 @@
         }
         .bx--table-expand-v2 {
           .bx--table-expand-v2__button {
+            &:focus svg {
+              box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+              outline: 1px solid transparent;
+              border: none;
+            }
+
             .bx--table-expand-v2__svg {
               transform: rotate(90deg);
               transition: 0.1s;
@@ -107,6 +125,12 @@
         }
         .bx--table-expand-v2 {
           .bx--table-expand-v2__button {
+            &:focus svg {
+              box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+              outline: 1px solid transparent;
+              border: none;
+            }
+            
             .bx--table-expand-v2__svg {
               transform: rotate(270deg);
               transition: 0.1s;

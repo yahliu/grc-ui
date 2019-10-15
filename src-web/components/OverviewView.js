@@ -163,19 +163,23 @@ export class OverviewView extends React.Component {
       switch(parentType.toLowerCase()){
       case 'policy violations'://RecentActivityModule to policies page, all policy violations
         paraURL.index = 0
+        paraURL.autoFocus = 'module-toggle-tab'
         break
       case 'cluster violations'://RecentActivityModule to policies page, all cluster violations
         paraURL.index = 1
+        paraURL.autoFocus = 'module-toggle-tab'
         break
       case 'high'://RecentActivityModule to security findings page, all high severity findings
       case 'medium'://all medium severity findings
       case 'low'://all low severity findings
         page = 'findings'
         paraURL.index = 0
+        paraURL.autoFocus = 'module-toggle-tab'
         paraURL.severity = _.startCase(parentType.toLowerCase())
         break
       case 'policies'://TopInformationModule to policies page with specific policy violation name
         paraURL.index = 0
+        paraURL.autoFocus = 'module-toggle-tab'
         if(parentName){
           // paraURL.name = parentName //highlight this policy violation name
           // paraURL.side = true //auto open side panel under this highlight name
@@ -184,6 +188,7 @@ export class OverviewView extends React.Component {
         break
       case 'clusters'://TopInformationModule to policies page with specific cluster violation name
         paraURL.index = 1
+        paraURL.autoFocus = 'module-toggle-tab'
         if(parentName){
           // paraURL.name = parentName //highlight this cluster violation name
           // paraURL.side = true //auto open side panel under this highlight name
@@ -193,6 +198,7 @@ export class OverviewView extends React.Component {
       case 'security findings'://TopInformationModule to security findings page with specific security finding name
         page = 'findings'
         paraURL.index = 0
+        paraURL.autoFocus = 'module-toggle-tab'
         if(parentName){
           paraURL.filters = `{"textsearch":["${parentName}"]}` //current no highlight and side panel for security findings page, just filter name
         }
@@ -200,6 +206,7 @@ export class OverviewView extends React.Component {
       case 'finding clusters'://TopInformationModule to security findings page with specific finding cluster name
         page = 'findings'
         paraURL.index = 1
+        paraURL.autoFocus = 'module-toggle-tab'
         if(parentName){
           paraURL.filters = `{"textsearch":["${parentName}"]}` //current no highlight and side panel for finding clusters page, just filter name
         }

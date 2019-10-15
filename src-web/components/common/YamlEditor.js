@@ -81,7 +81,7 @@ YamlEditor.propTypes = {
   readOnly: PropTypes.bool,
   setEditor: PropTypes.func,
   width: PropTypes.string,
-  yaml: PropTypes.string,
+  yaml: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 export default YamlEditor

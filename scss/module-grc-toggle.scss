@@ -17,19 +17,56 @@
   .bx--table-toolbar {
     .bx--search--sm .bx--search-input {
       height: 32px;
+      &:focus {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      } 
     }
   }
 
   .bx--content-switcher {
     height: 32px;
+
+    .bx--content-switcher-btn:focus {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    } 
+  }
+
+  .bx--pagination .bx--select-input:focus {
+    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
+    border: none;
+  } 
+
+  .bx--pagination__button:focus {
+    box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+    outline: 1px solid transparent;
+    border: none;
   }
 }
 
 .resource-table {
+  thead {
+    .bx--table-sort-v2:focus svg {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    }
+  }
+
   tbody {
+    .bx--overflow-menu:focus .bx--overflow-menu__icon {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    }
+
     tr td a:focus {
-        box-shadow: none;
-        outline: 1px solid $color__blue-51;
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
         border: none;
     } 
     tr.high-light {
@@ -60,6 +97,12 @@
 .bx--parent-row-v2 {
   .bx--table-expand-v2 {
     .bx--table-expand-v2__button {
+      &:focus svg {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      }
+      
       .bx--table-expand-v2__svg {
         transform: rotate(90deg);
         transition: 0.1s;
@@ -71,7 +114,19 @@
 .bx--expandable-row-v2 {
   .bx--table-expand-v2 {
     .bx--table-expand-v2__button {
+      &:focus svg {
+        box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+        outline: 1px solid transparent;
+        border: none;
+      }
+
       .bx--table-expand-v2__svg {
+        &:focus {
+          box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+          outline: 1px solid transparent;
+          border: none;
+        }
+    
         transform: rotate(270deg);
         transition: 0.1s;
       }

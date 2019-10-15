@@ -433,7 +433,7 @@ const PolicyCard = ({data, locale, handleClick}) => {
                 }
                 return (
                   <div key={grcType} className={containerClasses} role={'button'}
-                    tabIndex='0' onClick={onClick} onKeyPress={onKeyPress} >
+                    tabIndex={0} onClick={onClick} onKeyPress={onKeyPress} >
                     <div className='card-count'>
                       <div className='card-count-informations'>
                         {violations}
@@ -516,7 +516,7 @@ const FindingCard = ({data, locale, handleClick}) => {
                 }
                 return (
                   <div key={grcType} className={containerClasses} role={'button'}
-                    tabIndex='0' onClick={onClick} onKeyPress={onKeyPress}>
+                    tabIndex={0} onClick={onClick} onKeyPress={onKeyPress}>
                     {type==='finding' && <div className='finding-cluster'>
                       <div className='card-count'>
                         <div className='card-count-informations'>

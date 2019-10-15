@@ -26,7 +26,7 @@ const SHOW_MORE = 10
 
 const ShowOrMoreItem = ({ count, isExpanded, onExpand, locale }) => {
   return (
-    <div className='filter-section-expand' tabIndex='0' role={'button'}
+    <div className='filter-section-expand' tabIndex={0} role={'button'}
       onClick={onExpand} onKeyPress={onExpand}>
       {isExpanded ?
         msgs.get('filter.view.collapse', locale) :
@@ -190,7 +190,7 @@ export default class ResourceFilterView extends React.Component {
           </div>
           <Icon
             className='closeIcon'
-            tabIndex='0'
+            tabIndex={0}
             role={'button'}
             description={msgs.get('filter.view.close', locale)}
             name="icon--close"

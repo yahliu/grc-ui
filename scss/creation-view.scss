@@ -13,6 +13,17 @@
   display: flex;
   margin: 0 -3% -50px 0;
 
+  .bx--tooltip--icon__top:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+    .info-icon {
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
+    }
+  }
+
   .bx--tooltip--icon__top:after, .bx--tooltip--icon__bottom:after {
     white-space: normal;
     width: 22rem;
@@ -79,8 +90,8 @@
           text-overflow: ellipsis;
           &:focus {
             cursor: text;
-            box-shadow: none;
-            outline: 1px solid $color__blue-51;
+            box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+            outline: 1px solid transparent;
             border: none;
           }
         }

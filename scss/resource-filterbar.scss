@@ -25,9 +25,9 @@
     white-space: nowrap;
 
     &:focus {
-      box-shadow: none;
-      outline: none;
-      border: 1px solid $color__blue-51;
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
     }
 
     .closeIcon {
@@ -44,9 +44,9 @@
     padding-left: 20px;
 
     &:focus {
-      box-shadow: none;
-      outline: none;
-      border: 1px solid $color__blue-51;
+      box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
+      outline: 1px solid transparent;
+      border: none;
     }
   }
 }
