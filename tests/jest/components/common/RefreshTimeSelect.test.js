@@ -24,3 +24,22 @@ describe('RefreshTimeSelect component', () => {
     expect(component.toJSON()).toMatchSnapshot()
   })
 })
+
+describe('RefreshTimeSelect component with data', () => {
+  it('renders as expected', () => {
+    const refreshControl = {
+      'reloading': false,
+      'refreshCookie': 'grc-refresh-interval-cookie',
+      'timestamp': 'Tue Sep 24 2019 16:07:17 GMT-0400 (Eastern Daylight Time)'
+    }
+    const refreshValues = [5,10,30,60,300,1800,0]
+    const component = renderer.create(
+      <RefreshTimeSelect
+        locale = {''}
+        refreshValues = {refreshValues}
+        refreshControl = {refreshControl}
+      />
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+})

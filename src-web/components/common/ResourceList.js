@@ -10,7 +10,7 @@
 
 import React from 'react'
 import lodash from 'lodash'
-import ResourceTable from './ResourceTable'
+import {ResourceTable} from './ResourceTable'
 import { REQUEST_STATUS } from '../../actions/index'
 import NoResource from './NoResource'
 import { connect } from 'react-redux'
@@ -85,7 +85,6 @@ class ResourceList extends React.Component {
       topButton
     } = this.props
     const { locale } = this.context
-
     if (status === REQUEST_STATUS.ERROR) {
       if (err && err.data && err.data.Code === 1) {
         return (

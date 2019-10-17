@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourceTableRowExpandableTable component test renders as expected 1`] = `
+<table
+  className="bx--data-table-v2 resource-table-expandable bx--data-table-v2--zebra"
+>
+  <thead
+    className={undefined}
+  >
+    <tr
+      className={undefined}
+    >
+      <th
+        className="bx--table-header-index-0"
+        scope="col"
+      >
+        <span
+          className="bx--table-header-label"
+        >
+          Compliance Type
+        </span>
+      </th>
+      <th
+        className="bx--table-header-index-1"
+        scope="col"
+      >
+        <span
+          className="bx--table-header-label"
+        >
+          API groups
+        </span>
+      </th>
+      <th
+        className="bx--table-header-index-2"
+        scope="col"
+      >
+        <span
+          className="bx--table-header-label"
+        >
+          Resources
+        </span>
+      </th>
+      <th
+        className="bx--table-header-index-3"
+        scope="col"
+      >
+        <span
+          className="bx--table-header-label"
+        >
+          Verbs
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className={undefined}
+  />
+</table>
+`;

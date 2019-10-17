@@ -98,6 +98,7 @@ export default class RefreshTimeSelect extends React.Component {
       const idx = Math.max(0, this.autoRefreshChoices.findIndex(({pollInterval:pi})=>{
         return pollInterval===pi
       }))
+
       return (
         <div className='refresh-time-selection' ref={this.setRefresh}>
           {reloading?

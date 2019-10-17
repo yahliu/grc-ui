@@ -15,10 +15,10 @@ import { connect } from 'react-redux'
 import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
-import ResourceTable from '../../components/common/ResourceTable'
+import {ResourceTable} from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 
-class ResourceTableModule extends React.Component {
+export class ResourceTableModule extends React.Component {
   static propTypes = {
     definitionsKey: PropTypes.string,
     normalizedKey: PropTypes.string,

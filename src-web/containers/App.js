@@ -47,7 +47,6 @@ class App extends React.Component {
   render() {
     const serverProps = this.getServerProps()
     const { match } = this.props
-
     return (
       <div className='expand-vertically'>
         <SecondaryHeader />

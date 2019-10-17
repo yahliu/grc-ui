@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /*******************************************************************************
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
@@ -45,7 +46,7 @@ const {
   TableCell,
   TableExpandedRow } = DataTable
 
-class ResourceTable extends React.Component {
+export class ResourceTable extends React.Component {
 
   render() {
     const {

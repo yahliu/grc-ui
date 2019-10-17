@@ -2105,6 +2105,77 @@ export const sidePanelFindingsClusters = {
 
 export const sidePanelResourceTypeFindingsClusters = {'name':'HCMClusterFindings','list':'HCMClusterFindingsList'}
 
+export const findingsSidePanelData = {
+  'kind': 'HCMSecurityFindings',
+  'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-bf080cda-e44a-11e9-8895-005056a061f1',
+  'shortDescription': 'Policy that is not compliant',
+  'longDescription': 'MCM Policy that is not compliant',
+  'providerId': 'security-advisor',
+  'providerName': 'id-mycluster-account/providers/security-advisor',
+  'remediation': 'mapping error from raw object: `no matches for kind "MutationPolicy" in version "policies.ibm.com/v1alpha1"`',
+  'updateTime': '2019-10-07T16:33:50.061244Z',
+  'finding': {
+    'severity': 'MEDIUM',
+    'certainty': 'HIGH',
+    'networkConnection': null,
+    'nextSteps': [
+      {
+        'title': 'View the details for the compliance problem in the occurrence of the findings.',
+        'url': null
+      }
+    ],
+    'dataTransferred': null
+  },
+  'reportedBy': {
+    'id': 'mcm-policy-adapter',
+    'title': 'Security Advisor MCM Policy Findings Adapter',
+    'url': null
+  },
+  'context': {
+    'accountId': 'id-mycluster-account',
+    'region': 'clusterhub',
+    'resourceType': 'Policy',
+    'resourceName': 'policy-mutationpolicy',
+    'resourceId': 'bf080cda-e44a-11e9-8895-005056a061f1',
+    'resourceCrn': null,
+    'serviceName': 'icp4mcm-findings',
+    'serviceCrn': null,
+    'clusterName': 'clusterhub',
+    'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+  },
+  'securityClassification': {
+    'securityStandards': [
+      'HIPAA',
+      ' NIST',
+      ' PCI',
+      ' FISMA'
+    ],
+    'securityCategories': [
+      'SystemAndInformationIntegrity'
+    ],
+    'securityControl': 'MutationAdvisor'
+  },
+  '__typename': 'Occurrence',
+  'custom': {
+    'context': 'Policy: policy-mutationpolicy',
+    'finding.severity': 'Medium',
+    'securityClassification.securityStandards': 'HIPAA, NIST, PCI, FISMA',
+    'securityClassification.securityControl': 'Mutation Advisor',
+    'securityClassification.securityCategories': 'System And Information Integrity',
+    'updateTime': '-'
+  }
+}
+
+export const resourceType = {
+  'name': 'HCMSecurityFindings',
+  'list': 'HCMSecurityFindingsList'
+}
+
+export const resourceModalLabels = {
+  'primaryBtn': 'modal.button.submit',
+  'label': 'modal.edit-hcmpolicypolicy.label',
+  'heading': 'modal.edit-hcmpolicypolicy.heading'
+}
 export const availableFilters = {
   standards: {
     name: 'Standards',

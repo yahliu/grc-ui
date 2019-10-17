@@ -14,6 +14,63 @@ import renderer from 'react-test-renderer'
 
 describe('ResourceFilterView component', () => {
   it('renders as expected', () => {
+    const activeFilters = {
+      'standards': [
+        'HIPAA'
+      ]
+    }
+    const availableFilters = {
+      'standards': {
+        'name': 'Standards',
+        'availableSet': [
+          'NIST',
+          'FISMA',
+          'PCI',
+          'HIPAA'
+        ]
+      },
+      'categories': {
+        'name': 'Categories',
+        'availableSet': [
+          'System And Information Integrity',
+          'System And Communications Protections'
+        ]
+      },
+      'controls': {
+        'name': 'Controls',
+        'availableSet': [
+          'VA',
+          'Secret Encryption',
+          'Cert Manager',
+          'Mutation Advisor'
+        ]
+      },
+      'type': {
+        'name': 'Type',
+        'availableSet': [
+          'Enforce',
+          'Inform only'
+        ]
+      },
+      'severity': {
+        'availableSet': []
+      }
+    }
+    const fn = jest.fn()
+    const component = renderer.create(
+      <ResourceFilterView
+        updateFilters={fn}
+        onClose={fn}
+        activeFilters={activeFilters}
+        availableFilters={availableFilters}
+      />
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+})
+
+describe('ResourceFilterView component no filter', () => {
+  it('renders as expected', () => {
     const fn = jest.fn()
     const component = renderer.create(
       <ResourceFilterView

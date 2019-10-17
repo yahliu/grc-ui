@@ -13,6 +13,9 @@
         },
         "server": {
             "plugins": ["dynamic-import-node", "transform-object-rest-spread"]
-        }
+        },
+        "test": {
+            "plugins": ["dynamic-import-node"]
+          }
     }
 }

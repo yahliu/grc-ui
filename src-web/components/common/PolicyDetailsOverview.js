@@ -19,7 +19,7 @@ import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
 import DetailsModule from './DetailsModule'
 import SimpleTable from './SimpleTable'
-import ResourceTableModule from './ResourceTableModuleFromProps'
+import {ResourceTableModule} from './ResourceTableModuleFromProps'
 import StructuredListModule from '../../components/common/StructuredListModuleWithActions'
 
 
@@ -27,7 +27,7 @@ resources(() => {
   require('../../../scss/policy-details-overview.scss')
 })
 
-class PolicyDetailsOverview extends React.PureComponent{
+export class PolicyDetailsOverview extends React.PureComponent{
   constructor(props) {
     super(props)
   }

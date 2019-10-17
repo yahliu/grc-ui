@@ -17,10 +17,10 @@ import lodash from 'lodash'
 import { fetchResource } from '../../actions/common'
 import msgs from '../../../nls/platform.properties'
 import { getSingleResourceItem, resourceItemByName } from '../../reducers/common'
-import ResourceTable from '../../components/common/ResourceTable'
+import { ResourceTable } from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 
-class ResourceTableModule extends React.Component {
+export class ResourceTableModule extends React.Component {
   static propTypes = {
     definitionsKey: PropTypes.string,
     fetchResources: PropTypes.func,

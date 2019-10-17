@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grc Router container test renders as expected 1`] = `
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <withRouter(Connect(checkAccess))
+      ROLES={
+        Object {
+          "ADMIN": "Administrator",
+          "CLUSTER_ADMIN": "ClusterAdministrator",
+          "EDITOR": "Editor",
+          "OPERATOR": "Operator",
+          "VIEWER": "Viewer",
+        }
+      }
+      match={
+        Object {
+          "isExact": false,
+          "params": Object {},
+          "path": "/multicloud",
+          "url": "/multicloud",
+        }
+      }
+    />
+  </BrowserRouter>
+</Provider>
+`;
