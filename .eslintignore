@@ -4,3 +4,4 @@ coverage/*
 storybook-static
 test-output/*
 travis-scripts
+build-harness/modules/swagger/*
