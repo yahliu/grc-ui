@@ -50,6 +50,7 @@ export class OverviewView extends React.Component {
     //get (activeFilters ∪ storedFilters) only since availableGrcFilters is uninitialized at this stage
     //later when availableGrcFilters initialized, will do further filtering in componentWillReceiveProps
     const combinedFilters = combineResourceFilters(activeFilters, getSavedGrcState(GRC_FILTER_STATE_COOKIE))
+    delete combinedFilters.severity//remove severity filter set during first time render
     //update sessionStorage
     replaceGrcState(GRC_FILTER_STATE_COOKIE, combinedFilters)
     //update active filters
