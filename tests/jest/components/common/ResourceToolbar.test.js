@@ -128,7 +128,7 @@ describe('ResourceToolbar component no filter', () => {
         filterViewOpen={false}
         location={location}
         refreshControl={{}}
-        activeFilters={[]}
+        activeFilters={{}}
         availableFilters={availableFilters}
       />
     )

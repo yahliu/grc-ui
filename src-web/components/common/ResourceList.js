@@ -10,7 +10,8 @@
 
 import React from 'react'
 import lodash from 'lodash'
-import {ResourceTable} from './ResourceTable'
+// eslint-disable-next-line import/no-named-as-default
+import ResourceTable from './ResourceTable'
 import { REQUEST_STATUS } from '../../actions/index'
 import NoResource from './NoResource'
 import { connect } from 'react-redux'

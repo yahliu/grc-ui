@@ -15,7 +15,8 @@ import { connect } from 'react-redux'
 import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import lodash from 'lodash'
 import msgs from '../../../nls/platform.properties'
-import {ResourceTable} from '../../components/common/ResourceTable'
+// eslint-disable-next-line import/no-named-as-default
+import ResourceTable from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 
 export class ResourceTableModule extends React.Component {

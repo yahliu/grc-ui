@@ -520,7 +520,299 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
     </h5>
     <div
       className="overview-content-bottom"
-    />
+    >
+      <div
+        className="bx--module bx--module--double"
+        id="objectTemplates-module-id"
+      >
+        <div
+          className="bx--module__inner"
+        >
+          <div
+            className="bx--module__content"
+          >
+            <div
+              className="bx--data-table-v2-container"
+              id="object-templates-table-container"
+            >
+              <table
+                className="bx--data-table-v2 resource-table bx--data-table-v2--zebra"
+              >
+                <thead
+                  className={undefined}
+                >
+                  <tr
+                    className={undefined}
+                  >
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="objectDefinition.metadata.name"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Name
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="complianceType"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Compliance Type
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="objectDefinition.apiVersion"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          API version
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="objectDefinition.kind"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Kind
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="status.conditions[0].lastTransitionTime"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Last transition
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                    <th
+                      scope="col"
+                    >
+                      <button
+                        className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                        data-default-key="objectDefinition.metadata.name"
+                        data-key="status.Compliant"
+                        onClick={[Function]}
+                        title={undefined}
+                      >
+                        <span
+                          className="bx--table-header-label"
+                        >
+                          Status
+                        </span>
+                        <svg
+                          alt="Provide a description that will be used as the title"
+                          aria-label="Provide a description that will be used as the title"
+                          className="bx--table-sort-v2__icon"
+                          fill={undefined}
+                          fillRule="evenodd"
+                          height="5"
+                          name="caret--down"
+                          role="img"
+                          style={undefined}
+                          viewBox="0 0 10 5"
+                          width="10"
+                        >
+                          <title>
+                            Provide a description that will be used as the title
+                          </title>
+                          <path
+                            d="M0 0l5 4.998L10 0z"
+                          />
+                        </svg>
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  className={undefined}
+                >
+                  <tr
+                    className={undefined}
+                    data-row-name="prod"
+                  >
+                    <td
+                      className={undefined}
+                    >
+                      prod
+                    </td>
+                    <td
+                      className={undefined}
+                    >
+                      musthave
+                    </td>
+                    <td
+                      className={undefined}
+                    >
+                      v1
+                    </td>
+                    <td
+                      className={undefined}
+                    >
+                      Namespace
+                    </td>
+                    <td
+                      className={undefined}
+                    >
+                      -
+                    </td>
+                    <td
+                      className={undefined}
+                    >
+                      -
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

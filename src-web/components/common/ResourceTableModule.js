@@ -17,7 +17,8 @@ import lodash from 'lodash'
 import { fetchResource } from '../../actions/common'
 import msgs from '../../../nls/platform.properties'
 import { getSingleResourceItem, resourceItemByName } from '../../reducers/common'
-import { ResourceTable } from '../../components/common/ResourceTable'
+// eslint-disable-next-line import/no-named-as-default
+import ResourceTable from '../../components/common/ResourceTable'
 import TableHelper from '../../util/table-helper'
 
 export class ResourceTableModule extends React.Component {

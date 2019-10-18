@@ -19,7 +19,8 @@ import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
 import DetailsModule from './DetailsModule'
 import SimpleTable from './SimpleTable'
-import {ResourceTableModule} from './ResourceTableModuleFromProps'
+// eslint-disable-next-line import/no-named-as-default
+import ResourceTableModule from './ResourceTableModuleFromProps'
 import StructuredListModule from '../../components/common/StructuredListModuleWithActions'
 
 

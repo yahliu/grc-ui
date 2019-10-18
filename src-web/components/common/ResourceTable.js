@@ -373,8 +373,8 @@ ResourceTable.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  const navRoutes = state.nav && state.nav.navItems
-  const userRole = state.role.role
+  const navRoutes = state.nav? (state.nav && state.nav.navItems) : state.nav
+  const userRole = state.role ? state.role.role : state.role
 
   return { navRoutes, userRole }
 }
