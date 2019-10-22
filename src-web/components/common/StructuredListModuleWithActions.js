@@ -93,6 +93,7 @@ StructuredListModule.contextTypes = {
 // eslint-disable-next-line react/display-name
 StructuredListModule.formatDecisionsWithLinkAndIcon = (resourceKey, data, clusterStatus, location) => {
   const decisions = _.get(data[resourceKey], 'decisions')
+  const hubNamespace = _.get(data,'metadata.namespace')
   const urlSegments = location.pathname.replace(/\/$/, '').split('/')
   const baseUrl = urlSegments.slice(0, urlSegments.length-2 ).join('/')
   const policyName = urlSegments[urlSegments.length-1]
@@ -108,7 +109,7 @@ StructuredListModule.formatDecisionsWithLinkAndIcon = (resourceKey, data, cluste
       statusIcon = <StatusField status='critical' />
     }
     links.push(<div className='one-cluster-status' key={`${cluster}-container`}>
-      <Link to= {`${baseUrl}/policy/${cluster}/${policyName}`} >{cluster}</Link>
+      <Link to= {`${baseUrl}/policy/${cluster}/${hubNamespace}.${policyName}`} >{cluster}</Link>
       {statusIcon}
     </div>)
   })

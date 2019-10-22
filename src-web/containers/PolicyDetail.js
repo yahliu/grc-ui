@@ -94,6 +94,7 @@ class PolicyDetail extends React.Component {
                   refreshControl.stopPolling()
                   return <PolicyViolationTab
                     staticResourceData={staticResourceData}
+                    item={items}
                   />}}
                 />
                 <Route path={`${url}/yaml`} exact render={() => {

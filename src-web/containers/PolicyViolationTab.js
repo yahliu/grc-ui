@@ -36,13 +36,19 @@ class PolicyViolationTab extends React.Component{
 
   render() {
     const url = lodash.get(this.props, 'match.url')
+    const item = lodash.get(this.props, 'item',[])
+    const namespace = lodash.get(item[0], 'metadata.namespace', null)
     const urlSegments = url.split('/')
     const policyName = urlSegments[urlSegments.length - 2]
     const {staticResourceData} = this.props
     const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
 
+    if(namespace === null){
+      return (<Loading withOverlay={false} className='content-spinner' />)
+    }
+
     return (
-      <Query query={HCMPolicyViolations} pollInterval={pollInterval} variables={{policyName: policyName}}>
+      <Query query={HCMPolicyViolations} pollInterval={pollInterval} variables={{policyName: policyName, policyNamespace: namespace}}>
         {({ data, loading }) => {
           if (loading && data.violations === undefined) {
             return (<Loading withOverlay={false} className='content-spinner' />)

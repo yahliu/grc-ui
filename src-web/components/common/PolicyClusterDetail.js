@@ -52,13 +52,19 @@ class PolicyClusterDetail extends React.Component {
 
   componentWillMount() {
     const { updateSecondaryHeader} = this.props
-    updateSecondaryHeader(this.getPolicyName(), null, this.getBreadcrumb())
+    updateSecondaryHeader(this.getPolicyName(true), null, this.getBreadcrumb())
   }
 
-  getPolicyName() {
+  getPolicyName(withParentNamespace) {
     const { location } = this.props,
           urlSegments = location.pathname.split('/')
-    return urlSegments[urlSegments.length - 1]
+    if(withParentNamespace){
+      return urlSegments[urlSegments.length - 1]
+    }
+    else{
+      const nameSegments = urlSegments[urlSegments.length - 1].split('.')
+      return nameSegments.slice(1).join('.')
+    }
   }
 
   getClusterName() {
@@ -81,9 +87,9 @@ class PolicyClusterDetail extends React.Component {
         url: `${urlSegments.slice(0, 3).join('/')}/all`
       },
       {
-        label: this.getPolicyName(),
+        label: this.getPolicyName(false),
         noLocale: true,
-        url: `${urlSegments.slice(0, 3).join('/')}/all/${this.getPolicyName()}`
+        url: `${urlSegments.slice(0, 3).join('/')}/all/${this.getPolicyName(false)}`
       },
       {
         label: this.getClusterName(),

@@ -31,11 +31,12 @@ resources(() => {
 
 function getHeader(data, locale) {
   const kind = _.get(data, 'kind', '')
-  let header = '', descr = '', percent = 0, violation = '0/0', cluster = undefined, policy = undefined
+  let header = '', descr = '', percent = 0, violation = '0/0', cluster = undefined, policy = undefined, hubNamespace = undefined
   if (kind === 'HCMPolicyPolicy') {
     header = _.get(data, 'raw.metadata.name', '')
     descr = _.get(data, 'raw.metadata.description', '')
     violation = _.get(data, 'clusterCompliant', '0/0')
+    hubNamespace = _.get(data, 'namespace')
     const [vioNum, totalNum] = violation.split('/')
     if (!isNaN(vioNum) && !isNaN(totalNum)) {
       percent = +vioNum / +totalNum
@@ -53,7 +54,7 @@ function getHeader(data, locale) {
     violation += ' ' + msgs.get('overview.top.informations.policies', locale)
     cluster = data.cluster
   }
-  return {header, descr, percent, violation, cluster, policy}
+  return {header, descr, percent, violation, cluster, policy, hubNamespace}
 }
 
 class PolicySidePanelDetailsModal extends React.PureComponent {
@@ -80,7 +81,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
 
   render(){
     const { title, data, resourceType, locale } = this.props
-    const { header, descr, percent, violation, cluster, policy } = getHeader(data, locale)
+    const { header, descr, percent, violation, cluster, policy, hubNamespace } = getHeader(data, locale)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
     const pollInterval = getPollInterval(GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE, 'sidePanel')
     return (
@@ -105,7 +106,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
             </div>
             <div className={'bx--modal-content-body'}>
               <Query query={cluster ? AllPoliciesInCluster :  AllClustersInPolicy}
-                variables={cluster ? {cluster} : {policy}} pollInterval={pollInterval}>
+                variables={cluster ? {cluster} : {policy:policy, hubNamespace:hubNamespace}} pollInterval={pollInterval}>
                 {( {data, loading, error} ) => {
                   if (loading) {
                     // spinner if loading

@@ -221,7 +221,9 @@ function testDetailsPage(browser, name) {
   //violation tab test
   this.expect.element('#violation-tab').to.be.present
   this.click('#violation-tab')
-  browser.element('css selector', '.policy-violation-tab > .section-title', (result) => {
+  this.waitForElementNotPresent('#spinner')
+  this.waitForElementNotPresent('#spinner')
+  browser.waitForElementPresent('.policy-violation-tab > .section-title', 15000, false, (result) => {
     if(result.status == -1){
       browser.expect.element('.no-resource').to.be.present
     }
