@@ -117,7 +117,7 @@ function verifyTable(browser, cluster) {
         this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
         browser.pause(1000)
         this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.not.present
-        this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(8) > div > svg')
+        this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
         browser.pause(1000)
         this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
         this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(1)')
@@ -247,8 +247,8 @@ function deletePolicy(name){
   this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
   this.expect.element('.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.to.equal(name)
   this.expect.element('bx--overflow-menu-options__option.bx--overflow-menu-options__option--danger').not.to.be.present
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(8)').to.be.present
-  this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(8) > div > svg')
+  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)').to.be.present
+  this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
   this.click('li.bx--overflow-menu-options__option.bx--overflow-menu-options__option--danger')
   this.expect.element('button.bx--btn.bx--btn--danger--primary').to.be.present

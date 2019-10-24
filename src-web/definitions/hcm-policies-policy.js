@@ -30,6 +30,10 @@ export default {
       transformFunction: createComplianceLink,
     },
     {
+      msgKey: 'table.header.namespace',
+      resourceKey: 'namespace',
+    },
+    {
       msgKey: 'table.header.remediation',
       resourceKey: 'remediation',
     },

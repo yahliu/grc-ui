@@ -473,6 +473,43 @@ exports[`GrcView component 1 renders as expected 1`] = `
                 <button
                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                   data-default-key="metadata.name"
+                  data-key="namespace"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <span
+                    className="bx--table-header-label"
+                  >
+                    Namespace
+                  </span>
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-sort-v2__icon"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="5"
+                    name="caret--down"
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 10 5"
+                    width="10"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M0 0l5 4.998L10 0z"
+                    />
+                  </svg>
+                </button>
+              </th>
+              <th
+                scope="col"
+              >
+                <button
+                  className="bx--table-sort-v2 bx--table-sort-v2--ascending"
+                  data-default-key="metadata.name"
                   data-key="remediation"
                   onClick={[Function]}
                   title={undefined}
@@ -713,6 +750,11 @@ exports[`GrcView component 1 renders as expected 1`] = `
               <td
                 className={undefined}
               >
+                mcm
+              </td>
+              <td
+                className={undefined}
+              >
                 inform
               </td>
               <td
@@ -827,6 +869,11 @@ exports[`GrcView component 1 renders as expected 1`] = `
                 >
                   policy-namespace
                 </a>
+              </td>
+              <td
+                className={undefined}
+              >
+                mcm
               </td>
               <td
                 className={undefined}
