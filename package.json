@@ -110,7 +110,8 @@
     "svg-react-loader": "^0.4.6",
     "svg-sprite-loader": "^3.2.3",
     "svg.js": "^2.6.5",
-    "watchr": "^4.0.1"
+    "watchr": "^4.0.1",
+    "js-yaml-loader": "^1.2.2"
   },
   "devDependencies": {
     "@ibma/aat": "^1.5.1",
@@ -145,6 +146,7 @@
     "jest": "^22.4.3",
     "jest-handlebars": "^1.0.1",
     "jest-tap-reporter": "^1.9.0",
+    "jest-yaml-transform": "^0.2.0",
     "jsonfile": "^4.0.0",
     "nightwatch": "^0.9.21",
     "node-sass": "^4.11.0",

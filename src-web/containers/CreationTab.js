@@ -32,43 +32,25 @@ export class CreationTab extends React.Component {
     updateSecondaryHeader: PropTypes.func,
   }
 
-  constructor (props) {
-    super(props)
-    this.setGetPolicyJSON = this.setGetPolicyJSON.bind(this)
-    this.setResetNewPolicy = this.setResetNewPolicy.bind(this)
-  }
-
   componentWillMount() {
     const { updateSecondaryHeader, secondaryHeaderProps } = this.props
     const { title, tabs, breadcrumbItems, information } = secondaryHeaderProps
-    const links = [
+    const portals = [
       {
-        id: 'policy-cancel',
-        label: 'button.cancel',
-        kind: 'secondary',
-        handleClick: this.handleCancel.bind(this)
+        id: 'cancel-button-portal-id',
+        kind: 'portal',
       },
       {
-        id: 'policy-create',
-        label: 'button.create',
-        handleClick: this.handleCreate.bind(this)
+        id: 'create-button-portal-id',
+        kind: 'portal',
       }]
-    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems, links, msgs.get(information, this.context.locale))
+    updateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems, portals, msgs.get(information, this.context.locale))
   }
 
-  setGetPolicyJSON = getNewPolicyJSON => {
-    this.getNewPolicyJSON = getNewPolicyJSON
-  }
-
-  setResetNewPolicy = resetNewPolicy => {
-    this.resetNewPolicy = resetNewPolicy
-  }
-
-  handleCreate = () => {
-    const newPolicyJSON = this.getNewPolicyJSON()
-    if (newPolicyJSON) {
+  handleCreate = (resourceJSON) => {
+    if (resourceJSON) {
       const {handleCreateResources} = this.props
-      handleCreateResources(newPolicyJSON)
+      handleCreateResources(resourceJSON)
     }
   }
 
@@ -79,7 +61,6 @@ export class CreationTab extends React.Component {
   render () {
     const { mutateStatus, mutateErrorMsg } = this.props
     if (mutateStatus && mutateStatus === 'DONE') {
-      this.resetNewPolicy && this.resetNewPolicy()
       this.props.cleanReqStatus && this.props.cleanReqStatus()
       return <Redirect to={`${config.contextPath}/policies/all`} />
     }
@@ -89,17 +70,23 @@ export class CreationTab extends React.Component {
           {( result ) => {
             const { loading } = result
             const { data={} } = result
-            const { existing } = data
-            const error = existing ? null : result.error
+            const { discoveries } = data
+            const error = discoveries ? null : result.error
+            const fetchControl = {
+              isLoaded: !!discoveries && !loading,
+              isFailed: error,
+            }
+            const createControl = {
+              createResource: this.handleCreate.bind(this),
+              cancelCreate: this.handleCancel.bind(this),
+              creationStatus: mutateStatus,
+              creationMsg: mutateErrorMsg,
+            }
             return (
               <CreationView
-                loading={!existing && loading}
-                error={error}
-                setResetNewPolicy={this.setResetNewPolicy}
-                setGetPolicyJSON={this.setGetPolicyJSON}
-                existing={existing}
-                mutateStatus={mutateStatus}
-                mutateErrorMsg={mutateErrorMsg}
+                discovered={discoveries}
+                fetchControl={fetchControl}
+                createControl={createControl}
               />
             )
           }

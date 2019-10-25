@@ -139,6 +139,10 @@ export class SecondaryHeader extends React.Component {
           { locale } = this.context
     return links.map(link => {
       const {id, label, url, kind='primary', handleClick=(()=> this.props.history.push(url)) } = link
+      // if portal, react component will create the button using a portal
+      if (kind==='portal') {
+        return <div key={id} id={id} className='portal' />
+      }
       return <Button key={id} id={id} onClick={handleClick} kind={kind} >
         {msgs.get(label, locale)}
       </Button>

@@ -1,0 +1,23 @@
+# an available choice for the specs control
+name:
+  NetworkPolicy
+description:
+  deny network request
+control:
+  specs
+replacements: # if user select this choice, the template variable names and values to use
+  categories: |
+    SystemAndCommunicationsProtections
+  objectTemplates: |
+    - complianceType: musthave
+      objectDefinition:
+        kind: NetworkPolicy # deny network request
+        apiVersion: networking.k8s.io/v1
+        metadata:
+          name: deny-from-other-namespaces
+        spec:
+          podSelector:
+            matchLabels:
+          ingress:
+          - from:
+            - podSelector: {} # accept ingress from all pods within this namespace only

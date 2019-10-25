@@ -8,6 +8,9 @@
  *******************************************************************************/
 'use strict'
 
+// seems to be an issue with this rule and redux connect method in SecondaryHeader
+/* eslint-disable import/no-named-as-default */
+
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'

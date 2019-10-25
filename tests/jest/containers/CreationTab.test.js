@@ -29,8 +29,6 @@ describe('CreationTab container', () => {
       handleCreateResources={jest.fn()}
     />)
     expect(component).toMatchSnapshot()
-    component.instance().setGetPolicyJSON(jest.fn())
-    component.instance().setResetNewPolicy(jest.fn())
     component.instance().handleCreate()
     component.instance().handleCancel()
   })

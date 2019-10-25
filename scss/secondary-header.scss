@@ -34,9 +34,14 @@
     position: fixed;
     right: 5%;
     top: $secondary-header-max-height;
+    display: flex;
 
     .bx--btn--primary, .bx--btn--secondary {
       min-height: 30px;
+    }
+
+    .portal {
+      padding-left: 1rem;
     }
 
   }

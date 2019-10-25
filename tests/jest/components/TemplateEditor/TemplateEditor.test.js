@@ -9,29 +9,18 @@
 'use strict'
 
 import React from 'react'
-import PropTypes from 'prop-types'
-import { hideResourceToolbar } from '../../lib/client/resource-helper'
-import { TemplateEditor } from './TemplateEditor'
-import policyTemplate from './templates/policy-template.hbs'
-import * as Choices from './templates'
-import config from '../../lib/shared/config'
-import msgs from '../../nls/platform.properties'
-import _ from 'lodash'
+import {TemplateEditor} from '../../../../src-web/components/TemplateEditor'
+import renderer from 'react-test-renderer'
+import policyTemplate from '../../../../src-web/components/templates/policy-template.hbs'
+import { shallow } from 'enzyme'
+//import { existing } from '../ComponentsTestingData'
 
 
-// where to put Create/Cancel buttons
 const Portals = Object.freeze({
   createBtn: 'create-button-portal-id',
   cancelBtn: 'cancel-button-portal-id',
 })
 
-// controlData is converted to templateData when tempplate handlebar is rendered
-//  id: becomes template variable;
-//  active: becomes value replacement
-//  type: what type of control to prompt user
-//  available: available choices
-//  reverse: the yaml object to control path--if user edits yaml, what control should be updated
-//  mustExist: when validating the template for creation, this value must exist
 const controlData = [
   {
     name: 'creation.view.policy.name',
@@ -44,7 +33,7 @@ const controlData = [
   {
     id: 'namespace',
     type: 'hidden',   // don't prompt for namespace--use configuration
-    active: config.complianceNamespace,
+    active: 'mcm',
     reverse: 'Policy[0].metadata.namespace',
     mustExist: true,
   },
@@ -114,73 +103,83 @@ const controlData = [
 ]
 
 
-export default class CreationView extends React.Component {
-
-  static propTypes = {
-    createControl: PropTypes.shape({
-      createResource: PropTypes.func,
-      cancelCreate: PropTypes.func,
-      creationStatus: PropTypes.string,
-      creationMsg: PropTypes.string
-    }),
-    discovered: PropTypes.object,
-    fetchControl: PropTypes.shape({
-      isLoaded: PropTypes.bool,
-      isFailed: PropTypes.bool,
-    }),
-  }
-
-  render() {
-    hideResourceToolbar()
-    const { locale } = this.context
-    const {fetchControl, createControl, discovered} = this.props
-    return (
+describe('TemplateEditor component', () => {
+  it('renders as expected', () => {
+    const component = renderer.create(
       <TemplateEditor
         template={policyTemplate}
-        controlData={getControlData(discovered, locale)}
+        controlData={controlData}
         portals={Portals}
-        fetchControl={fetchControl}
-        createControl={createControl}
-        locale={locale}
       />
     )
-  }
-}
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+})
 
-const getControlData = (discovered, locale) => {
-  if (discovered) {
-    const mergedData = _.cloneDeep(controlData)
+describe('on control change function', () => {
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <TemplateEditor
+        template={policyTemplate}
+        controlData={controlData}
+        portals={Portals}
+      />
+    )
+    const evt = {
+      target: {
+        value: 'value-testing'
+      },
+      selectedItems: ['selectedItems-testing-1', 'selectedItems-testing-2'],
+    }
+    expect(wrapper.instance().onChange('name', evt)).toEqual('name')
+    expect(wrapper.instance().onChange('standards', evt)).toEqual('standards')
+    expect(wrapper.instance().onChange('categories', evt)).toEqual('categories')
+    expect(wrapper.instance().onChange('controls', evt)).toEqual('controls')
+    expect(wrapper.instance().onChange('clusters', evt)).toEqual('clusters')
+    //expect(wrapper.instance().onChange('enforce', evt)).toEqual('enforce')
+    // expect(wrapper.instance().onChange('specs', evt)).toEqual('specs')
+  })
+})
 
-    // add preset spec choices from yaml
-    const controlMap = _.keyBy(mergedData, 'id')
-    Object.values(Choices).forEach(choice=>{
-      const available = _.get(controlMap, `${choice.control}.available`)
-      if (available) {
-        available.push(choice)
-      }
-    })
+describe('on editor change function', () => {
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <TemplateEditor
+        template={policyTemplate}
+        controlData={controlData}
+        portals={Portals}
+      />
+    )
+    expect(wrapper.instance().handleParse()).toMatchSnapshot()
+  })
+})
 
-    // add discovered choices from server
-    //  add available annotations to categories, etc controls
-    //  add existing policy names to name control
-    const {policyNames, annotations, clusterLabels} = discovered
-    const {name, clusters, standards, categories, controls } = _.keyBy(mergedData, 'id')
-    name.existing = policyNames
-    clusters.available = clusterLabels
-    standards.available = [...new Set([...standards.available, ...annotations.standards])]
-    categories.available = [...new Set([...categories.available, ...annotations.categories])]
-    controls.available = [...new Set([...controls.available, ...annotations.controls])]
+describe('handleEditorCommand function', () => {
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <TemplateEditor
+        template={policyTemplate}
+        controlData={controlData}
+        portals={Portals}
+      />
+    )
+    expect(wrapper.instance().handleEditorCommand('next')).toEqual('next')
+    expect(wrapper.instance().handleEditorCommand('undo')).toEqual('undo')
+    expect(wrapper.instance().handleEditorCommand('redo')).toEqual('redo')
+    expect(wrapper.instance().handleEditorCommand('restore')).toEqual('restore')
+  })
+})
 
-    // convert message keys
-    mergedData.forEach(control=>{
-      ['name', 'description', 'prompt'].forEach(key=>{
-        if (control[key]) {
-          control[key] = msgs.get(control[key], locale)
-        }
-      })
-    })
 
-    return mergedData
-  }
-  return controlData
-}
+describe('getResourceJSON function', () => {
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <TemplateEditor
+        template={policyTemplate}
+        controlData={controlData}
+        portals={Portals}
+      />
+    )
+    expect(wrapper.instance().getResourceJSON()).toEqual(null)
+  })
+})

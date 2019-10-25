@@ -1,0 +1,17 @@
+# an available choice for the specs control
+name:
+  Namespace
+description:
+  must have namespace 'prod'
+control:
+  specs
+replacements: # if user select this choice, the template variable names and values to use
+  categories: |
+    SystemAndCommunicationsProtections
+  objectTemplates: |
+    - complianceType: musthave
+      objectDefinition:
+        kind: Namespace # must have namespace 'prod'
+        apiVersion: v1
+        metadata:
+          name: prod

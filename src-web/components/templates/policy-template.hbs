@@ -1,0 +1,64 @@
+apiVersion: policy.mcm.ibm.com/v1alpha1
+kind: Policy
+metadata:
+  name: {{name}}
+  namespace: {{namespace}}
+  annotations:
+    policy.mcm.ibm.com/standards: {{#each standards}}{{ this }}{{^if @last}}, {{/if}}{{/each}}
+    policy.mcm.ibm.com/categories: {{#each categories}}{{ this }}{{^if @last}}, {{/if}}{{/each}}
+    policy.mcm.ibm.com/controls: {{#each controls}}{{ this }}{{^if @last}}, {{/if}}{{/each}}
+spec:
+  complianceType: musthave
+  remediationAction: {{#if enforce}}enforce{{else}}inform{{/if}}
+  namespaces:
+    exclude: ["kube-*"]
+    include: ["default"]
+  {{! If user modifies one of these specs, editor captures those changes and will insert here on re-render}}
+  {{#if specsCapture}}
+{{{specsCapture}}}
+  {{else}}
+  {{#if roleTemplates.length}}
+  role-templates:
+    {{#each roleTemplates}}
+    {{{ this }}}
+    {{/each}}
+  {{/if}}
+  {{#if objectTemplates.length}}
+  object-templates:
+    {{#each objectTemplates}}
+    {{{ this }}}
+    {{/each}}
+  {{/if}}
+  {{#if policyTemplates.length}}
+  policy-templates:
+    {{#each policyTemplates}}
+    {{{ this }}}
+    {{/each}}
+  {{/if}}
+  {{/if}}
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: binding-{{name}}
+  namespace: {{namespace}}
+placementRef:
+  name: placement-{{name}}
+  kind: PlacementPolicy
+  apiGroup: mcm.ibm.com
+subjects:
+- name: {{name}}
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com
+---
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementPolicy
+metadata:
+  name: placement-{{name}}
+  namespace: {{namespace}}
+spec:
+  clusterLabels:
+    matchExpressions:
+      {{#each clusters}}
+      - {key: {{@key}}, operator: In, values: [{{#each this}}{{#if @index}}, {{/if}}"{{this}}"{{/each}}]}
+      {{/each}}

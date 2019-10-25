@@ -1,0 +1,26 @@
+# an available choice for the specs control
+name:
+  IamPolicy
+description:
+  limit clusteradminrole and report violation in IAM RBAC
+control:
+  specs
+replacements: # if user select this choice, the template variable names and values to use
+  categories: |
+    SystemAndCommunicationsProtections
+  policyTemplates: |
+    - objectDefinition:
+        apiVersion: iam.policies.ibm.com/v1alpha1
+        kind: IamPolicy # limit clusteradminrole and report violation in IAM RBAC
+        metadata:
+          name: {{name}}-example
+          label:
+            category: "System-Integrity"
+        spec:
+          severity: medium
+          namespaceSelector:
+            include: ["default","kube-*"]
+            exclude: ["kube-system"]
+          remediationAction: inform
+          maxClusterRoleBindingUsers: 10
+          maxRoleBindingViolationsPerNamespace: 2

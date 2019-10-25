@@ -107,8 +107,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.handlebars$/,
+        test: [/\.handlebars$/, /\.hbs$/],
         loader: 'handlebars-loader',
+      },
+      {
+        test: /\.yaml$/,
+        loader: 'js-yaml-loader',
       }
     ],
     noParse: [
@@ -189,6 +193,12 @@ module.exports = {
       }
     })
   ],
+
+  resolve: {
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js'
+    }
+  },
 
   resolveLoader: {
     modules: [
