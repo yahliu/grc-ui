@@ -25,12 +25,15 @@ body {
   .bx--data-table-v2--zebra tbody tr:nth-child(2n) {
     background-color: $color__white;
   }
+  .bx--tooltip--shown {
+    font-size: .875rem;
+  }
 }
 
 .page-content-container {
   display: flex;
   flex-direction: column;
-  padding: 24px 5% 54px;
+  padding: 1.5rem 5% 3.375rem;
 
   .bx--select--inline{
     svg.bx--select__arrow{
@@ -76,10 +79,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 518px;
-  height: 411px;
+  width: 32.375rem;
+  height: 25.6875rem;
   color: $color__blue-90;
-  padding: 20px 40px;
+  padding: 1.25rem 2.5rem;
   background-color: transparent;
   box-shadow: none;
   border: none;
@@ -101,13 +104,13 @@ body {
   }
 
   .no-resource-icon {
-    width: 360px;
-    height: 200px;
+    width: 22.5rem;
+    height: 12.5rem;
   }
 
   .no-resource-title {
     font-weight: 500;
-    margin-bottom: 9px;
+    margin-bottom: 0.5625rem;
     font-size: 1.8125rem;
     text-align: center;
     color: $grc_color_blue;
@@ -116,14 +119,14 @@ body {
   .no-resource-detail {
     font-weight: 300;
     font-size: 1rem;
-    margin-bottom: 21px;
+    margin-bottom: 1.3125rem;
     text-align: center;
     line-height: 1.2;
     color: $color__navy-gray-6;
 
     > a {
       font-weight: 700;
-      margin-right: 5px;
+      margin-right: 0.3125rem;
       font-size: .875rem;
     }
   }
@@ -131,7 +134,7 @@ body {
 
 .yamlEditorContainer {
   #brace-editor {
-    min-width: 500px;
-    min-height: 500px
+    min-width: 31.25rem;
+    min-height: 31.25rem
   }
 }

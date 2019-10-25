@@ -17,7 +17,7 @@ import RecentActivityModule from '../../../../src-web/components/modules/RecentA
 describe('RecentActivityModule view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
-    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
+    .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
   const handleDrillDownClick = jest.fn()
   const filteredPolicies = policiesTestingDataSet1
   const filteredFindings = findingsTestingDataSet1

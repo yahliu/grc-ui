@@ -18,7 +18,7 @@ import TopInformationModule from '../../../../src-web/components/modules/TopInfo
 describe('TopInformationModule clusters view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
-    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
+    .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
   const viewState = {viewState: {topViolationChoice:'clusters'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
@@ -57,7 +57,7 @@ describe('TopInformationModule clusters view', () => {
 describe('TopInformationModule policies view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
-    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
+    .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
   const viewState = {viewState: {topViolationChoice:'policies'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
@@ -96,7 +96,7 @@ describe('TopInformationModule policies view', () => {
 describe('TopInformationModule findings view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
-    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
+    .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
   const viewState = {viewState: {topFindingChoice:'findings'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
@@ -135,7 +135,7 @@ describe('TopInformationModule findings view', () => {
 describe('TopInformationModule findings clusters view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
-    .mockImplementation(() => ({display: 'block', 'padding-right': '10px'}))
+    .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
   const viewState = {viewState: {topViolationChoice:'clusters'}}
   const activeFilters = {activeFilters:{}}
   const updateViewState = jest.fn()

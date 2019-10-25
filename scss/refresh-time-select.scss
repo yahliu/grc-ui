@@ -12,48 +12,48 @@
 .refresh-time-selection {
   display: flex;
   align-items: center;
-  padding-right: 10px;
+  padding-right: 0.625rem;
 
   > div {
     &:focus {
       box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-      outline: 1px solid transparent;
+      outline: 0.0625rem solid transparent;
       border: none;
     }
   }
 
   .button-icon {
-    width: 12px;
-    height: 12px;
+    width: 0.75rem;
+    height: 0.75rem;
     fill: $color__blue-51;
     stroke: none;
     cursor: pointer;
   }
 
   .bx--dropdown {
-    font-size: 14px;
+    font-size: 0.875rem;
     background-color: transparent;
     box-shadow: none;
     white-space: nowrap;
 
     .bx--list-box__label {
       color: $color__blue-51;
-      padding-right: 32px;
+      padding-right: 2rem;
     }
 
     .bx--list-box__field {
-      padding: 0 5px;
+      padding: 0 0.3125rem;
       &:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
+        outline: 0.0625rem solid transparent;
         border: none;
      }
     }
 
     .bx--list-box__menu-item {
       color: $color__blue-90;
-      padding: 14px;
-      height: 26px;
+      padding: 0.875rem;
+      height: 1.625rem;
       font-weight: normal;
 
       &:hover, .bx--list-box__menu-item--highlighted {
@@ -68,12 +68,12 @@
 
   .bx--select__arrow {
     right: 0;
-    top: 4px;
+    top: 0.25rem;
   }
 
   .bx--loading--small {
     width: 1rem;
     height: 1rem;
-    margin: -2px 0;
+    margin: -0.125rem 0;
   }
 }

@@ -10,22 +10,22 @@
 @import 'variables';
 
 .module-grc-cards {
-  padding-top: 1px;
+  padding-top: 0.0625rem;
 
   .header-container {
     display: flex;
     align-items: center;
 
     .header-title {
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: 600;
-      padding-right: 10px;
-      border-right: 1px solid $color__gray-1;
-      line-height: 23px
+      padding-right: 0.625rem;
+      border-right: 0.0625rem solid $color__gray-1;
+      line-height: 1.4375rem
     }
 
     .bx--dropdown {
-      font-size: 14px;
+      font-size: 0.875rem;
       background-color: transparent;
       box-shadow: none;
       white-space: nowrap;
@@ -33,23 +33,23 @@
 
       .bx--list-box__label {
         color: $color__blue-51;
-        padding-right: 32px;
+        padding-right: 2rem;
         padding-top: 0.1rem;
       }
 
       .bx--list-box__field {
-        padding: 0 8px;
+        padding: 0 0.5rem;
         &:focus {
           box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-          outline: 1px solid transparent;
+          outline: 0.0625rem solid transparent;
           border: none;
        }
       }
 
       .bx--list-box__menu-item {
         color: $color__blue-90;
-        padding: 14px;
-        height: 26px;
+        padding: 0.875rem;
+        height: 1.625rem;
         font-weight: normal;
 
         &:hover, .bx--list-box__menu-item--highlighted {
@@ -101,20 +101,20 @@
 
       &:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
+        outline: 0.0625rem solid transparent;
         border: none;
       }
     }
   }
 
   .card-collapsed {
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
   }
 
   .card-container-container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 
     @media screen and (min-width: 81.25rem) {
       > div {
@@ -152,27 +152,27 @@
     .card-container {
       //--need-right-padding = 0 means last item in each line so no right padding
       //here need to dynamically calculate item numbers on each line after resizing
-      padding: 10px calc(20px * var(--need-right-padding)) 10px 0;
+      padding: 0.625rem calc(1.25rem * var(--need-right-padding)) 0.625rem 0;
 
       .card-content {
         display: flex;
         flex-direction: column;
-        height: 160px;
+        height: 10rem;
         min-width: 23.125rem;
         background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.0625rem 0.125rem 0rem;
 
         .card-name {
           font-weight: bold;
-          padding: 20px;
-          font-size: 16px;
+          padding: 1.25rem;
+          font-size: 1rem;
         }
 
        .card-count-content {
          display: flex;
-         padding: 10px;
+         padding: 0.625rem;
          height: 100%;
-         border-top: 1px solid $color__gray-1;
+         border-top: 0.0625rem solid $color__gray-1;
          align-items: center;
 
          > div {
@@ -183,20 +183,20 @@
           flex-basis: 100%;
           .empty {
             .empty-violations-img{
-              //32.5px is half width of empty img
-              padding-left: calc(50% - 32.5px);
+              //32.0.3125rem is half width of empty img
+              padding-left: calc(50% - 32.0.3125rem);
             }
           }
           .no-card-violations {
             text-align: center;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 0.75rem;
             color: $color__navy-gray-6;
           }
         }
 
          > div:first-child:not(.empty-violations-strip) {
-           border-right: 1px solid $color__gray-1;
+           border-right: 0.0625rem solid $color__gray-1;
          }
 
          .card-count-container {
@@ -205,22 +205,22 @@
            align-items: center;
            height: 100%;
            font-weight: bold;
-           font-size: 12px;
+           font-size: 0.75rem;
            color: $color__navy-gray-6;
-           padding: 10px 0;
+           padding: 0.625rem 0;
            outline: none;
 
            &:focus {
             box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-            outline: 1px solid transparent;
+            outline: 0.0625rem solid transparent;
             border: none;
           }
 
            &.violated, &.found, &.high {
             .card-count {
                .card-count-informations {
-                 font-size: 34px;
-                 padding-right: 3px;
+                 font-size: 2.125rem;
+                 padding-right: 0.1875rem;
                  color: $color__red-50;
                }
              }
@@ -240,10 +240,10 @@
 
           .card-count {
              display: flex;
-             height: 48px;
-             line-height: 34px;
+             height: 3rem;
+             line-height: 2.125rem;
              align-items: flex-end;
-             padding-bottom: 16px;
+             padding-bottom: 1rem;
              align-items: baseline;
              justify-content: center;
            }
@@ -254,20 +254,20 @@
   }
 }
 
-@media (max-width: 1222px) {
+@media (max-width: 76.375rem) {
   .card-container-container > div {
     flex-grow: 1;
     margin-left: -.625rem;
   }
 }
 
-@media (max-width: 1088px) {
+@media (max-width: 68rem) {
   .card-container-container > div {
     flex-grow: 0;
   }
 }
 
-@media (max-width: 799px) {
+@media (max-width: 49.9375rem) {
   .card-container-container > div {
     flex-grow: 1;
     margin-right: -.625rem;

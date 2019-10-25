@@ -16,36 +16,36 @@
   }
 
   .bx--tag.bx--tag--custom {
-    margin-left: 10px;
+    margin-left: 0.625rem;
     background-color: $grc_view_filter;
     color: $color__blue-90;
     font-size: .9rem;
     padding: .8rem;
-    line-height: 20px;
+    line-height: 1.25rem;
     white-space: nowrap;
 
     &:focus {
       box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-      outline: 1px solid transparent;
+      outline: 0.0625rem solid transparent;
       border: none;
     }
 
     .closeIcon {
       fill: $color__blue-90;
       cursor: pointer;
-      margin-left: 5px;
+      margin-left: 0.3125rem;
     }
   }
 
   .button {
     cursor: pointer;
     color: $color__blue-51;
-    font-size: 14px;
-    padding-left: 20px;
+    font-size: 0.875rem;
+    padding-left: 1.25rem;
 
     &:focus {
       box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-      outline: 1px solid transparent;
+      outline: 0.0625rem solid transparent;
       border: none;
     }
   }

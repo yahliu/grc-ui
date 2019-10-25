@@ -211,7 +211,7 @@ class ImpactedControlsModule extends React.Component {
               ringColor: $grc_color_radar_ring,
             }}
             axisLabelTextStyle={{
-              fontSize: '14px',
+              fontSize: '0.875rem',
               color: '#171717',
             }}
             onHover={(point) => {

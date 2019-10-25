@@ -12,25 +12,25 @@
 .module-policy-summary {
 
   .card-container-container {
-    padding-top: 24px;
+    padding-top: 1.5rem;
 
     .card-title {
-      font-size: 18px;
+      font-size: 1.125rem;
     }
 
     .card-container {
-      padding: 10px 20px 10px 0;
+      padding: 0.625rem 1.25rem 0.625rem 0;
 
       .card-content {
         display: flex;
         align-items: center;
         background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
-        height: 140px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.0625rem 0.125rem 0rem;
+        height: 8.75rem;
 
         .card-inner-content {
           display: flex;
-          padding: 0 140px 0 140px;
+          padding: 0 8.75rem 0 8.75rem;
           width: 100%;
           justify-content: space-around;
           align-items: center;
@@ -43,16 +43,16 @@
             color: $color__navy-gray-6;
 
             .card-count {
-              font-size: 34px;
+              font-size: 2.125rem;
               font-weight: bold;
-              padding-bottom: 15px;
+              padding-bottom: 0.9375rem;
             }
             .card-type {
               text-align: center;
-              font-size: 12px;
+              font-size: 0.75rem;
               font-variant: small-caps;
-              letter-spacing: 1px;
-              line-height: 16px;
+              letter-spacing: 0.0625rem;
+              line-height: 1rem;
               font-weight: bold;
             }
           }

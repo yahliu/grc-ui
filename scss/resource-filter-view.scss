@@ -9,7 +9,7 @@
 @import 'node_modules/carbon-components/scss/globals/scss/_colors';
 @import 'variables';
 
-$filter_sidebar_width: 300px;
+$filter_sidebar_width: 18.75rem;
 $filter_sidebar_animation_duration: 300ms;
 
 /* *********************  popup filter checkboxes modal ************************ */
@@ -22,9 +22,9 @@ $filter_sidebar_animation_duration: 300ms;
   color: $color__white;
   background-color: $color__blue-90;
   width: $filter_sidebar_width;
-  padding: 30px;
-  border-top: 5px solid $color__blue-50;
-  font-size: 14px;
+  padding: 1.875rem;
+  border-top: 0.3125rem solid $color__blue-50;
+  font-size: 0.875rem;
 
   &.transition-enter {
     right: -$filter_sidebar_width;
@@ -45,15 +45,15 @@ $filter_sidebar_animation_duration: 300ms;
     align-items: center;
 
     .titleIcon {
-      width: 12px;
-      height: 12px;
+      width: 0.75rem;
+      height: 0.75rem;
       fill: $color__white;
       stroke: none;
     }
 
     .titleText {
       font-size: 1.2rem;
-      padding-left: 10px;
+      padding-left: 0.625rem;
     }
 
     .closeIcon {
@@ -65,7 +65,7 @@ $filter_sidebar_animation_duration: 300ms;
 
       &:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
+        outline: 0.0625rem solid transparent;
         border: none;
       }
     }
@@ -74,25 +74,25 @@ $filter_sidebar_animation_duration: 300ms;
   .filter-sections-container {
 
     .filter-sections-scrollbar {
-      width: 10px;
+      width: 0.625rem;
       visibility: hidden;
     }
 
     .filter-section {
-      margin: 1.5rem 0 5px 5px;
+      margin: 1.5rem 0 0.3125rem 0.3125rem;
 
       .filter-section-title {
         margin-bottom: .5rem;
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 600;
       }
 
       .filter-section-checkbox {
-        font-size: 12px;
+        font-size: 0.75rem;
       }
 
       .filter-section-expand {
-        font-size: 12px;
+        font-size: 0.75rem;
         color: $color__blue-30;
         cursor: pointer;
         outline: none;

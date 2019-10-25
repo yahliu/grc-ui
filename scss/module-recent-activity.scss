@@ -15,28 +15,28 @@
     margin-bottom: .45rem;
 
     .card-title {
-      margin: 10px 0px;
-      font-size: 18px;
+      margin: 0.625rem 0rem;
+      font-size: 1.125rem;
     }
 
     .violation-container {
       display: flex;
       justify-content: space-between;
-      padding: 30px 20px 0 0;
+      padding: 1.875rem 1.25rem 0 0;
     }
 
     .card-container {
-      padding: 10px 20px 10px 0;
+      padding: 0.625rem 1.25rem 0.625rem 0;
       .card-content {
         display: flex;
         align-items: center;
-        height: 140px;
+        height: 8.75rem;
         background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.0625rem 0.125rem 0rem;
 
         .card-inner-content {
           display: flex;
-          padding: 0 140px 0 140px;
+          padding: 0 8.75rem 0 8.75rem;
           width: 100%;
           justify-content: space-between;
           align-items: center;
@@ -52,13 +52,13 @@
             align-items: center;
 
             svg.card-count-pie {
-              width: 34px;
-              height: 34px;
-              margin-right: 8px;
-              margin-bottom: 9px;
+              width: 2.125rem;
+              height: 2.125rem;
+              margin-right: 0.5rem;
+              margin-bottom: 0.5625rem;
               overflow: visible;
               g {
-                transform: translate(15px, 15px);
+                transform: translate(0.9375rem, 0.9375rem);
               }
             }
           }
@@ -73,25 +73,25 @@
 
             &:focus {
               box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-              outline: 1px solid transparent;
+              outline: 0.0625rem solid transparent;
               border: none;
             }
 
             &.hasBorder {
-              border-right: 1px solid $color__gray-1;
-              padding-right: 80px;
+              border-right: 0.0625rem solid $color__gray-1;
+              padding-right: 5rem;
             }
 
             .no-result-dash {
               width: 70%;
               text-align: center;
-              font-size: 24px;
-              letter-spacing: 1px;
-              line-height: 16px;
+              font-size: 1.5rem;
+              letter-spacing: 0.0625rem;
+              line-height: 1rem;
               color: $color__navy-gray-6;
-              margin-bottom: 32px;
+              margin-bottom: 2rem;
               position: relative;
-              bottom: -10px;
+              bottom: -0.625rem;
               font-weight: 300;
               overflow: hidden;
               text-overflow: clip;
@@ -100,10 +100,10 @@
             }
 
             .card-count {
-              font-size: 34px;
+              font-size: 2.125rem;
               font-weight: bold;
               color: $color__navy-gray-6;
-              padding-bottom: 15px;
+              padding-bottom: 0.9375rem;
               &.alert {
                 color: $grc_color_finding_high;
               }
@@ -111,10 +111,10 @@
             .card-type {
               // width: 70%;
               text-align: center;
-              font-size: 12px;
+              font-size: 0.75rem;
               font-variant: small-caps;
-              letter-spacing: 1px;
-              line-height: 16px;
+              letter-spacing: 0.0625rem;
+              line-height: 1rem;
               font-weight: bold;
               color: $color__navy-gray-6;
             }

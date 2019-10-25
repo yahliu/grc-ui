@@ -35,9 +35,9 @@
       .bx--module {
         flex: 1 0 50%;
         max-width: 100%;
-        min-height: 100px;
+        min-height: 6.25rem;
         .bx--module__inner {
-          min-height: 100px ;
+          min-height: 6.25rem ;
           flex: 1 0 50%;
           position: relative;
           overflow: auto;
@@ -51,7 +51,7 @@
             }
           }
           .bx--structured-list-th:first-child {
-            min-width: 150px;
+            min-width: 9.375rem;
           }
         }
   
@@ -63,7 +63,7 @@
       text-align: center;
       .bx--module__inner{
         .bx--module__content{
-          height: 150px;
+          height: 9.375rem;
           .new-structured-list{
             height: 100%;
             display: flex;
@@ -92,7 +92,7 @@
       .vertical-divider {
         background-color: $color__gray-1;
         height: auto;
-        min-width: 1px;
+        min-width: 0.0625rem;
       }
   
       }
@@ -118,13 +118,13 @@
               span{
                 color: $color__blue-51;
               }
-              border: 1px solid $color__gray-1;
+              border: 0.0625rem solid $color__gray-1;
               border-left: hidden;
               font-size: smaller;
               padding-left: 0;
             }
             td{
-              border: 1px solid $color__gray-1;
+              border: 0.0625rem solid $color__gray-1;
               border-left: hidden;
               font-size: smaller;
               padding-left: 0;

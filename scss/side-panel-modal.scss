@@ -34,13 +34,13 @@
 
       .bx--modal-close:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
+        outline: 0.0625rem solid transparent;
         border: none;
      }
     }
   
     .special-header {
-      border-bottom: 1px solid $color__gray-1;
+      border-bottom: 0.0625rem solid $color__gray-1;
     }
   
     .bx--loading {
@@ -80,18 +80,18 @@
       height: 100%;
       max-height: 100%;
       top: 3.3rem;
-      right: 5px;
+      right: 0.3125rem;
       z-index: 2000;
       color: white;
       background-color: white;
       width: 50%;
-      padding: 30px;
-      font-size: 14px;
+      padding: 1.875rem;
+      font-size: 0.875rem;
   
       .bx--parent-row-v2 {
         .bx--link:focus {
           box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-          outline: 1px solid transparent;
+          outline: 0.0625rem solid transparent;
           border: none;
         }
 
@@ -107,7 +107,7 @@
           .bx--table-expand-v2__button {
             &:focus svg {
               box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-              outline: 1px solid transparent;
+              outline: 0.0625rem solid transparent;
               border: none;
             }
 
@@ -127,7 +127,7 @@
           .bx--table-expand-v2__button {
             &:focus svg {
               box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-              outline: 1px solid transparent;
+              outline: 0.0625rem solid transparent;
               border: none;
             }
             
@@ -159,7 +159,7 @@
           tbody {
             border-bottom: none;
             tr:not(:last-child) {
-              border-bottom: 1px $color__navy-gray-8 solid;
+              border-bottom: 0.0625rem $color__navy-gray-8 solid;
             }
             tr:last-child {
               border-bottom: none;
@@ -170,7 +170,7 @@
       thead {
         border: none;
         tr {
-          border-bottom: 1px $color__navy-gray-6 solid;
+          border-bottom: 0.0625rem $color__navy-gray-6 solid;
           background-color: white;
           th {
             border: none;
@@ -197,7 +197,7 @@
         border: none;
         tr {
           border: none;
-          border-bottom: 1px $color__navy-gray-8 solid;
+          border-bottom: 0.0625rem $color__navy-gray-8 solid;
           td {
             p {
               font-weight: 400;

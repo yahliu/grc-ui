@@ -645,8 +645,8 @@ exports[`TemplateEditor component renders as expected 1`] = `
             title="Previous"
           >
             <svg
-              height="16px"
-              width="16px"
+              height="1rem"
+              width="1rem"
             >
               <use
                 href="#diagramIcons_previous"
@@ -663,8 +663,8 @@ exports[`TemplateEditor component renders as expected 1`] = `
             title="Next"
           >
             <svg
-              height="16px"
-              width="16px"
+              height="1rem"
+              width="1rem"
             >
               <use
                 href="#diagramIcons_next"
@@ -684,8 +684,8 @@ exports[`TemplateEditor component renders as expected 1`] = `
             title="Undo"
           >
             <svg
-              height="16px"
-              width="16px"
+              height="1rem"
+              width="1rem"
             >
               <use
                 href="#diagramIcons_undo"
@@ -702,8 +702,8 @@ exports[`TemplateEditor component renders as expected 1`] = `
             title="Redo"
           >
             <svg
-              height="16px"
-              width="16px"
+              height="1rem"
+              width="1rem"
             >
               <use
                 href="#diagramIcons_redo"
@@ -720,8 +720,8 @@ exports[`TemplateEditor component renders as expected 1`] = `
             title="Restore"
           >
             <svg
-              height="16px"
-              width="16px"
+              height="1rem"
+              width="1rem"
             >
               <use
                 href="#diagramIcons_restore"

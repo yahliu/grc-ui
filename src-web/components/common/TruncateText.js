@@ -34,13 +34,15 @@ class TruncateText extends React.PureComponent {
     }
 
     return (
-      <Tooltip
-        triggerClassName="textWithTruncation"
-        showIcon={false}
-        text={this.props.text}
-        triggerText={truncate(this.props.text, this.props.maxCharacters)} >
-        {this.props.text}
-      </Tooltip>
+      <div className='policyViolations'>
+        <Tooltip
+          triggerClassName="textWithTruncation"
+          showIcon={false}
+          text={this.props.text}
+          triggerText={truncate(this.props.text, this.props.maxCharacters)} >
+          {this.props.text}
+        </Tooltip>
+      </div>
     )
   }
 }

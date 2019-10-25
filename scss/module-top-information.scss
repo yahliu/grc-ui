@@ -12,7 +12,7 @@
 .module-top-information {
   width: 49%;
   background: white;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.0625rem 0.125rem 0rem;
 
   .no-informations {
     display: flex;
@@ -22,21 +22,21 @@
     width: 20rem;
 
     .no-informations-icon {
-      width: 175px;
-      height: 240px;
+      width: 10.9375rem;
+      height: 15rem;
     }
 
     .no-informations-title {
       font-weight: bold;
-      margin-bottom: 9px;
-      font-size: 18px;
+      margin-bottom: 0.5625rem;
+      font-size: 1.125rem;
       text-align: center;
       color: $grc_color_blue;
     }
 
     .no-informations-detail {
       font-weight: 300;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-style: italic;
       text-align: center;
       line-height: 1.2;
@@ -47,17 +47,17 @@
   .header-container {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $color__gray-1;
-    padding: 0 20px;
-    height: 40px;
+    border-bottom: 0.0625rem solid $color__gray-1;
+    padding: 0 1.25rem;
+    height: 2.5rem;
 
     .header-title {
       width: 50%;
-      font-size: 14px;
+      font-size: 0.875rem;
       font-weight: bold;
-      line-height: 23px;
+      line-height: 1.4375rem;
       &.hasChoice {
-        border-right: 1px solid $color__gray-1;
+        border-right: 0.0625rem solid $color__gray-1;
       }
     }
     .header-tab {
@@ -71,17 +71,17 @@
         }
         .bx--tabs__nav-link:focus {
           box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-          outline: 1px solid transparent;
+          outline: 0.0625rem solid transparent;
           border: none;
         }
       }
       .bx--tabs__nav-item:focus {
-        border : 1px solid $color__gray-1;
+        border : 0.0625rem solid $color__gray-1;
       }
     }
 
     .bx--dropdown {
-      font-size: 14px;
+      font-size: 0.875rem;
       background-color: transparent;
       box-shadow: none;
       white-space: nowrap;
@@ -89,23 +89,23 @@
 
       .bx--list-box__label {
         color: $color__blue-51;
-        padding-right: 32px;
+        padding-right: 2rem;
         padding-top: 0.1rem;
       }
 
       .bx--list-box__field {
-        padding: 0 8px;
+        padding: 0 0.5rem;
         &:focus {
           box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-          outline: 1px solid transparent;
+          outline: 0.0625rem solid transparent;
           border: none;
        }
       }
 
       .bx--list-box__menu-item {
         color: $color__blue-90;
-        padding: 14px;
-        height: 26px;
+        padding: 0.875rem;
+        height: 1.625rem;
         font-weight: normal;
 
         &:hover, .bx--list-box__menu-item--highlighted {
@@ -129,11 +129,11 @@
 
     .single-strip {
       padding: 0;
-      border-bottom: 1px solid $color__gray-1;
+      border-bottom: 0.0625rem solid $color__gray-1;
       &:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
-        border-bottom: 3px solid $grc_focus_shaldow_color;
+        outline: 0.0625rem solid transparent;
+        border-bottom: 0.1875rem solid $grc_focus_shaldow_color;
       }
 
       &:hover {
@@ -158,7 +158,7 @@
 
       .information-card-content {
         display: flex;
-        max-height: 140px;
+        max-height: 8.75rem;
         background-color: white;
 
        .card-inner-content {
@@ -168,18 +168,18 @@
           .card-informations {
             display: flex;
             flex-direction: column;
-            flex: 0 0 100px;
+            flex: 0 0 6.25rem;
             align-items: center;
             justify-content: center;
             outline: none;
             &:focus {
               box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-              outline: 1px solid transparent;
+              outline: 0.0625rem solid transparent;
               border: none;
             }
 
             .card-information-count {
-              font-size: 34px;
+              font-size: 2.125rem;
               font-weight: bold;
               color: $color__navy-gray-6;
               &.alert {
@@ -200,25 +200,25 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            padding: 0px 10px;
-            height: 110px;
+            padding: 0rem 0.625rem;
+            height: 6.875rem;
 
             .card-name {
-              padding-right: 40px;
+              padding-right: 2.5rem;
               display: flex;
               flex-wrap: wrap;
               font-weight: bold;
-              padding-bottom: 5px;
+              padding-bottom: 0.3125rem;
               color: $color__blue-90;
             }
 
             .card-description {
-              padding-right: 40px;
+              padding-right: 2.5rem;
               font-style: italic;
-              font-size: 12px;
+              font-size: 0.75rem;
               color: $color__navy-gray-6;
-              line-height: 18px;
-              max-height: 36px;
+              line-height: 1.125rem;
+              max-height: 2.25rem;
               overflow: hidden;
 
               .LinesEllipsis {
@@ -232,7 +232,7 @@
 
     .empty-strip {
       padding: 0;
-      border-bottom: 1px solid $color__gray-1;
+      border-bottom: 0.0625rem solid $color__gray-1;
       &:hover {
         cursor: default;
       }
@@ -244,20 +244,20 @@
   }
 }
 
-@media (max-width: 1222px) {
+@media (max-width: 76.375rem) {
   .card-container-container > div {
     flex-grow: 1;
     margin-left: -.625rem;
   }
 }
 
-@media (max-width: 1088px) {
+@media (max-width: 68rem) {
   .card-container-container > div {
     flex-grow: 0;
   }
 }
 
-@media (max-width: 799px) {
+@media (max-width: 49.9375rem) {
   .card-container-container > div {
     flex-grow: 1;
     margin-right: -.625rem;

@@ -103,7 +103,7 @@ class EditorBar extends React.Component {
                   itemText={
                     <div className='item-container'>
                       <div className='item-icon'>
-                        <svg width="12px" height="12px">
+                        <svg width="0.75rem" height="0.75rem">
                           <use href={'#diagramIcons_failure'} ></use>
                         </svg></div>
                       <div>
@@ -133,7 +133,7 @@ class EditorBar extends React.Component {
     }).join('\n')
     return (
       <div title={tooltips} {...props} >
-        <svg width="12px" height="12px">
+        <svg width="0.75rem" height="0.75rem">
           <use href={'#diagramIcons_failure'} ></use>
         </svg>
       </div>
@@ -178,7 +178,7 @@ class EditorButton extends React.Component {
       return (
         <div className={classes} tabIndex={0} role={'button'} aria-label={tooltip} title={tooltip}
           onClick={this.handleClick} onKeyPress={this.handleKeyPress} >
-          <svg width="16px" height="16px">
+          <svg width="1rem" height="1rem">
             <use href={`#diagramIcons_${icon}`} ></use>
           </svg>
         </div>

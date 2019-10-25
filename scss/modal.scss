@@ -19,12 +19,12 @@
 
   .bx--modal-header {
     padding: 1.25rem 3rem 1.25rem 3rem;
-    border-bottom: 1px solid $color__gray-1;
+    border-bottom: 0.0625rem solid $color__gray-1;
     margin-bottom: 0;
 
     .bx--modal-close:focus {
       box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-      outline: 1px solid transparent;
+      outline: 0.0625rem solid transparent;
       border: none;
     }  
   }
@@ -54,7 +54,7 @@
 
     &-data {
       width: 100%;
-      border-bottom: 1px solid $color__gray-1;
+      border-bottom: 0.0625rem solid $color__gray-1;
       padding-bottom: 0.4rem;
     }
   }
@@ -68,7 +68,7 @@
 
       .bx--modal-close:focus {
         box-shadow: 0 0 0 $grc_focus_shaldow_width $grc_focus_shaldow_color;
-        outline: 1px solid transparent;
+        outline: 0.0625rem solid transparent;
         border: none;
       }  
     }
