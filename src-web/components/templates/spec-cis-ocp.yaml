@@ -7,9 +7,11 @@ multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   standards: |
-    CIS
+    NIST-CSF
   categories: |
     CisComplianceOCP
+  controls: |
+    Cis
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

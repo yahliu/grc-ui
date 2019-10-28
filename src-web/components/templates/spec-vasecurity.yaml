@@ -6,16 +6,18 @@ description:
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST-CSF
   categories: |
-    DetectImageVulnerabilities
+    IdentityManagementAndAccessControl
+  controls: |
+    VulnerbilityAdvisor
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
         kind: VulnerabilityPolicy # detect image vulnerabilities
         metadata:
           name: {{name}}-example
-          label:
-            category: "System-Integrity"
         spec:
           namespaceSelector:
             include: ["default","kube-*"]

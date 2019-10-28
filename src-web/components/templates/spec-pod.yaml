@@ -6,8 +6,12 @@ description:
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST-CSF
   categories: |
-    EnsurePodExists
+    SecurityContinuousMonitoring
+  controls: |
+    Other
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

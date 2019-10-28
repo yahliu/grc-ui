@@ -6,8 +6,12 @@ description:
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST-CSF
   categories: |
-    ControlRolePrivileges
+    IdentityManagementAndAccessControl
+  controls: |
+    Other
   roleTemplates: |
     - apiVersion: roletemplate.mcm.ibm.com/v1alpha1 # role must follow defined permissions
       metadata:

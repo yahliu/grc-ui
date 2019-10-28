@@ -159,7 +159,7 @@ function createTestPolicy(browser, time) {
   this.setValue('@policyNameInput',`${time}-policy-test`)
 
   this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
+  this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'Namespace')
   this.click('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@templateDropdownBox').not.to.be.present
 
@@ -168,20 +168,20 @@ function createTestPolicy(browser, time) {
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
 
-  this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
-  this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.click('@standardsDropdown').expect.element('@standardsDropdownBox').not.to.be.present
+  // this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
+  // this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
+  // this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  // this.click('@standardsDropdown').expect.element('@standardsDropdownBox').not.to.be.present
 
-  this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SystemAndInformationIntegrity')
-  this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
+  // this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
+  // this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SecurityContinuousMonitoring')
+  // this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  // this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
 
-  this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
-  // this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
-  this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
+  // this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
+  // // this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
+  // this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
+  // this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
 
   this.waitForElementNotPresent('@spinner')
 
@@ -217,7 +217,7 @@ function testDetailsPage(browser, name) {
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('placement-' + name)
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement binding')
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('binding-' + name)
-  this.expect.element('.overview-content > div:nth-child(3) > .section-title').text.to.equal('Policy templates')
+  this.expect.element('.overview-content > div:nth-child(3) > .section-title').text.to.equal('Object templates')
   //violation tab test
   this.expect.element('#violation-tab').to.be.present
   this.click('#violation-tab')

@@ -6,16 +6,18 @@ description:
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST-CSF
   categories: |
-    KubeSecretsEncyption
+    SecurityContinuousMonitoring
+  controls: |
+    SecretEncryption
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
         kind: SecretEncryptionPolicy # Kubernetes secrets encryption
         metadata:
           name: {{name}}-example
-          label:
-            category: "System-Integrity"
         spec:
           # namespaceSelector does not play a role in secret encryption yet. At least one namespace must be put under include,
           # but particular namespaces under include and exclude will be ignored
