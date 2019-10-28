@@ -159,7 +159,7 @@ function createTestPolicy(browser, time) {
   this.setValue('@policyNameInput',`${time}-policy-test`)
 
   this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
-  this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'Namespace')
+  this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
   this.click('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.expect.element('@templateDropdownBox').not.to.be.present
 
@@ -217,7 +217,7 @@ function testDetailsPage(browser, name) {
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('placement-' + name)
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement binding')
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('binding-' + name)
-  this.expect.element('.overview-content > div:nth-child(3) > .section-title').text.to.equal('Object templates')
+  this.expect.element('.overview-content > div:nth-child(3) > .section-title').text.to.equal('Policy templates')
   //violation tab test
   this.expect.element('#violation-tab').to.be.present
   this.click('#violation-tab')

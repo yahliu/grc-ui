@@ -3,11 +3,11 @@ name:
   Role
 description:
   role must follow defined permissions
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    ControlRolePrivileges
   roleTemplates: |
     - apiVersion: roletemplate.mcm.ibm.com/v1alpha1 # role must follow defined permissions
       metadata:

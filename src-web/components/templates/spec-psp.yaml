@@ -3,11 +3,11 @@ name:
   PodSecurityPolicy
 description:
   no privileged pods
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    ControlPodPrivileges
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

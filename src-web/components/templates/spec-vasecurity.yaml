@@ -1,15 +1,13 @@
-policy-templates:
-
 # an available choice for the specs control
 name:
   VulnerabilityPolicy
 description:
   detect image vulnerabilities
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    DetectImageVulnerabilities
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

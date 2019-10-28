@@ -92,7 +92,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="creation.view.policy.select.specs"
+              placeholder={undefined}
               role="combobox"
               value=""
             />
@@ -184,7 +184,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="creation.view.policy.select.selectors"
+              placeholder={undefined}
               role="combobox"
               value=""
             />
@@ -276,7 +276,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="creation.view.policy.select.standards"
+              placeholder={undefined}
               role="combobox"
               value=""
             />
@@ -368,7 +368,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="creation.view.policy.select.categories"
+              placeholder={undefined}
               role="combobox"
               value=""
             />
@@ -460,7 +460,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
               onBlur={[Function]}
               onChange={[Function]}
               onKeyDown={[Function]}
-              placeholder="creation.view.policy.select.controls"
+              placeholder={undefined}
               role="combobox"
               value=""
             />

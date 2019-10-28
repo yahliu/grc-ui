@@ -3,11 +3,11 @@ name:
   LimitRange
 description:
   limit memory usage
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    LimitMemoryUsage
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

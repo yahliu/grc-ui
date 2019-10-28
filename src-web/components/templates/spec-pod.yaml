@@ -3,11 +3,11 @@ name:
   Pod
 description:
   nginx pod must exist
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    EnsurePodExists
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

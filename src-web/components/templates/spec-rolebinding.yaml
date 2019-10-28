@@ -3,11 +3,11 @@ name:
   RoleBinding
 description:
   role binding must exist
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    EnsureRoleBinding
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

@@ -3,11 +3,11 @@ name:
   Namespace
 description:
   must have namespace 'prod'
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    EnsureNamespaceExists
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

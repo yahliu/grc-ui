@@ -3,11 +3,11 @@ name:
   IamPolicy
 description:
   limit clusteradminrole and report violation in IAM RBAC
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    LimitAdminRole
   policyTemplates: |
     - objectDefinition:
         apiVersion: iam.policies.ibm.com/v1alpha1

@@ -8,36 +8,16 @@
  *******************************************************************************/
 'use strict'
 
-import specPodRole from './spec-rolebinding.yaml'
-import specPodSecurity from './spec-psp.yaml'
-import specPodNetwork from './spec-network.yaml'
-import specPodLimit from './spec-mem-limit.yaml'
-import specPodExists from './spec-pod.yaml'
-import specRoles from './spec-roles.yaml'
-import specNamespace from './spec-namespace.yaml'
-import specClustadminrole from './spec-clusteradminrole.yaml'
-import specCertmgmtexp from './spec-certmgmtexp.yaml'
-import specMutationAdvisor from './spec-mutationadvisor.yaml'
-import specVAsecurity from './spec-vasecurity.yaml'
-import specKubeEncryption from './spec-kubeencryption.yaml'
-import specAudit from './spec-audit.yaml'
-import specCis from './spec-cis.yaml'
-import specCisOcp from './spec-cis-ocp.yaml'
+import nistDEAE from './nist-de-ae.yaml'
+import nistDECM from './nist-de-cm.yaml'
+import nistPRAC from './nist-pr-ac.yaml'
+import nistPRDS from './nist-pr-ds.yaml'
+import nistRSMI from './nist-rs-mi.yaml'
 
 export {
-  specPodRole,
-  specPodSecurity,
-  specPodNetwork,
-  specPodLimit,
-  specPodExists,
-  specRoles,
-  specNamespace,
-  specClustadminrole,
-  specCertmgmtexp,
-  specMutationAdvisor,
-  specVAsecurity,
-  specKubeEncryption,
-  specAudit,
-  specCis,
-  specCisOcp,
+  nistDEAE,
+  nistDECM,
+  nistPRAC,
+  nistPRDS,
+  nistRSMI,
 }

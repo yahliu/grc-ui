@@ -211,7 +211,7 @@ export default class TemplateEditor extends React.Component {
 
   renderMultiselect(control) {
     const {locale} = this.props
-    const {id, name, prompt, description, isOneSelection} = control
+    const {id, name, placeholder:ph, description, isOneSelection} = control
 
     // see if we need to add user additions to available (from editing the yaml file)
     const {userData, userMap, hasCapturedUserSource} = control
@@ -228,7 +228,7 @@ export default class TemplateEditor extends React.Component {
     }
 
     // place holder
-    let placeholder = prompt
+    let placeholder = ph
     if (active.length>0) {
       const activeKeys = []
       active.forEach(key=>{
@@ -368,7 +368,8 @@ export default class TemplateEditor extends React.Component {
       const nname = controlData.find(({id})=>id==='name')
       if (nname) {
         if (control.active.length>0) {
-          cname = control.updateNamePrefix+control.availableMap[control.active[0]].name
+          cname = control.updateNamePrefix +
+            control.availableMap[control.active[0]].name.replace(/\W/g, '-')
         } else {
           cname = this.props.controlData.find(({id})=>id==='name').active
         }

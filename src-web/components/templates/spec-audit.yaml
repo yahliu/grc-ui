@@ -3,11 +3,11 @@ name:
   AuditPolicy
 description:
   Verify if audit is enabled
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
   categories: |
-    SystemAndCommunicationsProtections
+    VerifyAuditEnabled
   policyTemplates: |
     - objectDefinition:
         apiVersion: audit.policies.ibm.com/v1alpha1

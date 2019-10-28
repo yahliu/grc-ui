@@ -51,7 +51,7 @@ const controlData = [
   {
     name: 'creation.view.policy.specs',
     description: 'policy.create.specs.tooltip',
-    prompt: 'creation.view.policy.select.specs',
+    placeholder: 'creation.view.policy.select.specs',
     id: 'specs',
     type: 'multiselect',
     available: [],
@@ -67,7 +67,7 @@ const controlData = [
   {
     name: 'creation.view.policy.binding',
     description: 'policy.create.selectors.tooltip',
-    prompt: 'creation.view.policy.select.selectors',
+    placeholder: 'creation.view.policy.select.selectors',
     id: 'clusters',
     type: 'multiselect',
     available: [],
@@ -77,7 +77,7 @@ const controlData = [
   {
     name: 'creation.view.policy.standards',
     description: 'policy.create.standards.tooltip',
-    prompt: 'creation.view.policy.select.standards',
+    placeholder: 'creation.view.policy.select.standards',
     id: 'standards',
     type: 'multiselect',
     available: ['NIST', 'PCI', 'FISMA', 'HIPAA'],
@@ -86,7 +86,7 @@ const controlData = [
   {
     name: 'creation.view.policy.categories',
     description: 'policy.create.categories.tooltip',
-    prompt: 'creation.view.policy.select.categories',
+    placeholder: 'creation.view.policy.select.categories',
     id: 'categories',
     type: 'multiselect',
     available: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
@@ -95,7 +95,7 @@ const controlData = [
   {
     name: 'creation.view.policy.controls',
     description: 'policy.create.controls.tooltip',
-    prompt: 'creation.view.policy.select.controls',
+    placeholder: 'creation.view.policy.select.controls',
     id: 'controls',
     type: 'multiselect',
     available: ['MutationAdvisor','VulnerbilityAdvisor','SecretEncryption'],
@@ -154,7 +154,7 @@ const getControlData = (discovered, locale) => {
     // add preset spec choices from yaml
     const controlMap = _.keyBy(mergedData, 'id')
     Object.values(Choices).forEach(choice=>{
-      const available = _.get(controlMap, `${choice.control}.available`)
+      const available = _.get(controlMap, `${choice.multiselect}.available`)
       if (available) {
         available.push(choice)
       }
@@ -173,7 +173,7 @@ const getControlData = (discovered, locale) => {
 
     // convert message keys
     mergedData.forEach(control=>{
-      ['name', 'description', 'prompt'].forEach(key=>{
+      ['name', 'description', 'placeholder'].forEach(key=>{
         if (control[key]) {
           control[key] = msgs.get(control[key], locale)
         }

@@ -3,11 +3,13 @@ name:
   CisPolicy
 description:
   cis compliance
-control:
+multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    CIS
   categories: |
-    SystemAndCommunicationsProtections
+    CisCompliance
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

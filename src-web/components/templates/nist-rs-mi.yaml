@@ -1,13 +1,19 @@
 # an available choice for the specs control
 name:
-  MutationPolicy
+  NIST RS.MI
 description:
-  no mutation allowed
+  Prevent expansion of an event
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST
   categories: |
-    PreventMutations
+    PreventEventExpansion
+  controls: |
+    MutationAdvisor
+  enforce:
+    enforce
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

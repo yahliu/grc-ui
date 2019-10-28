@@ -1,13 +1,17 @@
 # an available choice for the specs control
 name:
-  MutationPolicy
+  NIST DE.AE
 description:
-  no mutation allowed
+  Detect anomalous activity
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST
   categories: |
-    PreventMutations
+    DetectAnomalousActivity
+  controls: |
+    VulnerbilityAdvisor
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
@@ -24,3 +28,16 @@ replacements: # if user select this choice, the template variable names and valu
           severity: medium
           conditions:
             ownership: ["ReplicaSet", "Deployment", "DeamonSet", "ReplicationController", "none"]
+  objectTemplates: |
+    - complianceType: musthave
+      objectDefinition:
+        kind: NetworkPolicy # deny network request
+        apiVersion: networking.k8s.io/v1
+        metadata:
+          name: deny-from-other-namespaces
+        spec:
+          podSelector:
+            matchLabels:
+          ingress:
+          - from:
+            - podSelector: {} # accept ingress from all pods within this namespace only

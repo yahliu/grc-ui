@@ -1,13 +1,17 @@
 # an available choice for the specs control
 name:
-  SecretEncryptionPolicy
+  NIST DE.CM
 description:
-  Kubernetes secrets encryption
+  Information system and assets are monitored
 multiselect:
   specs
 replacements: # if user select this choice, the template variable names and values to use
+  standards: |
+    NIST
   categories: |
-    KubeSecretsEncyption
+    SecurityContinuousMonitoring
+  controls: |
+    VulnerbilityAdvisor, SecretEncryption
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
@@ -29,3 +33,17 @@ replacements: # if user select this choice, the template variable names and valu
           encryptionMechanism: aescbc
           # Indicates the severity of noncompliance, used for MCM display. Can be low, medium, or high
           severity: low
+  objectTemplates: |
+    - complianceType: musthave
+      objectDefinition:
+        apiVersion: v1
+        kind: LimitRange # limit memory usage
+        metadata:
+          name: mem-limit-range
+        spec:
+          limits:
+          - default:
+              memory: 512Mi
+            defaultRequest:
+              memory: 256Mi
+            type: Container
