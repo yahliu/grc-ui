@@ -62,14 +62,14 @@ function verifySummary(browser, url) {
   browser.pause(1000)//wait 1s for every click
   const dropdownBox = 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
   //Categories summary
-  this.click(dropdownBox + ' > div:nth-child(1)')
+  this.click(dropdownBox + ' > div:nth-child(2)')
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
   browser.pause(1000)//wait 1s for checkPolicySummaryCards func
   //Standards summary
   this.click('@summaryDropdown')
   browser.pause(1000)
-  this.click(dropdownBox + ' > div:nth-child(2)')
+  this.click(dropdownBox + ' > div:nth-child(1)')
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
 }
