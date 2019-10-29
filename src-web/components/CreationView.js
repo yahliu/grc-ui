@@ -111,6 +111,15 @@ const controlData = [
     reverse: 'Policy[0].spec.remediationAction',
     mustExist: true,
   },
+  {
+    name: 'creation.view.policy.disabled',
+    description: 'policy.create.disabled.tooltip',
+    id: 'disabled',
+    type: 'checkbox',
+    active: true,
+    available: [true, false],  // in template, 'inform'===checkbox unchecked
+    reverse: 'Policy[0].spec.disabled',
+  },
 ]
 
 

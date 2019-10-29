@@ -765,6 +765,7 @@ metadata:
 spec:
   complianceType: musthave
   remediationAction: inform
+  disabled: false
   namespaces:
     exclude: [\\"kube-*\\"]
     include: [\\"default\\"]

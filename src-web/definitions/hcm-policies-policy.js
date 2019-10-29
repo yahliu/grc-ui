@@ -21,6 +21,7 @@ export default {
   tableActions: [
     'table.actions.policy.sidepanel',
     'table.actions.edit',
+    'table.actions.disable',
     'table.actions.remove',
   ],
   tableKeys: [

@@ -40,6 +40,18 @@ export const resourceActions = (action, dispatch, resourceType, data, hasService
         label: { primaryBtn: `modal.remove-${resourceType.name.toLowerCase()}.heading`, label: `modal.remove-${resourceType.name.toLowerCase()}.label`, heading: `modal.remove-${resourceType.name.toLowerCase()}.heading` },
         data: { apiVersion: resourceType.api_version, kind: resourceType.name, ...data }}))
   }
+  case 'table.actions.disable': {
+    return dispatch(updateModal(
+      { open: true, type: 'resource-disable', resourceType,
+        label: { primaryBtn: `modal.disable-${resourceType.name.toLowerCase()}.heading`, label: `modal.disable-${resourceType.name.toLowerCase()}.label`, heading: `modal.disable-${resourceType.name.toLowerCase()}.heading` },
+        data: { apiVersion: resourceType.api_version, kind: resourceType.name, ...data }}))
+  }
+  case 'table.actions.enable': {
+    return dispatch(updateModal(
+      { open: true, type: 'resource-enable', resourceType,
+        label: { primaryBtn: `modal.enable-${resourceType.name.toLowerCase()}.heading`, label: `modal.enable-${resourceType.name.toLowerCase()}.label`, heading: `modal.enable-${resourceType.name.toLowerCase()}.heading` },
+        data: { apiVersion: resourceType.api_version, kind: resourceType.name, ...data }}))
+  }
   case 'table.actions.cluster.view.nodes':{
     history.push(`${config.contextPath}/nodes?filters={"cluster":["${data.metadata.name}"]}`)
     return

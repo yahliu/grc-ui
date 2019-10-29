@@ -101,8 +101,28 @@ export class PolicyDetailsOverview extends React.PureComponent{
 
     const clusterStatus = this.getClusterStatus(item)
 
-    const modulesSecond = [<StructuredListModule key='placementPolicies' rowsKey='placementPoliciesKeys' actions={['table.actions.edit']} staticResourceData={staticResourceData} clusterStatus={clusterStatus} location={location} resourceType={resourceType} textEditButton left />,
-      <StructuredListModule key='placementBindings' rowsKey='placementBindingKeys' actions={['table.actions.edit']} staticResourceData={staticResourceData} resourceType={resourceType} textEditButton right />,]
+    const modulesSecond = [
+      <StructuredListModule
+        key='placementPolicies'
+        rowsKey='placementPoliciesKeys'
+        actions={['table.actions.edit']}
+        staticResourceData={staticResourceData}
+        clusterStatus={clusterStatus}
+        location={location}
+        resourceType={resourceType}
+        textEditButton
+        left
+      />,
+      <StructuredListModule
+        key='placementBindings'
+        rowsKey='placementBindingKeys'
+        actions={['table.actions.edit']}
+        staticResourceData={staticResourceData}
+        resourceType={resourceType}
+        textEditButton
+        right
+      />,
+    ]
     const modulesBottom = []
     const templates = this.getTemplates(item.raw.spec)
     let templateType

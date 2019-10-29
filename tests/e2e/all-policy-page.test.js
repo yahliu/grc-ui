@@ -30,17 +30,21 @@ module.exports = {
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.searchPolicy(true, time)
     page.testDetailsPage(browser, `${time}-policy-test`)
+    page.verifyDisableEnable(`${time}-policy-test`, browser)
   },
 
   'All policy page: Load and run expand': (browser) => {
+    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.verifyTable(browser, false)
   },
 
   'All policy page: Verify summary table': (browser) => {
+    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.verifySummary(browser, `${browser.launch_url}${config.get('contextPath')}/policies/all`)
   },
 
   'All policy page: Test pagination': (browser) => {
+    page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)
     page.verifyPagination(browser)
   },
 

@@ -149,6 +149,20 @@ export const editResource = (resourceType, namespace, name, body, selfLink, reso
     })
 })
 
+export const disableResource = (resourceType, namespace, name, body, selfLink, resourcePath) => (dispatch => {
+  dispatch(putResource(resourceType))
+  return apolloClient.updateResource(resourceType.name, namespace, name, body, selfLink, resourcePath)
+    .then(response => {
+      if (response.errors) {
+        return dispatch(receivePutError(response.errors[0], resourceType))
+      } else {
+        dispatch(updateModal({open: false, type: 'resource-disable'}))
+      }
+      dispatch(fetchResources(resourceType))
+      return dispatch(receivePutResource(response, resourceType))
+    })
+})
+
 export const removeResource = (resourceType, vars) => async dispatch => {
   dispatch(delResource(resourceType))
   try {

@@ -17,6 +17,8 @@ let ResourceModal
 let DescriptionModal
 let PolicySidePanelDetailsModal
 let FindingSidePanelDetailsModal
+let DisableModal
+let EnableModal
 
 const Modal = ({ type, open, ...rest }) => {
   switch (type) {
@@ -30,9 +32,23 @@ const Modal = ({ type, open, ...rest }) => {
     return open && getPolicySidePanelDetailsModal({ type, open, ...rest })
   case 'finding-side-panel':
     return open && getFindingSidePanelDetailsModal({ type, open, ...rest })
+  case 'resource-disable':
+    return open && getDisableModal({ type, open, ...rest })
+  case 'resource-enable':
+    return open && getEnableModal({ type, open, ...rest })
   default:
     return null
   }
+}
+
+const getDisableModal = props => {
+  DisableModal = DisableModal === undefined ? loadable(() => import(/* webpackChunkName: "disable-modal" */ '../modals/DisableModal')) : DisableModal
+  return getModal(DisableModal, props)
+}
+
+const getEnableModal = props => {
+  EnableModal = EnableModal === undefined ? loadable(() => import(/* webpackChunkName: "enable-modal" */ '../modals/EnableModal')) : EnableModal
+  return getModal(EnableModal, props)
 }
 
 const getDescriptionModal = props => {

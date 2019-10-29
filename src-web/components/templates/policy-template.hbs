@@ -10,6 +10,7 @@ metadata:
 spec:
   complianceType: musthave
   remediationAction: {{#if enforce}}enforce{{else}}inform{{/if}}
+  disabled: {{#if disabled}}true{{else}}false{{/if}}
   namespaces:
     exclude: ["kube-*"]
     include: ["default"]

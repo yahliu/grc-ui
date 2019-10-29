@@ -49,6 +49,7 @@ module.exports = {
     searchPolicy,
     testDetailsPage,
     deletePolicy,
+    verifyDisableEnable,
   }]
 }
 
@@ -254,4 +255,36 @@ function deletePolicy(name){
   this.expect.element('button.bx--btn.bx--btn--danger--primary').to.be.present
   this.click('button.bx--btn.bx--btn--danger--primary')
   this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.not.to.equal(name)
+}
+
+function verifyDisableEnable(name, browser){
+  //verify table/menu exist
+  browser.pause(20000)
+  this.expect.element('body').to.be.present
+  this.expect.element('@searchInput').to.be.present
+  this.clearValue('@searchInput')
+  this.setValue('@searchInput', name)
+  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
+  this.expect.element('.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.to.equal(name)
+  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)').to.be.present
+  //disable policy
+  this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)').to.be.present
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
+  this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
+  this.expect.element('#disable-resource-modal').to.be.present
+  this.click('#disable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
+  browser.pause(20000)
+  //enable policy
+  this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)').to.be.present
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Enable')
+  this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
+  this.expect.element('#enable-resource-modal').to.be.present
+  this.click('#enable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
+  browser.pause(20000)
+  this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /*******************************************************************************
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corporation 2017, 2019. All Rights Reserved.
@@ -25,6 +24,8 @@ import ResourceTableRowExpandableContent from './ResourceTableRowExpandableConte
 import ResourceTableRowExpandableList from './ResourceTableRowExpandableList'
 import constants from '../../../lib/shared/constants'
 import { fliterTableAction } from '../../../lib/client/access-helper'
+import { dumpAndParse, saveLoad } from '../../../lib/client/design-helper'
+
 
 resources(() => {
   require('../../../scss/table.scss')
@@ -171,7 +172,17 @@ export class ResourceTable extends React.Component {
                                   aria-label={msgs.get(items[row.id] && items[row.id].selected ? 'unselect' : 'select', this.context.locale)} />
                               </TableCell>
                             }
-                            {row.cells.map(cell => <TableCell key={cell.id}>{cell.value}</TableCell>)}
+                            {row.cells.map(cell => {
+                              if (cell.id.split(':')[1] == 'metadata.name' && row.disabled) {
+                                return <TableCell key={cell.id} className='policy-table-name-ctr'>
+                                  <div className='policy-table-name-link'>{cell.value}</div>
+                                  <div className='disabled-label'>disabled</div>
+                                </TableCell>
+                              }
+                              else {
+                                return <TableCell key={cell.id}>{cell.value}</TableCell>
+                              }
+                            })}
                           </TableExpandRow>
                           {row.isExpanded && listSubItems && (
                             <TableExpandedRow>
@@ -239,6 +250,15 @@ export class ResourceTable extends React.Component {
     return userRole !== constants.ROLES.VIEWER
   }
 
+  checkPolicyDisabled(data) {
+    const resources = lodash.compact(saveLoad(dumpAndParse(data).yaml))
+    const isDisabled = resources[0]['spec']['disabled']
+    if (isDisabled == undefined) {
+      return false
+    }
+    return isDisabled
+  }
+
   getRows() {
     const { history, items, itemIds, tableActions, resourceType, staticResourceData, match, getResourceAction, userRole, highLightRowName, autoAction, showSidePanel } = this.props
     const { locale } = this.context
@@ -253,16 +273,22 @@ export class ResourceTable extends React.Component {
         } else {
           row.id = getSecondaryKey(resourceType) ? `${lodash.get(item, getPrimaryKey(resourceType))}-${lodash.get(item, getSecondaryKey(resourceType))}` : lodash.get(item, getPrimaryKey(resourceType)) || `table-row-${index}`
         }
-
         const menuActions = item.metadata && tableActions && tableActions[item.metadata.namespace] || tableActions
 
-        const fliteredActions = menuActions ? fliterTableAction(menuActions,userRole,resourceType) : null
+        const fliteredActions = menuActions ? fliterTableAction(menuActions,userRole,resourceType).slice(0) : null
 
         //This is for grc policy page highlight item auto open side panel
         if(showSidePanel && highLightRowName && autoAction){
           if((item.metadata && item.metadata.name && item.metadata.name === highLightRowName) || (item.cluster && item.cluster === highLightRowName)){
             getResourceAction(autoAction, item, null, history, locale)
           }
+        }
+
+        //changes menu item based on whether policy is enabled or disabled
+        row.disabled = false
+        if (fliteredActions != null && fliteredActions.length == 4 && this.checkPolicyDisabled(item)) {
+          fliteredActions[fliteredActions.indexOf('table.actions.disable')] = 'table.actions.enable'
+          row.disabled = true
         }
 
         if (fliteredActions && fliteredActions.length > 0 && this.showTableToobar()) {
@@ -282,9 +308,12 @@ export class ResourceTable extends React.Component {
           )
         }
         staticResourceData.tableKeys.forEach(key => {
-          row[key.resourceKey] = key.link ?
+          row[key.resourceKey] = (key.link) ?
             <Link to={`${match.url}${getLink(key.link, item)}`}>{transform(item, key, locale)}</Link> :
             transform(item, key, locale)
+          if (key.resourceKey == 'metadata.name' && row.disabled) {
+            row[key.resourceKey] = lodash.get(item, key.resourceKey)
+          }
         })
         return row
       })

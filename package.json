@@ -73,7 +73,8 @@
     "handlebars-loader": "^1.6.0",
     "helmet": "^3.12.0",
     "http-proxy-middleware": "^0.18.0",
-    "js-yaml": "^3.12.0",
+    "js-yaml": "^3.13.1",
+    "js-yaml-loader": "^1.2.2",
     "loadable-components": "^1.4.0",
     "lodash": "^4.17.11",
     "log4js": "^2.5.3",
@@ -110,8 +111,7 @@
     "svg-react-loader": "^0.4.6",
     "svg-sprite-loader": "^3.2.3",
     "svg.js": "^2.6.5",
-    "watchr": "^4.0.1",
-    "js-yaml-loader": "^1.2.2"
+    "watchr": "^4.0.1"
   },
   "devDependencies": {
     "@ibma/aat": "^1.5.1",
@@ -132,7 +132,7 @@
     "del-cli": "^1.1.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
-    "enzyme-to-json": "^3.4.2",
+    "enzyme-to-json": "^3.4.3",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.3",
