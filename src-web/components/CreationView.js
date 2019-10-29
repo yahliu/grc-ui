@@ -42,8 +42,9 @@ const controlData = [
     mustExist: true,
   },
   {
+    name: 'creation.view.policy.namespace',
     id: 'namespace',
-    type: 'hidden',   // don't prompt for namespace--use configuration
+    type: 'text',
     active: config.complianceNamespace,
     reverse: 'Policy[0].metadata.namespace',
     mustExist: true,

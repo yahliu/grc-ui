@@ -184,7 +184,7 @@
           .empty {
             .empty-violations-img{
               //32.0.3125rem is half width of empty img
-              padding-left: calc(50% - 32.0.3125rem);
+              padding-left: calc(50% - 0.3125rem);
             }
           }
           .no-card-violations {
