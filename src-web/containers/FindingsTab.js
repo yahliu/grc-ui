@@ -24,7 +24,7 @@ import { FindingList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
-class FindingsTab extends React.Component {
+export class FindingsTab extends React.Component {
 
   static propTypes = {
     secondaryHeaderProps: PropTypes.object,
@@ -43,11 +43,12 @@ class FindingsTab extends React.Component {
   }
 
   render () {
-    const { secondaryHeaderProps } = this.props
+    const { secondaryHeaderProps, userpreferences } = this.props
+    const activeAccountId = (userpreferences && userpreferences.userPreferences) ? userpreferences.userPreferences.activeAccountId : ''
     const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
     return (
       <Page>
-        <Query query={FindingList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={FindingList} variables={{userAccountID: activeAccountId}} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {data={}, loading, startPolling, stopPolling, refetch} = result
             const { findings } = data
@@ -99,11 +100,21 @@ class FindingsTab extends React.Component {
   }
 }
 
+FindingsTab.propTypes = {
+  userpreferences: PropTypes.object,
+}
+
+const mapStateToProps = state => {
+  return {
+    userpreferences: state.userpreferences
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateSecondaryHeader: (title, tabs, links, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, links, '', information)),
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(FindingsTab))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(FindingsTab))
 

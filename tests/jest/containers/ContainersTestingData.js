@@ -1504,3 +1504,181 @@ export const resourceType = {
   'name': 'HCMCompliance',
   'list': 'HCMComplianceList'
 }
+
+export const findingsData = [
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-b35230ab-fa76-11e9-bf6c-005056a0b88e',
+    'shortDescription': 'Policy violation finding',
+    'longDescription': 'The Multicloud Manager Policy violation caused a security finding to be created',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'NonCompliant; 2 clusterrole admin users violations detected in namespace `cluster-wide` ; 0 rolebindings violations detected in namespace `default`, violated rolebinding : []; 0 rolebindings violations detected in namespace `kube-public`, violated rolebinding : []',
+    'updateTime': '2019-10-30T17:19:02.276706Z',
+    'finding': {
+      'severity': 'MEDIUM',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the policy violation using the Security findings dashboard.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor Multicloud Manager Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-iampolicy',
+      'resourceId': 'b35230ab-fa76-11e9-bf6c-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-b35230ab-fa76-11e9-bf6c-005056a0b88e',
+    'shortDescription': 'Policy violation finding',
+    'longDescription': 'The Multicloud Manager Policy violation caused a security finding to be created',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'NonCompliant; 1 clusterrole admin users violations detected in namespace `cluster-wide` ; 0 rolebindings violations detected in namespace `default`, violated rolebinding : []; 0 rolebindings violations detected in namespace `kube-public`, violated rolebinding : []',
+    'updateTime': '2019-10-30T17:18:57.777080Z',
+    'finding': {
+      'severity': 'MEDIUM',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the policy violation using the Security findings dashboard.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor Multicloud Manager Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-iampolicy',
+      'resourceId': 'b35230ab-fa76-11e9-bf6c-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST-CSF'
+      ],
+      'securityCategories': [
+        'IdentityManagementAndAccessControl'
+      ],
+      'securityControl': 'Iam'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/clusterhub-policy-0efa8d02-f9ee-11e9-bf6c-005056a0b88e',
+    'shortDescription': 'Policy violation finding',
+    'longDescription': 'The Multicloud Manager Policy violation caused a security finding to be created',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'pods `nginx-pod` is missing, and should be created',
+    'updateTime': '2019-10-30T17:18:54.164334Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the policy violation using the Security findings dashboard.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor Multicloud Manager Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'clusterhub',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-pod',
+      'resourceId': '0efa8d02-f9ee-11e9-bf6c-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'clusterhub',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': {
+      'securityStandards': [
+        'NIST-CSF'
+      ],
+      'securityCategories': [
+        'SecurityContinuousMonitoring'
+      ],
+      'securityControl': 'Other'
+    },
+    '__typename': 'Occurrence'
+  },
+  {
+    'name': 'id-mycluster-account/providers/security-advisor/occurrences/cluster1-policy-0efa8d02-f9ee-11e9-bf6c-005056a0b88e',
+    'shortDescription': 'Policy violation finding',
+    'longDescription': 'The Multicloud Manager Policy violation caused a security finding to be created',
+    'providerId': 'security-advisor',
+    'providerName': 'id-mycluster-account/providers/security-advisor',
+    'remediation': 'pods `nginx-pod` is missing, and should be created',
+    'updateTime': '2019-10-30T17:18:50.849184Z',
+    'finding': {
+      'severity': 'HIGH',
+      'certainty': 'HIGH',
+      'networkConnection': null,
+      'nextSteps': [
+        {
+          'title': 'View the details for the policy violation using the Security findings dashboard.',
+          'url': null
+        }
+      ],
+      'dataTransferred': null
+    },
+    'reportedBy': {
+      'id': 'mcm-policy-adapter',
+      'title': 'Security Advisor Multicloud Manager Policy Findings Adapter',
+      'url': null
+    },
+    'context': {
+      'accountId': 'id-mycluster-account',
+      'region': 'cluster1',
+      'resourceType': 'Policy',
+      'resourceName': 'policy-pod',
+      'resourceId': '0efa8d02-f9ee-11e9-bf6c-005056a0b88e',
+      'resourceCrn': null,
+      'serviceName': 'icp4mcm-findings',
+      'serviceCrn': null,
+      'clusterName': 'cluster1',
+      'namespaceName': 'Excludes: [kube-*], Includes: [default]'
+    },
+    'securityClassification': null,
+    '__typename': 'Occurrence'
+  },
+]

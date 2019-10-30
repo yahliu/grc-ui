@@ -32,6 +32,7 @@
   "choose.standard": "Choose standard",
   "creation.view.yaml": "Policy YAML",
   "creation.view.policy.name": "Name",
+  "creation.view.policy.namespace": "Namespace",
   "creation.view.policy.enforce": "Enforce if supported",
   "creation.view.policy.disabled": "Disable policy ",
   "creation.view.policy.mutation": "Prevent mutations",

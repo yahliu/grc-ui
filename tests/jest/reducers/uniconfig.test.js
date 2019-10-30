@@ -8,7 +8,7 @@
  *******************************************************************************/
 'use strict'
 
-import { UICONFIG_RECEIVE_SUCCESS } from '../../../src-web/actions'
+import * as Actions from '../../../src-web/actions'
 import { uiconfig } from '../../../src-web/reducers/uiconfig'
 
 describe('uiconfig reducer', () => {
@@ -17,7 +17,7 @@ describe('uiconfig reducer', () => {
       test: 'test'
     }
     const action = {
-      type: UICONFIG_RECEIVE_SUCCESS,
+      type: Actions.UICONFIG_RECEIVE_SUCCESS,
       data: 'testData'
     }
     const expectedValue = 'testData'

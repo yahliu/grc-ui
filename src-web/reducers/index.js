@@ -27,6 +27,7 @@ import lodash from 'lodash'
 export { user, loggedIn } from './user'
 export { uiconfig } from './uiconfig'
 export { role } from './role'
+export { userpreferences } from './userpreferences'
 export { resourceToolbar } from './common'
 export { secondaryHeader } from './common'
 

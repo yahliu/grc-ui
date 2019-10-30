@@ -8,11 +8,7 @@
  *******************************************************************************/
 'use strict'
 
-import {
-  ROLE_RECEIVE_SUCCESS,
-  ROLE_RECEIVE_FAILURE,
-  REQUEST_STATUS
-} from '../../../src-web/actions'
+import * as Actions from '../../../src-web/actions'
 import { role } from '../../../src-web/reducers/role'
 
 describe('role reducer', () => {
@@ -21,7 +17,7 @@ describe('role reducer', () => {
       test: 'test'
     }
     const action = {
-      type: ROLE_RECEIVE_SUCCESS
+      type: Actions.ROLE_RECEIVE_SUCCESS
     }
     const expectedValue = {'status': 'DONE', 'type': 'ROLE_RECEIVE_SUCCESS'}
     expect(role(state, action)).toEqual(expectedValue)
@@ -31,7 +27,7 @@ describe('role reducer', () => {
       test: 'test'
     }
     const action = {
-      type: ROLE_RECEIVE_FAILURE,
+      type: Actions.ROLE_RECEIVE_FAILURE,
       err: {
         details: 'errorDetails',
         statusCode: 'errorStatusCode'
@@ -45,7 +41,7 @@ describe('role reducer', () => {
       test: 'test'
     }
     const action = {
-      type: REQUEST_STATUS
+      type: Actions.REQUEST_STATUS
     }
     const expectedValue = {'test': 'test'}
     expect(role(state, action)).toEqual(expectedValue)
