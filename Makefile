@@ -106,7 +106,11 @@ release:
 	make docker:login
 	make docker:tag-arch
 	make docker:push-arch
+	make docker:tag-arch DOCKER_TAG=$(SEMVERSION)
+	make docker:push-arch DOCKER_TAG=$(SEMVERSION)
 ifeq ($(ARCH), x86_64)
 	make docker:tag-arch DOCKER_TAG=$(RELEASE_TAG_RED_HAT)
 	make docker:push-arch DOCKER_TAG=$(RELEASE_TAG_RED_HAT)
+	make docker:tag-arch DOCKER_TAG=$(SEMVERSION_RED_HAT)
+	make docker:push-arch DOCKER_TAG=$(SEMVERSION_RED_HAT)
 endif
