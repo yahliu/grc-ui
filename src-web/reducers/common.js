@@ -303,6 +303,19 @@ export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
       putStatus: Actions.REQUEST_STATUS.ERROR,
       putErrorMsg: action.err.error ? action.err.error.message : action.err.message
     })
+  case Actions.PATCH_REQUEST:
+    return Object.assign({}, state, {
+      patchStatus: Actions.REQUEST_STATUS.IN_PROGRESS
+    })
+  case Actions.PATCH_RECEIVE_SUCCESS:
+    return Object.assign({}, state, {
+      patchStatus: Actions.REQUEST_STATUS.DONE,
+    })
+  case Actions.PATCH_RECEIVE_FAILURE:
+    return Object.assign({}, state, {
+      patchStatus: Actions.REQUEST_STATUS.ERROR,
+      patchErrorMsg: action.err.error ? action.err.error.message : action.err.message
+    })
   case Actions.CLEAR_REQUEST_STATUS:
     return Object.assign({}, state, {
       mutateStatus: undefined,

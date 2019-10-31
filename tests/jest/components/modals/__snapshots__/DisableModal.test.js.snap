@@ -190,78 +190,9 @@ ShallowWrapper {
             },
             "mcm",
             "policy-auditpolicy-will-sev",
-            Object {
-              "apiVersion": "policy.mcm.ibm.com/v1alpha1",
-              "kind": "Policy",
-              "metadata": Object {
-                "annotations": Object {
-                  "policy.mcm.ibm.com/categories": "SystemAndCommunicationsProtections",
-                  "policy.mcm.ibm.com/controls": "IAM",
-                  "policy.mcm.ibm.com/standards": "FISMA",
-                  "seed-generation": "2",
-                },
-                "finalizers": Array [
-                  "finalizer.policies.ibm.com",
-                  "propagator.finalizer.mcm.ibm.com",
-                ],
-                "generation": 27,
-                "name": "policy-auditpolicy-will-sev",
-                "namespace": "mcm",
-                "resourceVersion": "5300122",
-              },
-              "spec": Object {
-                "complianceType": "musthave",
-                "disabled": true,
-                "namespaces": Object {
-                  "exclude": Array [
-                    "kube-*",
-                  ],
-                  "include": Array [
-                    "default",
-                  ],
-                },
-                "policy-templates": Array [
-                  Object {
-                    "objectDefinition": Object {
-                      "apiVersion": "audit.policies.ibm.com/v1alpha1",
-                      "kind": "AuditPolicy",
-                      "metadata": Object {
-                        "label": Object {
-                          "category": "System-Integrity",
-                        },
-                        "name": "policy-auditpolicy-will-sev",
-                      },
-                      "spec": Object {
-                        "clusterAuditPolicy": Object {
-                          "auditPolicyRules": Object {
-                            "auth-idp": "ignore",
-                            "helmapi": "ignore",
-                            "kubernetes": "ignore",
-                            "platform-api": "ignore",
-                            "platform-identity-manager": "ignore",
-                            "platform-identity-provider": "ignore",
-                            "vulnerability-advisor": "ignore",
-                          },
-                        },
-                        "namespaceSelector": Object {
-                          "exclude": Array [
-                            "kube-system",
-                          ],
-                          "include": Array [
-                            "default",
-                            "kube-*",
-                          ],
-                        },
-                        "remediationAction": "inform",
-                        "severity": "low",
-                      },
-                    },
-                  },
-                ],
-                "remediationAction": "inform",
-              },
-            },
+            true,
             "/apis/policy.mcm.ibm.com/v1alpha1/namespaces/mcm/policies/policy-auditpolicy-will-sev",
+            "/spec/disabled",
           ],
         ],
       }

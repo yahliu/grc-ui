@@ -24,7 +24,7 @@ module.exports = {
     page.navigate(url)
   },
 
-  'All policy page: Add, search test policy': (browser) => {
+  'All policy page: Add, search, disable/enable test policy': (browser) => {
     const time = browser.globals.time
     page.createTestPolicy(browser, time)
     page.navigate(`${browser.launch_url}${config.get('contextPath')}/policies/all`)

@@ -23,6 +23,7 @@ export const modal = (state = {}, action) => {
       })
     case Actions.POST_REQUEST:
     case Actions.PUT_REQUEST:
+    case Actions.PATCH_REQUEST:
     case Actions.DEL_REQUEST: {
       const reqCount = (state.reqCount || 0)
       return Object.assign({}, state, {
@@ -32,6 +33,7 @@ export const modal = (state = {}, action) => {
     }
     case Actions.POST_RECEIVE_SUCCESS:
     case Actions.PUT_RECEIVE_SUCCESS:
+    case Actions.PATCH_RECEIVE_SUCCESS:
     case Actions.DEL_RECEIVE_SUCCESS: {
       return Object.assign({}, state, {
         reqStatus: Actions.REQUEST_STATUS.DONE,
@@ -41,6 +43,7 @@ export const modal = (state = {}, action) => {
     }
     case Actions.POST_RECEIVE_FAILURE:
     case Actions.PUT_RECEIVE_FAILURE:
+    case Actions.PATCH_RECEIVE_FAILURE:
     case Actions.DEL_RECEIVE_FAILURE: {
       let message
       if (action.err && action.err.error) {

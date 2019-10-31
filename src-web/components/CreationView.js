@@ -117,8 +117,8 @@ const controlData = [
     description: 'policy.create.disabled.tooltip',
     id: 'disabled',
     type: 'checkbox',
-    active: true,
-    available: [true, false],  // in template, 'inform'===checkbox unchecked
+    active: 'false',
+    available: ['false', 'true'],
     reverse: 'Policy[0].spec.disabled',
   },
 ]

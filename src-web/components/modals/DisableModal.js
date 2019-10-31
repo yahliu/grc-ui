@@ -15,9 +15,7 @@ import { Modal, Loading, Notification } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 import { withRouter } from 'react-router-dom'
 import { REQUEST_STATUS } from '../../actions/index'
-import { disableResource, clearRequestStatus, receiveDelError, updateModal } from '../../actions/common'
-import { dumpAndParse, saveLoad } from '../../../lib/client/design-helper'
-import lodash from 'lodash'
+import { disableResource, clearRequestStatus, receivePatchError, updateModal } from '../../actions/common'
 
 export class DisableModal extends React.Component {
   constructor(props) {
@@ -27,12 +25,7 @@ export class DisableModal extends React.Component {
 
   handleSubmitClick() {
     const { handleSubmit, data, resourceType } = this.props
-    const resources = lodash.compact(saveLoad(dumpAndParse(data).yaml))
-    resources.forEach(resource => {
-      const disabledResource = resource
-      disabledResource['spec']['disabled'] = true
-      handleSubmit(resourceType, data.namespace, data.name, disabledResource, data.metadata.selfLink)
-    })
+    handleSubmit(resourceType, data.namespace, data.name, true, data.metadata.selfLink, '/spec/disabled')
   }
 
   render() {
@@ -91,15 +84,15 @@ const mapStateToProps = state =>  {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (resourceType, namespace, name, data, selfLink) => {
-      dispatch(disableResource(resourceType, namespace, name, data, selfLink))
+    handleSubmit: (resourceType, namespace, name, data, selfLink, resourcePath) => {
+      dispatch(disableResource(resourceType, namespace, name, data, selfLink, resourcePath))
     },
     handleClose: () => {
       dispatch(clearRequestStatus())
       dispatch(updateModal({open: false, type: 'resource-disable'}))
     },
-    receiveDelError: (resourceType, err) => {
-      dispatch(receiveDelError(err, resourceType))
+    receivePatchError: (resourceType, err) => {
+      dispatch(receivePatchError(err, resourceType))
     }
   }
 }

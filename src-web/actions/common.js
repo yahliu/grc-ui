@@ -150,16 +150,16 @@ export const editResource = (resourceType, namespace, name, body, selfLink, reso
 })
 
 export const disableResource = (resourceType, namespace, name, body, selfLink, resourcePath) => (dispatch => {
-  dispatch(putResource(resourceType))
+  dispatch(patchResource(resourceType))
   return apolloClient.updateResource(resourceType.name, namespace, name, body, selfLink, resourcePath)
     .then(response => {
       if (response.errors) {
-        return dispatch(receivePutError(response.errors[0], resourceType))
+        return dispatch(receivePatchError(response.errors[0], resourceType))
       } else {
         dispatch(updateModal({open: false, type: 'resource-disable'}))
       }
       dispatch(fetchResources(resourceType))
-      return dispatch(receivePutResource(response, resourceType))
+      return dispatch(receivePatchResource(response, resourceType))
     })
 })
 
@@ -240,6 +240,28 @@ export const receivePutResource = (item, resourceType) => {
 export const receivePutError = (err, resourceType) => ({
   type: Actions.PUT_RECEIVE_FAILURE,
   putStatus: Actions.REQUEST_STATUS.ERROR,
+  err,
+  resourceType
+})
+
+export const patchResource = (resourceType) => ({ // TODO: Consider renaming
+  type: Actions.PATCH_REQUEST,
+  patchStatus: Actions.REQUEST_STATUS.IN_PROGRESS,
+  resourceType
+})
+
+export const receivePatchResource = (item, resourceType) => {
+  return ({
+    type: Actions.PATCH_RECEIVE_SUCCESS,
+    patchStatus: Actions.REQUEST_STATUS.DONE,
+    resourceType: item.kind || resourceType,
+    item
+  })
+}
+
+export const receivePatchError = (err, resourceType) => ({
+  type: Actions.PATCH_RECEIVE_FAILURE,
+  patchStatus: Actions.REQUEST_STATUS.ERROR,
   err,
   resourceType
 })

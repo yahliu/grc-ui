@@ -15,9 +15,7 @@ import { Modal, Loading, Notification } from 'carbon-components-react'
 import msgs from '../../../nls/platform.properties'
 import { withRouter } from 'react-router-dom'
 import { REQUEST_STATUS } from '../../actions/index'
-import { disableResource, clearRequestStatus, receiveDelError, updateModal } from '../../actions/common'
-import { dumpAndParse, saveLoad } from '../../../lib/client/design-helper'
-import lodash from 'lodash'
+import { disableResource, clearRequestStatus, receivePatchError, updateModal } from '../../actions/common'
 
 export class EnableModal extends React.Component {
   constructor(props) {
@@ -27,12 +25,7 @@ export class EnableModal extends React.Component {
 
   handleSubmitClick() {
     const { handleSubmit, data, resourceType } = this.props
-    const resources = lodash.compact(saveLoad(dumpAndParse(data).yaml))
-    resources.forEach(resource => {
-      const enabledResource = resource
-      enabledResource['spec']['disabled'] = false
-      handleSubmit(resourceType, data.namespace, data.name, enabledResource, data.metadata.selfLink)
-    })
+    handleSubmit(resourceType, data.namespace, data.name, false, data.metadata.selfLink, '/spec/disabled')
   }
 
   render() {
@@ -41,7 +34,6 @@ export class EnableModal extends React.Component {
       <div>
         {reqStatus === REQUEST_STATUS.IN_PROGRESS && <Loading />}
         <Modal
-          danger
           id='enable-resource-modal'
           open={open}
           primaryButtonText={msgs.get(label.primaryBtn, locale)}
@@ -91,15 +83,15 @@ const mapStateToProps = state =>  {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (resourceType, namespace, name, data, selfLink) => {
-      dispatch(disableResource(resourceType, namespace, name, data, selfLink))
+    handleSubmit: (resourceType, namespace, name, data, selfLink, resourcePath) => {
+      dispatch(disableResource(resourceType, namespace, name, data, selfLink, resourcePath))
     },
     handleClose: () => {
       dispatch(clearRequestStatus())
       dispatch(updateModal({open: false, type: 'resource-enable'}))
     },
-    receiveDelError: (resourceType, err) => {
-      dispatch(receiveDelError(err, resourceType))
+    receivePatchError: (resourceType, err) => {
+      dispatch(receivePatchError(err, resourceType))
     }
   }
 }

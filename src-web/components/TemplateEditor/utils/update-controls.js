@@ -42,7 +42,12 @@ const updateTextControl = (control, reverse, newParsed) => {
 
 const updateCheckboxControl = (control, reverse, newParsed) => {
   const newActive = _.get(newParsed, reverse[0])
-  control.active = control.available.indexOf(newActive)>0
+  if (typeof newActive == 'boolean') {
+    control.active = control.available.indexOf(newActive.toString())>0
+  }
+  else {
+    control.active = control.available.indexOf(newActive)>0
+  }
 }
 
 const updateMultiSelectControl = (control, reverse, oldParsed, newParsed) => {

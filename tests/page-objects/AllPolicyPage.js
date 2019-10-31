@@ -260,7 +260,7 @@ function deletePolicy(name){
 
 function verifyDisableEnable(name, browser){
   //verify table/menu exist
-  browser.pause(20000)
+  browser.pause(6000)
   this.expect.element('body').to.be.present
   this.expect.element('@searchInput').to.be.present
   this.clearValue('@searchInput')
@@ -276,7 +276,7 @@ function verifyDisableEnable(name, browser){
   this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
   this.expect.element('#disable-resource-modal').to.be.present
   this.click('#disable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
-  browser.pause(20000)
+  browser.pause(3000)
   //enable policy
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
@@ -284,8 +284,8 @@ function verifyDisableEnable(name, browser){
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Enable')
   this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
   this.expect.element('#enable-resource-modal').to.be.present
-  this.click('#enable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
-  browser.pause(20000)
+  this.click('#enable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--primary')
+  browser.pause(3000)
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
 }
