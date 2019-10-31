@@ -54,11 +54,12 @@ image:: docker-logins
 
 .PHONY: run
 run: 
+ifeq ($(ARCH), x86_64)
 	# Both containers grc-ui and grc-ui-api must be on the same network.
 	docker network create --subnet 10.10.0.0/16 $(NETWORK_NAME)
 	make docker:info DOCKER_NETWORK_OP=$(NETWORK_OP) DOCKER_NETWORK=$(NETWORK_NAME)
 	make docker:run DOCKER_NETWORK_OP=$(NETWORK_OP) DOCKER_NETWORK=$(NETWORK_NAME)
-	docker ps
+endif
 
 .PHONY: unit-test
 unit-test:
@@ -114,3 +115,9 @@ ifeq ($(ARCH), x86_64)
 	make docker:tag-arch DOCKER_TAG=$(SEMVERSION_RED_HAT)
 	make docker:push-arch DOCKER_TAG=$(SEMVERSION_RED_HAT)
 endif
+
+.PHONY: multi-arch
+multi-arch:
+	make docker:manifest-tool
+	make docker:multi-arch
+	make docker:multi-arch DOCKER_TAG=$(SEMVERSION)
