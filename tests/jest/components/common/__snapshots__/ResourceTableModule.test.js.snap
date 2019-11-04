@@ -805,6 +805,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="metadata.name"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -813,14 +814,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -830,7 +831,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"
@@ -848,6 +849,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="remediation"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -856,14 +858,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -873,7 +875,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"
@@ -891,6 +893,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="clusterCompliant"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -899,14 +902,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -916,7 +919,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"
@@ -934,6 +937,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -942,14 +946,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -959,7 +963,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"
@@ -977,6 +981,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -985,14 +990,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -1002,7 +1007,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"
@@ -1020,6 +1025,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   className="bx--table-sort-v2 bx--table-sort-v2--ascending"
                                                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
                                                   onClick={[Function]}
+                                                  title="Sort rows by this header in ascending order."
                                                 >
                                                   <span
                                                     className="bx--table-header-label"
@@ -1028,14 +1034,14 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                   </span>
                                                   <Icon
                                                     className="bx--table-sort-v2__icon"
-                                                    description="Provide a description that will be used as the title"
+                                                    description="Sort rows by this header in ascending order."
                                                     fillRule="evenodd"
                                                     name="caret--down"
                                                     role="img"
                                                   >
                                                     <svg
-                                                      alt="Provide a description that will be used as the title"
-                                                      aria-label="Provide a description that will be used as the title"
+                                                      alt="Sort rows by this header in ascending order."
+                                                      aria-label="Sort rows by this header in ascending order."
                                                       className="bx--table-sort-v2__icon"
                                                       fillRule="evenodd"
                                                       height="5"
@@ -1045,7 +1051,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                                       width="10"
                                                     >
                                                       <title>
-                                                        Provide a description that will be used as the title
+                                                        Sort rows by this header in ascending order.
                                                       </title>
                                                       <path
                                                         d="M0 0l5 4.998L10 0z"

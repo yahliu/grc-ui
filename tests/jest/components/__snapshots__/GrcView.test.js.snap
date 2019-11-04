@@ -351,7 +351,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                 className="bx--search-input"
                 id="undefined-search"
                 onChange={[Function]}
-                placeholder="Search policies"
+                placeholder="Find policies"
                 type="text"
                 value=""
               />
@@ -438,7 +438,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="metadata.name"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -446,8 +446,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Policy name
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -459,7 +459,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -475,7 +475,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="namespace"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -483,8 +483,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Namespace
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -496,7 +496,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -512,7 +512,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="remediation"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -520,8 +520,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Remediation
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -533,7 +533,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -549,7 +549,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="clusterCompliant"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -557,8 +557,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Cluster violations
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -570,7 +570,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -586,7 +586,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -594,8 +594,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Standards
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -607,7 +607,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -623,7 +623,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -631,8 +631,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Controls
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -644,7 +644,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -660,7 +660,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                   data-default-key="metadata.name"
                   data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -668,8 +668,8 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Categories
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -681,7 +681,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1539,7 +1539,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                 className="bx--search-input"
                 id="undefined-search"
                 onChange={[Function]}
-                placeholder="Search security findings"
+                placeholder="Find security findings"
                 type="text"
                 value=""
               />
@@ -1623,7 +1623,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="shortDescription"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1631,8 +1631,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Description
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1644,7 +1644,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1660,7 +1660,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="context"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1668,8 +1668,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Resources
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1681,7 +1681,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1697,7 +1697,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="finding.severity"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1705,8 +1705,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Severity
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1718,7 +1718,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1734,7 +1734,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="context.clusterName"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1742,8 +1742,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Cluster
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1755,7 +1755,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1771,7 +1771,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="securityClassification.securityStandards"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1779,8 +1779,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Standards
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1792,7 +1792,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1808,7 +1808,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="securityClassification.securityControl"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1816,8 +1816,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Controls
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1829,7 +1829,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1845,7 +1845,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="securityClassification.securityCategories"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1853,8 +1853,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Categories
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1866,7 +1866,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"
@@ -1882,7 +1882,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                   data-default-key="shortDescription"
                   data-key="updateTime"
                   onClick={[Function]}
-                  title={undefined}
+                  title="Sort rows by this header in ascending order."
                 >
                   <span
                     className="bx--table-header-label"
@@ -1890,8 +1890,8 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     Update time
                   </span>
                   <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
+                    alt="Sort rows by this header in ascending order."
+                    aria-label="Sort rows by this header in ascending order."
                     className="bx--table-sort-v2__icon"
                     fill={undefined}
                     fillRule="evenodd"
@@ -1903,7 +1903,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
                     width="10"
                   >
                     <title>
-                      Provide a description that will be used as the title
+                      Sort rows by this header in ascending order.
                     </title>
                     <path
                       d="M0 0l5 4.998L10 0z"

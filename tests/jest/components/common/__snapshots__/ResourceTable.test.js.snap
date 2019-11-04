@@ -108,7 +108,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.name"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -116,8 +116,8 @@ Array [
                 Policy name
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -129,7 +129,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -145,7 +145,7 @@ Array [
               data-default-key="metadata.name"
               data-key="remediation"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -153,8 +153,8 @@ Array [
                 Remediation
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -166,7 +166,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -182,7 +182,7 @@ Array [
               data-default-key="metadata.name"
               data-key="clusterCompliant"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -190,8 +190,8 @@ Array [
                 Cluster violations
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -203,7 +203,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -219,7 +219,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -227,8 +227,8 @@ Array [
                 Standards
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -240,7 +240,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -256,7 +256,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -264,8 +264,8 @@ Array [
                 Controls
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -277,7 +277,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -293,7 +293,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -301,8 +301,8 @@ Array [
                 Categories
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -314,7 +314,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1386,7 +1386,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.name"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1394,8 +1394,8 @@ Array [
                 Policy name
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1407,7 +1407,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1423,7 +1423,7 @@ Array [
               data-default-key="metadata.name"
               data-key="remediation"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1431,8 +1431,8 @@ Array [
                 Remediation
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1444,7 +1444,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1460,7 +1460,7 @@ Array [
               data-default-key="metadata.name"
               data-key="clusterCompliant"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1468,8 +1468,8 @@ Array [
                 Cluster violations
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1481,7 +1481,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1497,7 +1497,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1505,8 +1505,8 @@ Array [
                 Standards
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1518,7 +1518,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1534,7 +1534,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1542,8 +1542,8 @@ Array [
                 Controls
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1555,7 +1555,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -1571,7 +1571,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -1579,8 +1579,8 @@ Array [
                 Categories
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -1592,7 +1592,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2661,7 +2661,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.name"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2669,8 +2669,8 @@ Array [
                 Policy name
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2682,7 +2682,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2698,7 +2698,7 @@ Array [
               data-default-key="metadata.name"
               data-key="remediation"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2706,8 +2706,8 @@ Array [
                 Remediation
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2719,7 +2719,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2735,7 +2735,7 @@ Array [
               data-default-key="metadata.name"
               data-key="clusterCompliant"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2743,8 +2743,8 @@ Array [
                 Cluster violations
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2756,7 +2756,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2772,7 +2772,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2780,8 +2780,8 @@ Array [
                 Standards
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2793,7 +2793,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2809,7 +2809,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2817,8 +2817,8 @@ Array [
                 Controls
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2830,7 +2830,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -2846,7 +2846,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -2854,8 +2854,8 @@ Array [
                 Categories
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -2867,7 +2867,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3514,7 +3514,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.name"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3522,8 +3522,8 @@ Array [
                 Policy name
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3535,7 +3535,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3551,7 +3551,7 @@ Array [
               data-default-key="metadata.name"
               data-key="remediation"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3559,8 +3559,8 @@ Array [
                 Remediation
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3572,7 +3572,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3588,7 +3588,7 @@ Array [
               data-default-key="metadata.name"
               data-key="clusterCompliant"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3596,8 +3596,8 @@ Array [
                 Cluster violations
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3609,7 +3609,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3625,7 +3625,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/standards\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3633,8 +3633,8 @@ Array [
                 Standards
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3646,7 +3646,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3662,7 +3662,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/controls\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3670,8 +3670,8 @@ Array [
                 Controls
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3683,7 +3683,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"
@@ -3699,7 +3699,7 @@ Array [
               data-default-key="metadata.name"
               data-key="metadata.annotations[\\"policy.mcm.ibm.com/categories\\"]"
               onClick={[MockFunction]}
-              title={undefined}
+              title="Sort rows by this header in ascending order."
             >
               <span
                 className="bx--table-header-label"
@@ -3707,8 +3707,8 @@ Array [
                 Categories
               </span>
               <svg
-                alt="Provide a description that will be used as the title"
-                aria-label="Provide a description that will be used as the title"
+                alt="Sort rows by this header in ascending order."
+                aria-label="Sort rows by this header in ascending order."
                 className="bx--table-sort-v2__icon"
                 fill={undefined}
                 fillRule="evenodd"
@@ -3720,7 +3720,7 @@ Array [
                 width="10"
               >
                 <title>
-                  Provide a description that will be used as the title
+                  Sort rows by this header in ascending order.
                 </title>
                 <path
                   d="M0 0l5 4.998L10 0z"

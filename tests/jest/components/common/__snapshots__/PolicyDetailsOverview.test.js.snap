@@ -552,7 +552,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="objectDefinition.metadata.name"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -560,8 +560,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           Name
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -573,7 +573,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
@@ -589,7 +589,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="complianceType"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -597,8 +597,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           Compliance Type
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -610,7 +610,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
@@ -626,7 +626,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="objectDefinition.apiVersion"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -634,8 +634,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           API version
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -647,7 +647,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
@@ -663,7 +663,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="objectDefinition.kind"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -671,8 +671,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           Kind
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -684,7 +684,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
@@ -700,7 +700,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="status.conditions[0].lastTransitionTime"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -708,8 +708,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           Last transition
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -721,7 +721,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
@@ -737,7 +737,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                         data-default-key="objectDefinition.metadata.name"
                         data-key="status.Compliant"
                         onClick={[Function]}
-                        title={undefined}
+                        title="Sort rows by this header in ascending order."
                       >
                         <span
                           className="bx--table-header-label"
@@ -745,8 +745,8 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           Status
                         </span>
                         <svg
-                          alt="Provide a description that will be used as the title"
-                          aria-label="Provide a description that will be used as the title"
+                          alt="Sort rows by this header in ascending order."
+                          aria-label="Sort rows by this header in ascending order."
                           className="bx--table-sort-v2__icon"
                           fill={undefined}
                           fillRule="evenodd"
@@ -758,7 +758,7 @@ exports[`PolicyDetailsOverview component renders as expected 1`] = `
                           width="10"
                         >
                           <title>
-                            Provide a description that will be used as the title
+                            Sort rows by this header in ascending order.
                           </title>
                           <path
                             d="M0 0l5 4.998L10 0z"
