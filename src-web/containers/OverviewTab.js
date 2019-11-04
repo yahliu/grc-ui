@@ -48,10 +48,12 @@ class OverviewTab extends React.Component {
   }
 
   render () {
+    const { userpreferences } = this.props
+    const activeAccountId = (userpreferences && userpreferences.userPreferences) ? userpreferences.userPreferences.activeAccountId : ''
     const pollInterval = getPollInterval(GRC_REFRESH_INTERVAL_COOKIE)
     return (
       <Page>
-        <Query query={GRCList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
+        <Query query={GRCList} variables={{userAccountID: activeAccountId}} pollInterval={pollInterval} notifyOnNetworkStatusChange >
           {( result ) => {
             const {loading, startPolling, stopPolling, refetch} = result
             const {data={}} = result
@@ -91,6 +93,16 @@ class OverviewTab extends React.Component {
   }
 }
 
+OverviewTab.propTypes = {
+  userpreferences: PropTypes.object,
+}
+
+const mapStateToProps = state => {
+  return {
+    userpreferences: state.userpreferences
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateSecondaryHeader: (title, tabs, links, information) => dispatch(updateSecondaryHeader(title, tabs, undefined, links, '', information)),
@@ -98,4 +110,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(OverviewTab))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OverviewTab))
