@@ -24,7 +24,6 @@ import msgs from '../../../nls/platform.properties'
 import config from '../../../lib/shared/config'
 import TagInput from './TagInput'
 import { RESOURCE_TYPES } from '../../../lib/shared/constants'
-import { showCreate } from '../../../lib/client/access-helper'
 import createDocLink from '../../components/common/CreateDocLink'
 import PropTypes from 'prop-types'
 
@@ -54,7 +53,6 @@ class ResourceList extends React.Component {
 
   render() {
     const {
-      userRole,
       items,
       itemIds,
       mutateStatus,
@@ -109,8 +107,6 @@ class ResourceList extends React.Component {
       return <Loading withOverlay={false} className='content-spinner' />
 
     const actions = React.Children.map(children, action => {
-      if (action.props.disabled || !showCreate(userRole, resourceType))
-        return null
       //resolve console warning, seems resourceType isn't used here
       return React.cloneElement(action/*, { resourceType }*/)
     })
@@ -284,7 +280,6 @@ ResourceList.propTypes = {
   totalFilteredItems: PropTypes.number,
   updateBrowserURL: PropTypes.func,
   updateSecondaryHeader: PropTypes.func,
-  userRole: PropTypes.string,
 }
 
 //diff than original updateBrowserURL in mcm-ui pageWithUrlQuery

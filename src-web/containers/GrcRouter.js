@@ -85,4 +85,4 @@ GrcRouter.propTypes = {
   match: PropTypes.object,
 }
 
-export default withRouter(withAccess(GrcRouter, ROLES.OPERATOR))
+export default withRouter(withAccess(GrcRouter, ROLES.ADMIN))

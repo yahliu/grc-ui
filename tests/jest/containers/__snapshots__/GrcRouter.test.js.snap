@@ -16,6 +16,7 @@ exports[`Grc Router container test renders as expected 1`] = `
     <withRouter(Connect(checkAccess))
       ROLES={
         Object {
+          "ACCOUNT_ADMIN": "AccountAdministrator",
           "ADMIN": "Administrator",
           "CLUSTER_ADMIN": "ClusterAdministrator",
           "EDITOR": "Editor",
