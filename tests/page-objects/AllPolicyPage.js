@@ -24,6 +24,8 @@ module.exports = {
     noResource: '.no-resource',
     policyStatus: '#complianceStatus-module-id',
     policyNameInput: '#name',
+    namespaceDropdown: '.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box',
+    namespaceDropdownBox: '.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > div.bx--list-box__menu',
     templateDropdown: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box',
     templateDropdownBox: '.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu',
     clusterSelectorDropdown: '.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__field',
@@ -158,6 +160,10 @@ function createTestPolicy(browser, time) {
   this.click('@yamlTextField')
   this.clearValue('@policyNameInput')
   this.setValue('@policyNameInput',`${time}-policy-test`)
+
+  this.click('@namespaceDropdown').expect.element('@namespaceDropdownBox').to.be.present
+  // this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > .bx--list-box__field > input', 'Namespace')
+  this.click('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
 
   this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'Namespace')

@@ -14,7 +14,6 @@ import { hideResourceToolbar } from '../../lib/client/resource-helper'
 import { TemplateEditor } from './TemplateEditor'
 import policyTemplate from './templates/policy-template.hbs'
 import * as Choices from './templates'
-import config from '../../lib/shared/config'
 import msgs from '../../nls/platform.properties'
 import _ from 'lodash'
 
@@ -44,8 +43,9 @@ const controlData = [
   {
     name: 'creation.view.policy.namespace',
     id: 'namespace',
-    type: 'text',
-    active: config.complianceNamespace,
+    type: 'singleselect',
+    description: 'policy.create.namespace.tooltip',
+    available: [],
     reverse: 'Policy[0].metadata.namespace',
     mustExist: true,
   },
@@ -173,9 +173,10 @@ const getControlData = (discovered, locale) => {
     // add discovered choices from server
     //  add available annotations to categories, etc controls
     //  add existing policy names to name control
-    const {policyNames, annotations, clusterLabels} = discovered
-    const {name, clusters, standards, categories, controls } = _.keyBy(mergedData, 'id')
+    const {policyNames, namespaces, annotations, clusterLabels} = discovered
+    const {name, namespace, clusters, standards, categories, controls } = _.keyBy(mergedData, 'id')
     name.existing = policyNames
+    namespace.available = namespaces
     clusters.available = clusterLabels
     standards.available = [...new Set([...standards.available, ...annotations.standards])]
     categories.available = [...new Set([...categories.available, ...annotations.categories])]

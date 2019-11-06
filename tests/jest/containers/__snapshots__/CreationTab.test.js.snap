@@ -230,6 +230,17 @@ ShallowWrapper {
                               ],
                             },
                           },
+                          Object {
+                            "alias": undefined,
+                            "arguments": Array [],
+                            "directives": Array [],
+                            "kind": "Field",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "namespaces",
+                            },
+                            "selectionSet": undefined,
+                          },
                         ],
                       },
                     },
@@ -240,7 +251,7 @@ ShallowWrapper {
             ],
             "kind": "Document",
             "loc": Object {
-              "end": 162,
+              "end": 179,
               "start": 0,
             },
           }
@@ -351,6 +362,17 @@ ShallowWrapper {
                             ],
                           },
                         },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "namespaces",
+                          },
+                          "selectionSet": undefined,
+                        },
                       ],
                     },
                   },
@@ -361,7 +383,7 @@ ShallowWrapper {
           ],
           "kind": "Document",
           "loc": Object {
-            "end": 162,
+            "end": 179,
             "start": 0,
           },
         },
@@ -475,6 +497,17 @@ ShallowWrapper {
                                 ],
                               },
                             },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "namespaces",
+                              },
+                              "selectionSet": undefined,
+                            },
                           ],
                         },
                       },
@@ -485,7 +518,7 @@ ShallowWrapper {
               ],
               "kind": "Document",
               "loc": Object {
-                "end": 162,
+                "end": 179,
                 "start": 0,
               },
             }
@@ -596,6 +629,17 @@ ShallowWrapper {
                               ],
                             },
                           },
+                          Object {
+                            "alias": undefined,
+                            "arguments": Array [],
+                            "directives": Array [],
+                            "kind": "Field",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "namespaces",
+                            },
+                            "selectionSet": undefined,
+                          },
                         ],
                       },
                     },
@@ -606,7 +650,7 @@ ShallowWrapper {
             ],
             "kind": "Document",
             "loc": Object {
-              "end": 162,
+              "end": 179,
               "start": 0,
             },
           },

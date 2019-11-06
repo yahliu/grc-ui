@@ -51,7 +51,18 @@
       cursor: pointer;
     }
 
-    &-textbox, &-multiselect, &-select {
+    &-singleselect {
+      .bx--list-box {
+        .bx--list-box__field {
+          span.bx--list-box__label {
+            color: $color__navy-gray-6;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+
+    &-textbox, &-multiselect, &-singleselect, &-select {
       padding: 0 0.3125rem 1.5625rem 0;
 
       &-title {

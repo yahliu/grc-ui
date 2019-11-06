@@ -17,6 +17,7 @@ import {
   Notification,
   TextInput,
   Checkbox,
+  DropdownV2,
   TooltipIcon,
   MultiSelect,
   InlineNotification} from 'carbon-components-react'
@@ -140,9 +141,13 @@ export default class TemplateEditor extends React.Component {
               return (<React.Fragment key={id}>
                 {this.renderTextInput(control)}
               </React.Fragment>)
+            case 'singleselect':
+              return (<React.Fragment key={id}>
+                {this.renderSingleSelect(control)}
+              </React.Fragment>)
             case 'multiselect':
               return (<React.Fragment key={id}>
-                {this.renderMultiselect(control)}
+                {this.renderMultiSelect(control)}
               </React.Fragment>)
             case 'checkbox':
               return (<React.Fragment key={id}>
@@ -209,7 +214,33 @@ export default class TemplateEditor extends React.Component {
     )
   }
 
-  renderMultiselect(control) {
+  renderSingleSelect(control) {
+    const {locale} = this.props
+    const {id, name, available, description, isOneSelection} = control
+    const key = `${id}-${name}`
+    return (
+      <React.Fragment>
+        <div className='creation-view-controls-singleselect'
+          ref={isOneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, id)} >
+          <div className="creation-view-controls-multiselect-title">
+            {name}
+            <TooltipIcon direction='top' tooltipText={description}>
+              <svg className='info-icon'>
+                <use href={'#diagramIcons_info'} ></use>
+              </svg>
+            </TooltipIcon>
+          </div>
+          <DropdownV2
+            key={key}
+            label={msgs.get('policy.create.namespace.tooltip', locale)}
+            items={available}
+            onChange={this.handleChange.bind(this, id)} />
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  renderMultiSelect(control) {
     const {locale} = this.props
     const {id, name, placeholder:ph, description, isOneSelection} = control
 
@@ -350,6 +381,9 @@ export default class TemplateEditor extends React.Component {
     case 'text':
       control.active = evt.target.value
       isCustomName = field==='name'
+      break
+    case 'singleselect':
+      control.active = evt.selectedItem
       break
     case 'multiselect':
       control.active = evt.selectedItems

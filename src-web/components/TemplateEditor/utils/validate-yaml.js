@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  * Licensed Materials - Property of IBM
  * (c) Copyright IBM Corporation 2019. All Rights Reserved.
@@ -23,6 +24,9 @@ export function validateYAML(parsed, controlData, exceptions, locale) {
         case 'checkbox':
           validateCheckboxControl(control, reverse, parsed, exceptions, locale)
           break
+        case 'singleselect':
+          validateSingleSelectControl(control, reverse, parsed, exceptions, locale)
+          break
         case 'multiselect':
           validateMultiSelectControl(control, reverse, parsed, exceptions, locale)
         }
@@ -34,6 +38,21 @@ export function validateYAML(parsed, controlData, exceptions, locale) {
 const validateTextControl = (reverse, parsed, exceptions, locale) => {
   if (!_.get(parsed, reverse[0])) {
     addException(reverse[0].split('.'), parsed, exceptions, locale)
+  }
+}
+
+const validateSingleSelectControl =  (control, reverse, parsed, exceptions, locale) => {
+  if (_.get(control, 'active') === [] || _.get(control, 'active') === null || _.get(control, 'active') === undefined ) {
+    exceptions.push({
+      text: msgs.get('validation.missing.resource', [_.get(control, 'name')], locale),
+      type: 'error',
+    })
+  }
+  if(_.indexOf(_.get(control, 'available'), _.get(control, 'active')) === -1){
+    exceptions.push({
+      text: msgs.get('validation.bad.value', [_.get(control, 'name'), _.get(control, 'available')], locale),
+      type: 'error',
+    })
   }
 }
 
