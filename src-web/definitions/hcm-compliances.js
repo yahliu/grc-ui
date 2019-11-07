@@ -640,10 +640,10 @@ export default {
         key: 'name',
       },
       {
-        msgKey: 'table.header.selector',
-        resourceKey: 'selector',
-        key: 'selector',
-        transformFunction: getLabelsToList
+        msgKey: 'table.header.status',
+        resourceKey: 'status',
+        key: 'status',
+        transformFunction: getStatusIconForPolicy,
       },
       {
         msgKey: 'table.header.cluster',
@@ -661,10 +661,10 @@ export default {
         key: 'reason',
       },
       {
-        msgKey: 'table.header.status',
-        resourceKey: 'status',
-        key: 'status',
-        transformFunction: getStatusIconForPolicy,
+        msgKey: 'table.header.cluster.link',
+        resourceKey: 'clusterURL',
+        key: 'clusterURL',
+        transformFunction: formLinkToCluster,
       },
     ],
   },
@@ -1172,6 +1172,12 @@ export function getDecisions(item = {}){
     return decisions.map(decision => decision.clusterName).join(', ')
   }
   return '-'
+}
+
+export function formLinkToCluster(item, locale){
+  if(item.clusterURL){
+    return <a target='_blank' href={`${item.clusterURL}`}>{msgs.get('table.actions.launch.cluster', locale)}</a>
+  }
 }
 
 // export function getPolicyClusters(item){

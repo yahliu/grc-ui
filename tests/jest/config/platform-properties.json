@@ -308,6 +308,7 @@
   "table.header.categories": "Categories",
   "table.header.cluster": "Cluster",
   "table.header.cluster.compliant": "Cluster compliant",
+  "table.header.cluster.link": "Link",
   "table.header.cluster.violation": "Cluster violations",
   "table.header.cluster.namespace": "Cluster name",
   "table.header.cluster.not.compliant": "Cluster not compliant",
