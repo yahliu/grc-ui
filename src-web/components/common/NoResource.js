@@ -22,12 +22,13 @@ const NoResource = ({
   title,
   detail,
   children,
-  topButton
+  topButton,
+  filterToEmpty
 }, context) =>
   <div>
     {topButton}
     <div className='no-resource'>
-      <img className='no-resource-icon' src={`${config.contextPath}/policies/graphics/no-policy.svg`} alt={msgs.get('svg.description.noresource', context.locale)} />
+      <img className='no-resource-icon' src={filterToEmpty ? `${config.contextPath}/policies/graphics/emptymoon.svg` : `${config.contextPath}/policies/graphics/no-policy.svg`} alt={msgs.get('svg.description.noresource', context.locale)} />
       <div className='no-resource-title'>{title}</div>
       {detail && <div className='no-resource-detail'>{detail}</div>}
       {children}
@@ -37,6 +38,7 @@ const NoResource = ({
 NoResource.propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   detail: PropTypes.string,
+  filterToEmpty: PropTypes.bool,
   title:PropTypes.string,
   topButton: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }

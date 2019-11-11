@@ -22,4 +22,13 @@ describe('NoResource component', () => {
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
+  it('renders as expected', () => {
+    const topButton = <div>topButton</div>
+    const component = renderer.create(
+      <NoResource title='title' detail='detailed description' topButton={topButton} filterToEmpty={true}>
+        <div className='child'>Test</div>
+      </NoResource>
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
 })

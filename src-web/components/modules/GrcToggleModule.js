@@ -36,7 +36,7 @@ export class GrcToggleModule extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { displayType, grcItems, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy } = this.props
+    const { displayType, grcItems, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy, filterToEmpty } = this.props
     const grcTabSwitcher = showGrcTabToggle ? this.renderTabSwitcher(displayType, grcTabToggleIndex) : []
     return (
       //below whole logic branch need to substract and rewrite later
@@ -44,6 +44,7 @@ export class GrcToggleModule extends React.Component {
         {displayType==='all' && grcTabToggleIndex===0 && <ResourceList
           {...this.props}
           detailsTabs={['policies']}
+          filterToEmpty={filterToEmpty}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_POLICY}
           listData={formatExpandablePolicies(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
@@ -62,6 +63,7 @@ export class GrcToggleModule extends React.Component {
         {displayType==='all' && grcTabToggleIndex===1 && <ResourceList
           {...this.props}
           detailsTabs={['clusters']}
+          filterToEmpty={filterToEmpty}
           resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER}
           listData={formatPoliciesToClustersTableData(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
@@ -80,6 +82,7 @@ export class GrcToggleModule extends React.Component {
         {displayType==='findings' && grcTabToggleIndex===0 && <ResourceList
           {...this.props}
           detailsTabs={['findings']}
+          filterToEmpty={filterToEmpty}
           resourceType={RESOURCE_TYPES.HCM_SECURITY_FINDINGS}
           listData={grcItems}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)}
@@ -98,6 +101,7 @@ export class GrcToggleModule extends React.Component {
         {displayType==='findings' && grcTabToggleIndex===1 && <ResourceList
           {...this.props}
           detailsTabs={['cluster-findings']}
+          filterToEmpty={filterToEmpty}
           resourceType={RESOURCE_TYPES.HCM_CLUSTER_FINDINGS}
           listData={formatFindingsToClustersTableData(grcItems)}
           staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
@@ -158,6 +162,7 @@ export class GrcToggleModule extends React.Component {
 
 GrcToggleModule.propTypes = {
   displayType: PropTypes.string,
+  filterToEmpty: PropTypes.bool,
   grcItems: PropTypes.array,
   grcTabToggleIndex: PropTypes.number,
   handleCreatePolicy: PropTypes.func,

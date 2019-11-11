@@ -81,7 +81,8 @@ class ResourceList extends React.Component {
       highLightRowName,
       showSidePanel,
       handleCreatePolicy,
-      topButton
+      topButton,
+      filterToEmpty
     } = this.props
     const { locale } = this.context
     if (status === REQUEST_STATUS.ERROR) {
@@ -157,6 +158,15 @@ class ResourceList extends React.Component {
           showSidePanel={showSidePanel}
         />
       </div>
+    }
+    if (filterToEmpty) {
+      return (
+        <NoResource
+          detail={msgs.get('no-resource.filter', locale)}
+          filterToEmpty={filterToEmpty}
+        >
+        </NoResource>
+      )
     }
     switch(resourceType.name) {
     case RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name:
@@ -249,6 +259,7 @@ ResourceList.propTypes = {
   deleteResource: PropTypes.func,
   err: PropTypes.object,
   fetchResources: PropTypes.func,
+  filterToEmpty: PropTypes.bool,
   handleCreatePolicy: PropTypes.func,
   highLightRowName: PropTypes.string,
   information: PropTypes.string,

@@ -127,7 +127,7 @@ export class GrcView extends React.Component {
         subtitle={msgs.get('overview.error.default', locale)} />
 
     const displayType = location.pathname.split('/').pop()
-    let filterGrcItems
+    let filterGrcItems, filterToEmpty = false
     switch(displayType) {
     case 'all':
     default:
@@ -142,6 +142,9 @@ export class GrcView extends React.Component {
       }
       else {
         filterGrcItems = filterPolicies(grcItems, activeFilters, locale)
+        if (grcItems.length > 0 && filterGrcItems.length == 0) {
+          filterToEmpty = true
+        }
       }
       break
     case 'findings':
@@ -156,6 +159,9 @@ export class GrcView extends React.Component {
       }
       else {
         filterGrcItems = filterFindings(grcItems, activeFilters, locale)
+        if (grcItems.length > 0 && filterGrcItems.length == 0) {
+          filterToEmpty = true
+        }
       }
       break
     }
@@ -189,6 +195,7 @@ export class GrcView extends React.Component {
           showGrcTabToggle={showGrcTabToggle}
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
+          filterToEmpty={filterToEmpty}
           handleCreatePolicy={this.handleCreatePolicy} />
       </div>
     )
