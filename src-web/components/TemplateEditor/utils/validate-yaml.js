@@ -42,15 +42,15 @@ const validateTextControl = (reverse, parsed, exceptions, locale) => {
 }
 
 const validateSingleSelectControl =  (control, reverse, parsed, exceptions, locale) => {
-  if (_.get(control, 'active') === [] || _.get(control, 'active') === null || _.get(control, 'active') === undefined ) {
+  const active = _.get(parsed, reverse[0])
+  const path = reverse[0].split('.')
+  if (!active) {
+    addException(path, parsed, exceptions, locale)
+  } else if (_.indexOf(_.get(control, 'available'), active) === -1){
     exceptions.push({
-      text: msgs.get('validation.missing.resource', [_.get(control, 'name')], locale),
-      type: 'error',
-    })
-  }
-  if(_.indexOf(_.get(control, 'available'), _.get(control, 'active')) === -1){
-    exceptions.push({
-      text: msgs.get('validation.bad.value', [_.get(control, 'name'), _.get(control, 'available')], locale),
+      row: getRow(path, parsed),
+      column: 0,
+      text: msgs.get('validation.bad.value', [active, _.get(control, 'available')], locale),
       type: 'error',
     })
   }

@@ -13,59 +13,6 @@ import Handlebars from 'handlebars'
 import { parseYAML } from './update-controls'
 import _ from 'lodash'
 
-export const initializeControlData = (template, initialControlData) =>{
-  return initialControlData.map(control=>{
-    control = Object.assign({}, control)
-    const {type, active, available=[]} = control
-
-    // if checkbox, convert active from an item name to a boolean
-    if (type==='checkbox') {
-      control.active = available.indexOf(active)>0
-    }
-
-    // if available choices are objects, convert to keys
-    if (typeof _.get(control, 'available[0]') === 'object') {
-      const { available } = control
-      control.availableMap = {}
-      let labelSort = false
-      control.available = available.map(choice=>{
-        let availableKey
-        const {key, value, name, description} = choice
-        if (key) {
-          availableKey = `${key}: "${value}"`
-          labelSort = control.hasLabels = true
-        } else if (name) {
-          availableKey = `${name} - ${description}`
-          control.hasReplacements = true
-        }
-        control.availableMap[availableKey] = choice
-        return availableKey
-      }).sort((a,b)=>{
-        if (labelSort) {
-          const aw = a.startsWith('name')
-          const bw = b.startsWith('name')
-          if (aw && !bw) {
-            return 1
-          } else if (!aw && bw) {
-            return -1
-          }
-        }
-        return a.localeCompare(b)
-      })
-    }
-
-    // initialize reverse paths
-    // used when user edits yaml to know what control to update
-    let reverse = control.reverse || []
-    reverse = Array.isArray(reverse) ? reverse : [reverse]
-    control.reverse = reverse.map(path=>{
-      return path.replace('.', '.$raw.')
-    })
-
-    return control
-  })
-}
-
 export const generateYAML = (template, controlData) => {
 
   // convert controlData active into templateData
@@ -203,7 +150,7 @@ export const highlightChanges = (editor, oldYAML, newYAML) => {
       let newPath = path.length>0 ? pathBase + `.${path.join('.$v.')}` : pathBase
       let obj = _.get(newSynced, newPath)
       if (obj) {
-        if (obj.$v) {
+        if (obj.$v || obj.$v===false) {
           // convert A's and E's into 'N's
           switch (kind) {
           case 'E': {
@@ -254,10 +201,10 @@ export const highlightChanges = (editor, oldYAML, newYAML) => {
         const r = Object.create(range)
         switch (kind) {
         case 'E': {// edited
-          if (obj.$v) { // if no value ignore--all values removed from a key
+          if (obj.$v || obj.$v===false) { // if no value ignore--all values removed from a key
             const col = newYAMLLines[obj.$r].indexOf(obj.$v)
             r.start = {row: obj.$r, column: col}
-            r.end = {row: obj.$r, column: col+obj.$v.length}
+            r.end = {row: obj.$r, column: col+obj.$v.toString().length}
             ranges.push(r)
             if (!firstModRow) {
               firstModRow = obj.$r

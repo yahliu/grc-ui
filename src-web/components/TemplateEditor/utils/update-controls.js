@@ -12,6 +12,78 @@ import jsYaml from 'js-yaml'
 import YamlParser from '../components/YamlParser'
 import _ from 'lodash'
 
+export const initializeControlData = (template, initialControlData) =>{
+  return initialControlData.map(control=>{
+    control = Object.assign({}, control)
+    const {type, active, available=[]} = control
+
+    // if checkbox, convert active from an item name to a boolean
+    if (type==='checkbox') {
+      control.active = available.indexOf(active)>0
+    }
+
+    // if user data was cached, apply now
+    // save custom user input for session??
+    if (control.cacheUserValueKey) {
+      const storageKey = `${control.cacheUserValueKey}--${window.location.href}`
+      const sessionObject = JSON.parse(sessionStorage.getItem(storageKey))
+      if (sessionObject) {
+        control.available = _.uniq([...control.available, ...sessionObject])
+      }
+    }
+
+    // if available choices are objects, convert to keys
+    if (typeof _.get(control, 'available[0]') === 'object') {
+      const { available } = control
+      control.availableMap = {}
+      let labelSort = false
+      control.available = available.map(choice=>{
+        let availableKey
+        const {key, value, name, description} = choice
+        if (key) {
+          availableKey = `${key}: "${value}"`
+          labelSort = control.hasLabels = true
+        } else if (name) {
+          availableKey = `${name} - ${description}`
+          control.hasReplacements = true
+        }
+        control.availableMap[availableKey] = choice
+        return availableKey
+      }).sort((a,b)=>{
+        if (labelSort) {
+          const aw = a.startsWith('name')
+          const bw = b.startsWith('name')
+          if (aw && !bw) {
+            return 1
+          } else if (!aw && bw) {
+            return -1
+          }
+        }
+        return a.localeCompare(b)
+      })
+    }
+
+    // initialize reverse paths
+    // used when user edits yaml to know what control to update
+    let reverse = control.reverse || []
+    reverse = Array.isArray(reverse) ? reverse : [reverse]
+    control.reverse = reverse.map(path=>{
+      return path.replace('.', '.$raw.')
+    })
+
+    return control
+  })
+}
+
+// don't save user data until they create
+export const cacheUserData = (controlData) => {
+  controlData.forEach(control=>{
+    if (control.cacheUserValueKey && control.userData && control.userData.length>0) {
+      const storageKey = `${control.cacheUserValueKey}--${window.location.href}`
+      sessionStorage.setItem(storageKey, JSON.stringify(control.userData))
+    }
+  })
+}
 
 export const updateControls = (controlData, oldParsed, newParsed) => {
 
@@ -28,6 +100,7 @@ export const updateControls = (controlData, oldParsed, newParsed) => {
       break
     case 'multiselect':
       updateMultiSelectControl(control, reverse, oldParsed, newParsed)
+      break
     }
   })
   return isCustomName

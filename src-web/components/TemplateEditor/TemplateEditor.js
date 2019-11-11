@@ -21,8 +21,8 @@ import {
   TooltipIcon,
   MultiSelect,
   InlineNotification} from 'carbon-components-react'
-import { updateControls, parseYAML } from './utils/update-controls'
-import { initializeControlData, generateYAML, highlightChanges, getUniqueName } from './utils/update-editor'
+import { initializeControlData, cacheUserData, updateControls, parseYAML } from './utils/update-controls'
+import { generateYAML, highlightChanges, getUniqueName } from './utils/update-editor'
 import { validateYAML } from './utils/validate-yaml'
 import EditorBar from './components/EditorBar'
 import YamlEditor from './components/YamlEditor'
@@ -583,6 +583,10 @@ export default class TemplateEditor extends React.Component {
     }
     this.setState({updateMsgKind: errorMsg?'error':'success', updateMessage: errorMsg||msgs.get('success.create.policy.check', locale)})
     if (!errorMsg) {
+      // cache user data
+      cacheUserData(controlData)
+
+      // create payload
       const payload = []
       Object.entries(parsed).forEach(([, values])=>{
         values.forEach(({$raw})=>{

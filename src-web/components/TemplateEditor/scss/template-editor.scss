@@ -85,6 +85,12 @@
         background-color: white;
       }
 
+      .bx--list-box {
+        .bx--list-box__menu {
+          max-height: 25rem;
+        }
+      }
+
       .bx--multi-select {
         .bx--list-box__menu {
           max-height: 25rem;

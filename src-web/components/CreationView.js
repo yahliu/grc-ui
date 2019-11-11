@@ -82,7 +82,8 @@ const controlData = [
     id: 'standards',
     type: 'multiselect',
     available: ['NIST', 'PCI', 'FISMA', 'HIPAA'],
-    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/standards"]'
+    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/standards"]',
+    cacheUserValueKey: 'create.policy.standards',
   },
   {
     name: 'creation.view.policy.categories',
@@ -91,7 +92,8 @@ const controlData = [
     id: 'categories',
     type: 'multiselect',
     available: ['SystemAndCommunicationsProtections','SystemAndInformationIntegrity'],
-    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/categories"]'
+    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/categories"]',
+    cacheUserValueKey: 'create.policy.categories',
   },
   {
     name: 'creation.view.policy.controls',
@@ -100,7 +102,8 @@ const controlData = [
     id: 'controls',
     type: 'multiselect',
     available: ['MutationAdvisor','VulnerbilityAdvisor','SecretEncryption'],
-    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/controls"]'
+    reverse: 'Policy[0].metadata.annotations["policy.mcm.ibm.com/controls"]',
+    cacheUserValueKey: 'create.policy.controls',
   },
   {
     name: 'creation.view.policy.enforce',
