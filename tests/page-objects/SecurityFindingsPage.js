@@ -81,7 +81,7 @@ function checkPolicySummaryCards(browser) {
         const cardInfo = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(2)`
         this.expect.element(cardInfo).to.be.present
         browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
-          if(result.status == -1) {
+          if(result.value == false) {
             this.click(cardInfo + ` > div:nth-child(${i})`)
             browser.pause(1000)
             browser.element('css selector', '.resource-filter-bar > span.button', function(result2){

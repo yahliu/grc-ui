@@ -37,7 +37,7 @@ function resetHomepage(browser, url) {
     .click('@adminBtn')
   this.api.pause(1000)
   browser.element('css selector', '#make-homepage', result => {
-    if(result.status === 0) {
+    if(result.value === true) {
       browser.click('#make-homepage')
     }
   })

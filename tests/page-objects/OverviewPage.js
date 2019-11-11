@@ -102,7 +102,7 @@ function verifyPolicySummary() {
 function followRecentActivityButton(browser, cluster) {
   browser.pause(5*1000)
   browser.element('css selector', 'div.no-resource', function(result){
-    if(result.status != -1){
+    if(result.value != false){
       this.expect.element('div.no-resource').to.be.present
     }
     else{
