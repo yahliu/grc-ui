@@ -11,6 +11,7 @@ import lodash from 'lodash'
 
 import * as Actions from './index'
 import apolloClient from '../../lib/client/apollo-client'
+import { formatExpandablePolicies } from '../components/common/FormatTableData'
 
 export const changeTablePage = ({page, pageSize}, resourceType) => ({
   type: Actions.TABLE_PAGE_CHANGE,
@@ -99,7 +100,7 @@ export const fetchResources = (resourceType, vars) => {
         if (response.errors) {
           return dispatch(receiveResourceError(response.errors[0], resourceType))
         }
-        return dispatch(receiveResourceSuccess({items: lodash.cloneDeep(response.data.items)}, resourceType))
+        return dispatch(receiveResourceSuccess({items: lodash.cloneDeep(formatExpandablePolicies(response.data.items))}, resourceType))
       })
       .catch(err => dispatch(receiveResourceError(err, resourceType)))
   }

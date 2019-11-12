@@ -55,6 +55,8 @@ export const INITIAL_STATE = {
   sortColumn: undefined,
   sortDirection: Actions.SORT_DIRECTION_ASCENDING,
   status: Actions.REQUEST_STATUS.INCEPTION,
+  patchStatus: undefined,
+  patchErrorMsg: '',
   putStatus: undefined,
   putErrorMsg: '',
   postStatus: undefined,
@@ -324,7 +326,9 @@ export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
       postStatusCode: undefined,
       postErrorMsg: undefined,
       putStatus: undefined,
-      putErrorMsg: undefined
+      putErrorMsg: undefined,
+      patchStatus: undefined,
+      patchErrorMsg: undefined
     })
   case Actions.TABLE_SEARCH:
     return Object.assign({}, state, {
