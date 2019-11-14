@@ -130,9 +130,11 @@ export default class TemplateEditor extends React.Component {
   }
 
   renderControls() {
+    const { locale } = this.props
     const {controlData} = this.state
     return (
       <div className='creation-view-controls-container' >
+        <div className='creation-view-controls-note'>{msgs.get('creation.view.required.mark', locale)}</div>
         <div className='creation-view-controls' >
           {controlData.map(control => {
             const {id, type} = control
@@ -162,7 +164,7 @@ export default class TemplateEditor extends React.Component {
   }
 
   renderTextInput(control) {
-    const {id, name, active:value, existing} = control
+    const {id, name, active:value, existing, mustExist} = control
 
     // special case--validate that name is unique
     let invalid = false
@@ -178,6 +180,7 @@ export default class TemplateEditor extends React.Component {
         <div className='creation-view-controls-textbox'>
           <div className="creation-view-controls-textbox-title">
             {name}
+            {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
           </div>
           <TextInput
             id={id}
@@ -216,7 +219,7 @@ export default class TemplateEditor extends React.Component {
 
   renderSingleSelect(control) {
     const {locale} = this.props
-    const {id, name, available, description, isOneSelection} = control
+    const {id, name, available, description, isOneSelection, mustExist} = control
     const key = `${id}-${name}`
     return (
       <React.Fragment>
@@ -224,6 +227,7 @@ export default class TemplateEditor extends React.Component {
           ref={isOneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, id)} >
           <div className="creation-view-controls-multiselect-title">
             {name}
+            {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
             <TooltipIcon direction='top' tooltipText={description}>
               <svg className='info-icon'>
                 <use href={'#diagramIcons_info'} ></use>
@@ -242,7 +246,7 @@ export default class TemplateEditor extends React.Component {
 
   renderMultiSelect(control) {
     const {locale} = this.props
-    const {id, name, placeholder:ph, description, isOneSelection} = control
+    const {id, name, placeholder:ph, description, isOneSelection, mustExist} = control
 
     // see if we need to add user additions to available (from editing the yaml file)
     const {userData, userMap, hasCapturedUserSource} = control
@@ -281,6 +285,7 @@ export default class TemplateEditor extends React.Component {
           ref={isOneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, id)} >
           <div className="creation-view-controls-multiselect-title">
             {name}
+            {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
             <TooltipIcon direction='top' tooltipText={description}>
               <svg className='info-icon'>
                 <use href={'#diagramIcons_info'} ></use>

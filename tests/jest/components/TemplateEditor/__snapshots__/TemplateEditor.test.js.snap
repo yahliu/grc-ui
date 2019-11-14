@@ -8,6 +8,11 @@ exports[`TemplateEditor component renders as expected 1`] = `
     className="creation-view-controls-container"
   >
     <div
+      className="creation-view-controls-note"
+    >
+      All fields marked with an asterisk (*) are mandatory field.
+    </div>
+    <div
       className="creation-view-controls"
     >
       <div
@@ -17,6 +22,11 @@ exports[`TemplateEditor component renders as expected 1`] = `
           className="creation-view-controls-textbox-title"
         >
           creation.view.policy.name
+          <div
+            className="creation-view-controls-must-exist"
+          >
+            *
+          </div>
         </div>
         <div
           className="bx--form-item"
@@ -40,6 +50,11 @@ exports[`TemplateEditor component renders as expected 1`] = `
           className="creation-view-controls-multiselect-title"
         >
           creation.view.policy.specs
+          <div
+            className="creation-view-controls-must-exist"
+          >
+            *
+          </div>
           <div
             className="bx--tooltip-icon"
           >
@@ -132,6 +147,11 @@ exports[`TemplateEditor component renders as expected 1`] = `
           className="creation-view-controls-multiselect-title"
         >
           creation.view.policy.binding
+          <div
+            className="creation-view-controls-must-exist"
+          >
+            *
+          </div>
           <div
             className="bx--tooltip-icon"
           >
