@@ -640,15 +640,10 @@ export default {
         key: 'name',
       },
       {
-        msgKey: 'table.header.status',
-        resourceKey: 'status',
-        key: 'status',
-        transformFunction: getStatusIconForPolicy,
-      },
-      {
         msgKey: 'table.header.cluster',
         resourceKey: 'cluster',
         key: 'cluster',
+        transformFunction: formLinkToCluster,
       },
       {
         msgKey: 'table.header.message',
@@ -659,12 +654,6 @@ export default {
         msgKey: 'table.header.reason',
         resourceKey: 'reason',
         key: 'reason',
-      },
-      {
-        msgKey: 'table.header.cluster.link',
-        resourceKey: 'clusterURL',
-        key: 'clusterURL',
-        transformFunction: formLinkToCluster,
       },
     ],
   },
@@ -1174,9 +1163,9 @@ export function getDecisions(item = {}){
   return '-'
 }
 
-export function formLinkToCluster(item, locale){
+export function formLinkToCluster(item){
   if(item.clusterURL){
-    return <a target='_blank' href={`${item.clusterURL}`}>{msgs.get('table.actions.launch.cluster', locale)}</a>
+    return <a target='_blank' href={`${item.clusterURL}`}>{item.cluster}</a>
   }
 }
 
