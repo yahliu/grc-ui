@@ -10,7 +10,7 @@ exports[`TemplateEditor component renders as expected 1`] = `
     <div
       className="creation-view-controls-note"
     >
-      All fields marked with an asterisk (*) are mandatory field.
+      All fields marked with an asterisk (*) are mandatory.
     </div>
     <div
       className="creation-view-controls"
