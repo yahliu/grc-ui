@@ -100,7 +100,7 @@ export class GrcView extends React.Component {
 
   componentDidUpdate() {
     const urlParams = queryString.parse(location.search)
-    if (urlParams.autoFocus) {
+    if (urlParams.autoFocus && document.getElementsByClassName(urlParams.autoFocus)[0]) {
       const ref = document.getElementsByClassName(urlParams.autoFocus)[0].offsetTop
       window.scrollTo({
         top: ref,
@@ -117,7 +117,7 @@ export class GrcView extends React.Component {
   render() {
     const { locale } = this.context
     const { viewState } = this.state
-    const { loading, error, grcItems, activeFilters={}, secondaryHeaderProps, refreshControl, location } = this.props
+    const { loading, error, grcItems, applications, activeFilters={}, secondaryHeaderProps, refreshControl, location } = this.props
     hideResourceToolbar()
     if (loading)
       return <Loading withOverlay={false} className='content-spinner' />
@@ -189,6 +189,7 @@ export class GrcView extends React.Component {
           displayType={displayType}
           refreshControl={refreshControl}
           grcItems={filterGrcItems}
+          applications={applications}
           secondaryHeaderProps={secondaryHeaderProps}
           locale={locale}
           grcTabToggleIndex={grcTabToggleIndex}
@@ -264,6 +265,7 @@ export class GrcView extends React.Component {
 
 GrcView.propTypes = {
   activeFilters: PropTypes.object,
+  applications: PropTypes.array,
   error: PropTypes.object,
   grcItems: PropTypes.array,
   history: PropTypes.object.isRequired,

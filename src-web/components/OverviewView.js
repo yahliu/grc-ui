@@ -86,7 +86,7 @@ export class OverviewView extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { loading, error, policies, findings, activeFilters={} } = this.props
+    const { loading, error, policies, findings, applications, activeFilters={} } = this.props
     hideResourceToolbar()
 
     if (loading)
@@ -110,12 +110,14 @@ export class OverviewView extends React.Component {
     const availableFilters =  getAvailableGrcFilters(policies, findings, locale)
     const filteredPolicies = filterPolicies(policies, activeFilters, locale)
     const filteredFindings = filterFindings(findings, activeFilters, locale)
+    //need to filteredapplications later?
     return (
       <div className='overview-view'>
         <ResourceFilterBar />
         <RecentActivityModule
           policies={filteredPolicies}
           findings={filteredFindings}
+          applications={applications}
           handleDrillDownClick={this.handleDrillDownClickOverview}
           viewState={viewState}
           updateViewState={this.updateViewState} />
@@ -184,7 +186,7 @@ export class OverviewView extends React.Component {
         if(parentName){
           // paraURL.name = parentName //highlight this policy violation name
           // paraURL.side = true //auto open side panel under this highlight name
-          paraURL.filters = `{"textsearch":["${parentName}"]}`  // Change click action to match security finding cards
+          paraURL.filters = `{"textsearch":["${parentName}"]}`
         }
         break
       case 'clusters'://TopInformationModule to policies page with specific cluster violation name
@@ -193,7 +195,14 @@ export class OverviewView extends React.Component {
         if(parentName){
           // paraURL.name = parentName //highlight this cluster violation name
           // paraURL.side = true //auto open side panel under this highlight name
-          paraURL.filters = `{"textsearch":["${parentName}"]}`  // Change click action to match security finding cards
+          paraURL.filters = `{"textsearch":["${parentName}"]}`
+        }
+        break
+      case 'applications':
+        paraURL.index = 2
+        paraURL.autoFocus = 'module-toggle-tab'
+        if(parentName){
+          paraURL.filters = `{"textsearch":["${parentName}"]}`
         }
         break
       case 'security findings'://TopInformationModule to security findings page with specific security finding name
@@ -226,6 +235,7 @@ export class OverviewView extends React.Component {
 
 OverviewView.propTypes = {
   activeFilters: PropTypes.object,
+  applications: PropTypes.array,
   error: PropTypes.object,
   findings: PropTypes.array,
   history: PropTypes.object.isRequired,

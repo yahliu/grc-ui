@@ -17,7 +17,7 @@ import { ContentSwitcher, Switch } from 'carbon-components-react'
 import getResourceDefinitions from '../../definitions'
 import { makeGetVisibleTableItemsSelector } from '../../reducers/common'
 import ResourceList from '../common/ResourceList'
-import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData, formatExpandablePolicies } from '../common/FormatTableData'
+import { formatPoliciesToClustersTableData, formatFindingsToClustersTableData, formatExpandablePolicies, formatApplicationTableData } from '../common/FormatTableData'
 import pageWithUrlQuery from '../common/withUrlQuery'
 import queryString from 'query-string'
 import resources from '../../../lib/shared/resources'
@@ -36,7 +36,7 @@ export class GrcToggleModule extends React.Component {
 
   render() {
     const { locale } = this.context
-    const { displayType, grcItems, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy, filterToEmpty } = this.props
+    const { displayType, grcItems, applications, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy, filterToEmpty } = this.props
     const grcTabSwitcher = showGrcTabToggle ? this.renderTabSwitcher(displayType, grcTabToggleIndex) : []
     return (
       //below whole logic branch need to substract and rewrite later
@@ -73,6 +73,24 @@ export class GrcToggleModule extends React.Component {
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
           placeHolderText={msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)}
+          autoAction='table.actions.policy.sidepanel'
+          highLightRowName={highLightRowName}
+          showSidePanel={showSidePanel}
+          topButton={grcTabSwitcher}>
+          {grcTabSwitcher}
+        </ResourceList>}
+        {displayType==='all' && grcTabToggleIndex===2 && <ResourceList
+          {...this.props}
+          detailsTabs={['applications']}
+          resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION}
+          listData={formatApplicationTableData(applications)}
+          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)}
+          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)}
+          tabs={secondaryHeaderProps.tabs}
+          links={secondaryHeaderProps.links}
+          title={secondaryHeaderProps.title}
+          information={secondaryHeaderProps.information}
+          placeHolderText={msgs.get('tabs.grc.toggle.applications.placeHolderText', locale)}
           autoAction='table.actions.policy.sidepanel'
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
@@ -123,12 +141,13 @@ export class GrcToggleModule extends React.Component {
 
   renderTabSwitcher(displayType, grcTabToggleIndex) {
     const { locale } = this.context
-    let toggleText1, toggleText2
+    let toggleText1, toggleText2, toggleText3
     switch(displayType) {
     case 'all':
     default:
       toggleText1 = msgs.get('tabs.grc.toggle.allPolicies', locale)
       toggleText2 = msgs.get('tabs.grc.toggle.clusterViolations', locale)
+      toggleText3 = msgs.get('tabs.grc.toggle.policiesApplications', locale)
       break
     case 'findings':
       toggleText1 = msgs.get('tabs.grc.toggle.securityFindings', locale)
@@ -137,10 +156,15 @@ export class GrcToggleModule extends React.Component {
     }
     return (
       <div className='module-toggle-tab-switch'>
-        <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
+        {displayType==='all' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
           <Switch text={toggleText1} onClick={this.toggleClick} />
           <Switch text={toggleText2} onClick={this.toggleClick} />
-        </ContentSwitcher>
+          <Switch text={toggleText3} onClick={this.toggleClick} />
+        </ContentSwitcher>}
+        {displayType==='findings' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
+          <Switch text={toggleText1} onClick={this.toggleClick} />
+          <Switch text={toggleText2} onClick={this.toggleClick} />
+        </ContentSwitcher>}
       </div>
     )
   }
@@ -161,6 +185,7 @@ export class GrcToggleModule extends React.Component {
 }
 
 GrcToggleModule.propTypes = {
+  applications: PropTypes.array,
   displayType: PropTypes.string,
   filterToEmpty: PropTypes.bool,
   grcItems: PropTypes.array,

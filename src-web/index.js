@@ -41,7 +41,7 @@ const store = createStore(combineReducers(reducers), preloadedState, composeEnha
 ))
 
 hydrate(
-  <ApolloProvider client={apolloClient.getClient()}>
+  <ApolloProvider client={apolloClient.getGrcClient()}>
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop>

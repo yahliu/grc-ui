@@ -414,6 +414,16 @@ exports[`GrcView component 1 renders as expected 1`] = `
                     Cluster violations
                   </span>
                 </a>
+                <a
+                  className="bx--content-switcher-btn"
+                  href=""
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                >
+                  <span>
+                    Applications
+                  </span>
+                </a>
               </div>
             </div>
           </div>

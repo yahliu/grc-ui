@@ -169,6 +169,13 @@ class ResourceList extends React.Component {
       )
     }
     switch(resourceType.name) {
+    case RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION.name:
+      return <NoResource
+        title={msgs.get('no-resource.title', [msgs.get('routes.grc', locale)], locale)}
+        detail={msgs.get('no-resource.detail.application', locale)}
+        topButton={topButton}>
+        {createDocLink(locale, this.handleCreatePolicy, msgs.get('routes.create.policy', locale), false)}
+      </NoResource>
     case RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name:
       return (
         <NoResource

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -12,28 +12,28 @@ import React from 'react'
 import TruncateText from '../components/common/TruncateText'
 
 export default {
-  defaultSortField: 'cluster',
-  primaryKey: 'cluster',
-  secondaryKey: 'metadata.namespace',
+  defaultSortField: 'name',
+  primaryKey: 'name',
+  secondaryKey: 'namespace',
   tableActions: [
-    'table.actions.policy.clusters.sidepanel',
+    // 'table.actions.policy.applications.sidepanel',
   ],
   tableKeys: [
     {
-      msgKey: 'table.header.cluster.name',
-      resourceKey: 'cluster',
+      msgKey: 'table.header.application',
+      resourceKey: 'name',
     },
     {
       msgKey: 'table.header.namespace',
-      resourceKey: 'namespace',
+      resourceKey: 'nameSpace',
     },
     {
       msgKey: 'table.header.violation',
-      resourceKey: 'violation',
+      resourceKey: 'violations',
     },
     {
       msgKey: 'table.header.violated',
-      resourceKey: 'nonCompliant',
+      resourceKey: 'violatedPolicies',
       transformFunction: getLabels,
     }
   ],
@@ -60,7 +60,11 @@ export default {
 }
 
 export function getLabels(item) {
-  return getTruncatedText(item.nonCompliant.join(', '))
+  const violatedPoliciesName = []
+  item.violatedPolicies.forEach(policy => {
+    violatedPoliciesName.push(policy.name)
+  })
+  return getTruncatedText(violatedPoliciesName.join(', '))
 }
 
 export function getTruncatedText(item){

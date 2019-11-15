@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom'
 import ResourceTableRowExpandableTable from './ResourceTableRowExpandableTable'
 import { Module, ModuleHeader, ModuleBody } from 'carbon-addons-cloud-react'
 import msgs from '../../../nls/platform.properties'
+import TruncateText from './TruncateText'
 
 resources(() => {
   require('../../../scss/structured-list.scss')
@@ -119,7 +120,7 @@ class StructuredListModule extends React.Component {
                     if(row && row.id){
                       return (
                         <TableRow key={row.id}>
-                          {rows[0].cells && rows[0].cells.map((cell, index)=> <TableCell key={cell.resourceKey+'Cell'} className={row.id.includes('S_F_S_P')?'S_F_S_P_'+index:''}>{transform(row, cell, this.context.locale)}</TableCell>)}
+                          {rows[0].cells && rows[0].cells.map((cell, index)=> <TableCell key={cell.resourceKey.substring(0, 21)+'Cell'} className={row.id.includes('S_F_S_P')?'S_F_S_P_'+index:''}><TruncateText text={transform(row, cell, this.context.locale)} /></TableCell>)}
                         </TableRow>
                       )
                     }

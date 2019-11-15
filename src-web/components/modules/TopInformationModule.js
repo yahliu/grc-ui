@@ -31,6 +31,7 @@ const TopInformationSelections = Object.freeze({
   clusters: 'clusters',
   policies: 'policies',
   findings: 'findings',
+  applications: 'applications',
 })
 
 export default class TopInformationModule extends React.Component {
@@ -48,14 +49,14 @@ export default class TopInformationModule extends React.Component {
 
   componentWillMount() {
     //current items, type when page first loading
-    const { items, type } = this.props
-    this.setCardData(items, type)
+    const { items, applications, type } = this.props
+    this.setCardData(items, applications, type)
   }
 
   componentWillReceiveProps(nextProps) {
     //next items, type when update filter on current page
-    const { items, type } = nextProps
-    this.setCardData(items, type)
+    const { items, applications, type } = nextProps
+    this.setCardData(items, applications, type)
   }
 
   render() {
@@ -99,8 +100,8 @@ export default class TopInformationModule extends React.Component {
     return false
   }
 
-  setCardData(items, type) {
-    this.setState({ cardData: this.getCardData(items, type)})
+  setCardData(items, applications, type) {
+    this.setState({ cardData: this.getCardData(items, applications, type)})
   }
 
   renderNoInformations() {
@@ -144,6 +145,7 @@ export default class TopInformationModule extends React.Component {
           <Tabs selected={idx} onSelectionChange={this.onChange} aria-label={`${title} ${msgs.get('tabs.label', locale)}`}>
             <Tab label={msgs.get(`overview.top.informations.${type}`, locale)} />
             <Tab label={msgs.get('overview.top.informations.clusters', locale)} />
+            {type==='policies' && <Tab label={msgs.get('overview.top.informations.applications', locale)} />}
           </Tabs>
         </div>
       </div>
@@ -156,11 +158,8 @@ export default class TopInformationModule extends React.Component {
     return <TopInformations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
   }
 
-  getCardData = (items, type) => {
-    const { topViolationChoice, topFindingChoice } = this.state
-    const dataMap = {}
-    switch (type) {
-    case 'policies':
+  getPoliciesAndClustersDataMap(dataMap, items, topViolationChoice) {
+    if(items && Array.isArray(items)) {
       items.map(item=>{
         const statuses = _.get(item, 'raw.status.status', {})
         Object.keys(statuses).forEach(key=>{
@@ -176,6 +175,7 @@ export default class TopInformationModule extends React.Component {
               itemName= _.get(item, 'raw.spec.runtime-rules[0].metadata.name', name)
               break
             case TopInformationSelections.clusters:
+              // case TopInformationSelections.applications:
               name = key
               description = _.get(item, 'metadata.name', 'unknown')
               choice = msgs.get('overview.top.informations.clusters').toLowerCase()
@@ -199,12 +199,66 @@ export default class TopInformationModule extends React.Component {
           }
         })
       })
+    }
+  }
+
+  getApplicationsDataMap(dataMap, applications) {
+    if(applications && Array.isArray(applications)) {
+      applications.map(application=>{
+        if (application.policies && application.policies.length > 0) {
+          const name = _.get(application, 'name', 'unknown')
+          const choice = msgs.get('overview.top.informations.applications').toLowerCase()
+          const nameSpace = _.get(application, 'namespace', 'unknown')
+          const itemName = name
+
+          let data = dataMap[name]
+          if (!data) {
+            dataMap[name] = data = {
+              name,
+              description: [],
+              count: 0,
+              choice,
+              nameSpace,
+              itemName
+            }
+          }
+
+          const violatedPolicies = application.policies
+          if (violatedPolicies) {
+            violatedPolicies.map(violatedPolicy=>{
+              if (violatedPolicy.name) {
+                data.description.push(violatedPolicy.name)
+                data.count++
+              }
+            })
+          }
+        }
+      })
+    }
+  }
+
+  getCardData = (items, applications, type) => {
+    const { topViolationChoice, topFindingChoice } = this.state
+    const dataMap = {}
+    switch (type) {
+    case 'policies':
+      switch (topViolationChoice) {
+      case TopInformationSelections.policies:
+      case TopInformationSelections.clusters:
+      default:
+        this.getPoliciesAndClustersDataMap(dataMap, items, topViolationChoice)
+        break
+      case TopInformationSelections.applications:
+        this.getApplicationsDataMap(dataMap, applications)
+        break
+      }
       break
     case 'findings':
       items.map(item=>{
         let name, description, choice, nameSpace, itemName
         switch (topFindingChoice) {
         case TopInformationSelections.findings:
+        default:
           name = _.get(item, 'shortDescription', 'unknown')
           description = _.get(item, 'context.clusterName', 'unknown')
           choice = msgs.get('overview.top.informations.findings').toLowerCase()
@@ -224,7 +278,6 @@ export default class TopInformationModule extends React.Component {
             description: [],
             count: 0,
             choice,
-            // type,
             nameSpace,
             itemName
           }
@@ -269,6 +322,10 @@ export default class TopInformationModule extends React.Component {
           value: TopInformationSelections.clusters,
           label: msgs.get('overview.top.informations.clusters', locale),
         },
+        {
+          value: TopInformationSelections.applications,
+          label: msgs.get('overview.top.informations.applications', locale),
+        },
       ]
     }
     return this.topViolationChoices
@@ -291,7 +348,7 @@ export default class TopInformationModule extends React.Component {
   }
 
   onChange = (index) => {
-    const { items, type } = this.props
+    const { items, applications, type } = this.props
     let value = ''
     switch(type) {
     case 'policies':
@@ -304,12 +361,15 @@ export default class TopInformationModule extends React.Component {
       case 1:
         value = 'clusters'
         break
+      case 2:
+        value = 'applications'
+        break
       }
       this.props.updateViewState({topViolationChoice: value})
       this.setState(()=>{
         return {topViolationChoice: value}
       }, () => {
-        this.setCardData(items, type)
+        this.setCardData(items, applications, type)
       })
       break
     case 'findings':
@@ -326,7 +386,7 @@ export default class TopInformationModule extends React.Component {
       this.setState(()=>{
         return {topFindingChoice: value}
       }, () => {
-        this.setCardData(items, type)
+        this.setCardData(items, null, type)
       })
       break
     }
@@ -406,9 +466,9 @@ const TopInformations = ({cardData, handleClick, locale}) => {
                 const skey = sortedKeys[i][0]
                 newDesc.push((descDict[skey] > 1) ? skey + ' (' + descDict[skey] + ')' : skey)
               }
-              const descText = newDesc.map((singleDescription) => {
+              const descText = newDesc.length > 0 ? newDesc.map((singleDescription) => {
                 return singleDescription
-              }).reduce((prev, curr) => (prev + ', ' + curr))
+              }).reduce((prev, curr) => (prev + ', ' + curr)) : ''
               return (
                 <ResponsiveEllipsis
                   text={descText}
@@ -478,6 +538,7 @@ TopInformations.propTypes = {
 }
 
 TopInformationModule.propTypes = {
+  applications: PropTypes.array,
   handleDrillDownClick: PropTypes.func,
   items: PropTypes.array,
   threshold: PropTypes.number,

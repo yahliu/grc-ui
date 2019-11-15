@@ -18,8 +18,10 @@ import hcmcompliances from './hcm-compliances'
 import hcmpolicies from './hcm-policies'
 import hcmsecurityfindings from './hcm-security-findings'
 import hcmclusterfindings from './hcm-cluster-findings'
+import hcmpoliciesapplication from './hcm-policies-application'
 
 const resourceData = {
+  [RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION.name]: hcmpoliciesapplication,
   [RESOURCE_TYPES.HCM_POLICIES_PER_POLICY.name]: hcmpoliciespolicy,
   [RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER.name]: hcmpoliciescluster,
   [RESOURCE_TYPES.HCM_COMPLIANCES.name]: hcmcompliances,

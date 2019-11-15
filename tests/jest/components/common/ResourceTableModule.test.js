@@ -31,7 +31,7 @@ describe('ResourceTableModule component test', () => {
       applyMiddleware(...middleware)
     ))
     const component = mount(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceTableModule

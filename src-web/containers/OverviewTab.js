@@ -11,16 +11,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
+import apolloClient from '../../lib/client/apollo-client'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Page from '../components/common/Page'
 // without curly braces means component with redux
 // eslint-disable-next-line import/no-named-as-default
 import OverviewView from '../components/OverviewView'
-import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
-import { updateModal, updateSecondaryHeader} from '../actions/common'
+import { GRC_REFRESH_INTERVAL_COOKIE}  from '../../lib/shared/constants'
+import { updateModal, updateSecondaryHeader } from '../actions/common'
 import {getPollInterval} from '../components/common/RefreshTimeSelect'
-import { GRCList } from '../../lib/client/queries'
+import { GRCList, HCMApplicationList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 
 class OverviewTab extends React.Component {
@@ -76,13 +77,27 @@ class OverviewTab extends React.Component {
 
             return (
               <div>
-                <OverviewView
-                  loading={!policies && loading}
-                  error={error}
-                  policies={policies}
-                  findings={findings}
-                  refreshControl={refreshControl}
-                />
+                <Query query={HCMApplicationList} pollInterval={pollInterval} client={apolloClient.getSearchClient()} notifyOnNetworkStatusChange >
+                  {( result ) => {
+                    const {data={}} = result
+                    const { applications } = data
+                    const searchError = applications ? null : result.error
+                    return (
+                      <div>
+                        <OverviewView
+                          loading={!policies && loading}
+                          error={error}
+                          searchError={searchError}
+                          applications = {applications}
+                          policies={policies}
+                          findings={findings}
+                          refreshControl={refreshControl}
+                        />
+                      </div>
+                    )
+                  }
+                  }
+                </Query>
               </div>
             )
           }

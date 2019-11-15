@@ -98,6 +98,24 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
               Clusters
             </a>
           </li>
+          <li
+            className="bx--tabs__nav-item"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="presentation"
+            selected={false}
+            tabIndex={-1}
+          >
+            <a
+              aria-selected={false}
+              className="bx--tabs__nav-link"
+              href="#"
+              role="tab"
+              tabIndex={-1}
+            >
+              Applications
+            </a>
+          </li>
         </ul>
       </nav>
       <div
@@ -111,6 +129,12 @@ exports[`TopInformationModule clusters view renders as expected 1`] = `
         className={undefined}
         hidden={false}
         selected={true}
+      />
+      <div
+        aria-hidden={true}
+        className={undefined}
+        hidden={true}
+        selected={false}
       />
     </div>
   </div>
@@ -280,42 +304,7 @@ Array [
 ]
 `;
 
-exports[`TopInformationModule clusters view renders as expected 4`] = `
-Array [
-  Object {
-    "choice": "policies",
-    "count": 2,
-    "description": Array [
-      "cluster1",
-      "clusterhub",
-    ],
-    "itemName": "policy-comp",
-    "name": "compliance-all",
-    "nameSpace": "mcm",
-  },
-  Object {
-    "choice": "policies",
-    "count": 2,
-    "description": Array [
-      "cluster1",
-      "clusterhub",
-    ],
-    "itemName": "policy-pod",
-    "name": "policy-pod",
-    "nameSpace": "mcm",
-  },
-  Object {
-    "choice": "policies",
-    "count": 1,
-    "description": Array [
-      "cluster1",
-    ],
-    "itemName": "policy-ma",
-    "name": "policy-ma",
-    "nameSpace": "mcm",
-  },
-]
-`;
+exports[`TopInformationModule clusters view renders as expected 4`] = `Array []`;
 
 exports[`TopInformationModule findings clusters view renders as expected 1`] = `
 <div
@@ -891,6 +880,24 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
               Clusters
             </a>
           </li>
+          <li
+            className="bx--tabs__nav-item"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="presentation"
+            selected={false}
+            tabIndex={-1}
+          >
+            <a
+              aria-selected={false}
+              className="bx--tabs__nav-link"
+              href="#"
+              role="tab"
+              tabIndex={-1}
+            >
+              Applications
+            </a>
+          </li>
         </ul>
       </nav>
       <div
@@ -904,6 +911,12 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
         className={undefined}
         hidden={false}
         selected={true}
+      />
+      <div
+        aria-hidden={true}
+        className={undefined}
+        hidden={true}
+        selected={false}
       />
     </div>
   </div>
@@ -1075,40 +1088,4 @@ Array [
 ]
 `;
 
-exports[`TopInformationModule policies view renders as expected 4`] = `
-Array [
-  Object {
-    "choice": "policies",
-    "count": 2,
-    "description": Array [
-      "cluster1",
-      "clusterhub",
-    ],
-    "itemName": "1558374675051-policy-pod",
-    "name": "1558374675051-policy-pod",
-    "nameSpace": "mcm",
-  },
-  Object {
-    "choice": "policies",
-    "count": 2,
-    "description": Array [
-      "cluster1",
-      "clusterhub",
-    ],
-    "itemName": "1558382034240-policy-pod",
-    "name": "1558382034240-policy-pod",
-    "nameSpace": "mcm",
-  },
-  Object {
-    "choice": "policies",
-    "count": 2,
-    "description": Array [
-      "cluster1",
-      "clusterhub",
-    ],
-    "itemName": "policy-pod",
-    "name": "policy-pod",
-    "nameSpace": "mcm",
-  },
-]
-`;
+exports[`TopInformationModule policies view renders as expected 4`] = `Array []`;

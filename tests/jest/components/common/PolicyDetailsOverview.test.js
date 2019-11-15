@@ -44,7 +44,7 @@ describe('PolicyDetailsOverview component', () => {
       'timestamp': 'Tue Sep 24 2019 09:56:26 GMT-0400 (Eastern Daylight Time)'
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <PolicyDetailsOverview

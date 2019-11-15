@@ -39,7 +39,7 @@ describe('PolicyClusterDetail component', () => {
       'list': 'HCMComplianceList'
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <PolicyClusterDetail

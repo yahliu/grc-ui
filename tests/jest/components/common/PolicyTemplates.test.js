@@ -578,7 +578,7 @@ describe('PolicyTemplates component', () => {
       '__typename': 'Compliance'
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <PolicyTemplates

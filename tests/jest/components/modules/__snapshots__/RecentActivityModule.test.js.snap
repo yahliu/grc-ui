@@ -238,6 +238,24 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                     Clusters
                   </a>
                 </li>
+                <li
+                  className="bx--tabs__nav-item"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="presentation"
+                  selected={false}
+                  tabIndex={-1}
+                >
+                  <a
+                    aria-selected={false}
+                    className="bx--tabs__nav-link"
+                    href="#"
+                    role="tab"
+                    tabIndex={-1}
+                  >
+                    Applications
+                  </a>
+                </li>
               </ul>
             </nav>
             <div
@@ -251,6 +269,12 @@ exports[`RecentActivityModule view renders as expected 1`] = `
               className={undefined}
               hidden={false}
               selected={true}
+            />
+            <div
+              aria-hidden={true}
+              className={undefined}
+              hidden={true}
+              selected={false}
             />
           </div>
         </div>

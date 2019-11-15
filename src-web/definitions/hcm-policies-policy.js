@@ -19,7 +19,7 @@ export default {
   primaryKey: 'metadata.name',
   secondaryKey: 'metadata.namespace',
   tableActions: [
-    'table.actions.policy.sidepanel',
+    'table.actions.policy.policies.sidepanel',
     'table.actions.edit',
     'table.actions.disable',
     'table.actions.remove',

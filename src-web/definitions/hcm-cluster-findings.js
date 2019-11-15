@@ -14,17 +14,13 @@ export default {
   primaryKey: 'cluster',
   secondaryKey: 'metadata.namespace',
   tableActions: [
-    'table.actions.finding.sidepanel',
+    'table.actions.finding.clusterFindings.sidepanel',
   ],
   tableKeys: [
     {
       msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
     },
-    // {
-    //   msgKey: 'table.header.namespace',
-    //   resourceKey: 'namespace',
-    // },
     {
       msgKey: 'overview.recent.activity.severity.high',
       resourceKey: 'severity',

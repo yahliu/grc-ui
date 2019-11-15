@@ -12,6 +12,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import msgs from '../../../nls/platform.properties'
 import { DataTable,  } from 'carbon-components-react'
+import TruncateText from './TruncateText'
 
 const {
   Table,
@@ -46,7 +47,7 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
             if(row && row.id && row.cells){//single sub row for policy/cluster violation side panel
               return (
                 <TableRow key={row.id}>
-                  {row.cells.map(cell => <TableCell key={cell}>{cell}</TableCell>)}
+                  {row.cells.map(cell => <TableCell key={cell.substring(0, 21)}><TruncateText text={cell} /></TableCell>)}
                 </TableRow>
               )
             }
@@ -55,7 +56,7 @@ const ResourceTableRowExpandableTable = ({ items, headers }, context) =>
                 if(subRow && subRow.id && subRow.cells) {
                   return (
                     <TableRow key={subRow.id}>
-                      {subRow.cells.map((cell, index)=> <TableCell key={cell} className={'bx--table-subRowsArray-subRow-index-'+index}>{cell}</TableCell>)}
+                      {subRow.cells.map((cell, index)=> <TableCell key={cell.substring(0, 21)} className={'bx--table-subRowsArray-subRow-index-'+index}><TruncateText text={cell} /></TableCell>)}
                     </TableRow>
                   )
                 }

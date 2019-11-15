@@ -11,16 +11,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
+import apolloClient from '../../lib/client/apollo-client'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import {GRC_REFRESH_INTERVAL_COOKIE} from '../../lib/shared/constants'
-import {getPollInterval} from '../components/common/RefreshTimeSelect'
+import { GRC_REFRESH_INTERVAL_COOKIE } from '../../lib/shared/constants'
+import { getPollInterval } from '../components/common/RefreshTimeSelect'
 import Page from '../components/common/Page'
 // without curly braces means component with redux
 // eslint-disable-next-line import/no-named-as-default
 import GrcView from '../components/GrcView'
-import {updateSecondaryHeader} from '../actions/common'
-import { HCMComplianceList } from '../../lib/client/queries'
+import { updateSecondaryHeader } from '../actions/common'
+import { HCMComplianceList, HCMApplicationList } from '../../lib/client/queries'
 import msgs from '../../nls/platform.properties'
 
 class PoliciesTab extends React.Component {
@@ -65,15 +66,27 @@ class PoliciesTab extends React.Component {
             }
 
             return (
-              <div>
-                <GrcView
-                  loading={!items && loading}
-                  error={error}
-                  grcItems={items}
-                  refreshControl={refreshControl}
-                  secondaryHeaderProps={secondaryHeaderProps}
-                />
-              </div>
+              <Query query={HCMApplicationList} pollInterval={pollInterval} client={apolloClient.getSearchClient()} notifyOnNetworkStatusChange >
+                {( result ) => {
+                  const {data={}} = result
+                  const { applications } = data
+                  const searchError = applications ? null : result.error
+                  return (
+                    <div>
+                      <GrcView
+                        loading={!items && loading}
+                        error={error}
+                        searchError={searchError}
+                        grcItems={items}
+                        applications = {applications}
+                        refreshControl={refreshControl}
+                        secondaryHeaderProps={secondaryHeaderProps}
+                      />
+                    </div>
+                  )
+                }
+                }
+              </Query>
             )
           }
           }

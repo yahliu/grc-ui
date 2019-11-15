@@ -46,7 +46,7 @@ describe('OverviewTab container test', () => {
     const updateSecondaryHeader= jest.fn()
     const openDesModal = jest.fn()
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <OverviewTab

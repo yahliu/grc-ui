@@ -36,7 +36,7 @@ describe('Grc Router container test', () => {
       'params': {}
     }
     const component = shallow(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <GrcRouter

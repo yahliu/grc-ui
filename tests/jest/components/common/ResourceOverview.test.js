@@ -1514,7 +1514,7 @@ describe('ResourceOverview component', () => {
       applyMiddleware(...middleware)
     ))
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceOverview

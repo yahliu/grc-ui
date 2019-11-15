@@ -66,6 +66,12 @@
       .bx--tabs__nav-item {
         margin-left: auto;
         overflow: hidden;
+        &:first-child {
+          margin-left: auto;
+        }
+        &:nth-child(2) {
+          margin-left: 1rem;
+        }
         &:last-child {
           margin-left: 1rem;
         }

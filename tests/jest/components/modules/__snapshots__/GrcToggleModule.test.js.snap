@@ -615,11 +615,13 @@ ShallowWrapper {
         false,
         false,
         false,
+        false,
       ],
       "className": "module-toggle-tab",
     },
     "ref": null,
     "rendered": Array [
+      false,
       false,
       false,
       false,
@@ -638,11 +640,13 @@ ShallowWrapper {
           false,
           false,
           false,
+          false,
         ],
         "className": "module-toggle-tab",
       },
       "ref": null,
       "rendered": Array [
+        false,
         false,
         false,
         false,
@@ -1286,11 +1290,13 @@ ShallowWrapper {
         false,
         false,
         false,
+        false,
       ],
       "className": "module-toggle-tab",
     },
     "ref": null,
     "rendered": Array [
+      false,
       false,
       false,
       false,
@@ -1309,11 +1315,13 @@ ShallowWrapper {
           false,
           false,
           false,
+          false,
         ],
         "className": "module-toggle-tab",
       },
       "ref": null,
       "rendered": Array [
+        false,
         false,
         false,
         false,
@@ -1546,11 +1554,13 @@ ShallowWrapper {
         false,
         false,
         false,
+        false,
       ],
       "className": "module-toggle-tab",
     },
     "ref": null,
     "rendered": Array [
+      false,
       false,
       false,
       false,
@@ -1569,11 +1579,13 @@ ShallowWrapper {
           false,
           false,
           false,
+          false,
         ],
         "className": "module-toggle-tab",
       },
       "ref": null,
       "rendered": Array [
+        false,
         false,
         false,
         false,
@@ -1806,11 +1818,13 @@ ShallowWrapper {
         false,
         false,
         false,
+        false,
       ],
       "className": "module-toggle-tab",
     },
     "ref": null,
     "rendered": Array [
+      false,
       false,
       false,
       false,
@@ -1829,11 +1843,13 @@ ShallowWrapper {
           false,
           false,
           false,
+          false,
         ],
         "className": "module-toggle-tab",
       },
       "ref": null,
       "rendered": Array [
+        false,
         false,
         false,
         false,
@@ -1942,6 +1958,14 @@ exports[`GrcView toggleClick renders as expected 3`] = `
       selected={false}
       text="Cluster violations"
     />
+    <Switch
+      href=""
+      kind="anchor"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      selected={false}
+      text="Applications"
+    />
   </ContentSwitcher>
 </div>
 `;
@@ -1970,6 +1994,14 @@ exports[`GrcView toggleClick renders as expected 4`] = `
       selected={false}
       text="Cluster violations"
     />
+    <Switch
+      href=""
+      kind="anchor"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      selected={false}
+      text="Applications"
+    />
   </ContentSwitcher>
 </div>
 `;
@@ -1977,55 +2009,11 @@ exports[`GrcView toggleClick renders as expected 4`] = `
 exports[`GrcView toggleClick renders as expected 5`] = `
 <div
   className="module-toggle-tab-switch"
->
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={0}
-  >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Policies"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster violations"
-    />
-  </ContentSwitcher>
-</div>
+/>
 `;
 
 exports[`GrcView toggleClick renders as expected 6`] = `
 <div
   className="module-toggle-tab-switch"
->
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={1}
-  >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Policies"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster violations"
-    />
-  </ContentSwitcher>
-</div>
+/>
 `;

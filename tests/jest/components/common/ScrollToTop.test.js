@@ -35,7 +35,7 @@ describe('ScrollToTop component test', () => {
       'key': 'q1uagn'
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ScrollToTop location={location}>
@@ -53,7 +53,7 @@ describe('ScrollToTop component test', () => {
       'key': 'q1uagn',
     }
     component.update(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ScrollToTop location={location2}>

@@ -18,7 +18,7 @@ export default {
   primaryKey: 'name',
   secondaryKey: 'finding.severity',
   tableActions: [
-    'table.actions.finding.sidepanel',
+    'table.actions.finding.securityFindings.sidepanel',
   ],
   tableKeys: [
     {

@@ -43,7 +43,7 @@ describe('ResourceFilterBar no filters applied', () => {
       applyMiddleware(...middleware)
     ))
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceFilterBar
@@ -88,7 +88,7 @@ describe('ResourceFilterBar w/ filter applied', () => {
       applyMiddleware(...middleware)
     ))
     const component2 = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceFilterBar

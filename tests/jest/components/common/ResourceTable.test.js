@@ -40,7 +40,7 @@ describe('ResourceTable no search', () => {
       }
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceTable
@@ -90,7 +90,7 @@ describe('ResourceTable no search', () => {
       }
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceTable
@@ -140,7 +140,7 @@ describe('ResourceTable with search', () => {
       }
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceTable
@@ -190,7 +190,7 @@ describe('ResourceTable not expandable', () => {
       }
     }
     const component = renderer.create(
-      <ApolloProvider client={apolloClient.getClient()}>
+      <ApolloProvider client={apolloClient.getGrcClient()}>
         <Provider store={store}>
           <BrowserRouter>
             <ResourceTable
