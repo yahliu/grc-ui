@@ -50,6 +50,7 @@ const {
 export class ResourceTable extends React.Component {
 
   render() {
+    const { locale } = this.context
     const {
       staticResourceData,
       page,
@@ -176,7 +177,7 @@ export class ResourceTable extends React.Component {
                               if (cell.id.split(':')[1] == 'metadata.name' && row.disabled) {
                                 return <TableCell key={cell.id} className='policy-table-name-ctr'>
                                   <div className='policy-table-name-link'>{cell.value}</div>
-                                  <div className='disabled-label'>disabled</div>
+                                  <div className='disabled-label'>{msgs.get('policy.disabled.label', locale)}</div>
                                 </TableCell>
                               }
                               else {
@@ -313,6 +314,9 @@ export class ResourceTable extends React.Component {
             transform(item, key, locale)
           if (key.resourceKey == 'metadata.name' && row.disabled) {
             row[key.resourceKey] = lodash.get(item, key.resourceKey)
+          }
+          if (key.resourceKey == 'remediation') {
+            row[key.resourceKey] = msgs.get('policy.remediation.' + row[key.resourceKey], locale)
           }
         })
         return row
