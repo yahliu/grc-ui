@@ -28,7 +28,7 @@
                         "width": 0
                     },
                     "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/input[1]",
-                    "snippet": "<input style=\"\" locale=\"en-US\" value=\"3TpRBGJ6-hM8R581WvtFMMZChx4l42GFpsz8\" id=\"app-access\" type=\"hidden\">",
+                    "snippet": "<input style=\"\" locale=\"en-US\" value=\"BwjyvIiu-KDaQAmL2gBz4I0cZcCp46d3p7j0\" id=\"app-access\" type=\"hidden\">",
                     "level": "violation"
                 },
                 {
@@ -179,9 +179,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1573161101434
+        "startScan": 1573161117482
     },
     "scanID": "5a8b3a63-b707-4d55-9616-55ada23c2ede",
     "toolID": "@ibma/aat-v1.5.1",
-    "label": "policyDetail"
+    "label": "securityFindings"
 }

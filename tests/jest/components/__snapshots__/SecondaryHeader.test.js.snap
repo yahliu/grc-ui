@@ -27,7 +27,9 @@ exports[`SecondaryHeader component 2 renders as expected 1`] = `
   <div
     className="secondary-header secondary-header-grc-overview simple-header"
   >
-    <header>
+    <header
+      aria-label="Heading: hello world"
+    >
       <div
         className="bx--detail-page-header-content"
       >
@@ -129,7 +131,9 @@ exports[`SecondaryHeader component 3 renders as expected 1`] = `
   <div
     className="secondary-header secondary-header-grc-overview simple-header"
   >
-    <header>
+    <header
+      aria-label="Heading: hello world"
+    >
       <div
         className="bx--detail-page-header-content"
       >

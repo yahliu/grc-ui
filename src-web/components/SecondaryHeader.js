@@ -47,7 +47,7 @@ export class SecondaryHeader extends React.Component {
       return (
         <div className='secondary-header-wrapper' role='region' aria-label={title}>
           <div className={`secondary-header ${!location.pathname.startsWith('/multicloud/policies/all/') ? 'secondary-header-grc-overview' : ''} simple-header${description ? ' special-layout': ''}`}>
-            <header>
+            <header aria-label={`Heading: ${title}`}>
               <div className="bx--detail-page-header-content">
                 {breadcrumbItems &&
                   (

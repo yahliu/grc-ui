@@ -41,7 +41,7 @@
       },
       "globals": {
         "waitForConditionTimeout": 30000,
-        "disable_a11y": true
+        "disable_a11y": false
       }
     },
     "remote": {
