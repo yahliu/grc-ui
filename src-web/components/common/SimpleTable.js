@@ -67,7 +67,7 @@ class StructuredListModule extends React.Component {
           <Table className='resource-table-main simple-table'>
             <TableHead>
               <TableRow>
-                {headerRows.map((header, index) => {
+                {Array.isArray(headerRows) && headerRows.map((header, index) => {
                   if (header) {
                     return (
                       <th className={'bx--header-index-'+index} scope={'col'} key={header}>
@@ -92,7 +92,7 @@ class StructuredListModule extends React.Component {
                           isExpanded={extended === index}
                           onExpand={this.onSelect(index)}
                           ariaLabel='Overflow-menu'>
-                          {rows[0].cells.map((cell, index) =>
+                          {Array.isArray(rows) && rows[0].cells.map((cell, index) =>
                             <td key={cell.resourceKey+'Cell'}>
                               <p>{
                                 (linkFixedName && (index in linkFixedName))
@@ -120,7 +120,7 @@ class StructuredListModule extends React.Component {
                     if(row && row.id){
                       return (
                         <TableRow key={row.id}>
-                          {rows[0].cells && rows[0].cells.map((cell, index)=> <TableCell key={cell.resourceKey.substring(0, 21)+'Cell'} className={row.id.includes('S_F_S_P')?'S_F_S_P_'+index:''}><TruncateText text={transform(row, cell, this.context.locale)} /></TableCell>)}
+                          {Array.isArray(rows) && rows[0].cells && rows[0].cells.map((cell, index)=> <TableCell key={cell.resourceKey.substring(0, 21)+'Cell'} className={row.id.includes('S_F_S_P')?'S_F_S_P_'+index:''}><TruncateText text={transform(row, cell, this.context.locale)} /></TableCell>)}
                         </TableRow>
                       )
                     }

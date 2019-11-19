@@ -15,7 +15,7 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
-import {AllPoliciesInCluster, AllClustersInPolicy} from '../../../lib/client/queries'
+import {AllPoliciesInCluster, AllClustersInPolicy, AllPoliciesInApplication} from '../../../lib/client/queries'
 import { Query } from 'react-apollo'
 import { Modal, Loading, InlineNotification } from 'carbon-components-react'
 import ResourceOverviewModule from '../modules/SubResourceListModule'
@@ -31,8 +31,10 @@ resources(() => {
 
 function getHeader(data, locale) {
   const kind = _.get(data, 'kind', '')
-  let header = '', descr = '', percent = 0, violation = '0/0', cluster = undefined, policy = undefined, hubNamespace = undefined
-  if (kind === 'HCMPolicyPolicy') {
+  let header = '', descr = '', percent = 0, violation = '0/0', query, queryPara, hubNamespace
+  switch (kind) {
+  case 'HCMPolicyPolicy':
+  default: {
     header = _.get(data, 'raw.metadata.name', '')
     descr = _.get(data, 'raw.metadata.description', '')
     violation = _.get(data, 'clusterCompliant', '0/0')
@@ -42,8 +44,11 @@ function getHeader(data, locale) {
       percent = +vioNum / +totalNum
     }
     violation += ' ' + msgs.get('overview.top.informations.clusters', locale)
-    policy = data.name
-  } else if (kind === 'HCMPolicyCluster') {
+    queryPara = {policy:data.name, hubNamespace:hubNamespace}
+    query = AllClustersInPolicy
+    break
+  }
+  case 'HCMPolicyCluster': {
     header = _.get(data, 'cluster', '')
     descr = _.get(data, '', '')
     violation = _.get(data, 'violation', '0/0')
@@ -52,9 +57,21 @@ function getHeader(data, locale) {
       percent = +vioNum / +totalNum
     }
     violation += ' ' + msgs.get('overview.top.informations.policies', locale)
-    cluster = data.cluster
+    queryPara = {cluster:data.cluster}
+    query = AllPoliciesInCluster
+    break
   }
-  return {header, descr, percent, violation, cluster, policy, hubNamespace}
+  case 'HCMPolicyApplication': {
+    header = _.get(data, 'name', '')
+    descr = _.get(data, '', '')
+    violation = _.get(data, 'violations', '0')
+    percent = 1
+    violation += ' ' + msgs.get('overview.top.informations.policies', locale)
+    queryPara = {violatedPolicies:data.violatedPolicies}
+    query = AllPoliciesInApplication
+    break
+  }}
+  return {header, kind, descr, percent, violation, query, queryPara}
 }
 
 class PolicySidePanelDetailsModal extends React.PureComponent {
@@ -81,7 +98,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
 
   render(){
     const { title, data, resourceType, locale } = this.props
-    const { header, descr, percent, violation, cluster, policy, hubNamespace } = getHeader(data, locale)
+    const { header, kind, descr, percent, violation, query, queryPara } = getHeader(data, locale)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
     const pollInterval = getPollInterval(GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE, 'sidePanel')
     return (
@@ -105,8 +122,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
               </div>
             </div>
             <div className={'bx--modal-content-body'}>
-              <Query query={cluster ? AllPoliciesInCluster :  AllClustersInPolicy}
-                variables={cluster ? {cluster} : {policy:policy, hubNamespace:hubNamespace}} pollInterval={pollInterval}>
+              <Query query={query} variables={queryPara} pollInterval={pollInterval}>
                 {( {data, loading, error} ) => {
                   if (loading) {
                     // spinner if loading
@@ -122,15 +138,24 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
                     )
                   }
                   const { items } = data
-                  if (cluster) {
+                  const staticResourceData = getResourceDefinitions(resourceType)
+                  switch (kind) {
+                  case 'HCMPolicyPolicy':
+                  default: {
                     return (
-                      <ClustersTable items={items} type={resourceType} inapplicable={inapplicable} />
-                    )
-                  } else {
-                    return (
-                      <PoliciesTable items={items} type={resourceType} inapplicable={inapplicable} />
+                      <PoliciesTable items={items} staticResourceData={staticResourceData.policyViolatedSidePanel} inapplicable={inapplicable} />
                     )
                   }
+                  case 'HCMPolicyCluster': {
+                    return (
+                      <ClustersOrApplicationsTable items={items} staticResourceData={staticResourceData.clusterViolatedSidePanel} inapplicable={inapplicable} />
+                    )
+                  }
+                  case 'HCMPolicyApplication': {
+                    return (
+                      <ClustersOrApplicationsTable items={items} staticResourceData={staticResourceData.applicationViolatedSidePanel} inapplicable={inapplicable} />
+                    )
+                  }}
                 }
                 }
               </Query>
@@ -142,7 +167,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
   }
 }
 
-export const ClustersTable = ({items, type, inapplicable}) => {
+export const ClustersOrApplicationsTable = ({items, staticResourceData, inapplicable}) => {
   items = items.map((policy, index) => {
     let violatedNum = 0
     const spec = _.get(policy, 'raw.spec', '')
@@ -198,11 +223,10 @@ export const ClustersTable = ({items, type, inapplicable}) => {
     }
   })
 
-  const staticResourceData = getResourceDefinitions(type)
   return (
     <div className='overview-content'>
       <ResourceOverviewModule
-        staticResourceData={staticResourceData.clusterViolatedSidePanel}
+        staticResourceData={staticResourceData}
         items={items}
         listSubItems={true}
       />
@@ -210,7 +234,7 @@ export const ClustersTable = ({items, type, inapplicable}) => {
   )
 }
 
-export const PoliciesTable = ({items, type, inapplicable}) => {
+export const PoliciesTable = ({items, staticResourceData, inapplicable}) => {
   items = items.map((cluster, index) => {
     const policy = _.get(cluster, 'policy', [])
     const violatedNum = _.get(cluster, 'violated', 0)
@@ -254,14 +278,12 @@ export const PoliciesTable = ({items, type, inapplicable}) => {
     }
   })
 
-  const staticResourceData = getResourceDefinitions(type)
-
   //Link columns with fixed title name and target direction
   const linkFixedName = {2 : {fixedName:'table.actions.launch.cluster', urlTarget:'_blank'}}
   return (
     <div className='overview-content'>
       <ResourceOverviewModule
-        staticResourceData={staticResourceData.policyViolatedSidePanel}
+        staticResourceData={staticResourceData}
         items={items}
         listSubItems={true}
         linkFixedName={linkFixedName}
@@ -280,16 +302,16 @@ const ProcessBar = ({percent}) => {
   )
 }
 
-ClustersTable.propTypes = {
+ClustersOrApplicationsTable.propTypes = {
   inapplicable: PropTypes.string,
   items: PropTypes.array,
-  type: PropTypes.object,
+  staticResourceData: PropTypes.object,
 }
 
 PoliciesTable.propTypes = {
   inapplicable: PropTypes.string,
   items: PropTypes.array,
-  type: PropTypes.object,
+  staticResourceData: PropTypes.object,
 }
 
 ProcessBar.propTypes = {

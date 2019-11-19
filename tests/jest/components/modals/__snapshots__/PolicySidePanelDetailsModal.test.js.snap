@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ClustersTable 1 renders expand as expected 1`] = `
+exports[`ClustersOrApplicationsTable 1 renders expand as expected 1`] = `
 <div
   className="overview-content"
 >
@@ -21,42 +21,7 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
           >
             <tr
               className={undefined}
-            >
-              <th
-                className="bx--header-index-0"
-                scope="col"
-              />
-              <th
-                className="bx--header-index-1"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Policy name
-                </span>
-              </th>
-              <th
-                className="bx--header-index-2"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Rule violations
-                </span>
-              </th>
-              <th
-                className="bx--header-index-3"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Control
-                </span>
-              </th>
-            </tr>
+            />
           </thead>
           <tbody
             className={undefined}
@@ -98,20 +63,43 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  policy-auditpolicy
-                </p>
-              </td>
-              <td>
-                <p>
-                  0
-                </p>
-              </td>
-              <td>
-                <p>
-                  secretEncryption
-                </p>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
               </td>
             </tr>
             <tr
@@ -151,20 +139,43 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  policy-certificatepolicy
-                </p>
-              </td>
-              <td>
-                <p>
-                  0
-                </p>
-              </td>
-              <td>
-                <p>
-                  CertManager
-                </p>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
               </td>
             </tr>
             <tr
@@ -204,20 +215,43 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  policy-iampolicy
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  MutationAdvisor
-                </p>
+            </tr>
+            <tr
+              className="bx--parent-row-v2"
+              data-parent-row={true}
+            >
+              <td
+                className="bx--table-expand-v2"
+                data-previous-value={undefined}
+                headers="expand"
+              >
+                <button
+                  aria-label="Overflow-menu"
+                  className="bx--table-expand-v2__button"
+                  onClick={[Function]}
+                  title={undefined}
+                >
+                  <svg
+                    alt="Provide a description that will be used as the title"
+                    aria-label="Provide a description that will be used as the title"
+                    className="bx--table-expand-v2__svg"
+                    fill={undefined}
+                    fillRule="evenodd"
+                    height="12"
+                    name={undefined}
+                    role="img"
+                    style={undefined}
+                    viewBox="0 0 7 12"
+                    width="7"
+                  >
+                    <title>
+                      Provide a description that will be used as the title
+                    </title>
+                    <path
+                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
+                    />
+                  </svg>
+                </button>
               </td>
             </tr>
             <tr
@@ -257,21 +291,6 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  policy-image
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  VA
-                </p>
-              </td>
             </tr>
             <tr
               className="bx--parent-row-v2"
@@ -310,21 +329,6 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  policy-limitrange
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  CertManager
-                </p>
-              </td>
             </tr>
             <tr
               className="bx--parent-row-v2"
@@ -362,180 +366,6 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
                     />
                   </svg>
                 </button>
-              </td>
-              <td>
-                <p>
-                  policy-namespace
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  MutationAdvisor
-                </p>
-              </td>
-            </tr>
-            <tr
-              className="bx--parent-row-v2"
-              data-parent-row={true}
-            >
-              <td
-                className="bx--table-expand-v2"
-                data-previous-value={undefined}
-                headers="expand"
-              >
-                <button
-                  aria-label="Overflow-menu"
-                  className="bx--table-expand-v2__button"
-                  onClick={[Function]}
-                  title={undefined}
-                >
-                  <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
-                    className="bx--table-expand-v2__svg"
-                    fill={undefined}
-                    fillRule="evenodd"
-                    height="12"
-                    name={undefined}
-                    role="img"
-                    style={undefined}
-                    viewBox="0 0 7 12"
-                    width="7"
-                  >
-                    <title>
-                      Provide a description that will be used as the title
-                    </title>
-                    <path
-                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td>
-                <p>
-                  policy-pod
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  MutationAdvisor
-                </p>
-              </td>
-            </tr>
-            <tr
-              className="bx--parent-row-v2"
-              data-parent-row={true}
-            >
-              <td
-                className="bx--table-expand-v2"
-                data-previous-value={undefined}
-                headers="expand"
-              >
-                <button
-                  aria-label="Overflow-menu"
-                  className="bx--table-expand-v2__button"
-                  onClick={[Function]}
-                  title={undefined}
-                >
-                  <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
-                    className="bx--table-expand-v2__svg"
-                    fill={undefined}
-                    fillRule="evenodd"
-                    height="12"
-                    name={undefined}
-                    role="img"
-                    style={undefined}
-                    viewBox="0 0 7 12"
-                    width="7"
-                  >
-                    <title>
-                      Provide a description that will be used as the title
-                    </title>
-                    <path
-                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td>
-                <p>
-                  policy-rolebinding-1
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  MutationAdvisor
-                </p>
-              </td>
-            </tr>
-            <tr
-              className="bx--parent-row-v2"
-              data-parent-row={true}
-            >
-              <td
-                className="bx--table-expand-v2"
-                data-previous-value={undefined}
-                headers="expand"
-              >
-                <button
-                  aria-label="Overflow-menu"
-                  className="bx--table-expand-v2__button"
-                  onClick={[Function]}
-                  title={undefined}
-                >
-                  <svg
-                    alt="Provide a description that will be used as the title"
-                    aria-label="Provide a description that will be used as the title"
-                    className="bx--table-expand-v2__svg"
-                    fill={undefined}
-                    fillRule="evenodd"
-                    height="12"
-                    name={undefined}
-                    role="img"
-                    style={undefined}
-                    viewBox="0 0 7 12"
-                    width="7"
-                  >
-                    <title>
-                      Provide a description that will be used as the title
-                    </title>
-                    <path
-                      d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-                    />
-                  </svg>
-                </button>
-              </td>
-              <td>
-                <p>
-                  policy-vulnerabilitypolicy
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  VA
-                </p>
               </td>
             </tr>
           </tbody>
@@ -546,7 +376,7 @@ exports[`ClustersTable 1 renders expand as expected 1`] = `
 </div>
 `;
 
-exports[`ClustersTable 2 renders expand as expected 1`] = `
+exports[`ClustersOrApplicationsTable 2 renders expand as expected 1`] = `
 <div
   className="overview-content"
 >
@@ -567,42 +397,7 @@ exports[`ClustersTable 2 renders expand as expected 1`] = `
           >
             <tr
               className={undefined}
-            >
-              <th
-                className="bx--header-index-0"
-                scope="col"
-              />
-              <th
-                className="bx--header-index-1"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Policy name
-                </span>
-              </th>
-              <th
-                className="bx--header-index-2"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Rule violations
-                </span>
-              </th>
-              <th
-                className="bx--header-index-3"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Control
-                </span>
-              </th>
-            </tr>
+            />
           </thead>
           <tbody
             className={undefined}
@@ -1746,36 +1541,7 @@ exports[`PoliciesTable 1 renders expand as expected 1`] = `
           >
             <tr
               className={undefined}
-            >
-              <th
-                className="bx--header-index-0"
-                scope="col"
-              />
-              <th
-                className="bx--header-index-1"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Cluster name
-                </span>
-              </th>
-              <th
-                className="bx--header-index-2"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Rule violations
-                </span>
-              </th>
-              <th
-                className="bx--header-index-3"
-                scope="col"
-              />
-            </tr>
+            />
           </thead>
           <tbody
             className={undefined}
@@ -1817,28 +1583,6 @@ exports[`PoliciesTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  cluster1
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  <a
-                    className="bx--link"
-                    href="https://9.42.82.160:8443"
-                    onClick={[Function]}
-                    target="_blank"
-                  >
-                    Launch cluster
-                  </a>
-                </p>
-              </td>
             </tr>
             <tr
               className="bx--parent-row-v2"
@@ -1877,28 +1621,6 @@ exports[`PoliciesTable 1 renders expand as expected 1`] = `
                   </svg>
                 </button>
               </td>
-              <td>
-                <p>
-                  clusterhub
-                </p>
-              </td>
-              <td>
-                <p>
-                  1
-                </p>
-              </td>
-              <td>
-                <p>
-                  <a
-                    className="bx--link"
-                    href="https://9.42.82.240:8443"
-                    onClick={[Function]}
-                    target="_blank"
-                  >
-                    Launch cluster
-                  </a>
-                </p>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -1929,36 +1651,7 @@ exports[`PoliciesTable 2 renders expand as expected 1`] = `
           >
             <tr
               className={undefined}
-            >
-              <th
-                className="bx--header-index-0"
-                scope="col"
-              />
-              <th
-                className="bx--header-index-1"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Cluster name
-                </span>
-              </th>
-              <th
-                className="bx--header-index-2"
-                scope="col"
-              >
-                <span
-                  className="bx--table-header-label"
-                >
-                  Rule violations
-                </span>
-              </th>
-              <th
-                className="bx--header-index-3"
-                scope="col"
-              />
-            </tr>
+            />
           </thead>
           <tbody
             className={undefined}

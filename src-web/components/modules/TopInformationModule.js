@@ -61,21 +61,12 @@ export default class TopInformationModule extends React.Component {
 
   render() {
     let cardData = this.state.cardData
-    const { type } = this.props
     if (cardData.length>0) {
       if (cardData.length>this.props.threshold) {
         cardData = cardData.slice(0,this.props.threshold)
       }
       if (cardData.length < this.props.threshold && !this.hasEmptyCard(cardData)) {
-        cardData.push({
-          name: type==='policies'?
-            msgs.get('overview.top.informations.policies.empty') :
-            msgs.get('overview.top.informations.findings.empty'),
-          choice: EMPTY_CHOICE,
-          description: [type==='policies'?
-            msgs.get('overview.top.informations.policies.empty.desc') :
-            msgs.get('overview.top.informations.findings.empty.desc')],
-        })
+        cardData.push(this.getEmptyCardStatements())
       }
       return (
         <div className='module-top-information'>
@@ -91,6 +82,37 @@ export default class TopInformationModule extends React.Component {
         </div>
       )
     }
+  }
+
+  getEmptyCardStatements() {
+    let emptyCardData = {}
+    const choice = this.state.topViolationChoice
+    switch (choice) {
+    case 'policies':
+    default :
+      emptyCardData = {
+        name: msgs.get('overview.top.informations.policies.empty'),
+        choice: EMPTY_CHOICE,
+        description: [msgs.get('overview.top.informations.policies.empty.desc')],
+      }
+      break
+    case 'findings':
+      emptyCardData = {
+        name: msgs.get('overview.top.informations.findings.empty'),
+        choice: EMPTY_CHOICE,
+        description: [msgs.get('overview.top.informations.findings.empty.desc')],
+      }
+      break
+    case 'applications':
+      emptyCardData = {
+        name: msgs.get('overview.top.informations.applications.empty'),
+        choice: EMPTY_CHOICE,
+        description: [msgs.get('overview.top.informations.applications.empty.desc')],
+      }
+      break
+    }
+
+    return emptyCardData
   }
 
   hasEmptyCard(cards) {
@@ -298,15 +320,7 @@ export default class TopInformationModule extends React.Component {
 
     // if less informations than threshold, add an empty card
     if (cards.length<this.props.threshold) {
-      cards.push({
-        name: type==='policies'?
-          msgs.get('overview.top.informations.policies.empty') :
-          msgs.get('overview.top.informations.findings.empty'),
-        choice: EMPTY_CHOICE,
-        description: [type==='policies'?
-          msgs.get('overview.top.informations.policies.empty.desc') :
-          msgs.get('overview.top.informations.findings.empty.desc')],
-      })
+      cards.push(this.getEmptyCardStatements())
     }
     return cards
   }

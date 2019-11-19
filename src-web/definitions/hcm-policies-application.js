@@ -16,7 +16,7 @@ export default {
   primaryKey: 'name',
   secondaryKey: 'namespace',
   tableActions: [
-    // 'table.actions.policy.applications.sidepanel',
+    'table.actions.policy.applications.sidepanel',
   ],
   tableKeys: [
     {
@@ -37,10 +37,9 @@ export default {
       transformFunction: getLabels,
     }
   ],
-  clusterViolatedSidePanel: {
-    // title: 'cluster.violated.policy',
-    headerRows: ['', 'table.header.policy.name', 'table.header.rule.violation', 'table.header.control'],
-    subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason'],
+  applicationViolatedSidePanel: {
+    headerRows: ['', 'table.header.policy.name', 'table.header.rule.violation', 'table.header.control', 'table.header.cluster',],
+    subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason', '',],
     rows: [
       {
         cells: [
@@ -52,7 +51,10 @@ export default {
           },
           {
             resourceKey: 'metadata.annotations["policy.mcm.ibm.com/controls"]',
-          }
+          },
+          {
+            resourceKey: 'cluster',
+          },
         ]
       }
     ]

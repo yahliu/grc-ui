@@ -1880,140 +1880,182 @@ ShallowWrapper {
 
 exports[`GrcView toggleClick renders as expected 1`] = `
 <div
-  className="module-toggle-tab-switch"
+  className="module-toggle-tab-switch-strip"
 >
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={0}
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
   >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Security findings"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster findings"
-    />
-  </ContentSwitcher>
+    <ContentSwitcher
+      onChange={[Function]}
+      selectedIndex={0}
+    >
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Security findings"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Cluster findings"
+      />
+    </ContentSwitcher>
+  </div>
 </div>
 `;
 
 exports[`GrcView toggleClick renders as expected 2`] = `
 <div
-  className="module-toggle-tab-switch"
+  className="module-toggle-tab-switch-strip"
 >
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={1}
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
   >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Security findings"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster findings"
-    />
-  </ContentSwitcher>
+    <ContentSwitcher
+      onChange={[Function]}
+      selectedIndex={1}
+    >
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Security findings"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Cluster findings"
+      />
+    </ContentSwitcher>
+  </div>
 </div>
 `;
 
 exports[`GrcView toggleClick renders as expected 3`] = `
 <div
-  className="module-toggle-tab-switch"
+  className="module-toggle-tab-switch-strip"
 >
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={0}
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
   >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Policies"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster violations"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Applications"
-    />
-  </ContentSwitcher>
+    <ContentSwitcher
+      onChange={[Function]}
+      selectedIndex={0}
+    >
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Policies"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Cluster violations"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Applications"
+      />
+    </ContentSwitcher>
+  </div>
 </div>
 `;
 
 exports[`GrcView toggleClick renders as expected 4`] = `
 <div
-  className="module-toggle-tab-switch"
+  className="module-toggle-tab-switch-strip"
 >
-  <ContentSwitcher
-    onChange={[Function]}
-    selectedIndex={1}
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
   >
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Policies"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Cluster violations"
-    />
-    <Switch
-      href=""
-      kind="anchor"
-      onClick={[Function]}
-      onKeyDown={[Function]}
-      selected={false}
-      text="Applications"
-    />
-  </ContentSwitcher>
+    <ContentSwitcher
+      onChange={[Function]}
+      selectedIndex={1}
+    >
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Policies"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Cluster violations"
+      />
+      <Switch
+        href=""
+        kind="anchor"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        selected={false}
+        text="Applications"
+      />
+    </ContentSwitcher>
+  </div>
 </div>
 `;
 
 exports[`GrcView toggleClick renders as expected 5`] = `
 <div
-  className="module-toggle-tab-switch"
-/>
+  className="module-toggle-tab-switch-strip"
+>
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
+  />
+</div>
 `;
 
 exports[`GrcView toggleClick renders as expected 6`] = `
 <div
-  className="module-toggle-tab-switch"
-/>
+  className="module-toggle-tab-switch-strip"
+>
+  <div
+    className="module-toggle-tab-switch-makeup"
+  />
+  <div
+    className="module-toggle-tab-switch"
+  />
+</div>
 `;

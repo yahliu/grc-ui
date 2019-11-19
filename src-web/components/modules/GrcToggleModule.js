@@ -155,16 +155,20 @@ export class GrcToggleModule extends React.Component {
       break
     }
     return (
-      <div className='module-toggle-tab-switch'>
-        {displayType==='all' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
-          <Switch text={toggleText1} onClick={this.toggleClick} />
-          <Switch text={toggleText2} onClick={this.toggleClick} />
-          <Switch text={toggleText3} onClick={this.toggleClick} />
-        </ContentSwitcher>}
-        {displayType==='findings' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
-          <Switch text={toggleText1} onClick={this.toggleClick} />
-          <Switch text={toggleText2} onClick={this.toggleClick} />
-        </ContentSwitcher>}
+      <div className='module-toggle-tab-switch-strip'>
+        <div className='module-toggle-tab-switch-makeup'>
+        </div>
+        <div className='module-toggle-tab-switch'>
+          {displayType==='all' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
+            <Switch text={toggleText1} onClick={this.toggleClick} />
+            <Switch text={toggleText2} onClick={this.toggleClick} />
+            <Switch text={toggleText3} onClick={this.toggleClick} />
+          </ContentSwitcher>}
+          {displayType==='findings' && <ContentSwitcher onChange={this.onChange} selectedIndex={grcTabToggleIndex}>
+            <Switch text={toggleText1} onClick={this.toggleClick} />
+            <Switch text={toggleText2} onClick={this.toggleClick} />
+          </ContentSwitcher>}
+        </div>
       </div>
     )
   }

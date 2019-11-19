@@ -11,7 +11,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { sidePanelPolicies, sidePanelResourceTypePolicies, sidePanelClusters, sidePanelResourceTypeClusters } from './ModalsTestingData'
-import PolicySidePanelDetailsModal, { PoliciesTable, ClustersTable } from '../../../../src-web/components/modals/PolicySidePanelDetailsModal'
+import PolicySidePanelDetailsModal, { PoliciesTable, ClustersOrApplicationsTable } from '../../../../src-web/components/modals/PolicySidePanelDetailsModal'
 import renderer from 'react-test-renderer'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -53,7 +53,7 @@ describe('PoliciesTable 1', () => {
       <BrowserRouter>
         <PoliciesTable
           items = {sidePanelPolicies}
-          type = {sidePanelResourceTypePolicies}
+          staticResourceData = {sidePanelResourceTypePolicies}
           inapplicable = {'N/A'}
         />
       </BrowserRouter>
@@ -68,7 +68,7 @@ describe('PoliciesTable 2', () => {
       <BrowserRouter>
         <PoliciesTable
           items = {[]}
-          type = {sidePanelResourceTypePolicies}
+          staticResourceData = {sidePanelResourceTypePolicies}
           inapplicable = {'N/A'}
         />
       </BrowserRouter>
@@ -77,13 +77,13 @@ describe('PoliciesTable 2', () => {
   })
 })
 
-describe('ClustersTable 1', () => {
+describe('ClustersOrApplicationsTable 1', () => {
   it('renders expand as expected', () => {
     const component = renderer.create(
       <BrowserRouter>
-        <ClustersTable
+        <ClustersOrApplicationsTable
           items = {sidePanelClusters}
-          type = {sidePanelResourceTypeClusters}
+          staticResourceData = {sidePanelResourceTypeClusters}
           inapplicable = {'N/A'}
         />
       </BrowserRouter>
@@ -92,13 +92,13 @@ describe('ClustersTable 1', () => {
   })
 })
 
-describe('ClustersTable 2', () => {
+describe('ClustersOrApplicationsTable 2', () => {
   it('renders expand as expected', () => {
     const component = renderer.create(
       <BrowserRouter>
-        <ClustersTable
+        <ClustersOrApplicationsTable
           items = {[]}
-          type = {sidePanelResourceTypeClusters}
+          staticResourceData = {sidePanelResourceTypeClusters}
           inapplicable = {'N/A'}
         />
       </BrowserRouter>

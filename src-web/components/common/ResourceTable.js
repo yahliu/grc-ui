@@ -354,7 +354,7 @@ ResourceTable.propTypes = {
   changeTablePage: PropTypes.func,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   clientSideFilters: PropTypes.string,
-  darkSearchBox: PropTypes.object,
+  darkSearchBox: PropTypes.bool,
   deleteResource: PropTypes.func,
   err: PropTypes.object,
   expandableTable: PropTypes.bool,

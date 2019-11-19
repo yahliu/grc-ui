@@ -564,7 +564,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                       <div
                         className="card-name name-empty"
                       >
-                        No other security findings
+                        No other policy violations
                       </div>
                       <div
                         className="card-description description-empty"
@@ -572,7 +572,7 @@ exports[`RecentActivityModule view renders as expected 1`] = `
                         <div
                           className="LinesEllipsis  "
                         >
-                          We will continue to monitor and display any security findings so you can easily find them here.
+                          We will continue to monitor and display any policy violations so you can easily find them here.
                           <wbr />
                         </div>
                       </div>

@@ -388,42 +388,49 @@ exports[`GrcView component 1 renders as expected 1`] = `
             className="bx--toolbar-content"
           >
             <div
-              className="module-toggle-tab-switch"
+              className="module-toggle-tab-switch-strip"
             >
               <div
-                className="bx--content-switcher"
-                onChange={[Function]}
+                className="module-toggle-tab-switch-makeup"
+              />
+              <div
+                className="module-toggle-tab-switch"
               >
-                <a
-                  className="bx--content-switcher-btn bx--content-switcher--selected"
-                  href=""
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
+                <div
+                  className="bx--content-switcher"
+                  onChange={[Function]}
                 >
-                  <span>
-                    Policies
-                  </span>
-                </a>
-                <a
-                  className="bx--content-switcher-btn"
-                  href=""
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
-                >
-                  <span>
-                    Cluster violations
-                  </span>
-                </a>
-                <a
-                  className="bx--content-switcher-btn"
-                  href=""
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
-                >
-                  <span>
-                    Applications
-                  </span>
-                </a>
+                  <a
+                    className="bx--content-switcher-btn bx--content-switcher--selected"
+                    href=""
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                  >
+                    <span>
+                      Policies
+                    </span>
+                  </a>
+                  <a
+                    className="bx--content-switcher-btn"
+                    href=""
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                  >
+                    <span>
+                      Cluster violations
+                    </span>
+                  </a>
+                  <a
+                    className="bx--content-switcher-btn"
+                    href=""
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                  >
+                    <span>
+                      Applications
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1586,32 +1593,39 @@ exports[`GrcView component 5 renders as expected 1`] = `
             className="bx--toolbar-content"
           >
             <div
-              className="module-toggle-tab-switch"
+              className="module-toggle-tab-switch-strip"
             >
               <div
-                className="bx--content-switcher"
-                onChange={[Function]}
+                className="module-toggle-tab-switch-makeup"
+              />
+              <div
+                className="module-toggle-tab-switch"
               >
-                <a
-                  className="bx--content-switcher-btn bx--content-switcher--selected"
-                  href=""
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
+                <div
+                  className="bx--content-switcher"
+                  onChange={[Function]}
                 >
-                  <span>
-                    Security findings
-                  </span>
-                </a>
-                <a
-                  className="bx--content-switcher-btn"
-                  href=""
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
-                >
-                  <span>
-                    Cluster findings
-                  </span>
-                </a>
+                  <a
+                    className="bx--content-switcher-btn bx--content-switcher--selected"
+                    href=""
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                  >
+                    <span>
+                      Security findings
+                    </span>
+                  </a>
+                  <a
+                    className="bx--content-switcher-btn"
+                    href=""
+                    onClick={[Function]}
+                    onKeyDown={[Function]}
+                  >
+                    <span>
+                      Cluster findings
+                    </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

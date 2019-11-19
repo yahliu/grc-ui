@@ -23,10 +23,10 @@ export default {
       msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
     },
-    {
-      msgKey: 'table.header.namespace',
-      resourceKey: 'namespace',
-    },
+    // {
+    //   msgKey: 'table.header.namespace',
+    //   resourceKey: 'namespace',
+    // },
     {
       msgKey: 'table.header.violation',
       resourceKey: 'violation',
