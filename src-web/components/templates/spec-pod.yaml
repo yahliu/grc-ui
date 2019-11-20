@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    SecurityContinuousMonitoring
+    PR.PT Protective Technology
   controls: |
-    Other
+    PR.PT-3 Least Functionality
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

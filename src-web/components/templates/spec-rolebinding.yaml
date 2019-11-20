@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    IdentityManagementAndAccessControl
+    PR.AC Identity Management Authentication and Access Control
   controls: |
-    Other
+    PR.AC-4 Access Control
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

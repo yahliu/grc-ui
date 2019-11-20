@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    IdentityManagementAndAccessControl
+    PR.AC Identity Management Authentication and Access Control
   controls: |
-    Iam
+    PR.AC-4 Access Control
   policyTemplates: |
     - objectDefinition:
         apiVersion: iam.policies.ibm.com/v1alpha1

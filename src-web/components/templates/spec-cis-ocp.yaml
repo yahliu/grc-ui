@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    CisComplianceOCP
+    PR.PT Protective Technology
   controls: |
-    Cis
+    PR.PT-3 Least Functionality
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

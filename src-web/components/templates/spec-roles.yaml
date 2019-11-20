@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    IdentityManagementAndAccessControl
+    PR.AC Identity Management Authentication and Access Control
   controls: |
-    Other
+    PR.AC-4 Access Control
   roleTemplates: |
     - apiVersion: roletemplate.mcm.ibm.com/v1alpha1 # role must follow defined permissions
       metadata:

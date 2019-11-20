@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    DetectAnomalousActivity
+    PR.AC Identity Management Authentication and Access Control
   controls: |
-    Other
+    PR.AC-5 Network Integrity
   objectTemplates: |
     - complianceType: musthave
       objectDefinition:

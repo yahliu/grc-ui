@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    IdentityManagementAndAccessControl
+    DE.CM Security Continuous Monitoring
   controls: |
-    VulnerbilityAdvisor
+    DE.CM-8 Vulnerability scans
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1

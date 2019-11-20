@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    SecurityContinuousMonitoring
+    PR.PT Protective Technology
   controls: |
-    Audit
+    PR.PT-1 Audit Logging
   policyTemplates: |
     - objectDefinition:
         apiVersion: audit.policies.ibm.com/v1alpha1

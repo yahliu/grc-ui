@@ -9,9 +9,9 @@ replacements: # if user select this choice, the template variable names and valu
   standards: |
     NIST-CSF
   categories: |
-    SecurityContinuousMonitoring
+    PR.DS DataSecurity
   controls: |
-    SecretEncryption
+    PR.DS-2 Data-at-rest
   policyTemplates: |
     - objectDefinition:
         apiVersion: policies.ibm.com/v1alpha1
