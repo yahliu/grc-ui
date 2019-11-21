@@ -15,11 +15,12 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import resources from '../../../lib/shared/resources'
 import _ from 'lodash'
-import { Modal } from 'carbon-components-react'
+import { Modal, InlineNotification } from 'carbon-components-react'
 import ResourceOverviewModule from '../modules/SubResourceListModule'
 import getResourceDefinitions from '../../definitions'
 import msgs from '../../../nls/platform.properties'
 import queryString from 'query-string'
+import { filterFindings } from '../../../lib/client/filter-helper'
 
 resources(() => {
   require('../../../scss/side-panel-modal.scss')
@@ -39,6 +40,15 @@ function getHeader(data) {
 }
 
 class FindingSidePanelDetailsModal extends React.PureComponent {
+
+  constructor (props) {
+    super(props)
+    const { activeFilters } = props
+    const showFilterInfo = Object.keys(activeFilters).length > 0
+    this.state = {
+      showFilterInfo : showFilterInfo,
+    }
+  }
 
   handleModalClose = () => {
     const { updateModal, location, history } = this.props
@@ -61,9 +71,10 @@ class FindingSidePanelDetailsModal extends React.PureComponent {
   }
 
   render(){
-    const { title, data, resourceType, locale } = this.props
+    const { title, data, resourceType, locale, activeFilters } = this.props
     const { kind, header, descr } = getHeader(data)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
+    const showFilterInfo = this.state.showFilterInfo
     return (
       <div className={'side-panel-modal'}>
         <Modal
@@ -80,14 +91,56 @@ class FindingSidePanelDetailsModal extends React.PureComponent {
                 {descr}
               </div>
             </div>
-            <div className={'bx--modal-content-body'}>
-              { kind.toLowerCase() === 'hcmsecurityfindings' &&  <SecurityFindingsTable singleFinding={data} type={resourceType} inapplicable={inapplicable} locale={locale} /> }
-              { kind.toLowerCase() === 'hcmclusterfindings' &&  <ClusterFindingsTable items={data} type={resourceType} inapplicable={inapplicable} locale={locale} /> }
-            </div>
+            {showFilterInfo && this.renderFilterWarning(kind, locale)}
+            {this.renderTable(activeFilters, showFilterInfo, kind, data, resourceType, inapplicable, locale)}
           </div>
         </Modal>
       </div>
     )
+  }
+
+  renderTable = (activeFilters, showFilterInfo, kind, data, resourceType, inapplicable, locale) => {
+    switch (kind.toLowerCase()) {
+    case 'hcmsecurityfindings':
+    default: {
+      if (showFilterInfo) {
+        //filterFindings need array type so wrap and unwrap here
+        data = filterFindings([data], activeFilters, locale)
+        if (Array.isArray(data) && data.length > 0) { data = data[0] }
+      }
+      return (
+        <div className={'bx--modal-content-body'}>
+          <SecurityFindingsTable singleFinding={data} type={resourceType} inapplicable={inapplicable} locale={locale} />
+        </div>
+      )
+    }
+    case 'hcmclusterfindings': {
+      if (showFilterInfo && data.findingsUnderCluster) {
+        data.findingsUnderCluster = filterFindings(data.findingsUnderCluster, activeFilters, locale)}
+      return (
+        <div className={'bx--modal-content-body'}>
+          <ClusterFindingsTable items={data} type={resourceType} inapplicable={inapplicable} locale={locale} />
+        </div>
+      )
+    }}
+  }
+
+  onClose = () => {
+    this.setState(()=>{
+      return {showFilterInfo: false}
+    })
+  }
+
+  renderFilterWarning(kind, locale){
+    return <InlineNotification
+      className={`${kind}-filterInfo`}
+      kind={'info'}
+      title={msgs.get('tabs.sidepanel.filterWarning.title', locale)}
+      subtitle={msgs.get('tabs.sidepanel.filterWarning.subtitle', locale)}
+      onCloseButtonClick={this.onClose}
+      iconDescription={`${kind}-filterInfo`}
+      hideCloseButton={true}
+    />
   }
 }
 
@@ -166,7 +219,7 @@ const SecurityFindingsTable = ({singleFinding, type, inapplicable, locale}) => {
     <div className='overview-content'>
       <ResourceOverviewModule
         staticResourceData={staticResourceData.securityFindingSidePanel}
-        items={items}
+        items={_.compact(items)}
         listSubItems={false}
       />
     </div>
@@ -241,7 +294,7 @@ const ClusterFindingsTable = ({items, type, inapplicable, locale}) => {
     <div className='overview-content'>
       <ResourceOverviewModule
         staticResourceData={staticResourceData.clusterFindingSidePanel}
-        items={items}
+        items={_.compact(items)}
         listSubItems={true}
       />
     </div>
@@ -263,6 +316,7 @@ ClusterFindingsTable.propTypes = {
 }
 
 FindingSidePanelDetailsModal.propTypes = {
+  activeFilters: PropTypes.object,
   data: PropTypes.object,
   history: PropTypes.object.isRequired,
   locale: PropTypes.string,
@@ -273,8 +327,12 @@ FindingSidePanelDetailsModal.propTypes = {
   updateModal: PropTypes.func
 }
 
-const mapStateToProps = state =>  {
-  return state.modal
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {activeFilters}} = state
+  return {
+    modal: state.modal,
+    activeFilters: activeFilters,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {

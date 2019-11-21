@@ -141,7 +141,7 @@ export class GrcView extends React.Component {
         )
       }
       else {
-        filterGrcItems = filterPolicies(grcItems, activeFilters, locale)
+        filterGrcItems = filterPolicies(grcItems, activeFilters, locale, 'metadata.annotations')
         if (grcItems.length > 0 && filterGrcItems.length == 0) {
           filterToEmpty = true
         }

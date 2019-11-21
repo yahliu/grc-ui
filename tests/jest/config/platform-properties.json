@@ -438,6 +438,8 @@
   "tabs.add.new": "New search",
   "tabs.close.icon": "Close current tab",
   "tabs.grc.back": "Overview",
+  "tabs.sidepanel.filterWarning.title": "Filtered view:",
+  "tabs.sidepanel.filterWarning.subtitle": "Clear filters to view all.",
   "validation.missing.resource": "Missing: {0}",
   "validation.missing.kind": "Missing resource kind: {0}",
   "validation.extra.kind": "Unexpected resource kind: {0}",

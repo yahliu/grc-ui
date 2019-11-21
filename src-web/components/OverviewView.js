@@ -108,7 +108,7 @@ export class OverviewView extends React.Component {
     showResourceToolbar()
     const { viewState } = this.state
     const availableFilters =  getAvailableGrcFilters(policies, findings, locale)
-    const filteredPolicies = filterPolicies(policies, activeFilters, locale)
+    const filteredPolicies = filterPolicies(policies, activeFilters, locale, 'metadata.annotations')
     const filteredFindings = filterFindings(findings, activeFilters, locale)
     //need to filteredapplications later?
     return (

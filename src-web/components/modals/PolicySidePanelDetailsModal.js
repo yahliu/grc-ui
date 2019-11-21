@@ -24,6 +24,7 @@ import msgs from '../../../nls/platform.properties'
 import queryString from 'query-string'
 import {GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE} from '../../../lib/shared/constants'
 import {getPollInterval} from '../../components/common/RefreshTimeSelect'
+import { filterPolicies } from '../../../lib/client/filter-helper'
 
 resources(() => {
   require('../../../scss/side-panel-modal.scss')
@@ -76,6 +77,15 @@ function getHeader(data, locale) {
 
 class PolicySidePanelDetailsModal extends React.PureComponent {
 
+  constructor (props) {
+    super(props)
+    const { activeFilters } = props
+    const showFilterInfo = Object.keys(activeFilters).length > 0
+    this.state = {
+      showFilterInfo : showFilterInfo,
+    }
+  }
+
   handleModalClose = () => {
     const { updateModal, location, history } = this.props
     updateModal()
@@ -97,10 +107,11 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
   }
 
   render(){
-    const { title, data, resourceType, locale } = this.props
+    const { title, data, resourceType, locale, activeFilters } = this.props
     const { header, kind, descr, percent, violation, query, queryPara } = getHeader(data, locale)
     const inapplicable = msgs.get('table.actions.inapplicable', locale)
     const pollInterval = getPollInterval(GRC_SIDE_PANEL_REFRESH_INTERVAL_COOKIE, 'sidePanel')
+    const showFilterInfo = this.state.showFilterInfo
     return (
       <div className={'side-panel-modal'}>
         <Modal
@@ -121,6 +132,7 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
                 <div className={'bx-modal-content-sub-header'}>{`${violation}`}</div>
               </div>
             </div>
+            {showFilterInfo && this.renderFilterWarning(kind, locale)}
             <div className={'bx--modal-content-body'}>
               <Query query={query} variables={queryPara} pollInterval={pollInterval}>
                 {( {data, loading, error} ) => {
@@ -138,20 +150,28 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
                     )
                   }
                   const { items } = data
+                  let filterSidePanelItems = []
                   const staticResourceData = getResourceDefinitions(resourceType)
                   switch (kind) {
                   case 'HCMPolicyPolicy':
                   default: {
+                    if (showFilterInfo) {
+                      filterSidePanelItems = filterPolicies(items, activeFilters, locale, 'policy.metadata.annotations')}
+                    else { filterSidePanelItems = items }
                     return (
-                      <PoliciesTable items={items} staticResourceData={staticResourceData.policyViolatedSidePanel} inapplicable={inapplicable} />
+                      <PoliciesTable items={filterSidePanelItems} staticResourceData={staticResourceData.policyViolatedSidePanel} inapplicable={inapplicable} />
                     )
                   }
                   case 'HCMPolicyCluster': {
+                    if (showFilterInfo) {
+                      filterSidePanelItems = filterPolicies(items, activeFilters, locale, 'metadata.annotations')}
+                    else { filterSidePanelItems = items }
                     return (
-                      <ClustersOrApplicationsTable items={items} staticResourceData={staticResourceData.clusterViolatedSidePanel} inapplicable={inapplicable} />
+                      <ClustersOrApplicationsTable items={filterSidePanelItems} staticResourceData={staticResourceData.clusterViolatedSidePanel} inapplicable={inapplicable} />
                     )
                   }
                   case 'HCMPolicyApplication': {
+                    // current no filter for both application card and its side panel, may add future
                     return (
                       <ClustersOrApplicationsTable items={items} staticResourceData={staticResourceData.applicationViolatedSidePanel} inapplicable={inapplicable} />
                     )
@@ -164,6 +184,24 @@ class PolicySidePanelDetailsModal extends React.PureComponent {
         </Modal>
       </div>
     )
+  }
+
+  onClose = () => {
+    this.setState(()=>{
+      return {showFilterInfo: false}
+    })
+  }
+
+  renderFilterWarning(kind, locale){
+    return <InlineNotification
+      className={`${kind}-filterInfo`}
+      kind={'info'}
+      title={msgs.get('tabs.sidepanel.filterWarning.title', locale)}
+      subtitle={msgs.get('tabs.sidepanel.filterWarning.subtitle', locale)}
+      onCloseButtonClick={this.onClose}
+      iconDescription={`${kind}-filterInfo`}
+      hideCloseButton={true}
+    />
   }
 }
 
@@ -227,7 +265,7 @@ export const ClustersOrApplicationsTable = ({items, staticResourceData, inapplic
     <div className='overview-content'>
       <ResourceOverviewModule
         staticResourceData={staticResourceData}
-        items={items}
+        items={_.compact(items)}
         listSubItems={true}
       />
     </div>
@@ -284,7 +322,7 @@ export const PoliciesTable = ({items, staticResourceData, inapplicable}) => {
     <div className='overview-content'>
       <ResourceOverviewModule
         staticResourceData={staticResourceData}
-        items={items}
+        items={_.compact(items)}
         listSubItems={true}
         linkFixedName={linkFixedName}
       />
@@ -319,6 +357,7 @@ ProcessBar.propTypes = {
 }
 
 PolicySidePanelDetailsModal.propTypes = {
+  activeFilters: PropTypes.object,
   data: PropTypes.object,
   history: PropTypes.object.isRequired,
   locale: PropTypes.string,
@@ -329,8 +368,13 @@ PolicySidePanelDetailsModal.propTypes = {
   updateModal: PropTypes.func
 }
 
-const mapStateToProps = state =>  {
-  return state.modal
+
+const mapStateToProps = (state) => {
+  const {resourceToolbar: {activeFilters}} = state
+  return {
+    modal: state.modal,
+    activeFilters: activeFilters,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
