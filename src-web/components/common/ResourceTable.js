@@ -24,7 +24,6 @@ import ResourceTableRowExpandableContent from './ResourceTableRowExpandableConte
 import ResourceTableRowExpandableList from './ResourceTableRowExpandableList'
 import constants from '../../../lib/shared/constants'
 import { fliterTableAction } from '../../../lib/client/access-helper'
-import { dumpAndParse, saveLoad } from '../../../lib/client/design-helper'
 
 
 resources(() => {
@@ -252,12 +251,7 @@ export class ResourceTable extends React.Component {
   }
 
   checkPolicyDisabled(data) {
-    const resources = lodash.compact(saveLoad(dumpAndParse(data).yaml))
-    const isDisabled = resources[0]['spec']['disabled']
-    if (isDisabled == undefined) {
-      return false
-    }
-    return isDisabled
+    return lodash.get(data, 'raw.spec.disabled', false)
   }
 
   getRows() {
