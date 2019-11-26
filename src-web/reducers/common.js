@@ -388,6 +388,7 @@ export const resourceReducerFunction = (state = INITIAL_STATE, action) => {
     switch (action.resourceType) {
     case RESOURCE_TYPES.HCM_COMPLIANCES:
     case RESOURCE_TYPES.HCM_POLICIES:
+    case RESOURCE_TYPES.HCM_POLICIES_PER_POLICY:
       const policy = lodash.get(action, 'resource')
       index = lodash.findIndex(items, { 'name':policy.name, 'namespace':policy.namespace })
       break
