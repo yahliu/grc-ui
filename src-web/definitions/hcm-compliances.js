@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -814,63 +814,6 @@ export default {
           }
         ]
       },
-      // {
-      //   cells: [
-      //     {
-      //       resourceKey: 'description.title.created',
-      //       type: 'i18n'
-      //     },
-      //     {
-      //       resourceKey: 'detail.creationTime',
-      //       transformFunction: getAge
-      //     }
-      //   ]
-      // },
-      // {
-      //   cells: [
-      //     {
-      //       resourceKey: 'description.title.annotations',
-      //       type: 'i18n'
-      //     },
-      //     {
-      //       resourceKey: 'detail.annotations',
-      //       transformFunction: getLabelsToList
-      //     }
-      //   ]
-      // },
-      // {
-      //   cells: [
-      //     {
-      //       resourceKey: 'description.title.resource.version',
-      //       type: 'i18n'
-      //     },
-      //     {
-      //       resourceKey: 'detail.resourceVersion'
-      //     }
-      //   ]
-      // },
-      // {
-      //   cells: [
-      //     {
-      //       resourceKey: 'description.title.self.link',
-      //       type: 'i18n'
-      //     },
-      //     {
-      //       resourceKey: 'detail.selfLink'
-      //     }
-      //   ]
-      // },
-      // {
-      //   cells: [
-      //     {
-      //       resourceKey: 'description.title.uid',
-      //       type: 'i18n'
-      //     },
-      //     {
-      //       resourceKey: 'detail.uid'
-      //     }
-      //   ]
-      // },
     ]
   },
   policyRoleTemplates: {
@@ -1148,7 +1091,7 @@ export function getCategories(item) {
   return convertToStartCase(annotations['policy.mcm.ibm.com/categories'])
 }
 
-function convertToStartCase(items){
+export function convertToStartCase(items){
   if (items) {
     return items.split(',').map(item => _.startCase(item.trim())).join(', ')
   }
@@ -1164,13 +1107,7 @@ export function getDecisions(item = {}){
 }
 
 export function formLinkToCluster(item){
-  if(item.clusterURL){
+  if(item && item.clusterURL){
     return <a target='_blank' href={`${item.clusterURL}`}>{item.cluster}</a>
   }
 }
-
-// export function getPolicyClusters(item){
-//   const clusters = _.get(item, 'clusters')
-//   return JSON.stringify(clusters)
-// }
-

@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -10,6 +10,7 @@
 
 import React from 'react'
 import TruncateText from '../components/common/TruncateText'
+import config from '../../lib/shared/config'
 
 export default {
   defaultSortField: 'cluster',
@@ -22,11 +23,12 @@ export default {
     {
       msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
+      transformFunction: createClusterLink,
     },
-    // {
-    //   msgKey: 'table.header.namespace',
-    //   resourceKey: 'namespace',
-    // },
+    {
+      msgKey: 'table.header.cluster.namespace',
+      resourceKey: 'namespace',
+    },
     {
       msgKey: 'table.header.violation',
       resourceKey: 'violation',
@@ -34,11 +36,10 @@ export default {
     {
       msgKey: 'table.header.violated',
       resourceKey: 'nonCompliant',
-      transformFunction: getLabels,
+      transformFunction: getClusterViolationLabels,
     }
   ],
   clusterViolatedSidePanel: {
-    // title: 'cluster.violated.policy',
     headerRows: ['', 'table.header.policy.name', 'table.header.rule.violation', 'table.header.control'],
     subHeaders: ['table.header.name', 'table.header.message', 'table.header.reason'],
     rows: [
@@ -59,10 +60,20 @@ export default {
   },
 }
 
-export function getLabels(item) {
+export function getClusterViolationLabels(item) {
   return getTruncatedText(item.nonCompliant.join(', '))
 }
 
 export function getTruncatedText(item){
   return <TruncateText text={item} />
+}
+
+export function createClusterLink(item){
+  if (item && item.cluster && item.namespace) {
+    return <a href={`${config.contextPath}/clusters/${item.namespace}/${item.cluster}`}>{item.cluster}</a>
+  }
+  else if (item && item.cluster) {
+    return item.cluster
+  }
+  return '-'
 }

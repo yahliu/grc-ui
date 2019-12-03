@@ -7,7 +7,7 @@
  * Contract with IBM Corp.
  *******************************************************************************/
 'use strict'
-import { getLabels, getTruncatedText } from '../../../src-web/definitions/hcm-policies-cluster'
+import { getClusterViolationLabels, getTruncatedText, createClusterLink } from '../../../src-web/definitions/hcm-policies-cluster'
 
 describe('getTruncatedText', () => {
   it('Should return truncated text item', () => {
@@ -15,11 +15,42 @@ describe('getTruncatedText', () => {
     expect(getTruncatedText(item)).toMatchSnapshot()
   })
 })
-describe('getLabels', () => {
+
+describe('getClusterViolationLabels', () => {
   it('Should return labels of truncated text item', () => {
     const item = {
       nonCompliant: ['nonCompliant1','nonCompliant2']
     }
-    expect(getLabels(item)).toMatchSnapshot()
+    expect(getClusterViolationLabels(item)).toMatchSnapshot()
+  })
+})
+
+describe('createClusterLink', () => {
+  it('Should return createClusterLink', () => {
+    const item = {
+      cluster: 'tiny-remote',
+      namespace: 'ibm',
+    }
+    expect(createClusterLink(item)).toMatchSnapshot()
+  })
+  it('Should return cluster name', () => {
+    const item = {
+      cluster: 'tiny-remote',
+    }
+    expect(createClusterLink(item)).toMatchSnapshot()
+  })
+  it('Should return -', () => {
+    const item = {
+      namnespace: 'ibm',
+    }
+    expect(createClusterLink(item)).toMatchSnapshot()
+  })
+  it('Should return -', () => {
+    const item = {}
+    expect(createClusterLink(item)).toMatchSnapshot()
+  })
+  it('Should return -', () => {
+    const item = null
+    expect(createClusterLink(item)).toMatchSnapshot()
   })
 })

@@ -1621,7 +1621,7 @@ exports[`formatPoliciesToClustersTableData should correctly format 1`] = `
 Array [
   Object {
     "cluster": "cluster1",
-    "namespace": "mcm",
+    "namespace": "-",
     "nonCompliant": Array [
       "policy-ma",
     ],
@@ -1629,7 +1629,7 @@ Array [
   },
   Object {
     "cluster": "clusterhub",
-    "namespace": "mcm",
+    "namespace": "-",
     "nonCompliant": Array [],
     "violation": "0/4",
   },
@@ -1640,13 +1640,13 @@ exports[`formatPoliciesToClustersTableData should correctly format 2`] = `
 Array [
   Object {
     "cluster": "cluster1",
-    "namespace": "mcm",
+    "namespace": "-",
     "nonCompliant": Array [],
     "violation": "0/1",
   },
   Object {
     "cluster": "clusterhub",
-    "namespace": "mcm",
+    "namespace": "-",
     "nonCompliant": Array [],
     "violation": "0/1",
   },

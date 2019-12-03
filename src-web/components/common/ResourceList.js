@@ -46,8 +46,8 @@ class ResourceList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!lodash.isEqual(this.props.listData, nextProps.listData)) {
-      this.props.fetchResources(nextProps.listData)
+    if ((!lodash.isEqual(this.props.listData, nextProps.listData)) ||(!lodash.isEqual(this.props.resourceType, nextProps.resourceType))) {
+      this.props.fetchResources(nextProps.listData, nextProps.resourceType)
     }
   }
 
@@ -104,8 +104,9 @@ class ResourceList extends React.Component {
         kind='error' />
     }
 
-    if (status !== REQUEST_STATUS.DONE)
+    if (status !== REQUEST_STATUS.DONE){
       return <Loading withOverlay={false} className='content-spinner' />
+    }
 
     const actions = React.Children.map(children, action => {
       //resolve console warning, seems resourceType isn't used here
@@ -305,8 +306,11 @@ ResourceList.propTypes = {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { updateBrowserURL, resourceType } = ownProps
   return {
-    fetchResources: (listData) => {
-      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(listData)}, resourceType))
+    fetchResources: (listData, nextPropsResourceType) => {
+      if(nextPropsResourceType == undefined){
+        nextPropsResourceType = resourceType
+      }
+      dispatch(receiveResourceSuccess({items: lodash.cloneDeep(listData)}, nextPropsResourceType))
     },
     changeTablePage: page => dispatch(changeTablePage(page, resourceType)),
     searchTable: (search, updateURL) => {

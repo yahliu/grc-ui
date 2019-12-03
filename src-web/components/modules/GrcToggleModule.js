@@ -38,103 +38,88 @@ export class GrcToggleModule extends React.Component {
     const { locale } = this.context
     const { displayType, grcItems, applications, secondaryHeaderProps, showGrcTabToggle, grcTabToggleIndex, highLightRowName, showSidePanel, handleCreatePolicy, filterToEmpty } = this.props
     const grcTabSwitcher = showGrcTabToggle ? this.renderTabSwitcher(displayType, grcTabToggleIndex) : []
+    let detailsTabs, resourceType, listData, staticResourceData, getVisibleResources, placeHolderText, autoAction
+    switch (displayType) {
+    case 'all':
+    default:
+      switch (grcTabToggleIndex){
+      case 0:
+      default:
+        detailsTabs = ['policies']
+        resourceType = RESOURCE_TYPES.HCM_POLICIES_PER_POLICY
+        listData = formatExpandablePolicies(grcItems)
+        staticResourceData = getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)
+        getVisibleResources = makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)
+        placeHolderText = msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)
+        autoAction = 'table.actions.policy.sidepanel'
+        break
+      case 1:
+        detailsTabs = ['clusters']
+        resourceType = RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER
+        listData = formatPoliciesToClustersTableData(grcItems)
+        staticResourceData = getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)
+        getVisibleResources = makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)
+        placeHolderText = msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)
+        autoAction = 'table.actions.policy.sidepanel'
+        break
+      case 2:
+        detailsTabs = ['applications']
+        resourceType = RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION
+        listData = formatApplicationTableData(applications)
+        staticResourceData = getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)
+        getVisibleResources = makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)
+        placeHolderText = msgs.get('tabs.grc.toggle.applications.placeHolderText', locale)
+        autoAction = 'table.actions.policy.sidepanel'
+        break
+      }
+      break
+    case 'findings':
+      switch (grcTabToggleIndex){
+      case 0:
+      default:
+        detailsTabs = ['findings']
+        resourceType = RESOURCE_TYPES.HCM_SECURITY_FINDINGS
+        listData = grcItems
+        staticResourceData = getResourceDefinitions(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)
+        getVisibleResources = makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)
+        placeHolderText = msgs.get('tabs.grc.toggle.securityFindings.placeHolderText', locale)
+        autoAction = 'table.actions.finding.sidepanel'
+        break
+      case 1:
+        detailsTabs = ['cluster-findings']
+        resourceType = RESOURCE_TYPES.HCM_CLUSTER_FINDINGS
+        listData = formatFindingsToClustersTableData(grcItems)
+        staticResourceData = getResourceDefinitions(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)
+        getVisibleResources = makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)
+        placeHolderText = msgs.get('tabs.grc.toggle.clusterFindings.placeHolderText', locale)
+        autoAction = 'table.actions.finding.sidepanel'
+        break
+      }
+      break
+    }
+
     return (
-      //below whole logic branch need to substract and rewrite later
       <div className='module-toggle-tab'>
-        {displayType==='all' && grcTabToggleIndex===0 && <ResourceList
+        <ResourceList
           {...this.props}
-          detailsTabs={['policies']}
+          detailsTabs={detailsTabs}
           filterToEmpty={filterToEmpty}
-          resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_POLICY}
-          listData={formatExpandablePolicies(grcItems)}
-          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
-          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_POLICY)}
+          resourceType={resourceType}
+          listData={listData}
+          staticResourceData={staticResourceData}
+          getVisibleResources={getVisibleResources}
           tabs={secondaryHeaderProps.tabs}
           links={secondaryHeaderProps.links}
           title={secondaryHeaderProps.title}
           information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)}
-          autoAction='table.actions.policy.sidepanel'
+          placeHolderText={placeHolderText}
+          autoAction={autoAction}
           highLightRowName={highLightRowName}
           showSidePanel={showSidePanel}
-          handleCreatePolicy={handleCreatePolicy}>
-          {grcTabSwitcher}
-        </ResourceList>}
-        {displayType==='all' && grcTabToggleIndex===1 && <ResourceList
-          {...this.props}
-          detailsTabs={['clusters']}
-          filterToEmpty={filterToEmpty}
-          resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER}
-          listData={formatPoliciesToClustersTableData(grcItems)}
-          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
-          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_CLUSTER)}
-          tabs={secondaryHeaderProps.tabs}
-          links={secondaryHeaderProps.links}
-          title={secondaryHeaderProps.title}
-          information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)}
-          autoAction='table.actions.policy.sidepanel'
-          highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}
+          handleCreatePolicy={handleCreatePolicy}
           topButton={grcTabSwitcher}>
           {grcTabSwitcher}
-        </ResourceList>}
-        {displayType==='all' && grcTabToggleIndex===2 && <ResourceList
-          {...this.props}
-          detailsTabs={['applications']}
-          resourceType={RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION}
-          listData={formatApplicationTableData(applications)}
-          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)}
-          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_POLICIES_PER_APPLICATION)}
-          tabs={secondaryHeaderProps.tabs}
-          links={secondaryHeaderProps.links}
-          title={secondaryHeaderProps.title}
-          information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.grc.toggle.applications.placeHolderText', locale)}
-          autoAction='table.actions.policy.sidepanel'
-          highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}
-          topButton={grcTabSwitcher}>
-          {grcTabSwitcher}
-        </ResourceList>}
-        {displayType==='findings' && grcTabToggleIndex===0 && <ResourceList
-          {...this.props}
-          detailsTabs={['findings']}
-          filterToEmpty={filterToEmpty}
-          resourceType={RESOURCE_TYPES.HCM_SECURITY_FINDINGS}
-          listData={grcItems}
-          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)}
-          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_SECURITY_FINDINGS)}
-          tabs={secondaryHeaderProps.tabs}
-          links={secondaryHeaderProps.links}
-          title={secondaryHeaderProps.title}
-          information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.grc.toggle.securityFindings.placeHolderText', locale)}
-          autoAction='table.actions.finding.sidepanel'
-          highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}
-          topButton={grcTabSwitcher}>
-          {grcTabSwitcher}
-        </ResourceList>}
-        {displayType==='findings' && grcTabToggleIndex===1 && <ResourceList
-          {...this.props}
-          detailsTabs={['cluster-findings']}
-          filterToEmpty={filterToEmpty}
-          resourceType={RESOURCE_TYPES.HCM_CLUSTER_FINDINGS}
-          listData={formatFindingsToClustersTableData(grcItems)}
-          staticResourceData={getResourceDefinitions(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
-          getVisibleResources={makeGetVisibleTableItemsSelector(RESOURCE_TYPES.HCM_CLUSTER_FINDINGS)}
-          tabs={secondaryHeaderProps.tabs}
-          links={secondaryHeaderProps.links}
-          title={secondaryHeaderProps.title}
-          information={secondaryHeaderProps.information}
-          placeHolderText={msgs.get('tabs.grc.toggle.clusterFindings.placeHolderText', locale)}
-          autoAction='table.actions.finding.sidepanel'
-          highLightRowName={highLightRowName}
-          showSidePanel={showSidePanel}
-          topButton={grcTabSwitcher}>
-          {grcTabSwitcher}
-        </ResourceList>}
+        </ResourceList>
       </div>
     )
   }

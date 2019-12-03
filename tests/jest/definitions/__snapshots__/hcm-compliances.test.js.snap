@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`hcm-compliances - convertToStartCase should get "-"  1`] = `"-"`;
+
+exports[`hcm-compliances - convertToStartCase should get "-"  2`] = `"-"`;
+
+exports[`hcm-compliances - convertToStartCase should get start cases 1`] = `"Test 1 Test 2, Test 3, Test 4 Test 5"`;
+
 exports[`hcm-compliances - createComplianceLink should return valid compliance link 1`] = `"testCreateComplianceLink1"`;
 
 exports[`hcm-compliances - createComplianceLink should return valid compliance link 2`] = `
@@ -29,6 +35,17 @@ exports[`hcm-compliances - createPolicyLink should return valid policy link 1`] 
   to="undefined/policies/all/undefined/undefined/compliancePolicy/undefined"
 />
 `;
+
+exports[`hcm-compliances - formLinkToCluster should get formLinkToCluster 1`] = `
+<a
+  href="/multicloud/clusters"
+  target="_blank"
+/>
+`;
+
+exports[`hcm-compliances - formLinkToCluster should get null  1`] = `undefined`;
+
+exports[`hcm-compliances - formLinkToCluster should get null  2`] = `undefined`;
 
 exports[`hcm-compliances - getCategories should return categories status 1`] = `"11, 12, 13, 14, 15"`;
 

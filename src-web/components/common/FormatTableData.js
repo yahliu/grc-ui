@@ -11,10 +11,13 @@ import _ from 'lodash'
 
 const formatPolicyClusterView = (clusterName, policiesUnderCluster) => {
   let validNum = 0
-  let nameSpace
+  let nameSpace = '-'
   const nonCompliant = []
   policiesUnderCluster.forEach(policy => {
-    nameSpace = _.get(policy, 'namespace', 'metadata.namespace')
+    if (policy.clusterNS && typeof policy.clusterNS === 'object' && policy.clusterNS[clusterName]) {
+      nameSpace = policy.clusterNS[clusterName]
+    }
+
     const status = _.get(policy, `raw.status.status.${clusterName}`, '')
     let compliant = false
     switch (typeof status) {

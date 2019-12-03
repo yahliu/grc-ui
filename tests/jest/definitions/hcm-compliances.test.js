@@ -22,7 +22,9 @@ import {
   getStandards,
   getCategories,
   getDecisions,
-  getSubjects
+  getSubjects,
+  convertToStartCase,
+  formLinkToCluster,
 } from '../../../src-web/definitions/hcm-compliances'
 
 describe('hcm-compliances - createComplianceLink', () => {
@@ -274,5 +276,35 @@ describe('hcm-compliances - getSubjects', () => {
   it('should get "" ', () => {
     const item = {'subjects':[]}
     expect(getSubjects(item)).toMatchSnapshot()
+  })
+})
+
+describe('hcm-compliances - convertToStartCase', () => {
+  it('should get start cases', () => {
+    const item = 'test1 test2, test3, test4 test5'
+    expect(convertToStartCase(item)).toMatchSnapshot()
+  })
+  it('should get "-" ', () => {
+    const item = ''
+    expect(convertToStartCase(item)).toMatchSnapshot()
+  })
+  it('should get "-" ', () => {
+    const item = null
+    expect(convertToStartCase(item)).toMatchSnapshot()
+  })
+})
+
+describe('hcm-compliances - formLinkToCluster', () => {
+  it('should get formLinkToCluster', () => {
+    const item = {clusterURL:'/multicloud/clusters'}
+    expect(formLinkToCluster(item)).toMatchSnapshot()
+  })
+  it('should get null ', () => {
+    const item = {clusterURL:''}
+    expect(formLinkToCluster(item)).toMatchSnapshot()
+  })
+  it('should get null ', () => {
+    const item = null
+    expect(formLinkToCluster(item)).toMatchSnapshot()
   })
 })

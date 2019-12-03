@@ -435,6 +435,11 @@ export const policiesTestingDataSet1 = [
     'remediation':'',
     'policyCompliant':'2/2',
     'clusterCompliant':'2/2',
+    'clusterNS': {
+      'beldams': 'beldams',
+      'cetane': 'cetane',
+      'djebel': 'djebel',
+    },
     'placementPolicies':[
       {
         'metadata':{
@@ -571,6 +576,11 @@ export const policiesTestingDataSet1 = [
     'remediation':'enforce',
     'policyCompliant':'1/2',
     'clusterCompliant':'1/2',
+    'clusterNS': {
+      'beldams': 'beldams',
+      'cetane': 'cetane',
+      'djebel': 'djebel',
+    },
     'placementPolicies':[
       {
         'metadata':{
@@ -840,6 +850,11 @@ export const policiesTestingDataSet2 = [
     'remediation':'inform',
     'policyCompliant':'2/2',
     'clusterCompliant':'2/2',
+    'clusterNS': {
+      'beldams': 'beldams',
+      'cetane': 'cetane',
+      'djebel': 'djebel',
+    },
     'placementPolicies':[
       {
         'metadata':{
@@ -1242,6 +1257,11 @@ export const policiesTestingDataSet2 = [
     'remediation':'inform',
     'policyCompliant':'2/2',
     'clusterCompliant':'2/2',
+    'clusterNS': {
+      'beldams': 'beldams',
+      'cetane': 'cetane',
+      'djebel': 'djebel',
+    },
     'placementPolicies':[
       {
         'metadata':{

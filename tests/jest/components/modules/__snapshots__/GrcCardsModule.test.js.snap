@@ -3243,6 +3243,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -3543,6 +3548,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "1/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -4167,6 +4177,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -4467,6 +4482,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "1/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -5845,6 +5865,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -6239,6 +6264,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -6731,6 +6761,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
@@ -7125,6 +7160,11 @@ ShallowWrapper {
         Object {
           "__typename": "Compliance",
           "clusterCompliant": "2/2",
+          "clusterNS": Object {
+            "beldams": "beldams",
+            "cetane": "cetane",
+            "djebel": "djebel",
+          },
           "metadata": Object {
             "__typename": "Metadata",
             "annotations": Object {
