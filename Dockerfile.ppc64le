@@ -1,4 +1,5 @@
-FROM hyc-cloud-private-edge-docker-local.artifactory.swg-devops.com/build-images/node-dubnium-ubi7-minimal-ppc64le:7.7-98
+FROM hyc-cloud-private-edge-docker-local.artifactory.swg-devops.com/build-images/node-dubnium-ubi8-minimal-ppc64le:8.1-279
+
 ARG VCS_REF
 ARG VCS_URL
 ARG IMAGE_NAME
@@ -31,6 +32,8 @@ LABEL org.label-schema.vendor="IBM" \
       io.openshift.tags="$IMAGE_OPENSHIFT_TAGS"
 
 RUN mkdir -p /opt/ibm/grc-ui
+RUN mkdir -p /opt/ibm/grc-ui /licenses
+ADD license.txt /licenses
 WORKDIR /opt/ibm/grc-ui
 
 COPY . /opt/ibm/grc-ui
