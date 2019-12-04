@@ -12,6 +12,6 @@ send yes\n;
 
 expect "password:"
 
-send AHippopotamusPlaysHopscotchWithAnElephant1\n;
+send AHippopotamusPlaysHopscotchWithAnElephant2\n;
 
 interact

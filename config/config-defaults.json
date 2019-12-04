@@ -15,8 +15,6 @@
     "WLP_CLIENT_SECRET": "",
     "WLP_REDIRECT_URL": "https://localhost:3000/auth/liberty/callback",
     "ICP_VERSION": "3.2.0",
-    "tests": {
-        "user": "admin",
-        "password": "AHippopotamusPlaysHopscotchWithAnElephant"
-     }
+    "selenium_user": "admin",
+    "selenium_password": "AHippopotamusPlaysHopscotchWithAnElephant"
 }

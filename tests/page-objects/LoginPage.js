@@ -42,12 +42,12 @@ function authenticate(user, password) {
 
 function inputUsername(user) {
   this.waitForElementVisible('@username')
-    .setValue('@username', user || config.get('tests:user'))
+    .setValue('@username', user || config.get('selenium_user'))
 }
 
 function inputPassword(password) {
   this.waitForElementVisible('@password')
-    .setValue('@password', password || config.get('tests:password'))
+    .setValue('@password', password || config.get('selenium_password'))
 }
 
 function submit() {
