@@ -277,19 +277,21 @@ exports[`GrcView component 1 renders as expected 1`] = `
               <div
                 className="empty-violations-strip"
               >
-                <div
-                  className="card-violations empty"
-                >
-                  <img
-                    alt="No resource"
-                    className="empty-violations-img"
-                    src="undefined/policies/graphics/no-other-violations.svg"
-                  />
-                </div>
-                <div
-                  className="no-card-violations"
-                >
-                  No violations
+                <div>
+                  <div
+                    className="card-violations empty"
+                  >
+                    <img
+                      alt="No resource"
+                      className="empty-violations-img"
+                      src="undefined/policies/graphics/no-other-violations.svg"
+                    />
+                    <div
+                      className="no-card-violations"
+                    >
+                      No violations
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

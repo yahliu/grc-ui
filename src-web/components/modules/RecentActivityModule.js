@@ -59,7 +59,8 @@ export default class RecentActivityModule extends React.Component {
           const findingsN = this.state.topFindingsNum
           const violationsN = this.state.topViolationsNum
           this.setState(
-            { threshold: this.setThreshold(findingsN, violationsN) },
+            // need at least one threshold for top violations empty card
+            { threshold: Math.max(1, this.setThreshold(findingsN, violationsN)) },
             () => {
               return
             }
@@ -74,7 +75,8 @@ export default class RecentActivityModule extends React.Component {
           const findingsN = this.state.topFindingsNum
           const violationsN = this.state.topViolationsNum
           this.setState(
-            { threshold: this.setThreshold(findingsN, violationsN) },
+            // need at least one threshold for top finding empty card
+            { threshold: Math.max(1, this.setThreshold(findingsN, violationsN)) },
             () => {
               return
             }
@@ -106,7 +108,7 @@ export default class RecentActivityModule extends React.Component {
           <div className='violation-container'>
             <TopInformationModule
               type={'policies'}
-              viewState={viewState}
+              viewState={viewState.topViolationsChoice ? viewState.topViolationsChoice : 'policies'}
               updateViewState={updateViewState}
               items={policies}
               applications={applications}
@@ -116,7 +118,7 @@ export default class RecentActivityModule extends React.Component {
             />
             <TopInformationModule
               type={'findings'}
-              viewState={viewState}
+              viewState={viewState.topFindingChoice ? viewState.topFindingChoice : 'findings'}
               updateViewState={updateViewState}
               items={findings}
               threshold={this.state.threshold}

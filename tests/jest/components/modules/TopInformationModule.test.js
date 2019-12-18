@@ -19,7 +19,6 @@ describe('TopInformationModule clusters view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
     .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
-  const viewState = {viewState: {topViolationChoice:'clusters'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
   const updateViewState = jest.fn()
@@ -29,7 +28,7 @@ describe('TopInformationModule clusters view', () => {
     const component = renderer.create(
       <BrowserRouter>
         <TopInformationModule
-          viewState={viewState}
+          viewState={'clusters'}
           type='policies'
           updateViewState={updateViewState}
           updateThreshold={updateThreshold}
@@ -41,7 +40,7 @@ describe('TopInformationModule clusters view', () => {
 
     const wrapper = shallow(
       <TopInformationModule
-        viewState={viewState}
+        viewState={'clusters'}
         type='policies'
         updateViewState={updateViewState}
         updateThreshold={updateThreshold}
@@ -58,7 +57,6 @@ describe('TopInformationModule policies view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
     .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
-  const viewState = {viewState: {topViolationChoice:'policies'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
   const updateViewState = jest.fn()
@@ -68,7 +66,7 @@ describe('TopInformationModule policies view', () => {
     const component = renderer.create(
       <BrowserRouter>
         <TopInformationModule
-          viewState={viewState}
+          viewState={'policies'}
           type='policies'
           updateThreshold={updateThreshold}
           updateViewState={updateViewState}
@@ -80,7 +78,7 @@ describe('TopInformationModule policies view', () => {
 
     const wrapper = shallow(
       <TopInformationModule
-        viewState={viewState}
+        viewState={'policies'}
         type='policies'
         updateThreshold={updateThreshold}
         updateViewState={updateViewState}
@@ -97,7 +95,6 @@ describe('TopInformationModule findings view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
     .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
-  const viewState = {viewState: {topFindingChoice:'findings'}}
   const activeFilters = {activeFilters:{}}
   const updateThreshold = jest.fn()
   const updateViewState = jest.fn()
@@ -107,7 +104,7 @@ describe('TopInformationModule findings view', () => {
     const component = renderer.create(
       <BrowserRouter>
         <TopInformationModule
-          viewState={viewState}
+          viewState={'findings'}
           type='findings'
           updateThreshold={updateThreshold}
           updateViewState={updateViewState}
@@ -119,7 +116,7 @@ describe('TopInformationModule findings view', () => {
 
     const wrapper = shallow(
       <TopInformationModule
-        viewState={viewState}
+        viewState={'findings'}
         type='findings'
         updateThreshold={updateThreshold}
         updateViewState={updateViewState}
@@ -136,7 +133,6 @@ describe('TopInformationModule findings clusters view', () => {
   jest
     .spyOn(window, 'getComputedStyle')
     .mockImplementation(() => ({display: 'block', 'padding-right': '0.625rem'}))
-  const viewState = {viewState: {topViolationChoice:'clusters'}}
   const activeFilters = {activeFilters:{}}
   const updateViewState = jest.fn()
   const updateThreshold = jest.fn()
@@ -146,7 +142,7 @@ describe('TopInformationModule findings clusters view', () => {
     const component = renderer.create(
       <BrowserRouter>
         <TopInformationModule
-          viewState={viewState}
+          viewState={'clusters'}
           type='findings'
           updateViewState={updateViewState}
           updateThreshold={updateThreshold}
@@ -158,7 +154,7 @@ describe('TopInformationModule findings clusters view', () => {
 
     const wrapper = shallow(
       <TopInformationModule
-        viewState={viewState}
+        viewState={'clusters'}
         type='findings'
         updateViewState={updateViewState}
         updateThreshold={updateThreshold}

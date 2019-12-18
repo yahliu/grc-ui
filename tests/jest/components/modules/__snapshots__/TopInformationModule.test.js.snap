@@ -304,7 +304,17 @@ Array [
 ]
 `;
 
-exports[`TopInformationModule clusters view renders as expected 4`] = `Array []`;
+exports[`TopInformationModule clusters view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "EMPTY_CHOICE",
+    "description": Array [
+      "We will continue to monitor and display any application policy violations so you can easily find them here.",
+    ],
+    "name": "No other application policy violations.",
+  },
+]
+`;
 
 exports[`TopInformationModule findings clusters view renders as expected 1`] = `
 <div
@@ -325,7 +335,7 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
         aria-label="Top security findings undefined"
         className="bx--tabs"
         role="navigation"
-        selected={0}
+        selected={1}
       >
         <div
           aria-label="listbox"
@@ -341,7 +351,7 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
             onClick={[Function]}
             tabIndex={-1}
           >
-            Security findings
+            Clusters
           </a>
           <svg
             alt="show menu options"
@@ -369,24 +379,6 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
           role="tablist"
         >
           <li
-            className="bx--tabs__nav-item bx--tabs__nav-item--selected"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="presentation"
-            selected={true}
-            tabIndex={-1}
-          >
-            <a
-              aria-selected={true}
-              className="bx--tabs__nav-link"
-              href="#"
-              role="tab"
-              tabIndex={0}
-            >
-              Security findings
-            </a>
-          </li>
-          <li
             className="bx--tabs__nav-item"
             onClick={[Function]}
             onKeyDown={[Function]}
@@ -401,22 +393,40 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
               role="tab"
               tabIndex={-1}
             >
+              Security findings
+            </a>
+          </li>
+          <li
+            className="bx--tabs__nav-item bx--tabs__nav-item--selected"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="presentation"
+            selected={true}
+            tabIndex={-1}
+          >
+            <a
+              aria-selected={true}
+              className="bx--tabs__nav-link"
+              href="#"
+              role="tab"
+              tabIndex={0}
+            >
               Clusters
             </a>
           </li>
         </ul>
       </nav>
       <div
-        aria-hidden={false}
-        className={undefined}
-        hidden={false}
-        selected={true}
-      />
-      <div
         aria-hidden={true}
         className={undefined}
         hidden={true}
         selected={false}
+      />
+      <div
+        aria-hidden={false}
+        className={undefined}
+        hidden={false}
+        selected={true}
       />
     </div>
   </div>
@@ -444,7 +454,7 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
                 <div
                   className="card-information-count"
                 >
-                  3
+                  1
                 </div>
               </div>
               <div
@@ -453,7 +463,7 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
                 <div
                   className="card-name name-clickable"
                 >
-                  Policy that is not compliant
+                  mycluster_name
                 </div>
                 <div
                   className="card-description description-clickable"
@@ -461,7 +471,99 @@ exports[`TopInformationModule findings clusters view renders as expected 1`] = `
                   <div
                     className="LinesEllipsis  "
                   >
-                    mycluster_name, cluster1, clusterhub
+                    Policy that is not compliant
+                    <wbr />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className="information-card-container single-strip"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="information-card-content"
+          >
+            <div
+              className="card-inner-content"
+            >
+              <div
+                className="card-informations"
+              >
+                <div
+                  className="card-information-count"
+                >
+                  1
+                </div>
+              </div>
+              <div
+                className="card-name-description"
+              >
+                <div
+                  className="card-name name-clickable"
+                >
+                  cluster1
+                </div>
+                <div
+                  className="card-description description-clickable"
+                >
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    Policy that is not compliant
+                    <wbr />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className="information-card-container single-strip"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="information-card-content"
+          >
+            <div
+              className="card-inner-content"
+            >
+              <div
+                className="card-informations"
+              >
+                <div
+                  className="card-information-count"
+                >
+                  1
+                </div>
+              </div>
+              <div
+                className="card-name-description"
+              >
+                <div
+                  className="card-name name-clickable"
+                >
+                  clusterhub
+                </div>
+                <div
+                  className="card-description description-clickable"
+                >
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    Policy that is not compliant
                     <wbr />
                   </div>
                 </div>
@@ -801,7 +903,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
         aria-label="Top violations undefined"
         className="bx--tabs"
         role="navigation"
-        selected={1}
+        selected={0}
       >
         <div
           aria-label="listbox"
@@ -817,7 +919,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
             onClick={[Function]}
             tabIndex={-1}
           >
-            Clusters
+            Policies
           </a>
           <svg
             alt="show menu options"
@@ -845,24 +947,6 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
           role="tablist"
         >
           <li
-            className="bx--tabs__nav-item"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            role="presentation"
-            selected={false}
-            tabIndex={-1}
-          >
-            <a
-              aria-selected={false}
-              className="bx--tabs__nav-link"
-              href="#"
-              role="tab"
-              tabIndex={-1}
-            >
-              Policies
-            </a>
-          </li>
-          <li
             className="bx--tabs__nav-item bx--tabs__nav-item--selected"
             onClick={[Function]}
             onKeyDown={[Function]}
@@ -876,6 +960,24 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
               href="#"
               role="tab"
               tabIndex={0}
+            >
+              Policies
+            </a>
+          </li>
+          <li
+            className="bx--tabs__nav-item"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="presentation"
+            selected={false}
+            tabIndex={-1}
+          >
+            <a
+              aria-selected={false}
+              className="bx--tabs__nav-link"
+              href="#"
+              role="tab"
+              tabIndex={-1}
             >
               Clusters
             </a>
@@ -901,16 +1003,16 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
         </ul>
       </nav>
       <div
-        aria-hidden={true}
-        className={undefined}
-        hidden={true}
-        selected={false}
-      />
-      <div
         aria-hidden={false}
         className={undefined}
         hidden={false}
         selected={true}
+      />
+      <div
+        aria-hidden={true}
+        className={undefined}
+        hidden={true}
+        selected={false}
       />
       <div
         aria-hidden={true}
@@ -944,7 +1046,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-information-count"
                 >
-                  3
+                  2
                 </div>
               </div>
               <div
@@ -953,7 +1055,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-name name-clickable"
                 >
-                  cluster1
+                  1558374675051-policy-pod
                 </div>
                 <div
                   className="card-description description-clickable"
@@ -961,7 +1063,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                   <div
                     className="LinesEllipsis  "
                   >
-                    1558374675051-policy-pod, 1558382034240-policy-pod, policy-pod
+                    cluster1, clusterhub
                     <wbr />
                   </div>
                 </div>
@@ -990,7 +1092,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-information-count"
                 >
-                  3
+                  2
                 </div>
               </div>
               <div
@@ -999,7 +1101,7 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                 <div
                   className="card-name name-clickable"
                 >
-                  clusterhub
+                  1558382034240-policy-pod
                 </div>
                 <div
                   className="card-description description-clickable"
@@ -1007,7 +1109,53 @@ exports[`TopInformationModule policies view renders as expected 1`] = `
                   <div
                     className="LinesEllipsis  "
                   >
-                    1558374675051-policy-pod, 1558382034240-policy-pod, policy-pod
+                    cluster1, clusterhub
+                    <wbr />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          className="information-card-container single-strip"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className="information-card-content"
+          >
+            <div
+              className="card-inner-content"
+            >
+              <div
+                className="card-informations"
+              >
+                <div
+                  className="card-information-count"
+                >
+                  2
+                </div>
+              </div>
+              <div
+                className="card-name-description"
+              >
+                <div
+                  className="card-name name-clickable"
+                >
+                  policy-pod
+                </div>
+                <div
+                  className="card-description description-clickable"
+                >
+                  <div
+                    className="LinesEllipsis  "
+                  >
+                    cluster1, clusterhub
                     <wbr />
                   </div>
                 </div>
@@ -1088,4 +1236,14 @@ Array [
 ]
 `;
 
-exports[`TopInformationModule policies view renders as expected 4`] = `Array []`;
+exports[`TopInformationModule policies view renders as expected 4`] = `
+Array [
+  Object {
+    "choice": "EMPTY_CHOICE",
+    "description": Array [
+      "We will continue to monitor and display any application policy violations so you can easily find them here.",
+    ],
+    "name": "No other application policy violations.",
+  },
+]
+`;

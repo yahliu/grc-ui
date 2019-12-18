@@ -49,26 +49,25 @@ module.exports = {
 }
 
 function verifySummary(browser, url) {
-  this.expect.element('button.collapse > span.collapse-button').to.be.present
+  this.waitForElementPresent('button.collapse > span.collapse-button')
   this.waitForElementPresent('div.module-grc-cards > div.card-container-container')
-  this.expect.element('@summaryInfoContainer').to.be.present
   this.navigate(url + '?card=false&index=0')
   this.expect.element('@summaryInfoContainer').to.be.not.present
   this.navigate(url + '?card=true&index=0')
-  this.expect.element('@summaryInfoContainer').to.be.present
+  this.waitForElementPresent('@summaryInfoContainer')
   //standards summary
-  this.expect.element('@summaryDropdown').to.be.present
+  this.waitForElementPresent('@summaryDropdown')
   this.click('@summaryDropdown')
-  browser.pause(1000)//wait 1s for every click
   const dropdownBox = 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
   //Categories summary
+  this.waitForElementPresent(dropdownBox + ' > div:nth-child(2)')
   this.click(dropdownBox + ' > div:nth-child(2)')
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
-  browser.pause(1000)//wait 1s for checkPolicySummaryCards func
   //Standards summary
+  this.waitForElementPresent('@summaryDropdown')
   this.click('@summaryDropdown')
-  browser.pause(1000)
+  this.waitForElementPresent(dropdownBox + ' > div:nth-child(1)')
   this.click(dropdownBox + ' > div:nth-child(1)')
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
@@ -79,7 +78,7 @@ function checkPolicySummaryCards(browser) {
     for (var cardNum = 1; cardNum < cards.value.length + 1; cardNum++) {
       for (let i = 1; i <= 2; i++) {
         const cardInfo = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(2)`
-        this.expect.element(cardInfo).to.be.present
+        this.waitForElementPresent(cardInfo)
         browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
           if(result.value == false) {
             this.click(cardInfo + ` > div:nth-child(${i})`)
@@ -88,8 +87,8 @@ function checkPolicySummaryCards(browser) {
               if(result2.status != -1) {
                 //first card of each category is cluster (no drop-down), second is policy
                 verifyTable(browser, (i % 2 != 0))
+                this.waitForElementPresent('div.resource-filter-bar > span.button')
                 this.click('div.resource-filter-bar > span.button')
-                browser.pause(1000)//wait 1s for cleaning resource filters
               }
             })
           }
@@ -101,11 +100,11 @@ function checkPolicySummaryCards(browser) {
 
 function verifyPagination() {
   const pagination = '.bx--pagination'
-  this.expect.element(pagination).to.be.present
+  this.waitForElementPresent(pagination)
   this.click('select[id="bx-pagination-select-resource-table-pagination"] option[value="5"]')
-  this.expect.element('.bx--pagination__button.bx--pagination__button--forward').to.be.present
+  this.waitForElementPresent('.bx--pagination__button.bx--pagination__button--forward')
   this.click('.bx--pagination__button.bx--pagination__button--forward')
-  this.expect.element('.bx--pagination__button.bx--pagination__button--backward').to.be.present
+  this.waitForElementPresent('.bx--pagination__button.bx--pagination__button--backward')
   this.click('.bx--pagination__button.bx--pagination__button--backward')
   this.click('select[id="bx-pagination-select-resource-table-pagination"] option[value="10"]')
 }
@@ -114,10 +113,10 @@ function verifyTable(browser) {
   browser.pause(5*1000)
   browser.element('css selector', 'div.no-resource', function(result){
     if(result.status != -1){
-      this.expect.element('div.no-resource').to.be.present
+      this.waitForElementPresent('div.no-resource')
     }
     else{
-      this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
+      this.waitForElementPresent('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra')
     }
   })
 }

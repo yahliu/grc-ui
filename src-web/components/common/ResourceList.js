@@ -164,7 +164,7 @@ class ResourceList extends React.Component {
       return (
         <NoResource
           detail={msgs.get('no-resource.filter', locale)}
-          filterToEmpty={filterToEmpty}
+          svgName={'emptymoon.svg'}
         >
         </NoResource>
       )

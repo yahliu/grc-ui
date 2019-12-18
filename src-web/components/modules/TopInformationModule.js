@@ -12,12 +12,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import resources from '../../../lib/shared/resources'
-import config from '../../../lib/shared/config'
 import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 import { Tabs, Tab } from 'carbon-components-react'
 import LinesEllipsis from 'react-lines-ellipsis'
 import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
+import NoResource from '../common/NoResource'
 
 resources(() => {
   require('../../../scss/module-top-information.scss')
@@ -38,10 +38,10 @@ export default class TopInformationModule extends React.Component {
 
   constructor (props) {
     super(props)
-    const {viewState: {topViolationChoice=TopInformationSelections.clusters,topFindingChoice=TopInformationSelections.findings}} = props
+    const {viewState=TopInformationSelections.clusters} = props
+    // now only using one viewState topInfoChoice, type and topInfoChoice determine everthing
     this.state = {
-      topViolationChoice,
-      topFindingChoice,
+      topInfoChoice: viewState,
       cardData: []
     }
     this.onChange = this.onChange.bind(this)
@@ -61,53 +61,55 @@ export default class TopInformationModule extends React.Component {
 
   render() {
     let cardData = this.state.cardData
-    if (cardData.length>0) {
-      if (cardData.length>this.props.threshold) {
+    if (cardData.length > 0) {
+      if (cardData.length > this.props.threshold) {
         cardData = cardData.slice(0,this.props.threshold)
       }
       if (cardData.length < this.props.threshold && !this.hasEmptyCard(cardData)) {
         cardData.push(this.getEmptyCardStatements())
       }
-      return (
-        <div className='module-top-information'>
-          {this.renderHeader()}
-          {this.renderCards(cardData)}
-        </div>
-      )
     } else {
-      return (
-        <div className='module-top-information'>
-          {this.renderHeader()}
-          {this.renderNoInformations()}
-        </div>
-      )
+      cardData.push(this.getEmptyCardStatements())
     }
+
+    return (
+      <div className='module-top-information'>
+        {this.renderHeader()}
+        {this.renderCards(cardData)}
+      </div>
+    )
   }
 
   getEmptyCardStatements() {
+    const { locale } = this.context
     let emptyCardData = {}
-    const choice = this.state.topViolationChoice
-    switch (choice) {
+    const { type='policies' } = this.props
+    const choice = this.state.topInfoChoice
+    switch(type) {
     case 'policies':
-    default :
-      emptyCardData = {
-        name: msgs.get('overview.top.informations.policies.empty'),
-        choice: EMPTY_CHOICE,
-        description: [msgs.get('overview.top.informations.policies.empty.desc')],
+      switch (choice) {
+      case 'policies':
+      default :
+        emptyCardData = {
+          name: msgs.get('overview.top.informations.policies.empty', locale),
+          choice: EMPTY_CHOICE,
+          description: [msgs.get('overview.top.informations.policies.empty.desc', locale)],
+        }
+        break
+      case 'applications':
+        emptyCardData = {
+          name: msgs.get('overview.top.informations.applications.empty', locale),
+          choice: EMPTY_CHOICE,
+          description: [msgs.get('overview.top.informations.applications.empty.desc', locale)],
+        }
+        break
       }
       break
     case 'findings':
       emptyCardData = {
-        name: msgs.get('overview.top.informations.findings.empty'),
+        name: msgs.get('overview.top.informations.findings.empty', locale),
         choice: EMPTY_CHOICE,
-        description: [msgs.get('overview.top.informations.findings.empty.desc')],
-      }
-      break
-    case 'applications':
-      emptyCardData = {
-        name: msgs.get('overview.top.informations.applications.empty'),
-        choice: EMPTY_CHOICE,
-        description: [msgs.get('overview.top.informations.applications.empty.desc')],
+        description: [msgs.get('overview.top.informations.findings.empty.desc', locale)],
       }
       break
     }
@@ -126,33 +128,16 @@ export default class TopInformationModule extends React.Component {
     this.setState({ cardData: this.getCardData(items, applications, type)})
   }
 
-  renderNoInformations() {
-    const { locale } = this.context
-    const { type } = this.props
-    const title = msgs.get(`overview.no.informations.title.${type}`, locale)
-    const detail = msgs.get(`overview.no.informations.description.${type}`, locale)
-    return (
-      <div className='no-informations'>
-        <img className='no-informations-icon'
-          src={`${config.contextPath}/policies/graphics/no-violations.svg`} alt={title} />
-        <div className='no-informations-title'>{title}</div>
-        <div className='no-informations-detail'>{detail}</div>
-      </div>
-    )
-  }
-
   renderHeader() {
     const { locale } = this.context
     const { type } = this.props
-    let choice = 'policies'
+    const choice = this.state.topInfoChoice
     let choices = []
     switch(type) {
     case 'policies':
-      choice = this.state.topViolationChoice
       choices = this.getTopViolationChoices(locale)
       break
     case 'findings':
-      choice = this.state.topFindingChoice
       choices = this.getTopFindingChoices(locale)
       break
     }
@@ -180,7 +165,7 @@ export default class TopInformationModule extends React.Component {
     return <TopInformations key={cardData.name} cardData={cardData} handleClick={handleDrillDownClick} locale={locale} />
   }
 
-  getPoliciesAndClustersDataMap(dataMap, items, topViolationChoice) {
+  getPoliciesAndClustersDataMap(dataMap, items, topInfoChoice) {
     if(items && Array.isArray(items)) {
       items.map(item=>{
         const statuses = _.get(item, 'raw.status.status', {})
@@ -188,7 +173,7 @@ export default class TopInformationModule extends React.Component {
           const compliant = statuses[key].compliant
           if (!compliant || compliant.toLowerCase()==='noncompliant') {
             let name, description, choice, nameSpace, itemName
-            switch (topViolationChoice) {
+            switch (topInfoChoice) {
             case TopInformationSelections.policies:
               name = _.get(item, 'metadata.name', 'unknown')
               description = key
@@ -260,15 +245,15 @@ export default class TopInformationModule extends React.Component {
   }
 
   getCardData = (items, applications, type) => {
-    const { topViolationChoice, topFindingChoice } = this.state
+    const { topInfoChoice } = this.state
     const dataMap = {}
     switch (type) {
     case 'policies':
-      switch (topViolationChoice) {
+      switch (topInfoChoice) {
       case TopInformationSelections.policies:
       case TopInformationSelections.clusters:
       default:
-        this.getPoliciesAndClustersDataMap(dataMap, items, topViolationChoice)
+        this.getPoliciesAndClustersDataMap(dataMap, items, topInfoChoice)
         break
       case TopInformationSelections.applications:
         this.getApplicationsDataMap(dataMap, applications)
@@ -278,7 +263,7 @@ export default class TopInformationModule extends React.Component {
     case 'findings':
       items.map(item=>{
         let name, description, choice, nameSpace, itemName
-        switch (topFindingChoice) {
+        switch (topInfoChoice) {
         case TopInformationSelections.findings:
         default:
           name = _.get(item, 'shortDescription', 'unknown')
@@ -379,9 +364,11 @@ export default class TopInformationModule extends React.Component {
         value = 'applications'
         break
       }
+      // here is updating OverviewView view states, we still need to keep two kinds of view states there
       this.props.updateViewState({topViolationChoice: value})
       this.setState(()=>{
-        return {topViolationChoice: value}
+        // here is updating local TopInformationModule view states
+        return {topInfoChoice: value}
       }, () => {
         this.setCardData(items, applications, type)
       })
@@ -396,9 +383,11 @@ export default class TopInformationModule extends React.Component {
         value = 'clusters'
         break
       }
+      // here is updating OverviewView view states, we still need to keep two kinds of view states there
       this.props.updateViewState({topFindingChoice: value})
       this.setState(()=>{
-        return {topFindingChoice: value}
+        // here is updating local TopInformationModule view states
+        return {topInfoChoice: value}
       }, () => {
         this.setCardData(items, null, type)
       })
@@ -408,7 +397,7 @@ export default class TopInformationModule extends React.Component {
   }
 }
 
-const TopInformations = ({cardData, handleClick, locale}) => {
+const TopInformations = ({cardData, handleClick}) => {
   return (
     <div key={name}>
       <div className='information-card-container' >
@@ -439,11 +428,11 @@ const TopInformations = ({cardData, handleClick, locale}) => {
             } else {
               return (
                 <React.Fragment>
-                  <div className='card-informations empty'>
-                    <img
-                      src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
-                      alt={msgs.get('svg.description.noresource', locale)} />
-                  </div>
+                  <NoResource
+                    className={'card-informations empty'}
+                    imgClassName={'empty-icon'}
+                    svgName={'no-other-violations.svg'}>
+                  </NoResource>
                 </React.Fragment>
               )
             }
@@ -548,7 +537,6 @@ const TopInformations = ({cardData, handleClick, locale}) => {
 TopInformations.propTypes = {
   cardData: PropTypes.array,
   handleClick: PropTypes.func,
-  locale: PropTypes.string,
 }
 
 TopInformationModule.propTypes = {
@@ -559,5 +547,5 @@ TopInformationModule.propTypes = {
   type: PropTypes.string,
   updateThreshold: PropTypes.func,
   updateViewState: PropTypes.func,
-  viewState: PropTypes.object,
+  viewState: PropTypes.string,
 }

@@ -31,4 +31,29 @@ describe('NoResource component', () => {
     )
     expect(component.toJSON()).toMatchSnapshot()
   })
+  it('renders as expected', () => {
+    const topButton = <div>topButton</div>
+    const component = renderer.create(
+      <NoResource title='title' detail='detailed description' topButton={topButton} titleClassName={'test-title'} imgClassName={'test-image'} svgName={'test-svg.svg'} alt={'test'}>
+        <div className='child'>Test</div>
+      </NoResource>
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+  it('renders as expected', () => {
+    const component = renderer.create(
+      <NoResource>
+        <div className='child'>Test</div>
+      </NoResource>
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
+  it('renders as expected', () => {
+    const component = renderer.create(
+      <NoResource className={'test-class'} titleClassName={'test-title'} imgClassName={'test-image'} svgName={'test-svg.svg'} alt={'test'}>
+        <div className='child'>Test</div>
+      </NoResource>
+    )
+    expect(component.toJSON()).toMatchSnapshot()
+  })
 })

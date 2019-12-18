@@ -21,25 +21,38 @@ resources(() => {
 const NoResource = ({
   title,
   detail,
+  className,
+  imgClassName,
+  titleClassName,
+  svgName,
+  alt,
   children,
   topButton,
-  filterToEmpty
-}, context) =>
-  <div>
-    {topButton}
-    <div className='no-resource'>
-      <img className='no-resource-icon' src={filterToEmpty ? `${config.contextPath}/policies/graphics/emptymoon.svg` : `${config.contextPath}/policies/graphics/no-policy.svg`} alt={msgs.get('svg.description.noresource', context.locale)} />
-      <div className='no-resource-title'>{title}</div>
-      {detail && <div className='no-resource-detail'>{detail}</div>}
-      {children}
+}, context )=> {
+  return  title ?
+    <div>
+      {topButton}
+      <div className={className ? className : 'no-resource'}>
+        <img className={imgClassName ? imgClassName : 'no-resource-icon'} src={`${config.contextPath}/policies/graphics/${svgName ? svgName : 'no-policy.svg'}`} alt={alt ? alt : msgs.get('svg.description.noresource', context.locale)} />
+        <div className={titleClassName ? titleClassName : 'no-resource-title'}>{title}</div>
+        {detail && <div className='no-resource-detail'>{detail}</div>}
+        {children}
+      </div>
+    </div> :
+    <div className={className ? className : 'no-resource'}>
+      <img	className={imgClassName ? imgClassName : 'no-resource-icon'} src={`${config.contextPath}/policies/graphics/${svgName ? svgName : 'no-policy.svg'}`} alt={alt ? alt : msgs.get('svg.description.noresource', context.locale)} />
     </div>
-  </div>
+}
 
 NoResource.propTypes = {
+  alt: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  className: PropTypes.string,
   detail: PropTypes.string,
-  filterToEmpty: PropTypes.bool,
+  imgClassName: PropTypes.string,
+  svgName: PropTypes.string,
   title:PropTypes.string,
+  titleClassName:PropTypes.string,
   topButton: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
 

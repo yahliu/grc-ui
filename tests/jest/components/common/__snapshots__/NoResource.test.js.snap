@@ -43,7 +43,7 @@ exports[`NoResource component renders as expected 2`] = `
     <img
       alt="No resource"
       className="no-resource-icon"
-      src="undefined/policies/graphics/emptymoon.svg"
+      src="undefined/policies/graphics/no-policy.svg"
     />
     <div
       className="no-resource-title"
@@ -61,5 +61,61 @@ exports[`NoResource component renders as expected 2`] = `
       Test
     </div>
   </div>
+</div>
+`;
+
+exports[`NoResource component renders as expected 3`] = `
+<div>
+  <div>
+    topButton
+  </div>
+  <div
+    className="no-resource"
+  >
+    <img
+      alt="test"
+      className="test-image"
+      src="undefined/policies/graphics/test-svg.svg"
+    />
+    <div
+      className="test-title"
+    >
+      title
+    </div>
+    <div
+      className="no-resource-detail"
+    >
+      detailed description
+    </div>
+    <div
+      className="child"
+    >
+      Test
+    </div>
+  </div>
+</div>
+`;
+
+exports[`NoResource component renders as expected 4`] = `
+<div
+  className="no-resource"
+>
+  <img
+    alt="No resource"
+    className="no-resource-icon"
+    src="undefined/policies/graphics/no-policy.svg"
+  />
+</div>
+`;
+
+exports[`NoResource component renders as expected 5`] = `
+<div
+  className="test-class"
+>
+  <img
+    alt="test"
+    className="test-image"
+    src="undefined/policies/graphics/test-svg.svg"
+  />
 </div>
 `;

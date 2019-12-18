@@ -18,10 +18,10 @@ import 'd3-selection-multi'
 import { SECURITY_TYPES } from '../../../lib/shared/constants'
 import resources from '../../../lib/shared/resources'
 import msgs from '../../../nls/platform.properties'
-import config from '../../../lib/shared/config'
 import _ from 'lodash'
 import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
+import NoResource from '../common/NoResource'
 
 resources(() => {
   require('../../../scss/module-impacted-controls.scss')
@@ -224,13 +224,12 @@ class ImpactedControlsModule extends React.Component {
             }
             data={radarData}
           />
-            : <div className='no-impacts'>
-              <img className='no-impacts-img'
-                src={`${config.contextPath}/policies/graphics/no-impacted-controls-overlap.svg`}
-                alt={noOverlapTitle} />
-              <div className='title'>{noOverlapTitle}</div>
-              <div className='info'>{noOverlapInfo}</div>
-            </div>}
+            : <NoResource
+              title={noOverlapTitle}
+              detail={noOverlapInfo}
+              svgName={'no-impacted-controls-overlap.svg'}
+              alt={noOverlapTitle}>
+            </NoResource>}
         </div>
       </div>
     )

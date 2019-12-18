@@ -6,7 +6,6 @@
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
  *******************************************************************************/
-
 module.exports = {
   elements: {
     spinner: '.content-spinner',
@@ -54,7 +53,6 @@ module.exports = {
     verifyDisableEnable,
   }]
 }
-
 function verifySummary(browser, url) {
   this.expect.element('button.collapse > span.collapse-button').to.be.present
   this.waitForElementPresent('div.module-grc-cards > div.card-container-container')
@@ -80,7 +78,6 @@ function verifySummary(browser, url) {
   browser.pause(1000)
   checkPolicySummaryCards.call(this, browser)
 }
-
 function checkPolicySummaryCards(browser) {
   browser.elements('css selector','div.module-grc-cards > div:nth-child(2) > div', (cards) => {
     for (var cardNum = 1; cardNum < cards.value.length + 1; cardNum++) {
@@ -105,7 +102,6 @@ function checkPolicySummaryCards(browser) {
     }
   })
 }
-
 function verifyTable(browser, cluster) {
   browser.element('css selector', 'div.no-resource', function(result){
     if(result.status != -1){
@@ -140,7 +136,6 @@ function verifyTable(browser, cluster) {
     }
   })
 }
-
 function verifyPagination() {
   const pagination = '.bx--pagination'
   this.expect.element(pagination).to.be.present
@@ -151,8 +146,6 @@ function verifyPagination() {
   this.click('.bx--pagination__button.bx--pagination__button--backward')
   this.click('select[id="bx-pagination-select-resource-table-pagination"] option[value="10"]')
 }
-
-
 function createTestPolicy(browser, time) {
   this.expect.element('@createPolicyButton').to.be.present
   this.click('@createPolicyButton')
@@ -160,47 +153,36 @@ function createTestPolicy(browser, time) {
   this.click('@yamlTextField')
   this.clearValue('@policyNameInput')
   this.setValue('@policyNameInput',`${time}-policy-test`)
-
   this.click('@namespaceDropdown').expect.element('@namespaceDropdownBox').to.be.present
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > .bx--list-box__field > input', 'Namespace')
   this.click('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-
   this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'Namespace')
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-
   this.expect.element('@templateDropdownBox').not.to.be.present
-
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').to.be.present
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'cloud: "IBM')
   this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
-
   // this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
   // this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   // this.click('@standardsDropdown').expect.element('@standardsDropdownBox').not.to.be.present
-
   // this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').to.be.present
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'SecurityContinuousMonitoring')
   // this.click('div.creation-view-controls-container > div > div:nth-child(6) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   // this.click('@categoriesDropdown').expect.element('@categoriesDropdownBox').not.to.be.present
-
   // this.click('@controlsDropdown').expect.element('@controlsDropdownBox').to.be.present
   // // this.setValue('div.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'VA')
   // this.click('div.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   // this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
-
   this.waitForElementNotPresent('@spinner')
-
   this.expect.element('@submitCreatePolicyButton').to.be.present
   this.click('@submitCreatePolicyButton')
-
   this.waitForElementPresent('@table')
   this.waitForElementPresent('@searchInput')
   this.setValue('@searchInput',`${time}-policy-test`)
 }
-
 function searchPolicy(expectToDisplay, time) {
   this.expect.element('@searchInput').to.be.present
   this.setValue('@searchInput',`${time}-policy-test`)
@@ -212,7 +194,6 @@ function searchPolicy(expectToDisplay, time) {
     this.clearValue('@searchInput')
   }
 }
-
 function testDetailsPage(browser, name) {
   this.click('tbody>tr>td>a')
   //overview tab test
@@ -248,7 +229,6 @@ function testDetailsPage(browser, name) {
   this.expect.element('.yaml-editor-button > button:nth-child(2)').to.be.present
   this.click('.bx--breadcrumb > div:nth-child(1)')
 }
-
 function deletePolicy(name){
   this.expect.element('body').to.be.present
   this.expect.element('@searchInput').to.be.present
@@ -259,12 +239,11 @@ function deletePolicy(name){
   this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)').to.be.present
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
-  this.click('li.bx--overflow-menu-options__option.bx--overflow-menu-options__option--danger')
-  this.expect.element('button.bx--btn.bx--btn--danger--primary').to.be.present
-  this.click('button.bx--btn.bx--btn--danger--primary')
+  this.click('li.bx--overflow-menu-options__option--danger > button.bx--overflow-menu-options__btn')
+  this.expect.element('button.bx--btn--danger--primary').to.be.present
+  this.click('button.bx--btn--danger--primary')
   this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.not.to.equal(name)
 }
-
 function verifyDisableEnable(name, browser){
   //verify table/menu exist
   browser.pause(6000)
@@ -281,9 +260,10 @@ function verifyDisableEnable(name, browser){
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)').to.be.present
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
   this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
+  browser.pause(3000)
   this.expect.element('#disable-resource-modal').to.be.present
   this.click('#disable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
-  browser.pause(30000)
+  browser.pause(3000)
   //enable policy
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present

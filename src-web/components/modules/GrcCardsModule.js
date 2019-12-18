@@ -17,7 +17,7 @@ import msgs from '../../../nls/platform.properties'
 import _ from 'lodash'
 import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
-import config from '../../../lib/shared/config'
+import NoResource from '../common/NoResource'
 
 resources(() => {
   require('../../../scss/module-grc-cards.scss')
@@ -451,14 +451,13 @@ const PolicyCard = ({data, locale, handleClick}) => {
             { //policy empty state card without any policy and cluster violation
               validItemsCount === 0 &&
               <div className='empty-violations-strip'>
-                <div className='card-violations empty'>
-                  <img className='empty-violations-img'
-                    src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
-                    alt={msgs.get('svg.description.noresource', locale)} />
-                </div>
-                <div className='no-card-violations'>
-                  {msgs.get('overview.violations.empty', locale)}
-                </div>
+                <NoResource
+                  className={'card-violations empty'}
+                  imgClassName={'empty-violations-img'}
+                  titleClassName={'no-card-violations'}
+                  title={msgs.get('overview.violations.empty', locale)}
+                  svgName={'no-other-violations.svg'}>
+                </NoResource>
               </div>}
           </div>
         </div>
@@ -549,14 +548,13 @@ const FindingCard = ({data, locale, handleClick}) => {
             { //finding empty state card without any finding or high severity
               validItemsCount === 0 &&
               <div className='empty-violations-strip'>
-                <div className='card-violations empty'>
-                  <img className='empty-violations-img'
-                    src={`${config.contextPath}/policies/graphics/no-other-violations.svg`}
-                    alt={msgs.get('svg.description.noresource', locale)} />
-                </div>
-                <div className='no-card-violations'>
-                  {msgs.get('overview.findings.empty', locale)}
-                </div>
+                <NoResource
+                  className={'card-violations empty'}
+                  imgClassName={'empty-violations-img'}
+                  titleClassName={'no-card-violations'}
+                  title={msgs.get('overview.findings.empty', locale)}
+                  svgName={'no-other-violations.svg'}>
+                </NoResource>
               </div>}
           </div>
         </div>
