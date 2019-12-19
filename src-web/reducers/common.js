@@ -31,12 +31,13 @@ import { RESOURCE_TYPES } from '../../lib/shared/constants'
 import msgs from '../../nls/platform.properties'
 
 function getFromState(state, root, attribute) {
-  const storeRoot = state[root]
-  if (storeRoot === undefined) {
-    //eslint-disable-next-line no-console
-    console.error(`store root '${root}' does not exist`)
+  if(root && state) {
+    const storeRoot = state[root]
+    if (attribute && storeRoot && storeRoot[attribute]) {
+      return storeRoot[attribute]
+    }
   }
-  return storeRoot[attribute]
+  return []
 }
 
 export const getItems = (state, props) => getFromState(state,props.storeRoot, 'items')
@@ -68,7 +69,7 @@ export const INITIAL_STATE = {
 
 function searchTableCell(item, tableKey, context, searchText){
   const renderedElement = transform(item, tableKey, context.locale, true)
-  if (typeof renderedElement === String) {
+  if (typeof renderedElement === 'string') {
     return renderedElement.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
   } else {
     return ReactDOMServer.renderToString(transform(item, tableKey, context.locale, true)).toString().toLowerCase().indexOf(searchText.toLowerCase()) !== -1

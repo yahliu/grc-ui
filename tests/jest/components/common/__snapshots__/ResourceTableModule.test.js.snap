@@ -614,24 +614,24 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                               translateWithId={[Function]}
                             >
                               <TableContainer
-                                id="undefined-table-container"
+                                id="table-container"
                               >
                                 <div
                                   className="bx--data-table-v2-container"
-                                  id="undefined-table-container"
+                                  id="table-container"
                                 >
                                   <TableToolbar
-                                    aria-label="undefined-search"
+                                    aria-label="search"
                                     role="region"
                                   >
                                     <section
-                                      aria-label="undefined-search"
+                                      aria-label="search"
                                       className="bx--table-toolbar"
                                       role="region"
                                     >
                                       <TableToolbarSearch
-                                        aria-label="undefined-search"
-                                        id="undefined-search"
+                                        aria-label="search"
+                                        id="search"
                                         light={true}
                                         onChange={[Function]}
                                         translateWithId={[Function]}
@@ -641,8 +641,8 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                           className="bx--toolbar-search-container"
                                         >
                                           <Search
-                                            aria-label="undefined-search"
-                                            id="undefined-search"
+                                            aria-label="search"
+                                            id="search"
                                             labelText="Filter table"
                                             light={true}
                                             onChange={[Function]}
@@ -652,7 +652,7 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                             value=""
                                           >
                                             <div
-                                              aria-labelledby="undefined-search-label"
+                                              aria-labelledby="search-label"
                                               className="bx--search bx--search--sm bx--search--light"
                                               role="search"
                                             >
@@ -707,15 +707,15 @@ exports[`ResourceTableModule component test renders as expected 1`] = `
                                               </Icon>
                                               <label
                                                 className="bx--label"
-                                                htmlFor="undefined-search"
-                                                id="undefined-search-label"
+                                                htmlFor="search"
+                                                id="search-label"
                                               >
                                                 Filter table
                                               </label>
                                               <input
-                                                aria-label="undefined-search"
+                                                aria-label="search"
                                                 className="bx--search-input"
-                                                id="undefined-search"
+                                                id="search"
                                                 onChange={[Function]}
                                                 placeholder="Search"
                                                 type="text"

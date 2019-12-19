@@ -4,10 +4,10 @@ exports[`ResourceTable no search renders as expected 1`] = `
 Array [
   <div
     className="bx--data-table-v2-container"
-    id="undefined-table-container"
+    id="table-container"
   >
     <section
-      aria-label="undefined-search"
+      aria-label="search"
       className="bx--table-toolbar"
       role="region"
     >
@@ -15,7 +15,7 @@ Array [
         className="bx--toolbar-search-container"
       >
         <div
-          aria-labelledby="undefined-search-label"
+          aria-labelledby="search-label"
           className="bx--search bx--search--sm bx--search--light"
           role="search"
         >
@@ -41,15 +41,15 @@ Array [
           </svg>
           <label
             className="bx--label"
-            htmlFor="undefined-search"
-            id="undefined-search-label"
+            htmlFor="search"
+            id="search-label"
           >
             Filter table
           </label>
           <input
-            aria-label="undefined-search"
+            aria-label="search"
             className="bx--search-input"
-            id="undefined-search"
+            id="search"
             onChange={[Function]}
             placeholder="Search policies"
             type="text"
@@ -1282,10 +1282,10 @@ exports[`ResourceTable no search renders as expected 2`] = `
 Array [
   <div
     className="bx--data-table-v2-container"
-    id="undefined-table-container"
+    id="table-container"
   >
     <section
-      aria-label="undefined-search"
+      aria-label="search"
       className="bx--table-toolbar"
       role="region"
     >
@@ -1293,7 +1293,7 @@ Array [
         className="bx--toolbar-search-container"
       >
         <div
-          aria-labelledby="undefined-search-label"
+          aria-labelledby="search-label"
           className="bx--search bx--search--sm bx--search--light"
           role="search"
         >
@@ -1319,15 +1319,15 @@ Array [
           </svg>
           <label
             className="bx--label"
-            htmlFor="undefined-search"
-            id="undefined-search-label"
+            htmlFor="search"
+            id="search-label"
           >
             Filter table
           </label>
           <input
-            aria-label="undefined-search"
+            aria-label="search"
             className="bx--search-input"
-            id="undefined-search"
+            id="search"
             onChange={[Function]}
             placeholder="Search policies"
             type="text"
@@ -2560,10 +2560,10 @@ exports[`ResourceTable not expandable renders as expected 1`] = `
 Array [
   <div
     className="bx--data-table-v2-container"
-    id="undefined-table-container"
+    id="table-container"
   >
     <section
-      aria-label="undefined-search"
+      aria-label="search"
       className="bx--table-toolbar"
       role="region"
     >
@@ -2571,7 +2571,7 @@ Array [
         className="bx--toolbar-search-container"
       >
         <div
-          aria-labelledby="undefined-search-label"
+          aria-labelledby="search-label"
           className="bx--search bx--search--sm bx--search--light"
           role="search"
         >
@@ -2597,15 +2597,15 @@ Array [
           </svg>
           <label
             className="bx--label"
-            htmlFor="undefined-search"
-            id="undefined-search-label"
+            htmlFor="search"
+            id="search-label"
           >
             Filter table
           </label>
           <input
-            aria-label="undefined-search"
+            aria-label="search"
             className="bx--search-input"
-            id="undefined-search"
+            id="search"
             onChange={[Function]}
             placeholder="Search policies"
             type="text"
@@ -3410,10 +3410,10 @@ exports[`ResourceTable with search renders as expected 1`] = `
 Array [
   <div
     className="bx--data-table-v2-container"
-    id="undefined-table-container"
+    id="table-container"
   >
     <section
-      aria-label="undefined-search"
+      aria-label="search"
       className="bx--table-toolbar"
       role="region"
     >
@@ -3421,7 +3421,7 @@ Array [
         className="bx--toolbar-search-container"
       >
         <div
-          aria-labelledby="undefined-search-label"
+          aria-labelledby="search-label"
           className="bx--search bx--search--sm bx--search--light"
           role="search"
         >
@@ -3447,15 +3447,15 @@ Array [
           </svg>
           <label
             className="bx--label"
-            htmlFor="undefined-search"
-            id="undefined-search-label"
+            htmlFor="search"
+            id="search-label"
           >
             Filter table
           </label>
           <input
-            aria-label="undefined-search"
+            aria-label="search"
             className="bx--search-input"
-            id="undefined-search"
+            id="search"
             onChange={[Function]}
             placeholder="Search policies"
             type="text"

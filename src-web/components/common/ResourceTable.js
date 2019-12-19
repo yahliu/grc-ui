@@ -78,11 +78,12 @@ export class ResourceTable extends React.Component {
 
     const showSearch = lodash.get(this.props, 'showSearch', true)
     const showPagination = lodash.get(this.props, 'showPagination', true)
+    const id = (staticResourceData && staticResourceData.resourceKey) ? `${staticResourceData.resourceKey}-` : ''
 
     const PagenationComponent = showPagination ?
       (<PaginationV2
         key='pagination'
-        id={staticResourceData.resourceKey ? `${staticResourceData.resourceKey}-resource-table-pagination` : 'resource-table-pagination'}
+        id={`${id}resource-table-pagination`}
         onChange={changeTablePage}
         pageSize={pageSize || PAGE_SIZES.DEFAULT}
         pageSizes={PAGE_SIZES.VALUES}
@@ -102,10 +103,10 @@ export class ResourceTable extends React.Component {
         headers={this.getHeaders()}
         translateWithId={translateWithId.bind(null, this.context.locale)}
         render={({ rows, headers, getRowProps }) => (
-          <TableContainer id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-table-container`}>
+          <TableContainer id={`${id}table-container`}>
             {showSearch ?
-              (<TableToolbar aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} role='region'>
-                <TableToolbarSearch onChange={handleSearch} value={searchValue} aria-label={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} id={`${staticResourceData.resourceKey && staticResourceData.resourceKey}-search`} light={!darkSearchBox} placeHolderText={placeHolderText} />
+              (<TableToolbar aria-label={`${id}search`} role='region'>
+                <TableToolbarSearch onChange={handleSearch} value={searchValue} aria-label={`${id}search`} id={`${id}search`} light={!darkSearchBox} placeHolderText={placeHolderText} />
                 <TableToolbarContent>
                   {actions}
                 </TableToolbarContent>

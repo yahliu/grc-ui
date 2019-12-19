@@ -305,7 +305,7 @@ class ImpactedControlsModule extends React.Component {
   fixTooltipDrilldown = () => {
     const openedTooltipLinksArray = document.getElementsByClassName('tool-tip-drill-down-link')
     if (openedTooltipLinksArray && openedTooltipLinksArray.length >= 1) {
-      Array.from(openedTooltipLinksArray).map(openedTooltipLink => {
+      Array.from(openedTooltipLinksArray).forEach((openedTooltipLink) => {
         openedTooltipLink.tabIndex=0 // make drill down links keyboard accessible
         const link = openedTooltipLink.getAttribute('link')
         if (link && link.length > 0) {
@@ -349,7 +349,7 @@ class ImpactedControlsModule extends React.Component {
     this.radarRef = ref
     if (this.radarRef) {
       // don't show fill in radar rings
-      Array.from(this.radarRef.querySelectorAll('circle')).map(circle=>{
+      Array.from(this.radarRef.querySelectorAll('circle')).forEach((circle) =>{
         if (circle.getAttribute('r') > 3) {
           circle.setAttribute('fill-opacity', '0')
         } else if (circle.tabIndex!==0 && this.radarRef.querySelector('svg')) {
@@ -403,7 +403,7 @@ class ImpactedControlsModule extends React.Component {
       })
 
       // wrap labels
-      Array.from(this.radarRef.querySelectorAll('text')).map(text=>{
+      Array.from(this.radarRef.querySelectorAll('text')).forEach((text) =>{
         if (text.getAttribute('text-anchor') === 'middle') {
           // save unwrapped text
           const textContent = text.__textContent || text.textContent
@@ -487,7 +487,7 @@ class ImpactedControlsModule extends React.Component {
     if (!this.dotMap) {
       this.dotMap = {}
       if (this.radarRef) {
-        Array.from(this.radarRef.querySelectorAll('circle')).map(circle=>{
+        Array.from(this.radarRef.querySelectorAll('circle')).forEach((circle) =>{
           if (circle.getAttribute('r') === '3') {
             // radar onhover supplies cx,cy of dot
             // create map to get current client bounds to position tooltip
@@ -523,9 +523,10 @@ class ImpactedControlsModule extends React.Component {
         </div>
         <div className='findings'>
           {tooltipList.map(({count, findingType}) => {
-            let label, className
+            let label, className = ''
             switch (findingType) {
             case SECURITY_TYPES.HIGH:
+            default:
               label = msgs.get('overview.recent.activity.severity.high', locale)
               className = 'high'
               break

@@ -86,7 +86,7 @@ function checkPolicySummaryCards(browser) {
             browser.element('css selector', '.resource-filter-bar > span.button', function(result2){
               if(result2.status != -1) {
                 //first card of each category is cluster (no drop-down), second is policy
-                verifyTable(browser, (i % 2 != 0))
+                verifyTable(browser)
                 this.waitForElementPresent('div.resource-filter-bar > span.button')
                 this.click('div.resource-filter-bar > span.button')
               }

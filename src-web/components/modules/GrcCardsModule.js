@@ -143,7 +143,7 @@ export class GrcCardsModule extends React.Component {
         break
       }
       // backward compatible and if user doesn't supply an annotation
-      if (types.length===0) {
+      if (types && types.length===0) {
         types=other
       }
       //for policies, multi categories/standards is a string split with ','
@@ -271,7 +271,7 @@ export class GrcCardsModule extends React.Component {
         break
       }
       // backward compatible and if user doesn't supply securityClassification
-      if (types.length===0) {
+      if (types && types.length===0) {
         types=[other]
       }
       // if securityClassification isn't empty but contains empty categories/standards, replace them to 'other'

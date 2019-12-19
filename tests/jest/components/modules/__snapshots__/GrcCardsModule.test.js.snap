@@ -4881,28 +4881,6 @@ ShallowWrapper {
             handleClick={[MockFunction]}
             locale={undefined}
           />
-          <PolicyCard
-            data={
-              Object {
-                "choice": "standards",
-                "counts": Object {
-                  "cluster": Object {
-                    "total": 2,
-                    "violations": 2,
-                  },
-                  "policy": Object {
-                    "total": 1,
-                    "violations": 1,
-                  },
-                },
-                "name": "Other",
-                "rawName": "Other",
-                "violations": 3,
-              }
-            }
-            handleClick={[MockFunction]}
-            locale={undefined}
-          />
         </div>,
       ],
       "className": "module-grc-cards",
@@ -5181,28 +5159,6 @@ ShallowWrapper {
               handleClick={[MockFunction]}
               locale={undefined}
             />,
-            <PolicyCard
-              data={
-                Object {
-                  "choice": "standards",
-                  "counts": Object {
-                    "cluster": Object {
-                      "total": 2,
-                      "violations": 2,
-                    },
-                    "policy": Object {
-                      "total": 1,
-                      "violations": 1,
-                    },
-                  },
-                  "name": "Other",
-                  "rawName": "Other",
-                  "violations": 3,
-                }
-              }
-              handleClick={[MockFunction]}
-              locale={undefined}
-            />,
           ],
           "className": "card-container-container",
         },
@@ -5255,34 +5211,6 @@ ShallowWrapper {
                 },
                 "name": "HIPAA",
                 "rawName": "HIPAA",
-                "violations": 3,
-              },
-              "handleClick": [MockFunction],
-              "locale": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": "Other",
-            "nodeType": "function",
-            "props": Object {
-              "data": Object {
-                "choice": "standards",
-                "counts": Object {
-                  "cluster": Object {
-                    "total": 2,
-                    "violations": 2,
-                  },
-                  "policy": Object {
-                    "total": 1,
-                    "violations": 1,
-                  },
-                },
-                "name": "Other",
-                "rawName": "Other",
                 "violations": 3,
               },
               "handleClick": [MockFunction],
@@ -5406,28 +5334,6 @@ ShallowWrapper {
                   },
                   "name": "HIPAA",
                   "rawName": "HIPAA",
-                  "violations": 3,
-                }
-              }
-              handleClick={[MockFunction]}
-              locale={undefined}
-            />
-            <PolicyCard
-              data={
-                Object {
-                  "choice": "standards",
-                  "counts": Object {
-                    "cluster": Object {
-                      "total": 2,
-                      "violations": 2,
-                    },
-                    "policy": Object {
-                      "total": 1,
-                      "violations": 1,
-                    },
-                  },
-                  "name": "Other",
-                  "rawName": "Other",
                   "violations": 3,
                 }
               }
@@ -5712,28 +5618,6 @@ ShallowWrapper {
                 handleClick={[MockFunction]}
                 locale={undefined}
               />,
-              <PolicyCard
-                data={
-                  Object {
-                    "choice": "standards",
-                    "counts": Object {
-                      "cluster": Object {
-                        "total": 2,
-                        "violations": 2,
-                      },
-                      "policy": Object {
-                        "total": 1,
-                        "violations": 1,
-                      },
-                    },
-                    "name": "Other",
-                    "rawName": "Other",
-                    "violations": 3,
-                  }
-                }
-                handleClick={[MockFunction]}
-                locale={undefined}
-              />,
             ],
             "className": "card-container-container",
           },
@@ -5786,34 +5670,6 @@ ShallowWrapper {
                   },
                   "name": "HIPAA",
                   "rawName": "HIPAA",
-                  "violations": 3,
-                },
-                "handleClick": [MockFunction],
-                "locale": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": "Other",
-              "nodeType": "function",
-              "props": Object {
-                "data": Object {
-                  "choice": "standards",
-                  "counts": Object {
-                    "cluster": Object {
-                      "total": 2,
-                      "violations": 2,
-                    },
-                    "policy": Object {
-                      "total": 1,
-                      "violations": 1,
-                    },
-                  },
-                  "name": "Other",
-                  "rawName": "Other",
                   "violations": 3,
                 },
                 "handleClick": [MockFunction],

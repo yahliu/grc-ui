@@ -167,7 +167,7 @@ export default class TopInformationModule extends React.Component {
 
   getPoliciesAndClustersDataMap(dataMap, items, topInfoChoice) {
     if(items && Array.isArray(items)) {
-      items.map(item=>{
+      items.forEach((item) =>{
         const statuses = _.get(item, 'raw.status.status', {})
         Object.keys(statuses).forEach(key=>{
           const compliant = statuses[key].compliant
@@ -211,7 +211,7 @@ export default class TopInformationModule extends React.Component {
 
   getApplicationsDataMap(dataMap, applications) {
     if(applications && Array.isArray(applications)) {
-      applications.map(application=>{
+      applications.forEach((application) =>{
         if (application.policies && application.policies.length > 0) {
           const name = _.get(application, 'name', 'unknown')
           const choice = msgs.get('overview.top.informations.applications').toLowerCase()

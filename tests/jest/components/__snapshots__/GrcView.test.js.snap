@@ -259,45 +259,6 @@ exports[`GrcView component 1 renders as expected 1`] = `
           </div>
         </div>
       </div>
-      <div>
-        <div
-          className="card-container"
-        >
-          <div
-            className="card-content"
-          >
-            <div
-              className="card-name"
-            >
-              Other
-            </div>
-            <div
-              className="card-count-content"
-            >
-              <div
-                className="empty-violations-strip"
-              >
-                <div>
-                  <div
-                    className="card-violations empty"
-                  >
-                    <img
-                      alt="No resource"
-                      className="empty-violations-img"
-                      src="undefined/policies/graphics/no-other-violations.svg"
-                    />
-                    <div
-                      className="no-card-violations"
-                    >
-                      No violations
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <div
@@ -306,10 +267,10 @@ exports[`GrcView component 1 renders as expected 1`] = `
     <div>
       <div
         className="bx--data-table-v2-container"
-        id="undefined-table-container"
+        id="table-container"
       >
         <section
-          aria-label="undefined-search"
+          aria-label="search"
           className="bx--table-toolbar"
           role="region"
         >
@@ -317,7 +278,7 @@ exports[`GrcView component 1 renders as expected 1`] = `
             className="bx--toolbar-search-container"
           >
             <div
-              aria-labelledby="undefined-search-label"
+              aria-labelledby="search-label"
               className="bx--search bx--search--sm bx--search--light"
               role="search"
             >
@@ -343,15 +304,15 @@ exports[`GrcView component 1 renders as expected 1`] = `
               </svg>
               <label
                 className="bx--label"
-                htmlFor="undefined-search"
-                id="undefined-search-label"
+                htmlFor="search"
+                id="search-label"
               >
                 Filter table
               </label>
               <input
-                aria-label="undefined-search"
+                aria-label="search"
                 className="bx--search-input"
-                id="undefined-search"
+                id="search"
                 onChange={[Function]}
                 placeholder="Find policies"
                 type="text"
@@ -1511,10 +1472,10 @@ exports[`GrcView component 5 renders as expected 1`] = `
     <div>
       <div
         className="bx--data-table-v2-container"
-        id="undefined-table-container"
+        id="table-container"
       >
         <section
-          aria-label="undefined-search"
+          aria-label="search"
           className="bx--table-toolbar"
           role="region"
         >
@@ -1522,7 +1483,7 @@ exports[`GrcView component 5 renders as expected 1`] = `
             className="bx--toolbar-search-container"
           >
             <div
-              aria-labelledby="undefined-search-label"
+              aria-labelledby="search-label"
               className="bx--search bx--search--sm bx--search--light"
               role="search"
             >
@@ -1548,15 +1509,15 @@ exports[`GrcView component 5 renders as expected 1`] = `
               </svg>
               <label
                 className="bx--label"
-                htmlFor="undefined-search"
-                id="undefined-search-label"
+                htmlFor="search"
+                id="search-label"
               >
                 Filter table
               </label>
               <input
-                aria-label="undefined-search"
+                aria-label="search"
                 className="bx--search-input"
-                id="undefined-search"
+                id="search"
                 onChange={[Function]}
                 placeholder="Find security findings"
                 type="text"
