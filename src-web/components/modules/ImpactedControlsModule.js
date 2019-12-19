@@ -209,6 +209,10 @@ class ImpactedControlsModule extends React.Component {
             highlighted={null}
             style={{
               ringColor: $grc_color_radar_ring,
+              customColors: [
+                $grc_color_radar_blue,
+                $grc_color_radar_green,
+              ]
             }}
             axisLabelTextStyle={{
               fontSize: '0.875rem',
@@ -465,8 +469,7 @@ class ImpactedControlsModule extends React.Component {
         .styles((d, j, ts)=>{
           const tooltipDiv = ts[j]
           const {width} = tooltipDiv.getBoundingClientRect()
-          const height = setKey==='policy' ? 100 : 175
-          tooltipDiv.style.height = height + 'px'
+          const height = tooltip.node().getBoundingClientRect().height
           const dot = this.getDotMap()[`${x}&${y}`].getBoundingClientRect()
           const top = dot.y + window.scrollY - height - 6
           const left = dot.x + window.scrollX - width/2 + 3
@@ -511,7 +514,7 @@ class ImpactedControlsModule extends React.Component {
   getTooltipHTML = (setKey, variableKey) => {
     const { locale } = this.context
     const { setMap, variableMap, tooltips } = this.cardData
-    const tooltipList = _.get(tooltips, `${setKey}.${variableKey}`)
+    const tooltipList = tooltips[setKey][variableKey]
     return tooltipList ? ReactDOMServer.renderToStaticMarkup(
       <div className='tooltip-text'>
         <div className='header'>

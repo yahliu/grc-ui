@@ -36,6 +36,7 @@ services:
 
 before_install:
   - make init
+  - echo -e "machine github.ibm.com\n  login $GITHUB_USER\n  password $GITHUB_TOKEN" > ~/.netrc
 
 install:
   - npm install
