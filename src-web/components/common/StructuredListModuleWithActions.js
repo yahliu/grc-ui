@@ -51,7 +51,7 @@ const StructuredListModule = ({
             {actions.map((action) => (
               <OverflowMenuItem
                 data-table-action={action}
-                isDelete={action ==='table.actions.remove' || action ==='table.actions.policy.remove'|| action ==='table.actions.applications.remove'|| action ==='table.actions.compliance.remove'}
+                isDelete={action ==='table.actions.remove' || action ==='table.actions.policy.remove' || action ==='table.actions.applications.remove' || action ==='table.actions.compliance.remove' || action ==='table.actions.finding.remove'}
                 onClick={() => getResourceAction(action, data, null, history, context.locale)}
                 key={action}
                 itemText={msgs.get(action, context.locale)}

@@ -37,6 +37,7 @@ export const resourceActions = (action, dispatch, resourceType, data, hasService
   case 'table.actions.applications.remove':
   case 'table.actions.compliance.remove':
   case 'table.actions.policy.remove':
+  case 'table.actions.finding.remove':
   case 'table.actions.remove': {
     return dispatch(updateModal(
       { open: true, type: 'resource-remove', resourceType,

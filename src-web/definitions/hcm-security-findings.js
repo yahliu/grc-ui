@@ -19,6 +19,7 @@ export default {
   secondaryKey: 'finding.severity',
   tableActions: [
     'table.actions.finding.securityFindings.sidepanel',
+    'table.actions.remove',
   ],
   tableKeys: [
     {

@@ -139,6 +139,8 @@
   "modal.button.submit": "Submit",
   "modal.enable.description": "Are you sure you want to enable this policy?",
   "modal.disable.description": "Are you sure you want to disable this policy?",
+  "modal.remove-hcmsecurityfindings.label": "REMOVE SECURITY FINDING",
+  "modal.remove-hcmsecurityfindings.heading": "Remove security finding",
   "nested.table.selected": "Selected",
   "no-cluster.title": "No clusters found.",
   "no-cluster.detail": "Add a cluster to manage.",
