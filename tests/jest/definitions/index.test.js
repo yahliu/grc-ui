@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2020. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -18,11 +18,16 @@ console.log('Below console logs are just unit test results, not actual errors:')
 describe('definitions/index', () => {
   describe('#getDefaultSearchField', () => {
     it('should return the default search field of node', () => {
-      const item = {
+      const resourceType = {
         list: 'HCMPolicyList',
         name: 'HCMPolicy'
       }
-      expect(getDefaultSearchField(item)).toBe('metadata.name')
+      expect(getDefaultSearchField(resourceType)).toBe('metadata.name')
+    })
+
+    it('should return undefined', () => {
+      const resourceType = {}
+      expect(getDefaultSearchField(resourceType)).toBe(undefined)
     })
   })
 
@@ -51,6 +56,18 @@ describe('definitions/index', () => {
       }
       expect(getLink(link, resource)).toBe('/namespace/name')
     })
+    it('should return the link of node as /namespace/name', () => {
+      const link = (resource) => {
+        return `/${resource.metadata.test1}/${resource.metadata.test2}`
+      }
+      const resource = {
+        metadata: {
+          test1: 'test1',
+          test2: 'test2'
+        }
+      }
+      expect(getLink(link, resource)).toBe('/test1/test2')
+    })
     it('should return the link of node as /domain/host', () => {
       const link = 'domain/host'
       const resource = {
@@ -73,6 +90,11 @@ describe('definitions/index', () => {
       }
       expect(getPrimaryKey(item)).toBe('metadata.name')
     })
+
+    it('should return default value metadata.uid', () => {
+      const item = {}
+      expect(getPrimaryKey(item)).toBe('metadata.uid')
+    })
   })
 
   describe('#getSecondaryKey', () => {
@@ -82,6 +104,11 @@ describe('definitions/index', () => {
         name: 'HCMPolicy'
       }
       expect(getSecondaryKey(item)).toBe('metadata.namespace')
+    })
+
+    it('should return default value cluster', () => {
+      const item = {}
+      expect(getSecondaryKey(item)).toBe('cluster')
     })
   })
 
@@ -95,6 +122,11 @@ describe('definitions/index', () => {
         list: 'HCMPolicyList',
         name: 'HCMPolicy'
       }
+      expect(getURIKey(item)).toBe('metadata.name')
+    })
+
+    it('should return default value metadata.name', () => {
+      const item = {}
       expect(getURIKey(item)).toBe('metadata.name')
     })
   })

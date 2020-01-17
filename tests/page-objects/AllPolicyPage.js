@@ -54,15 +54,15 @@ module.exports = {
   }]
 }
 function verifySummary(browser, url) {
-  this.expect.element('button.collapse > span.collapse-button').to.be.present
-  this.waitForElementPresent('div.module-grc-cards > div.card-container-container')
-  this.expect.element('@summaryInfoContainer').to.be.present
+  this.waitForElementVisible('button.collapse > span.collapse-button')
+  this.waitForElementVisible('div.module-grc-cards > div.card-container-container')
+  this.waitForElementVisible('@summaryInfoContainer')
   this.navigate(url + '?card=false&index=0')
-  this.expect.element('@summaryInfoContainer').to.be.not.present
+  this.waitForElementNotPresent('@summaryInfoContainer')
   this.navigate(url + '?card=true&index=0')
-  this.expect.element('@summaryInfoContainer').to.be.present
+  this.waitForElementVisible('@summaryInfoContainer')
   //standards summary
-  this.expect.element('@summaryDropdown').to.be.present
+  this.waitForElementVisible('@summaryDropdown')
   this.click('@summaryDropdown')
   browser.pause(1000)//wait 1s for every click
   const dropdownBox = 'div.module-grc-cards > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(2)'
@@ -83,7 +83,7 @@ function checkPolicySummaryCards(browser) {
     for (var cardNum = 1; cardNum < cards.value.length + 1; cardNum++) {
       for (let i = 1; i <= 2; i++) {
         const cardInfo = `div.module-grc-cards > div:nth-child(2) > div:nth-child(${cardNum}) > div > div > div:nth-child(2)`
-        this.expect.element(cardInfo).to.be.present
+        this.waitForElementVisible(cardInfo)
         browser.element('css selector', cardInfo + ' > .empty-violations-strip', function(result){
           if(result.value == false) {
             this.click(cardInfo + ` > div:nth-child(${i})`)
@@ -105,65 +105,61 @@ function checkPolicySummaryCards(browser) {
 function verifyTable(browser, cluster) {
   browser.element('css selector', 'div.no-resource', function(result){
     if(result.status != -1){
-      this.expect.element('div.no-resource').to.be.present
+      this.waitForElementVisible('div.no-resource')
     }
     else{
-      this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
+      this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra')
       if (!cluster) {
         this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
-        browser.pause(1000)
-        this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.present
+        this.waitForElementVisible('tr.bx--expandable-row-v2:nth-of-type(2)')
         this.click('button.bx--table-expand-v2__button:nth-of-type(1)')
-        browser.pause(1000)
-        this.expect.element('tr.bx--expandable-row-v2:nth-of-type(2)').to.be.not.present
+        this.waitForElementVisible('tr.bx--expandable-row-v2:nth-of-type(2)')
         this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
-        browser.pause(1000)
-        this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
+        this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open')
         this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(1)')
-        browser.pause(1000)
       }
       else {
         this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(5) > div > svg')
-        browser.pause(1000)
-        this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
+        this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open')
         this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(1)')
-        browser.pause(1000)
       }
-      this.expect.element('div.bx--modal.is-visible').to.be.present
+      this.waitForElementVisible('div.bx--modal.is-visible')
       this.click('button.bx--modal-close')
-      browser.pause(1000)
-      this.expect.element('div.bx--modal.is-visible').to.be.not.present
+      this.waitForElementNotPresent('div.bx--modal.is-visible')
     }
   })
 }
 function verifyPagination() {
   const pagination = '.bx--pagination'
-  this.expect.element(pagination).to.be.present
+  this.waitForElementVisible(pagination)
   this.click('select[id="bx-pagination-select-resource-table-pagination"] option[value="5"]')
-  this.expect.element('.bx--pagination__button.bx--pagination__button--forward').to.be.present
+  this.waitForElementVisible('.bx--pagination__button.bx--pagination__button--forward')
   this.click('.bx--pagination__button.bx--pagination__button--forward')
-  this.expect.element('.bx--pagination__button.bx--pagination__button--backward').to.be.present
+  this.waitForElementVisible('.bx--pagination__button.bx--pagination__button--backward')
   this.click('.bx--pagination__button.bx--pagination__button--backward')
   this.click('select[id="bx-pagination-select-resource-table-pagination"] option[value="10"]')
 }
 function createTestPolicy(browser, time) {
-  this.expect.element('@createPolicyButton').to.be.present
+  this.waitForElementVisible('@createPolicyButton')
   this.click('@createPolicyButton')
-  this.expect.element('@yamlInputField').to.be.present
+  this.waitForElementPresent('@yamlInputField')
   this.click('@yamlTextField')
   this.clearValue('@policyNameInput')
   this.setValue('@policyNameInput',`${time}-policy-test`)
-  this.click('@namespaceDropdown').expect.element('@namespaceDropdownBox').to.be.present
+  this.click('@namespaceDropdown')
+  this.waitForElementVisible('@namespaceDropdownBox')
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > .bx--list-box__field > input', 'Namespace')
   this.click('div.creation-view-controls-container > div > div:nth-child(2) > div.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   this.click('@templateDropdown').expect.element('@templateDropdownBox').to.be.present
   this.setValue('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'Namespace')
   this.click('div.creation-view-controls-container > div > div:nth-child(3) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.expect.element('@templateDropdownBox').not.to.be.present
-  this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').to.be.present
+  this.waitForElementNotPresent('@templateDropdownBox')
+  this.click('@clusterSelectorDropdown')
+  this.waitForElementVisible('@clusterSelectorDropdownBox')
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'cloud: "IBM')
   this.click('div.creation-view-controls-container > div > div:nth-child(4) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
-  this.click('@clusterSelectorDropdown').expect.element('@clusterSelectorDropdownBox').not.to.be.present
+  this.click('@clusterSelectorDropdown')
+  this.waitForElementNotPresent('@clusterSelectorDropdownBox')
   // this.click('@standardsDropdown').expect.element('@standardsDropdownBox').to.be.present
   // this.setValue('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > .bx--list-box__field > input', 'NIST')
   // this.click('div.creation-view-controls-container > div > div:nth-child(5) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
@@ -177,20 +173,20 @@ function createTestPolicy(browser, time) {
   // this.click('div.creation-view-controls-container > div > div:nth-child(7) > div.bx--multi-select.bx--list-box > div.bx--list-box__menu > div:nth-child(1)')
   // this.click('@controlsDropdown').expect.element('@controlsDropdownBox').not.to.be.present
   this.waitForElementNotPresent('@spinner')
-  this.expect.element('@submitCreatePolicyButton').to.be.present
+  this.waitForElementVisible('@submitCreatePolicyButton')
   this.click('@submitCreatePolicyButton')
-  this.waitForElementPresent('@table')
-  this.waitForElementPresent('@searchInput')
+  this.waitForElementVisible('@table')
+  this.waitForElementVisible('@searchInput')
   this.setValue('@searchInput',`${time}-policy-test`)
 }
 function searchPolicy(expectToDisplay, time) {
-  this.expect.element('@searchInput').to.be.present
+  this.waitForElementVisible('@searchInput')
   this.setValue('@searchInput',`${time}-policy-test`)
-  this.expect.element('@searchInput').to.be.present
+  this.waitForElementVisible('@searchInput')
   if(expectToDisplay){
     this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(`${time}-policy-test`)
   } else{
-    this.expect.element('tbody>tr').to.be.not.present
+    this.waitForElementNotPresent('tbody>tr')
     this.clearValue('@searchInput')
   }
 }
@@ -201,19 +197,19 @@ function testDetailsPage(browser, name) {
   this.expect.element('.section-title:nth-of-type(1)').text.to.equal('Policy details')
   this.expect.element('.new-structured-list > table:nth-child(1) > tbody > tr:nth-child(1) > td:nth-child(2)').text.to.equal(name)
   this.expect.element('.overview-content > div:nth-child(2) > .section-title').text.to.equal('Placement')
-  this.waitForElementPresent('.overview-content-second > div:nth-child(1) > div > div > div:nth-child(1) > .bx--module__title')
+  this.waitForElementVisible('.overview-content-second > div:nth-child(1) > div > div > div:nth-child(1) > .bx--module__title')
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement policy')
   this.expect.element('.overview-content-second > div:nth-child(1) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('placement-' + name)
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > div:nth-child(1) > .bx--module__title').text.to.equal('Placement binding')
   this.expect.element('.overview-content-second > div:nth-child(2) > div > div > .bx--module__content > section > div > div:nth-child(1) > div:nth-child(2)').text.to.equal('binding-' + name)
   this.expect.element('.overview-content > div:nth-child(3) > .section-title').text.to.equal('Object templates')
   //violation tab test
-  this.expect.element('#violation-tab').to.be.present
+  this.waitForElementVisible('#violation-tab')
   this.click('#violation-tab')
   this.waitForElementNotPresent('#spinner')
   this.waitForElementNotPresent('#spinner')
   // Temp disable violation table test - Adam Kang 11Nov19
-  // this.waitForElementPresent('.policy-violation-tab > .section-title', 15000, false, (result) => {
+  // this.waitForElementVisible('.policy-violation-tab > .section-title', 15000, false, (result) => {
   //   if(result.value == false){
   //     browser.expect.element('.no-resource').to.be.present
   //   }
@@ -222,59 +218,58 @@ function testDetailsPage(browser, name) {
   //   }
   // })
   //policy yaml page test
-  this.expect.element('#yaml-tab').to.be.present
+  this.waitForElementVisible('#yaml-tab')
   this.click('#yaml-tab')
-  this.expect.element('.ace_editor').to.be.present
-  this.expect.element('.yaml-editor-button > button:nth-child(1)').to.be.present
-  this.expect.element('.yaml-editor-button > button:nth-child(2)').to.be.present
+  this.waitForElementVisible('.ace_editor')
+  this.waitForElementVisible('.yaml-editor-button > button:nth-child(1)')
+  this.waitForElementVisible('.yaml-editor-button > button:nth-child(2)')
   this.click('.bx--breadcrumb > div:nth-child(1)')
 }
 function deletePolicy(name){
-  this.expect.element('body').to.be.present
-  this.expect.element('@searchInput').to.be.present
+  this.waitForElementVisible('body')
+  this.waitForElementVisible('@searchInput')
   this.setValue('@searchInput', name)
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra')
   this.expect.element('.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.to.equal(name)
-  this.expect.element('bx--overflow-menu-options__option.bx--overflow-menu-options__option--danger').not.to.be.present
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)').to.be.present
+  this.waitForElementNotPresent('bx--overflow-menu-options__option.bx--overflow-menu-options__option--danger')
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)')
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
-  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
-  this.click('li.bx--overflow-menu-options__option--danger > button.bx--overflow-menu-options__btn')
-  this.expect.element('button.bx--btn--danger--primary').to.be.present
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open')
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(4)')
+  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(4) > button').text.to.equal('Remove')
+  this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(4) > button')
+  this.waitForElementVisible('button.bx--btn--danger--primary')
   this.click('button.bx--btn--danger--primary')
   this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.not.to.equal(name)
 }
-function verifyDisableEnable(name, browser){
+function verifyDisableEnable(name){
   //verify table/menu exist
-  browser.pause(6000)
-  this.expect.element('body').to.be.present
-  this.expect.element('@searchInput').to.be.present
+  this.waitForElementVisible('body')
+  this.waitForElementVisible('@searchInput')
   this.clearValue('@searchInput')
   this.setValue('@searchInput', name)
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra').to.be.present
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra')
   this.expect.element('.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').text.to.equal(name)
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)').to.be.present
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9)')
   //disable policy
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
-  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
-  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)').to.be.present
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open')
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
   this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
-  browser.pause(3000)
-  this.expect.element('#disable-resource-modal').to.be.present
+  this.waitForElementVisible('#disable-resource-modal')
   this.click('#disable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--danger--primary')
-  browser.pause(3000)
   //enable policy
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
-  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open').to.be.present
-  this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)').to.be.present
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open')
+  this.waitForElementVisible('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3)')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Enable')
   this.click('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button')
-  this.expect.element('#enable-resource-modal').to.be.present
+  this.waitForElementVisible('#enable-resource-modal')
   this.click('#enable-resource-modal > div > .bx--modal-footer > .bx--btn.bx--btn--primary')
   //re-check menu
-  browser.pause(10000)
-  this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg').to.be.present
+  this.waitForElementVisible('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.click('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(9) > div > svg')
   this.expect.element('ul.bx--overflow-menu-options.bx--overflow-menu--flip.bx--overflow-menu-options--open > li:nth-child(3) > button').text.to.equal('Disable')
 }

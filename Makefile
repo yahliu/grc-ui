@@ -87,7 +87,7 @@ ifeq ($(ARCH), x86_64)
 	make docker:pull DOCKER_URI=$(GRC_UI_API_DOCKER_URI)
 	docker image ls -a
 	make docker:run DOCKER_NETWORK_OP=$(NETWORK_OP) DOCKER_NETWORK=$(NETWORK_NAME) DOCKER_IP_OP=$(IP_OP) DOCKER_IP=$(GRC_UI_API_DOCKER_IP) DOCKER_CONTAINER_NAME=$(GRC_UI_API_DOCKER_CONTAINER_NAME) DOCKER_BIND_PORT=$(GRC_UI_API_DOCKER_BIND_PORT) DOCKER_IMAGE=$(GRC_UI_API_DOCKER_URI) DOCKER_BUILD_TAG=$(RELEASE_TAG)
-	npm install selenium-standalone@6.16.0 nightwatch@0.9.21
+	npm install selenium-standalone@6.17.0 nightwatch@0.9.21
 ifeq ($(A11Y_TESTS), TRUE)
 	nightwatch
 else

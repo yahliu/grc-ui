@@ -44,34 +44,29 @@ function getResourceData(resourceType) {
 export default getResourceData
 
 export function getPrimaryKey(resourceType) {
+  let pk = 'metadata.uid'
   const def = getResourceData(resourceType)
-  let pk = def.primaryKey
-
-  if (!pk)
-    pk = 'metadata.uid'
-
+  if (def && def.primaryKey) {
+    pk = def.primaryKey
+  }
   return pk
 }
 
 export function getSecondaryKey(resourceType) {
+  let sk = 'cluster'
   const def = getResourceData(resourceType)
-  let sk = def.secondaryKey
-
-  if (!sk)
-    sk = 'cluster'
-
+  if(def && def.secondaryKey) {
+    sk = def.secondaryKey
+  }
   return sk
 }
 
 export function getURIKey(resourceType) {
+  let uriKey = 'metadata.name'
   const def = getResourceData(resourceType)
-  let uriKey = ''
-
   if (def && def.uriKey) {
-    uriKey = def.uriKey}
-  else {
-    uriKey = 'metadata.name'}
-
+    uriKey = def.uriKey
+  }
   return uriKey
 }
 

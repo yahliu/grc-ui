@@ -55,10 +55,10 @@ module.exports = {
     a11yScan.runAccessibilityScan(browser, 'policyDetail')
   },
 
-  'All policy page: Delete test policy': (browser) => {
-    const time = browser.globals.time
-    page.deletePolicy(`${time}-policy-test`, browser)
-  },
+  // 'All policy page: Delete test policy': (browser) => {
+  //   const time = browser.globals.time
+  //   page.deletePolicy(`${time}-policy-test`, browser)
+  // },
 
   after: function (browser, done) {
     setTimeout(() => {

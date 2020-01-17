@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2018, 2019. All Rights Reserved.
+ * (c) Copyright IBM Corporation 2018, 2020. All Rights Reserved.
  *
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
@@ -290,6 +290,55 @@ describe('resourceReducerFunction', () => {
     }
     expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
   })
+
+  it('should return a state with PATCH request', () => {
+    const state = {
+      test: 'test'
+    }
+    const action = {
+      type: 'PATCH_REQUEST',
+    }
+    const expectedValue = {
+      test: 'test',
+      patchStatus: 'IN_PROGRESS'
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+
+  it('should return a state with PATCH RECEIVE SUCCESS', () => {
+    const state = {
+      test: 'test'
+    }
+    const action = {
+      type: 'PATCH_RECEIVE_SUCCESS',
+    }
+    const expectedValue = {
+      test: 'test',
+      patchStatus: 'DONE'
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+
+  it('should return a state with PATCH RECEIVE FAILURE', () => {
+    const state = {
+      test: 'test'
+    }
+    const action = {
+      type: 'PATCH_RECEIVE_FAILURE',
+      err: {
+        error: {
+          message: 'error'
+        }
+      }
+    }
+    const expectedValue = {
+      test: 'test',
+      patchErrorMsg: 'error',
+      patchStatus: 'ERROR'
+    }
+    expect(resourceReducerFunction(state, action)).toEqual(expectedValue)
+  })
+
   it('should return a state with clear action', () => {
     const state = {
       test: 'test',

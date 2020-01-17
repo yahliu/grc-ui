@@ -60,5 +60,5 @@ function waitForLoginSuccess() {
 }
 
 function waitForLoginPageLoad() {
-  this.waitForElementPresent('@loginPage')
+  this.waitForElementVisible('@loginPage')
 }
