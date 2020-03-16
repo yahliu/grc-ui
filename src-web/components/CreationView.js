@@ -5,7 +5,9 @@
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
- *******************************************************************************/
+ ******************************************************************************
+ * Copyright (c) 2020 Red Hat, Inc.
+ */
 'use strict'
 
 import React from 'react'
@@ -72,7 +74,7 @@ const controlData = [
     id: 'clusters',
     type: 'multiselect',
     available: [],
-    reverse: 'PlacementPolicy[0].spec.clusterLabels', // automatically does matchLabels && matchExpressions
+    reverse: 'PlacementRule[0].spec.clusterLabels', // automatically does matchLabels && matchExpressions
     mustExist: true,
   },
   {
