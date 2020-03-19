@@ -5,6 +5,8 @@
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
+ *******************************************************************************
+ * Copyright (c) 2020 Red Hat, Inc.
  *******************************************************************************/
 
 const config = require('../../config')
@@ -14,12 +16,12 @@ module.exports = {
     return `${this.api.launchUrl}${config.get('contextPath')}`
   },
   elements: {
-    username: '#username',
-    password: '#password',
-    submit: 'button[name="loginButton"]',
+    username: '#inputUsername',
+    password: '#inputPassword',
+    submit: 'button[type="submit"]',
     error: '.bx--inline-notification--error',
     header: '.app-header',
-    loginPage: '.login-container'
+    loginPage: 'form[action="/login"]'
   },
   commands: [{
     inputUsername,
@@ -42,12 +44,12 @@ function authenticate(user, password) {
 
 function inputUsername(user) {
   this.waitForElementVisible('@username')
-    .setValue('@username', user || config.get('selenium_user'))
+    .setValue('@username', user || process.env.SELENIUM_USER )
 }
 
 function inputPassword(password) {
   this.waitForElementVisible('@password')
-    .setValue('@password', password || config.get('selenium_password'))
+    .setValue('@password', password || process.env.SELENIUM_PASSWORD )
 }
 
 function submit() {
