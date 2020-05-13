@@ -34,7 +34,8 @@ import msgs from '../../../nls/platform.properties'
 import '../../../graphics/diagramIcons.svg'
 import _ from 'lodash'
 
-const tempCookie= 'template-editor-open-cookie'
+const tempCookie = 'template-editor-open-cookie'
+const diagramIconsInfoStr = '#diagramIcons_info'
 
 export default class TemplateEditor extends React.Component {
 
@@ -128,7 +129,7 @@ export default class TemplateEditor extends React.Component {
 
   handleSplitterDefault = () => {
     const cookie = localStorage.getItem(this.splitterSizeCookie)
-    let size = cookie ? parseInt(cookie) : 1000
+    let size = cookie ? parseInt(cookie, 10) : 1000
     const page = document.getElementById('page')
     if (page) {
       const width = page.getBoundingClientRect().width
@@ -258,6 +259,7 @@ export default class TemplateEditor extends React.Component {
     if (updateMessage) {
 
       const handleClick = () => {
+        //This is intentional
       }
       const handleKeyPress = (e) => {
         if ( e.key === 'Enter') {
@@ -331,7 +333,7 @@ export default class TemplateEditor extends React.Component {
           <div>{name}</div>
           <TooltipIcon direction='top' tooltipText={description}>
             <svg className='info-icon'>
-              <use href={'#diagramIcons_info'} ></use>
+              <use href={diagramIconsInfoStr} ></use>
             </svg>
           </TooltipIcon>
         </div>
@@ -349,13 +351,13 @@ export default class TemplateEditor extends React.Component {
     return (
       <React.Fragment>
         <div className='creation-view-controls-singleselect'
-          ref={isOneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, id)} >
+          ref={isOneSelection ? ()=>{/*This is intentional*/} : this.setMultiSelectCmp.bind(this, id)} >
           <div className="creation-view-controls-multiselect-title">
             {name}
             {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
             <TooltipIcon direction='top' tooltipText={description}>
               <svg className='info-icon'>
-                <use href={'#diagramIcons_info'} ></use>
+                <use href={diagramIconsInfoStr} ></use>
               </svg>
             </TooltipIcon>
           </div>
@@ -392,12 +394,12 @@ export default class TemplateEditor extends React.Component {
     let placeholder = ph
     if (active.length>0) {
       const activeKeys = []
-      active.forEach(key=>{
-        if (availableMap && typeof availableMap === 'object' && availableMap[key]) {
-          const {name} = availableMap[key]
-          activeKeys.push(name||key)
+      active.forEach(actKey=>{
+        if (availableMap && typeof availableMap === 'object' && availableMap[actKey]) {
+          const {name:actName} = availableMap[actKey]
+          activeKeys.push(actName||actKey)
         } else {
-          activeKeys.push(key)
+          activeKeys.push(actKey)
         }
       })
       placeholder = activeKeys.join(', ')
@@ -408,13 +410,13 @@ export default class TemplateEditor extends React.Component {
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'
-          ref={isOneSelection ? ()=>{} : this.setMultiSelectCmp.bind(this, id)} >
+          ref={isOneSelection ? ()=>{/*This is intentional*/} : this.setMultiSelectCmp.bind(this, id)} >
           <div className="creation-view-controls-multiselect-title">
             {name}
             {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
             <TooltipIcon direction='top' tooltipText={description}>
               <svg className='info-icon'>
-                <use href={'#diagramIcons_info'} ></use>
+                <use href={diagramIconsInfoStr} ></use>
               </svg>
             </TooltipIcon>
           </div>
@@ -751,7 +753,7 @@ export default class TemplateEditor extends React.Component {
               id='edit-yaml'
               ariaLabel={showEditor ? msgs.get('edit.yaml.on', locale) : msgs.get('edit.yaml.off', locale)}
               defaultToggled={showEditor}
-              onChange={()=>{}}
+              onChange={()=>{/*This is intentional*/}}
               onToggle={handleToggle}
             />
             <div className='switch-label'>

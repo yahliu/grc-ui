@@ -49,7 +49,7 @@ export const generateYAML = (template, controlData) => {
   // add replacements
   const snippetMap = {}
   replacements.forEach(replacement=>{
-    const {active, availableMap, hasCapturedUserSource, id:replacementID, userData} = replacement
+    const {id:replacementID, active, availableMap, hasCapturedUserSource, userData} = replacement
     if (active.length>0) {
       if (hasCapturedUserSource) {
         // restore snippet that user edited
@@ -253,7 +253,8 @@ export const getUniqueName = (name, nameSet) => {
     let count=1
     const baseName = name.replace(/-*\d+$/, '')
     do {
-      name = `${baseName}-${count++}`
+      name = `${baseName}-${count}`
+      count++
     } while (nameSet.has(name))
   }
   return name
