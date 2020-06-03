@@ -8,15 +8,11 @@ metadata:
     policy.open-cluster-management.io/categories: PR.DS DataSecurity
     policy.open-cluster-management.io/controls: PR.DS-2 Data-in-transit
 spec:
-  complianceType: musthave
   remediationAction: inform
   disabled: false
-  namespaces:
-    exclude: ["kube-*"]
-    include: ["default"]
   policy-templates:
     - objectDefinition:
-        apiVersion: policies.ibm.com/v1alpha1
+        apiVersion: policy.open-cluster-management.io/v1
         kind: CertificatePolicy # cert management expiration
         metadata:
           name: policy-certificatepolicy-[TIME]
@@ -26,7 +22,7 @@ spec:
             exclude: []
           remediationAction: inform
           severity: low
-          minimumDuration: 300h
+          minimumDuration: 30h
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
