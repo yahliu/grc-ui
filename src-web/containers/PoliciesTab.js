@@ -5,8 +5,9 @@
  * Note to U.S. Government Users Restricted Rights:
  * Use, duplication or disclosure restricted by GSA ADP Schedule
  * Contract with IBM Corp.
- *******************************************************************************/
-/* Copyright (c) 2020 Red Hat, Inc. */
+ *******************************************************************************
+ * Copyright (c) 2020 Red Hat, Inc.
+ */
 'use strict'
 
 import React from 'react'
@@ -27,6 +28,7 @@ import msgs from '../../nls/platform.properties'
 import config from '../../lib/shared/config'
 
 class PoliciesTab extends React.Component {
+
   static propTypes = {
     secondaryHeaderProps: PropTypes.object,
     showApplications: PropTypes.bool,
@@ -51,12 +53,12 @@ class PoliciesTab extends React.Component {
     return (
       <Page>
         <Query query={HCMComplianceList} pollInterval={pollInterval} notifyOnNetworkStatusChange >
-          {( complianceResult ) => {
-            const {data={}, loading, startPolling, stopPolling, refetch} = complianceResult
+          {( result ) => {
+            const {data={}, loading, startPolling, stopPolling, refetch} = result
             const { items } = data
-            const error = items ? null : complianceResult.error
+            const error = items ? null : result.error
             if (error) {
-              const errorName = complianceResult.error.graphQLErrors[0].name ? complianceResult.error.graphQLErrors[0].name : error.name
+              const errorName = result.error.graphQLErrors[0].name ? result.error.graphQLErrors[0].name : error.name
               error.name = errorName
             }
             const firstLoad = this.firstLoad
@@ -75,10 +77,10 @@ class PoliciesTab extends React.Component {
             return (
               showApplications ?
                 <Query query={HCMApplicationList} pollInterval={pollInterval} client={GrcApolloClient.getSearchClient()} notifyOnNetworkStatusChange >
-                  {( applicationResult ) => {
-                    const {applicationsData={}} = applicationResult
+                  {( result ) => {
+                    const {applicationsData={}} = result
                     const { applications } = applicationsData
-                    const searchError = applications ? null : applicationResult.error
+                    const searchError = applications ? null : result.error
                     return (
                       <GrcView
                         showApplications={showApplications}
@@ -119,3 +121,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(PoliciesTab))
+
