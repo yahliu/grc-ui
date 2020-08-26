@@ -15,7 +15,7 @@ module.exports = {
   elements: {
     spinner: '.content-spinner',
     table: 'table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra',
-    createPolicyButton: '.bx--btn--primary:nth-of-type(1)',
+    createPolicyButton: '#create-policy',
     submitCreatePolicyButton: '#create-button-portal-id',
     resetEditor: 'div.creation-view-yaml-header div.editor-bar-button[title="Reset"]',
     yamlMonacoEditor: '.monaco-editor',
@@ -509,10 +509,4 @@ function deletePolicy(name) {
   this.waitForElementVisible('button.bx--btn--danger--primary')
   this.click('button.bx--btn--danger--primary')
   this.waitForElementNotPresent('@spinner')
-  // this.isVisible('@searchInputClear', result => {
-  //   if (result.value) {
-  //     this.click('@searchInputClear')
-  //   }
-  // })
-  // this.expect.element('table.bx--data-table-v2.resource-table.bx--data-table-v2--zebra > tbody > tr:nth-child(1) > td:nth-child(2) > a').not.to.be.present
 }
