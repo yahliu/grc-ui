@@ -11,6 +11,7 @@ import {
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
 } from '../components/common/Icons'
+import TableTimestamp from '../components/common/TableTimestamp'
 import msgs from '../../nls/platform.properties'
 
 export const transform = (items, def, locale) => {
@@ -67,15 +68,9 @@ export const buildCompliantCellFromMessage = (item, locale) => {
   }
 }
 
-export const getAge = (item, locale, timestampKey) => {
-  const key = timestampKey ? timestampKey : 'timestamp'
-  const createdTime = _.get(item, key)
-  if (createdTime && createdTime.includes('T')) {
-    return moment(createdTime, 'YYYY-MM-DDTHH:mm:ssZ').fromNow()
-  } else if (createdTime) {
-    return moment(createdTime, 'YYYY-MM-DD HH:mm:ss').fromNow()
-  }
-  return '-'
+export const buildTimestamp = (item) => {
+  const createdTime = _.get(item, 'timestamp')
+  return <TableTimestamp timestamp={createdTime} />
 }
 
 export function buildClusterLink(item) {

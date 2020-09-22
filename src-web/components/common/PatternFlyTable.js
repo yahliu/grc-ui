@@ -54,6 +54,9 @@ class PatternFlyTable extends React.Component {
     const { pagination, rows, searchable } = props
     // Helper function to return the string from the cell
     const parseCell = function (cell) {
+      if (cell.title && cell.title.props && cell.title.props.timestamp) {
+        return cell.title.props.timestamp
+      }
       if (typeof cell === 'object' && cell.title === 'string') {
         return cell.title
       } else if (typeof cell === 'object') {
@@ -71,6 +74,7 @@ class PatternFlyTable extends React.Component {
           return parseCell(item).toLowerCase().includes(searchValue.toLowerCase())
         })
       })
+
     // Sort the rows based on sortBy prop (if it's not empty)
     const sortedRows = rowsFiltered
     if (Object.keys(sortBy).length !== 0) {
@@ -99,6 +103,7 @@ class PatternFlyTable extends React.Component {
       itemCount: sortedRows.length,
     }
   }
+
   handleSort = (_event, index, direction) => {
     this.setState({
       sortBy: {
