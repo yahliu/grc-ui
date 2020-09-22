@@ -1,10 +1,11 @@
 /* Copyright (c) 2020 Red Hat, Inc. */
-
 'use strict'
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
-import lodash from 'lodash'
+import _ from 'lodash'
+import config from '../../lib/shared/config'
 import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
@@ -15,7 +16,7 @@ import msgs from '../../nls/platform.properties'
 export const transform = (items, def, locale) => {
   const rows = items.map(item => {
     return def.tableKeys.map(key => {
-      let value = lodash.get(item, key.resourceKey)
+      let value = _.get(item, key.resourceKey)
       if (key.type === 'timestamp') {
         return moment.unix(value).format('MMM Do YYYY \\at h:mm A')
       } else if (key.type === 'i18n') {
@@ -44,7 +45,7 @@ export const transform = (items, def, locale) => {
 }
 
 export const buildCompliantCell = (item, locale) => {
-  const compliant = lodash.get(item, 'compliant', '-')
+  const compliant = _.get(item, 'compliant', '-')
   if (compliant.toLowerCase() === 'compliant') {
     return <div><GreenCheckCircleIcon /> {msgs.get('table.cell.compliant', locale)}</div>
   } else if (compliant.toLowerCase() === 'noncompliant') {
@@ -55,7 +56,7 @@ export const buildCompliantCell = (item, locale) => {
 }
 
 export const buildCompliantCellFromMessage = (item, locale) => {
-  const message = lodash.get(item, 'message', '-')
+  const message = _.get(item, 'message', '-')
   const compliant = message.split(';')[0]
   if (compliant.toLowerCase() === 'compliant') {
     return <div><GreenCheckCircleIcon /> {msgs.get('table.cell.compliant', locale)}</div>
@@ -68,11 +69,61 @@ export const buildCompliantCellFromMessage = (item, locale) => {
 
 export const getAge = (item, locale, timestampKey) => {
   const key = timestampKey ? timestampKey : 'timestamp'
-  const createdTime = lodash.get(item, key)
+  const createdTime = _.get(item, key)
   if (createdTime && createdTime.includes('T')) {
     return moment(createdTime, 'YYYY-MM-DDTHH:mm:ssZ').fromNow()
   } else if (createdTime) {
     return moment(createdTime, 'YYYY-MM-DD HH:mm:ss').fromNow()
   }
   return '-'
+}
+
+export function buildClusterLink(item) {
+  const cluster = _.get(item, 'cluster')
+  const clusterNamespace = _.get(item, 'clusterNamespace')
+  if (cluster && clusterNamespace) {
+    const clusterURL = `${config.clusterContextPath}/${clusterNamespace}/${cluster}`
+    return <a
+      rel='noopener noreferrer'
+      href={clusterURL}>
+      {cluster}
+    </a>
+  } else if (cluster) {
+    return cluster
+  }
+  return '-'
+}
+
+export function buildStatusHistoryLink(item, locale) {
+  const policyName = _.get(item, 'policyName')
+  const policyNamespace = _.get(item, 'policyNamespace')
+  const cluster = _.get(item, 'cluster')
+  const templateName = _.get(item, 'templateName')
+  if (policyName && policyNamespace && cluster && templateName) {
+    const statusHistoryURL = `/multicloud/policies/all/${policyNamespace}/${policyName}/status/${cluster}/templates/${templateName}/history`
+    return <Link to={statusHistoryURL}>
+      {msgs.get('table.actions.view.history', locale)}
+    </Link>
+  }
+  return '-'
+}
+
+export function buildMessageDetailLink(item, locale) {
+  const message = _.get(item, 'message')
+  const policyName = _.get(item, 'policyName')
+  const policyNamespace = _.get(item, 'policyNamespace')
+  const cluster = _.get(item, 'cluster')
+  const templateName = _.get(item, 'templateName')
+  const apiVersion = _.get(item, 'apiVersion')
+  const kind = _.get(item, 'kind')
+  if (message && policyName && policyNamespace && cluster && templateName && apiVersion && kind) {
+    const statusHistoryURL = `/multicloud/policies/all/${policyNamespace}/${policyName}/template/${cluster}/${apiVersion}/${kind}/${templateName}`
+    return <div>
+      {`${message} `}
+      <Link to={statusHistoryURL}>
+        {msgs.get('table.actions.view.details', locale)}
+      </Link>
+    </div>
+  }
+  return ''
 }
