@@ -3,7 +3,7 @@
 
 import classNames from 'classnames'
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
+import purifyReactNode from './PurifyReactNode'
 import PropTypes from 'prop-types'
 import {
   EmptyState,
@@ -22,6 +22,7 @@ import {
 } from '@patternfly/react-table'
 import { SearchIcon } from '@patternfly/react-icons'
 import resources from '../../../lib/shared/resources'
+import moment from 'moment'
 
 resources(() => {
   require('../../../scss/pattern-fly-table.scss')
@@ -56,39 +57,14 @@ class PatternFlyTable extends React.Component {
     // Helper function to return the string from the cell
     const parseCell = function (cell) {
       if (cell.title && cell.title.props && cell.title.props.timestamp) {
-        return cell.title.props.timestamp
+        return {
+          timeStamp: cell.title.props.timestamp,
+          fromNow: moment(cell.title.props.timestamp, 'YYYY-MM-DDTHH:mm:ssZ').fromNow().toString()
+        }
       }
-      if (typeof cell === 'object' && cell.title === 'string') {
-        return cell.title
-      } else if (typeof cell === 'object') {
-        // Here is specially skip <Link> for searching , only skip 2-level div depth
-        // Because recursively skipping is too expensive for whole table
-        if (cell.title && cell.title.type && cell.title.type.displayName === 'Link') {
-          if (cell.title.props && typeof cell.title.props.children === 'string') {
-            return cell.title.props.children
-          } else {
-            return ''
-          }
-        }
-        else if (cell.title && cell.title.props
-          && Array.isArray(cell.title.props.children) && cell.title.props.children.length > 0) {
-          let hackLinkString = ''
-          cell.title.props.children.forEach((child)=>{
-            if (typeof child === 'string') {
-              hackLinkString = `${hackLinkString}${child}`
-            }
-            else if (typeof child === 'object' && child.type) {
-              if (child.type.displayName !== 'Link') {
-                hackLinkString = `${hackLinkString}${ReactDOMServer.renderToString(child).replace(/<[^>]+>/g, '')}`
-              } else if (child.props && typeof child.props.children === 'string'){
-                hackLinkString = `${hackLinkString}${child.props.children}`
-              }
-            }
-          })
-          return hackLinkString // level-2 hack <div><Link>text</Link><div>
-        }
-        // It's not a string so render the component and strip HTML tags
-        return ReactDOMServer.renderToString(cell.title).replace(/<[^>]+>/g, '')
+      if (typeof cell === 'object') {
+        // get the pure text from table cell
+        return purifyReactNode(cell.title)
       }
       return cell
     }
@@ -98,7 +74,9 @@ class PatternFlyTable extends React.Component {
       : rows.filter(row => {
         const cells = row.cells ? row.cells : row
         return cells.some(item => {
-          return parseCell(item).trim().toLowerCase().includes(trimmedSearchValue.toLowerCase())
+          let parsedCell = parseCell(item)
+          parsedCell = (typeof parsedCell === 'string') ? parsedCell : parsedCell.fromNow
+          return parsedCell.trim().toLowerCase().includes(trimmedSearchValue.toLowerCase())
         })
       })
 
@@ -116,6 +94,8 @@ class PatternFlyTable extends React.Component {
           bvalue = parseCell(acell)
           avalue = parseCell(bcell)
         }
+        avalue = (typeof avalue === 'string') ? avalue : avalue.timeStamp
+        bvalue = (typeof bvalue === 'string') ? bvalue : bvalue.timeStamp
         if (avalue > bvalue) {
           return 1
         } else if (avalue < bvalue) {
