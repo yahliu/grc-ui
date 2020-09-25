@@ -50,24 +50,16 @@ module.exports = {
       createPage.createTestPolicy(true, { policyName: policies[policies.length - 1], namespace: namespaces[namespaces.length - 1] })
       commonPage.searchPolicy(policies[policies.length - 1], true)
     }
-    loginPage.logout()
   },
 
-  after: () => {
-    loginPage.navigate()
-    loginPage.authenticate()
-    // Delete created policies
-    policies.forEach((policy) => {
-      commonPage.deletePolicy(policy)
-    })
+  beforeEach: () => {
+    loginPage.logout()
   },
 
   afterEach: (browser) => {
     if(!process.env.SELENIUM_CLUSTER) {
       browser.collectCoverage()
     }
-    loginPage.logout()
-    browser.deleteCookies()
   },
 
   'GRC RBAC: Cluster-wide cluster-admin user': () => {
@@ -151,4 +143,12 @@ module.exports = {
     page.verifyCreatePage(permissions.view)
     page.verifyPolicyPage(policyName, permissions.view)
   },
+
+  'GRC RBAC: Clean up': () => {
+    loginPage.authenticate()
+    // Delete created policies
+    policies.forEach((policy) => {
+      commonPage.deletePolicy(policy)
+    })
+  }
 }

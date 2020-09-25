@@ -39,11 +39,13 @@ module.exports = {
   commands: [{
     verifyAllPage,
     verifyCreatePage,
-    verifyPolicyPage
+    verifyPolicyPage,
+    log
   }]
 }
 /* Verify user can only see policies they should on the summary page */
 function verifyAllPage(name, nsNum, permissions) {
+  this.log(`verifyAllPage policy: ${name} nsNum: ${nsNum} permissions: ${{permissions}}`)
   // Filter for our RBAC policies
   this.waitForElementVisible('@searchInput')
   this.click('@searchInput').clearValue('@searchInput').setValue('@searchInput', name)
@@ -78,9 +80,12 @@ function verifyAllPage(name, nsNum, permissions) {
   this.waitForElementNotPresent('@spinner')
   this.click('@sidePolicyPanelClose')
   this.waitForElementNotPresent('@sidePolicyPanel')
+  this.waitForElementVisible('@searchInput')
+  this.click('@searchInput').clearValue('@searchInput')
 }
 
 function verifyPolicyPage(name, permissions) {
+  this.log(`verifyPolicyPage policy: ${name} permissions: ${{permissions}}`)
   // Filter for our RBAC policies
   this.waitForElementVisible('@searchInput')
   this.click('@searchInput').clearValue('@searchInput').setValue('@searchInput', name)
@@ -109,6 +114,8 @@ function verifyPolicyPage(name, permissions) {
   }
   this.click('.bx--breadcrumb > div:nth-child(1)')
   this.waitForElementNotPresent('@spinner')
+  this.waitForElementVisible('@searchInput')
+  this.click('@searchInput').clearValue('@searchInput')
 }
 
 function verifyCreatePage(permissions, createPage, policyName = '', ns = [], clusterwide = false, elevated = false) {
@@ -154,4 +161,11 @@ function verifyCreatePage(permissions, createPage, policyName = '', ns = [], clu
     this.expect.element('@submitCreatePolicyButton').to.not.be.present
     this.expect.element('@createPolicyButton').to.be.present
   }
+}
+
+function log(message) {
+  return this.perform(() => {
+    // eslint-disable-next-line no-console
+    console.log(message)
+  })
 }
