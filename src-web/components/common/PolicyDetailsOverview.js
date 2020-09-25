@@ -230,10 +230,18 @@ export class PolicyDetailsOverview extends React.PureComponent{
 
     let itemPP = '-', itemPB = '-'
     if (localItem && localItem.placementPolicies && Array.isArray(localItem.placementPolicies)) {
-      itemPP = localItem.placementPolicies[0]
+      if (localItem.placementPolicies.length > 0) {
+        itemPP = localItem.placementPolicies[0]
+      } else {
+        itemPP = null
+      }
     }
     if (localItem && localItem.placementBindings && Array.isArray(localItem.placementBindings)) {
-      itemPB = localItem.placementBindings[0]
+      if (localItem.placementBindings.length > 0) {
+        itemPB = localItem.placementBindings[0]
+      } else {
+        itemPB = null
+      }
     }
     return (
       <div className='overview-content'>
@@ -251,15 +259,24 @@ export class PolicyDetailsOverview extends React.PureComponent{
 
         <div className='vertical-expend'>
           <h5 className='section-title'>{msgs.get('table.header.placement', locale)}</h5>
-          {modulesSecond.length > 0 &&
-          <div className='overview-content-second'>
-            <div className='overview-content-second-left'>
-              {React.cloneElement(modulesSecond[0], { ...staticResourceData.placementPolicyKeys.detailKeys, data:itemPP })}
+          { itemPP===null && itemPB===null &&
+            <div className='bx--module'>
+              <Notification
+                title=''
+                subtitle={msgs.get('error.no.placement', locale)}
+                kind='info' />
             </div>
-            <div className='overview-content-second-left'>
-              {React.cloneElement(modulesSecond[1], { ...staticResourceData.placementBindingKeys.detailKeys, data:itemPB })}
+          }
+          {itemPP!==null && itemPB!==null && modulesSecond.length > 0 &&
+            <div className='overview-content-second'>
+              <div className='overview-content-second-left'>
+                {React.cloneElement(modulesSecond[0], { ...staticResourceData.placementPolicyKeys.detailKeys, data:itemPP })}
+              </div>
+              <div className='overview-content-second-left'>
+                {React.cloneElement(modulesSecond[1], { ...staticResourceData.placementBindingKeys.detailKeys, data:itemPB })}
+              </div>
             </div>
-          </div>}
+          }
         </div>
 
         {modulesBottom}
