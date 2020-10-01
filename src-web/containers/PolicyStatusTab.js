@@ -17,6 +17,7 @@ import PolicyStatusView from '../components/common/PolicyStatusView'
 import { setRefreshControl } from '../../lib/client/reactiveVars'
 import NoResource from '../components/common/NoResource'
 import { getTabs } from '../../lib/client/resource-helper'
+import { LocaleContext } from '../components/common/LocaleContext'
 import msgs from '../../nls/platform.properties'
 
 resources(() => {
@@ -36,6 +37,8 @@ class PolicyStatusTab extends React.Component {
   constructor (props) {
     super(props)
   }
+
+  static contextType = LocaleContext
 
   getBreadcrumb() {
     const breadcrumbItems = []
@@ -63,10 +66,10 @@ class PolicyStatusTab extends React.Component {
   }
 
   componentDidMount() {
-    const { locale } = this.context
+    const { policyName } = this.props
     const { tabs, url, updateSecondaryHeader: localUpdateSecondaryHeader } = this.props
     localUpdateSecondaryHeader(
-      msgs.get('panel.header.violation.history', locale),
+      policyName,
       getTabs(tabs, (tab, index) => index === 0 ? url : `${url}/${tab}`),
       this.getBreadcrumb()
     )

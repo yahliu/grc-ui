@@ -19,6 +19,8 @@ import PolicyDetailsOverview from '../components/common/PolicyDetailsOverview'
 import { setRefreshControl } from '../../lib/client/reactiveVars'
 import { getTabs } from '../../lib/client/resource-helper'
 import msgs from '../../nls/platform.properties'
+import { LocaleContext } from '../components/common/LocaleContext'
+import NoResource from '../components/common/NoResource'
 
 resources(() => {
   require('../../scss/policy-yaml-tab.scss')
@@ -28,6 +30,8 @@ class PolicyDetailsTab extends React.Component{
   constructor(props) {
     super(props)
   }
+
+  static contextType = LocaleContext
 
   getBreadcrumb() {
     const breadcrumbItems = []
@@ -50,10 +54,10 @@ class PolicyDetailsTab extends React.Component{
   }
 
   componentDidMount() {
-    const { locale } = this.context
+    const { policyName } = this.props
     const { tabs, url, updateSecondaryHeader: localUpdateSecondaryHeader } = this.props
     localUpdateSecondaryHeader(
-      msgs.get('panel.header.violation.history', locale),
+      policyName,
       getTabs(tabs, (tab, index) => index === 0 ? url : `${url}/${tab}`),
       this.getBreadcrumb()
     )
@@ -83,11 +87,14 @@ class PolicyDetailsTab extends React.Component{
         setRefreshControl(loading, this.timestamp, startPolling, stopPolling, refetch)
 
         if (error) {
-          return (
-            <DangerNotification error={error} />
-          )
+          return <DangerNotification error={error} />
         } else if (loading && items === undefined) {
           return <Spinner className='patternfly-spinner' />
+        } else if (items.length === 0){
+          return <NoResource
+            title={msgs.get('error.not.found', this.context.locale)}
+            svgName='EmptyPagePlanet-illus.png'>
+          </NoResource>
         } else {
           const item = items[0]
           return <PolicyDetailsOverview
@@ -102,10 +109,6 @@ class PolicyDetailsTab extends React.Component{
     </Query>
   }
 
-}
-
-PolicyDetailsTab.contextTypes = {
-  locale: PropTypes.string
 }
 
 PolicyDetailsTab.propTypes = {
