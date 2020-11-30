@@ -16,7 +16,13 @@ exports[`PolicyStatusView component renders as expected 1`] = `
         className="pf-c-toggle-group__button pf-m-light pf-m-selected"
         id="policy-status-clusters"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Clusters
+        </span>
+      </button>
     </div>
     <div
       className="pf-c-divider pf-m-vertical"
@@ -30,7 +36,13 @@ exports[`PolicyStatusView component renders as expected 1`] = `
         className="pf-c-toggle-group__button pf-m-light"
         id="policy-status-templates"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Templates
+        </span>
+      </button>
     </div>
   </div>
   <div
@@ -698,7 +710,13 @@ exports[`PolicyStatusView component renders as expected with empty object 1`] = 
         className="pf-c-toggle-group__button pf-m-light pf-m-selected"
         id="policy-status-clusters"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Clusters
+        </span>
+      </button>
     </div>
     <div
       className="pf-c-divider pf-m-vertical"
@@ -712,7 +730,13 @@ exports[`PolicyStatusView component renders as expected with empty object 1`] = 
         className="pf-c-toggle-group__button pf-m-light"
         id="policy-status-templates"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Templates
+        </span>
+      </button>
     </div>
   </div>
   <div
@@ -1380,7 +1404,13 @@ exports[`PolicyStatusView component renders empty state with no data 1`] = `
         className="pf-c-toggle-group__button pf-m-light pf-m-selected"
         id="policy-status-clusters"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Clusters
+        </span>
+      </button>
     </div>
     <div
       className="pf-c-divider pf-m-vertical"
@@ -1394,7 +1424,13 @@ exports[`PolicyStatusView component renders empty state with no data 1`] = `
         className="pf-c-toggle-group__button pf-m-light"
         id="policy-status-templates"
         onClick={[Function]}
-      />
+      >
+        <span
+          className="pf-c-toggle-group__text"
+        >
+          Templates
+        </span>
+      </button>
     </div>
   </div>
   <div

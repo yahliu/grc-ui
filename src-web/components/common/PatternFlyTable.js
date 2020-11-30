@@ -30,6 +30,11 @@ resources(() => {
 class PatternFlyTable extends React.Component {
   constructor(props) {
     super(props)
+    const { searchValue, handleSearch, handleClear } = props
+    let searchText = ''
+    if (typeof handleSearch === 'function' && typeof handleClear === 'function' && typeof searchValue === 'string') {
+      searchText = searchValue.trim()
+    }
     this.state = {
       perPage: this.props.perPage,
       page: 1,
@@ -38,7 +43,7 @@ class PatternFlyTable extends React.Component {
       sortBy: this.props.sortBy,
       startIdx: 0,
       endIdx: this.props.perPage,
-      searchValue: ''
+      searchState: searchText
     }
   }
   static defaultProps = {
@@ -50,11 +55,14 @@ class PatternFlyTable extends React.Component {
     sortBy: {}
   }
   static getDerivedStateFromProps(props, state) {
-    const { searchValue, sortBy } = state
-    let trimmedSearchValue = (typeof searchValue === 'string') ? searchValue.trim() : ''
+    const { searchState, sortBy } = state
+    const { searchValue, handleSearch, handleClear, pagination, rows, searchable } = props
+    let trimmedSearchValue = typeof searchState === 'string' ? searchState.trim() : ''
+    if (typeof handleSearch === 'function' && typeof handleClear === 'function' && typeof searchValue === 'string') {
+      trimmedSearchValue = searchValue.trim()
+    }
     // also able to search truncated text
     trimmedSearchValue = trimmedSearchValue.split('...')[0]
-    const { pagination, rows, searchable } = props
     // Helper function to return the string from the cell
     const parseCell = function (cell) {
       if (cell.title && cell.title.props && cell.title.props.timestamp) {
@@ -77,7 +85,7 @@ class PatternFlyTable extends React.Component {
         return cells.some(item => {
           let parsedCell = parseCell(item)
           parsedCell = (typeof parsedCell === 'string') ? parsedCell : parsedCell.fromNow
-          return parsedCell.trim().toLowerCase().includes(trimmedSearchValue.toLowerCase())
+          return parsedCell.toLowerCase().includes(trimmedSearchValue.toLowerCase())
         })
       })
 
@@ -137,12 +145,17 @@ class PatternFlyTable extends React.Component {
   }
   handleSearch = (value) => {
     this.setState({
-      searchValue: value
+      searchState: value
+    })
+  }
+  handleClear = () => {
+    this.setState({
+      searchState: ''
     })
   }
 
   render() {
-    const { sortBy, rows = [], itemCount, searchValue } = this.state
+    const { sortBy, rows = [], itemCount, searchState } = this.state
     const {
       columns,
       className,
@@ -150,18 +163,31 @@ class PatternFlyTable extends React.Component {
       pagination,
       searchable,
       searchPlaceholder,
+      searchValue,
       dropdownPosition,
       dropdownDirection,
       tableActionResolver,
+      handleSearch,
+      handleClear
     } = this.props
     const classes = classNames('pattern-fly-table', className)
+    // if not pass in handleSearch, use build in handleSearch
+    let handleSearchFunc = this.handleSearch
+    // if not pass in handleClear, use build in handleClear
+    let handleClearFunc = this.handleClear
+    let searchText = searchState
+    if (typeof handleSearch === 'function' && typeof handleClear === 'function' && typeof searchValue === 'string') {
+      handleSearchFunc = handleSearch
+      handleClearFunc = handleClear
+      searchText = searchValue.trim()
+    }
     return (
       <div className='pattern-fly-table-group'>
         {searchable && <SearchInput
           placeholder={searchPlaceholder}
-          value={searchValue}
-          onChange={this.handleSearch}
-          onClear={() => this.handleSearch('')}
+          value={searchText}
+          onChange={handleSearchFunc}
+          onClear={handleClearFunc}
         />}
         <div className={classes}>
           <Table
@@ -217,6 +243,10 @@ PatternFlyTable.propTypes = {
   /* The desired position to show the dropdown when clicking on the actions Kebab.
   Can only be used together with `actions` property (optional) */
   dropdownPosition: PropTypes.string,
+  /* Callback function from parent to handle clean search input action */
+  handleClear: PropTypes.func,
+  /* Callback function from parent to handle search action */
+  handleSearch: PropTypes.func,
   /* Message when no results are displayed in the table */
   noResultMsg: PropTypes.string,
   /* Toggle pagination (optional) */
@@ -227,6 +257,8 @@ PatternFlyTable.propTypes = {
   rows: PropTypes.array,
   /* Placeholder text for search input field */
   searchPlaceholder: PropTypes.string,
+  /* Initial search value from parent props */
+  searchValue: PropTypes.string,
   /* Toggle search input (optional) */
   searchable: PropTypes.bool,
   /* Initial table sorting (optional) */

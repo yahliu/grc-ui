@@ -115,16 +115,16 @@ describe('PatternFlyTable table sorting and filtering', () => {
     expect(filterSort({pagination: false, ...tableDataTests.arrayLarge}, {...state, sortBy:{}}).rows.length).toEqual(12)
   })
   it('should return no values given nonexistent filter for string values', () => {
-    expect(filterSort({searchable: true, ...tableDataTests.arrayLarge}, {...state, searchValue:'not here', sortBy:{}}).rows.length).toEqual(0)
+    expect(filterSort({searchable: true, ...tableDataTests.arrayLarge}, {...state, searchState:'not here', sortBy:{}}).rows.length).toEqual(0)
   })
   it('should return expected values given existent filter for string values', () => {
-    expect(filterSort({searchable: true, ...tableDataTests.arrayLarge}, {...state, searchValue:'b', sortBy:{}})).toMatchSnapshot()
+    expect(filterSort({searchable: true, ...tableDataTests.arrayLarge}, {...state, searchState:'b', sortBy:{}})).toMatchSnapshot()
   })
   it('should filter text contained in React components with cells', () => {
-    expect(filterSort({searchable: true, ...tableDataTests.arrayIRowHTMLwCells}, {...state, searchValue:'space1', sortBy:{}})).toMatchSnapshot()
+    expect(filterSort({searchable: true, ...tableDataTests.arrayIRowHTMLwCells}, {...state, searchState:'space1', sortBy:{}})).toMatchSnapshot()
   })
   it('should filter text contained in React components without cells', () => {
-    expect(filterSort({searchable: true, ...tableDataTests.arrayIRowHTMLwoCells}, {...state, searchValue:'space1', sortBy:{}})).toMatchSnapshot()
+    expect(filterSort({searchable: true, ...tableDataTests.arrayIRowHTMLwoCells}, {...state, searchState:'space1', sortBy:{}})).toMatchSnapshot()
   })
   it('should sort rows by ascending strings in column 5', () => {
     expect(filterSort({...tableDataTests.arrayLarge}, {...state, sortBy:{index: 4, direction: SortByDirection.asc}})).toMatchSnapshot()

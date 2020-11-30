@@ -17,21 +17,29 @@ import { transform } from '../../tableDefinitions/utils'
 import msgs from '../../../nls/platform.properties'
 import { formatPoliciesToClustersTableData } from '../common/FormatTableData'
 import resources from '../../../lib/shared/resources'
-import { RESOURCE_TYPES } from '../../../lib/shared/constants'
+import { RESOURCE_TYPES, GRC_SEARCH_STATE_COOKIE } from '../../../lib/shared/constants'
 import _ from 'lodash'
 import { resourceActions } from '../common/ResourceTableRowMenuItemActions'
 import formatUserAccess from '../common/FormatUserAccess'
 import filterUserAction from '../common/FilterUserAction'
 import { REQUEST_STATUS } from '../../actions/index'
 import { createDisableTooltip } from '../common/DisableTooltip'
+import {
+  getSessionState, replaceSessionPair
+} from '../common/AccessStorage'
 
 resources(() => {
   require('../../../scss/grc-toggle-module.scss')
 })
 
+const componentName = 'GrcToggleModule'
+
 class GrcToggleModule extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      searchValue : _.get(getSessionState(GRC_SEARCH_STATE_COOKIE), componentName, '')
+    }
   }
 
   static contextType = LocaleContext
@@ -39,6 +47,7 @@ class GrcToggleModule extends React.Component {
   render() {
     const { grcItems, showGrcTabToggle, grcTabToggleIndex, handleToggleClick, status } = this.props
     const { locale } = this.context
+    const { searchValue } = this.state
     const tableDataByPolicies = transform(grcItems, grcPoliciesViewDef, locale)
     const tableDataByCLusters = transform(formatPoliciesToClustersTableData(grcItems), grcClustersViewDef, locale)
     if (status !== REQUEST_STATUS.INCEPTION && status !== REQUEST_STATUS.DONE){
@@ -50,14 +59,16 @@ class GrcToggleModule extends React.Component {
           <ToggleGroupItem
             buttonId={'grc-policies-view'}
             onChange={handleToggleClick}
-            isSelected={grcTabToggleIndex===0}>
-            {msgs.get('tabs.grc.toggle.allPolicies', locale)}
+            isSelected={grcTabToggleIndex===0}
+            text={msgs.get('tabs.grc.toggle.allPolicies', locale)}
+            >
           </ToggleGroupItem>
           <ToggleGroupItem
             buttonId={'grc-cluster-view'}
             onChange={handleToggleClick}
-            isSelected={grcTabToggleIndex===1}>
-            {msgs.get('tabs.grc.toggle.clusterViolations', locale)}
+            isSelected={grcTabToggleIndex===1}
+            text={msgs.get('tabs.grc.toggle.clusterViolations', locale)}
+          >
           </ToggleGroupItem>
         </ToggleGroup>}
         <div className='resource-table'>
@@ -70,6 +81,9 @@ class GrcToggleModule extends React.Component {
               dropdownPosition={'right'}
               dropdownDirection={'down'}
               tableActionResolver={this.tableActionResolver}
+              handleClear={this.handleSearch}
+              handleSearch={this.handleSearch}
+              searchValue={searchValue}
             />
           </div>}
           {grcTabToggleIndex===1 && <div className='grc-view-by-clusters-table'>
@@ -81,11 +95,22 @@ class GrcToggleModule extends React.Component {
               dropdownPosition={'right'}
               dropdownDirection={'down'}
               tableActionResolver={this.tableActionResolver}
+              handleClear={this.handleSearch}
+              handleSearch={this.handleSearch}
+              searchValue={searchValue}
             />
           </div>}
         </div>
       </div>
     )
+  }
+
+  handleSearch = (value) => {
+    const searchValue = (typeof value === 'string') ? value : ''
+    replaceSessionPair(GRC_SEARCH_STATE_COOKIE, componentName, searchValue, true)
+    this.setState({
+      searchValue: searchValue
+    })
   }
 
   tableActionResolver = (rowData) => {
