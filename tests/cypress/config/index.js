@@ -1,15 +1,10 @@
-/** *****************************************************************************
- * Licensed Materials - Property of Red Hat, Inc.
- * Copyright (c) 2020 Red Hat, Inc.
- ****************************************************************************** */
-
+/* Copyright (c) 2020 Red Hat, Inc. */
 const fs = require('fs')
-const path = require('path')
 const jsYaml = require('js-yaml')
 
-exports.getConfig = () => {
+exports.getConfig = (filepath) => {
   let config
-  config = fs.readFileSync(path.join(__dirname , 'config.yaml'))
+  config = fs.readFileSync(filepath)
 
   try {
     config = jsYaml.safeLoad(config)
@@ -18,4 +13,3 @@ exports.getConfig = () => {
   }
   return JSON.stringify(config)
 }
-
