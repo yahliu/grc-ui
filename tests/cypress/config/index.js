@@ -3,23 +3,25 @@ const fs = require('fs')
 const jsYaml = require('js-yaml')
 
 exports.getConfig = (filepath) => {
-  const config = fs.readFileSync(filepath).toString()
-  console.log(filepath)
-  console.log(config)
-
- return config
-}
-
-exports.getConfigText = (prefix) => {
-  return Cypress.env('TEST_CONFIG_'+prefix.toUpperCase())
-}
-
-exports.getConfigObject = (prefix) => {
-  let config
   try {
-    config = jsYaml.safeLoad(exports.getConfigText(prefix))
+    return fs.readFileSync(filepath).toString()
   } catch (e) {
     throw new Error(e)
   }
-  return config
+}
+
+exports.getConfigObject = (fileName, subDirName='', returnType='raw') => {
+  let postfix = subDirName ? `${subDirName}_${fileName}` : fileName
+  postfix = postfix.replace('-','_').toUpperCase()
+  try {
+    switch(returnType.toLowerCase()) {
+      case 'json':
+        return jsYaml.load(Cypress.env(`TEST_CONFIG_${postfix}`))
+      case 'raw':
+      default:
+        return Cypress.env(`TEST_CONFIG_${postfix}`)
+    }
+  } catch (e) {
+    throw new Error(e)
+  }
 }
