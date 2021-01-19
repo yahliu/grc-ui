@@ -29,6 +29,10 @@ export const test_genericPolicyGovernance = (confFilePolicy, confFileViolationsI
       verifyPolicyInListing(policyName, confPolicies[policyName])
     })
 
+    it(`Wait for policy ${policyName} status to become available`, () => {
+      cy.waitForPolicyStatus(policyName)
+    })
+
     it(`Disable policy ${policyName}`, () => {
       actionPolicyActionInListing(policyName, 'Disable')
     })
