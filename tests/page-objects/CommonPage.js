@@ -250,14 +250,14 @@ function checkStatus(name, violationExpected, violationText) {
 
 function searchPolicy(name, expectToDisplay) {
   this.waitForElementVisible('@searchInput')
-  this.click('@searchInput').clearValue('@searchInput').setSearchValue(name)
-  this.waitForElementVisible('@searchInput')
-  if(expectToDisplay){
+  this.clearSearchValue()
+  this.expect.elements('tbody>tr').count.not.to.equal(0)
+  this.click('@searchInput').setSearchValue(name)
+  if (expectToDisplay) {
+    this.expect.elements('tbody>tr').count.to.equal(1)
     this.expect.element('tbody>tr').to.have.attribute('data-row-name').equals(name)
-    this.click('@searchInput').clearValue('@searchInput')
-  } else{
+  } else {
     this.waitForElementNotPresent('tbody>tr')
-    this.click('@searchInput').clearValue('@searchInput')
   }
 }
 
@@ -265,7 +265,7 @@ function deletePolicy(name){
   this.log(`Deleting policy: ${name}`)
   this.waitForElementVisible('body')
   this.waitForElementVisible('@searchInput')
-  this.setSearchValue(name)
+  this.searchPolicy(name, true)
   //verify cancel button (.bx--btn.bx--btn--tertiary) on delete policy modal and return to main page
   this.clickButtonOnOverflowModal(name, 'a', 9, 'Remove', 4, '#remove-resource-modal', '.bx--btn.bx--btn--tertiary')
   //re-entry overflow menu then click delete policy button (.bx--btn.bx--btn--danger--primary)
@@ -284,7 +284,8 @@ function clearSearchValue(){
 
 function setSearchValue(value){
   this.log(`Searching for policy: ${value}`)
-  this.click('@searchInput').clearValue('@searchInput').setValue('@searchInput', value)
+  this.clearSearchValue()
+  this.click('@searchInput').setValue('@searchInput', value)
 }
 
 function log(message) {
