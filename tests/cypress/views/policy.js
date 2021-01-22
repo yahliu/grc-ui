@@ -105,8 +105,18 @@ export const createPolicyFromSelection = (uPolicyName, create=false, policyConfi
 // targetStatus = 2, check policy status is violation; targetStatus = 3, check policy status is pending
 export const verifyPolicyInListing = (
   uName, policyConfig, enabled='enabled',
-  targetStatus=0, violationsCounter=''
+  violationsCounter='', targetStatus = null
   ) => {
+  if (targetStatus == null) {
+    if (violationsCounter) {
+      targetStatus = violationsCounter.startsWith('0/') ? 1 : 2
+    }
+    else if (enabled == 'disabled') {
+      targetStatus = 3
+    } else {
+      targetStatus = 0
+    }
+  }
   doTableSearch(uName)
   cy.get('.grc-view-by-policies-table').within(() => {
     console.log(uName)
@@ -127,7 +137,8 @@ export const verifyPolicyInListing = (
       if ([1,2,3].includes(targetStatus)) {
         cy.wrap(violations).find('svg').then((elems) => {
           if (elems.length === 1) {
-            getStatusIconFillColor(targetStatus) === elems[0].getAttribute('fill').trim().toLowerCase()
+            // please enable the following line once CertPolicy_governance.spec.js is fixed
+            //expect(getStatusIconFillColor(targetStatus)).to.equal(elems[0].getAttribute('fill').trim().toLowerCase())
           }
         })
       }
@@ -261,8 +272,18 @@ return cy.url().then((pageURL) => {
 
 export const verifyPolicyInPolicyDetails = (
   uName, policyConfig, enabled='enabled',
-  targetStatus=0, violationsCounter=''
+  violationsCounter='', targetStatus = null
   ) => {
+  if (targetStatus == null) {
+    if (violationsCounter) {
+      targetStatus = violationsCounter.startsWith('0/') ? 1 : 2
+    }
+    else if (enabled == 'disabled') {
+      targetStatus = 3
+    } else {
+      targetStatus = 0
+    }
+  }
   //cy.get('div.vertical-expend').then((e) => {
   cy.get('#compliance\\.details-expand').within(() => {
     cy.get('div.pf-c-description-list__text').spread((
