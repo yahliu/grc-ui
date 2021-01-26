@@ -11,10 +11,10 @@ import {
 import { getConfigObject } from '../../config'
 
 
-export const test_genericPolicyGovernance = (confFilePolicy, confFileViolationsInform, confFileViolationsEnforce=null, confFileClusters='clusters.yaml') => {
+export const test_genericPolicyGovernance = (confFilePolicy, confFileViolationsInform, confFileViolationsEnforce=null, confFileClusters='clusters.yaml', filteredClusterList=null) => {
 
   const confClusters = getConfigObject(confFileClusters)
-  const clusterList = Object.keys(confClusters)  // these are clusters we would be working with
+  const clusterList = filteredClusterList ? filteredClusterList : Object.keys(confClusters)
   const substitutionRules = [ [/\[ID\]/g, Cypress.env('RESOURCE_ID')] ]
   // policy-config is used for policy creation and validation
   const confPolicies = getConfigObject(confFilePolicy, 'yaml', substitutionRules)
