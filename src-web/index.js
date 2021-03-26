@@ -10,7 +10,7 @@
 /* Copyright Contributors to the Open Cluster Management project */
 
 import React from 'react'
-import { hydrate } from 'react-dom'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
@@ -27,27 +27,23 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const loggerMiddleware = createLogger()
 // Grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window.__PRELOADED_STATE__
 
 const middleware = [thunkMiddleware] // lets us dispatch() functions
 if (!window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && config['featureFlags:reduxLogger']) {
   middleware.push(loggerMiddleware) // middleware that logs actions
 }
 
-// Allow the passed state to be garbage-collected
-delete window.__PRELOADED_STATE__
-
 // Create Redux store with initial state
-const store = createStore(combineReducers(reducers), preloadedState, composeEnhancers(
+const store = createStore(combineReducers(reducers), composeEnhancers(
   applyMiddleware(...middleware)
 ))
 
-hydrate(
+render(
   <ApolloProvider client={GrcApolloClient.getGrcClient()}>
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop>
-          <App />
+          <App url={window.location.pathname} />
         </ScrollToTop>
       </BrowserRouter>
     </Provider>

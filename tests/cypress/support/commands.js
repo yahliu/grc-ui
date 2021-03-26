@@ -47,7 +47,7 @@ Cypress.Commands.add('login', (OPTIONS_HUB_USER='', OPTIONS_HUB_PASSWORD='', OC_
   cy.visit('/multicloud/policies')
   .get('body').then(body => {
     // if not yet logged in, do the regular login through Web UI
-    if (body.find('#header').length === 0) {
+    if (body.find('.pf-c-page__header').length === 0) {
       // Check if identity providers are configured
       if (body.find('form').length === 0) {
         if (user === 'kubeadmin') {
@@ -58,7 +58,7 @@ Cypress.Commands.add('login', (OPTIONS_HUB_USER='', OPTIONS_HUB_PASSWORD='', OC_
       cy.get('#inputUsername').click().focused().type(user)
       cy.get('#inputPassword').click().focused().type(password)
       cy.get('button[type="submit"]').click()
-      cy.get('#header').should('exist')
+      cy.get('.pf-c-page__header').should('exist')
     }
   })
   .CheckGrcMainPage()
@@ -141,11 +141,11 @@ Cypress.Commands.add('forEach', (selector, action, options) => {
 
 Cypress.Commands.add('logout', () => {
   cy.log('Attempt to logout existing user')
-  cy.get('.header-user-info-dropdown_icon').then($btn => {
+  cy.get('.pf-c-app-launcher.pf-m-align-right.co-app-launcher.co-user-menu').then($btn => {
     //logout when test starts since we need to use the app idp user
     cy.log('Logging out existing user')
       .get($btn).click()
-    cy.contains('Log out').click()
+    cy.contains('Logout').click()
     cy.location('pathname').should('match', new RegExp('/oauth/authorize(\\?.*)?$'))
 //      .waitForPageContentLoad()
       .clearCookies()

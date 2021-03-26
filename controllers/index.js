@@ -12,13 +12,22 @@
 'use strict'
 const express = require('express'),
       router = express.Router(),
-      config = require('../config')
+      config = require('../config'),
+      security = require('@open-cluster-management/security-middleware'),
+      oauth = require('./oauth-info'),
+      user = require('./userinfo'),
+      version = require('./acmversion')
 
 //controllers
 const status = require('./status'),
       ui = require('./ui')
 
 router.all(['/', '/status', '/livenessProbe', '/readinessProbe'], status)
+router.get('/multicloud/logout', security.logout)
+router.get('/multicloud/common/configure', oauth.oauthInfo)
+router.get('/multicloud/common/username', user.userInfo)
+router.get('/multicloud/common/version', version.version)
+router.use('/multicloud/welcome', ui)
 router.use(config.get('contextPath'), ui)
 
 module.exports = router

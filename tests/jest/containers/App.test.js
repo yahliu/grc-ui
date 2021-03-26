@@ -25,10 +25,10 @@ import toJson from 'enzyme-to-json'
 
 describe('App container test', () => {
   it('renders as expected', () => {
-    const preloadedState = window.__PRELOADED_STATE__
+
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     const middleware = [thunkMiddleware]
-    const store = createStore(combineReducers(reducers), preloadedState, composeEnhancers(
+    const store = createStore(combineReducers(reducers), composeEnhancers(
       applyMiddleware(...middleware)
     ))
     const match = {
@@ -50,6 +50,7 @@ describe('App container test', () => {
           <App
             match={match}
             staticContext={staticContext}
+            url={'/multicloud/policies'}
           />
         </BrowserRouter>
       </Provider>

@@ -20,13 +20,17 @@ import PropTypes from 'prop-types'
 // without curly braces means component with redux
 // eslint-disable-next-line import/no-named-as-default
 import SecondaryHeader from '../components/modules/SecondaryHeader'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import client from '../../lib/shared/client'
 import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
 import GrcRouter from './GrcRouter'
 import loadable from '@loadable/component'
 import { LocaleContext } from '../components/common/LocaleContext'
+import { AcmHeader, AcmRoute } from '@open-cluster-management/ui-components'
+import WelcomeStatic from './Welcome'
+import { getUserAccessData } from '../actions/access'
+import { connect } from 'react-redux'
 
 export const ResourceToolbar = loadable(() => import(/* webpackChunkName: "ResourceToolbar" */ '../components/common/ResourceToolbar'))
 
@@ -35,6 +39,7 @@ class App extends React.Component {
   static propTypes = {
     match: PropTypes.object,
     staticContext: PropTypes.object,
+    url: PropTypes.string,
   }
 
   constructor(props) {
@@ -51,6 +56,10 @@ class App extends React.Component {
     return this.props.staticContext
   }
 
+  componentDidMount() {
+    this.props.getUserAccess()
+  }
+
   render() {
     const serverProps = this.getServerProps()
     const { match } = this.props
@@ -64,16 +73,41 @@ class App extends React.Component {
             <Redirect to={`${config.contextPath}`} />
           </Switch>
           <Modal locale={serverProps.context.locale} />
-          <input type='hidden' id='app-access' value={serverProps.xsrfToken.toString('base64')} locale={serverProps.context.locale} />
         </div>
       </LocaleContext.Provider>
     )
   }
 }
 
+App.propTypes = {
+  getUserAccess: PropTypes.func
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserAccess: () => dispatch(getUserAccessData())
+  }
+}
+
+const AppWithUserAccess = withRouter(connect(null, mapDispatchToProps)(App))
+
+const getAcmRoute = (props) => {
+  let path = ''
+  if (client) {
+    path = window.location.pathname
+  } else {
+    path = props.url
+  }
+  if (path.includes(config.contextPath)) {
+    return AcmRoute.RiskAndCompliance
+  }
+  return AcmRoute.Welcome
+}
+
 // eslint-disable-next-line react/display-name
 export default props => (
-  <div className='expand-vertically'>
-    <Route path={config.contextPath} serverProps={props} component={App} />
-  </div>
+  <AcmHeader route={getAcmRoute(props)} >
+    <Route path={config.contextPath} serverProps={props} component={AppWithUserAccess} />
+    <Route path={'/multicloud/welcome'} serverProps={props} component={WelcomeStatic} />
+  </AcmHeader>
 )
