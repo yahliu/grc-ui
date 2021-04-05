@@ -1,12 +1,4 @@
-/*******************************************************************************
- * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2019. All Rights Reserved.
- *
- * Note to U.S. Government Users Restricted Rights:
- * Use, duplication or disclosure restricted by GSA ADP Schedule
- * Contract with IBM Corp.
- *******************************************************************************/
-/* Copyright (c) 2020 Red Hat, Inc. */
+/* Copyright (c) 2021 Red Hat, Inc. */
 /* Copyright Contributors to the Open Cluster Management project */
 
 'use strict'
@@ -15,17 +7,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { RESOURCE_TYPES } from '../../lib/shared/constants'
-import { createResources, createAndUpdateResources, updateSecondaryHeader,
+import { createResources, createAndUpdateResources,
   clearRequestStatus, fetchSingleResource } from '../actions/common'
 import { withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Page from '../components/common/Page'
 import { CREATE_POLICY_DISCOVERY } from '../../lib/client/queries'
 import CreationView from '../components/modules/CreationView'
 import msgs from '../../nls/platform.properties'
 import config from '../../lib/shared/config'
 import checkCreatePermission from '../components/common/CheckCreatePermission'
 import { LocaleContext } from '../components/common/LocaleContext'
+import { AcmButton, AcmPage, AcmPageHeader } from '@open-cluster-management/ui-components'
 
 export class CreationTab extends React.Component {
 
@@ -43,34 +35,13 @@ export class CreationTab extends React.Component {
     handleCreateAndUpdateResources: PropTypes.func,
     handleCreateResources: PropTypes.func,
     handleFetchResource: PropTypes.func,
+    history: PropTypes.object.isRequired,
     mutateErrorMsg: PropTypes.string,
     mutatePBErrorMsg: PropTypes.string,
     mutatePRErrorMsg: PropTypes.string,
     mutateStatus: PropTypes.string,
-    secondaryHeaderProps: PropTypes.object,
-    updateSecondaryHeader: PropTypes.func,
     updateStatus: PropTypes.string,
     userAccess: PropTypes.array
-  }
-
-  UNSAFE_componentWillMount() {
-    const { updateSecondaryHeader:localUpdateSecondaryHeader, secondaryHeaderProps } = this.props
-    const { title, tabs, breadcrumbItems, information } = secondaryHeaderProps
-    const portals = [
-      {
-        id: 'edit-button-portal-id',
-        kind: 'portal',
-        title: true,
-      },
-      {
-        id: 'cancel-button-portal-id',
-        kind: 'portal',
-      },
-      {
-        id: 'create-button-portal-id',
-        kind: 'portal',
-      }]
-    localUpdateSecondaryHeader(msgs.get(title, this.context.locale), tabs, breadcrumbItems, portals, msgs.get(information, this.context.locale))
   }
 
   handleCreate = (resourceJSON) => {
@@ -202,8 +173,9 @@ export class CreationTab extends React.Component {
   }
 
   render () {
-    const { mutateStatus, mutateErrorMsg, mutatePBErrorMsg, mutatePRErrorMsg, updateStatus, userAccess } = this.props
+    const { history, mutateStatus, mutateErrorMsg, mutatePBErrorMsg, mutatePRErrorMsg, updateStatus, userAccess } = this.props
     const { updateRequested } = this.state
+    const { locale } = this.context
     if (userAccess && userAccess.length > 0 && checkCreatePermission(userAccess) !== 1) {
       return <Redirect to={`${config.contextPath}/all`} />
     }
@@ -212,51 +184,67 @@ export class CreationTab extends React.Component {
       return <Redirect to={`${config.contextPath}/all`} />
     }
     return (
-      <Page>
-        <Query query={CREATE_POLICY_DISCOVERY}>
-          {( result ) => {
-            const { loading } = result
-            const { data={} } = result
-            const { discoveries } = data
-            const errored = discoveries ? false : true
-            const error = discoveries ? null : result.error
-            if (!loading && error) {
-              const errorName = result.error.graphQLErrors[0].name ? result.error.graphQLErrors[0].name : error.name
-              error.name = errorName
-            }
-            const fetchControl = {
-              isLoaded: !loading,
-              isFailed: errored,
-              error: error
-            }
-            const buildControl = {
-              buildResourceLists: this.buildCreateUpdateLists.bind(this),
-            }
-            const createControl = {
-              createResource: this.handleCreate.bind(this),
-              cancelCreate: this.handleCancel.bind(this),
-              creationStatus: mutateStatus,
-              creationMsg: mutateErrorMsg,
-            }
-            const createAndUpdateControl = {
-              createAndUpdateResource: this.handleCreateAndUpdate.bind(this),
-              cancelCreateAndUpdate: this.handleCancel.bind(this),
-              createAndUpdateStatus: updateStatus,
-              createAndUpdateMsg: this.formatUpdateError(this.formatUpdateError(mutatePBErrorMsg, mutateErrorMsg), mutatePRErrorMsg),
-            }
-            return (
+      <Query query={CREATE_POLICY_DISCOVERY}>
+        {( result ) => {
+          const { loading } = result
+          const { data={} } = result
+          const { discoveries } = data
+          const errored = discoveries ? false : true
+          const error = discoveries ? null : result.error
+          if (!loading && error) {
+            const errorName = result.error.graphQLErrors[0].name ? result.error.graphQLErrors[0].name : error.name
+            error.name = errorName
+          }
+          const fetchControl = {
+            isLoaded: !loading,
+            isFailed: errored,
+            error: error
+          }
+          const buildControl = {
+            buildResourceLists: this.buildCreateUpdateLists.bind(this),
+          }
+          const createControl = {
+            createResource: this.handleCreate.bind(this),
+            cancelCreate: this.handleCancel.bind(this),
+            creationStatus: mutateStatus,
+            creationMsg: mutateErrorMsg,
+          }
+          const createAndUpdateControl = {
+            createAndUpdateResource: this.handleCreateAndUpdate.bind(this),
+            cancelCreateAndUpdate: this.handleCancel.bind(this),
+            createAndUpdateStatus: updateStatus,
+            createAndUpdateMsg: this.formatUpdateError(this.formatUpdateError(mutatePBErrorMsg, mutateErrorMsg), mutatePRErrorMsg),
+          }
+          return (
+            <AcmPage>
+              <AcmPageHeader title={msgs.get('button.create.policy', locale)}
+                titleTooltip={msgs.get('policy.create.tooltip', locale)}
+                controls={
+                  <React.Fragment>
+                    <AcmButton id='cancel' variant='secondary'
+                      onClick={() => history.push(`${config.contextPath}/all`)}>
+                      {msgs.get('button.cancel', locale)}
+                    </AcmButton>
+                    <AcmButton id='create'
+                      tooltip={msgs.get('error.permission.disabled', locale)}
+                      onClick={() => this.clickChild()}>
+                      {msgs.get('button.create', locale)}
+                    </AcmButton>
+                  </React.Fragment>
+                }>
+              </AcmPageHeader>
               <CreationView
+                onCreate={click => this.clickChild = click}
                 discovered={discoveries}
                 fetchControl={fetchControl}
                 createControl={createControl}
                 buildControl={buildControl}
                 createAndUpdateControl={createAndUpdateControl}
               />
-            )
-          }
-          }
-        </Query>
-      </Page>
+            </AcmPage>
+          )
+        }}
+      </Query>
     )
   }
 }
@@ -284,7 +272,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSecondaryHeader: (title, tabs, breadcrumbItems, links, information) => dispatch(updateSecondaryHeader(title, tabs, breadcrumbItems, links, '', information)),
     handleCreateResources: (type, json) => dispatch(createResources(type, json)),
     handleCreateAndUpdateResources: (types, create, update) => dispatch(createAndUpdateResources(types, create, update)),
     handleFetchResource: (type, json) => dispatch(fetchSingleResource(type, json)),

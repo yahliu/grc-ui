@@ -1,12 +1,5 @@
-/*******************************************************************************
- * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2019. All Rights Reserved.
- *
- * Note to U.S. Government Users Restricted Rights:
- * Use, duplication or disclosure restricted by GSA ADP Schedule
- * Contract with IBM Corp.
- *******************************************************************************/
-/* Copyright (c) 2020 Red Hat, Inc. */
+
+/* Copyright (c) 2021 Red Hat, Inc. */
 /* Copyright Contributors to the Open Cluster Management project */
 
 'use strict'
@@ -21,8 +14,15 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import client from '../../lib/shared/client'
 import config from '../../lib/shared/config'
 import Modal from '../components/common/Modal'
-import GrcRouter from './GrcRouter'
-import AllPolicies from './AllPolicies'
+import Page from '../components/common/Page'
+// eslint-disable-next-line import/no-named-as-default
+import CreationTab from './CreationTab'
+import PoliciesTab from './PoliciesTab'
+import PolicyDetailsTab from './PolicyDetailsTab'
+import PolicyStatusTab from './PolicyStatusTab'
+import PolicyStatusHistoryTab from './PolicyStatusHistoryTab'
+import PolicyTemplateDetails from './PolicyTemplateDetails'
+import PolicyDetailsByCluster from './PolicyDetailsByCluster'
 import { LocaleContext } from '../components/common/LocaleContext'
 import { AcmHeader, AcmRoute } from '@open-cluster-management/ui-components'
 import WelcomeStatic from './Welcome'
@@ -60,16 +60,21 @@ class App extends React.Component {
     const { match } = this.props
     return (
       <LocaleContext.Provider value={serverProps.context}>
-        <Switch>
-          <Route path="/:url*(/+)" exact strict render={({ location }) => <Redirect to={location.pathname.replace(/\/+$/, '')} />} />
-          {/* Removes duplicate slashes in the middle of the URL */}
-          <Route path="/:url(.*//+.*)" exact strict render={({ match: { params }})=> <Redirect to={`/${params.url.replace(/\/\/+/, '/')}`} />} />
-          <Route path={`${match.url}/all`} exact>
-          <AllPolicies />
-          </Route>
-          <Route path={`${match.url}`} render={() => <GrcRouter />} />
-          <Redirect to={`${config.contextPath}/all`} />
-        </Switch>
+         <Page>
+          <Switch>
+            <Route path="/:url*(/+)" exact strict render={({ location }) => <Redirect to={location.pathname.replace(/\/+$/, '')} />} />
+            {/* Removes duplicate slashes in the middle of the URL */}
+            <Route path="/:url(.*//+.*)" exact strict render={({ match: { params }})=> <Redirect to={`/${params.url.replace(/\/\/+/, '/')}`} />} />
+            <Route path={`${match.url}/all/:namespace/:name/status/:cluster/templates/:template/history`} exact component={PolicyStatusHistoryTab} />
+            <Route path={`${match.url}/all/:namespace/:name/template/:cluster/:apiGroup/:version/:kind/:template`} exact component={PolicyTemplateDetails} />
+            <Route path={`${match.url}/all/:namespace/:name/status`} exact component={PolicyStatusTab} />
+            <Route path={`${match.url}/all/:namespace/:name`} exact component={PolicyDetailsTab} />
+            <Route path={`${match.url}/all`} exact component={PoliciesTab} />
+            <Route path={`${match.url}/create`} exact component={CreationTab} />
+            <Route path={`${match.url}/policy/:clusterName/:name`} component={PolicyDetailsByCluster} />
+            <Redirect to={`${config.contextPath}/all`} />
+          </Switch>
+         </Page>
         <Modal locale={serverProps.context.locale} />
       </LocaleContext.Provider>
     )
