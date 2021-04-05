@@ -280,6 +280,25 @@ export const getTemplateSource = (reverse, parsed) => {
   return ret.join('\n')
 }
 
+export const parseYAMLFromPolicyDiscovered = (policyDiscovered) => {
+  let yaml = ''
+  const policy = policyDiscovered.policy
+  if (policy) {
+    yaml = jsYaml.dump(policy) + '\n'
+  }
+  const placementbindings = policyDiscovered.placementBindings
+  placementbindings.map(pb=>{
+    yaml += '---\n'
+    yaml += jsYaml.dump(pb.raw)
+  })
+  const placementrules = policyDiscovered.placementPolicies
+  placementrules.map(plr=>{
+    yaml += '---\n'
+    yaml += jsYaml.dump(plr.raw)
+  })
+  return yaml
+}
+
 export const parseYAML = (yaml) => {
   let absLine=0
   const parsed = {}

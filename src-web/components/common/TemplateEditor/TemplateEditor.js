@@ -25,7 +25,7 @@ import {
   RadioButton,
   Modal} from 'carbon-components-react'
 import { Spinner, Tooltip } from '@patternfly/react-core'
-import { initializeControlData, cacheUserData, updateControls, parseYAML } from './utils/update-controls'
+import { initializeControlData, cacheUserData, updateControls, parseYAML, parseYAMLFromPolicyDiscovered } from './utils/update-controls'
 import { generateYAML, highlightChanges } from './utils/update-editor'
 import { validateYAML } from './utils/validate-yaml'
 import YamlEditor from './components/YamlEditor'
@@ -66,6 +66,7 @@ export default class TemplateEditor extends React.Component {
     }),
     locale: PropTypes.string,
     onCreate: PropTypes.func.isRequired,
+    policyDiscovered: PropTypes.object,
     template: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
   }
@@ -73,7 +74,7 @@ export default class TemplateEditor extends React.Component {
   static contextType = LocaleContext
 
   static getDerivedStateFromProps(props, state) {
-    const {fetchControl, createControl={}, createAndUpdateControl={}} = props
+    const {fetchControl, createControl={}, createAndUpdateControl={}, policyDiscovered, locale} = props
     const {isLoaded} = fetchControl || {isLoaded:true}
     const {creationStatus, creationMsg} = createControl
     const {createAndUpdateMsg} = createAndUpdateControl
@@ -84,13 +85,22 @@ export default class TemplateEditor extends React.Component {
     } else if (isLoaded) {
       const { template, controlData: initialControlData } = props
       let { controlData, templateYAML, templateObject } = state
-
       // initialize controlData, templateYAML, templateObject
       if (!controlData) {
         controlData = initializeControlData(template, initialControlData)
         templateYAML = generateYAML(template, controlData)
         templateObject = parseYAML(templateYAML).parsed
-        return { controlData, templateYAML, templateObject }
+        let isCustomName = false
+        if (policyDiscovered) {
+          templateYAML = parseYAMLFromPolicyDiscovered(policyDiscovered)
+          templateObject = parseYAML(templateYAML).parsed
+          isCustomName = true
+          if (Object.keys(templateObject).some(item => templateObject[item].length>0)) {
+            controlData = _.cloneDeep(controlData)
+            updateControls(controlData, [], templateObject, locale)
+          }
+        }
+        return { controlData, templateYAML, templateObject, isCustomName }
       }
     }
     return null
@@ -202,6 +212,7 @@ export default class TemplateEditor extends React.Component {
             split="vertical"
             minSize={300}
             maxSize={-500}
+            style={{position:'unset'}}
             ref={this.setSplitPaneRef}
             defaultSize={this.handleSplitterDefault()}
             onChange={this.handleSplitterChange}
@@ -622,7 +633,7 @@ export default class TemplateEditor extends React.Component {
       const controlsSize = this.handleSplitterDefault()
       const rect = this.containerRef.getBoundingClientRect()
       const width = rect.width - controlsSize - 15
-      const height = rect.height - 80
+      const height = rect.height
       this.editor.layout({width, height})
     }
   }
