@@ -805,31 +805,31 @@ export const verifyPolicyInPolicyHistory = (uName) => {
   })
 }
 
-export const verifyPolicyByYAML = (uName, originalYAML, ingoreClusterSelector=true) => {
-  cy.CheckGrcMainPage()
-  cy.get('.grc-view-by-policies-table').within(() => {
-    cy.get('a')
-      .contains(uName)
-      .parents('td')
-      .siblings('td')
-      .last()
-      .click()
-  })
-  .then(() => {
-    cy.get('button').contains('Edit', { matchCase: false }).click()
-  })
-  .then(() => {
-    cy.get('.pf-c-modal-box').within(() => {
-      cy.log(ingoreClusterSelector)
-      // // eslint-disable-next-line cypress/no-assigning-return-values
-      // const acutalYAML = cy.YAMLeditor().first().invoke('getValue')
-      // cy.log(acutalYAML)
-    })
-  })
+// export const verifyPolicyByYAML = (uName, originalYAML, ingoreClusterSelector=true) => {
+//   cy.CheckGrcMainPage()
+//   cy.get('.grc-view-by-policies-table').within(() => {
+//     cy.get('a')
+//       .contains(uName)
+//       .parents('td')
+//       .siblings('td')
+//       .last()
+//       .click()
+//   })
+//   .then(() => {
+//     cy.get('button').contains('Edit', { matchCase: false }).click()
+//   })
+//   .then(() => {
+//     cy.get('.pf-c-modal-box').within(() => {
+//       cy.log(ingoreClusterSelector)
+//       // // eslint-disable-next-line cypress/no-assigning-return-values
+//       // const acutalYAML = cy.YAMLeditor().first().invoke('getValue')
+//       // cy.log(acutalYAML)
+//     })
+//   })
 
-  // after mainpage table action, always return to grc main page
-  cy.CheckGrcMainPage()
-}
+//   // after mainpage table action, always return to grc main page
+//   cy.CheckGrcMainPage()
+// }
 
 export const getPolicyTemplatesNameAndKind = (policyName, policyConfig) => {
   const templates = new Set()
@@ -1016,10 +1016,10 @@ export const action_doTableSearch = (text, inputSelector = null, parentSelector 
   cy.get('div.page-content-container')  // make sure the page is loaded enough
     .then(() => {
       // do the search only if there are resources on the page
-      if (!Cypress.$('#page').find('div.no-resource').length) {
+      // if (!Cypress.$('#page').find('div.no-resource').length) {
         // FIXME - do this search without a force
-        cy.get(inputSelector, {withinSubject: parentSelector}).clear({force: true}).type(text, {force: true})
-      }
+      cy.get(inputSelector, {withinSubject: parentSelector}).clear({force: true}).type(text, {force: true})
+      // }
     })
 }
 
