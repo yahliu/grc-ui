@@ -1,11 +1,3 @@
-/*******************************************************************************
- * Licensed Materials - Property of IBM
- * (c) Copyright IBM Corporation 2019. All Rights Reserved.
- *
- * Note to U.S. Government Users Restricted Rights:
- * Use, duplication or disclosure restricted by GSA ADP Schedule
- * Contract with IBM Corp.
- *******************************************************************************/
 /* Copyright (c) 2020 Red Hat, Inc. */
 /* Copyright Contributors to the Open Cluster Management project */
 
@@ -15,17 +7,10 @@ import React from 'react'
 import SplitPane from 'react-split-pane'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import {
-  Notification,
-  TextInput,
-  Checkbox,
-  DropdownV2,
-  MultiSelect,
-  RadioButtonGroup,
-  RadioButton,
-  Modal} from 'carbon-components-react'
-import { Spinner, Tooltip } from '@patternfly/react-core'
+import { Checkbox, ButtonVariant, Spinner, Select, SelectVariant, SelectOption, TextInput, ValidatedOptions, Radio } from '@patternfly/react-core'
+import { AcmModal, AcmButton, AcmAlert } from '@open-cluster-management/ui-components'
 import { initializeControlData, cacheUserData, updateControls, parseYAML, dumpYAMLFromPolicyDiscovered, dumpYAMLFromTemplateObject } from './utils/update-controls'
+import { BlueInfoCircleIcon } from '../Icons'
 import { generateYAML, highlightChanges } from './utils/update-editor'
 import { validateYAML } from './utils/validate-yaml'
 import YamlEditor from './components/YamlEditor'
@@ -36,7 +21,7 @@ import { LocaleContext } from '../../../components/common/LocaleContext'
 import _ from 'lodash'
 
 const tempCookie = 'template-editor-open-cookie'
-const diagramIconsInfoStr = '#diagramIcons_info'
+// const diagramIconsInfoStr = '#diagramIcons_info'
 // Regex to test valid policy name format
 // (it's 63 characters for `${policyNS}.${policyName}`)
 const policyNameRegex = RegExp(/^[a-z0-9][a-z0-9-.]{0,61}[a-z0-9]$/)
@@ -80,9 +65,9 @@ export default class TemplateEditor extends React.Component {
     const {creationStatus, creationMsg} = createControl
     const {createAndUpdateMsg} = createAndUpdateControl
     if (creationStatus === 'ERROR') {
-      return {updateMsgKind: 'error', updateMessage: creationMsg}
+      return {updateMsgKind: 'danger', updateMessage: creationMsg}
     } else if (createAndUpdateMsg) {
-      return {updateMsgKind: 'error', updateMessage: createAndUpdateMsg}
+      return {updateMsgKind: 'danger', updateMessage: createAndUpdateMsg}
     } else if (isLoaded) {
       const { template, controlData: initialControlData } = props
       let { controlData, templateYAML, templateObject } = state
@@ -118,6 +103,7 @@ export default class TemplateEditor extends React.Component {
       showEditor,
       updateMessage: '',
       resetInx: 0,
+      controlState: {},
     }
     this.multiSelectCmpMap = {}
     this.parseDebounced = _.debounce(()=>{
@@ -181,10 +167,10 @@ export default class TemplateEditor extends React.Component {
 
     if (isFailed) {
       if (error.name === 'PermissionError') {
-        return <Notification title='' className='overview-notification' kind='error'
+        return <AcmAlert isInline={true} variant='danger'
           subtitle={msgs.get('error.permission.denied.create', locale)} />
       }
-      return <Notification title='' className='overview-notification' kind='error'
+      return <AcmAlert isInline={true} variant='danger'
         subtitle={msgs.get('overview.error.default', locale)} />
     }
 
@@ -283,15 +269,11 @@ export default class TemplateEditor extends React.Component {
           handleClick()
         }
       }
-
       return <div role='button' onClick={handleClick}
         tabIndex="0" aria-label={updateMessage} onKeyDown={handleKeyPress}>
         <div>
-          <Notification
-            key={updateMessage}
-            kind={updateMsgKind}
+          <AcmAlert variant={updateMsgKind} isInline={true}
             title={msgs.get(`${updateMsgKind}.create.policy`, locale)}
-            iconDescription=''
             subtitle={validPolicyName
               ? updateMessage
               : <span>
@@ -303,8 +285,6 @@ export default class TemplateEditor extends React.Component {
                   <br />{msgs.get('error.policy.nameFormat.Rule4', locale)}
                 </span>
             }
-            className='persistent notification'
-            onCloseButtonClick={this.handleUpdateMessageClosed}
           />
         </div>
       </div>
@@ -347,55 +327,41 @@ export default class TemplateEditor extends React.Component {
           <TextInput
             aria-label={id}
             id={id}
-            invalid={!validPolicyName || duplicateName}
-            hideLabel
-            labelText=''
-            spellCheck={false}
             value={value}
-            onChange={this.onChange.bind(this, id)} />
+            onChange={this.onChange.bind(this, id)}
+            isRequired={mustExist}
+            validated={!validPolicyName?ValidatedOptions.error:duplicateName?ValidatedOptions.warning:ValidatedOptions.default}
+            type="text"
+          />
         </div>
       </React.Fragment>
     )
   }
 
   renderCheckbox(control) {
-    const {id, name, description, checked, available} = control
+    const {id, name, description, checked, available, active} = control
     if (id === 'remediation') {
       const radioButtons=[]
       available.forEach((item) => {
-        radioButtons.push(<RadioButton
-          aria-label={`${id}-${item}`}
-          id={`${id}-${item}`}
-          key={`${id}-${item}`}
-          className='radio-button'
-          labelText={msgs.get(`creation.view.policy.${item}`)}
-          value={item === 'enforce' ? 'true' : 'false'}
-        />)
-      })
+        radioButtons.push(<Radio
+            isChecked={item===active}
+            name={`${id}-${item}`}
+            onChange={this.handleChange.bind(this, id)}
+            label={msgs.get(`creation.view.policy.${item}`)}
+            aria-label={`${id}-${item}`}
+            id={`${id}-${item}`}
+            key={`${id}-${item}`}
+            value={item} /> )
+        })
       return (
         <React.Fragment>
           <div className='creation-view-controls-radiobutton'>
             <div className="creation-view-controls-textbox-title">
               {name}
               <div className='creation-view-controls-must-exist'>*</div>
-              <Tooltip content={description}>
-                <svg className='info-icon'>
-                  <use href={diagramIconsInfoStr} ></use>
-                </svg>
-              </Tooltip>
+              <BlueInfoCircleIcon tooltip={description} />
             </div>
-            <RadioButtonGroup
-              aria-label={id}
-              id={id}
-              name='radio-button-group'
-              className='radio-button-group'
-              defaultSelected='inform'
-              valueSelected={checked.toString()}
-              orientation='vertical'
-              onChange={this.onChange.bind(this, id)}
-            >
-              {radioButtons}
-            </RadioButtonGroup>
+            {radioButtons}
           </div>
         </React.Fragment>
       )
@@ -404,34 +370,25 @@ export default class TemplateEditor extends React.Component {
       <React.Fragment>
         <div className="creation-view-controls-textbox-title">
           {name}
-          <Tooltip content={description}>
-            <svg className='info-icon'>
-              <use href={diagramIconsInfoStr} ></use>
-            </svg>
-          </Tooltip>
+          <BlueInfoCircleIcon tooltip={description} />
         </div>
         <div className='creation-view-controls-checkbox'>
-          <Checkbox
-            aria-label={id}
-            id={id}
-            className='checkbox'
-            hideLabel
-            labelText=''
-            checked={checked}
-            onChange={this.onChange.bind(this, id)} />
-            <div>{msgs.get(`description.title.${id}`)}</div>
+          <Checkbox aria-label={id} id={id} isChecked={checked} onChange={this.onChange.bind(this, id)} />
+          <div>{msgs.get(`description.title.${id}`)}</div>
         </div>
       </React.Fragment>
     )
   }
-
+  onToggle = (id, isOpen) => {
+    this.setState((state) => {
+      state.controlState[id] = { isOpen }
+      return state
+    })
+  }
   renderSingleSelect(control) {
     const {locale} = this.props
-    const {id, name, available, description, isOneSelection, mustExist} = control
-    let { active } = control
-    // for DropdownV2, empty initialSelectedItem means no pre-selected
-    active = (active && typeof active === 'string') ? active : ''
-    const key = `${id}-${active}`
+    const {id, name, available, description, isOneSelection, mustExist, active} = control
+    const {controlState} = this.state
     return (
       <React.Fragment>
         <div className='creation-view-controls-singleselect'
@@ -439,29 +396,40 @@ export default class TemplateEditor extends React.Component {
           <div className="creation-view-controls-multiselect-title">
             {name}
             {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
-            <Tooltip content={description}>
-              <svg className='info-icon'>
-                <use href={diagramIconsInfoStr} ></use>
-              </svg>
-            </Tooltip>
+            <BlueInfoCircleIcon tooltip={description} />
           </div>
-          <DropdownV2
-            aria-label={id}
-            key={key}
-            label={msgs.get('policy.create.namespace.tooltip', locale)}
-            items={available}
-            onChange={this.handleChange.bind(this, id)}
-            initialSelectedItem={active} />
+          <Select
+            variant={SelectVariant.typeahead}
+            onToggle={this.onToggle.bind(this, id)}
+            onSelect={(event, selection)=>{
+              controlState[id] = {
+                selected: selection,
+                isOpen: false,
+              }
+              this.setState({controlState})
+              this.handleChange.bind(this, id)(selection, event)
+            }}
+            selections={active}
+            aria-label={msgs.get('policy.create.namespace.tooltip', locale)}
+            toggleAriaLabel={id}
+            placeholderText={msgs.get('policy.create.namespace.tooltip', locale)}
+            isOpen={controlState[id]&&controlState[id].isOpen}
+          >
+            {available.map((option) => (
+              <SelectOption isDisabled={false} key={option} value={option} />
+            ))}
+          </Select>
         </div>
       </React.Fragment>
     )
   }
 
   renderMultiSelect(control) {
-    const {id, name, placeholder:ph, description, isOneSelection, mustExist} = control
+    const {id, name, placeholder:ph, description, isOneSelection, mustExist, active=[]} = control
+    const {controlState} = this.state
 
     // see if we need to add user additions to available (from editing the yaml file)
-    const {active=[], userData, userMap, hasCapturedUserSource} = control
+    const {userData, userMap, hasCapturedUserSource} = control
     let {available, availableMap} = control
     if (userData) {
       if (!hasCapturedUserSource) {
@@ -490,7 +458,7 @@ export default class TemplateEditor extends React.Component {
     }
 
     // change key if active changes so that carbon component is re-created with new initial values
-    const key = `${id}-${active.join('-')}`
+    // const key = `${id}-${active.join('-')}`
     return (
       <React.Fragment>
         <div className='creation-view-controls-multiselect'
@@ -498,20 +466,42 @@ export default class TemplateEditor extends React.Component {
           <div className="creation-view-controls-multiselect-title">
             {name}
             {mustExist ? <div className='creation-view-controls-must-exist'>*</div> : null}
-            <Tooltip content={description}>
-              <svg className='info-icon'>
-                <use href={diagramIconsInfoStr} ></use>
-              </svg>
-            </Tooltip>
+            <BlueInfoCircleIcon tooltip={description} />
           </div>
-          <MultiSelect.Filterable
-            aria-label={id}
-            key={key}
-            items={available}
-            initialSelectedItems={active}
-            placeholder={placeholder}
-            itemToString={item=>item}
-            onChange={this.handleChange.bind(this, id)} />
+          <Select
+            variant={SelectVariant.typeaheadMulti}
+            onToggle={this.onToggle.bind(this, id)}
+            onSelect={(event, selection)=>{
+              if (!active.includes(selection)) {
+                active.push(selection)
+              } else {
+                _.remove(active, (item) => item === selection)
+              }
+              controlState[id] = {
+                selected: active,
+                isOpen: false,
+              }
+              this.setState({controlState})
+              this.handleChange.bind(this, id)(active, event)
+            }}
+            onClear={() => {
+              controlState[id] = {
+                selected: [],
+                isOpen: false,
+              }
+              this.setState({controlState})
+              this.handleChange.bind(this, id)([], event)
+            }}
+            selections={active}
+            isOpen={controlState[id]&&controlState[id].isOpen}
+            aria-label={placeholder}
+            toggleAriaLabel={id}
+            placeholderText={placeholder}
+          >
+            {available.map((option) => (
+              <SelectOption isDisabled={false} key={option} value={option} />
+            ))}
+          </Select>
         </div>
       </React.Fragment>
     )
@@ -532,33 +522,11 @@ export default class TemplateEditor extends React.Component {
     )
   }
 
-  handleChange(field, evt) {
-    const multiSelect = this.multiSelectCmpMap[field]
-
-    // if this multiselect has an isOneSelection option, close on any selection
-    if (multiSelect) {
-      // if menu is still open don't update until its gone
-      // unfortunately MultiSelect.Filterable doesn't have an onClose
-      const menu = multiSelect.getElementsByClassName('bx--list-box__menu')
-      if (menu && menu.length>0) {
-        multiSelect.selectedItems = evt.selectedItems
-        if (!multiSelect.observer) {
-          multiSelect.observer = new MutationObserver(() => {
-            this.onChange(field, {selectedItems: multiSelect.selectedItems})
-            multiSelect.observer.disconnect()
-            delete multiSelect.observer
-          })
-          multiSelect.observer.observe(menu[0].parentNode, {
-            childList: true
-          })
-        }
-        return
-      }
-    }
-    this.onChange(field, evt)
+  handleChange(field, evt, other) {
+    this.onChange(field, evt, other)
   }
 
-  onChange(field, evt) {
+  onChange(field, evt, other) {
     const { locale } = this.props
     let updateName = false
     let { isCustomName } = this.state
@@ -566,23 +534,24 @@ export default class TemplateEditor extends React.Component {
     const control = controlData.find(({id})=>id===field)
     switch (control.type) {
     case 'text':
-      control.active = evt.target.value
+      control.active = evt
       isCustomName = field==='name'
       break
     case 'singleselect':
-      control.active = evt.selectedItem
+      control.active = evt
       break
     case 'multiselect':
-      control.active = evt.selectedItems
+      control.active = evt
       // if user was able to select something that automatically
       // generates the name, blow away the user name
       updateName = !isCustomName && control.updateNamePrefix
       break
     case 'checkbox':
-      if (typeof(evt) === 'string') {
-        evt = (evt === 'true')
+      if (control.name === 'Remediation') {
+        control.active = other.currentTarget.value
+        break
       }
-      control.active = evt ? control.available[1] : control.available[0]
+      control.active = evt
       control.checked = evt
       break
     }
@@ -601,12 +570,11 @@ export default class TemplateEditor extends React.Component {
         nname.active = cname.toLowerCase()
       }
     }
-
     const {template} = this.props
     const newTemplateYAML = generateYAML(template, controlData)
     const { parsed: newTemplateObject, exceptions }= parseYAML(newTemplateYAML)
-    const finalTemplateObject = _.mergeWith(templateObject, newTemplateObject, (objValue, srcValue) => {
-      if (_.isArray(objValue) && _.isArray(srcValue) && srcValue.length === 0) {
+    const finalTemplateObject = _.mergeWith(templateObject, newTemplateObject, (objValue, srcValue, key) => {
+      if (key === 'policy-templates' || key === 'matchExpressions') {
         return srcValue
       }
       return undefined
@@ -794,7 +762,7 @@ export default class TemplateEditor extends React.Component {
     const errorMsg = exceptions.length>0 ? exceptions[0].text : null
     const { validPolicyName } = this.state
     this.setState({
-      updateMsgKind: (errorMsg || !validPolicyName)?'error':'success',
+      updateMsgKind: (errorMsg || !validPolicyName)?'danger':'success',
       updateMessage: errorMsg||msgs.get(message, locale)
     })
     // We're heading to 'Create', so we no longer need the duplicate name alert
@@ -844,28 +812,53 @@ export default class TemplateEditor extends React.Component {
       }
     }
     return (
-      <Modal
-        danger
+      <AcmModal
+        titleIconVariant='danger'
+        variant='medium'
         id='policy-update-modal'
-        open={this.state.canOpenModal}
-        primaryButtonText={msgs.get('update.apply', locale)}
-        secondaryButtonText={msgs.get('update.cancel', locale)}
-        modalLabel={msgs.get('update.existing', locale)}
-        modalHeading={msgs.get('update.existing', locale)}
-        onRequestClose={() => {
+        isOpen={this.state.canOpenModal}
+        showClose={true}
+        onClose={() => {
           this.setState({ canOpenModal: false })
         }}
-        onSecondarySubmit={() => {
-          this.setState({ canOpenModal: false })
-        }}
-        onRequestSubmit={() => {
-          this.handleUpdateResource(this.state.toCreate, this.state.toUpdate)
-          this.setState({ canOpenModal: false })
-        }}
-        role='region'
-        aria-label={'policy-update'}>
+        title={msgs.get('update.existing', locale)}
+        actions={[
+          <AcmButton key="cancel" variant={ButtonVariant.link} onClick={() => {
+            this.setState({ canOpenModal: false })
+          }}>
+            {msgs.get('update.cancel', locale)}
+          </AcmButton>,
+          <AcmButton key="confirm" variant={ButtonVariant.primary} onClick={() => {
+            this.handleUpdateResource(this.state.toCreate, this.state.toUpdate)
+            this.setState({ canOpenModal: false })
+          }}>
+            {msgs.get('update.apply', locale)}
+          </AcmButton>,
+        ]}>
         <p>{`${msgs.get('update.question', locale)} ${msg}`}</p>
-      </Modal>
+      </AcmModal>
+      // <Modal
+      //   danger
+      //   id='policy-update-modal'
+      //   open={this.state.canOpenModal}
+      //   primaryButtonText={msgs.get('update.apply', locale)}
+      //   secondaryButtonText={msgs.get('update.cancel', locale)}
+      //   modalLabel={msgs.get('update.existing', locale)}
+      //   modalHeading={msgs.get('update.existing', locale)}
+      //   onRequestClose={() => {
+      //     this.setState({ canOpenModal: false })
+      //   }}
+      //   onSecondarySubmit={() => {
+      //     this.setState({ canOpenModal: false })
+      //   }}
+      //   onRequestSubmit={() => {
+      //     this.handleUpdateResource(this.state.toCreate, this.state.toUpdate)
+      //     this.setState({ canOpenModal: false })
+      //   }}
+      //   role='region'
+      //   aria-label={'policy-update'}>
+      //   <p>{`${msgs.get('update.question', locale)} ${msg}`}</p>
+      // </Modal>
     )
   }
 
