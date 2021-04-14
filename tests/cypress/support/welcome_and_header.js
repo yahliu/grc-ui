@@ -59,6 +59,12 @@ export const leftNav = {
         cy.get('#page-sidebar').should('not.be.visible')
         cy.get('#nav-toggle').click()
     },
+    validatePerspective: () => {
+        cy.get('#toggle-perspective').should('be.visible')
+    },
+    validateNoPerspective: () => {
+        cy.get('#toggle-perspective').should('not.be.visible')
+    },
     goToHome: () => {
         cy.get('#page-sidebar').contains('Home').click()
         cy.get('#page-sidebar').contains('Welcome').should('not.be.visible')
@@ -97,6 +103,11 @@ export const userMenu = {
         cy.url().should('equal', Cypress.config().baseUrl + '/search/')
         cy.visit('/multicloud/welcome')
     },
+    openCreate: () => {
+        cy.get('[aria-label="create-button"]').click()
+        cy.url().should('equal', Cypress.config().baseUrl + '/k8s/all-namespaces/import')
+        cy.visit('/multicloud/welcome')
+    },
     openInfo: () => {
         cy.get('[data-test="about-dropdown"]').click()
         cy.get('[data-test="about-dropdown"] li').should('be.visible').and('have.length', 2)
@@ -117,5 +128,10 @@ export const userMenu = {
         cy.get('[data-test="user-dropdown"]').click()
         cy.get('#configure').should('not.exist')
         cy.get('#logout').should('not.exist')
+        cy.request(Cypress.config().baseUrl + '/multicloud/common/configure').as('configureReq')
+        cy.get('@configureReq').should((response) => {
+            expect(response.body).to.have.property('token_endpoint')
+            expect(response.body['token_endpoint']).to.include('oauth/token')
+        })
     }
 }
