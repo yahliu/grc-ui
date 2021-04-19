@@ -24,8 +24,11 @@ import '../../../scss/policy-status-view.scss'
 class PolicyStatusView extends React.Component {
   constructor(props) {
     super(props)
+    const indexQuery = new URLSearchParams(location.search.substring(1)).get('index')
+    const toggleIndex = indexQuery && parseInt(indexQuery, 10) < 2 ? parseInt(indexQuery, 10) : 0
     this.state= {
-      toggleIndex: 0
+      toggleIndex,
+      toggleIndexQueryEnabled: Boolean(indexQuery !== null)
     }
     this.toggleClick = this.toggleClick.bind(this)
   }
@@ -77,6 +80,8 @@ class PolicyStatusView extends React.Component {
             <PatternFlyTable
               {...tableDataByClusters}
               noResultMsg={msgs.get('table.search.no.results', locale)}
+              searchQueryEnabled
+              searchQueryKey='clusterFilter'
             />
           </div>}
           {toggleIndex===1 && tableDataByTemplate.map((data)=> {
@@ -103,14 +108,18 @@ class PolicyStatusView extends React.Component {
 
   toggleClick(isSelected, event) {
     if (isSelected) {
-      switch(event.currentTarget.id) {
-      case 'policy-status-templates':
-        this.setState({toggleIndex: 1})
-        break
-      case 'policy-status-clusters':
-      default:
-        this.setState({toggleIndex: 0})
-        break
+      const eventArray = [
+        'policy-status-clusters',
+        'policy-status-templates'
+      ]
+      const index = eventArray.indexOf(event.currentTarget.id)
+      const toggleIndex = index < 0 ? 0 : index
+      this.setState({toggleIndex})
+      // Only update the URL if there was a query to begin with
+      if (this.state.toggleIndexQueryEnabled) {
+        const toggleQuery = new URLSearchParams(location.search.substring(1))
+        toggleQuery.set('index', toggleIndex)
+        window.history.replaceState({}, document.title, `${location.origin}${location.pathname}?${toggleQuery.toString()}`)
       }
     }
   }
@@ -140,7 +149,8 @@ function groupByTemplate(status, locale) {
 
 PolicyStatusView.propTypes = {
   items: PropTypes.array,
-  userAccess: PropTypes.array
+  searchValue: PropTypes.string,
+  userAccess: PropTypes.array,
 }
 
 const mapStateToProps = (state) => {

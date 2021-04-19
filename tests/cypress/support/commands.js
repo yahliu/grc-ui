@@ -6,8 +6,7 @@ import 'cypress-wait-until'
 import { pageLoader, isPolicyStatusAvailable, isClusterPolicyStatusAvailable, isClusterTemplateStatusAvailable,
          action_doTableSearch, action_clearTableSearch, action_createPolicyFromSelection, action_verifyPolicyInListing,
          action_verifyPolicyNotInListing, action_actionPolicyActionInListing, action_createPolicyFromYAML,
-         action_verifyPolicyInPolicyDetails, action_verifyPolicyInPolicyDetailsTemplates,
-         action_verifyPlacementRuleInPolicyDetails, action_verifyPlacementBindingInPolicyDetails,
+         action_verifyPolicyInPolicyDetails,
          action_verifyViolationsInPolicyStatusClusters, action_verifyViolationsInPolicyStatusTemplates,
          action_verifyPolicyDetailsInCluster, action_verifyPolicyTemplatesInCluster,
          action_verifyPolicyViolationDetailsInCluster, action_verifyPolicyViolationDetailsInHistory,
@@ -304,18 +303,6 @@ Cypress.Commands.add('createPolicyFromYAML', (policyYAML, create=true) => {
 
 Cypress.Commands.add('verifyPolicyInPolicyDetails', (uName, policyConfig, enabled='enabled', violationsCounter='', targetStatus = null) => {
   cy.then(() => action_verifyPolicyInPolicyDetails(uName, policyConfig, enabled, violationsCounter, targetStatus))
-})
-
-Cypress.Commands.add('verifyPolicyInPolicyDetailsTemplates', (uName, policyConfig) => {
-  cy.then(() => action_verifyPolicyInPolicyDetailsTemplates(uName, policyConfig))
-})
-
-Cypress.Commands.add('verifyPlacementRuleInPolicyDetails', (uName, policyConfig) => {
-  cy.then(() => action_verifyPlacementRuleInPolicyDetails(uName, policyConfig))
-})
-
-Cypress.Commands.add('verifyPlacementBindingInPolicyDetails', (uName, policyConfig) => {
-  cy.then(() => action_verifyPlacementBindingInPolicyDetails,(uName, policyConfig))
 })
 
 Cypress.Commands.add('verifyViolationsInPolicyStatusClusters', (policyName, policyConfig, clusterViolations, violationPatterns, clusters = undefined) => {

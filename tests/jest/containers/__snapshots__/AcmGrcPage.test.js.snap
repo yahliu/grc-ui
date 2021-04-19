@@ -12244,6 +12244,8 @@ exports[`AcmGrcPage container should render ALL_POLICIES page  1`] = `
                                                 ]
                                               }
                                               searchPlaceholder="Find policies"
+                                              searchQueryEnabled={false}
+                                              searchQueryKey="searchFilter"
                                               searchValue=""
                                               searchable={true}
                                               sortBy={
@@ -25748,6 +25750,9 @@ exports[`AcmGrcPage container should render POLICY_STATUS page  1`] = `
                                         ]
                                       }
                                       searchPlaceholder="Find"
+                                      searchQueryEnabled={true}
+                                      searchQueryKey="clusterFilter"
+                                      searchValue=""
                                       searchable={true}
                                       sortBy={
                                         Object {
@@ -35659,6 +35664,9 @@ exports[`AcmGrcPage container should render POLICY_STATUS_HISTORY page  1`] = `
                                     ]
                                   }
                                   searchPlaceholder="Find"
+                                  searchQueryEnabled={false}
+                                  searchQueryKey="searchFilter"
+                                  searchValue=""
                                   searchable={true}
                                   sortBy={
                                     Object {
@@ -46382,6 +46390,9 @@ status:
                                     ]
                                   }
                                   searchPlaceholder="Find"
+                                  searchQueryEnabled={false}
+                                  searchQueryKey="searchFilter"
+                                  searchValue=""
                                   searchable={true}
                                   sortBy={
                                     Object {

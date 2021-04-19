@@ -35,7 +35,6 @@ export class CreationTab extends React.Component {
     handleCreateAndUpdateResources: PropTypes.func,
     handleCreateResources: PropTypes.func,
     handleFetchResource: PropTypes.func,
-    history: PropTypes.object.isRequired,
     match: PropTypes.object,
     mutateErrorMsg: PropTypes.string,
     mutatePBErrorMsg: PropTypes.string,
@@ -174,7 +173,7 @@ export class CreationTab extends React.Component {
   }
 
   render () {
-    const { history, mutateStatus, mutateErrorMsg, mutatePBErrorMsg, mutatePRErrorMsg, updateStatus, userAccess,
+    const { mutateStatus, mutateErrorMsg, mutatePBErrorMsg, mutatePRErrorMsg, updateStatus, userAccess,
       match : {
         params: {
           name,
@@ -233,7 +232,7 @@ export class CreationTab extends React.Component {
                 controls={
                   <React.Fragment>
                     <AcmButton id='cancel' variant='secondary'
-                      onClick={() => history.push(`${config.contextPath}/all`)}>
+                      onClick={() => this.handleCancel()}>
                       {msgs.get('button.cancel', locale)}
                     </AcmButton>
                     <AcmButton id={isEdit?'edit':'create'}
