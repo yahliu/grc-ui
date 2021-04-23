@@ -15,7 +15,7 @@
 import React from 'react'
 import _ from 'lodash'
 import msgs from '../../nls/platform.properties'
-import { getAge, getLabels } from '../../lib/client/resource-helper'
+import { getLabels } from '../../lib/client/resource-helper'
 import { Link } from 'react-router-dom'
 import StatusField from '../components/common/StatusField'
 import { Label, LabelGroup } from '@patternfly/react-core'
@@ -230,233 +230,6 @@ export default {
       },
     ]
   },
-  policyTemplatesKeys: {
-    title: 'policy.template.details',
-    headerRows: ['description.title.name', 'description.title.last.transition', 'description.title.templateType'],
-    rows: [
-      {
-        cells: [
-          {
-            resourceKey: 'name',
-          },
-          {
-            resourceKey: 'lastTransition',
-            transformFunction: getAge
-          },
-          {
-            resourceKey: 'templateType',
-          }
-        ]
-      }
-    ]
-  },
-  policyRules: {
-    title: 'table.header.rules',
-    resourceKey: 'rules',
-    defaultSortField: 'ruleUID',
-    normalizedKey: 'ruleUID',
-    tableKeys: [
-      {
-        msgKey: 'table.header.name',
-        resourceKey: 'ruleUID',
-        key: 'ruleUID',
-      },
-      {
-        msgKey: 'table.header.templateType',
-        resourceKey: 'templateType',
-        key: 'templateType',
-      },
-      {
-        msgKey: 'table.header.complianceType',
-        resourceKey: 'complianceType',
-        key: 'complianceType',
-      },
-      {
-        msgKey: 'table.header.apiGroups',
-        resourceKey: 'apiGroups',
-        key: 'apiGroups',
-        transformFunction: getAPIGroups
-      },
-      {
-        msgKey: 'table.header.ruleVerbs',
-        resourceKey: 'verbs',
-        key: 'verbs',
-        transformFunction: getRuleVerbs
-      },
-      {
-        msgKey: 'table.header.resources',
-        resourceKey: 'resources',
-        key: 'resources',
-      },
-    ],
-  },
-  policyViolations: {
-    resourceKey: 'violations',
-    title: 'table.header.violation.detail',
-    defaultSortField: 'name',
-    normalizedKey: 'name',
-    tableKeys: [
-      {
-        msgKey: 'table.header.name',
-        resourceKey: 'name',
-        key: 'name',
-      },
-      {
-        msgKey: 'table.header.cluster',
-        resourceKey: 'cluster',
-        key: 'cluster',
-        transformFunction: formLinkToCluster,
-      },
-      {
-        msgKey: 'table.header.message',
-        resourceKey: 'message',
-        key: 'message',
-        transformFunction: formMessageLink,
-      },
-      {
-        msgKey: 'table.header.timestamp',
-        resourceKey: 'timestamp',
-        key: 'timestamp',
-        transformFunction: getAge,
-      },
-    ],
-  },
-  policyInfoKeys: {
-    title: 'policy.details',
-    headerRows: ['type', 'detail'],
-    rows: [
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.name',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'name'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'table.header.message',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'message'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.status',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'status'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.remediation',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'remediation'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.exclude_namespace',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'detail.exclude_namespace',
-            transformFunction: getExcludeNamespace
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.include_namespace',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'detail.include_namespace',
-            transformFunction: getIncludeNamespace
-          }
-        ]
-      },
-    ]
-  },
-  policyDetailKeys: {
-    title: 'policy.details',
-    headerRows: ['type', 'detail'],
-    rows: [
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.name',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'metadata.name'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'table.header.cluster',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'cluster'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'table.header.message',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'status.details',
-            transformFunction: getAggregatedMessage,
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.status',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'status.compliant'
-          }
-        ]
-      },
-      {
-        cells: [
-          {
-            resourceKey: 'description.title.remediation',
-            type: 'i18n'
-          },
-          {
-            resourceKey: 'remediation'
-          }
-        ]
-      },
-    ]
-  },
   policyPolicyTemplates: {
     title: 'table.header.policyTemplates',
     defaultSortField: 'name',
@@ -627,11 +400,11 @@ export function getDecisionList(policy, locale) {
   // Push lists of clusters along with status icon, heading, and overflow badge
   const statusList = []
   for (const status of Object.keys(clusterList)) {
+    const statusMsg = msgs.get(`table.cell.${status}`, locale)
     statusList.push(
       <div key={`${status}-status-container`} className='status-container'>
         <div key={`${status}-status-heading`} className='status-heading'>
-          <StatusField status={status} text='' />
-          <span>{msgs.get(`table.cell.${status}`, locale)}: </span>
+          <StatusField status={status} text={`${statusMsg}:`} />
         </div>
         <div key={`${status}-status-list`} className='status-list'>
           <LabelGroup
@@ -640,10 +413,12 @@ export function getDecisionList(policy, locale) {
           >
             {Array.from(clusterList[status]).map((cluster) =>{
                 // If there's no status, there's no point in linking to the status page
-                let href='', color='grey'
+                let href=null, color='grey'
                 if (status !== 'nostatus') {
                   href=`${config.contextPath}/all/${policy.metadata.namespace}/${policy.metadata.name}/status?clusterFilter=${cluster}&index=0`
                   color='blue'
+                } else {
+                  href=`${config.contextPath}/all/${policy.metadata.namespace}/${policy.metadata.name}`
                 }
                 // Return links to status page, filtered by selected cluster
                 return (<span key={`${cluster}-link`}>
@@ -651,7 +426,15 @@ export function getDecisionList(policy, locale) {
                     key={`${cluster}-link`}
                     color={color}
                     variant='outline'
-                    href={href}
+                    render={({
+                        className,
+                        content,
+                        componentRef
+                      })=>
+                        <Link to={href} className={className} innerRef={componentRef}>
+                          {content}
+                        </Link>
+                    }
                   >
                     {cluster}
                   </Label>
@@ -668,79 +451,4 @@ export function getDecisionList(policy, locale) {
     return '-'
   }
   return statusList
-}
-
-export function formLinkToCluster(item){
-  if(item && item.cluster && item.consoleURL){
-    return <a target='_blank' rel='noopener noreferrer' href={`${item.consoleURL}`}>{item.cluster}</a>
-  }
-  else if (item && item.cluster) {
-    return item.cluster
-  }
-  return '-'
-}
-
-export function formMessageLink(item, locale){
-  if(item && item.message){
-    if (item.policyNamespace) {
-      return <div>
-        {`${item.message} `}
-        <Link to={`${config.contextPath}/all/${item.policyNamespace}/${item.policyName}/template/${item.cluster}/${item.apiVersion}/${item.kind}/${item.name}`}>
-          {msgs.get('table.actions.view.details', locale)}
-        </Link>
-      </div>
-    }
-    return <div>
-      {item.message}
-    </div>
-
-  }
-  return '-'
-}
-
-export function getAggregatedMessage(item) {
-  const details = _.get(item, 'status.details', [])
-  let message = ''
-  details.forEach((detail) => {
-    const policyName = _.get(detail, 'templateMeta.name','-')
-    if(_.get(detail, 'compliant') === 'Compliant') {
-      message += `${policyName}: Compliant, `
-    } else {
-      const policyMessage = _.get(detail, 'history[0].message','-')
-      message += `${policyName}: ${policyMessage} `
-    }
-  })
-  return message
-}
-
-export function getAPIGroups(item) {
-  const apiGroups = _.get(item, 'apiGroups')
-  if (apiGroups) {
-    return apiGroups.join(', ')
-  }
-  return '-'
-}
-
-export function getRuleVerbs(item) {
-  const verbs = _.get(item, 'verbs')
-  if (verbs) {
-    return verbs.join(', ')
-  }
-  return '-'
-}
-
-export function getExcludeNamespace(item) {
-  const namespace = _.get(item, 'detail.exclude_namespace')
-  if (namespace) {
-    return namespace.join(', ')
-  }
-  return '-'
-}
-
-export function getIncludeNamespace(item) {
-  const namespace = _.get(item, 'detail.include_namespace')
-  if (namespace) {
-    return namespace.join(', ')
-  }
-  return '-'
 }
