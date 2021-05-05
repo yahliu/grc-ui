@@ -13,7 +13,7 @@ exports[`hcm-compliances - createComplianceLink should return valid compliance l
 
 exports[`hcm-compliances - createComplianceLink should return valid compliance link 3`] = `
 <Link
-  to="undefined/all/testCreateComplianceLink3"
+  to="undefined/all/testNamespace3/testCreateComplianceLink3"
 >
   testCreateComplianceLink3
 </Link>
