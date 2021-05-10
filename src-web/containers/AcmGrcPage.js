@@ -6,8 +6,8 @@
 
 import React from 'react'
 import { useQuery } from '@apollo/client'
-import { AcmPageContent, AcmPageHeader, AcmAutoRefreshSelect, AcmRefreshTime, AcmSecondaryNav, AcmAlert } from '@open-cluster-management/ui-components'
-import { Spinner } from '@patternfly/react-core'
+import { AcmPageContent, AcmPageHeader, AcmAutoRefreshSelect, AcmRefreshTime, AcmSecondaryNav, AcmAlert, AcmPage } from '@open-cluster-management/ui-components'
+import { Spinner, PageSection } from '@patternfly/react-core'
 import { useHistory, useParams } from 'react-router-dom'
 
 import { INITIAL_POLL_INTERVAL, REFRESH_INTERVALS, REFRESH_INTERVAL_COOKIE } from '../utils/constants'
@@ -25,59 +25,66 @@ function AcmGrcPage(props) {
   }
   return (
     <React.Fragment>
-      <AcmPageHeader title={page.title}
-        breadcrumb={page.breadcrumb}
-        navigation={page.navigation && (
-          <AcmSecondaryNav>
-            {page.navigation.map(nav => nav(allProps))}
-          </AcmSecondaryNav>
-        )}
-        controls={
-          <React.Fragment>
-            {page.refreshControls && (
+      <AcmPage
+        header={
+          <AcmPageHeader title={page.title}
+            breadcrumb={page.breadcrumb}
+            navigation={page.navigation && (
+              <AcmSecondaryNav>
+                {page.navigation.map(nav => nav(allProps))}
+              </AcmSecondaryNav>
+            )}
+            controls={
               <React.Fragment>
-                <AcmAutoRefreshSelect refetch={refetch}
-                  refreshIntervals={REFRESH_INTERVALS}
-                  refreshIntervalCookie={REFRESH_INTERVAL_COOKIE}
-                  initPollInterval={INITIAL_POLL_INTERVAL} />
-                <AcmRefreshTime timestamp={timestamp} reloading={loading} />
-              </React.Fragment>
-            )}
-            <div className='page-header-button-group'>
-            {page.buttons && (
-              page.buttons.map(btn => btn(allProps))
-            )}
-            </div>
-          </React.Fragment>}>
-      </AcmPageHeader>
-      <AcmPageContent id={page.id}>
-        {(() => {
-          if (error) {
-            // Handle Apollo networkError type
-            const eMsg = []
-            if (error.networkError) {
-              const { statusCode='', bodyText='', message='', result='' } = error.networkError
-              eMsg.push(<p key='eHeader'>Network Error {statusCode}</p>)
-              eMsg.push(<p key='eBodyText'>{bodyText}</p>)
-              eMsg.push(<p key='eMessage'>{message}</p>)
-              if (result.errors) {
-                eMsg.push(<p key='eMsgDetails'>{result.errors.map((e) => e.message).join(';')}</p>)
+                {page.refreshControls && (
+                  <React.Fragment>
+                    <AcmAutoRefreshSelect refetch={refetch}
+                      refreshIntervals={REFRESH_INTERVALS}
+                      refreshIntervalCookie={REFRESH_INTERVAL_COOKIE}
+                      initPollInterval={INITIAL_POLL_INTERVAL} />
+                    <AcmRefreshTime timestamp={timestamp} reloading={loading} />
+                  </React.Fragment>
+                )}
+                <div className='page-header-button-group'>
+                {page.buttons && (
+                  page.buttons.map(btn => btn(allProps))
+                )}
+                </div>
+              </React.Fragment>}>
+          </AcmPageHeader>
+        }
+      >
+        <AcmPageContent id={page.id}>
+          <PageSection>
+            {(() => {
+              if (error) {
+                // Handle Apollo networkError type
+                const eMsg = []
+                if (error.networkError) {
+                  const { statusCode='', bodyText='', message='', result='' } = error.networkError
+                  eMsg.push(<p key='eHeader'>Network Error {statusCode}</p>)
+                  eMsg.push(<p key='eBodyText'>{bodyText}</p>)
+                  eMsg.push(<p key='eMessage'>{message}</p>)
+                  if (result.errors) {
+                    eMsg.push(<p key='eMsgDetails'>{result.errors.map((e) => e.message).join(';')}</p>)
+                  }
+                // Handle Apollo graphQLErrors type
+                } else {
+                  eMsg.push(<p key='eHeader'>GraphQL Error</p>)
+                  eMsg.push(<p key='eMessage'>{error.errors.map((e) => e.message).join(';')}</p>)
+                }
+                return <AcmAlert isInline={true} variant='danger'
+                  subtitle={eMsg} />
               }
-            // Handle Apollo graphQLErrors type
-            } else {
-              eMsg.push(<p key='eHeader'>GraphQL Error</p>)
-              eMsg.push(<p key='eMessage'>{error.errors.map((e) => e.message).join(';')}</p>)
-            }
-            return <AcmAlert isInline={true} variant='danger'
-              subtitle={eMsg} />
-          }
-          if (loading && !previousData || items === undefined ) {
-            return <Spinner className='patternfly-spinner' />
-          } else {
-            return page.children({ items })
-          }
-        })()}
-      </AcmPageContent>
+              if (loading && !previousData || items === undefined ) {
+                return <Spinner className='patternfly-spinner' />
+              } else {
+                return page.children({ items })
+              }
+            })()}
+          </PageSection>
+        </AcmPageContent>
+      </AcmPage>
     </React.Fragment>
   )
 }
