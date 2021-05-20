@@ -12,7 +12,6 @@ import {
 import {
   breakWord,
   wrappable,
-  sortable
 } from '@patternfly/react-table'
 
 export default {
@@ -21,32 +20,50 @@ export default {
   ],
   tableKeys: [
     {
+      label: 'cluster',
       msgKey: 'table.header.cluster.name',
       resourceKey: 'cluster',
-      transforms: [wrappable, sortable],
+      searchable: true,
+      sortable: true,
+      transforms: [wrappable],
       cellTransforms: [breakWord],
       transformFunction: buildClusterLink,
     },
     {
+      label: 'namespace',
       msgKey: 'table.header.cluster.namespace',
       resourceKey: 'namespace',
-      transforms: [wrappable, sortable],
+      searchable: true,
+      sortable: true,
+      transforms: [wrappable],
       cellTransforms: [breakWord],
     },
     {
+      label: 'clusterCompliant',
       msgKey: 'table.header.cluster.violation',
       resourceKey: 'clusterCompliant',
-      transforms: [wrappable, sortable],
+      searchable: true,
+      sortable: true,
+      transforms: [wrappable],
       cellTransforms: [breakWord],
-      transformFunction: getClusterCompliantStatus
+      transformFunction: getClusterCompliantStatus,
     },
     {
+      label: 'nonCompliant',
       msgKey: 'table.header.violated',
+      searchable: true,
       resourceKey: 'nonCompliant',
-      transforms: [wrappable, sortable],
+      sortable: true,
+      transforms: [wrappable],
       cellTransforms: [breakWord],
       transformFunction: getClusterViolationLabels,
     },
+    // Row metadata
+    {
+      hidden: true,
+      label: 'consoleURL',
+      resourceKey: 'consoleURL',
+    }
   ],
   sortBy: {
     index: 2,

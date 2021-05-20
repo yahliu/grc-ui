@@ -365,7 +365,7 @@ export const action_verifyPolicyInListing = (
     .get('.grc-view-by-policies-table').within(() => {
     cy.log(uName)
     cy.get('a').contains(uName).parents('td').siblings('td')
-    .spread((namespace, remediation, violations, standards, categories, controls) => {
+    .spread((toggle, namespace, remediation, violations, standards) => {
       // check namespace
       if (policyConfig['namespace']) {
         cy.wrap(namespace).contains(policyConfig['namespace'].trim(), { matchCase: false })
@@ -396,15 +396,19 @@ export const action_verifyPolicyInListing = (
       }
       // check categories
       if (policyConfig['categories']) {
+        cy.wrap(toggle).click()
         for (const cat of policyConfig['categories']) {
-          cy.wrap(categories).contains(cat.trim())
+          cy.get('td[data-label="Categories"]').contains(cat.trim())
         }
+        cy.wrap(toggle).click()
       }
       // check controls
       if (policyConfig['controls']) {
+        cy.wrap(toggle).click()
         for (const ctl of policyConfig['controls']) {
-          cy.wrap(controls).contains(ctl.trim())
+          cy.get('td[data-label="Controls"]').contains(ctl.trim())
         }
+        cy.wrap(toggle).click()
       }
     })
 
@@ -477,7 +481,7 @@ export const isClusterViolationsStatusAvailable = (name, violationsCounter) => {
   let statusAvailable = false
   // page /multicloud/policies/all
   return cy.then(() => {
-    cy.get('[aria-label="Sortable Table"]').within(() => {
+    cy.get('[aria-label="Simple Table"]').within(() => {
       cy.get('a').contains(name).parents('td').siblings('td').spread((namespace, counter) => {
         // check the violation status
         cy.wrap(counter).find('path').then((elems) => {
@@ -509,8 +513,8 @@ export const isPolicyStatusAvailable = (uName, violationsCounter) => {
   //if (window.location.toString().endsWith('/multicloud/policies/all')) {
 return cy.url().then((pageURL) => {
   if (pageURL.endsWith('/multicloud/policies/all')) {
-    cy.get('[aria-label="Sortable Table"]').within(() => {
-    cy.get('a').contains(uName).parents('td').siblings('td').spread((namespace, remediation, violations) => {
+    cy.get('[aria-label="Simple Table"]').within(() => {
+    cy.get('a').contains(uName).parents('td').siblings('td').spread((toggle, namespace, remediation, violations) => {
       // check the violation status
       cy.wrap(violations).find('path').then((elems) => {
         if (elems.length === 1) {
@@ -1227,7 +1231,7 @@ export const action_verifyClusterViolationsInListing = (clusterName, violationsC
     }
   }
   cy.doTableSearch(clusterName)
-    .get('table[aria-label="Sortable Table"]').within(() => {
+    .get('table[aria-label="Simple Table"]').within(() => {
     cy.get('a').contains(clusterName).parents('td').siblings('td')
     .spread((namespace, violations, policies) => {
       // FIXME: skip namespace
@@ -1338,13 +1342,13 @@ export const action_checkPolicyListingPageUserPermissions = (policyNames = [], c
             if (permissions.patch) {
               cy.get('button.pf-c-dropdown__menu-item').contains(action, { matchCase: false }).should('have.attr', 'aria-disabled', 'false')
             } else {
-              cy.get('button.pf-c-dropdown__menu-item').contains(action, { matchCase: false }).parent().should('have.attr', 'aria-disabled', 'true')
+              cy.get('button.pf-c-dropdown__menu-item').contains(action, { matchCase: false }).should('have.attr', 'aria-disabled', 'true')
             }
           }
           if (permissions.delete) {
             cy.get('button.pf-c-dropdown__menu-item').contains('Remove', { matchCase: false }).should('have.attr', 'aria-disabled', 'false')
           } else {
-            cy.get('button.pf-c-dropdown__menu-item').contains('Remove', { matchCase: false }).parent().should('have.attr', 'aria-disabled', 'true')
+            cy.get('button.pf-c-dropdown__menu-item').contains('Remove', { matchCase: false }).should('have.attr', 'aria-disabled', 'true')
           }
         })
         // close the menu again

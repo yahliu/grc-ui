@@ -9,12 +9,12 @@ import moment from 'moment'
 import _ from 'lodash'
 import config from '../../server/lib/shared/config'
 import {
-  // AcmButton,
   AcmTable
 } from '@open-cluster-management/ui-components'
 import {
   Label,
   LabelGroup,
+  Button,
   Tooltip,
 } from '@patternfly/react-core'
 import StatusField from '../components/common/StatusField'
@@ -28,6 +28,8 @@ import msgs from '../nls/platform.properties'
 import TruncateText from '../components/common/TruncateText'
 import { LocaleContext } from '../components/common/LocaleContext'
 import purifyReactNode from '../utils/PurifyReactNode'
+import { POLICY_AUTOMATIONS } from '../utils/client/queries'
+import { Query } from '@apollo/client/react/components'
 
 // use console.log(JSON.stringify(result, circular())) to test return result from transform
 export const transform = (items, def, locale) => {
@@ -62,7 +64,7 @@ export const transform = (items, def, locale) => {
 }
 
 // use console.log(JSON.stringify(result, circular())) to test return result from transform
-export const transform_new = (items, def, locale) => {
+export const transformNew = (items, def, locale) => {
   // Create column data for parent table and expandable (child) tables
   const columns = {
     colParent: [],
@@ -88,57 +90,11 @@ export const transform_new = (items, def, locale) => {
     }
   })
   // Create row data for parent table and expandable (child) tables
-  let subUid = 0, expandable
   const rows = {
     rowParent: [],
     rowChild: [],
   }
-  items.forEach((item, index) => {
-    expandable = false
-    const rowChildObj = {}
-    const rowParentObj = {
-      uid: index
-    }
-    // For each column, parse the row values based on its type
-    def.tableKeys.forEach(key => {
-      const label = key.label
-      let value = _.get(item, key.resourceKey)
-      if (key.type === 'timestamp') {
-        value = {
-          title: <TableTimestamp timestamp={value} />,
-          rawData: value
-        }
-      } else if (key.type === 'i18n') {
-        value =  msgs.get(key.resourceKey, locale)
-      } else if (key.type === 'boolean') {
-        const valueBoolean = (Boolean(value)).toString()
-        value =  msgs.get(valueBoolean, locale)
-      } else if (key.transformFunction && typeof key.transformFunction === 'function') {
-        // Leverage the defined transformFunction to render content and store the raw value as metadata
-        value = {
-          title: key.transformFunction(item, locale),
-          rawData: value
-        }
-      } else {
-        value =  (value || value === 0) ? value : '-'
-      }
-      // Add to parent table or expandable (child) table as specified by the column
-      if (key.subRow) {
-        expandable = true
-        rowChildObj[label] = value
-      } else {
-        rowParentObj[label] = value
-      }
-    })
-    // If there's an expandable row, add to the expandable (child) rows
-    if (expandable) {
-      rowChildObj.uid = index
-      rowChildObj.subUid = subUid++
-      rows.rowChild.push(rowChildObj)
-    }
-    // Add our row to the table
-    rows.rowParent.push(rowParentObj)
-  })
+  pushRows(items, rows, def, locale)
   // Specify a default sortBy object for the table if it doesn't exist
   const sortBy = def.sortBy ? def.sortBy : { direction: 'asc' }
   // The index can either be an integer or a string matching the column label
@@ -184,6 +140,56 @@ export const transform_new = (items, def, locale) => {
     keyFn,
     addSubRows
   }
+}
+
+function pushRows(items, rows, def, locale) {
+  let subUid = 0, expandable
+  items.forEach((item, index) => {
+    expandable = false
+    const rowChildObj = {}
+    const rowParentObj = {
+      uid: index
+    }
+    // For each column, parse the row values based on its type
+    def.tableKeys.forEach(key => {
+      const label = key.label
+      let value = _.get(item, key.resourceKey)
+      if (key.type === 'timestamp') {
+        value = {
+          title: <TableTimestamp timestamp={value} />,
+          rawData: value
+        }
+      } else if (key.type === 'i18n') {
+        value =  msgs.get(key.resourceKey, locale)
+      } else if (key.type === 'boolean') {
+        value = value ? true : false
+      } else if (key.transformFunction && typeof key.transformFunction === 'function') {
+        // Leverage the defined transformFunction to render content and store the raw value as metadata
+        value = {
+          title: key.transformFunction(item, locale),
+          rawData: value
+        }
+      } else {
+        value =  (value || value === 0) ? value : '-'
+      }
+      // Add to parent table or expandable (child) table as specified by the column
+      if (key.subRow) {
+        expandable = true
+        rowChildObj[label] = value
+      } else {
+        rowParentObj[label] = value
+      }
+    })
+    // If there's an expandable row, add to the expandable (child) rows
+    if (expandable) {
+      rowChildObj.uid = index
+      rowChildObj.subUid = subUid
+      subUid = subUid + 1
+      rows.rowChild.push(rowChildObj)
+    }
+    // Add our row to the table
+    rows.rowParent.push(rowParentObj)
+  })
 }
 
 function parseCell(label) {
@@ -380,6 +386,89 @@ export function formatAnnotationString(policy, annotationKey){
   return '-'
 }
 
+export function getAutomationLink(item, locale) {
+  return (
+    <Query query={POLICY_AUTOMATIONS} variables={{ namespace: item.metadata.namespace }}>
+    {( result ) => {
+      const { data={policyAutomations: []} } = result
+      let found = false
+      data.policyAutomations.forEach((automation) => {
+        if (automation.metadata && automation.metadata.name === item.metadata.name) {
+          found = true
+        }
+      })
+      return (
+        <Button component="a" variant="link" className="automationButton">
+          {found ? msgs.get('table.actions.automation.edit', locale) : msgs.get('table.actions.automation.configure', locale)}
+        </Button>
+      )
+    }}
+    </Query>
+  )
+}
+
+export function getStatus(item, locale) {
+  const status = _.get(item, 'status', '-')
+  if (status.compliant){
+    return <StatusField status={status.compliant.toLowerCase()} text={msgs.get(`policy.status.${status.compliant.toLowerCase()}`, locale)} />
+  } else if (status && typeof(status)==='string' && status !== '-'){
+    return <StatusField status={status.toLowerCase()} text={msgs.get(`policy.status.${status.toLowerCase()}`, locale)} />
+  }
+  return '-'
+}
+
+export function getCompliancePolicyStatus(item, locale) {
+  if (item.clusterNotCompliant && item.clusterNotCompliant.length > 0){
+    return <StatusField status='noncompliant' text={msgs.get('policy.status.noncompliant', locale)} />
+  }
+  return <StatusField status='compliant' text={msgs.get('policy.status.compliant', locale)} />
+}
+
+export function createCompliancePolicyLink(item = {}, ...param){
+  const policyKeys = item[param[1]]
+  const policyArray = []
+  policyKeys && policyKeys.forEach(policyKey => {
+    const targetPolicy = item.policies.find(policy => item.name === policy.name && policyKey === policy.cluster)
+    policyArray.push(targetPolicy)
+  })
+
+  return policyArray.length > 0 ?
+    <ul>{policyArray.map(policy => (<li key={`${policy.cluster}-${policy.name}`}>
+      <Link
+        to={
+          `${config.contextPath}/all/${encodeURIComponent(policy.complianceNamespace)}/${encodeURIComponent(policy.complianceName)}`
+            + `/compliancePolicy/${encodeURIComponent(policy.name)}/${policy.cluster}`}>
+        {policy.cluster}
+      </Link>
+    </li>))}</ul>
+    :
+    '-'
+}
+
+export function createPolicyLink(item = {}){
+  return  <Link
+    to={`${config.contextPath}/all/${encodeURIComponent(item.complianceNamespace)}/${encodeURIComponent(item.complianceName)}/compliancePolicy/${encodeURIComponent(item.name)}`}>
+    {item.name}
+  </Link>
+}
+
+export function getStatusCount(item) {
+  return `${item.policyCompliant}/${item.policyTotal}`
+}
+
+export function getClusterCount(item) {
+  return `${item.clusterCompliant}/${item.clusterTotal}`
+}
+
+export function getSubjects(item) {
+  if(item && item.subjects){
+    return item.subjects.map(subject => `${subject.name}(${subject.apiGroup})`).join(', ')
+  }
+  else{
+    return '-'
+  }
+}
+
 export function getLabels(item) {
   const labels = _.get(item, 'placementPolicies[0].clusterLabels')
   if (!labels || Object.keys(labels).length===0) {
@@ -487,3 +576,4 @@ export function getDecisionList(policy, locale) {
   }
   return statusList
 }
+

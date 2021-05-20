@@ -11,11 +11,13 @@ import {
   ToggleGroupItem,
   Spinner
 } from '@patternfly/react-core'
-import PatternFlyTable from '../common/PatternFlyTable'
+import {
+  AcmTable
+} from '@open-cluster-management/ui-components'
 import { LocaleContext } from '../common/LocaleContext'
 import grcPoliciesViewDef from '../../tableDefinitions/grcPoliciesViewDef'
 import grcClustersViewDef from '../../tableDefinitions/grcClustersViewDef'
-import { transform } from '../../tableDefinitions/utils'
+import { transformNew } from '../../tableDefinitions/utils'
 import msgs from '../../nls/platform.properties'
 import { formatPoliciesToClustersTableData } from '../../utils/FormatTableData'
 import { RESOURCE_TYPES, GRC_SEARCH_STATE_COOKIE } from '../../utils/constants'
@@ -24,7 +26,6 @@ import { resourceActions } from '../common/ResourceTableRowMenuItemActions'
 import formatUserAccess from '../../utils/FormatUserAccess'
 import filterUserAction from '../../utils/FilterUserAction'
 import { REQUEST_STATUS } from '../../actions/index'
-import { createDisableTooltip } from '../common/DisableTooltip'
 import {
   getSessionState, replaceSessionPair
 } from '../../utils/AccessStorage'
@@ -44,17 +45,23 @@ class GrcToggleModule extends React.Component {
   static contextType = LocaleContext
 
   render() {
-    const { grcItems, showGrcTabToggle, grcTabToggleIndex, handleToggleClick, status } = this.props
+    const { grcItems, grcTabToggleIndex, handleToggleClick, status } = this.props
     const { locale } = this.context
-    const { searchValue } = this.state
-    const tableDataByPolicies = transform(grcItems, grcPoliciesViewDef, locale)
-    const tableDataByCLusters = transform(formatPoliciesToClustersTableData(grcItems), grcClustersViewDef, locale)
+    const tableType = grcTabToggleIndex === 0 ? 'policies' : 'clusters'
+    const tableData = [
+      transformNew(grcItems, grcPoliciesViewDef, locale),
+      transformNew(formatPoliciesToClustersTableData(grcItems), grcClustersViewDef, locale),
+    ]
     if (status !== REQUEST_STATUS.INCEPTION && status !== REQUEST_STATUS.DONE){
       return <Spinner className='patternfly-spinner' />
     }
-    return (
-      <div className='grc-toggle'>
-        {showGrcTabToggle && <ToggleGroup className='grc-toggle-button'>
+    const { searchValue, policySortValue, clusterSortValue } = this.state
+    const sortValues = [
+      policySortValue || tableData[0].sortBy,
+      clusterSortValue || tableData[1].sortBy
+    ]
+    const extraToolbarControls = (
+      <ToggleGroup className='grc-toggle-button'>
           <ToggleGroupItem
             buttonId={'grc-policies-view'}
             onChange={handleToggleClick}
@@ -69,36 +76,25 @@ class GrcToggleModule extends React.Component {
             text={msgs.get('tabs.grc.toggle.clusterViolations', locale)}
           >
           </ToggleGroupItem>
-        </ToggleGroup>}
-        <div className='resource-table'>
-          {grcTabToggleIndex===0 && <div className='grc-view-by-policies-table'>
-            <PatternFlyTable
-              {...tableDataByPolicies}
-              searchPlaceholder={msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)}
-              noResultMsg={msgs.get('table.search.no.results', locale)}
-              areActionsDisabled={false}
-              dropdownPosition={'right'}
-              dropdownDirection={'down'}
-              tableActionResolver={this.tableActionResolver}
-              handleClear={this.handleSearch}
-              handleSearch={this.handleSearch}
-              searchValue={searchValue}
-            />
-          </div>}
-          {grcTabToggleIndex===1 && <div className='grc-view-by-clusters-table'>
-            <PatternFlyTable
-              {...tableDataByCLusters}
-              searchPlaceholder={msgs.get('tabs.grc.toggle.clusterViolations.placeHolderText', locale)}
-              noResultMsg={msgs.get('table.search.no.results', locale)}
-              areActionsDisabled={false}
-              dropdownPosition={'right'}
-              dropdownDirection={'down'}
-              tableActionResolver={this.tableActionResolver}
-              handleClear={this.handleSearch}
-              handleSearch={this.handleSearch}
-              searchValue={searchValue}
-            />
-          </div>}
+        </ToggleGroup>
+    )
+    return (
+      <div className='grc-toggle'>
+        <div className={`grc-view-by-${tableType}-table`}>
+          <AcmTable
+            items={tableData[grcTabToggleIndex].rows}
+            columns={tableData[grcTabToggleIndex].columns}
+            rowActionResolver={this.tableActionResolver}
+            addSubRows={tableData[grcTabToggleIndex].addSubRows}
+            keyFn={tableData[grcTabToggleIndex].keyFn}
+            setSearch={searchValue}
+            sort={sortValues[grcTabToggleIndex]}
+            setSort={this.setSort(grcTabToggleIndex)}
+            gridBreakPoint=''
+            extraToolbarControls={extraToolbarControls}
+            searchPlaceholder={msgs.get('tabs.grc.toggle.allPolicies.placeHolderText', locale)}
+            fuseThreshold={0}
+          />
         </div>
       </div>
     )
@@ -112,69 +108,77 @@ class GrcToggleModule extends React.Component {
     })
   }
 
-  tableActionResolver = (rowData) => {
-    const { getResourceAction, userAccess, grcTabToggleIndex, history } = this.props
-    const { locale } = this.context
-    const userAccessHash = formatUserAccess(userAccess)
-    const actionsList = []
-    const rowName = typeof _.get(rowData, ['0', 'title', 'props', 'children']) === 'string'
-      ? _.get(rowData, ['0', 'title', 'props', 'children'])
-      : _.get(rowData, ['0', 'title', 'props', 'children', '0', 'props', 'children'])
-    let rowArray = _.get(rowData, ['0', 'title', '_owner', 'stateNode', 'props', 'grcItems'])
-      ? _.get(rowData, ['0', 'title', '_owner', 'stateNode', 'props', 'grcItems'])
-      : _.get(rowData, ['0', 'title', 'props', 'children[0]', '_owner', 'stateNode', 'props', 'grcItems'])
-      let resourceType, tableActions
-      // Set table definitions and actions based on toggle position
-      if (grcTabToggleIndex === 1) {
-        resourceType = RESOURCE_TYPES.POLICIES_BY_CLUSTER
-        tableActions = grcClustersViewDef.tableActions
-        rowArray = formatPoliciesToClustersTableData(rowArray)
+  setSort = (grcTabToggleIndex) => {
+    return (sortValue) => {
+      if (grcTabToggleIndex === 0) {
+        this.setState({
+          policySortValue: sortValue
+        })
       } else {
-        resourceType = RESOURCE_TYPES.POLICIES_BY_POLICY
-        tableActions = grcPoliciesViewDef.tableActions
+        this.setState({
+          clusterSortValue: sortValue
+        })
       }
+    }
+  }
+
+  tableActionResolver = (rowData) => {
+    const { getResourceAction, userAccess, grcTabToggleIndex, history, grcItems } = this.props
+    const { locale } = this.context
+    let rowName, resourceType, tableActions, rowArray
+    // Set table definitions and actions based on toggle position
+    if (grcTabToggleIndex === 0) {
+      rowName = _.get(rowData, 'name').rawData
+      resourceType = RESOURCE_TYPES.POLICIES_BY_POLICY
+      tableActions = grcPoliciesViewDef.tableActions
+      rowArray = grcItems
+    } else {
+      rowName = _.get(rowData, 'cluster').rawData
+      resourceType = RESOURCE_TYPES.POLICIES_BY_CLUSTER
+      tableActions = grcClustersViewDef.tableActions
+      rowArray = formatPoliciesToClustersTableData(grcItems)
+    }
+    const actionsList = []
+    const userAccessHash = formatUserAccess(userAccess)
     if (rowName && Array.isArray(rowArray) && rowArray.length > 0) {
-      const row = rowArray.find(arrElement => {
-        if (grcTabToggleIndex === 0) {
-          return _.get(arrElement, 'metadata.name') === rowName
-        } else {
-          return _.get(arrElement, 'cluster') === rowName
-        }
-      })
       const filteredActions = (Array.isArray(tableActions) && tableActions.length > 0)
-        ? filterUserAction(row, tableActions, userAccessHash, resourceType)
+        ? filterUserAction(rowData, tableActions, userAccessHash, resourceType)
         : []
-      if (_.get(row, 'raw.spec.disabled', false)) {
+      if (_.get(rowData, 'disabled', false)) {
         filteredActions[filteredActions.indexOf('table.actions.disable')] = 'table.actions.enable'
       } else {
         filteredActions[filteredActions.indexOf('table.actions.enable')] = 'table.actions.disable'
       }
-      if (_.get(row, 'raw.spec.remediationAction', 'inform') === 'enforce') {
-        filteredActions[filteredActions.indexOf('table.actions.enforce', locale)] = 'table.actions.inform'
+      if (_.get(rowData, 'remediation', 'inform') === 'enforce') {
+        filteredActions[filteredActions.indexOf('table.actions.enforce')] = 'table.actions.inform'
       } else {
         filteredActions[filteredActions.indexOf('table.actions.inform')] = 'table.actions.enforce'
       }
       if (filteredActions.length > 0) {
+        const row = rowArray.find(arrElement => {
+          if (grcTabToggleIndex === 0) {
+            return _.get(arrElement, 'metadata.name') === rowName
+          } else {
+            return _.get(arrElement, 'cluster') === rowName
+          }
+        })
         filteredActions.forEach((action) => {
           const disableFlag = action.includes('disabled.')
           if (disableFlag) {
             action = action.replace('disabled.', '')
           }
-          if (action === 'table.actions.remove') {
-            actionsList.push(
-              {
-                isSeparator: true
-              }
-            )
-          }
           // if consoleURL is unavailable then don't show launch cluster button
-          const removeLaunchCluster = (action.includes('launch.cluster')) && ((row && !row.consoleURL) || (row && row.consoleURL && row.consoleURL === '-'))
+          const removeLaunchCluster = (action.includes('launch.cluster')) && ((rowData && !rowData.consoleURL) || (rowData && rowData.consoleURL && rowData.consoleURL === '-'))
+          // Push actions for the row
           if (!removeLaunchCluster) {
             actionsList.push(
               {
-                title: createDisableTooltip(disableFlag, action, locale, msgs.get(action, locale)),
+                id: action,
+                title: msgs.get(action, locale),
+                tooltip: disableFlag ? msgs.get('error.permission.disabled', locale) : undefined,
                 isDisabled: disableFlag ? true : false,
-                onClick: () =>
+                addSeparator: action === 'table.actions.remove' ? true : false,
+                click: () =>
                   (disableFlag ? null : getResourceAction(action, row, resourceType, history))
               }
             )
@@ -192,7 +196,6 @@ GrcToggleModule.propTypes = {
   grcTabToggleIndex: PropTypes.number,
   handleToggleClick: PropTypes.func,
   history: PropTypes.object.isRequired,
-  showGrcTabToggle: PropTypes.bool,
   status: PropTypes.string,
   userAccess: PropTypes.array,
 }
