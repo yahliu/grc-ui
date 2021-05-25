@@ -3,13 +3,19 @@
 
 'use strict'
 
+import React from 'react'
 import {
   breakWord,
   wrappable,
-  cellWidth,
   sortable
 } from '@patternfly/react-table'
-import { buildAnsibleJobStatus } from './utils'
+import _ from 'lodash'
+import {
+  GreenCheckCircleIcon,
+  RedExclamationCircleIcon,
+  YellowExclamationTriangleIcon,
+} from '../components/common/Icons'
+import msgs from '../nls/platform.properties'
 
 export default {
   tableKeys: [
@@ -21,14 +27,6 @@ export default {
       transforms: [sortable],
       cellTransforms: [breakWord],
       transformFunction: buildAnsibleJobStatus
-    },
-    {
-      msgKey: 'table.header.message',
-      label: 'message',
-      searchable: true,
-      resourceKey: 'message',
-      transforms: [cellWidth(50), wrappable, sortable],
-      cellTransforms: [breakWord],
     },
     {
       msgKey: 'table.header.started',
@@ -44,9 +42,53 @@ export default {
       transforms: [wrappable, sortable],
       type: 'timestamp'
     },
+    {
+      label: 'link',
+      transformFunction: buildViewJobLink
+    },
   ],
   sortBy: {
-    index: 2,
+    index: 1,
     direction: 'desc',
+  }
+}
+
+const buildAnsibleJobStatus = (item, locale) => {
+  let ansibleJobStatus = _.get(item, 'status', '-')
+  ansibleJobStatus = (ansibleJobStatus && typeof ansibleJobStatus === 'string')
+    ? ansibleJobStatus.trim().toLowerCase() : '-'
+
+  switch (ansibleJobStatus) {
+    case 'successful':
+      ansibleJobStatus = <div><GreenCheckCircleIcon tooltip={item.message} /> {msgs.get('table.cell.successful', locale)}</div>
+      break
+    case 'error':
+    case 'failed':
+      ansibleJobStatus = <div><RedExclamationCircleIcon tooltip={item.message} /> {msgs.get('table.cell.failed', locale)}</div>
+      break
+    case '-':
+      ansibleJobStatus = <div><YellowExclamationTriangleIcon tooltip={item.message} /> {msgs.get('table.cell.nostatus', locale)}</div>
+      break
+    default :
+      ansibleJobStatus = <div><YellowExclamationTriangleIcon tooltip={item.message} /> {ansibleJobStatus}</div>
+      break
+  }
+
+  return ansibleJobStatus
+}
+
+const buildViewJobLink = (item, locale) => {
+  const job = _.get(item, 'job')
+  if (job) {
+    const jobNamespace = job.split('/')[0]
+    const jobName = job.split('/')[1]
+    return (
+      <a target='_blank' rel='noopener noreferrer'
+        href={`/search?filters={%22textsearch%22:%22cluster%3Alocal-cluster%20kind%3Ajob%20namespace%3A${jobNamespace}%20name%3A${jobName}%22}`}>
+          {msgs.get('table.actions.view.job', locale)}
+      </a>
+    )
+  } else {
+    return ''
   }
 }
