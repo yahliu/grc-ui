@@ -12,7 +12,6 @@
   }
   .grc-toggle-button {
     float: right;
-    margin: 1rem 1rem 0 0;
     .pf-c-toggle-group__button {
       width: 9rem;
       .pf-c-toggle-group__text {
@@ -25,4 +24,8 @@
 .pf-c-button.pf-m-link.automationButton {
   padding: 0px;
   font-size: 14px;
+}
+
+.automationLabel {
+  margin-right: 5px;
 }

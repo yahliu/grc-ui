@@ -20,10 +20,8 @@ import {
 export default {
   tableActions: [
     'table.actions.edit',
-    'table.actions.automation',
     'table.actions.disable',
     'table.actions.enforce',
-    'table.actions.automation.edit',
     'table.actions.remove',
   ],
   tableKeys: [
@@ -68,13 +66,13 @@ export default {
       transformFunction: getPolicyCompliantStatus,
     },
     {
-      label: 'standards',
-      msgKey: 'table.header.standards',
-      resourceKey: 'metadata.annotations["policy.open-cluster-management.io/standards"]',
+      label: 'controls',
+      msgKey: 'table.header.controls',
+      resourceKey: 'metadata.annotations["policy.open-cluster-management.io/controls"]',
       searchable: true,
       sortable: true,
       transforms: [wrappable],
-      transformFunction: getStandards,
+      transformFunction: getControls,
     },
     // Expandable table subrows
     {
@@ -87,13 +85,13 @@ export default {
       transformFunction: getCategories,
     },
     {
-      label: 'controls',
-      msgKey: 'table.header.controls',
-      resourceKey: 'metadata.annotations["policy.open-cluster-management.io/controls"]',
+      label: 'standards',
+      msgKey: 'table.header.standards',
+      resourceKey: 'metadata.annotations["policy.open-cluster-management.io/standards"]',
       searchable: true,
       subRow: true,
       transforms: [wrappable],
-      transformFunction: getControls,
+      transformFunction: getStandards,
     },
     {
       label: 'automation',

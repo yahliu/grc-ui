@@ -9,13 +9,15 @@ import moment from 'moment'
 import _ from 'lodash'
 import config from '../../server/lib/shared/config'
 import {
-  AcmTable
+  AcmTable,
+  AcmLaunchLink
 } from '@open-cluster-management/ui-components'
 import {
   Label,
   LabelGroup,
   Button,
   Tooltip,
+  Spinner,
 } from '@patternfly/react-core'
 import StatusField from '../components/common/StatusField'
 import {
@@ -64,7 +66,7 @@ export const transform = (items, def, locale) => {
 }
 
 // use console.log(JSON.stringify(result, circular())) to test return result from transform
-export const transformNew = (items, def, locale) => {
+export const transformNew = (items, def, locale, automationOnClick) => {
   // Create column data for parent table and expandable (child) tables
   const columns = {
     colParent: [],
@@ -94,7 +96,7 @@ export const transformNew = (items, def, locale) => {
     rowParent: [],
     rowChild: [],
   }
-  pushRows(items, rows, def, locale)
+  pushRows(items, rows, def, locale, automationOnClick)
   // Specify a default sortBy object for the table if it doesn't exist
   const sortBy = def.sortBy ? def.sortBy : { direction: 'asc' }
   // The index can either be an integer or a string matching the column label
@@ -142,7 +144,7 @@ export const transformNew = (items, def, locale) => {
   }
 }
 
-function pushRows(items, rows, def, locale) {
+function pushRows(items, rows, def, locale, onClickAutomation) {
   let subUid = 0, expandable
   items.forEach((item, index) => {
     expandable = false
@@ -163,6 +165,16 @@ function pushRows(items, rows, def, locale) {
         value =  msgs.get(key.resourceKey, locale)
       } else if (key.type === 'boolean') {
         value = value ? true : false
+      } else if (key.label === 'automation') {
+        // Leverage the defined transformFunction to render content and store the raw value as metadata
+        value = {
+          title: key.transformFunction(item, locale, {
+            onClickAutomation: (data) => {
+              onClickAutomation(data)
+            }
+          }),
+          rawData: value
+        }
       } else if (key.transformFunction && typeof key.transformFunction === 'function') {
         // Leverage the defined transformFunction to render content and store the raw value as metadata
         value = {
@@ -403,20 +415,45 @@ export function formatAnnotationString(policy, annotationKey){
   return '-'
 }
 
-export function getAutomationLink(item, locale) {
+export function getAutomationLink(item, locale, args) {
   return (
     <Query query={POLICY_AUTOMATIONS} variables={{ namespace: item.metadata.namespace }}>
     {( result ) => {
       const { data={policyAutomations: []} } = result
+      const { loading } = result
       let found = false
+      let automationName = ''
       data.policyAutomations.forEach((automation) => {
-        if (automation.metadata && automation.metadata.name === item.metadata.name) {
+        if (automation.spec && automation.spec.policyRef === item.metadata.name) {
           found = true
+          automationName = automation.metadata.name
         }
       })
+      if (loading) {
+        return <Spinner size='md' />
+      }
+      if (found) {
+        return <AcmLaunchLink links={[
+          {
+              id: `automationButton-${automationName}`,
+              text: <TruncateText maxCharacters={20} text={automationName} />,
+              onClick: () => {
+                args.onClickAutomation(item)
+              },
+              label: true,
+          },
+        ]}></AcmLaunchLink>
+      }
       return (
-        <Button component="a" variant="link" className="automationButton">
-          {found ? msgs.get('table.actions.automation.edit', locale) : msgs.get('table.actions.automation.configure', locale)}
+        <Button
+          component="a"
+          variant="link"
+          className="automationButton"
+          onClick= {() => {
+            args.onClickAutomation(item)
+          }}
+        >
+          {msgs.get('table.actions.automation.configure', locale)}
         </Button>
       )
     }}
