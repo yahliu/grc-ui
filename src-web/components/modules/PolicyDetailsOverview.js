@@ -21,7 +21,7 @@ import { AcmDescriptionList, AcmTable } from '@open-cluster-management/ui-compon
 import NoResource from '../../components/common/NoResource'
 import policyDetailsClusterListDef from '../../tableDefinitions/policyDetailsClusterListDef'
 import policyDetailsOverviewDef from '../../tableDefinitions/policyDetailsOverviewDef'
-import { transformNew, getPolicyCompliantStatus } from '../../tableDefinitions/utils'
+import { transformNew, getPolicyCompliantStatus, getAutomationLink } from '../../tableDefinitions/utils'
 import moment from 'moment'
 
 import '../../scss/policy-details-overview.scss'
@@ -39,6 +39,36 @@ export class PolicyDetailsOverview extends React.PureComponent{
 
   static contextTypes = {
     locale: PropTypes.string
+  }
+
+  getDescriptionItems = (items, localItem, locale) => {
+     return items.map((item) => {
+      // AcmDescriptionList wants the items in {key: ..., value: ...} form
+      const entry = {}
+      if (Array.isArray(item.cells) && item.cells[0]) {
+        const keyPath = item.cells[0].resourceKey || '-'
+        const keyType = item.cells[0].type || '-'
+        const dataResourceKey = item.cells[1] ? item.cells[1].resourceKey : '-'
+        entry.key = msgs.get(keyPath, locale) ? msgs.get(keyPath, locale) : '-'
+        const entryData = (dataResourceKey === '-') ? localItem : _.get(localItem, dataResourceKey, '-')
+        if ((keyType !== 'automation') && (typeof(entryData) === 'object' || typeof(entryData) === 'boolean')) {
+          entry.value = JSON.stringify(entryData).replace(/\[|\]|"/g, ' ')
+        } else {
+          entry.value = entryData
+        }
+
+        if (keyPath) {
+          if(keyType === 'timestamp') {
+            entry.value = moment(entry.value, 'YYYY-MM-DDTHH:mm:ssZ').fromNow()
+          } else if(dataResourceKey === 'clusterCompliant') {
+            entry.value = getPolicyCompliantStatus({clusterCompliant: entry.value}, locale)
+          } else if (keyType === 'automation') {
+            entry.value = getAutomationLink(entry.value, locale)
+          }
+        }
+      }
+      return entry
+    })
   }
 
   render() {
@@ -67,30 +97,7 @@ export class PolicyDetailsOverview extends React.PureComponent{
     ]
     const itemPR = Array.isArray(localItem?.placementPolicies) && localItem.placementPolicies.length > 0
     const itemPB = Array.isArray(localItem?.placementBindings) && localItem.placementBindings.length > 0
-
-    const descriptionItems = policyDetailsOverviewDef.rows.map((item) => {
-      // AcmDescriptionList wants the items in {key: ..., value: ...} form
-      const entry = {}
-      if (Array.isArray(item.cells) && item.cells[0]) {
-        const keyPath = item.cells[0].resourceKey || '-'
-        entry.key = msgs.get(keyPath, locale)
-
-        const entryData = item.cells[1] ? _.get(localItem, item.cells[1].resourceKey, '-') : '-'
-        if (typeof(entryData) === 'object' || typeof(entryData) === 'boolean') {
-          entry.value = JSON.stringify(entryData).replace(/\[|\]|"/g, ' ')
-        } else {
-          entry.value = entryData
-        }
-        if (item.cells[0].resourceKey) {
-          if(item.cells[0].type === 'timestamp') {
-            entry.value = moment(entry.value, 'YYYY-MM-DDTHH:mm:ssZ').fromNow()
-          } else if(item.cells[1]?.resourceKey === 'clusterCompliant') {
-            entry.value = getPolicyCompliantStatus({clusterCompliant: entry.value}, locale)
-          }
-        }
-      }
-      return entry
-    })
+    const descriptionItems = this.getDescriptionItems(policyDetailsOverviewDef.rows, localItem, locale)
     const itemsHalfCount = Math.ceil(descriptionItems.length / 2)
 
     return (
