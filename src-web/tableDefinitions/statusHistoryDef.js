@@ -5,7 +5,6 @@
 'use strict'
 
 import {
-  buildTimestamp,
   buildCompliantCellFromMessage,
   statusHistoryMessageTooltip,
 } from './utils'
@@ -13,7 +12,6 @@ import {
   breakWord,
   wrappable,
   cellWidth,
-  sortable
 } from '@patternfly/react-table'
 
 export default {
@@ -22,8 +20,10 @@ export default {
       msgKey: 'table.header.status',
       label: 'status',
       searchable: true,
-      resourceKey: 'status',
-      transforms: [wrappable, sortable],
+      sortable: true,
+      sortLabel: 'status.rawData',
+      resourceKey: 'message', // because the cell content is actually built from the message
+      transforms: [wrappable],
       cellTransforms: [breakWord],
       transformFunction: buildCompliantCellFromMessage
     },
@@ -31,17 +31,21 @@ export default {
       msgKey: 'table.header.message',
       label: 'message',
       searchable: true,
+      sortable: true,
+      sortLabel: 'message.rawData',
       resourceKey: 'message',
-      transforms: [cellWidth(70), wrappable, sortable],
+      transforms: [cellWidth(70), wrappable],
       cellTransforms: [breakWord],
       transformFunction: statusHistoryMessageTooltip
     },
     {
       msgKey: 'table.header.lastReport',
       label: 'timestamp',
+      sortable: true,
+      sortLabel: 'message.rawData',
       resourceKey: 'timestamp',
-      transforms: [wrappable, sortable],
-      transformFunction: buildTimestamp
+      transforms: [wrappable],
+      type: 'timestamp'
     },
   ],
   sortBy: {

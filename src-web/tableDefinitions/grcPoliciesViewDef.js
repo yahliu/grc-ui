@@ -5,7 +5,6 @@
 'use strict'
 
 import {
-  buildTimestamp,
   createComplianceLink,
   getPolicyCompliantStatus,
   getCategories,
@@ -32,6 +31,7 @@ export default {
       resourceKey: 'metadata.name',
       searchable: true,
       sortable: true,
+      sortLabel: 'name.rawData',
       transforms: [wrappable],
       cellTransforms: [breakWord],
       transformFunction: createComplianceLink,
@@ -62,6 +62,7 @@ export default {
       transforms: [wrappable],
       searchable: true,
       sortable: true,
+      sortLabel: 'violations.rawData',
       cellTransforms: [breakWord],
       transformFunction: getPolicyCompliantStatus,
     },
@@ -71,6 +72,7 @@ export default {
       resourceKey: 'metadata.annotations["policy.open-cluster-management.io/controls"]',
       searchable: true,
       sortable: true,
+      sortLabel: 'controls.rawData',
       transforms: [wrappable],
       transformFunction: getControls,
     },
@@ -97,6 +99,7 @@ export default {
       label: 'automation',
       msgKey: 'table.header.automation',
       sortable: true,
+      sortLabel: 'automation.rawData',
       transforms: [wrappable],
       transformFunction: getAutomationLink,
     },
@@ -105,8 +108,9 @@ export default {
       msgKey: 'table.header.created',
       resourceKey: 'raw.metadata.creationTimestamp',
       sortable: true,
+      sortLabel: 'creation.rawData',
       transforms: [wrappable],
-      transformFunction: buildTimestamp,
+      type: 'timestamp'
     },
     // Row metadata
     {

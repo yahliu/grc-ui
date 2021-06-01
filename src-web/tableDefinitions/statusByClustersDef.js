@@ -6,11 +6,9 @@
 import {
   breakWord,
   cellWidth,
-  sortable,
   wrappable,
 } from '@patternfly/react-table'
 import {
-  buildTimestamp,
   buildCompliantCellFromMessage,
   buildClusterLink,
   buildStatusHistoryLink,
@@ -23,40 +21,50 @@ export default {
       msgKey: 'table.header.cluster',
       label: 'cluster',
       searchable: true,
-      transforms: [sortable, wrappable],
+      sortable: true,
+      sortLabel: 'cluster.rawData',
+      resourceKey: 'cluster',
+      transforms: [wrappable],
       transformFunction: buildClusterLink
     },
     {
       msgKey: 'table.header.status',
       label: 'status',
       searchable: true,
+      sortable: true,
+      sortLabel: 'status.rawData',
       resourceKey: 'status',
-      transforms: [cellWidth(15), sortable],
+      transforms: [cellWidth(15)],
       transformFunction: buildCompliantCellFromMessage
     },
     {
       msgKey: 'table.header.template',
       label: 'templateName',
       searchable: true,
+      sortable: true,
       resourceKey: 'templateName',
-      transforms: [sortable, wrappable],
+      transforms: [wrappable],
       cellTransforms: [breakWord],
     },
     {
       msgKey: 'table.header.message',
       label: 'message',
       searchable: true,
+      sortable: true,
+      sortLabel: 'message.rawData',
       resourceKey: 'message',
-      transforms: [cellWidth(70), sortable, wrappable],
+      transforms: [cellWidth(70), wrappable],
       cellTransforms: [breakWord],
       transformFunction: buildTemplateDetailLink
     },
     {
       msgKey: 'table.header.timestamp',
       label: 'timestamp',
+      sortable: true,
+      sortLabel: 'timestamp.rawData',
       resourceKey: 'timestamp',
-      transforms: [sortable, wrappable],
-      transformFunction: buildTimestamp,
+      transforms: [wrappable],
+      type: 'timestamp'
     },
     {
       msgKey: 'table.header.history',
