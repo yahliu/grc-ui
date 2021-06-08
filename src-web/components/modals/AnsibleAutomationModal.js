@@ -7,7 +7,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
-  AcmModal, AcmButton, AcmLaunchLink, AcmTable
+  AcmModal, AcmButton, AcmLaunchLink,
+  AcmTable, AcmExpandableCard
 } from '@open-cluster-management/ui-components'
 import {
   Text, Spinner, ButtonVariant, Nav,
@@ -736,14 +737,16 @@ export class AnsibleAutomationModal extends React.Component {
           title: msgs.get('ansible.jobTemplates.editor.title', locale),
           tooltip: msgs.get('ansible.jobTemplates.editor.title', locale),
         })}
+      <AcmExpandableCard title={msgs.get('panel.header.template.yaml', locale)}>
         <MonacoEditor
-          width="100%"
-          height="100"
-          language="yaml"
-          theme="console"
-          onChange={this.editorOnChange}
-          value={extraVars}
-        />
+            width="100%"
+            height="100"
+            language="yaml"
+            theme="vs"
+            onChange={this.editorOnChange}
+            value={extraVars}
+          />
+        </AcmExpandableCard>
       </div>
     )
   }
