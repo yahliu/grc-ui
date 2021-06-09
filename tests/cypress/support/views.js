@@ -1409,6 +1409,15 @@ export const action_verifyCredentialsInSidebar = (uName, credentialName) => {
           })
       }
     }).as('credsQuery')
+    cy.intercept('POST', Cypress.config().baseUrl + '/multicloud/policies/graphql', (req) => {
+      if (req.body.operationName === 'policyAutomations') {
+          req.reply({
+            data: {
+              policyAutomations: []
+            }
+          })
+      }
+    }).as('autosQuery')
   }
   //search for policy and click to configure
   cy.CheckGrcMainPage()
