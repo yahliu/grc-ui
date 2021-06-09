@@ -75,6 +75,7 @@ export class AnsibleAutomationModal extends React.Component {
       activeItem: 0,
       credentialName: null,
       towerURL: '-',
+      ansibleConnection: null,
       credentialNS: null,
       credentialIsOpen: false,
       jobTemplateName: null,
@@ -264,7 +265,8 @@ export class AnsibleAutomationModal extends React.Component {
   handleSubmitClick = async () => {
     const { yamlMsg } = this.state
     const { locale } = this.props
-    const {latestJSON, action} = await this.generateJSON()
+    const generateJSONResult = Promise.resolve(this.generateJSON())
+    const {latestJSON, action} = await generateJSONResult
     if (!yamlMsg.msg && latestJSON && action) {
       const {data:resData} = await this.props.handleModifyPolicyAutomation(latestJSON, action)
       const errors = _.get(resData, 'modifyPolicyAutomation.errors')
@@ -299,7 +301,8 @@ export class AnsibleAutomationModal extends React.Component {
       this.handleCloseSlideOut()
     } else {
       const { initialJSON, confirmClose, credentialName } = this.state
-      const { latestJSON } = await this.generateJSON()
+      const generateJSONResult = Promise.resolve(this.generateJSON())
+      const { latestJSON } = await generateJSONResult
       if (_.get(latestJSON, 'spec.automationDef.secret')) {
         latestJSON.spec.automationDef.secret = credentialName
       }
@@ -457,7 +460,7 @@ export class AnsibleAutomationModal extends React.Component {
                 {!readyFlag && <Spinner className='patternfly-spinner' />}
               </div>
               {readyFlag && this.renderAnsiblePanelContent({
-                panelType, policyData, data, towerURL, activeItem, locale})
+                panelType, policyData, data, towerURL, activeItem})
               }
               </AcmModal>
             </React.Fragment>
@@ -467,23 +470,37 @@ export class AnsibleAutomationModal extends React.Component {
     )
   }
 
+  renderURL = (id, text, URL, truncateLength) => {
+    if (!text || text !== '-') {
+      let linkText = text
+      if (truncateLength) {
+        linkText = <TruncateText maxCharacters={truncateLength} text={linkText} />
+      }
+      const link = { id, text: linkText, href: URL }
+      return <AcmLaunchLink links={[link]} />
+    } else {
+      return text
+    }
+  }
+
   renderAnsiblePanelContent = ({
-    panelType, policyData, data, towerURL, activeItem, locale
+    panelType, policyData, data, towerURL, activeItem
   }) => {
+    const { locale } = this.props
     return <React.Fragment>
-      <div>
+      <div className='infoArea'>
         {msgs.get(`ansible.automation.description.${panelType}`, locale)}
       </div>
       <Title headingLevel="h3">
         {msgs.get('table.header.policy.name', locale)}
       </Title>
-      <div>
+      <div className='infoArea'>
         {policyData.name}
       </div>
       <Title headingLevel="h3">
         {msgs.get('table.header.cluster.violation', locale)}
       </Title>
-      <div>
+      <div className='infoArea'>
         {getPolicyCompliantStatus(policyData, locale, 'clusterCompliant')}
       </div>
       {TitleWithTooltip({
@@ -493,7 +510,7 @@ export class AnsibleAutomationModal extends React.Component {
         title: msgs.get('ansible.tower.URL.title', locale),
         tooltip: msgs.get('ansible.launch.connection', locale),
       })}
-      <div>
+      <div className='infoArea'>
         {towerURL && this.renderURL('towerURL', towerURL, towerURL, 60)}
       </div>
       <Nav onSelect={this.onSelect} variant="tertiary">
@@ -508,7 +525,7 @@ export class AnsibleAutomationModal extends React.Component {
       </Nav>
       <div className='ansible-table'>
         {activeItem===0 && data && <div className='ansible-configure-table'>
-          {this.renderAnsibleCredentialsSelection(data, locale)}
+          {this.renderAnsibleCredentialsSelection(data)}
         </div>}
         {activeItem===1 && data && <div className='ansible-history-table'>
           {this.renderAnsibleHisotry(data)}
@@ -517,20 +534,12 @@ export class AnsibleAutomationModal extends React.Component {
     </React.Fragment>
   }
 
-  renderURL = (id, text, URL, truncateLength) => {
-    let linkText = text
-    if (truncateLength) {
-      linkText = <TruncateText maxCharacters={truncateLength} text={linkText} />
-    }
-    const link = { id, text: linkText, href: URL }
-  return <AcmLaunchLink links={[link]} />
-  }
-
-  setCredentialsSelectionValue = (event, selection) => {
+  setCredentialsSelectionValue = (event, selection, ansCredentials) => {
     this.setState({
         credentialName: selection,
         credentialIsOpen: false
       })
+    this.getAnsibleConnection(ansCredentials, selection, 'edit')
   }
 
   onCredentialsSelectionToggle = isOpen => {
@@ -539,10 +548,9 @@ export class AnsibleAutomationModal extends React.Component {
     })
   }
 
-  getAnsibleConnection = (ansCredentials) => {
-    const {credentialName, credentialNS} = this.state
-    const ansibleConnection = {towerURL:'', token:''}
-    const targetCredential = _.find(ansCredentials, ['name', credentialName])
+  getAnsibleConnection = (ansCredentials, credentialNameNew, type) => {
+    const { credentialName:credentialNameOld, credentialNS } = this.state
+    const targetCredential = _.find(ansCredentials, ['name', (credentialNameNew || credentialNameOld)])
     if (targetCredential && targetCredential.namespace
       && targetCredential.host && targetCredential.token) {
       if (credentialNS !== targetCredential.namespace) {
@@ -551,13 +559,24 @@ export class AnsibleAutomationModal extends React.Component {
           towerURL:targetCredential.host,
         })
       }
-      ansibleConnection.towerURL = targetCredential.host
-      ansibleConnection.token = targetCredential.token
+      if (type === 'edit') {
+        this.setState({
+          ansibleConnection: {
+            towerURL: targetCredential.host,
+            token: targetCredential.token
+          }
+        })
+      } else {
+        return {
+          towerURL: targetCredential.host,
+          token: targetCredential.token
+        }
+      }
     }
-    return ansibleConnection
   }
 
-  renderAnsibleCredentialsSelection = (credentialsData, locale) => {
+  renderAnsibleCredentialsSelection = (credentialsData) => {
+    const { locale } = this.props
     const ansCredentials = credentialsData.ansibleCredentials
     const ansCredentialFlag = Array.isArray(ansCredentials) && ansCredentials.length > 0
     const {credentialName, credentialIsOpen} = this.state
@@ -572,35 +591,37 @@ export class AnsibleAutomationModal extends React.Component {
               title: msgs.get('ansible.credential.selection.title', locale),
               tooltip: msgs.get('ansible.credential.selection.title', locale),
             })}
-            <Select
-              variant={SelectVariant.single}
-              placeholderText={msgs.get('ansible.credential.selection.placeholder', locale)}
-              aria-label={msgs.get('ansible.credential.selection.placeholder', locale)}
-              onSelect={this.setCredentialsSelectionValue}
-              onToggle={this.onCredentialsSelectionToggle}
-              selections={credentialName}
-              isOpen={credentialIsOpen}
-            >
-              {ansCredentials.map((credential) => (
-                <SelectOption
-                  key={credential.name}
-                  value={credential.name ? credential.name : '-'}
-                  isPlaceholder={credential.name ? credential.name : '-'}
-                  description={`${credential.host ? credential.host : '-'}`}
-                />
-              ))}
-            </Select>
+           <div className='infoArea createCredential'>
+              <Select
+                variant={SelectVariant.single}
+                placeholderText={msgs.get('ansible.credential.selection.placeholder', locale)}
+                aria-label={msgs.get('ansible.credential.selection.placeholder', locale)}
+                onSelect={(event,selection) => this.setCredentialsSelectionValue(event, selection, ansCredentials)}
+                onToggle={this.onCredentialsSelectionToggle}
+                selections={credentialName}
+                isOpen={credentialIsOpen}
+              >
+                {ansCredentials.map((credential) => (
+                  <SelectOption
+                    key={credential.name}
+                    value={credential.name ? credential.name : '-'}
+                    isPlaceholder={credential.name ? credential.name : '-'}
+                    description={`${credential.host ? credential.host : '-'}`}
+                  />
+                ))}
+              </Select>
             {this.renderURL(
               'createCredentialLink',
               msgs.get('ansible.launch.createCredential', locale),
               '/multicloud/credentials'
             )}
+            </div>
             {credentialName && this.renderAnsibleJobTemplatesSelection(
-              this.getAnsibleConnection(ansCredentials), locale
+              this.getAnsibleConnection(ansCredentials)
             )}
           </React.Fragment>}
         {!ansCredentialFlag &&
-          <React.Fragment>
+          <div className='infoArea createCredential'>
             <Text>
               {msgs.get('ansible.no.credential', locale)}
               {this.renderURL(
@@ -609,7 +630,7 @@ export class AnsibleAutomationModal extends React.Component {
                 '/multicloud/credentials'
               )}
             </Text>
-          </React.Fragment>
+          </div>
         }
       </React.Fragment>
     )
@@ -628,9 +649,11 @@ export class AnsibleAutomationModal extends React.Component {
     })
   }
 
-  renderAnsibleJobTemplatesSelection = (ansibleConnection, locale) => {
+  renderAnsibleJobTemplatesSelection = (ansibleConnectionOld) => {
+    const { ansibleConnection: ansibleConnectionNew } = this.state
+    const { locale } = this.props
     return <React.Fragment>
-      <Query query={GET_ANSIBLE_JOB_TEMPLATE} variables={ansibleConnection}>
+      <Query query={GET_ANSIBLE_JOB_TEMPLATE} variables={(ansibleConnectionNew || ansibleConnectionOld)}>
         {( result ) => {
           const { loading } = result
           const { data={}, error={} } = result
@@ -653,28 +676,31 @@ export class AnsibleAutomationModal extends React.Component {
                     title: msgs.get('ansible.jobTemplates.selection.title', locale),
                     tooltip: msgs.get('ansible.jobTemplates.selection.title', locale),
                   })}
-                  <Select
-                    variant={SelectVariant.single}
-                    placeholderText={msgs.get('ansible.jobTemplates.selection.placeholder', locale)}
-                    aria-label={msgs.get('ansible.jobTemplates.selection.placeholder', locale)}
-                      onSelect={this.setJobTemplatesSelectionValue}
-                      onToggle={this.onJobTemplatesSelectionToggle}
-                      selections={jobTemplateName}
-                      isOpen={jobTemplateIsOpen}
-                    >
-                    {ansJobTemplates.map((jobTemplate) => (
-                      <SelectOption
-                        key={jobTemplate.name}
-                        value={jobTemplate.name ? jobTemplate.name : '-'}
-                        isPlaceholder={jobTemplate.name ? jobTemplate.name : '-'}
-                        description={jobTemplate.description ? jobTemplate.description : '-'}
-                      />
-                    ))}
-                  </Select>
+                  <div className='infoArea createJobTemplate'>
+                    <Select
+                      variant={SelectVariant.single}
+                      placeholderText={msgs.get('ansible.jobTemplates.selection.placeholder', locale)}
+                      aria-label={msgs.get('ansible.jobTemplates.selection.placeholder', locale)}
+                        onSelect={this.setJobTemplatesSelectionValue}
+                        onToggle={this.onJobTemplatesSelectionToggle}
+                        selections={jobTemplateName}
+                        isOpen={jobTemplateIsOpen}
+                      >
+                      {ansJobTemplates.map((jobTemplate) => (
+                        <SelectOption
+                          key={jobTemplate.name}
+                          value={jobTemplate.name ? jobTemplate.name : '-'}
+                          isPlaceholder={jobTemplate.name ? jobTemplate.name : '-'}
+                          description={jobTemplate.description ? jobTemplate.description : '-'}
+                        />
+                      ))}
+                    </Select>
+                  </div>
                   {jobTemplateName && this.renderAnsibleJobTemplateEditor()}
                   {jobTemplateName && this.renderAnsibleScheduleMode()}
                 </React.Fragment>}
                 {!ansJobTemplateFlag && notificationOpen &&
+                <div className='infoArea'>
                   <Alert
                     variant={'info'}
                     isInline={true}
@@ -682,6 +708,7 @@ export class AnsibleAutomationModal extends React.Component {
                     actionClose={<AlertActionCloseButton onClose={this.closeAlert} />}
                   >
                   </Alert>
+                </div>
                 }
               </React.Fragment>
             </React.Fragment>
@@ -701,7 +728,7 @@ export class AnsibleAutomationModal extends React.Component {
     const { locale } = this.props
     const { extraVars } = this.state
     return (
-      <div>
+      <div className='infoArea'>
        {TitleWithTooltip({
           className: 'titleWithTooltip',
           headingLevel: 'h3',
@@ -737,9 +764,11 @@ export class AnsibleAutomationModal extends React.Component {
           title: msgs.get('ansible.scheduleMode.title', locale),
           tooltip: msgs.get('ansible.scheduleMode.title', locale),
       })}
-      <Text className='ansible_scheduleMode_info'>
-        {msgs.get('ansible.scheduleMode.info', locale)}
-      </Text>
+      <div className='infoArea'>
+        <Text className='ansible_scheduleMode_info'>
+          {msgs.get('ansible.scheduleMode.info', locale)}
+        </Text>
+      </div>
       <React.Fragment>
         {this.renderAnsibleScheduleRadio(
           (ansScheduleMode==='manual'),
