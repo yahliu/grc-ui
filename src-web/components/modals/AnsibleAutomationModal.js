@@ -730,14 +730,7 @@ export class AnsibleAutomationModal extends React.Component {
     const { extraVars } = this.state
     return (
       <div className='infoArea'>
-       {TitleWithTooltip({
-          className: 'titleWithTooltip',
-          headingLevel: 'h3',
-          position: 'top',
-          title: msgs.get('ansible.jobTemplates.editor.title', locale),
-          tooltip: msgs.get('ansible.jobTemplates.editor.title', locale),
-        })}
-      <AcmExpandableCard title={msgs.get('panel.header.template.yaml', locale)}>
+      <AcmExpandableCard title={msgs.get('ansible.jobTemplates.editor.title', locale)}>
         <MonacoEditor
             width="100%"
             height="100"
