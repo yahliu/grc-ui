@@ -1398,6 +1398,18 @@ export const action_checkPolicyListingPageUserPermissions = (policyNames = [], c
 }
 
 export const action_verifyCredentialsInSidebar = (uName, credentialName) => {
+  //mock call if checking for empty state to ensure no conflicts occur
+  if (credentialName === '') {
+    cy.intercept('POST', Cypress.config().baseUrl + '/multicloud/policies/graphql', (req) => {
+      if (req.body.operationName === 'getAnsibleCredentials') {
+          req.reply({
+            data: {
+              ansibleCredentials: []
+            }
+          })
+      }
+    }).as('credsQuery')
+  }
   //search for policy and click to configure
   cy.CheckGrcMainPage()
     .doTableSearch(uName)
@@ -1405,8 +1417,7 @@ export const action_verifyCredentialsInSidebar = (uName, credentialName) => {
     cy.get('a')
       .contains(uName)
       .parents('td')
-      .siblings('td')
-      .contains('td', 'Configure').within(() => {
+      .siblings('td[data-label="Automation"]').within(() => {
         cy.get('a').click()
       })
   })

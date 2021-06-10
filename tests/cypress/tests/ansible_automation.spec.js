@@ -58,11 +58,6 @@ describeT('RHACM4K-2343 - [P1][Sev1][policy-grc] All policies page: Verify autom
     cy.waitForPolicyStatus(policyName, '1/1')
   })
 
-  //check credential table before creation
-  it('verifies sidebar credentials not existing', () => {
-    cy.verifyCredentialsInSidebar(policyName, '')
-  })
-
   //create credential
   const rawCredPolicyYAML = getConfigObject(credentialPolicy, 'raw', substitutionRules)
   const credPolicyName = rawCredPolicyYAML.replace(/\r?\n|\r/g, ' ').replace(/^.*?name:\s*/m, '').replace(/\s.*/m,'')
@@ -83,6 +78,8 @@ describeT('RHACM4K-2343 - [P1][Sev1][policy-grc] All policies page: Verify autom
 
   //check modal post credential creation
   it('verifies sidebar credentials after creation', () => {
+    //reload page to ensure credential is there
+    cy.visit('/multicloud/policies/all')
     cy.verifyCredentialsInSidebar(policyName, 'grcui-e2e-credential')
   })
 
@@ -102,6 +99,11 @@ describeT('RHACM4K-2343 - [P1][Sev1][policy-grc] All policies page: Verify autom
   })
   it('Verifies successful job history with mock', () => {
     cy.verifyHistoryPageWithMock(policyName)
+  })
+
+  //check credential table empty state with mock
+  it('verifies sidebar credentials not existing', () => {
+    cy.verifyCredentialsInSidebar(policyName, '')
   })
 
   //clean up
