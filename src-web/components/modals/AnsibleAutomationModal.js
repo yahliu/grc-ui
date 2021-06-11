@@ -44,6 +44,7 @@ import '../../scss/ansible-modal.scss'
 
 const metaNameStr = 'metadata.name'
 const metaNSStr = 'metadata.namespace'
+const extraVarsStr= 'spec.automationDef.extra_vars'
 
 if (window.monaco) {
   window.monaco.editor.defineTheme('console', {
@@ -82,7 +83,7 @@ export class AnsibleAutomationModal extends React.Component {
       jobTemplateName: null,
       jobTemplateIsOpen: false,
       extraVars: null,
-      ansScheduleMode: '',
+      ansScheduleMode: 'disabled',
       queryMsg: {
         msg: '',
         type: '',
@@ -145,7 +146,7 @@ export class AnsibleAutomationModal extends React.Component {
       jsonTemp.metadata.resourceVersion = resourceVersion
     }
     if (stateExtraVars || extraVars) {
-      jsonTemp.spec.automationDef.extra_vars = this.yamlToJSON(stateExtraVars || extraVars)
+      _.set(jsonTemp, extraVarsStr, this.yamlToJSON(stateExtraVars || extraVars))
     }
     return jsonTemp
   }
@@ -167,8 +168,11 @@ export class AnsibleAutomationModal extends React.Component {
         const resourceVersion = _.get(targetPolicyAutomation, 'metadata.resourceVersion')
         const credentialName = _.get(targetPolicyAutomation, 'spec.automationDef.secret')
         const jobTemplateName = _.get(targetPolicyAutomation, 'spec.automationDef.name')
-        const extraVarsJSON = _.get(targetPolicyAutomation, 'spec.automationDef.extra_vars')
-        const extraVars = this.jsonToYAML(extraVarsJSON)
+        const extraVarsJSON = _.get(targetPolicyAutomation, extraVarsStr)
+        let extraVars = null
+        if (typeof extraVarsJSON === 'object' && Object.keys(extraVarsJSON).length > 0) {
+          extraVars = this.jsonToYAML(extraVarsJSON)
+        }
         let ansScheduleMode = _.get(targetPolicyAutomation, 'spec.mode')
         if (annotations && annotations['policy.open-cluster-management.io/rerun'] === 'true') {
           ansScheduleMode = 'manual'
@@ -263,13 +267,38 @@ export class AnsibleAutomationModal extends React.Component {
     return ansScheduleMode
   }
 
+  // for delete action in merge-patch+json in grc-ui-api policyAutomationAction
+  // we need to keep the removed key and set removed value to null
+  removedExtraVars = (initialJSON, latestJSON) => {
+    const updatedJSON = latestJSON
+    if (initialJSON && latestJSON) {
+      const initialExtraVars= _.get(initialJSON, extraVarsStr)
+      let latestExtraVars= _.get(latestJSON, extraVarsStr)
+      if (initialExtraVars) {
+        Object.keys(initialExtraVars).forEach((key) => {
+          if(latestExtraVars){
+            if (!Object.prototype.hasOwnProperty.call(latestExtraVars, key)) {
+              _.set(latestExtraVars, key, null)
+            }
+          } else {
+             latestExtraVars = {}
+            _.set(latestExtraVars, key, null)
+            }
+        })
+        _.set(updatedJSON, extraVarsStr, latestExtraVars)
+      }
+    }
+    return updatedJSON
+  }
+
   handleSubmitClick = async () => {
-    const { yamlMsg } = this.state
+    const { yamlMsg, initialJSON } = this.state
     const { locale } = this.props
     const generateJSONResult = Promise.resolve(this.generateJSON())
     const {latestJSON, action} = await generateJSONResult
     if (!yamlMsg.msg && latestJSON && action) {
-      const {data:resData} = await this.props.handleModifyPolicyAutomation(latestJSON, action)
+      const updatedJSON = this.removedExtraVars(initialJSON, latestJSON)
+      const {data:resData} = await this.props.handleModifyPolicyAutomation(updatedJSON, action)
       const errors = _.get(resData, 'modifyPolicyAutomation.errors')
       if (Array.isArray(errors) && errors.length > 0)  {
         const error = errors[0]
@@ -277,7 +306,7 @@ export class AnsibleAutomationModal extends React.Component {
           this.setQueryAlert(_.get(error, 'message'), 'danger')
         }
       } else {
-        const ansScheduleMode = this.getAnsScheduleMode(latestJSON)
+        const ansScheduleMode = this.getAnsScheduleMode(updatedJSON)
         this.initialize()
         this.setQueryAlert(msgs.get(`ansible.${ansScheduleMode}.success`, locale), 'success')
       }
