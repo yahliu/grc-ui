@@ -21,26 +21,27 @@ import {
   global_BackgroundColor_dark_100 as editorBackground,
 } from '@patternfly/react-tokens'
 import MonacoEditor from 'react-monaco-editor'
-import msgs from '../../nls/platform.properties'
+import msgs from '../../../nls/platform.properties'
 import {
   modifyPolicyAutomation, clearRequestStatus,
   updateModal, copyAnsibleSecret, getPolicyAutomation
-} from '../../actions/common'
-import ansibleJobHistoryDef from '../../tableDefinitions/ansibleJobHistoryDef'
+} from '../../../actions/common'
+import ansibleJobHistoryDef from '../../../tableDefinitions/ansibleJobHistoryDef'
 import {
   getPolicyCompliantStatus, transform
-} from '../../tableDefinitions/utils'
+} from '../../../tableDefinitions/utils'
 import { Query } from '@apollo/client/react/components'
 import {
   GET_ANSIBLE_CREDENTIALS, GET_ANSIBLE_HISTORY,
-  GET_ANSIBLE_JOB_TEMPLATE,
-} from '../../utils/client/queries'
-import TruncateText from '../../components/common/TruncateText'
+  GET_ANSIBLE_JOB_TEMPLATE, GET_ANSIBLE_OPERATOR_INSTALLED,
+} from '../../../utils/client/queries'
+import TruncateText from '../../../components/common/TruncateText'
 import _ from 'lodash'
 import jsYaml from 'js-yaml'
-import TitleWithTooltip from '../common/TitleWithTooltip'
+import TitleWithTooltip from '../../common/TitleWithTooltip'
+import { renderAnsibleOperatorNotInstalled } from './AnsibleOperatorNotInstalled'
 
-import '../../scss/ansible-modal.scss'
+import '../../../scss/ansible-modal.scss'
 
 const metaNameStr = 'metadata.name'
 const metaNSStr = 'metadata.namespace'
@@ -408,6 +409,18 @@ export class AnsibleAutomationModal extends React.Component {
   }
 
   render() {
+    return (
+      <Query query={GET_ANSIBLE_OPERATOR_INSTALLED}>
+        {( result ) => {
+          const { loading, error={}, data={} } = result
+          const queryError = this.getQueryError(error)
+          return this.renderAnsiblePanel(data.ansibleOperatorInstalled?.installed, loading, queryError)
+        }}
+      </Query>
+    )
+  }
+
+  renderAnsiblePanel = (opInstalled, opInstalledLoading, opInstalledError) => {
     const { data:policyData, locale, open } = this.props
     const { activeItem, towerURL, queryMsg, yamlMsg, initialJSON,
       initializeFinished, policyAutoName, slideFlag, notificationOpen
@@ -432,12 +445,12 @@ export class AnsibleAutomationModal extends React.Component {
           const { loading } = result
           const { error={}, data={} } = result
           const queryError = this.getQueryError(error)
-          const readyFlag = (initializeFinished && !loading)
-          const modalName = slideFlag ? 'automation-resource-panel slide-in': 'automation-resource-panel'
+          const readyFlag = (initializeFinished && !loading && !opInstalledLoading)
+          const modalName = slideFlag ? 'automation-resource-panel slide-in' : 'automation-resource-panel'
           const titleText = readyFlag
             ? msgs.get(`ansible.automation.heading.${panelType}`, locale)
             : msgs.get('ansible.loading.info', locale)
-          const alertTitle = (queryError || yamlMsg.msg || queryMsg.msg)
+          const alertTitle = (opInstalledError || queryError || yamlMsg.msg || queryMsg.msg)
           let alertVariant = 'danger'
           if (queryError && _.includes(queryError, 'not installed')) {
             alertVariant = 'info'
@@ -458,6 +471,7 @@ export class AnsibleAutomationModal extends React.Component {
               header={
                 <React.Fragment>
                   <div className='ansible_modal_title'>{titleText}</div>
+                  {!opInstalledLoading && !opInstalled && renderAnsibleOperatorNotInstalled(locale)}
                   {alertTitle && notificationOpen &&
                       <Alert
                         variant={alertVariant}
@@ -469,7 +483,7 @@ export class AnsibleAutomationModal extends React.Component {
                   }
                 </React.Fragment>
               }
-              actions={!activeItem && [
+              actions={!activeItem && opInstalled && [
                 <AcmButton
                   key="confirm"
                   variant={ButtonVariant.primary}
@@ -558,7 +572,7 @@ export class AnsibleAutomationModal extends React.Component {
           {this.renderAnsibleCredentialsSelection(data)}
         </div>}
         {activeItem===1 && data && <div className='ansible-history-table'>
-          {this.renderAnsibleHisotry(data)}
+          {this.renderAnsibleHistory(data)}
         </div>}
       </div>
     </React.Fragment>
@@ -829,7 +843,7 @@ export class AnsibleAutomationModal extends React.Component {
     />
   }
 
-  renderAnsibleHisotry = (historyData) => {
+  renderAnsibleHistory = (historyData) => {
     const { locale } = this.props
     const tableData = transform(_.get(historyData.items ? historyData : {'items':[]}, 'items', []), ansibleJobHistoryDef, locale)
     return <AcmTable
