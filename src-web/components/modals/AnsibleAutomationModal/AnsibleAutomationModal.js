@@ -7,14 +7,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
-  AcmModal, AcmButton, AcmLaunchLink,
-  AcmTable, AcmExpandableCard
+  AcmModal, AcmButton, AcmExpandableCard,
 } from '@open-cluster-management/ui-components'
 import {
-  Text, Spinner, ButtonVariant, Nav,
-  NavItem, NavList, Select, Title,
-  SelectOption, SelectVariant, Radio,
-  Alert, AlertActionCloseButton
+  Text, Spinner, ButtonVariant, Select, Title,
+  SelectOption, SelectVariant, Radio, Alert,
+  AlertActionCloseButton
 } from '@patternfly/react-core'
 import {
   global_BackgroundColor_100 as lineNumberActiveForeground,
@@ -26,20 +24,18 @@ import {
   modifyPolicyAutomation, clearRequestStatus,
   updateModal, copyAnsibleSecret, getPolicyAutomation
 } from '../../../actions/common'
-import ansibleJobHistoryDef from '../../../tableDefinitions/ansibleJobHistoryDef'
-import {
-  getPolicyCompliantStatus, transform
-} from '../../../tableDefinitions/utils'
+import { getPolicyCompliantStatus } from '../../../tableDefinitions/utils'
 import { Query } from '@apollo/client/react/components'
 import {
   GET_ANSIBLE_CREDENTIALS, GET_ANSIBLE_HISTORY,
   GET_ANSIBLE_JOB_TEMPLATE, GET_ANSIBLE_OPERATOR_INSTALLED,
 } from '../../../utils/client/queries'
-import TruncateText from '../../../components/common/TruncateText'
 import _ from 'lodash'
 import jsYaml from 'js-yaml'
 import TitleWithTooltip from '../../common/TitleWithTooltip'
 import { renderAnsibleOperatorNotInstalled } from './AnsibleOperatorNotInstalled'
+import { renderAnsibleURL } from './AnsibleURL'
+import { renderAnsiblePanelContent } from './AnsiblePanelContent'
 
 import '../../../scss/ansible-modal.scss'
 
@@ -70,6 +66,7 @@ if (window.monaco) {
 export class AnsibleAutomationModal extends React.Component {
   constructor(props) {
     super(props)
+    const { open } = this.props
     this.handleSubmitClick = this.handleSubmitClick.bind(this)
     this.handleCloseClick = this.handleCloseClick.bind(this)
     this.state = {
@@ -95,7 +92,7 @@ export class AnsibleAutomationModal extends React.Component {
       },
       initialJSON: null,
       confirmClose: false,
-      slideFlag: false,
+      slideFlag: open,
       notificationOpen: true
     }
     this.initialize()
@@ -196,7 +193,6 @@ export class AnsibleAutomationModal extends React.Component {
     }
     this.setState({
       initializeFinished: true,
-      slideFlag: true,
     })
   }
 
@@ -252,9 +248,9 @@ export class AnsibleAutomationModal extends React.Component {
     })
   }
 
-  onSelect = result => {
+  handleTabClick = (result, tabIndex) => {
     this.setState({
-      activeItem: result.itemId
+      activeItem: tabIndex
     })
   }
 
@@ -310,6 +306,7 @@ export class AnsibleAutomationModal extends React.Component {
         const ansScheduleMode = this.getAnsScheduleMode(updatedJSON)
         this.initialize()
         this.setQueryAlert(msgs.get(`ansible.${ansScheduleMode}.success`, locale), 'success')
+        this.handleCloseSlideOut()
       }
     }
   }
@@ -423,7 +420,8 @@ export class AnsibleAutomationModal extends React.Component {
   renderAnsiblePanel = (opInstalled, opInstalledLoading, opInstalledError) => {
     const { data:policyData, locale, open } = this.props
     const { activeItem, towerURL, queryMsg, yamlMsg, initialJSON,
-      initializeFinished, policyAutoName, slideFlag, notificationOpen
+      initializeFinished, policyAutoName, slideFlag, notificationOpen,
+      credentialName, credentialIsOpen
     } = this.state
     const policyNS = _.get(policyData, metaNSStr)
     let query, variables, pollInterval, actionClose
@@ -440,142 +438,108 @@ export class AnsibleAutomationModal extends React.Component {
     }
     const panelType = initialJSON ? 'edit' : 'create'
     return (
-      <Query query={query} pollInterval={pollInterval} variables={variables}>
-        {( result ) => {
-          const { loading } = result
-          const { error={}, data={} } = result
-          const queryError = this.getQueryError(error)
-          const readyFlag = (initializeFinished && !loading && !opInstalledLoading)
-          const modalName = slideFlag ? 'automation-resource-panel slide-in' : 'automation-resource-panel'
-          const titleText = readyFlag
-            ? msgs.get(`ansible.automation.heading.${panelType}`, locale)
-            : msgs.get('ansible.loading.info', locale)
-          const alertTitle = (opInstalledError || queryError || yamlMsg.msg || queryMsg.msg)
-          let alertVariant = 'danger'
-          if (queryError && _.includes(queryError, 'not installed')) {
-            alertVariant = 'info'
-          } else if (yamlMsg.type || queryMsg.type){
-            alertVariant = (yamlMsg.type || queryMsg.type)
-          }
-          return (
-            <React.Fragment>
-              <AcmModal
-              className={modalName}
-              titleIconVariant={'default'}
-              variant='small'
-              id={'automation-resource-panel'}
-              isOpen={open}
-              showClose={true}
-              onClose={this.handleCloseClick}
-              aria-label={titleText}
-              header={
+      <div>
+        <Query query={query} pollInterval={pollInterval} variables={variables}>
+            {( result ) => {
+              const { loading } = result
+              const { error={}, data={} } = result
+              const queryError = this.getQueryError(error)
+              const readyFlag = (initializeFinished && !loading && !opInstalledLoading)
+              const modalName = slideFlag ? 'automation-resource-panel slide-in' : 'automation-resource-panel'
+              const titleText = msgs.get(`ansible.automation.heading.${panelType}`, locale)
+              const alertTitle = (opInstalledError || queryError || yamlMsg.msg || queryMsg.msg)
+              let alertVariant = 'danger'
+              if (queryError && _.includes(queryError, 'not installed')) {
+                alertVariant = 'info'
+              } else if (yamlMsg.type || queryMsg.type){
+                alertVariant = (yamlMsg.type || queryMsg.type)
+              }
+              return (
                 <React.Fragment>
-                  <div className='ansible_modal_title'>{titleText}</div>
-                  {!opInstalledLoading && !opInstalled && renderAnsibleOperatorNotInstalled(locale)}
-                  {alertTitle && notificationOpen &&
-                      <Alert
-                        variant={alertVariant}
-                        isInline={true}
-                        title={alertTitle}
-                        actionClose={actionClose}
-                      >
-                      </Alert>
+                  <AcmModal
+                  className={modalName}
+                  titleIconVariant={'default'}
+                  variant='small'
+                  id={'automation-resource-panel'}
+                  isOpen={open}
+                  showClose={true}
+                  onClose={this.handleCloseClick}
+                  aria-label={titleText}
+                  header={
+                    <React.Fragment>
+                      <div className='ansible_modal_title'>{titleText}</div>
+                      {!opInstalledLoading && !opInstalled && renderAnsibleOperatorNotInstalled(locale)}
+                      {alertTitle && notificationOpen &&
+                          <Alert
+                            variant={alertVariant}
+                            isInline={true}
+                            title={alertTitle}
+                            actionClose={actionClose}
+                          >
+                          </Alert>
+                      }
+                      <div className='infoArea'>
+                        {msgs.get(`ansible.automation.description.${panelType}`, locale)}
+                      </div>
+                      <Title headingLevel="h3">
+                        {msgs.get('table.header.policy.name', locale)}
+                      </Title>
+                      <div className='infoArea'>
+                        {policyData.name}
+                      </div>
+                      <Title headingLevel="h3">
+                        {msgs.get('table.header.cluster.violation', locale)}
+                      </Title>
+                      <div className='infoArea'>
+                        {getPolicyCompliantStatus(policyData, locale, 'clusterCompliant')}
+                      </div>
+                      {TitleWithTooltip({
+                        className: 'titleWithTooltip',
+                        headingLevel: 'h3',
+                        position: 'top',
+                        title: msgs.get('ansible.tower.URL.title', locale),
+                        tooltip: msgs.get('ansible.launch.connection', locale),
+                      })}
+                      <div className='infoArea'>
+                        {towerURL && renderAnsibleURL('towerURL', towerURL, towerURL, 60)}
+                      </div>
+                    </React.Fragment>
                   }
+                  actions={!activeItem && opInstalled && [
+                    <AcmButton
+                      key="confirm"
+                      variant={ButtonVariant.primary}
+                      onClick={this.handleSubmitClick}
+                    >
+                        {msgs.get('modal.button.save', locale)}
+                    </AcmButton>,
+                    <AcmButton
+                      key="cancel"
+                      variant={ButtonVariant.link}
+                      onClick={this.handleCloseClick}
+                    >
+                        {msgs.get('modal.button.cancel', locale)}
+                    </AcmButton>,
+                  ]}
+                  >
+                  <div>
+                    {!readyFlag && <Spinner className='patternfly-spinner' />}
+                  </div>
+                  {readyFlag && renderAnsiblePanelContent({
+                    data, activeItem, locale, handleTabClick:this.handleTabClick,
+                    credentialName, credentialIsOpen,
+                    setCredentialsSelectionValue:this.setCredentialsSelectionValue,
+                    onCredentialsSelectionToggle:this.onCredentialsSelectionToggle,
+                    renderAnsibleJobTemplatesSelection:this.renderAnsibleJobTemplatesSelection,
+                    getAnsibleConnection:this.getAnsibleConnection,
+                  })}
+                  </AcmModal>
                 </React.Fragment>
-              }
-              actions={!activeItem && opInstalled && [
-                <AcmButton
-                  key="confirm"
-                  variant={ButtonVariant.primary}
-                  onClick={this.handleSubmitClick}
-                >
-                    {msgs.get('modal.button.save', locale)}
-                </AcmButton>,
-                <AcmButton
-                  key="cancel"
-                  variant={ButtonVariant.link}
-                  onClick={this.handleCloseClick}
-                >
-                    {msgs.get('modal.button.cancel', locale)}
-                </AcmButton>,
-              ]}
-              >
-              <div>
-                {!readyFlag && <Spinner className='patternfly-spinner' />}
-              </div>
-              {readyFlag && this.renderAnsiblePanelContent({
-                panelType, policyData, data, towerURL, activeItem})
-              }
-              </AcmModal>
-            </React.Fragment>
-          )
-        }}
-      </Query>
+              )
+            }}
+          </Query>
+    </div>
     )
-  }
-
-  renderURL = (id, text, URL, truncateLength) => {
-    if (!text || text !== '-') {
-      let linkText = text
-      if (truncateLength) {
-        linkText = <TruncateText maxCharacters={truncateLength} text={linkText} />
-      }
-      const link = { id, text: linkText, href: URL }
-      return <AcmLaunchLink links={[link]} />
-    } else {
-      return text
-    }
-  }
-
-  renderAnsiblePanelContent = ({
-    panelType, policyData, data, towerURL, activeItem
-  }) => {
-    const { locale } = this.props
-    return <React.Fragment>
-      <div className='infoArea'>
-        {msgs.get(`ansible.automation.description.${panelType}`, locale)}
-      </div>
-      <Title headingLevel="h3">
-        {msgs.get('table.header.policy.name', locale)}
-      </Title>
-      <div className='infoArea'>
-        {policyData.name}
-      </div>
-      <Title headingLevel="h3">
-        {msgs.get('table.header.cluster.violation', locale)}
-      </Title>
-      <div className='infoArea'>
-        {getPolicyCompliantStatus(policyData, locale, 'clusterCompliant')}
-      </div>
-      {TitleWithTooltip({
-        className: 'titleWithTooltip',
-        headingLevel: 'h3',
-        position: 'top',
-        title: msgs.get('ansible.tower.URL.title', locale),
-        tooltip: msgs.get('ansible.launch.connection', locale),
-      })}
-      <div className='infoArea'>
-        {towerURL && this.renderURL('towerURL', towerURL, towerURL, 60)}
-      </div>
-      <Nav onSelect={this.onSelect} variant="tertiary">
-        <NavList>
-          <NavItem key={'Configure'} itemId={0} isActive={activeItem === 0} href="#">
-            Configure
-          </NavItem>
-          <NavItem key={'History'} itemId={1} isActive={activeItem === 1} href="#">
-            History
-          </NavItem>
-        </NavList>
-      </Nav>
-      <div className='ansible-table'>
-        {activeItem===0 && data && <div className='ansible-configure-table'>
-          {this.renderAnsibleCredentialsSelection(data)}
-        </div>}
-        {activeItem===1 && data && <div className='ansible-history-table'>
-          {this.renderAnsibleHistory(data)}
-        </div>}
-      </div>
-    </React.Fragment>
   }
 
   setCredentialsSelectionValue = (event, selection, ansCredentials) => {
@@ -616,67 +580,6 @@ export class AnsibleAutomationModal extends React.Component {
       towerURL: targetCredential.host,
       token: targetCredential.token
     }
-  }
-
-  renderAnsibleCredentialsSelection = (credentialsData) => {
-    const { locale } = this.props
-    const ansCredentials = credentialsData.ansibleCredentials
-    const ansCredentialFlag = Array.isArray(ansCredentials) && ansCredentials.length > 0
-    const {credentialName, credentialIsOpen} = this.state
-    return (
-      <React.Fragment>
-        {ansCredentialFlag &&
-          <React.Fragment>
-            {TitleWithTooltip({
-              className: 'titleWithTooltip',
-              headingLevel: 'h3',
-              position: 'top',
-              title: msgs.get('ansible.credential.selection.title', locale),
-              tooltip: msgs.get('ansible.credential.selection.title', locale),
-            })}
-           <div className='infoArea createCredential'>
-              <Select
-                variant={SelectVariant.single}
-                placeholderText={msgs.get('ansible.credential.selection.placeholder', locale)}
-                aria-label={msgs.get('ansible.credential.selection.placeholder', locale)}
-                onSelect={(event,selection) => this.setCredentialsSelectionValue(event, selection, ansCredentials)}
-                onToggle={this.onCredentialsSelectionToggle}
-                selections={credentialName}
-                isOpen={credentialIsOpen}
-              >
-                {ansCredentials.map((credential) => (
-                  <SelectOption
-                    key={credential.name}
-                    value={credential.name ? credential.name : '-'}
-                    isPlaceholder={credential.name ? credential.name : '-'}
-                    description={`${credential.host ? credential.host : '-'}`}
-                  />
-                ))}
-              </Select>
-            {this.renderURL(
-              'createCredentialLink',
-              msgs.get('ansible.launch.createCredential', locale),
-              '/multicloud/credentials'
-            )}
-            </div>
-            {credentialName && this.renderAnsibleJobTemplatesSelection(
-              this.getAnsibleConnection(ansCredentials)
-            )}
-          </React.Fragment>}
-        {!ansCredentialFlag &&
-          <div className='infoArea createCredential'>
-            <Text>
-              {msgs.get('ansible.no.credential', locale)}
-              {this.renderURL(
-                'createCredentialLink',
-                msgs.get('ansible.launch.createCredential', locale),
-                '/multicloud/credentials'
-              )}
-            </Text>
-          </div>
-        }
-      </React.Fragment>
-    )
   }
 
   setJobTemplatesSelectionValue = (event, selection) => {
@@ -840,21 +743,6 @@ export class AnsibleAutomationModal extends React.Component {
       id={id}
       value={value}
       description={msgs.get(`ansible.scheduleMode.${value}.info`, locale)}
-    />
-  }
-
-  renderAnsibleHistory = (historyData) => {
-    const { locale } = this.props
-    const tableData = transform(_.get(historyData.items ? historyData : {'items':[]}, 'items', []), ansibleJobHistoryDef, locale)
-    return <AcmTable
-      initialSort={tableData.sortBy}
-      showToolbar={false}
-      autoHidePagination={true}
-      plural='ansible jobs'
-      items={tableData.rows}
-      columns={tableData.columns}
-      keyFn={(item) => item.uid.toString()}
-      gridBreakPoint=''
     />
   }
 }

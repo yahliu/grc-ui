@@ -1373,9 +1373,9 @@ export const action_checkPolicyListingPageUserPermissions = (policyNames = [], c
             }
           }
           if (permissions.delete) {
-            cy.get('button.pf-c-dropdown__menu-item').contains('Remove', { matchCase: false }).should('have.attr', 'aria-disabled', 'false')
+            cy.get('button.pf-c-dropdown__menu-item').contains('Delete', { matchCase: false }).should('have.attr', 'aria-disabled', 'false')
           } else {
-            cy.get('button.pf-c-dropdown__menu-item').contains('Remove', { matchCase: false }).should('have.attr', 'aria-disabled', 'true')
+            cy.get('button.pf-c-dropdown__menu-item').contains('Delete', { matchCase: false }).should('have.attr', 'aria-disabled', 'true')
           }
         })
         // close the menu again
@@ -1563,7 +1563,26 @@ export const action_scheduleAutomation = (uName, credentialName, mode) => {
     cy.get('.pf-c-modal-box__footer').within(() => {
       cy.get('button').eq(0).click()
     })
-    verifyHistoryPage(mode, failures)
+  })
+  .then(() => {
+    // after successfully creating automation
+    // panel will automatically closed and need to reopen it
+    cy.CheckGrcMainPage()
+    .doTableSearch(uName)
+    .get('.grc-view-by-policies-table').within(() => {
+    cy.get('a')
+      .contains(uName)
+      .parents('td')
+      .siblings('td[data-label="Automation"]').within(() => {
+        cy.get('a').click()
+      })
+    })
+    .then(() => {
+      cy.get('#automation-resource-panel').should('exist')
+    })
+    .then(() => {
+      verifyHistoryPage(mode, failures)
+    })
   })
   .then(() => {
     cy.get('button[aria-label="Close"]').click()
@@ -1604,7 +1623,7 @@ export const action_verifyHistoryPageWithMock = (uName) => {
   }).as('historyQuery')
 
   cy.get('#automation-resource-panel').within(() => {
-    cy.get('a').contains('History').click()
+    cy.get('.pf-c-tabs__item-text').contains('History').click()
   })
 
   cy.get('.ansible-history-table').within(() => {
@@ -1622,7 +1641,7 @@ const verifyHistoryPage = (mode, failuresExpected) => {
     checkWithPolicy('automation/verify_run_once.yaml')
   }
 
-  cy.get('a').contains('History').click()
+  cy.get('.pf-c-tabs__item-text').contains('History').click()
   if (failuresExpected === 0) {
     cy.get('.ansible-history-table').within(() => {
       cy.get('.pf-c-empty-state').should('exist')
@@ -1655,9 +1674,9 @@ const checkWithPolicy = (policyYaml) => {
     verifyCompliant(policyName)
   })
 
-  //remove policy
+  //Delete policy
   it(`Delete policy ${policyName}`, () => {
-    cy.actionPolicyActionInListing(policyName, 'Remove')
+    cy.actionPolicyActionInListing(policyName, 'Delete')
   })
 }
 
