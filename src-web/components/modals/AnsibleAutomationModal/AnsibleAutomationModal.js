@@ -398,6 +398,7 @@ export class AnsibleAutomationModal extends React.Component {
       initializeFinished, policyAutoName, slideFlag, notificationOpen,
       credentialName, credentialIsOpen
     } = this.state
+    const policyName = _.get(policyData, metaNameStr)
     const policyNS = _.get(policyData, metaNSStr)
     let query, variables, pollInterval, actionClose
     if (activeItem) { // ansible history page
@@ -460,7 +461,7 @@ export class AnsibleAutomationModal extends React.Component {
                         {msgs.get('table.header.policy.name', locale)}
                       </Title>
                       <div className='infoArea'>
-                        {policyData.name}
+                        {policyName}
                       </div>
                       <Title headingLevel="h3">
                         {msgs.get('table.header.cluster.violation', locale)}
