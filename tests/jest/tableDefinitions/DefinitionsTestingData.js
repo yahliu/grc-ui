@@ -319,3 +319,129 @@ export const hcmPoliciesPolicyCluster = {
   'empty': {'status': {'consoleURL': ''}},
   'null': {'status': null}
 }
+
+export const disabledPolicyCompliantStatusItem = {
+  '__typename': 'Compliance',
+  'name': 'policy-etcdencryption',
+  'namespace': 'default',
+  'raw': {
+    'apiVersion': 'policy.open-cluster-management.io/v1',
+    'kind': 'Policy',
+    'spec': {
+      'disabled': true,
+      'remediationAction': 'inform'
+    },
+    'status': {
+      'placement': [
+        {
+          'placementBinding': 'binding-policy-etcdencryption',
+          'placementRule': 'placement-policy-etcdencryption'
+        }
+      ]
+    }
+  },
+  'remediation': 'inform',
+  'policyCompliant': '0/0',
+  'clusterCompliant': '-',
+}
+
+export const unavailableClusterCompliant = {
+  '__typename': 'Compliance',
+  'name': 'policy-etcdencryption',
+  'namespace': 'default',
+  'raw': {
+    'apiVersion': 'policy.open-cluster-management.io/v1',
+    'kind': 'Policy',
+    'spec': {
+      'disabled': false,
+      'remediationAction': 'inform'
+    },
+    'status': {
+      'placement': [
+        {
+          'placementBinding': 'binding-policy-etcdencryption',
+          'placementRule': 'placement-policy-etcdencryption'
+        }
+      ]
+    }
+  },
+  'remediation': 'inform',
+  'policyCompliant': '0/0',
+  'clusterCompliant': '-',
+}
+
+export const withClusterViolation = {
+  '__typename': 'Compliance',
+  'name': 'policy-etcdencryption',
+  'namespace': 'default',
+  'raw': {
+    'apiVersion': 'policy.open-cluster-management.io/v1',
+    'kind': 'Policy',
+    'spec': {
+      'disabled': false,
+      'remediationAction': 'inform'
+    },
+    'status': {
+      'placement': [
+        {
+          'placementBinding': 'binding-policy-etcdencryption',
+          'placementRule': 'placement-policy-etcdencryption'
+        }
+      ]
+    }
+  },
+  'remediation': 'inform',
+  'policyCompliant': '0/0',
+  'clusterCompliant': '1/3',
+}
+
+
+export const withoutClusterViolation = {
+  '__typename': 'Compliance',
+  'name': 'policy-etcdencryption',
+  'namespace': 'default',
+  'raw': {
+    'apiVersion': 'policy.open-cluster-management.io/v1',
+    'kind': 'Policy',
+    'spec': {
+      'disabled': false,
+      'remediationAction': 'inform'
+    },
+    'status': {
+      'placement': [
+        {
+          'placementBinding': 'binding-policy-etcdencryption',
+          'placementRule': 'placement-policy-etcdencryption'
+        }
+      ]
+    }
+  },
+  'remediation': 'inform',
+  'policyCompliant': '0/0',
+  'clusterCompliant': '0/3',
+}
+
+export const withUnknownClusterViolation = {
+  '__typename': 'Compliance',
+  'name': 'policy-etcdencryption',
+  'namespace': 'default',
+  'raw': {
+    'apiVersion': 'policy.open-cluster-management.io/v1',
+    'kind': 'Policy',
+    'spec': {
+      'disabled': false,
+      'remediationAction': 'inform'
+    },
+    'status': {
+      'placement': [
+        {
+          'placementBinding': 'binding-policy-etcdencryption',
+          'placementRule': 'placement-policy-etcdencryption'
+        }
+      ]
+    }
+  },
+  'remediation': 'inform',
+  'policyCompliant': '0/0',
+  'clusterCompliant': '1/3/1',
+}

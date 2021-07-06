@@ -346,7 +346,7 @@ export const action_verifyCreatePolicySelection = (policyName, policyConfig) => 
 
 // enabled='enabled', checking if policy is enabled; enabled='disabled', checking if policy is disabled
 // targetStatus = 0, don't check policy status; targetStatus = 1, check policy status is non-violation
-// targetStatus = 2, check policy status is violation; targetStatus = 3, check policy status is pending
+// targetStatus = 2, check policy status is violation; targetStatus = 3, check policy status === '--'
 export const action_verifyPolicyInListing = (
   uName, policyConfig, enabled='enabled',
   violationsCounter='', targetStatus = null
@@ -377,12 +377,15 @@ export const action_verifyPolicyInListing = (
         cy.wrap(remediation).contains('inform', { matchCase: false })
       }
       // check the violation status
-      if ([1,2,3].includes(targetStatus)) {
+      if ([1,2].includes(targetStatus)) {
         cy.wrap(violations).find('svg').then((elems) => {
           if (elems.length === 1) {
             cy.get('.violationCell>svg').should('have.attr', 'fill', getStatusIconFillColor(targetStatus))
           }
         })
+      } else if (targetStatus === 3) {
+        // disabled and no icon
+        cy.wrap(violations).contains('--')
       }
       // check the cluster violations value
       if (violationsCounter) {
@@ -510,20 +513,25 @@ export const isClusterViolationsStatusAvailable = (name, violationsCounter) => {
   return cy.then(() => {
     cy.get('[aria-label="Simple Table"]').within(() => {
       cy.get('a').contains(name).parents('td').siblings('td').spread((namespace, counter) => {
-        // check the violation status
-        cy.wrap(counter).find('path').then((elems) => {
-          // when STANDALONE_TESTSUITE_EXECUTION === FALSE, elems.length could be 2, only check the first icon in such case
-          if (elems.length === 1 || (elems.length === 2 && Cypress.env('STANDALONE_TESTSUITE_EXECUTION') === 'FALSE')) {
-            const d = elems[0].getAttribute('d')
-            // M569 seem to be unique to an icon telling that policy status is not available for some cluster
-            statusAvailable = !d.startsWith('M569')
-            if (statusAvailable && violationsCounter) { // also check if violations counter matches
-              if (!counter.textContent.match('\\b'+violationsCounter+'\\b')) { // not found
-                statusAvailable = false
+        if (Cypress.$('[aria-label="Simple Table"]').find('.disabledStatus').length === 0) {
+          // check the violation status
+          cy.wrap(counter).find('path').then((elems) => {
+            // when STANDALONE_TESTSUITE_EXECUTION === FALSE, elems.length could be 2, only check the first icon in such case
+            if (elems.length === 1 || (elems.length === 2 && Cypress.env('STANDALONE_TESTSUITE_EXECUTION') === 'FALSE')) {
+              const d = elems[0].getAttribute('d')
+              // M569 seem to be unique to an icon telling that policy status is not available for some cluster
+              statusAvailable = !d.startsWith('M569')
+              if (statusAvailable && violationsCounter) { // also check if violations counter matches
+                if (!counter.textContent.match('\\b'+violationsCounter+'\\b')) { // not found
+                  statusAvailable = false
+                }
               }
             }
-          }
-        })
+          })
+        } else {
+          // disabled and no icon
+          cy.wrap(counter).contains('--')
+        }
       })
     })
     .then(() => statusAvailable)
@@ -536,25 +544,28 @@ export const isClusterViolationsStatusAvailable = (name, violationsCounter) => {
 // here statusPending = true to check consist pending status for disable policy
 export const isPolicyStatusAvailable = (uName, violationsCounter) => {
   let statusAvailable = false
-  // page /multicloud/policies/all
-  //if (window.location.toString().endsWith('/multicloud/policies/all')) {
 return cy.url().then((pageURL) => {
   if (pageURL.endsWith('/multicloud/policies/all')) {
     cy.get('[aria-label="Simple Table"]').within(() => {
     cy.get('a').contains(uName).parents('td').siblings('td').spread((toggle, namespace, remediation, violations) => {
-      // check the violation status
-      cy.wrap(violations).find('path').then((elems) => {
-        if (elems.length === 1) {
-          const d = elems[0].getAttribute('d')
-          // M569 seem to be unique to an icon telling that policy status is not available for some cluster
-          statusAvailable = !d.startsWith('M569')
-          if (statusAvailable && violationsCounter) { // also check if violations counter matches
-            if (!violations.textContent.match('\\b'+violationsCounter+'\\b')) { // not found
-              statusAvailable = false
+      if (Cypress.$('[aria-label="Simple Table"]').find('.disabledStatus').length === 0) {
+        // check the violation status
+        cy.wrap(violations).find('path').then((elems) => {
+          if (elems.length === 1) {
+            const d = elems[0].getAttribute('d')
+            // M569 seem to be unique to an icon telling that policy status is not available for some cluster
+            statusAvailable = !d.startsWith('M569')
+            if (statusAvailable && violationsCounter) { // also check if violations counter matches
+              if (!violations.textContent.match('\\b'+violationsCounter+'\\b')) { // not found
+                statusAvailable = false
+              }
             }
           }
-        }
-      })
+        })
+      } else {
+        // disabled and no icon
+        cy.wrap(violations).contains('--')
+      }
     })
   })
   .then(() => statusAvailable)

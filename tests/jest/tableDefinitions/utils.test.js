@@ -17,7 +17,15 @@ import {
   getCategories,
   getDecisionCount,
   formatAnnotationString,
+  getPolicyCompliantStatus
 } from '../../../src-web/tableDefinitions/utils'
+import {
+  disabledPolicyCompliantStatusItem,
+  unavailableClusterCompliant,
+  withClusterViolation,
+  withoutClusterViolation,
+  withUnknownClusterViolation
+ } from './DefinitionsTestingData'
 
 describe('tableDefinitions utils - createComplianceLink', () => {
   it('should return valid compliance link', () => {
@@ -133,5 +141,27 @@ describe('tableDefinitions utils - formatAnnotationString', () => {
   it('should get "-" ', () => {
     const item = null
     expect(formatAnnotationString(item)).toMatchSnapshot()
+  })
+})
+
+describe('tableDefinitions utils - getPolicyCompliantStatus', () => {
+  it('should return disabled policy compliant status', () => {
+    expect(getPolicyCompliantStatus(disabledPolicyCompliantStatusItem, 'us')).toMatchSnapshot()
+  })
+
+  it('should return policy compliant status with unavailable cluster compliant', () => {
+    expect(getPolicyCompliantStatus(unavailableClusterCompliant, 'us')).toMatchSnapshot()
+  })
+
+  it('should return policy compliant status with cluster violation', () => {
+    expect(getPolicyCompliantStatus(withClusterViolation, 'us')).toMatchSnapshot()
+  })
+
+  it('should return policy compliant status without cluster violation', () => {
+    expect(getPolicyCompliantStatus(withoutClusterViolation, 'us')).toMatchSnapshot()
+  })
+
+  it('should return policy compliant status with unknown cluster violation', () => {
+    expect(getPolicyCompliantStatus(withUnknownClusterViolation, 'us')).toMatchSnapshot()
   })
 })
