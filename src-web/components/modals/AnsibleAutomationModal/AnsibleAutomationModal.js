@@ -276,8 +276,8 @@ export class AnsibleAutomationModal extends React.Component {
     if (typeof inputAction === 'string') {
       submitAction = inputAction
     }
-    if (!yamlMsg.msg && latestJSON && submitAction) {
-      const updatedJSON = this.removedExtraVars(initialJSON, latestJSON)
+    if (!yamlMsg.msg && latestJSON && submitAction || submitAction === 'delete') {
+      const updatedJSON = this.removedExtraVars(initialJSON, latestJSON) || initialJSON
       const {data:resData} = await this.props.handleModifyPolicyAutomation(updatedJSON, submitAction)
       const errors = _.get(resData, 'modifyPolicyAutomation.errors')
       if (Array.isArray(errors) && errors.length > 0)  {
@@ -406,8 +406,9 @@ export class AnsibleAutomationModal extends React.Component {
   }
 
   render() {
+    const namespace = _.get(this.props.data, metaNSStr, '')
     return (
-      <Query query={GET_ANSIBLE_OPERATOR_INSTALLED}>
+      <Query query={GET_ANSIBLE_OPERATOR_INSTALLED} variables={{namespace}}>
         {( result ) => {
           const { loading, error={}, data={} } = result
           const queryError = this.getQueryError(error)
@@ -418,7 +419,7 @@ export class AnsibleAutomationModal extends React.Component {
   }
 
   renderAnsiblePanel = (opInstalled, opInstalledLoading, opInstalledError) => {
-    const { data:policyData, locale, open } = this.props
+    const { data:policyData, locale, open, onlyEdit } = this.props
     const { activeItem, towerURL, queryMsg, yamlMsg, initialJSON,
       initializeFinished, policyAutoName, slideFlag, notificationOpen,
       credentialName, credentialIsOpen, openDelModal
@@ -426,49 +427,51 @@ export class AnsibleAutomationModal extends React.Component {
     const policyName = _.get(policyData, metaNameStr)
     const policyNS = _.get(policyData, metaNSStr)
     let query, variables, pollInterval, actionClose
-    if (activeItem) { // ansible history page
+    if (!activeItem) { // configuration page
+      query = GET_ANSIBLE_CREDENTIALS
+      variables = { name: credentialName, namespace: policyNS }
+      actionClose = <AlertActionCloseButton onClose={this.closeAlert} />
+      pollInterval = 0
+    } else { // ansible history page
       query = GET_ANSIBLE_HISTORY
       variables = {name:policyAutoName, namespace:policyNS}
       actionClose = ''
       pollInterval = 10000
-    } else { // configuration page
-      query = GET_ANSIBLE_CREDENTIALS
-      variables = {}
-      actionClose = <AlertActionCloseButton onClose={this.closeAlert} />
-      pollInterval = 0
     }
     const panelType = initialJSON ? 'edit' : 'create'
     return (
       <div>
-        <Query query={query} pollInterval={pollInterval} variables={variables}>
-            {( result ) => {
-              const { loading } = result
-              const { error={}, data={} } = result
-              const queryError = this.getQueryError(error)
-              const readyFlag = (initializeFinished && !loading && !opInstalledLoading)
-              const modalName = slideFlag ? 'automation-resource-panel slide-in' : 'automation-resource-panel'
-              const titleText = msgs.get(`ansible.automation.heading.${panelType}`, locale)
-              const alertTitle = (opInstalledError || queryError || yamlMsg.msg || queryMsg.msg)
-              let alertVariant = 'danger'
-              if (queryError && _.includes(queryError, 'not installed')) {
-                alertVariant = 'info'
-              } else if (yamlMsg.type || queryMsg.type){
-                alertVariant = (yamlMsg.type || queryMsg.type)
-              }
-              return (
-                <React.Fragment>
-                  <AcmModal
-                  className={modalName}
-                  titleIconVariant={'default'}
-                  variant='small'
-                  id={'automation-resource-panel'}
-                  isOpen={open}
-                  showClose={true}
-                  onClose={this.handleCloseClick}
-                  aria-label={titleText}
-                  header={
-                    <React.Fragment>
-                      <div className='ansible_modal_title'>{titleText}</div>
+        {<Query query={query} pollInterval={pollInterval} variables={variables}>
+          {( result ) => {
+            const { loading } = result
+            const { error={}, data={} } = result
+            const queryError = this.getQueryError(error)
+            const readyFlag = (initializeFinished && !loading && !opInstalledLoading)
+            const modalName = slideFlag ? 'automation-resource-panel slide-in' : 'automation-resource-panel'
+            const titleText = readyFlag ? msgs.get(`ansible.automation.heading.${panelType}`, locale) : ''
+            const alertTitle = (opInstalledError || queryError || yamlMsg.msg || queryMsg.msg)
+            let alertVariant = 'danger'
+            if (queryError && _.includes(queryError, 'not installed')) {
+              alertVariant = 'info'
+            } else if (yamlMsg.type || queryMsg.type){
+              alertVariant = (yamlMsg.type || queryMsg.type)
+            }
+            return (
+              <React.Fragment>
+                <AcmModal
+                className={modalName}
+                titleIconVariant={'default'}
+                variant='small'
+                id={'automation-resource-panel'}
+                isOpen={open}
+                showClose={true}
+                onClose={this.handleCloseClick}
+                aria-label={titleText}
+                header={
+                  <React.Fragment>
+                    <div className='ansible_modal_title'>{titleText}</div>
+                    {readyFlag &&
+                      <div>
                       {!opInstalledLoading && !opInstalled && renderAnsibleOperatorNotInstalled(locale)}
                       {alertTitle && notificationOpen &&
                           <Alert
@@ -504,24 +507,28 @@ export class AnsibleAutomationModal extends React.Component {
                       <div className='infoArea ansibleTowerURL'>
                         {towerURL && renderAnsibleURL('towerURL', towerURL, towerURL, 60, false, null)}
                       </div>
-                    </React.Fragment>
+                    </div>
                   }
-                  actions={buildModalButtonList({
-                    activeItem, opInstalled, policyAutoName, locale,
+                  </React.Fragment>
+                }
+                actions={(panelType === 'create' && opInstalled || policyAutoName !== '') && readyFlag &&
+                  buildModalButtonList({
+                    onlyEdit, activeItem, opInstalled, policyAutoName, locale,
                     handleSubmitClick:this.handleSubmitClick,
                     handleCloseClick:this.handleCloseClick,
                     handleOpenDelModal:this.handleOpenDelModal
                   })}
-                  >
-                  <div>
-                    {!readyFlag && <Spinner className='patternfly-spinner' />}
-                  </div>
-                  {renderAnsibleRemovalModal({
-                    openDelModal, policyAutoName, locale,
-                    handleDeleteClick:this.handleDeleteClick,
-                    handleCloseDelModal:this.handleCloseDelModal,
-                  })}
-                  {readyFlag && renderAnsiblePanelContent({
+                >
+                <div>
+                  {!readyFlag && <Spinner className='patternfly-spinner' />}
+                </div>
+                {renderAnsibleRemovalModal({
+                  openDelModal, policyAutoName, locale,
+                  handleDeleteClick:this.handleDeleteClick,
+                  handleCloseDelModal:this.handleCloseDelModal,
+                })}
+                {readyFlag &&
+                  renderAnsiblePanelContent({
                     data, activeItem, locale, handleTabClick:this.handleTabClick,
                     credentialName, credentialIsOpen,
                     setCredentialsSelectionValue:this.setCredentialsSelectionValue,
@@ -529,11 +536,11 @@ export class AnsibleAutomationModal extends React.Component {
                     renderAnsibleJobTemplatesSelection:this.renderAnsibleJobTemplatesSelection,
                     getAnsibleConnection:this.getAnsibleConnection,
                   })}
-                  </AcmModal>
-                </React.Fragment>
-              )
-            }}
-          </Query>
+                </AcmModal>
+              </React.Fragment>
+            )
+          }}
+        </Query>}
     </div>
     )
   }
@@ -555,27 +562,27 @@ export class AnsibleAutomationModal extends React.Component {
   getAnsibleConnection = (ansCredentials, credentialNameNew, type) => {
     const { credentialName:credentialNameOld, credentialNS } = this.state
     const targetCredential = _.find(ansCredentials, ['name', (credentialNameNew || credentialNameOld)])
+    let towerURL='', token=''
     if (targetCredential && targetCredential.namespace
       && targetCredential.host && targetCredential.token) {
+      towerURL = targetCredential.host
+      token = targetCredential.token
       if (credentialNS !== targetCredential.namespace) {
         this.setState({
           credentialNS: targetCredential.namespace,
-          towerURL:targetCredential.host,
+          towerURL,
         })
       }
       if (type === 'edit') {
         this.setState({
           ansibleConnection: {
-            towerURL: targetCredential.host,
-            token: targetCredential.token
+            towerURL,
+            token,
           }
         })
       }
     }
-    return {
-      towerURL: targetCredential.host,
-      token: targetCredential.token
-    }
+    return { towerURL, token }
   }
 
   setJobTemplatesSelectionValue = (event, selection) => {
@@ -749,6 +756,7 @@ AnsibleAutomationModal.propTypes = {
   handleGetPolicyAutomation: PropTypes.func,
   handleModifyPolicyAutomation: PropTypes.func,
   locale: PropTypes.string,
+  onlyEdit: PropTypes.bool,
   open: PropTypes.bool,
   type: PropTypes.string,
 }

@@ -22,7 +22,7 @@ describeT('RHACM4K-3471 - [P1][Sev1][policy-grc] All policies page: Verify autom
   const rawSubPolicyYAML = getConfigObject(subscriptionPolicy, 'raw', substitutionRules)
   const subPolicyName = rawSubPolicyYAML.replace(/\r?\n|\r/g, ' ').replace(/^.*?name:\s*/m, '').replace(/\s.*/m,'')
 
-  it('Creates a subscription to install the Ansible operator', () => {
+  it('Create a subscription to install the Ansible operator', () => {
     cy.visit('/multicloud/policies/create')
     cy.log(rawSubPolicyYAML)
       .createPolicyFromYAML(rawSubPolicyYAML, true)
@@ -72,7 +72,15 @@ describeT('RHACM4K-3471 - [P1][Sev1][policy-grc] All policies page: Verify autom
     cy.verifyPolicyInListing(credPolicyName, {})
   })
 
-  it(`Wait for ${credPolicyName} status to become available`, () => {
+  it(`Wait for ${credPolicyName} status to become NonCompliant`, () => {
+    cy.waitForPolicyStatus(credPolicyName, '[^0]/')
+  })
+
+  it(`Enforce ${credPolicyName}`, () => {
+    cy.actionPolicyActionInListing(credPolicyName, 'Enforce')
+  })
+
+  it(`Wait for ${credPolicyName} status to be Compliant`, () => {
     cy.waitForPolicyStatus(credPolicyName, '0/')
   })
 
@@ -135,7 +143,13 @@ describeT('RHACM4K-3471 - [P1][Sev1][policy-grc] All policies page: Verify autom
     cy.log(cleanUprawPolicyYAML)
       .createPolicyFromYAML(cleanUprawPolicyYAML, true)
   })
-  it(`Wait for ${cleanUppolicyName} status to become available`, () => {
+  it(`Wait for ${cleanUppolicyName} status to become NonCompliant`, () => {
+    cy.waitForPolicyStatus(cleanUppolicyName, '[^0]/')
+  })
+  it(`Enforce ${cleanUppolicyName}`, () => {
+    cy.actionPolicyActionInListing(cleanUppolicyName, 'Enforce')
+  })
+  it(`Wait for ${cleanUppolicyName} status to be Compliant`, () => {
     cy.waitForPolicyStatus(cleanUppolicyName, '0/')
   })
   it(`Delete policy ${cleanUppolicyName}`, () => {

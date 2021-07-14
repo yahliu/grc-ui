@@ -297,8 +297,8 @@ export const getUserAccess = gql`
 
 // retrieve ansible access info
 export const GET_ANSIBLE_CREDENTIALS = gql`
-  query getAnsibleCredentials {
-    ansibleCredentials {
+  query getAnsibleCredentials($name: String, $namespace: String) {
+    ansibleCredentials(name: $name, namespace: $namespace) {
       name
       namespace
       host
@@ -334,8 +334,8 @@ export const GET_ANSIBLE_HISTORY = gql`
 
 // check if ansible operator installed
 export const GET_ANSIBLE_OPERATOR_INSTALLED = gql`
-  query ansibleOperatorInstalled {
-    ansibleOperatorInstalled {
+  query ansibleOperatorInstalled($namespace: String!) {
+    ansibleOperatorInstalled(namespace: $namespace) {
       installed
     }
   }
