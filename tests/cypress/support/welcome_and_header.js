@@ -54,7 +54,7 @@ export const welcomePage = {
 
 export const leftNav = {
     validateMenu: () => {
-        cy.get('#page-sidebar li.pf-c-nav__item').should('be.visible').and('have.length', 11)
+        cy.get('#page-sidebar li.pf-c-nav__item').should('be.visible').and('have.length', 10)
         cy.get('#nav-toggle').click()
         cy.get('#page-sidebar').should('not.be.visible')
         cy.get('#nav-toggle').click()
@@ -91,9 +91,6 @@ export const leftNav = {
     },
     goToCredentials: () => {
         cy.get('#page-sidebar').contains('Credentials').should('have.prop', 'href', Cypress.config().baseUrl + '/multicloud/credentials')
-    },
-    goToKUI: () => {
-        cy.get('#page-sidebar').contains('Visual Web Terminal').should('have.prop', 'href', Cypress.config().baseUrl + '/kui')
     }
 }
 
