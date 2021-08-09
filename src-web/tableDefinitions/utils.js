@@ -110,6 +110,7 @@ export const transform = (items, def, locale) => {
 
 function pushRows(items, rows, def, locale) {
   let subUid = 0, expandable
+  const refetch = items.refetch
   items.forEach((item, index) => {
     expandable = false
     const rowChildObj = {}
@@ -132,7 +133,7 @@ function pushRows(items, rows, def, locale) {
       } else if (key.transformFunction && typeof key.transformFunction === 'function') {
         // Leverage the defined transformFunction to render content and store the raw value as metadata
         value = {
-          title: key.transformFunction(item, locale),
+          title: refetch ? key.transformFunction(item, locale, refetch) : key.transformFunction(item, locale),
           rawData: value
         }
       } else {
@@ -368,10 +369,10 @@ export function formatAnnotationString(policy, annotationKey){
   return '-'
 }
 
-export function getAutomationLink(item, locale) {
+export function getAutomationLink(item, locale, refetch) {
   if (_.get(item, 'metadata.namespace')) {
     return (
-      <AutomationButton item={item} locale={locale}></AutomationButton>
+      <AutomationButton item={item} locale={locale} refetch={refetch}></AutomationButton>
     )
   }
   return '-'
