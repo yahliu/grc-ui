@@ -12,6 +12,8 @@ import {
   getStandards,
   getAutomationLink,
   getRemediationText,
+  getSource,
+  getSourceText,
   getStatus,
   getStatusText,
 } from './utils'
@@ -83,6 +85,18 @@ export default {
       transformFunction: getPolicyCompliantStatus,
     },
     {
+      label: 'source',
+      msgKey: 'table.header.source',
+      resourceKey: 'source',
+      searchable: true,
+      sortable: true,
+      sortLabel: 'source.text',
+      transforms: [wrappable],
+      cellTransforms: [breakWord],
+      transformFunction: getSource,
+      textFunction: getSourceText,
+    },
+    {
       label: 'controls',
       msgKey: 'table.header.controls',
       resourceKey: 'metadata.annotations["policy.open-cluster-management.io/controls"]',
@@ -138,7 +152,7 @@ export default {
     },
   ],
   sortBy: {
-    index: 7,
+    index: 8,
     direction: 'desc',
   }
 }

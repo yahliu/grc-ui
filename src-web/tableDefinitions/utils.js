@@ -27,6 +27,8 @@ import msgs from '../nls/platform.properties'
 import TruncateText from '../components/common/TruncateText'
 import purifyReactNode from '../utils/PurifyReactNode'
 import AutomationButton from '../components/common/AutomationButton'
+import ChannelLabels from '../components/common/ChannelLabels'
+import { getChannelLabel, normalizeChannelType } from '../utils/resource-helper'
 
 // use console.log(JSON.stringify(result, circular())) to test return result from transform
 export const transform = (items, def, locale) => {
@@ -358,6 +360,26 @@ export function getRemediationText(item, locale) {
     return msgs.get(`policy.remediation.${remediation}`, locale)
   }
   return remediation
+}
+
+export function getSourceText(item, locale) {
+  const source = _.get(item, 'source', {}) || {}
+  if (source.type) {
+    return getChannelLabel(normalizeChannelType(source.type), 0, locale)
+  } else if (_.get(item, 'external')) {
+    return msgs.get('policy.source.external', locale)
+  } else {
+    return msgs.get('policy.source.local', locale)
+  }
+}
+
+export function getSource(item, locale) {
+  const source = _.get(item, 'source', {}) || {}
+  if (source.type) {
+    return <ChannelLabels channels={[source]} locale={locale} />
+  } else {
+    return getSourceText(item, locale)
+  }
 }
 
 export function getStatus(item, locale, table=true) {
