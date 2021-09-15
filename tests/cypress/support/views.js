@@ -365,7 +365,9 @@ export const action_verifyPolicyInListing = (
     .get('.grc-view-by-policies-table').within(() => {
     cy.log(uName)
     cy.get('a').contains(uName).parents('td').siblings('td')
-    .spread((toggle, namespace, status, remediation, violations, _ /*source*/, controls) => {
+    .spread((toggle, rowCheckbox, namespace, status, remediation, violations, _ /*source*/, controls) => {
+      // check table row checkbox
+      cy.wrap(rowCheckbox).find('input')
       // check namespace
       if (policyConfig['namespace']) {
         cy.wrap(namespace).contains(policyConfig['namespace'].trim(), { matchCase: false })
@@ -535,7 +537,7 @@ export const isPolicyStatusAvailable = (uName, violationsCounter) => {
 return cy.url().then((pageURL) => {
   if (pageURL.endsWith('/multicloud/policies/all')) {
     cy.get('[aria-label="Simple Table"]').within(() => {
-    cy.get('a').contains(uName).parents('td').siblings('td').spread((toggle, namespace, status, remediation, violations) => {
+    cy.get('a').contains(uName).parents('td').siblings('td').spread((toggle, rowCheckbox, namespace, status, remediation, violations) => {
       if (Cypress.$('[aria-label="Simple Table"]').find('.disabledStatus').length === 0) {
         // check the violation status
         cy.wrap(violations).find('path').then((elems) => {
