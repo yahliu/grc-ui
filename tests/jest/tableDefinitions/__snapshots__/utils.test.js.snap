@@ -94,7 +94,7 @@ exports[`tableDefinitions utils - getTableFilters test that filters are returned
 Array [
   Object {
     "id": "violations",
-    "label": "Cluster violation",
+    "label": "Cluster violations",
     "options": Array [
       Object {
         "label": "No violation",
@@ -139,6 +139,7 @@ Array [
         "value": "enforce",
       },
     ],
+    "showEmptyOptions": true,
     "tableFilterFn": [Function],
   },
   Object {
@@ -147,13 +148,14 @@ Array [
     "options": Array [
       Object {
         "label": "Enabled",
-        "value": false,
+        "value": "false",
       },
       Object {
         "label": "Disabled",
-        "value": true,
+        "value": "true",
       },
     ],
+    "showEmptyOptions": true,
     "tableFilterFn": [Function],
   },
 ]
