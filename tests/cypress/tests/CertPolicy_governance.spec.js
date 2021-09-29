@@ -17,7 +17,8 @@ if (Cypress.env('MANAGED_CLUSTER_NAME') !== undefined) {
 }
 
 
-describeT('@extended @bvt Setup - create a certificate expiring soon', () => {
+
+describeT('@extended @bvt Setup - GRC UI: [P1][Sev1][policy-grc] - create a certificate expiring soon', () => {
   const substitutionRules = getDefaultSubstitutionRules({
     clusterselector:`- {key: name, operator: In, values: ["${clusterList[0]}"]}`,
     compliancetype: 'musthave'
